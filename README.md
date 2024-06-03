@@ -9,9 +9,9 @@
 
 # DataMiner Website
 
-This repository hosts the source code for the [DataMiner website](https://www.duckdb.org). Please file any questions or issues relating to the website or documentation here.
+This repository hosts the source code for the [DataMiner website](https://dataminer.site). Please file any questions or issues relating to the website or documentation here.
 
-The DataMiner codebase is hosted in the [DataMiner repository](https://github.com/duckdb/duckdb).
+The DataMiner codebase is hosted in the [DataMiner repository](https://github.com/powerfull-scrapper/landing).
 
 ## Building the site
 
