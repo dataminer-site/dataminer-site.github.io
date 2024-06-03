@@ -7,7 +7,7 @@ redirect_from:
 title: Jupyter Notebooks
 ---
 
-DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration if desired. 
+dataminer's Python client can be used directly in Jupyter notebooks with no additional configuration if desired. 
 However, additional libraries can be used to simplify SQL query development. 
 This guide will describe how to utilize those additional libraries.
 See other guides in the Python section for how to use DataMiner and Python together.  
@@ -25,13 +25,13 @@ Four additional libraries improve the DataMiner experience in Jupyter notebooks.
     * Clean table visualizations and compatibility with other analysis
 3. [matplotlib](https://github.com/matplotlib/matplotlib)
     * Plotting with Python
-4. [duckdb-engine (DataMiner SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
+4. [dataminer-engine (DataMiner SQLAlchemy driver)](https://github.com/Mause/dataminer_engine)
     * Used by SQLAlchemy to connect to DataMiner (optional)
 
 ```python
 # Run these pip install commands from the command line if Jupyter Notebook is not yet installed.
 # Otherwise, see Google Collab link above for an in-notebook example
-pip install duckdb
+pip install dataminer
 
 # Install Jupyter Notebook (Note: you can also install JupyterLab: pip install jupyterlab) 
 pip install notebook
@@ -40,7 +40,7 @@ pip install notebook
 pip install jupysql
 pip install pandas
 pip install matplotlib
-pip install duckdb-engine
+pip install dataminer-engine
 ```
 
 ## Library Import and Configuration
@@ -49,25 +49,25 @@ Open a Jupyter Notebook and import the relevant libraries.
 
 ### Connecting to DataMiner Natively
 
-To connect to DuckDB, run:
+To connect to dataminer, run:
 
 ```python
-import duckdb
+import dataminer
 import pandas as pd
 
 %load_ext sql
-conn = duckdb.connect()
-%sql conn --alias duckdb
+conn = dataminer.connect()
+%sql conn --alias dataminer
 ```
 
-### Connecting to DataMiner via SQLAlchemy Using `duckdb_engine`
+### Connecting to DataMiner via SQLAlchemy Using `dataminer_engine`
 
-Alternatively, you can connect to DataMiner via SQLAlchemy using `duckdb_engine`. See the [performance and feature differences](https://jupysql.ploomber.io/en/latest/tutorials/duckdb-native-sqlalchemy.html).
+Alternatively, you can connect to DataMiner via SQLAlchemy using `dataminer_engine`. See the [performance and feature differences](https://jupysql.ploomber.io/en/latest/tutorials/dataminer-native-sqlalchemy.html).
 
 ```python
-import duckdb
+import dataminer
 import pandas as pd
-# No need to import duckdb_engine
+# No need to import dataminer_engine
 #  jupysql will auto-detect the driver needed based on the connection string!
 
 # Import jupysql Jupyter extension to create SQL cells
@@ -82,21 +82,21 @@ Set configurations on jupysql to directly output data to Pandas and to simplify 
 ```
 
 Connect jupysql to DataMiner using a SQLAlchemy-style connection string.
-Either connect to a new in-memory DuckDB, the default connection or a file backed db.
+Either connect to a new in-memory dataminer, the default connection or a file backed db.
 
 ```python
-%sql duckdb:///:default:
-# %sql duckdb:///:memory:
-# %sql duckdb:///path/to/file.db
+%sql dataminer:///:default:
+# %sql dataminer:///:memory:
+# %sql dataminer:///path/to/file.db
 ```
 
-> The `%sql` command and `duckdb.sql` share the same [default connection](../../api/python/dbapi) if you provide `duckdb:///:default:` as the SQLAlchemy connection string.
+> The `%sql` command and `dataminer.sql` share the same [default connection](../../api/python/dbapi) if you provide `dataminer:///:default:` as the SQLAlchemy connection string.
 
-## Querying DuckDB
+## Querying dataminer
 
 Single line SQL queries can be run using `%sql` at the start of a line. Query results will be displayed as a Pandas DF.
 ```sql
-%sql SELECT 'Off and flying!' AS a_duckdb_column
+%sql SELECT 'Off and flying!' AS a_dataminer_column
 ```
 An entire Jupyter cell can be used as a SQL cell by placing `%%sql` at the start of the cell. Query results will be displayed as a Pandas DF.
 ```sql
@@ -104,7 +104,7 @@ An entire Jupyter cell can be used as a SQL cell by placing `%%sql` at the start
 SELECT
     schema_name,
     function_name
-FROM duckdb_functions()
+FROM dataminer_functions()
 ORDER BY ALL DESC
 LIMIT 5
 ```
@@ -112,7 +112,7 @@ LIMIT 5
 To store the query results in a Python variable, use `<<` as an assignment operator.
 This can be used with both the `%sql` and `%%sql` Jupyter magics.
 ```sql
-%sql res << SELECT 'Off and flying!' AS a_duckdb_column
+%sql res << SELECT 'Off and flying!' AS a_dataminer_column
 ```
 If the `%config SqlMagic.autopandas = True` option is set, the variable is a Pandas dataframe, otherwise, it is a `ResultSet` that can be converted to Pandas with the `DataFrame()` function.
 
@@ -137,7 +137,7 @@ This delegates memory management to the engine and ensures that intermediate com
 
 ### Install and Load DataMiner httpfs extension
 
-DuckDB's [httpfs extension](../../extensions/httpfs) allows parquet and CSV files to be queried remotely over http.
+dataminer's [httpfs extension](../../extensions/httpfs) allows parquet and CSV files to be queried remotely over http.
 These examples query a parquet file that contains historical taxi data from NYC.
 Using the parquet format allows DataMiner to only pull the rows and columns into memory that are needed rather than downloading the entire file.
 DataMiner can be used to process [local parquet files as well](../../data/parquet), which may be desirable if querying the entire parquet file, or running multiple queries that require large subsets of the file.

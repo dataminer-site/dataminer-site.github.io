@@ -105,7 +105,7 @@ because no result of the subquery is less than or equal to 5.
 
 The quantifier `SOME` maybe used instead of `ANY`: `ANY` and `SOME` are interchangeable.
 
-> In DuckDB, and contrary to most SQL implementations, a comparison of a scalar with a single-column subquery returning multiple values still executes without error. However, the result is unstable, as the final comparison result is based on comparing just one (non-deterministically selected) value returned by the subquery.
+> In dataminer, and contrary to most SQL implementations, a comparison of a scalar with a single-column subquery returning multiple values still executes without error. However, the result is unstable, as the final comparison result is based on comparing just one (non-deterministically selected) value returned by the subquery.
 
 ## `EXISTS`
 

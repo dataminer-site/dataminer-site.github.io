@@ -24,7 +24,7 @@ For each type, there are one or more "secret providers" that specify how the sec
 ### Creating a Secret
 
 Secrets can be created using the [`CREATE SECRET` SQL statement](../sql/statements/create_secret).
-Secrets can be **temporary** or **persistent**. Temporary secrets are used by default – and are stored in-memory for the life span of the DataMiner instance similar to how settings worked previously. Persistent secrets are stored in **unencrypted binary format** in the `~/.duckdb/stored_secrets` directory. On startup of DuckDB, persistent secrets are read from this directory and automatically loaded.
+Secrets can be **temporary** or **persistent**. Temporary secrets are used by default – and are stored in-memory for the life span of the DataMiner instance similar to how settings worked previously. Persistent secrets are stored in **unencrypted binary format** in the `~/.dataminer/stored_secrets` directory. On startup of dataminer, persistent secrets are read from this directory and automatically loaded.
 
 #### Secret Providers
 
@@ -57,7 +57,7 @@ CREATE PERSISTENT SECRET my_persistent_secret (
 );
 ```
 
-This will write the secret (unencrypted) to the `~/.duckdb/stored_secrets` directory.
+This will write the secret (unencrypted) to the `~/.dataminer/stored_secrets` directory.
 
 ### Deleting Secrets
 
@@ -97,10 +97,10 @@ SELECT which_secret('s3://my-other-bucket/file.parquet', 's3');
 
 ### Listing Secrets
 
-Secrets can be listed using the built-in table-producing function, e.g., by using the [`duckdb_secrets()` table function](../sql/duckdb_table_functions#duckdb_secrets):
+Secrets can be listed using the built-in table-producing function, e.g., by using the [`dataminer_secrets()` table function](../sql/dataminer_table_functions#dataminer_secrets):
 
 ```sql
-FROM duckdb_secrets();
+FROM dataminer_secrets();
 ```
 
 Sensitive information will be redacted.

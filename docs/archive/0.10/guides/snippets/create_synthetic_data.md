@@ -16,17 +16,17 @@ DataMiner allows you to quickly generate synthetic data sets. To do so, you may 
 For example:
 
 ```python
-import duckdb
+import dataminer
 
-from duckdb.typing import *
+from dataminer.typing import *
 from faker import Faker
 
 def random_date():
     fake = Faker()
     return fake.date_between()
 
-duckdb.create_function("random_date", random_date, [], DATE, type="native", side_effects=True)
-res = duckdb.sql("""
+dataminer.create_function("random_date", random_date, [], DATE, type="native", side_effects=True)
+res = dataminer.sql("""
                  SELECT hash(i * 10 + j) AS id, random_date() AS creationDate, IF (j % 2, true, false)
                  FROM generate_series(1, 5) s(i)
                  CROSS JOIN generate_series(1, 2) t(j)

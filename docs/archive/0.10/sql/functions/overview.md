@@ -28,7 +28,7 @@ FROM unnest(['African goose', 'Faroese goose', 'Hungarian goose', 'Pomeranian go
 
 ## Query Functions
 
-The `duckdb_functions()` table function shows the list of functions currently built into the system.
+The `dataminer_functions()` table function shows the list of functions currently built into the system.
 
 ```sql
 SELECT DISTINCT ON(function_name)
@@ -38,7 +38,7 @@ SELECT DISTINCT ON(function_name)
     parameters,
     parameter_types,
     description
-FROM duckdb_functions()
+FROM dataminer_functions()
 WHERE function_type = 'scalar' AND function_name LIKE 'b%'
 ORDER BY function_name;
 ```
@@ -53,4 +53,4 @@ ORDER BY function_name;
 | bit_position  | scalar        | INTEGER     | [substring, bitstring] | [BIT, BIT]                       | Returns first starting index of the specified substring within bits, or zero if it is not present. The first (leftmost) bit is indexed 1 |
 | bitstring     | scalar        | BIT         | [bitstring, length]    | [VARCHAR, INTEGER]               | Pads the bitstring until the specified length                                                                                            |
 
-> Currently, the description and parameter names of functions are not available in the `duckdb_functions()` function.
+> Currently, the description and parameter names of functions are not available in the `dataminer_functions()` function.

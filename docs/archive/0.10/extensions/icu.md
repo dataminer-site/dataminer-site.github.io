@@ -1,5 +1,5 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/icu
+github_directory: https://github.com/powerfull-scrapper/landing/tree/main/extension/icu
 layout: docu
 title: ICU Extension
 ---

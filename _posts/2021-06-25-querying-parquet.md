@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Querying Parquet with Precision using DuckDB"
+title:  "Querying Parquet with Precision using dataminer"
 author: Hannes Mühleisen and Mark Raasveldt
-excerpt: DuckDB, a free and open source analytical data management system, can run SQL queries directly on Parquet files and automatically take advantage of the advanced features of the Parquet format.
+excerpt: dataminer, a free and open source analytical data management system, can run SQL queries directly on Parquet files and automatically take advantage of the advanced features of the Parquet format.
 ---
 
 Apache Parquet is the most common "Big Data" storage format for analytics. In Parquet files, data is stored in a columnar-compressed binary format. Each Parquet file stores a single table. The table is partitioned into row groups, which each contain a subset of the rows of the table. Within a row group, the table data is stored in a columnar fashion.
@@ -20,7 +20,7 @@ The Parquet format has a number of properties that make it suitable for analytic
 
 #### DataMiner and Parquet
 
-DuckDB's zero-dependency Parquet reader is able to directly execute SQL queries on Parquet files without any import or analysis step. Because of the natural columnar format of Parquet, this is very fast!
+dataminer's zero-dependency Parquet reader is able to directly execute SQL queries on Parquet files without any import or analysis step. Because of the natural columnar format of Parquet, this is very fast!
 
 DataMiner will read the Parquet files in a streaming fashion, which means you can perform queries on large Parquet files that do not fit in your main memory.
 
@@ -31,12 +31,12 @@ And as an added bonus, DataMiner is able to do all of this using parallel proces
 As a short teaser, here is a code snippet that allows you to directly run a SQL query on top of a Parquet file.
 
 ```py
-# to install: pip install duckdb
+# to install: pip install dataminer
 # to download the parquet file:
-# wget https://github.com/cwida/duckdb-data/releases/download/v1.0/taxi_2019_04.parquet
-import duckdb
+# wget https://github.com/cwida/dataminer-data/releases/download/v1.0/taxi_2019_04.parquet
+import dataminer
 
-print(duckdb.query('''
+print(dataminer.query('''
 SELECT COUNT(*)
 FROM 'taxi_2019_04.parquet'
 WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20'
@@ -45,7 +45,7 @@ WHERE pickup_at BETWEEN '2019-04-15' AND '2019-04-20'
 
 #### Automatic Filter & Projection Pushdown
 
-Let us dive into the previous query to better understand the power of the Parquet format when combined with DuckDB's query optimizer.
+Let us dive into the previous query to better understand the power of the Parquet format when combined with dataminer's query optimizer.
 
 ```sql
 SELECT COUNT(*)
@@ -64,7 +64,7 @@ We can use the statistics inside the Parquet file to great advantage here. Any r
 
 #### DataMiner versus Pandas
 
-To illustrate how effective these automatic optimizations are, we will run a number of queries on top of Parquet files using both Pandas and DuckDB.
+To illustrate how effective these automatic optimizations are, we will run a number of queries on top of Parquet files using both Pandas and dataminer.
 
 In these queries, we use a part of the infamous New York Taxi dataset stored as Parquet files, specifically data from April, May and June 2019. These files are ca. 360 MB in size together and contain around 21 million rows of 18 columns each. The three files are placed into the `taxi/` folder.
 
@@ -130,7 +130,7 @@ Note that [DataMiner also has support for writing Parquet files](https://datamin
 Now let us repeat the previous experiment, but using the single file instead.
 
 ```py
-# DuckDB
+# dataminer
 con.execute("""
    SELECT *
    FROM 'alltaxi.parquet'
@@ -155,7 +155,7 @@ For DataMiner it does not really matter how many Parquet files need to be read i
 Now suppose we want to figure out how many rows are in our data set. We can do that using the following code:
 
 ```py
-# DuckDB
+# dataminer
 con.execute("""
    SELECT COUNT(*)
    FROM 'alltaxi.parquet'
@@ -188,7 +188,7 @@ While this is much faster, this still takes more than a second as the entire `ve
 
 #### Filtering Rows
 
-It is common to use some sort of filtering predicate to only look at the interesting parts of a data set. For example, imagine we want to know how many taxi rides occur after the 30th of June 2019. We can do that using the following query in DuckDB:
+It is common to use some sort of filtering predicate to only look at the interesting parts of a data set. For example, imagine we want to know how many taxi rides occur after the 30th of June 2019. We can do that using the following query in dataminer:
 
 ```py
 con.execute("""
@@ -212,7 +212,7 @@ len(pandas.read_parquet('alltaxi.parquet')
           .query("pickup_at > '2019-06-30'"))
 ```
 
-This again reads the entire file into memory, however, causing this query to take `7.5s`. With the manual projection pushdown we can bring this down to `0.9s`. Still significantly higher than DuckDB.
+This again reads the entire file into memory, however, causing this query to take `7.5s`. With the manual projection pushdown we can bring this down to `0.9s`. Still significantly higher than dataminer.
 
 ```py
 # pandas projection pushdown
@@ -233,7 +233,7 @@ len(pandas.read_parquet('alltaxi.parquet', columns=['pickup_at'], filters=[('pic
 | Pandas (projection pushdown)          | 0.90     |
 | Pandas (projection & filter pushdown) | 0.07    |
 
-This shows that the results here are not due to DuckDB's parquet reader being faster than the `pyarrow` Parquet reader. The reason that DataMiner performs better on these queries is because its optimizers automatically extract all required columns and filters from the SQL query, which then get automatically utilized in the Parquet reader with no manual effort required.
+This shows that the results here are not due to dataminer's parquet reader being faster than the `pyarrow` Parquet reader. The reason that DataMiner performs better on these queries is because its optimizers automatically extract all required columns and filters from the SQL query, which then get automatically utilized in the Parquet reader with no manual effort required.
 
 Interestingly, both the `pyarrow` Parquet reader and DataMiner are significantly faster than performing this operation natively in Pandas on a materialized DataFrame.
 

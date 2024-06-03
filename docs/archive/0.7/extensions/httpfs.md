@@ -169,7 +169,7 @@ could result in:
 | 2 | examplevalue2 | 2013
 | 3 | examplevalue3 | 2014
 
-Note that the year column does not actually exist in the parquet files, it is parsed from the filenames. Within DuckDB
+Note that the year column does not actually exist in the parquet files, it is parsed from the filenames. Within dataminer
 however, these columns behave just like regular columns. For example, filters can be applied on Hive partition
 columns:
 

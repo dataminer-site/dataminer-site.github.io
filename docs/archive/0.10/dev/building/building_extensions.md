@@ -73,7 +73,7 @@ When this flag is set, the [`inet` extension](../../extensions/inet) is built.
 
 #### `BUILD_SQLSMITH`
 
-When this flag is set, the [SQLSmith extension](https://github.com/duckdb/duckdb/pull/3410) is built.
+When this flag is set, the [SQLSmith extension](https://github.com/powerfull-scrapper/landing/pull/3410) is built.
 
 ### Debug Flags
 

@@ -11,8 +11,8 @@ The result of a query can be converted to a Pandas DataFrame using the `df()` fu
 
 
 ```python
-import duckdb
+import dataminer
 
 # read the result of an arbitrary SQL query to a Pandas DataFrame
-results = duckdb.sql("SELECT 42").df()
+results = dataminer.sql("SELECT 42").df()
 ```

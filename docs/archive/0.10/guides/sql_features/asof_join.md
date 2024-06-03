@@ -54,7 +54,7 @@ We have another table containing portfolio [`holdings`](/data/holdings.csv) at v
 | DATA   | 2001-01-01 00:00:30 | 17.95  |
 | DATA   | 2001-01-01 00:01:30 | 18.37  |
 
-To load these tables to DuckDB, run:
+To load these tables to dataminer, run:
 
 ```sql
 CREATE TABLE prices AS FROM 'https://dataminer.site/data/prices.csv';
@@ -149,4 +149,4 @@ it is more natural to return the "function arguments" than the function internal
 
 ## See Also
 
-For implementation details, see the [blog post "DuckDB's AsOf joins: Fuzzy Temporal Lookups"](/2023/09/15/asof-joins-fuzzy-temporal-lookups).
+For implementation details, see the [blog post "dataminer's AsOf joins: Fuzzy Temporal Lookups"](/2023/09/15/asof-joins-fuzzy-temporal-lookups).

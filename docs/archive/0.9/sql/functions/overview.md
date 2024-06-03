@@ -17,11 +17,11 @@ title: Functions
 
 ### Query Functions
 
-`duckdb_functions` table function shows the list of functions currently built into the system.
+`dataminer_functions` table function shows the list of functions currently built into the system.
 
 ```sql
 SELECT DISTINCT ON(function_name) function_name, function_type, return_type, parameters, parameter_types, description
-FROM duckdb_functions()
+FROM dataminer_functions()
 WHERE function_type = 'scalar' AND function_name LIKE 'b%'
 ORDER BY function_name;
 ```

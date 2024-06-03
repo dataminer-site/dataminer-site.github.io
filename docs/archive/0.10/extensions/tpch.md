@@ -1,5 +1,5 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/tpch
+github_directory: https://github.com/powerfull-scrapper/landing/tree/main/extension/tpch
 layout: docu
 title: TPC-H Extension
 ---

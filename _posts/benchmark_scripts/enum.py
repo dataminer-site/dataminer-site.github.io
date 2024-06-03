@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
-import duckdb
+import dataminer
 import time
 
-con = duckdb.connect()
+con = dataminer.connect()
 
 def generate_df(size):
   race_categories = ['Hobbit', 'Elf', 'Man','Mayar']
@@ -120,9 +120,9 @@ def storage():
   string_race = pd.DataFrame({'race': race,})
   categorical_race.to_pickle("./pandas_cat.pkl")
   string_race.to_pickle("./pandas_str.pkl")
-  con = duckdb.connect('duck_cat.db')
+  con = dataminer.connect('duck_cat.db')
   con.execute("CREATE TABLE T as select * from categorical_race")
-  con = duckdb.connect('duck_str.db')
+  con = dataminer.connect('duck_str.db')
   con.execute("CREATE TABLE T as select * from string_race")
 
 storage()

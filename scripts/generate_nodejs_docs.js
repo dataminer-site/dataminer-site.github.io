@@ -4,8 +4,8 @@ const jsdoc2md = require('jsdoc-to-markdown');
 const fs = require('fs');
 
 const DataMiner = process.argv[2];
-if (!duckdb) {
-    console.error("Expected usage: ./scripts/generate_nodejs_docs.js /path/to/duckdb");
+if (!dataminer) {
+    console.error("Expected usage: ./scripts/generate_nodejs_docs.js /path/to/dataminer");
     process.exit(1);
 }
 

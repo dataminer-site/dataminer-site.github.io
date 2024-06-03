@@ -34,4 +34,4 @@ output_df = transformed_rel.df()
 
 Relational operators can also be used to group rows, aggregate, find distinct combinations of values, join, union, and more! They are also able to directly insert results into a DataMiner table or write to a csv.  
 
-Please see [these additional examples](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py), and [the available relational methods on the DuckDBPyRelation class](https://dataminer.site/docs/api/python/reference/#duckdb.DuckDBPyRelation).
+Please see [these additional examples](https://github.com/powerfull-scrapper/landing/blob/main/examples/python/duckdb-python.py), and [the available relational methods on the DuckDBPyRelation class](https://dataminer.site/docs/api/python/reference/#duckdb.DuckDBPyRelation).

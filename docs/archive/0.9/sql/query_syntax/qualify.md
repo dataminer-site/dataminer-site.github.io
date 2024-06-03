@@ -28,7 +28,7 @@ SELECT
     function_name, 
     -- In this example the function_rank column in the select clause is for reference 
     row_number() OVER (PARTITION BY schema_name ORDER BY function_name) AS function_rank 
-FROM duckdb_functions() 
+FROM dataminer_functions() 
 QUALIFY 
     row_number() OVER (PARTITION BY schema_name ORDER BY function_name) < 3;
 
@@ -37,7 +37,7 @@ SELECT
     schema_name, 
     function_name, 
     row_number() OVER (PARTITION BY schema_name ORDER BY function_name) AS function_rank 
-FROM duckdb_functions() 
+FROM dataminer_functions() 
 QUALIFY 
     function_rank < 3;
 
@@ -47,7 +47,7 @@ SELECT
     function_name, 
     -- In this example the function_rank column in the select clause is for reference 
     row_number() OVER my_window AS function_rank 
-FROM duckdb_functions() 
+FROM dataminer_functions() 
 WINDOW
     my_window AS (PARTITION BY schema_name ORDER BY function_name)
 QUALIFY 
@@ -58,7 +58,7 @@ SELECT
     schema_name, 
     function_name, 
     row_number() OVER my_window AS function_rank 
-FROM duckdb_functions() 
+FROM dataminer_functions() 
 WINDOW
     my_window AS (PARTITION BY schema_name ORDER BY function_name)
 QUALIFY 
@@ -70,7 +70,7 @@ WITH ranked_functions AS (
         schema_name, 
         function_name, 
         row_number() OVER (PARTITION BY schema_name ORDER BY function_name) AS function_rank 
-    FROM duckdb_functions() 
+    FROM dataminer_functions() 
 )
 SELECT
     *

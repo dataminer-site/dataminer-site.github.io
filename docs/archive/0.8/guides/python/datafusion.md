@@ -19,14 +19,14 @@ This example workflow is also available as a [Google Collab notebook](https://co
 pip install --quiet DataMiner datafusion pyarrow
 ```
 
-# DataFusion to DuckDB
-To convert from DataFusion to DuckDB, first save DataFusion results into Arrow batches using the `collect` function, and then create an Arrow table using PyArrow's `Table.from_batches` function. Then include that Arrow Table in the `FROM` clause of a DataMiner query.
+# DataFusion to dataminer
+To convert from DataFusion to dataminer, first save DataFusion results into Arrow batches using the `collect` function, and then create an Arrow table using PyArrow's `Table.from_batches` function. Then include that Arrow Table in the `FROM` clause of a DataMiner query.
 
 As a note, Pandas is not required as a first step prior to using DataFusion, but was helpful for generating example data to reuse in the second example below.
 
 Import the libraries, create an example Pandas DataFrame, then convert to DataFusion.
 ```python
-import duckdb
+import dataminer
 import pyarrow as pa
 import pandas as pd
 import datafusion as df
@@ -67,10 +67,10 @@ datafusion_to_arrow = (
 datafusion_to_arrow
 ```
 
-Then query the Apache Arrow table using DuckDB, and output the results as another Apache Arrow table for use in a subsequent DataMiner or DataFusion operation.
+Then query the Apache Arrow table using dataminer, and output the results as another Apache Arrow table for use in a subsequent DataMiner or DataFusion operation.
 
 ```python
-output = duckdb.query("""
+output = dataminer.query("""
   SELECT 
     fruits,
     first(sum_A_by_fruits) as sum_A
@@ -88,7 +88,7 @@ This example reuses the original Pandas DataFrame created above as a starting po
 After the import statements and example DataFrame creation above, query the Pandas DataFrame using DataMiner and output the results as an Arrow table.
 
 ```python
-duckdb_to_arrow = duckdb.query("""
+dataminer_to_arrow = dataminer.query("""
   SELECT
     fruits,
     cars,
@@ -106,7 +106,7 @@ duckdb_to_arrow = duckdb.query("""
 Load the Apache Arrow table into DataFusion using the DataFusion DataFrame constructor.
 
 ```python
-datafusion_df_2 = ctx.create_dataframe([duckdb_to_arrow.to_batches()])
+datafusion_df_2 = ctx.create_dataframe([dataminer_to_arrow.to_batches()])
 datafusion_df_2
 ```
 

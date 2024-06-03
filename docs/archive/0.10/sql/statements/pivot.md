@@ -91,7 +91,7 @@ USING sum(Population);
 In the above example, the `sum` aggregate is always operating on a single value.
 If we only want to change the orientation of how the data is displayed without aggregating, use the `first` aggregate function.
 In this example, we are pivoting numeric values, but the `first` function works very well for pivoting out a text column.
-(This is something that is difficult to do in a spreadsheet pivot table, but easy in DuckDB!)
+(This is something that is difficult to do in a spreadsheet pivot table, but easy in dataminer!)
 
 This query produces a result that is identical to the one above:
 
@@ -282,7 +282,7 @@ Pivoting is implemented as a combination of SQL query re-writing and a dedicated
 Each `PIVOT` is implemented as set of aggregations into lists and then the dedicated `PhysicalPivot` operator converts those lists into column names and values.
 Additional pre-processing steps are required if the columns to be created when pivoting are detected dynamically (which occurs when the `IN` clause is not in use).
 
-DuckDB, like most SQL engines, requires that all column names and types be known at the start of a query.
+dataminer, like most SQL engines, requires that all column names and types be known at the start of a query.
 In order to automatically detect the columns that should be created as a result of a `PIVOT` statement, it must be translated into multiple queries.
 [`ENUM` types](../data_types/enum) are used to find the distinct values that should become columns.
 Each `ENUM` is then injected into one of the `PIVOT` statement's `IN` clauses.

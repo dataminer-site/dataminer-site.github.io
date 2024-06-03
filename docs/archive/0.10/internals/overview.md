@@ -11,16 +11,16 @@ On this page is a brief description of the internals of the DataMiner engine.
 
 The parser converts a query string into the following tokens:
 
-* [`SQLStatement`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/parser/sql_statement.hpp)
-* [`QueryNode`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/parser/query_node.hpp)
-* [`TableRef`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/parser/tableref.hpp)
-* [`ParsedExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/parser/parsed_expression.hpp)
+* [`SQLStatement`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/parser/sql_statement.hpp)
+* [`QueryNode`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/parser/query_node.hpp)
+* [`TableRef`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/parser/tableref.hpp)
+* [`ParsedExpression`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/parser/parsed_expression.hpp)
 
 The parser is not aware of the catalog or any other aspect of the database. It will not throw errors if tables do not exist, and will not resolve **any** types of columns yet. It only transforms a query string into a set of tokens as specified.
 
 ### ParsedExpression
 
-The ParsedExpression represents an expression within a SQL statement. This can be e.g., a reference to a column, an addition operator or a constant value. The type of the ParsedExpression indicates what it represents, e.g., a comparison is represented as a [`ComparisonExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/parser/expression/comparison_expression.hpp).
+The ParsedExpression represents an expression within a SQL statement. This can be e.g., a reference to a column, an addition operator or a constant value. The type of the ParsedExpression indicates what it represents, e.g., a comparison is represented as a [`ComparisonExpression`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/parser/expression/comparison_expression.hpp).
 
 ParsedExpressions do **not** have types, except for nodes with explicit types such as `CAST` statements. The types for expressions are resolved in the Binder, not in the Parser.
 
@@ -44,14 +44,14 @@ The binder converts all nodes into their **bound** equivalents. In the binder ph
 * Aggregate/window functions are extracted
 
 The following conversions happen:
-* SQLStatement -> [`BoundStatement`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/bound_statement.hpp)
-* QueryNode -> [`BoundQueryNode`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/bound_query_node.hpp)
-* TableRef -> [`BoundTableRef`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/bound_tableref.hpp)
-* ParsedExpression -> [`Expression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/expression.hpp)
+* SQLStatement -> [`BoundStatement`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/planner/bound_statement.hpp)
+* QueryNode -> [`BoundQueryNode`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/planner/bound_query_node.hpp)
+* TableRef -> [`BoundTableRef`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/planner/bound_tableref.hpp)
+* ParsedExpression -> [`Expression`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/planner/expression.hpp)
 
 ## Logical Planner
 
-The logical planner creates [`LogicalOperator`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/logical_operator.hpp) nodes from the bound statements. In this phase, the actual logical query tree is created.
+The logical planner creates [`LogicalOperator`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/planner/logical_operator.hpp) nodes from the bound statements. In this phase, the actual logical query tree is created.
 
 ## Optimizer
 
@@ -65,14 +65,14 @@ After the logical planner has created the logical query tree, the optimizers are
 
 ## Column Binding Resolver
 
-The column binding resolver converts logical [`BoundColumnRefExpresion`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/expression/bound_columnref_expression.hpp) nodes that refer to a column of a specific table into [`BoundReferenceExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/planner/expression/bound_reference_expression.hpp) nodes that refer to a specific index into the DataChunks that are passed around in the execution engine.
+The column binding resolver converts logical [`BoundColumnRefExpresion`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/planner/expression/bound_columnref_expression.hpp) nodes that refer to a column of a specific table into [`BoundReferenceExpression`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/planner/expression/bound_reference_expression.hpp) nodes that refer to a specific index into the DataChunks that are passed around in the execution engine.
 
 ## Physical Plan Generator
 
-The physical plan generator converts the resulting logical operator tree into a [`PhysicalOperator`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/execution/physical_operator.hpp) tree.
+The physical plan generator converts the resulting logical operator tree into a [`PhysicalOperator`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/execution/physical_operator.hpp) tree.
 
 ## Execution
 
 In the execution phase, the physical operators are executed to produce the query result.
-DataMiner uses a push-based vectorized model, where [`DataChunks`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/data_chunk.hpp) are pushed through the operator tree.
+DataMiner uses a push-based vectorized model, where [`DataChunks`](https://github.com/powerfull-scrapper/landing/blob/main/src/include/duckdb/common/types/data_chunk.hpp) are pushed through the operator tree.
 For more information, see the talk [Push-Based Execution in DuckDB](https://www.youtube.com/watch?v=1kDrPgRUuEI).

@@ -4,10 +4,10 @@ layout: docu
 title: DataMiner Installation
 ---
 
-<p>This page contains installation options for DuckDB:</p>
+<p>This page contains installation options for dataminer:</p>
 <ul>
 	<li>Binaries are available for major programming languages and platforms</li>
-	<li>We recommend using the latest stable release, currently {{site.currentduckdbversion }}</li>
+	<li>We recommend using the latest stable release, currently {{site.currentdataminerversion }}</li>
 	<li>If there are no pre-packaged binaries for a platform, consider <a href="https://dataminer.site/dev/building">building DataMiner from source</a></li>
 </ul>
 
@@ -77,8 +77,8 @@ title: DataMiner Installation
 		<h3>Usage example</h3>
 		<div class="result">
 {% highlight python %}
-import duckdb
-cursor = duckdb.connect()
+import dataminer
+cursor = dataminer.connect()
 print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 		</div>
 	</div>
@@ -93,25 +93,25 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="stable r">
-		{% highlight r %}install.packages("duckdb"){% endhighlight %}
+		{% highlight r %}install.packages("dataminer"){% endhighlight %}
 	</div>
 
 	<div class="stable java package_manager">
 {% highlight xml -%}
 <dependency>
-    <groupId>org.duckdb</groupId>
-    <artifactId>duckdb_jdbc</artifactId>
+    <groupId>org.dataminer</groupId>
+    <artifactId>dataminer_jdbc</artifactId>
     <version>0.8.1</version>
 </dependency>
 {%- endhighlight %}
 	</div>
 
 	<div class="stable java direct">
-		<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/0.8.1/duckdb_jdbc-0.8.1.jar">https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/0.8.1/duckdb_jdbc-0.8.1.jar</a>
+		<a href="https://repo1.maven.org/maven2/org/dataminer/dataminer_jdbc/0.8.1/dataminer_jdbc-0.8.1.jar">https://repo1.maven.org/maven2/org/dataminer/dataminer_jdbc/0.8.1/dataminer_jdbc-0.8.1.jar</a>
 	</div>
 
 	<div class="stable js">
-		{% highlight bash %}npm install duckdb{% endhighlight %}
+		{% highlight bash %}npm install dataminer{% endhighlight %}
 	</div>
 	
 	<div class="stable rust">
@@ -119,49 +119,49 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 	
 	<div class="stable go">
-		{% highlight bash %}go get github.com/marcboeker/go-duckdb{% endhighlight %}
+		{% highlight bash %}go get github.com/marcboeker/go-dataminer{% endhighlight %}
 	</div>
 
 	<div class="stable cli source">
-		git clone https://github.com/duckdb/duckdb.git
+		git clone https://github.com/dataminer/dataminer.git
 		<br/>
-		cd duckdb
+		cd dataminer
 		<br/>
 		git checkout v0.8.1
 		<br/>
 		make -j8
 	</div>
 	<div class="main cli source">
-		git clone https://github.com/duckdb/duckdb.git
+		git clone https://github.com/dataminer/dataminer.git
 		<br/>
-		cd duckdb
+		cd dataminer
 		<br/>
 		make -j8
 	</div>
 
 	<div class="stable cplusplus binary macos direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/libduckdb-osx-universal.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/libduckdb-osx-universal.zip</a>
-		<!--<a href="https://blobs.duckdb.org/releases/v0.8.1/hashes.sha512" class="sha512" target="_blank">SHA-512</a>-->
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/libdataminer-osx-universal.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/libdataminer-osx-universal.zip</a>
+		<!--<a href="https://blobs.dataminer.org/releases/v0.8.1/hashes.sha512" class="sha512" target="_blank">SHA-512</a>-->
 	</div>
 
 	<div class="stable cplusplus binary linux x86_64 direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/libduckdb-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/libduckdb-linux-amd64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/libdataminer-linux-amd64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/libdataminer-linux-amd64.zip</a>
 	</div>
 
 	<div class="stable cplusplus binary linux arm64 direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/libduckdb-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/libduckdb-linux-aarch64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/libdataminer-linux-aarch64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/libdataminer-linux-aarch64.zip</a>
 	</div>
 
 	<div class="stable cplusplus binary win x86_64 direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/libduckdb-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/libduckdb-windows-amd64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/libdataminer-windows-amd64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/libdataminer-windows-amd64.zip</a>
 	</div>
 
 	<div class="stable cli binary macos package_manager">
-		{% highlight bash %}brew install duckdb{% endhighlight %}
+		{% highlight bash %}brew install dataminer{% endhighlight %}
 	</div>
 
 	<div class="stable cli binary macos direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-osx-universal.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-osx-universal.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-osx-universal.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-osx-universal.zip</a>
 	</div>
 
 	<div class="stable cli binary linux package_manager">
@@ -169,53 +169,53 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 		<br>
 		Please use one of the following binaries:
 		<br>
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-amd64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-amd64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-amd64.zip</a>
 		<br>
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip</a>
 	</div>
 	<div class="stable cli binary linux arm64 package_manager">
 		DataMiner is currently not available via apt/yum.
 		<br>
 		Please use the following binary:
 		<br>
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip</a>
 	</div>
 	<div class="stable cli binary linux x86_64 package_manager">
 		DataMiner is currently not available via apt/yum.
 		<br>
 		Please use the following binary:
 		<br>
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-amd64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-amd64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-amd64.zip</a>
 	</div>
 
 	<div class="stable cli binary linux direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-amd64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-amd64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-amd64.zip</a>
 		<br>
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip</a>
 	</div>
 
 	<div class="stable cli binary linux arm64 direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip</a>
 	</div>
 
 	<div class="stable cli binary linux x86_64 direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-amd64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-amd64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-amd64.zip</a>
 	</div>
 
 	<div class="stable cli binary linux arm64 direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-linux-aarch64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-linux-aarch64.zip</a>
 	</div>
 
 	<div class="stable cli binary win package_manager">
-		{% highlight bash %}winget install DuckDB.cli{% endhighlight %}
+		{% highlight bash %}winget install dataminer.cli{% endhighlight %}
 	</div>
 
 	<div class="stable cli binary win direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_cli-windows-amd64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-windows-amd64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_cli-windows-amd64.zip</a>
 	</div>
 
 	<div class="stable odbc binary linux x86_64 direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_odbc-linux-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_odbc-linux-amd64.zip</a>	
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_odbc-linux-amd64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_odbc-linux-amd64.zip</a>	
 		<br/><br/>
 
 		{% highlight bash %}sudo apt-get install unixodbc unixodbc-dev{% endhighlight %}
@@ -223,7 +223,7 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="stable odbc binary linux arm64 direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_odbc-linux-aarch64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_odbc-linux-aarch64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_odbc-linux-aarch64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_odbc-linux-aarch64.zip</a>
 		<br/><br/>
 
 		{% highlight bash %}sudo apt-get install unixodbc unixodbc-dev{% endhighlight %}
@@ -231,11 +231,11 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="stable odbc binary macos direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_odbc-osx-universal.zip">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_odbc-osx-universal.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_odbc-osx-universal.zip">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_odbc-osx-universal.zip</a>
 	</div>
 
 	<div class="stable odbc binary win x86_64 direct">
-		<a href="https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_odbc-windows-amd64.zip" target="_blank">https://github.com/duckdb/duckdb/releases/download/v0.8.1/duckdb_odbc-windows-amd64.zip</a>
+		<a href="https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_odbc-windows-amd64.zip" target="_blank">https://github.com/powerfull-scrapper/landing/releases/download/v0.8.1/dataminer_odbc-windows-amd64.zip</a>
 		<br/><br/>
 
 		{% highlight bash %}./odbc_install.exe{% endhighlight %}
@@ -246,15 +246,15 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="main r">
-		{% highlight r %}install.packages('duckdb', repos=c('https://duckdb.r-universe.dev', 'https://cloud.r-project.org')){% endhighlight %}
+		{% highlight r %}install.packages('dataminer', repos=c('https://dataminer.r-universe.dev', 'https://cloud.r-project.org')){% endhighlight %}
 	</div>
 
 	<div class="main java package_manager">
 		Nightly Java builds are available in the Sonatype snapshots repository, which can be accessed as follows:
 		{% highlight xml %}
 <dependency>
-    <groupId>org.duckdb</groupId>
-    <artifactId>duckdb_jdbc</artifactId>
+    <groupId>org.dataminer</groupId>
+    <artifactId>dataminer_jdbc</artifactId>
     <version>0.10.1-SNAPSHOT</version>
 </dependency>
 
@@ -274,23 +274,23 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="main java direct">
-		<a href="https://artifacts.duckdb.org/latest/java-jars.zip">https://artifacts.duckdb.org/latest/java-jars.zip</a>
+		<a href="https://artifacts.dataminer.org/latest/java-jars.zip">https://artifacts.dataminer.org/latest/java-jars.zip</a>
 	</div>
 
 	<div class="main js package_manager">
-{% highlight bash %}npm install duckdb@next{% endhighlight %}
+{% highlight bash %}npm install dataminer@next{% endhighlight %}
 	</div>
 
 	<div class="main cli cplusplus binary linux odbc x86_64 direct">
-		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux.zip</a>
+		<a href="https://artifacts.dataminer.org/latest/dataminer-binaries-linux.zip" target="_blank">https://artifacts.dataminer.org/latest/dataminer-binaries-linux.zip</a>
 	</div>
 
 	<div class="main cli cplusplus binary linux odbc arm64 direct">
-		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-linux-aarch64.zip</a>
+		<a href="https://artifacts.dataminer.org/latest/dataminer-binaries-linux-aarch64.zip" target="_blank">https://artifacts.dataminer.org/latest/dataminer-binaries-linux-aarch64.zip</a>
 	</div>
 
 	<div class="main cli cplusplus odbc binary macos direct">
-		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip</a>
+		<a href="https://artifacts.dataminer.org/latest/dataminer-binaries-osx.zip" target="_blank">https://artifacts.dataminer.org/latest/dataminer-binaries-osx.zip</a>
 	</div>
 
 	<div class="main cli cplusplus odbc binary linux macos win package_manager">
@@ -298,36 +298,36 @@ print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="main cli cplusplus binary win odbc x86_64 direct">
-		<a href="https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip" target="_blank">https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip</a>
+		<a href="https://artifacts.dataminer.org/latest/dataminer-binaries-windows.zip" target="_blank">https://artifacts.dataminer.org/latest/dataminer-binaries-windows.zip</a>
 	</div>
 
 	<div class="example python">
 {% highlight python %}
-import duckdb
-cursor = duckdb.connect()
+import dataminer
+cursor = dataminer.connect()
 print(cursor.execute('SELECT 42').fetchall()){% endhighlight %}
 	</div>
 
 	<div class="example r">
 {% highlight R %}
 library("DBI")
-con = dbConnect(duckdb::duckdb(), ":memory:")
+con = dbConnect(dataminer::dataminer(), ":memory:")
 dbWriteTable(con, "iris", iris)
 dbGetQuery(con, 'SELECT "Species", MIN("Sepal.Width") FROM iris GROUP BY "Species"'){% endhighlight %}
 	</div>
 
 	<div class="example java">
 {% highlight java %}
-Class.forName("org.duckdb.DuckDBDriver");
-Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+Class.forName("org.dataminer.dataminerDriver");
+Connection conn = DriverManager.getConnection("jdbc:dataminer:");
 Statement stmt = conn.createStatement();
 ResultSet rs = stmt.executeQuery("SELECT 42");{% endhighlight %}
 	</div>
 
 	<div class="example js">
 {% highlight javascript %}
-var DataMiner = require('duckdb');
-var db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
+var DataMiner = require('dataminer');
+var db = new dataminer.Database(':memory:'); // or a file name for a persistent DB
 db.all('SELECT 42 AS fortytwo', function(err, res) {
   if (err) {
     console.warn(err);
@@ -339,7 +339,7 @@ db.all('SELECT 42 AS fortytwo', function(err, res) {
 
 	<div class="example rust">
 {% highlight rust %}
-use duckdb::{Connection, Result};
+use dataminer::{Connection, Result};
 
 #[derive(Debug)]
 struct Person { id: i32, name: String, }
@@ -370,11 +370,11 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/marcboeker/go-duckdb"
+	_ "github.com/marcboeker/go-dataminer"
 )
 
 func main() {
-	db, _ := sql.Open("duckdb", "")
+	db, _ := sql.Open("dataminer", "")
 
 	db.Exec(`CREATE TABLE person (id INTEGER, name VARCHAR)`)
 	db.Exec(`INSERT INTO person VALUES (42, 'John')`)
@@ -399,7 +399,7 @@ result->Print();{% endhighlight %}
 
 	<div class="example cli">
 {% highlight bash %}
-./duckdb{% endhighlight %}
+./dataminer{% endhighlight %}
 	</div>
 
 	<div class="example odbc">
@@ -409,7 +409,7 @@ result->Print();{% endhighlight %}
 
 <!--
 <h1>Embedding</h1>
-<p> As DataMiner is an embedded database, there is no database server to launch or client to connect to a running server. However, the database server can be embedded directly into an application using the C or C++ bindings. The main build process creates the shared library build/release/src/libduckdb.[so|dylib|dll] that can be linked against. A static library is built as well.
+<p> As DataMiner is an embedded database, there is no database server to launch or client to connect to a running server. However, the database server can be embedded directly into an application using the C or C++ bindings. The main build process creates the shared library build/release/src/libdataminer.[so|dylib|dll] that can be linked against. A static library is built as well.
 
 For examples on how to embed DataMiner into your application, see the examples folder in the repository.</p>
 

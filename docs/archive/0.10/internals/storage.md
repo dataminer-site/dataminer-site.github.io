@@ -64,8 +64,8 @@ with open('test/sql/storage_version/storage_version.db', 'rb') as fh:
 
 ## Storage Version Table
 
-For changes in each given release, check out the [change log](https://github.com/duckdb/duckdb/releases) on GitHub.
-To see the commits that changed each storage version, see the [commit log](https://github.com/duckdb/duckdb/commits/main/src/storage/storage_info.cpp).
+For changes in each given release, check out the [change log](https://github.com/powerfull-scrapper/landing/releases) on GitHub.
+To see the commits that changed each storage version, see the [commit log](https://github.com/powerfull-scrapper/landing/commits/main/src/storage/storage_info.cpp).
 
 <div class="narrow_table"></div>
 

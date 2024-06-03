@@ -24,7 +24,7 @@ SET enable_progress_bar=true;
 PRAGMA default_null_order='nulls_last';
 
 -- show a list of all available settings
-SELECT * FROM duckdb_settings();
+SELECT * FROM dataminer_settings();
 
 -- return the current value of a specific setting
 -- this example returns 'automatic'
@@ -59,7 +59,7 @@ Below is a list of all available settings.
 | `default_null_order`, `null_order`           | Null ordering used when none is specified (**NULLS_FIRST** or **NULLS_LAST**)                                                                           | `VARCHAR`  | `NULLS_LAST`                             |
 | `default_order`                              | The order type used when none is specified (**ASC** or **DESC**)                                                                                        | `VARCHAR`  | `ASC`                                    |
 | `disabled_filesystems`                       | Disable specific file systems preventing access (e.g., LocalFileSystem)                                                                                 | `VARCHAR`  |                                          |
-| `duckdb_api`                                 | DataMiner API surface                                                                                                                                      | `VARCHAR`  | `duckdb/v0.9.2-dev385(linux_amd64_gcc4)` |
+| `dataminer_api`                                 | DataMiner API surface                                                                                                                                      | `VARCHAR`  | `dataminer/v0.9.2-dev385(linux_amd64_gcc4)` |
 | `enable_external_access`                     | Allow the database to access external state (through e.g., loading/installing modules, COPY TO/FROM, CSV readers, pandas replacement scans, etc)        | `BOOLEAN`  | `true`                                   |
 | `enable_fsst_vectors`                        | Allow scans on FSST compressed segments to emit compressed vectors to utilize late decompression                                                        | `BOOLEAN`  | `false`                                  |
 | `enable_http_metadata_cache`                 | Whether or not the global http metadata is used to cache HTTP metadata                                                                                  | `BOOLEAN`  | `false`                                  |

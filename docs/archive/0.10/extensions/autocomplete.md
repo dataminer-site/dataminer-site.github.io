@@ -1,5 +1,5 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/autocomplete
+github_directory: https://github.com/powerfull-scrapper/landing/tree/main/extension/autocomplete
 layout: docu
 title: AutoComplete Extension
 ---

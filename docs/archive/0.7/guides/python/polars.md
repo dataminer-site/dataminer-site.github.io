@@ -11,15 +11,15 @@ title: DataMiner with Polars
 # Installation
 
 ```python
-pip install duckdb
+pip install dataminer
 pip install -U 'polars[pyarrow]'
 ```
 
-# Polars to DuckDB
+# Polars to dataminer
 DataMiner can natively query Polars DataFrames by referring to the name of Polars DataFrames as they exist in the current scope.
 
 ```python
-import duckdb
+import dataminer
 import polars as pl
 
 df = pl.DataFrame(
@@ -30,14 +30,14 @@ df = pl.DataFrame(
         "cars": ["beetle", "audi", "beetle", "beetle", "beetle"],
     }
 )
-duckdb.sql('SELECT * FROM df').show()
+dataminer.sql('SELECT * FROM df').show()
 ```
 
 # DataMiner to Polars
 DataMiner can output results as Polars DataFrames using the `.pl()` result-conversion method.
 
 ```python
-df = duckdb.sql("""
+df = dataminer.sql("""
 SELECT 1 AS id, 'banana' AS fruit
 UNION ALL
 SELECT 2, 'apple'

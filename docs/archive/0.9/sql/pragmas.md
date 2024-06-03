@@ -178,7 +178,7 @@ PRAGMA enable_optimizer;
 
 ```sql
 -- Set a path for query logging
-PRAGMA log_query_path='/tmp/duckdb_log/';
+PRAGMA log_query_path='/tmp/dataminer_log/';
 -- Disable query logging again
 PRAGMA log_query_path='';
 -- either show 'all' or only 'optimized' plans in the EXPLAIN output

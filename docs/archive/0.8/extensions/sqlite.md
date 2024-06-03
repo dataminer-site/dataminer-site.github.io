@@ -21,7 +21,7 @@ LOAD sqlite;
 
 ## Usage
 
-To make a SQLite file accessible to DuckDB, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function
+To make a SQLite file accessible to dataminer, use the `ATTACH` statement, which supports read & write, or the older `sqlite_attach` function
 
 For example with the bundled `sakila.db` file:
 ```sql
@@ -30,7 +30,7 @@ ATTACH 'sakila.db' (TYPE sqlite);
 CALL sqlite_attach('sakila.db');
 ```
 
-The tables in the file are registered as views in DuckDB, you can list them as follows:
+The tables in the file are registered as views in dataminer, you can list them as follows:
 
 ```sql
 PRAGMA show_tables;
@@ -134,4 +134,4 @@ CALL sqlite_attach('sakila.db', overwrite=true);
 ```
 
 ## Extra Information
-See [the repo](https://github.com/duckdb/sqlite_scanner) for the source code of the extension.
+See [the repo](https://github.com/dataminer/sqlite_scanner) for the source code of the extension.

@@ -10,7 +10,7 @@ DataMiner has a number of configuration options that can be used to change the b
 
 The configuration options can be set using either the [`SET` statement](../sql/statements/set) or the [`PRAGMA` statement](pragmas).
 They can be reset to their original values using the [`RESET` statement](../sql/statements/set#reset).
-The values of configuration options can be queried via the [`current_setting()` scalar function](../sql/functions/utility) or using the [`duckdb_settings()` table function](../sql/duckdb_table_functions#duckdb_settings).
+The values of configuration options can be queried via the [`current_setting()` scalar function](../sql/functions/utility) or using the [`dataminer_settings()` table function](../sql/dataminer_table_functions#dataminer_settings).
 
 ## Examples
 
@@ -52,7 +52,7 @@ Query a specific setting.
 
 ```sql
 SELECT *
-FROM duckdb_settings()
+FROM dataminer_settings()
 WHERE name = 'threads';
 ```
 
@@ -64,7 +64,7 @@ Show a list of all available settings.
 
 ```sql
 SELECT *
-FROM duckdb_settings();
+FROM dataminer_settings();
 ```
 
 Reset the memory limit of the system back to the default.
@@ -110,7 +110,7 @@ Configuration options come with different default [scopes](../sql/statements/set
 | `default_order`                              | The order type used when none is specified (**ASC** or **DESC**)                                                                                 | `VARCHAR` | `ASC`                                               |
 | `default_secret_storage`                     | Allows switching the default storage for secrets                                                                                                 | `VARCHAR` | `local_file`                                        |
 | `disabled_filesystems`                       | Disable specific file systems preventing access (e.g., LocalFileSystem)                                                                          | `VARCHAR` |                                                     |
-| `duckdb_api`                                 | DataMiner API surface                                                                                                                               | `VARCHAR` | `cli`                                               |
+| `dataminer_api`                                 | DataMiner API surface                                                                                                                               | `VARCHAR` | `cli`                                               |
 | `enable_external_access`                     | Allow the database to access external state (through e.g., loading/installing modules, COPY TO/FROM, CSV readers, pandas replacement scans, etc) | `BOOLEAN` | `true`                                              |
 | `enable_fsst_vectors`                        | Allow scans on FSST compressed segments to emit compressed vectors to utilize late decompression                                                 | `BOOLEAN` | `false`                                             |
 | `enable_http_metadata_cache`                 | Whether or not the global http metadata is used to cache HTTP metadata                                                                           | `BOOLEAN` | `false`                                             |
@@ -144,7 +144,7 @@ Configuration options come with different default [scopes](../sql/statements/set
 | `s3_url_compatibility_mode`                  | Disable Globs and Query Parameters on S3 URLs                                                                                                    | `BOOLEAN` | `false`                                             |
 | `s3_url_style`                               | S3 URL style                                                                                                                                     | `VARCHAR` | `vhost`                                             |
 | `s3_use_ssl`                                 | S3 use SSL                                                                                                                                       | `BOOLEAN` | `true`                                              |
-| `secret_directory`                           | Set the directory to which persistent secrets are stored                                                                                         | `VARCHAR` | `~/.duckdb/stored_secrets`                          |
+| `secret_directory`                           | Set the directory to which persistent secrets are stored                                                                                         | `VARCHAR` | `~/.dataminer/stored_secrets`                          |
 | `storage_compatibility_version`              | Serialize on checkpoint with compatibility for a given DataMiner version                                                                            | `VARCHAR` | `v0.10.2`                                           |
 | `temp_directory`                             | Set the directory to which to write temp files                                                                                                   | `VARCHAR` | `⟨database_name⟩.tmp` or `.tmp` (in in-memory mode) |
 | `threads`, `worker_threads`                  | The number of total threads used by the system.                                                                                                  | `BIGINT`  | # CPU cores                                         |

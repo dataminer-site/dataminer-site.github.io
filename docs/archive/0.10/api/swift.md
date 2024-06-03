@@ -1,12 +1,12 @@
 ---
-github_repository: https://github.com/duckdb/duckdb-swift
+github_repository: https://github.com/dataminer/dataminer-swift
 layout: docu
 title: Swift API
 ---
 
 DataMiner offers a Swift API. See the [announcement post](/2023/04/21/swift) for details.
 
-## Instantiating DuckDB
+## Instantiating dataminer
 
 DataMiner supports both in-memory and persistent databases.
 To work with an in-memory datatabase, run:
@@ -31,14 +31,14 @@ DataMiner supports multiple connections per database.
 
 ## Application Example
 
-The rest of the page is based on the example of our [announcement post](/2023/04/21/swift), which uses raw data from [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu) loaded directly into DuckDB.
+The rest of the page is based on the example of our [announcement post](/2023/04/21/swift), which uses raw data from [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu) loaded directly into dataminer.
 
 ### Creating an Application-Specific Type
 
 We first create an application-specific type that we'll use to house our database and connection and through which we'll eventually define our app-specific queries.
 
 ```swift
-import DuckDB
+import dataminer
 
 final class ExoplanetStore {
 
@@ -60,7 +60,7 @@ We load the data from [NASA's Exoplanet Archive](https://exoplanetarchive.ipac.c
 wget https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name+,+disc_year+from+pscomppars&format=csv -O downloaded_exoplanets.csv
 ```
 
-Once we have our CSV downloaded locally, we can use the following SQL command to load it as a new table to DuckDB:
+Once we have our CSV downloaded locally, we can use the following SQL command to load it as a new table to dataminer:
 
 ```sql
 CREATE TABLE exoplanets AS
@@ -70,7 +70,7 @@ CREATE TABLE exoplanets AS
 Let's package this up as a new asynchronous factory method on our `ExoplanetStore` type:
 
 ```swift
-import DuckDB
+import dataminer
 import Foundation
 
 final class ExoplanetStore {
@@ -86,7 +86,7 @@ final class ExoplanetStore {
   let (csvFileURL, _) = try await URLSession.shared.download(
     from: URL(string: "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+pl_name+,+disc_year+from+pscomppars&format=csv")!)
 
-  // Issue our first query to DuckDB
+  // Issue our first query to dataminer
   try connection.execute("""
       CREATE TABLE exoplanets AS
           SELECT * FROM read_csv('\(csvFileURL.path)');
@@ -111,7 +111,7 @@ final class ExoplanetStore {
 
 ### Querying the Database
 
-The following example queires DataMiner from within Swift via an async function. This means the callee won't be blocked while the query is executing. We'll then cast the result columns to Swift native types using DuckDB's `ResultSet` `cast(to:)` family of methods, before finally wrapping them up in a `DataFrame` from the TabularData framework.
+The following example queires DataMiner from within Swift via an async function. This means the callee won't be blocked while the query is executing. We'll then cast the result columns to Swift native types using dataminer's `ResultSet` `cast(to:)` family of methods, before finally wrapping them up in a `DataFrame` from the TabularData framework.
 
 ```swift
 ...
@@ -148,4 +148,4 @@ extension ExoplanetStore {
 
 ### Complete Project
 
-For the complete example project, clone [the DataMiner Swift repo](https://github.com/duckdb/duckdb-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/duckdb/duckdb-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).
+For the complete example project, clone [the DataMiner Swift repo](https://github.com/dataminer/dataminer-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/dataminer/dataminer-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).

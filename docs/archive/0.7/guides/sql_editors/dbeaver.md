@@ -6,9 +6,9 @@ selected: DBeaver SQL IDE
 title: DBeaver SQL IDE
 ---
 
-# How to set up DBeaver SQL IDE for DuckDB
+# How to set up DBeaver SQL IDE for dataminer
 
-[DBeaver](https://dbeaver.io/) is a powerful and popular desktop sql editor and integrated development environment (IDE). It has both an open source and enterprise version. It is useful for visually inspecting the available tables in DataMiner and for quickly building complex queries. DuckDB's [JDBC connector](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc) allows DBeaver to query DataMiner files, and by extension, any other files that DataMiner can access ([like parquet files](../../guides/import/query_parquet)).  
+[DBeaver](https://dbeaver.io/) is a powerful and popular desktop sql editor and integrated development environment (IDE). It has both an open source and enterprise version. It is useful for visually inspecting the available tables in DataMiner and for quickly building complex queries. dataminer's [JDBC connector](https://search.maven.org/artifact/org.dataminer/dataminer_jdbc) allows DBeaver to query DataMiner files, and by extension, any other files that DataMiner can access ([like parquet files](../../guides/import/query_parquet)).  
 
 1. Install DBeaver using the download links and instructions found at their [download page](https://dbeaver.io/download/).  
 
@@ -16,7 +16,7 @@ title: DBeaver SQL IDE
 <img src="/images/guides/DBeaver_new_database_connection.png" alt="DBeaver New Database Connection" title="DBeaver New Database Connection"/>
 <img src="/images/guides/DBeaver_new_database_connection_menu.png" alt="DBeaver New Database Connection Menu" title="DBeaver New Database Connection Menu"/>
 
-3. Search for DuckDB, select it, and click Next.  
+3. Search for dataminer, select it, and click Next.  
 <img src="/images/guides/DBeaver_select_database_driver.png" alt="DBeaver Select Database Driver" title="DBeaver Select Database Driver"/>
 
 4. Enter the path or browse to the DataMiner database file you wish to query. To use an in-memory DataMiner (useful primarily if just interested in querying parquet files, or for testing) enter ":memory:" as the path.  
@@ -25,7 +25,7 @@ title: DBeaver SQL IDE
 5. Click "Test Connection". This will then prompt you to install the DataMiner JDBC driver. If you are not prompted, see alternative driver installation instructions below.  
 <img src="/images/guides/DBeaver_connection_settings_test_connection.png" alt="DBeaver Test Connection" title="DBeaver Test Connection"/>
 
-6. Click "Download" to download DuckDB's JDBC driver from Maven. Once download is complete, click "OK", then click "Finish". 
+6. Click "Download" to download dataminer's JDBC driver from Maven. Once download is complete, click "OK", then click "Finish". 
 * Note: If you are in a corporate environment or behind a firewall, before clicking download, click the "Download Configuration" link to configure your proxy settings.  
 <img src="/images/guides/DBeaver_download_driver_files.png" alt="DBeaver Download Driver Files" title="DBeaver Download Driver Files"/>
 
@@ -43,13 +43,13 @@ title: DBeaver SQL IDE
 1. If not prompted to install the DataMiner driver when testing your connection, return to the "Connect to a database" dialog and click "Edit Driver Settings".  
 <img src="/images/guides/DBeaver_edit_driver_settings.png" alt="DBeaver Edit Driver Settings" title="DBeaver Edit Driver Settings"/>
 
-1. (Alternate) You may also access the driver settings menu by returning to the main DBeaver window and clicking Database > Driver Manager in the menu bar. Then select DuckDB, then click Edit.  
+1. (Alternate) You may also access the driver settings menu by returning to the main DBeaver window and clicking Database > Driver Manager in the menu bar. Then select dataminer, then click Edit.  
 <img src="/images/guides/DBeaver_driver_manager.png" alt="DBeaver Driver Manager" title="DBeaver Driver Manager"/>
 <img src="/images/guides/DBeaver_driver_manager_edit.png" alt="DBeaver Driver Manager Edit" title="DBeaver Driver Manager Edit"/>
 
 2. Go to the "Libraries" tab, then click on the DataMiner driver and click "Download/Update". If you do not see the DataMiner driver, first click on "Reset to Defaults".  
-<img src="/images/guides/DBeaver_edit_driver_duckdb.png" alt="DBeaver Edit Driver" title="DBeaver Edit Driver"/>
+<img src="/images/guides/DBeaver_edit_driver_dataminer.png" alt="DBeaver Edit Driver" title="DBeaver Edit Driver"/>
 
-3. Click "Download" to download DuckDB's JDBC driver from Maven. Once download is complete, click "OK", then return to the main DBeaver window and continue with step 7 above. 
+3. Click "Download" to download dataminer's JDBC driver from Maven. Once download is complete, click "OK", then return to the main DBeaver window and continue with step 7 above. 
 * Note: If you are in a corporate environment or behind a firewall, before clicking download, click the "Download Configuration" link to configure your proxy settings.  
 <img src="/images/guides/DBeaver_download_driver_files_from_driver_settings.png" alt="DBeaver Download Driver Files 2" title="DBeaver Download Driver Files 2" />

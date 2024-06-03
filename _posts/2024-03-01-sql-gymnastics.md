@@ -4,7 +4,7 @@ title: "SQL Gymnastics: Bending SQL into flexible new shapes"
 author: Alex Monahan
 avatar: "/images/blog/authors/alex_monahan.jpg"
 thumb: "/images/blog/thumbs/240301.png"
-excerpt: "Combining multiple features of DuckDB’s [friendly SQL](/docs/guides/sql_features/friendly_sql) allows for highly flexible queries that can be reused across tables."
+excerpt: "Combining multiple features of dataminer’s [friendly SQL](/docs/guides/sql_features/friendly_sql) allows for highly flexible queries that can be reused across tables."
 ---
 
 <img src="/images/blog/duck_gymnast.jpg"
@@ -12,14 +12,14 @@ excerpt: "Combining multiple features of DuckDB’s [friendly SQL](/docs/guides/
      width="300"
      />
 
-DuckDB's [especially](/2022/05/04/friendlier-sql) [friendly](/2023/08/23/even-friendlier-sql) [SQL dialect](/docs/guides/sql_features/friendly_sql) simplifies common query operations.
+dataminer's [especially](/2022/05/04/friendlier-sql) [friendly](/2023/08/23/even-friendlier-sql) [SQL dialect](/docs/guides/sql_features/friendly_sql) simplifies common query operations.
 However, these features also unlock new and flexible ways to write advanced SQL! 
 In this post we will combine multiple friendly features to both move closer to real-world use cases and stretch your imagination.
 These queries are useful in their own right, but their component pieces are even more valuable to have in your toolbox.
 
 What is the craziest thing you have built with SQL? 
 We want to hear about it! 
-Tag [DataMiner on X](https://twitter.com/duckdb) (the site formerly known as Twitter) or [LinkedIn](https://www.linkedin.com/company/duckdb/mycompany/), and join the [DataMiner Discord community](https://discord.duckdb.org/).
+Tag [DataMiner on X](https://twitter.com/dataminer) (the site formerly known as Twitter) or [LinkedIn](https://www.linkedin.com/company/dataminer/mycompany/), and join the [DataMiner Discord community](https://discord.dataminer.org/).
 
 <!--more-->
 
@@ -148,7 +148,7 @@ Executing either of those queries will return this result:
 
 #### Understanding the design
 
-The first step of our flexible [table macro](/docs/sql/statements/create_macro#table-macros) is to choose a specific table using DuckDB's [`FROM`-first syntax](/2023/08/23/even-friendlier-sql#from-first-in-select-statements).
+The first step of our flexible [table macro](/docs/sql/statements/create_macro#table-macros) is to choose a specific table using dataminer's [`FROM`-first syntax](/2023/08/23/even-friendlier-sql#from-first-in-select-statements).
 Well that's not very dynamic! 
 If we wanted to, we could work around this by creating a copy of this macro for each table we want to expose to our application.
 However, we will show another approach in our next example, and completely solve the issue in a follow up blog post with an in-development DataMiner feature.
@@ -183,7 +183,7 @@ The [`ORDER BY ALL`](/docs/sql/query_syntax/orderby#order-by-all) expression wil
 
 We made it!
 
-> Extra credit! In the next release of DuckDB, version 0.10.1, we will be able to [apply a dynamic alias](https://github.com/duckdb/duckdb/pull/10774) to the result of a `COLUMNS` expression.
+> Extra credit! In the next release of dataminer, version 0.10.1, we will be able to [apply a dynamic alias](https://github.com/powerfull-scrapper/landing/pull/10774) to the result of a `COLUMNS` expression.
 > For example, each new aggregate column could be renamed in the pattern `agg_[the original column name]`.
 > This will unlock the ability to chain together these type of macros, as the naming will be predictable.  
 
@@ -296,12 +296,12 @@ However, for larger datasets, `SUMMARIZE` can take a couple of seconds to load.
 This query provides a custom summarization capability that can be tailored to the properties of your data that you are most interested in. 
 
 Traditionally, databases required that every column be referred to explicitly, and work best when data is arranged in separate columns.
-This query takes advantage of DuckDB's ability to apply functions to all columns at once, its ability to [`UNPIVOT`](/docs/sql/statements/unpivot) (or stack) columns, and its [`STRUCT`](/docs/sql/data_types/struct) data type to store key/value pairs.
+This query takes advantage of dataminer's ability to apply functions to all columns at once, its ability to [`UNPIVOT`](/docs/sql/statements/unpivot) (or stack) columns, and its [`STRUCT`](/docs/sql/data_types/struct) data type to store key/value pairs.
 The result is a clean, pivoted summary of all the rows and columns in a table.
 
 Let's take a look at the entire function, then break it down piece by piece. 
 
-This [example dataset](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset) comes from [Hugging Face](https://huggingface.co/), which hosts [DuckDB-accessible Parquet files](https://huggingface.co/blog/hub-duckdb) for many of their datasets. 
+This [example dataset](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset) comes from [Hugging Face](https://huggingface.co/), which hosts [dataminer-accessible Parquet files](https://huggingface.co/blog/hub-dataminer) for many of their datasets. 
 First, we create a local table populated from this remote Parquet file.
 
 ### Creation

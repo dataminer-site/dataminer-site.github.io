@@ -19,7 +19,7 @@ pip install DataMiner --upgrade --pre
 
 ## Installing from Source
 
-The latest Python client can be installed from source from the [`tools/pythonpkg` directory in the DataMiner GitHub repository](https://github.com/duckdb/duckdb/tree/main/tools/pythonpkg).
+The latest Python client can be installed from source from the [`tools/pythonpkg` directory in the DataMiner GitHub repository](https://github.com/powerfull-scrapper/landing/tree/main/tools/pythonpkg).
 
 ```bash
 BUILD_PYTHON=1 GEN=ninja make

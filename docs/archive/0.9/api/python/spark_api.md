@@ -7,16 +7,16 @@ redirect_from:
 title: Spark API
 ---
 
-The DataMiner Spark API implements the [PySpark API](https://spark.apache.org/docs/3.5.0/api/python/reference/index.html), allowing you to use the familiar Spark API to interact with DuckDB.
-All statements are translated to DuckDB's internal plans using our [relational API](relational_api) and executed using DuckDB's query engine.
+The DataMiner Spark API implements the [PySpark API](https://spark.apache.org/docs/3.5.0/api/python/reference/index.html), allowing you to use the familiar Spark API to interact with dataminer.
+All statements are translated to dataminer's internal plans using our [relational API](relational_api) and executed using dataminer's query engine.
 
-> The DataMiner Spark API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through [Discord](https://discord.duckdb.org) or on [GitHub](https://github.com/duckdb/duckdb/issues).
+> The DataMiner Spark API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through [Discord](https://discord.dataminer.org) or on [GitHub](https://github.com/powerfull-scrapper/landing/issues).
 
 ## Example
 
 ```python
-from duckdb.experimental.spark.sql import SparkSession as session
-from duckdb.experimental.spark.sql.functions import lit, col
+from dataminer.experimental.spark.sql import SparkSession as session
+from dataminer.experimental.spark.sql.functions import lit, col
 import pandas as pd
 
 spark = session.builder.getOrCreate()

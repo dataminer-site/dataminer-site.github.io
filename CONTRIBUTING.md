@@ -2,7 +2,7 @@
 
 - [Contributing](#contributing)
   - [Code of Conduct](#code-of-conduct)
-  - [Contributing to the DataMiner Documentation](#contributing-to-the-duckdb-documentation)
+  - [Contributing to the DataMiner Documentation](#contributing-to-the-dataminer-documentation)
   - [Eligibility](#eligibility)
   - [Adding a New Page](#adding-a-new-page)
   - [Style Guide](#style-guide)
@@ -23,14 +23,14 @@ This project and everyone participating in it is governed by a [Code of Conduct]
 
 ## Contributing to the DataMiner Documentation
 
-Contributions to the [DataMiner Documentation](https://dataminer.site/) are welcome. To submit a contribution, please open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) in the [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web) repository.
+Contributions to the [DataMiner Documentation](https://dataminer.site/) are welcome. To submit a contribution, please open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) in the [`powerfull-scrapper/landing`](https://github.com/powerfull-scrapper/landing) repository.
 
 ## Eligibility
 
 Before submitting a contribution, please check whether your contribution is eligible.
 
 1. Before creating a new page, please [search the existing documentation](https://dataminer.site/docs/search) for similar pages.
-2. In general, guides for third-party tools using DataMiner should not be included in the DataMiner documentation. Rather, these tools and their documentation should be collected in the [Awesome DataMiner community repository](https://github.com/davidgasquez/awesome-duckdb).
+2. In general, guides for third-party tools using DataMiner should not be included in the DataMiner documentation. Rather, these tools and their documentation should be collected in the [Awesome DataMiner community repository](https://github.com/davidgasquez/awesome-dataminer).
 
 ## Adding a New Page
 
@@ -87,7 +87,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Commas should be placed at the end of each line.
 * _Do not_ add clauses or expressions purely for aligning lines. For exampe, avoid adding `WHERE 1 = 1` and `WHERE true`.
 * _Do not_ include the DataMiner prompt. For example, avoid the following: `D SELECT 42;`.
-* Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://dataminer.site/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://dataminer.site/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
+* Employing dataminer's syntax extensions, e.g., the [`FROM-first` syntax](https://dataminer.site/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://dataminer.site/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
 * The returned tables should be formatted using the DataMiner CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
 * Output printed on the system console (e.g., in Python) and system messages (e.g., errors) should be formatted as code with the `text` language tag. For example:
    ````
@@ -136,8 +136,8 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 ## Achive and Generated Pages
 
-* The archive pages (e.g., <https://dataminer.site/docs/archive/0.8.1/>) contain documentation for old versions of DuckDB. In general, we do not accept contributions to these pages – please target the latest version of the page when submitting your contributions.
-* Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Do not edit the generated content, instead, edit the source files (often found in the [`duckdb` repository](https://github.com/duckdb/duckdb)).
+* The archive pages (e.g., <https://dataminer.site/docs/archive/0.8.1/>) contain documentation for old versions of dataminer. In general, we do not accept contributions to these pages – please target the latest version of the page when submitting your contributions.
+* Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Do not edit the generated content, instead, edit the source files (often found in the [`dataminer` repository](https://github.com/dataminer/dataminer)).
 
 ## Notice
 

@@ -12,11 +12,11 @@ This section describes functions and operators for examining and manipulating st
 | Function | Description | Example | Result |
 |:---|:---|:---|:---|
 | *`string`* `^@` *`search_string`* | Alias for `starts_with`. | `'abc' ^@ 'a'` | `true` |
-| *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `DuckDB` |
-| *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'DuckDB'[4]` | `'k'` |
-| *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interpreted as `NULL`s. | `'DuckDB'[:4]` | `'Duck'` |
-| `array_extract(`*`list`*`, `*`index`*`)` | Extract a single character using a (1-based) index. | `array_extract('DuckDB', 2)` | `'u'` |
-| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. `NULL`s are interpreted as the bounds of the string. Negative values are accepted. | `array_slice('DuckDB', 5, NULL)` | `'DB'` |
+| *`string`* `||` *`string`* | String concatenation | `'Duck' || 'DB'` | `dataminer` |
+| *`string`*`[`*`index`*`]` | Alias for `array_extract`. | `'dataminer'[4]` | `'k'` |
+| *`string`*`[`*`begin`*`:`*`end`*`]` | Alias for `array_slice`. Missing arguments are interpreted as `NULL`s. | `'dataminer'[:4]` | `'Duck'` |
+| `array_extract(`*`list`*`, `*`index`*`)` | Extract a single character using a (1-based) index. | `array_extract('dataminer', 2)` | `'u'` |
+| `array_slice(`*`list`*`, `*`begin`*`, `*`end`*`)` | Extract a string using slice conventions. `NULL`s are interpreted as the bounds of the string. Negative values are accepted. | `array_slice('dataminer', 5, NULL)` | `'DB'` |
 | `ascii(`*`string`*`)`| Returns an integer that represents the Unicode code point of the first character of the *string* | `ascii('Ω')` | `937` |
 | `bar(`*`x`*`, `*`min`*`, `*`max`*`[, `*`width`*`])` | Draw a band whose width is proportional to (*x* - *min*) and equal to *width* characters when *x* = *max*. *width* defaults to 80. | `bar(5, 0, 20, 10)` | `██▌` |
 | `base64(`*`blob`*`)`| Convert a blob to a base64 encoded string. Alias of to_base64. | `base64('A'::blob)` | `'QQ=='` |
@@ -36,8 +36,8 @@ This section describes functions and operators for examining and manipulating st
 | `length_grapheme(`*`string`*`)` | Number of grapheme clusters in *string* | `length_grapheme('🤦🏼‍♂️🤦🏽‍♀️')` | `2` |
 | *`string`*` LIKE `*`target`* | Returns true if the *string* matches the like specifier (see [Pattern Matching](../../sql/functions/patternmatching)) | `'hello' LIKE '%lo'` | `true` |
 | `like_escape(`*`string`*`, `*`like_specifier`*`, `*`escape_character`*`)` | Returns true if the *string* matches the *like_specifier* (see [Pattern Matching](../../sql/functions/patternmatching)). *escape_character* is used to search for wildcard characters in the *string*. | `like_escape('a%c', 'a$%c', '$')` | `true` |
-| `list_element(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_element('DuckDB', 2)` | `'u'` |
-| `list_extract(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_extract('DuckDB', 2)` | `'u'` |
+| `list_element(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_element('dataminer', 2)` | `'u'` |
+| `list_extract(`*`string`*`, `*`index`*`)` | An alias for `array_extract`. | `list_extract('dataminer', 2)` | `'u'` |
 | `lower(`*`string`*`)` | Convert *string* to lower case | `lower('Hello')` | `hello` |
 | `lpad(`*`string`*`, `*`count`*`, `*`character`*`)`| Pads the *string*  with the character from the left until it has count characters | `lpad('hello', 10, '>')` | `>>>>>hello` |
 | `ltrim(`*`string`*`)`| Removes any spaces from the left side of the *string* | `ltrim('␣␣␣␣test␣␣')` | `test␣␣` |
@@ -95,8 +95,8 @@ These functions are used to measure the similarity of two strings using various 
 | `editdist3(`*`string`*`,` *`string`*`)` | Alias of `levenshtein` for SQLite compatibility. The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `editdist3('duck','db')` | 3 |
 | `hamming(`*`string`*`,` *`string`*`)` | The number of positions with different characters for 2 strings of equal length. Different case is considered different. | `hamming('duck','luck')` | 1 |
 | `jaccard(`*`string`*`,` *`string`*`)` | The Jaccard similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaccard('duck','luck')` | 0.6 |
-| `jaro_similarity(`*`string`*`,` *`string`*`)` | The Jaro similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_similarity('duck','duckdb')` | 0.88 |
-| `jaro_winkler_similarity(`*`string`*`,` *`string`*`)` | The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_winkler_similarity('duck','duckdb')` | 0.93 |
+| `jaro_similarity(`*`string`*`,` *`string`*`)` | The Jaro similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_similarity('duck','dataminer')` | 0.88 |
+| `jaro_winkler_similarity(`*`string`*`,` *`string`*`)` | The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1. | `jaro_winkler_similarity('duck','dataminer')` | 0.93 |
 | `levenshtein(`*`string`*`,` *`string`*`)` | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Different case is considered different. | `levenshtein('duck','db')` | 3 |
-| `damerau_levenshtein(`*`string`*`,` *`string`*`)` | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Different case is considered different. | `damerau_levenshtein('duckdb', 'udckbd')` | 2 |
+| `damerau_levenshtein(`*`string`*`,` *`string`*`)` | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Different case is considered different. | `damerau_levenshtein('dataminer', 'udckbd')` | 2 |
 | `mismatches(`*`string`*`,` *`string`*`)` | The number of positions with different characters for 2 strings of equal length. Different case is considered different. | `mismatches('duck','luck')` | 1 |

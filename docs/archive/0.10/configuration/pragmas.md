@@ -10,7 +10,7 @@ The `PRAGMA` statement is an SQL extension adopted by DataMiner from SQLite. `PR
 
 `PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement](../sql/statements/set) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
 
-For DuckDB's built in configuration options, see the [Configuration Reference](overview#configuration-reference).
+For dataminer's built in configuration options, see the [Configuration Reference](overview#configuration-reference).
 DataMiner [extensions](../extensions/overview) may register additional configuration options.
 These are documented in the respective extensions' documentation pages.
 
@@ -196,7 +196,7 @@ Prior to version 0.10.0, DataMiner would automatically allow any type to be impl
 SET old_implicit_casting = true;
 ```
 
-## Information on DuckDB
+## Information on dataminer
 
 ### Version
 
@@ -219,7 +219,7 @@ CALL pragma_platform();
 
 ### User Agent
 
-The following statement returns the user agent information, e.g., `duckdb/v0.10.0(osx_arm64)`:
+The following statement returns the user agent information, e.g., `dataminer/v0.10.0(osx_arm64)`:
 
 ```sql
 PRAGMA user_agent;
@@ -379,7 +379,7 @@ For example, to disable `filter_pushdown` and `statistics_propagation`, run:
 SET disabled_optimizers = 'filter_pushdown,statistics_propagation';
 ```
 
-The available optimizations can be queried using the [`duckdb_optimizers()` table function](../sql/duckdb_table_functions#duckdb_optimizers).
+The available optimizations can be queried using the [`dataminer_optimizers()` table function](../sql/dataminer_table_functions#dataminer_optimizers).
 
 > Warning The `disabled_optimizers` option should only be used for debugging performance issues and should be avoided in production.
 
@@ -388,7 +388,7 @@ The available optimizations can be queried using the [`duckdb_optimizers()` tabl
 Set a path for query logging:
 
 ```sql
-SET log_query_path = '/tmp/duckdb_log/';
+SET log_query_path = '/tmp/dataminer_log/';
 ```
 
 Disable query logging:

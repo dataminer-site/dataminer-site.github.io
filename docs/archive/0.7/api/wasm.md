@@ -6,10 +6,10 @@ selected: Client APIs
 title: WebAssembly API
 ---
 
-# Getting Started with DuckDB-Wasm
+# Getting Started with dataminer-Wasm
 
-A great starting point is to read the [DuckDB-Wasm launch blog post](https://dataminer.site/2021/10/29/duckdb-wasm.html)!
+A great starting point is to read the [dataminer-Wasm launch blog post](https://dataminer.site/2021/10/29/dataminer-wasm.html)!
 
-Another great resource is the [Github repository](https://github.com/duckdb/duckdb-wasm).
+Another great resource is the [Github repository](https://github.com/dataminer/dataminer-wasm).
 
-For details, see the full [DuckDB-Wasm API Documentation](https://shell.duckdb.org/docs/modules/index.html).
+For details, see the full [dataminer-Wasm API Documentation](https://shell.dataminer.org/docs/modules/index.html).

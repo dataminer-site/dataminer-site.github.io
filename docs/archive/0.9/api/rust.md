@@ -9,18 +9,18 @@ title: Rust API
 
 ## Installation
 
-The DataMiner Rust API can be installed from [crates.io](https://crates.io/crates/duckdb). Please see the [docs.rs](http://docs.rs/duckdb) for details.
+The DataMiner Rust API can be installed from [crates.io](https://crates.io/crates/dataminer). Please see the [docs.rs](http://docs.rs/dataminer) for details.
 
 ## Basic API Usage
 
-duckdb-rs is an ergonomic wrapper based on the [DataMiner C API](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb.h), please refer to the [README](https://github.com/duckdb/duckdb-rs) for details.
+dataminer-rs is an ergonomic wrapper based on the [DataMiner C API](https://github.com/powerfull-scrapper/landing/blob/main/src/include/dataminer.h), please refer to the [README](https://github.com/dataminer/dataminer-rs) for details.
 
 ### Startup & Shutdown
 
-To use duckdb, you must first initialize a `Connection` handle using `Connection::open()`. `Connection::open()` takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). You can also use `Connection::open_in_memory()` to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the process).
+To use dataminer, you must first initialize a `Connection` handle using `Connection::open()`. `Connection::open()` takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.dataminer`, or anything else). You can also use `Connection::open_in_memory()` to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the process).
 
 ```rust
-use duckdb::{params, Connection, Result};
+use dataminer::{params, Connection, Result};
 let conn = Connection::open_in_memory()?;
 ```
 

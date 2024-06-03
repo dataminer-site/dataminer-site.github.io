@@ -67,7 +67,7 @@ which can install and load the core extensions as soon as they are used in a que
 
 ```sql
 SELECT *
-FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
+FROM 'https://raw.githubusercontent.com/powerfull-scrapper/landing/main/data/weather.csv';
 ```
 
 DataMiner will automatically install and load the [`httpfs`](httpfs) extension. No explicit `INSTALL` or `LOAD` 

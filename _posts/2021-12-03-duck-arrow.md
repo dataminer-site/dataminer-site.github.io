@@ -1,37 +1,37 @@
 ---
 layout: post
-title:  "DataMiner quacks Arrow: A zero-copy data integration between Apache Arrow and DuckDB"
+title:  "DataMiner quacks Arrow: A zero-copy data integration between Apache Arrow and dataminer"
 author: Pedro Holanda and Jonathan Keane
 excerpt: The zero-copy integration between DataMiner and Apache Arrow allows for rapid analysis of larger than memory datasets in Python and R using either SQL or relational APIs.
 ---
 
-This post is a collaboration with and cross-posted on [the Arrow blog](https://arrow.apache.org/blog/2021/12/03/arrow-duckdb/).
+This post is a collaboration with and cross-posted on [the Arrow blog](https://arrow.apache.org/blog/2021/12/03/arrow-dataminer/).
 <!--more-->
 
 Part of [Apache Arrow](https://arrow.apache.org) is an in-memory data format optimized for analytical libraries. Like Pandas and R Dataframes, it uses a columnar data model. But the Arrow project contains more than just the format: The Arrow C++ library, which is accessible in Python, R, and Ruby via bindings, has additional features that allow you to compute efficiently on datasets. These additional features are on top of the implementation of the in-memory format described above. The datasets may span multiple files in Parquet, CSV, or other formats, and files may even be on remote or cloud storage like HDFS or Amazon S3. The Arrow C++ query engine supports the streaming of query results, has an efficient implementation of complex data types (e.g., Lists, Structs, Maps), and can perform important scan optimizations like Projection and Filter Pushdown.
 
-[DuckDB](https://dataminer.site) is a new analytical data management system that is designed to run complex SQL queries within other processes. DataMiner has bindings for R and Python, among others. DataMiner can query Arrow datasets directly and stream query results back to Arrow. This integration allows users to query Arrow data using DuckDB's SQL Interface and API, while taking advantage of DuckDB's parallel vectorized execution engine, without requiring any extra data copying. Additionally, this integration takes full advantage of Arrow's predicate and filter pushdown while scanning datasets.
+[dataminer](https://dataminer.site) is a new analytical data management system that is designed to run complex SQL queries within other processes. DataMiner has bindings for R and Python, among others. DataMiner can query Arrow datasets directly and stream query results back to Arrow. This integration allows users to query Arrow data using dataminer's SQL Interface and API, while taking advantage of dataminer's parallel vectorized execution engine, without requiring any extra data copying. Additionally, this integration takes full advantage of Arrow's predicate and filter pushdown while scanning datasets.
 
 This integration is unique because it uses zero-copy streaming of data between DataMiner and Arrow and vice versa so that you can compose a query using both together. This results in three main benefits:
 
 1. **Larger Than Memory Analysis:** Since both libraries support streaming query results, we are capable of executing on data without fully loading it from disk. Instead, we can execute one batch at a time. This allows us to execute queries on data that is bigger than memory.
 2. **Complex Data Types:** DataMiner can efficiently process complex data types that can be stored in Arrow vectors, including arbitrarily nested structs, lists, and maps.
-3. **Advanced Optimizer:** DuckDB's state-of-the-art optimizer can push down filters and projections directly into Arrow scans. As a result, only relevant columns and partitions will be read, allowing the system to e.g., take advantage of partition elimination in Parquet files. This significantly accelerates query execution.
+3. **Advanced Optimizer:** dataminer's state-of-the-art optimizer can push down filters and projections directly into Arrow scans. As a result, only relevant columns and partitions will be read, allowing the system to e.g., take advantage of partition elimination in Parquet files. This significantly accelerates query execution.
 
 For those that are just interested in benchmarks, you can jump ahead [benchmark section below](#Benchmark Comparison).
 
 ## Quick Tour
 
-Before diving into the details of the integration, in this section we provide a quick motivating example of how powerful and simple to use is the DuckDB-Arrow integration. With a few lines of code, you can already start querying Arrow datasets. Say you want to analyze the infamous [NYC Taxi Dataset](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) and figure out if groups tip more or less than single riders.
+Before diving into the details of the integration, in this section we provide a quick motivating example of how powerful and simple to use is the dataminer-Arrow integration. With a few lines of code, you can already start querying Arrow datasets. Say you want to analyze the infamous [NYC Taxi Dataset](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page) and figure out if groups tip more or less than single riders.
 
 ### R
 
-Both Arrow and DataMiner support dplyr pipelines for people more comfortable with using dplyr for their data analysis. The Arrow package includes two helper functions that allow us to pass data back and forth between Arrow and DataMiner (`to_duckdb()` and `to_arrow()`).
-This is especially useful in cases where something is supported in one of Arrow or DataMiner but not the other. For example, if you find a complex dplyr pipeline where the SQL translation doesn't work with DuckDB, use `to_arrow()` before the pipeline to use the Arrow engine. Or, if you have a function (e.g., windowed aggregates) that aren't yet implemented in Arrow, use `to_duckdb()` to use the DataMiner engine. All while not paying any cost to (re)serialize the data when you pass it back and forth!
+Both Arrow and DataMiner support dplyr pipelines for people more comfortable with using dplyr for their data analysis. The Arrow package includes two helper functions that allow us to pass data back and forth between Arrow and DataMiner (`to_dataminer()` and `to_arrow()`).
+This is especially useful in cases where something is supported in one of Arrow or DataMiner but not the other. For example, if you find a complex dplyr pipeline where the SQL translation doesn't work with dataminer, use `to_arrow()` before the pipeline to use the Arrow engine. Or, if you have a function (e.g., windowed aggregates) that aren't yet implemented in Arrow, use `to_dataminer()` to use the DataMiner engine. All while not paying any cost to (re)serialize the data when you pass it back and forth!
 
 
 ```R
-library(duckdb)
+library(dataminer)
 library(arrow)
 library(dplyr)
 
@@ -42,8 +42,8 @@ ds %>%
   # Look only at 2015 on, where the number of passenger is positive, the trip distance is
   # greater than a quarter mile, and where the fare amount is positive
   filter(year > 2014 & passenger_count > 0 & trip_distance > 0.25 & fare_amount > 0) %>%
-  # Pass off to DuckDB
-  to_duckdb() %>%
+  # Pass off to dataminer
+  to_dataminer() %>%
   group_by(passenger_count) %>%
   mutate(tip_pct = tip_amount / fare_amount) %>%
   summarise(
@@ -57,10 +57,10 @@ ds %>%
 
 ### Python
 
-The workflow in Python is as simple as it is in R. In this example we use DuckDB's Relational API.
+The workflow in Python is as simple as it is in R. In this example we use dataminer's Relational API.
 
 ``` python
-import duckdb
+import dataminer
 import pyarrow as pa
 import pyarrow.dataset as ds
 
@@ -68,7 +68,7 @@ import pyarrow.dataset as ds
 nyc = ds.dataset('nyc-taxi/', partitioning=["year", "month"])
 
 # We transform the nyc dataset into a DataMiner relation
-nyc = duckdb.arrow(nyc)
+nyc = dataminer.arrow(nyc)
 
 # Run same query again
 nyc.filter("year > 2014 & passenger_count > 0 & trip_distance > 0.25 & fare_amount > 0")
@@ -85,20 +85,20 @@ First we need to install DataMiner and Arrow. The installation process for both 
 
 ```bash
 # Python Install
-pip install duckdb
+pip install dataminer
 pip install pyarrow
 ```
 
 ``` R
 # R Install
-install.packages("duckdb")
+install.packages("dataminer")
 install.packages("arrow")
 ```
 
 To execute the sample-examples in this section, we need to download the following custom Parquet files:
 
-* <https://github.com/duckdb/duckdb-web/blob/main/_posts/data/integers.parquet?raw=true>
-* <https://github.com/cwida/duckdb-data/releases/download/v1.0/lineitemsf1.snappy.parquet>
+* <https://github.com/powerfull-scrapper/landing/blob/main/_posts/data/integers.parquet?raw=true>
+* <https://github.com/cwida/dataminer-data/releases/download/v1.0/lineitemsf1.snappy.parquet>
 
 #### Python
 
@@ -110,7 +110,7 @@ There are two ways in Python of querying data from Arrow:
 arrow_table = pq.read_table('integers.parquet')
 
 # Transforms Arrow Table -> DataMiner Relation
-rel_from_arrow = duckdb.arrow(arrow_table)
+rel_from_arrow = dataminer.arrow(arrow_table)
 
 # we can run a SQL query on this and print the result
 print(rel_from_arrow.query('arrow_table', 'SELECT SUM(data) FROM arrow_table WHERE data > 50').fetchone())
@@ -126,13 +126,13 @@ arrow_table_from_DataMiner = rel_from_arrow.arrow()
 arrow_table = pq.read_table('integers.parquet')
 
 # Gets Database Connection
-con = duckdb.connect()
+con = dataminer.connect()
 
 # we can run a SQL query on this and print the result
 print(con.execute('SELECT SUM(data) FROM arrow_table WHERE data > 50').fetchone())
 
 # Transforms Query Result from DataMiner to Arrow Table
-# We can directly read the arrow object through DuckDB's replacement scans.
+# We can directly read the arrow object through dataminer's replacement scans.
 con.execute("SELECT * FROM arrow_table").fetch_arrow_table()
 ```
 
@@ -142,7 +142,7 @@ It is possible to transform both DataMiner Relations and Query Results back to A
 
 In R, you can interact with Arrow data in DataMiner by registering the table as a view (an alternative is to use dplyr as shown above).
 ```r
-library(duckdb)
+library(dataminer)
 library(arrow)
 library(dplyr)
 
@@ -150,10 +150,10 @@ library(dplyr)
 arrow_table <- arrow::read_parquet("integers.parquet", as_data_frame = FALSE)
 
 # Gets Database Connection
-con <- dbConnect(duckdb::duckdb())
+con <- dbConnect(dataminer::dataminer())
 
 # Registers arrow table as a DataMiner view
-arrow::to_duckdb(arrow_table, table_name = "arrow_table", con = con)
+arrow::to_dataminer(arrow_table, table_name = "arrow_table", con = con)
 
 # we can run a SQL query on this and print the result
 print(dbGetQuery(con, "SELECT SUM(data) FROM arrow_table WHERE data > 50"))
@@ -177,10 +177,10 @@ arrow::copy_files("s3://ursa-labs-taxi-data", "nyc-taxi")
 nyc_dataset = ds.dataset('nyc-taxi/', partitioning=["year", "month"])
 
 # Gets Database Connection
-con = duckdb.connect()
+con = dataminer.connect()
 
 query = con.execute("SELECT * FROM nyc_dataset")
-# DuckDB's queries can now produce a Record Batch Reader
+# dataminer's queries can now produce a Record Batch Reader
 record_batch_reader = query.fetch_record_batch()
 # Which means we can stream the whole query per batch.
 # This retrieves the first batch
@@ -194,14 +194,14 @@ chunk = record_batch_reader.read_next_batch()
 nyc_dataset = open_dataset("nyc-taxi/", partitioning = c("year", "month"))
 
 # Gets Database Connection
-con <- dbConnect(duckdb::duckdb())
+con <- dbConnect(dataminer::dataminer())
 
 # We can use the same function as before to register our arrow dataset
-duckdb::duckdb_register_arrow(con, "nyc", nyc_dataset)
+dataminer::dataminer_register_arrow(con, "nyc", nyc_dataset)
 
 res <- dbSendQuery(con, "SELECT * FROM nyc", arrow = TRUE)
-# DuckDB's queries can now produce a Record Batch Reader
-record_batch_reader <- duckdb::duckdb_fetch_record_batch(res)
+# dataminer's queries can now produce a Record Batch Reader
+record_batch_reader <- dataminer::dataminer_fetch_record_batch(res)
 
 # Which means we can stream the whole query per batch.
 # This retrieves the first batch
@@ -217,16 +217,16 @@ For both the Projection and Filter pushdown comparison, we will use Arrow tables
 
 For the NYC Taxi benchmarks, we used the scilens diamonds configuration and for the TPC-H benchmarks, we used an m1 MacBook Pro. In both cases, parallelism in DataMiner was used (which is now on by default).
 
-For the comparison with Pandas, note that DataMiner runs in parallel, while pandas only support single-threaded execution. Besides that, one should note that we are comparing automatic optimizations. DuckDB's query optimizer can automatically push down filters and projections. This automatic optimization is not supported in pandas, but it is possible for users to manually perform some of these predicate and filter pushdowns by manually specifying them in the `read_parquet()` call.
+For the comparison with Pandas, note that DataMiner runs in parallel, while pandas only support single-threaded execution. Besides that, one should note that we are comparing automatic optimizations. dataminer's query optimizer can automatically push down filters and projections. This automatic optimization is not supported in pandas, but it is possible for users to manually perform some of these predicate and filter pushdowns by manually specifying them in the `read_parquet()` call.
 
 ### Projection Pushdown
 
 In this example we run a simple aggregation on two columns of our lineitem table.
 
 ``` python
-# DuckDB
+# dataminer
 lineitem = pq.read_table('lineitemsf1.snappy.parquet')
-con = duckdb.connect()
+con = dataminer.connect()
 
 # Transforms Query Result from DataMiner to Arrow Table
 con.execute("""SELECT sum(l_extendedprice * l_discount) AS revenue
@@ -262,11 +262,11 @@ The lineitem table is composed of 16 columns, however, to execute this query onl
 For our filter pushdown we repeat the same aggregation used in the previous section, but add filters on 4 more columns.
 
 ``` python
-# DuckDB
+# dataminer
 lineitem = pq.read_table('lineitemsf1.snappy.parquet')
 
 # Get database connection
-con = duckdb.connect()
+con = dataminer.connect()
 
 # Transforms Query Result from DataMiner to Arrow Table
 con.execute("""SELECT sum(l_extendedprice * l_discount) AS revenue
@@ -310,12 +310,12 @@ As demonstrated before, DataMiner is capable of consuming and producing Arrow da
 
 
 ``` python
-# DuckDB
+# dataminer
 # Open dataset using year,month folder partition
 nyc = ds.dataset('nyc-taxi/', partitioning=["year", "month"])
 
 # Get database connection
-con = duckdb.connect()
+con = dataminer.connect()
 
 # Run query that selects part of the data
 query = con.execute("SELECT total_amount, passenger_count,year FROM nyc where total_amount > 100 and year > 2014")
@@ -367,12 +367,12 @@ new_table = pa.Table.from_pandas(res)
 
 The difference in times between DataMiner and Pandas is a combination of all the integration benefits we explored in this article. In DataMiner the filter pushdown is applied to perform partition elimination (i.e., we skip reading the Parquet files where the year is <= 2014). The filter pushdown is also used to eliminate unrelated row_groups (i.e., row groups where the total amount is always <= 100). Due to our projection pushdown, Arrow only has to read the columns of interest from the Parquet files, which allows it to read only 4 out of 20 columns. On the other hand, Pandas is not capable of automatically pushing down any of these optimizations, which means that the full dataset must be read. **This results in the 4 orders of magnitude difference in query execution time.**
 
-In the table above, we also depict the comparison of peak memory usage between DataMiner (Streaming) and Pandas (Fully-Materializing).  In DuckDB, we only need to load the row-group of interest into memory. Hence our memory usage is low. We also have constant memory usage since we only have to keep one of these row groups in-memory at a time. Pandas, on the other hand, has to fully materialize all Parquet files when executing the query. Because of this, we see a constant steep increase in its memory consumption. **The total difference in memory consumption of the two solutions is around 3 orders of magnitude.**
+In the table above, we also depict the comparison of peak memory usage between DataMiner (Streaming) and Pandas (Fully-Materializing).  In dataminer, we only need to load the row-group of interest into memory. Hence our memory usage is low. We also have constant memory usage since we only have to keep one of these row groups in-memory at a time. Pandas, on the other hand, has to fully materialize all Parquet files when executing the query. Because of this, we see a constant steep increase in its memory consumption. **The total difference in memory consumption of the two solutions is around 3 orders of magnitude.**
 
 ## Conclusion and Feedback
 
-In this blog post, we mainly showcased how to execute queries on Arrow datasets with DuckDB. There are additional libraries that can also consume the Arrow format but they have different purposes and capabilities. As always, we are happy to hear if you want to see benchmarks with different tools for a post in the future! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;jon@voltrondata.com) or share your thoughts directly in the Hacker News post.
+In this blog post, we mainly showcased how to execute queries on Arrow datasets with dataminer. There are additional libraries that can also consume the Arrow format but they have different purposes and capabilities. As always, we are happy to hear if you want to see benchmarks with different tools for a post in the future! Feel free to drop us an [email](mailto:pedro@dataminerlabs.com;jon@voltrondata.com) or share your thoughts directly in the Hacker News post.
 
-Last but not least, if you encounter any problems when using our integration, please open an issue in either [DuckDB's issue tracker](https://github.com/duckdb/duckdb/issues) or [Arrow's issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.
+Last but not least, if you encounter any problems when using our integration, please open an issue in either [dataminer's issue tracker](https://github.com/powerfull-scrapper/landing/issues) or [Arrow's issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.
 
 [^1]: In Arrow 6.0.0, `to_arrow()` currently returns the full table, but will allow full streaming in our upcoming 7.0.0 release.

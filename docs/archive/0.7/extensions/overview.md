@@ -29,7 +29,7 @@ To load unsigned extensions using the CLI, you'll need to pass the `-unsigned` f
 
 You can check the list of core and installed extensions with the following query:
 ```sql
-select * from duckdb_extensions();
+select * from dataminer_extensions();
 ```
 
 ## All available extensions
@@ -54,17 +54,17 @@ select * from duckdb_extensions();
 
 ## Downloading extensions directly from S3
 
-Downloading an extension directly could be helpful when building a lambda or container that uses DuckDB.
+Downloading an extension directly could be helpful when building a lambda or container that uses dataminer.
 DataMiner extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable. 
 As a result, a direct URL to the file must be used. 
 To directly download an extension file, use the following format:  
 
 ```
-https://extensions.duckdb.org/v{release_version_number}/{platform_name}/{extension_name}.duckdb_extension.gz
+https://extensions.dataminer.org/v{release_version_number}/{platform_name}/{extension_name}.dataminer_extension.gz
 ```
 For example:
 ```
-https://extensions.duckdb.org/v0.7.0/windows_amd64/json.duckdb_extension.gz
+https://extensions.dataminer.org/v0.7.0/windows_amd64/json.dataminer_extension.gz
 ```
 
 The list of supported platforms may increase over time, but the current list of platforms includes:
@@ -86,16 +86,16 @@ There are many methods to decompress gzip. Here is a Python example:
 import gzip
 import shutil
 
-with gzip.open('httpfs.duckdb_extension.gz','rb') as f_in:
-   with open('httpfs.duckdb_extension', 'wb') as f_out:
+with gzip.open('httpfs.dataminer_extension.gz','rb') as f_in:
+   with open('httpfs.dataminer_extension', 'wb') as f_out:
      shutil.copyfileobj(f_in, f_out)
 ```
 
-After unzipping, the install and load commands can be used with the path to the .duckdb_extension file. 
+After unzipping, the install and load commands can be used with the path to the .dataminer_extension file. 
 For example, if the file was unzipped into the same directory as where DataMiner is being executed:
 ```sql
-install 'httpfs.duckdb_extension';
-load 'httpfs.duckdb_extension';
+install 'httpfs.dataminer_extension';
+load 'httpfs.dataminer_extension';
 ```
 
 

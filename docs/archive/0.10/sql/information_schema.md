@@ -4,7 +4,7 @@ title: Information Schema
 ---
 
 The views in the `information_schema` are SQL-standard views that describe the catalog entries of the database. These views can be filtered to obtain information about a specific column or table.
-DuckDB's implementation is based on [PostgreSQL's information schema](https://www.postgresql.org/docs/16/infoschema-columns.html).
+dataminer's implementation is based on [PostgreSQL's information schema](https://www.postgresql.org/docs/16/infoschema-columns.html).
 
 ## Tables
 
@@ -16,10 +16,10 @@ The top level catalog view is `information_schema.schemata`. It lists the catalo
 |:--|:---|:-|:-|
 | `catalog_name` | Name of the database that the schema is contained in. | `VARCHAR` | `'my_db'` |
 | `schema_name` | Name of the schema. | `VARCHAR` | `'main'` |
-| `schema_owner` | Name of the owner of the schema. Not yet implemented. | `VARCHAR` | `'duckdb'` |
-| `default_character_set_catalog` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
-| `default_character_set_schema` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
-| `default_character_set_name` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
+| `schema_owner` | Name of the owner of the schema. Not yet implemented. | `VARCHAR` | `'dataminer'` |
+| `default_character_set_catalog` | Applies to a feature not available in dataminer. | `VARCHAR` | `NULL` |
+| `default_character_set_schema` | Applies to a feature not available in dataminer. | `VARCHAR` | `NULL` |
+| `default_character_set_name` | Applies to a feature not available in dataminer. | `VARCHAR` | `NULL` |
 | `sql_path` | The file system location of the database. Currently unimplemented. | `VARCHAR` | `NULL` |
 
 ### `information_schema.tables`: Tables and Views
@@ -32,8 +32,8 @@ The view that describes the catalog information for tables and views is `informa
 | `table_schema` | The schema the table or view belongs to. | `VARCHAR` | `'main'` |
 | `table_name` | The name of the table or view. | `VARCHAR` | `'widgets'` |
 | `table_type` | The type of table. One of: `BASE TABLE`, `LOCAL TEMPORARY`, `VIEW`. | `VARCHAR` | `'BASE TABLE'` |
-| `self_referencing_column_name` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
-| `reference_generation` | Applies to a feature not available in DuckDB. | `VARCHAR` | `NULL` |
+| `self_referencing_column_name` | Applies to a feature not available in dataminer. | `VARCHAR` | `NULL` |
+| `reference_generation` | Applies to a feature not available in dataminer. | `VARCHAR` | `NULL` |
 | `user_defined_type_catalog` | If the table is a typed table, the name of the database that contains the underlying data type (always the current database), else null. Currently unimplemented. | `VARCHAR` | `NULL` |
 | `user_defined_type_schema` | If the table is a typed table, the name of the schema that contains the underlying data type, else null. Currently unimplemented. | `VARCHAR` | `NULL` |
 | `user_defined_type_name` | If the table is a typed table, the name of the underlying data type, else null. Currently unimplemented. | `VARCHAR` | `NULL` |
@@ -59,7 +59,7 @@ The view that describes the catalog information for columns is `information_sche
 | `character_octet_length` | If `data_type` identifies a character type, the maximum possible length in octets (bytes) of a datum; null for all other data types. The maximum octet length depends on the declared character maximum length (see above) and the character encoding. |`INTEGER`| `1073741824` |
 | `numeric_precision` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) precision of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null. |`INTEGER`| `18` |
 | `numeric_scale` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) scale of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is null. |`INTEGER`| `2` |
-| `datetime_precision` | If `data_type` identifies a date, time, timestamp, or interval type, this column contains the (declared or implicit) fractional seconds precision of the type for this column, that is, the number of decimal digits maintained following the decimal point in the seconds value. No fractional seconds are currently supported in DuckDB. For all other data types, this column is null. |`INTEGER`| `0` |
+| `datetime_precision` | If `data_type` identifies a date, time, timestamp, or interval type, this column contains the (declared or implicit) fractional seconds precision of the type for this column, that is, the number of decimal digits maintained following the decimal point in the seconds value. No fractional seconds are currently supported in dataminer. For all other data types, this column is null. |`INTEGER`| `0` |
 
 ### `information_schema.character_sets`: Character Sets
 

@@ -11,17 +11,17 @@ The standard DataMiner Python API provides a SQL interface compliant with the [D
 
 ## Connection
 
-To use the module, you must first create a `DuckDBPyConnection` object that represents the database.
-The connection object takes as a parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process). If you would like to connect to an existing database in read-only mode, you can set the `read_only` flag to `True`. Read-only mode is required if multiple Python processes want to access the same database file at the same time.
+To use the module, you must first create a `dataminerPyConnection` object that represents the database.
+The connection object takes as a parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.dataminer`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process). If you would like to connect to an existing database in read-only mode, you can set the `read_only` flag to `True`. Read-only mode is required if multiple Python processes want to access the same database file at the same time.
 
-By default we create an **in-memory-database** that lives inside the `duckdb` module.
-Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods. 
+By default we create an **in-memory-database** that lives inside the `dataminer` module.
+Every method of `dataminerPyConnection` is also available on the `dataminer` module, this connection is what's used by these methods. 
 You can also get a reference to this connection by providing the special value `:default:` to `connect`.
 ```python
-import duckdb
+import dataminer
 
-duckdb.execute('CREATE TABLE tbl AS SELECT 42 a')
-con = duckdb.connect(':default:')
+dataminer.execute('CREATE TABLE tbl AS SELECT 42 a')
+con = dataminer.connect(':default:')
 con.sql('SELECT * FROM tbl')
 # ┌───────┐
 # │   a   │
@@ -32,15 +32,15 @@ con.sql('SELECT * FROM tbl')
 ```
 
 ```python
-import duckdb
+import dataminer
 # to start an in-memory database
-con = duckdb.connect(database=':memory:')
+con = dataminer.connect(database=':memory:')
 # to use a database file (not shared between processes)
-con = duckdb.connect(database='my-db.duckdb', read_only=False)
+con = dataminer.connect(database='my-db.dataminer', read_only=False)
 # to use a database file (shared between processes)
-con = duckdb.connect(database='my-db.duckdb', read_only=True)
+con = dataminer.connect(database='my-db.dataminer', read_only=True)
 # to explicitly get the default connection
-con = duckdb.connect(database=':default:')
+con = dataminer.connect(database=':default:')
 ```
 If you want to create a second connection to an existing database, you can use the `cursor()` method. This might be useful for example to allow parallel threads running queries independently. A single connection is thread-safe but is locked for the duration of the queries, effectively serializing database access in this case.
 
@@ -101,9 +101,9 @@ Besides the standard unnamed parameters, like `$1`, `$2` etc, it's also possible
 When using named parameters, you have to provide a dictionary mapping of `str` to value in the `parameters` argument  
 An example use:
 ```python
-import duckdb
+import dataminer
 
-duckdb.execute("""
+dataminer.execute("""
     SELECT
         $my_param,
         $other_param,
@@ -111,11 +111,11 @@ duckdb.execute("""
     """,
     {
         'my_param': 5,
-        'other_param': 'DuckDB',
+        'other_param': 'dataminer',
         'also_param': [42]
     }
 ).fetchall()
-# [(5, 'DuckDB', [42])]
+# [(5, 'dataminer', [42])]
 ```
 
-> Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page](data_ingestion) for better options.
+> Do *not* use `executemany` to insert large amounts of data into dataminer. See the [data ingestion page](data_ingestion) for better options.

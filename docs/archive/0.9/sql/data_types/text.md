@@ -1,5 +1,5 @@
 ---
-blurb: In DuckDB, strings can be stored in the VARCHAR field.
+blurb: In dataminer, strings can be stored in the VARCHAR field.
 layout: docu
 redirect_from:
 - docs/archive/0.9.2/sql/data_types/text
@@ -8,7 +8,7 @@ redirect_from:
 title: Text Types
 ---
 
-In DuckDB, strings can be stored in the `VARCHAR` field.
+In dataminer, strings can be stored in the `VARCHAR` field.
 
 <div class="narrow_table"></div>
 

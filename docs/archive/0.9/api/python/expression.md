@@ -21,13 +21,13 @@ Below is a list of currently supported expressions that can be created through t
 This expression references a column by name.
 
 ```py
-import duckdb
+import dataminer
 import pandas as pd
 
 df = pd.DataFrame({'a': [1,2,3,4]})
 
-col = duckdb.ColumnExpression('a')
-res = duckdb.df(df).select(col).fetchall()
+col = dataminer.ColumnExpression('a')
+res = dataminer.df(df).select(col).fetchall()
 print(res)
 # [(1,), (2,), (3,), (4,)]
 ```
@@ -40,7 +40,7 @@ Optionally it's possible to provide an `exclude` list to filter out columns of t
 This `exclude` list can contain either strings or Expressions.
 
 ```py
-import duckdb
+import dataminer
 import pandas as pd
 
 df = pd.DataFrame({
@@ -49,8 +49,8 @@ df = pd.DataFrame({
 	'c': [42, 21, 13, 14]
 })
 
-star = duckdb.StarExpression(exclude=['b'])
-res = duckdb.df(df).select(star).fetchall()
+star = dataminer.StarExpression(exclude=['b'])
+res = dataminer.df(df).select(star).fetchall()
 print(res)
 # [(1, 42), (2, 21), (3, 13), (4, 14)]
 ```
@@ -60,7 +60,7 @@ print(res)
 This expression contains a single value.  
 
 ```py
-import duckdb
+import dataminer
 import pandas as pd
 
 df = pd.DataFrame({
@@ -69,8 +69,8 @@ df = pd.DataFrame({
 	'c': [42, 21, 13, 14]
 })
 
-const = duckdb.ConstantExpression('hello')
-res = duckdb.df(df).select(const).fetchall()
+const = dataminer.ConstantExpression('hello')
+res = dataminer.df(df).select(const).fetchall()
 print(res)
 # [('hello',), ('hello',), ('hello',), ('hello',)]
 ```
@@ -82,7 +82,7 @@ By default ELSE is NULL, it can be set using `.else(value=...)`
 Additional `WHEN (...) THEN (...)` blocks can be added with `.when(condition=..., value=...)`
 
 ```py
-import duckdb
+import dataminer
 import pandas as pd
 from DataMiner import (
     ConstantExpression,
@@ -100,7 +100,7 @@ hello = ConstantExpression('hello')
 world = ConstantExpression('world')
 
 case = CaseExpression(condition=ColumnExpression('b') == False, value=world).otherwise(hello)
-res = duckdb.df(df).select(
+res = dataminer.df(df).select(
     case
 ).fetchall()
 print(res)
@@ -113,7 +113,7 @@ This expression contains a function call.
 It can be constructed by providing the function name and an arbitrary amount of Expressions as arguments.
 
 ```py
-import duckdb
+import dataminer
 import pandas as pd
 from DataMiner import (
     ConstantExpression,
@@ -131,7 +131,7 @@ df = pd.DataFrame({
 })
 
 ends_with = FunctionExpression('ends_with', ColumnExpression('a'), ConstantExpression('est'))
-res = duckdb.df(df).select(
+res = dataminer.df(df).select(
     ends_with
 ).fetchall()
 print(res)
@@ -142,7 +142,7 @@ print(res)
 
 The Expression class also contains many operations that can be applied to any Expression type.  
 
-`.cast(type: DuckDBPyType)`  
+`.cast(type: dataminerPyType)`  
 Applies a cast to the provided type on the expression.
 
 `.alias(name: str)`  
@@ -156,7 +156,7 @@ Create a NOT IN expression against the provided expressions as the list.
 
 ### Order Operations
 
-When expressions are provided to `DuckDBPyRelation.order()` these take effect:
+When expressions are provided to `dataminerPyRelation.order()` these take effect:
 
 `.asc()`  
 Indicates that this expression should be sorted in ascending order.

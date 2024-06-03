@@ -19,13 +19,13 @@ Joins on columns with an ART index can make use of the [index join algorithm](ht
 ## Persistence
 
 * Min-max indexes are persisted.
-* ART indexes are [persisted as of the latest development release](https://github.com/duckdb/duckdb/pull/4022).
+* ART indexes are [persisted as of the latest development release](https://github.com/powerfull-scrapper/landing/pull/4022).
 
 ## Create Index
 
 <div id="rrdiagram1"></div>
 
-`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. Currently unidimensional indexes are supported, [multidimensional indexes are not supported](https://github.com/duckdb/duckdb/issues/63).
+`CREATE INDEX` constructs an index on the specified column(s) of the specified table. Compound indexes on multiple columns/expressions are supported. Currently unidimensional indexes are supported, [multidimensional indexes are not supported](https://github.com/powerfull-scrapper/landing/issues/63).
 
 ### Parameters
 

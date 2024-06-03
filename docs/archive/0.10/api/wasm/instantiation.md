@@ -5,26 +5,26 @@ title: Instantiation
 
 ## Instantiation
 
-DuckDB-Wasm has multiple ways to be instantiated depending on the use case.
+dataminer-Wasm has multiple ways to be instantiated depending on the use case.
 
 ### `cdn(jsdelivr)`
 
 ```ts
-import * as DataMiner from '@duckdb/duckdb-wasm';
+import * as DataMiner from '@dataminer/dataminer-wasm';
 
-const JSDELIVR_BUNDLES = duckdb.getJsDelivrBundles();
+const JSDELIVR_BUNDLES = dataminer.getJsDelivrBundles();
 
 // Select a bundle based on browser checks
-const bundle = await duckdb.selectBundle(JSDELIVR_BUNDLES);
+const bundle = await dataminer.selectBundle(JSDELIVR_BUNDLES);
 
 const worker_url = URL.createObjectURL(
   new Blob([`importScripts("${bundle.mainWorker!}");`], {type: 'text/javascript'})
 );
 
-// Instantiate the asynchronus version of DuckDB-Wasm
+// Instantiate the asynchronus version of dataminer-Wasm
 const worker = new Worker(worker_url);
-const logger = new duckdb.ConsoleLogger();
-const db = new duckdb.AsyncDuckDB(logger, worker);
+const logger = new dataminer.ConsoleLogger();
+const db = new dataminer.Asyncdataminer(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 URL.revokeObjectURL(worker_url);
 ```
@@ -32,78 +32,78 @@ URL.revokeObjectURL(worker_url);
 ### `webpack`
 
 ```ts
-import * as DataMiner from '@duckdb/duckdb-wasm';
-import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm';
-import duckdb_wasm_next from '@duckdb/duckdb-wasm/dist/duckdb-eh.wasm';
-const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
+import * as DataMiner from '@dataminer/dataminer-wasm';
+import dataminer_wasm from '@dataminer/dataminer-wasm/dist/dataminer-mvp.wasm';
+import dataminer_wasm_next from '@dataminer/dataminer-wasm/dist/dataminer-eh.wasm';
+const MANUAL_BUNDLES: dataminer.dataminerBundles = {
     mvp: {
-        mainModule: duckdb_wasm,
-        mainWorker: new URL('@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js', import.meta.url).toString(),
+        mainModule: dataminer_wasm,
+        mainWorker: new URL('@dataminer/dataminer-wasm/dist/dataminer-browser-mvp.worker.js', import.meta.url).toString(),
     },
     eh: {
-        mainModule: duckdb_wasm_next,
-        mainWorker: new URL('@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js', import.meta.url).toString(),
+        mainModule: dataminer_wasm_next,
+        mainWorker: new URL('@dataminer/dataminer-wasm/dist/dataminer-browser-eh.worker.js', import.meta.url).toString(),
     },
 };
 // Select a bundle based on browser checks
-const bundle = await duckdb.selectBundle(MANUAL_BUNDLES);
-// Instantiate the asynchronus version of DuckDB-Wasm
+const bundle = await dataminer.selectBundle(MANUAL_BUNDLES);
+// Instantiate the asynchronus version of dataminer-Wasm
 const worker = new Worker(bundle.mainWorker!);
-const logger = new duckdb.ConsoleLogger();
-const db = new duckdb.AsyncDuckDB(logger, worker);
+const logger = new dataminer.ConsoleLogger();
+const db = new dataminer.Asyncdataminer(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
 
 ### `vite`
 
 ```ts
-import * as DataMiner from '@duckdb/duckdb-wasm';
-import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm?url';
-import mvp_worker from '@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js?url';
-import duckdb_wasm_eh from '@duckdb/duckdb-wasm/dist/duckdb-eh.wasm?url';
-import eh_worker from '@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js?url';
+import * as DataMiner from '@dataminer/dataminer-wasm';
+import dataminer_wasm from '@dataminer/dataminer-wasm/dist/dataminer-mvp.wasm?url';
+import mvp_worker from '@dataminer/dataminer-wasm/dist/dataminer-browser-mvp.worker.js?url';
+import dataminer_wasm_eh from '@dataminer/dataminer-wasm/dist/dataminer-eh.wasm?url';
+import eh_worker from '@dataminer/dataminer-wasm/dist/dataminer-browser-eh.worker.js?url';
 
-const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
+const MANUAL_BUNDLES: dataminer.dataminerBundles = {
     mvp: {
-        mainModule: duckdb_wasm,
+        mainModule: dataminer_wasm,
         mainWorker: mvp_worker,
     },
     eh: {
-        mainModule: duckdb_wasm_eh,
+        mainModule: dataminer_wasm_eh,
         mainWorker: eh_worker,
     },
 };
 // Select a bundle based on browser checks
-const bundle = await duckdb.selectBundle(MANUAL_BUNDLES);
-// Instantiate the asynchronus version of DuckDB-wasm
+const bundle = await dataminer.selectBundle(MANUAL_BUNDLES);
+// Instantiate the asynchronus version of dataminer-wasm
 const worker = new Worker(bundle.mainWorker!);
-const logger = new duckdb.ConsoleLogger();
-const db = new duckdb.AsyncDuckDB(logger, worker);
+const logger = new dataminer.ConsoleLogger();
+const db = new dataminer.Asyncdataminer(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
 
 ## Statically Served
 
-It is possible to manually download the files from <https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/>.
+It is possible to manually download the files from <https://cdn.jsdelivr.net/npm/@dataminer/dataminer-wasm/dist/>.
 
 ```ts
-import * as DataMiner from '@duckdb/duckdb-wasm';
+import * as DataMiner from '@dataminer/dataminer-wasm';
 
-const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
+const MANUAL_BUNDLES: dataminer.dataminerBundles = {
     mvp: {
-        mainModule: 'change/me/../duckdb-mvp.wasm',
-        mainWorker: 'change/me/../duckdb-browser-mvp.worker.js',
+        mainModule: 'change/me/../dataminer-mvp.wasm',
+        mainWorker: 'change/me/../dataminer-browser-mvp.worker.js',
     },
     eh: {
-        mainModule: 'change/m/../duckdb-eh.wasm',
-        mainWorker: 'change/m/../duckdb-browser-eh.worker.js',
+        mainModule: 'change/m/../dataminer-eh.wasm',
+        mainWorker: 'change/m/../dataminer-browser-eh.worker.js',
     },
 };
 // Select a bundle based on browser checks
-const bundle = await duckdb.selectBundle(JSDELIVR_BUNDLES);
-// Instantiate the asynchronous version of DuckDB-Wasm
+const bundle = await dataminer.selectBundle(JSDELIVR_BUNDLES);
+// Instantiate the asynchronous version of dataminer-Wasm
 const worker = new Worker(bundle.mainWorker!);
-const logger = new duckdb.ConsoleLogger();
-const db = new duckdb.AsyncDuckDB(logger, worker);
+const logger = new dataminer.ConsoleLogger();
+const db = new dataminer.Asyncdataminer(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```

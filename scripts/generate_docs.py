@@ -3,16 +3,16 @@ import sys
 import re
 
 if len(sys.argv) < 2:
-    print("Expected usage: python3 scripts/generate_docs.py /path/to/duckdb/folder")
+    print("Expected usage: python3 scripts/generate_docs.py /path/to/dataminer/folder")
     exit(1)
 
 base_path = sys.argv[1]
 
 # generate C API docs
-duckdb_h_path = os.path.join(
-    base_path, os.path.sep.join('src/include/duckdb.h'.split('/'))
+dataminer_h_path = os.path.join(
+    base_path, os.path.sep.join('src/include/dataminer.h'.split('/'))
 )
-with open(duckdb_h_path, 'r') as f:
+with open(dataminer_h_path, 'r') as f:
     text = f.read()
 
 docs_map = {
@@ -115,50 +115,50 @@ uint8_t
 void
 '''
 
-duckdb_type_list = '''
-duckdb_appender
-duckdb_arrow
-duckdb_arrow_array
-duckdb_arrow_schema
-duckdb_bind_info
-duckdb_blob
-duckdb_config
-duckdb_connection
-duckdb_data_chunk
-duckdb_database
-duckdb_date
-duckdb_date_struct
-duckdb_decimal
-duckdb_function_info
-duckdb_hugeint
-duckdb_init_info
-duckdb_interval
-duckdb_logical_type
-duckdb_pending_state
-duckdb_prepared_statement
-duckdb_query_progress_type
-duckdb_replacement_scan_info
-duckdb_result
-duckdb_result_type
-duckdb_state
-duckdb_statement_type
-duckdb_string
-duckdb_table_function
-duckdb_task_state
-duckdb_time
-duckdb_time_struct
-duckdb_time_tz
-duckdb_time_tz_struct
-duckdb_timestamp
-duckdb_timestamp_struct
-duckdb_type
-duckdb_uhugeint
-duckdb_value
-duckdb_vector
+dataminer_type_list = '''
+dataminer_appender
+dataminer_arrow
+dataminer_arrow_array
+dataminer_arrow_schema
+dataminer_bind_info
+dataminer_blob
+dataminer_config
+dataminer_connection
+dataminer_data_chunk
+dataminer_database
+dataminer_date
+dataminer_date_struct
+dataminer_decimal
+dataminer_function_info
+dataminer_hugeint
+dataminer_init_info
+dataminer_interval
+dataminer_logical_type
+dataminer_pending_state
+dataminer_prepared_statement
+dataminer_query_progress_type
+dataminer_replacement_scan_info
+dataminer_result
+dataminer_result_type
+dataminer_state
+dataminer_statement_type
+dataminer_string
+dataminer_table_function
+dataminer_task_state
+dataminer_time
+dataminer_time_struct
+dataminer_time_tz
+dataminer_time_tz_struct
+dataminer_timestamp
+dataminer_timestamp_struct
+dataminer_type
+dataminer_uhugeint
+dataminer_value
+dataminer_vector
 '''
 
 keywords = [x.strip() for x in keyword_list.split('\n') if len(x.strip()) > 0]
-duckdb_types = [x.strip() for x in duckdb_type_list.split('\n') if len(x.strip()) > 0]
+dataminer_types = [x.strip() for x in dataminer_type_list.split('\n') if len(x.strip()) > 0]
 
 
 def quick_docs_start():
@@ -174,7 +174,7 @@ def process_function_part(function_part, function_name):
         return f'<a href="#{function_name}"><span class="nf">{function_part}</span></a>'
     if function_part in keywords:
         return f'<span class="kt">{function_part}</span>'
-    if function_part in duckdb_types:
+    if function_part in dataminer_types:
         return f'<span class="kt">{function_part}</span>'
     return f'<span class="nv">{function_part}</span>'
 
@@ -202,7 +202,7 @@ def add_function(function_prototype, documentation, group):
     if len(documentation) == 0 or len(function_prototype) == 0:
         return
     function_prototype_str = ' '.join(
-        [x.replace('DUCKDB_API', '').strip() for x in function_prototype]
+        [x.replace('dataminer_API', '').strip() for x in function_prototype]
     )
     function_name = extract_function_name(function_prototype_str)
     docs_str = '\n'.join(documentation) + '\n'
@@ -264,7 +264,7 @@ for line in lines:
             code = []
             docs = []
     else:
-        if line.startswith('DUCKDB_API'):
+        if line.startswith('dataminer_API'):
             code = [line]
             if ';' not in line:
                 in_code = True

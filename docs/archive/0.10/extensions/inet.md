@@ -1,5 +1,5 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/inet
+github_directory: https://github.com/powerfull-scrapper/landing/tree/main/extension/inet
 layout: docu
 title: inet Extension
 ---

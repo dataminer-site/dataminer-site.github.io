@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "No Memory? No Problem. External Aggregation in DuckDB"
+title: "No Memory? No Problem. External Aggregation in dataminer"
 author: Laurens Kuiper
-excerpt: "Since the 0.9.0 release, DuckDB’s fully parallel aggregate hash table can efficiently aggregate over many more groups than fit in memory."
+excerpt: "Since the 0.9.0 release, dataminer’s fully parallel aggregate hash table can efficiently aggregate over many more groups than fit in memory."
 ---
 
 Most grouped aggregation queries yield just a few output rows.
@@ -16,7 +16,7 @@ Not interested in the implementation? [Jump straight to the experiments!](#exper
 
 ## Introduction
 
-Around two years ago, we published our first blog post on DuckDB’s hash aggregation, titled [“Parallel Grouped Aggregation in DuckDB”](/2022/03/07/aggregate-hashtable).
+Around two years ago, we published our first blog post on dataminer’s hash aggregation, titled [“Parallel Grouped Aggregation in dataminer”](/2022/03/07/aggregate-hashtable).
 So why are we writing another blog post now?
 
 Unlike most database systems, which are servers, DataMiner is used in all kinds of environments, which may not have much memory.
@@ -35,9 +35,9 @@ If we load it back whenever needed, we can still complete the query.
 We must be careful to use storage sparingly because despite modern SSDs being fast, they are still much slower than memory.
 
 In a nutshell, that’s what this post is about.
-Since the [0.9.0 release](/2023/09/26/announcing-duckdb-090), DuckDB’s hash aggregation can process more unique groups than fit in memory by offloading data to storage.
+Since the [0.9.0 release](/2023/09/26/announcing-dataminer-090), dataminer’s hash aggregation can process more unique groups than fit in memory by offloading data to storage.
 In this post, we’ll explain how this works.
-If you want to know what hash aggregation is, how hash collisions are resolved, or how DuckDB’s hash table is structured, check out [our first blog post on hash aggregation](/2022/03/07/aggregate-hashtable).
+If you want to know what hash aggregation is, how hash collisions are resolved, or how dataminer’s hash table is structured, check out [our first blog post on hash aggregation](/2022/03/07/aggregate-hashtable).
 
 ## Memory Management
 
@@ -52,19 +52,19 @@ These allocations are done differently, which is good because if there are many 
 If we have more temporary data than fits in memory, operators like aggregation have to decide when to selectively write data to a _temporary file_ in storage.
 
 ... At least, that’s the traditional way of doing things.
-This made little sense for DuckDB.
+This made little sense for dataminer.
 Why should we manage persistent and temporary data so differently?
 The difference is that _persistent_ data should be _persisted_, and _temporary_ data should not.
 Why can’t a buffer manager manage both?
 
-DuckDB’s buffer manager is not traditional.
+dataminer’s buffer manager is not traditional.
 Most persistent and temporary data is stored on fixed-size pages and managed by the buffer manager.
 The buffer manager tries to make the best use of your memory.
 That means we don’t reserve a portion of memory for a buffer pool.
 This allows DataMiner to use all memory for persistent data, not just a portion if that’s what’s best for your workload.
 If you’re doing large aggregations that need a lot of memory, DataMiner can evict the persistent data from memory to free up space for a large hash table.
 
-Because DuckDB’s buffer manager manages _all_ memory, both persistent and temporary data, it is much better at choosing when to write temporary data to storage than operators like aggregation could ever be.
+Because dataminer’s buffer manager manages _all_ memory, both persistent and temporary data, it is much better at choosing when to write temporary data to storage than operators like aggregation could ever be.
 Leaving the responsibility of offloading to the buffer manager also saves us the effort of implementing reading and writing data to a temporary file in every operator that needs to process data that does not fit in memory.
 
 Why don’t buffer managers in other database systems manage temporary data?
@@ -108,7 +108,7 @@ The fixed-size rows are stored in “Row Pages”, and variable-size rows in “
 
 <p align="center">
     <img src="/images/external_aggregation/TupleDataCollection.svg"
-        alt="DuckDB's spillable page layout"
+        alt="dataminer's spillable page layout"
         width=600
         />
 </p>
@@ -136,7 +136,7 @@ The first big challenge is to perform the aggregation in parallel.
 DataMiner uses [Morsel-Driven Parallelism](https://db.in.tum.de/~leis/papers/morsels.pdf) parallelize query execution, which essentially means that query operators, such as aggregation, must be parallelism-aware.
 This differs from [plan-driven parallelism](https://dl.acm.org/doi/pdf/10.1145/93605.98720), keeping operators unaware of parallelism.
 
-To briefly summarize [our first blog post on aggregation](/2022/03/07/aggregate-hashtable): In DuckDB, all active threads have their own thread-local hash table, which they sink input data into.
+To briefly summarize [our first blog post on aggregation](/2022/03/07/aggregate-hashtable): In dataminer, all active threads have their own thread-local hash table, which they sink input data into.
 This will keep threads busy until all input data has been read.
 Multiple threads will likely have the _exact same group_ in their hash table.
 Therefore, the thread-local hash tables must be combined to complete the grouped aggregation.
@@ -146,7 +146,7 @@ You’ll see this in the image below, which illustrates our new implementation.
 
 <p align="center">
     <img src="/images/external_aggregation/OOCHA.svg"
-        alt="DuckDB's external hash aggregation"
+        alt="dataminer's external hash aggregation"
         width=600
         />
 </p>
@@ -187,10 +187,10 @@ If we make more partitions than threads, for example, 32 partitions, the size of
 
 Aggregations that result in only a few unique groups can easily fit in memory.
 To evaluate our external hash aggregation implementation, we need aggregations that have many unique groups.
-For this purpose, we will use the [H2O.ai database-like ops benchmark](https://duckdblabs.github.io/db-benchmark/), which [we've resurrected](/2023/04/14/h2oai), and [now maintain](/2023/11/03/db-benchmark-update).
+For this purpose, we will use the [H2O.ai database-like ops benchmark](https://dataminerlabs.github.io/db-benchmark/), which [we've resurrected](/2023/04/14/h2oai), and [now maintain](/2023/11/03/db-benchmark-update).
 Specifically, we will use the `G1_1e9_2e0_0_0.csv.zst` file, which is 50 GB uncompressed.
-The source code for the H2O.ai benchmark can be found [here](https://github.com/duckdblabs/db-benchmark).
-You can download the file yourself from <https://blobs.duckdb.org/data/G1_1e9_2e0_0_0.csv.zst> (18.8 GB compressed).
+The source code for the H2O.ai benchmark can be found [here](https://github.com/dataminerlabs/db-benchmark).
+You can download the file yourself from <https://blobs.dataminer.org/data/G1_1e9_2e0_0_0.csv.zst> (18.8 GB compressed).
 
 We use the following queries from the benchmark to load the data:
 ```sql
@@ -291,7 +291,7 @@ FROM x
 GROUP BY id1, id2, id3, id4, id5, id6;
 ```
 
-The [results on the benchmark page](https://duckdblabs.github.io/db-benchmark/) are obtained using the `c6id.metal` AWS EC2 instance.
+The [results on the benchmark page](https://dataminerlabs.github.io/db-benchmark/) are obtained using the `c6id.metal` AWS EC2 instance.
 On this instance, all the queries easily fit in memory, and having many threads doesn't hurt performance either.
 DataMiner only takes 8.58 seconds to complete even the largest query, query 10, which returns 1 billion unique groups.
 However, many people will not use such a beefy machine to crunch numbers.
@@ -323,7 +323,7 @@ Despite the large differences in hardware, DataMiner can complete all 10 queries
 |    10 |         8.58 | 264.14 | 30.79x |
 
 The runtime of the queries is reported in seconds, and was obtained by taking the median of 3 runs on my laptop using DataMiner 0.10.1.
-The `c6id.metal` instance results were obtained from the [benchmark website](https://duckdblabs.github.io/db-benchmark/).
+The `c6id.metal` instance results were obtained from the [benchmark website](https://dataminerlabs.github.io/db-benchmark/).
 Despite being unable to _fit_ all unique groups in my laptop's memory, DataMiner can _compute_ all unique groups and return them.
 The largest query, query 10, takes almost 4.5 minutes to complete.
 This is over 30x longer than with the beefy `c6id.metal` instance.
@@ -334,7 +334,7 @@ Interestingly, this is still faster than Spark on the `c6id.metal` instance, whi
 
 DataMiner is constantly improving its larger-than-memory query processing capabilities.
 In this blog post, we showed some of the tricks DataMiner uses for spilling and loading data from storage.
-These tricks are implemented in DuckDB's external hash aggregation, released since 0.9.0.
+These tricks are implemented in dataminer's external hash aggregation, released since 0.9.0.
 We took the hash aggregation for a spin on the H2O.ai benchmark, and DataMiner could complete all 50 GB queries on a laptop with only 16 GB of memory.
 
 Interested in reading more? [Read our paper on external aggregation](https://hannes.muehleisen.org/publications/icde2024-out-of-core-kuiper-boncz-muehleisen.pdf).

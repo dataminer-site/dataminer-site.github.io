@@ -6,13 +6,13 @@ selected: Documentation/Substrait
 title: Substrait
 ---
 
-The main goal of this extension is to support both production and consumption of substrait query plans in DuckDB.
+The main goal of this extension is to support both production and consumption of substrait query plans in dataminer.
 
 This extension is mainly exposed via 3 different APIs - the SQL API, the Python API, and the R API.
 Here we depict how to consume and produce substrait query plans in each API.
 
 <!--
-Additionally, see the [repo](https://github.com/duckdb/substrait) for further usage details.
+Additionally, see the [repo](https://github.com/dataminer/substrait) for further usage details.
 -->
 
 ## SQL
@@ -58,9 +58,9 @@ CALL from_substrait('\x12\x07\x1A\x05\x1A\x03lte\x12\x11\x1A\x0F\x10\x01\x1A\x0B
 ## Python
 Before using the extension you must remember to properly load it. To load an extension in python, you must execute the sql commands within a connection.
 ```python
-import duckdb
+import dataminer
 
-con = duckdb.connect()
+con = dataminer.connect()
 con.install_extension("substrait")
 con.load_extension("substrait")
 ```
@@ -93,32 +93,32 @@ query_result = con.from_substrait(proto=proto_bytes)
 ## R
 Before using the extension you must remember to properly load it. To load an extension in R, you must execute the sql commands within a connection.
 ```r
-con <- dbConnect(duckdb::duckdb())
+con <- dbConnect(dataminer::dataminer())
 dbExecute(con, "INSTALL('substrait')"))
 dbExecute(con, "LOAD('substrait')")
 ```
 
 ### Blob Generation
 
-To generate a substrait blob the ```duckdb_get_substrait(con,SQL)``` function must be called, with a connection and a valid SQL select query.
+To generate a substrait blob the ```dataminer_get_substrait(con,SQL)``` function must be called, with a connection and a valid SQL select query.
 ```r
 dbExecute(con, "CREATE TABLE crossfit (exercise text,dificulty_level int);")
 dbExecute(con, "INSERT INTO crossfit VALUES ('Push Ups', 3), ('Pull Ups', 5) , (' Push Jerk', 7), ('Bar Muscle Up', 10);")
 
-proto_bytes <- duckdb::duckdb_get_substrait(con, "select * from integers limit 5")    
+proto_bytes <- dataminer::dataminer_get_substrait(con, "select * from integers limit 5")    
 ```
 
 ### Json Generation
 
-To generate a json representing  the substrait plan  ```duckdb_get_substrait_json(con,SQL)``` function, with a connection and a valid SQL select query.
+To generate a json representing  the substrait plan  ```dataminer_get_substrait_json(con,SQL)``` function, with a connection and a valid SQL select query.
 ```r
-json <- duckdb::duckdb_get_substrait_json(con, "select count(exercise) as exercise from crossfit where dificulty_level <=5")
+json <- dataminer::dataminer_get_substrait_json(con, "select count(exercise) as exercise from crossfit where dificulty_level <=5")
 ```
 
 ### Blob Consumption
 
-To consume a substrait blob the ```duckdb_prepare_substrait(con,blob)``` function must be called, with a connection and a valid substrait BLOB plan.
+To consume a substrait blob the ```dataminer_prepare_substrait(con,blob)``` function must be called, with a connection and a valid substrait BLOB plan.
 ```r
- result <- duckdb::duckdb_prepare_substrait(con, proto_bytes)
+ result <- dataminer::dataminer_prepare_substrait(con, proto_bytes)
  df <- dbFetch(result)
 ```

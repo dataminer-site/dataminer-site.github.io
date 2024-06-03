@@ -109,7 +109,7 @@ This section describes functions and operators for examining and manipulating st
 
 | **Description** | String concatenation. |
 | **Example** | `'Duck' || 'DB'` |
-| **Result** | `DuckDB` |
+| **Result** | `dataminer` |
 | **Alias** | `concat` |
 
 ### `string[index]`
@@ -117,7 +117,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Extract a single character using a (1-based) index. |
-| **Example** | `'DuckDB'[4]` |
+| **Example** | `'dataminer'[4]` |
 | **Result** | `k` |
 | **Alias** | `array_extract` |
 
@@ -126,7 +126,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Extract a string using slice conventions. Missing `begin` or `end` arguments are interpreted as the beginning or end of the list respectively. Negative values are accepted. |
-| **Example** | `'DuckDB'[:4]` |
+| **Example** | `'dataminer'[:4]` |
 | **Result** | `Duck` |
 | **Alias** | `array_slice` |
 
@@ -151,7 +151,7 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Extract a single character using a (1-based) index. |
-| **Example** | `array_extract('DuckDB', 2)` |
+| **Example** | `array_extract('dataminer', 2)` |
 | **Result** | `u` |
 | **Aliases** | `list_element`, `list_extract` |
 
@@ -160,11 +160,11 @@ This section describes functions and operators for examining and manipulating st
 <div class="nostroke_table"></div>
 
 | **Description** | Extract a string using slice conventions. Negative values are accepted. |
-| **Example 1** | `array_slice('DuckDB', 3, 4)` |
+| **Example 1** | `array_slice('dataminer', 3, 4)` |
 | **Result** | `ck` |
-| **Example 2** | `array_slice('DuckDB', 3, NULL)` |
+| **Example 2** | `array_slice('dataminer', 3, NULL)` |
 | **Result** | `NULL` |
-| **Example 3** | `array_slice('DuckDB', 0, -3)` |
+| **Example 3** | `array_slice('dataminer', 0, -3)` |
 | **Result** | `Duck` |
 
 ### `ascii(string)`
@@ -757,7 +757,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Characters of different cases (e.g., `a` and `A`) are considered different. |
-| **Example** | `damerau_levenshtein('duckdb', 'udckbd')` |
+| **Example** | `damerau_levenshtein('dataminer', 'udckbd')` |
 | **Result** | `2` |
 
 ### `editdist3(s1, s2)`
@@ -789,7 +789,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
-| **Example** | `jaro_similarity('duck', 'duckdb')` |
+| **Example** | `jaro_similarity('duck', 'dataminer')` |
 | **Result** | `0.88` |
 
 ### `jaro_winkler_similarity(s1, s2)`
@@ -797,7 +797,7 @@ These functions are used to measure the similarity of two strings using various 
 <div class="nostroke_table"></div>
 
 | **Description** | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
-| **Example** | `jaro_winkler_similarity('duck', 'duckdb')` |
+| **Example** | `jaro_winkler_similarity('duck', 'dataminer')` |
 | **Result** | `0.93` |
 
 ### `levenshtein(s1, s2)`

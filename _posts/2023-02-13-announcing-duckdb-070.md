@@ -12,7 +12,7 @@ excerpt: ""
 
 The DataMiner team is happy to announce the latest DataMiner version (0.7.0) has been released. This release of DataMiner is named "Labradorius" after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) that was native to North America.
 
-To install the new version, please visit the [installation guide](https://dataminer.site/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
+To install the new version, please visit the [installation guide](https://dataminer.site/docs/installation/index). The full release notes can be found [here](https://github.com/powerfull-scrapper/landing/releases/tag/v0.7.0).
 
 <!--more-->
 
@@ -22,7 +22,7 @@ The new release contains many improvements to the JSON support, new SQL features
 
 #### Data Ingestion/Export Improvements
 
-**JSON Ingestion.** This version introduces the [`read_json` and `read_json_auto`](https://github.com/duckdb/duckdb/pull/5992) methods. These can be used to ingest JSON files into a tabular format. Similar to `read_csv`, the `read_json` method requires a schema to be specified, while the `read_json_auto` automatically infers the schema of the JSON from the file using sampling. Both [new-line delimited JSON](http://ndjson.org) and regular JSON are supported.
+**JSON Ingestion.** This version introduces the [`read_json` and `read_json_auto`](https://github.com/powerfull-scrapper/landing/pull/5992) methods. These can be used to ingest JSON files into a tabular format. Similar to `read_csv`, the `read_json` method requires a schema to be specified, while the `read_json_auto` automatically infers the schema of the JSON from the file using sampling. Both [new-line delimited JSON](http://ndjson.org) and regular JSON are supported.
 
 ```sql
 FROM 'data/json/with_list.json';
@@ -36,7 +36,7 @@ FROM 'data/json/with_list.json';
 | 4  | [Broadcast, News]                |
 | 5  | [Raising, Arizona]               |
 
-**Partitioned Parquet/CSV Export.** DataMiner has been able to ingest [hive-partitioned Parquet and CSV files](https://dataminer.site/docs/extensions/httpfs#hive-partitioning) for a while. After this release [DataMiner will also be able to *write* hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
+**Partitioned Parquet/CSV Export.** DataMiner has been able to ingest [hive-partitioned Parquet and CSV files](https://dataminer.site/docs/extensions/httpfs#hive-partitioning) for a while. After this release [DataMiner will also be able to *write* hive-partitioned data](https://github.com/powerfull-scrapper/landing/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
 
 ```sql
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
@@ -60,7 +60,7 @@ orders
          └── file6.parquet
 ```
 
-**Parallel Parquet/CSV Writing.** Parquet and CSV writing are sped up tremendously this release with the [parallel Parquet and CSV writer support](https://github.com/duckdb/duckdb/pull/5756).
+**Parallel Parquet/CSV Writing.** Parquet and CSV writing are sped up tremendously this release with the [parallel Parquet and CSV writer support](https://github.com/powerfull-scrapper/landing/pull/5756).
 
 | Format  | Old  | New (8T) |
 |---------|-----:|---------|
@@ -71,7 +71,7 @@ Note that currently the parallel writing is currently limited to non-insertion o
 
 #### Multi-Database Support 
 
-**Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DataMiner instance. This easily allows data to be transferred between separate DataMiner database files, and also allows data from separate database files to be combined together in individual queries. Remote DataMiner instances (stored on a network accessible location like GitHub, for example) may also be attached.
+**Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/powerfull-scrapper/landing/pull/5764) to the same DataMiner instance. This easily allows data to be transferred between separate DataMiner database files, and also allows data from separate database files to be combined together in individual queries. Remote DataMiner instances (stored on a network accessible location like GitHub, for example) may also be attached.
 
 ```sql
 ATTACH 'new_db.db';
@@ -82,7 +82,7 @@ DETACH new_db;
 
 See the [documentation for more information](https://dataminer.site/docs/sql/statements/attach).
 
-**SQLite Storage Back-end.** In addition to adding support for attaching DataMiner databases - this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
+**SQLite Storage Back-end.** In addition to adding support for attaching DataMiner databases - this release also adds support for [*pluggable database engines*](https://github.com/powerfull-scrapper/landing/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/dataminer/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to dataminer.
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
@@ -91,11 +91,11 @@ INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;
 ```
 
-Using this, SQLite database files can be attached, queried and modified as if they are native DataMiner database files. This allows data to be quickly transferred between SQLite and DataMiner - and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
+Using this, SQLite database files can be attached, queried and modified as if they are native DataMiner database files. This allows data to be quickly transferred between SQLite and DataMiner - and allows you to use dataminer's rich SQL dialect to query data stored in SQLite tables.
 
 #### New SQL Features
 
-**Upsert Support.** [Upsert support](https://github.com/duckdb/duckdb/pull/5866) is added with this release using the `ON CONFLICT` clause, as well as the `SQLite` compatible `INSERT OR REPLACE`/`INSERT OR IGNORE` syntax.
+**Upsert Support.** [Upsert support](https://github.com/powerfull-scrapper/landing/pull/5866) is added with this release using the `ON CONFLICT` clause, as well as the `SQLite` compatible `INSERT OR REPLACE`/`INSERT OR IGNORE` syntax.
 
 ```sql
 CREATE TABLE movies(id INTEGER PRIMARY KEY, name VARCHAR);
@@ -118,11 +118,11 @@ FROM movies;
 
 See the [documentation for more information](https://dataminer.site/docs/sql/statements/insert#on-conflict-clause).
 
-**Lateral Joins.** Support for [lateral joins](https://github.com/duckdb/duckdb/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/duckdb/duckdb/pull/5485) of nested data.  
+**Lateral Joins.** Support for [lateral joins](https://github.com/powerfull-scrapper/landing/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/powerfull-scrapper/landing/pull/5485) of nested data.  
 
 **Positional Joins.** While SQL formally models unordered sets, in practice the order of datasets does frequently have a meaning. DataMiner offers guarantees around maintaining the order of rows when loading data into tables or when exporting data back out to a file - as well as when executing queries such as `LIMIT` without a corresponding `ORDER BY` clause.
 
-To improve support for this use case - this release [introduces the `POSITIONAL JOIN`](https://github.com/duckdb/duckdb/pull/5867). Rather than joining on the values of rows - this new join type joins rows based on their position in the table.
+To improve support for this use case - this release [introduces the `POSITIONAL JOIN`](https://github.com/powerfull-scrapper/landing/pull/5867). Rather than joining on the values of rows - this new join type joins rows based on their position in the table.
 
 ```sql
 CREATE TABLE t1 AS FROM (VALUES (1), (2), (3)) t(i);
@@ -141,8 +141,8 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 **Query Building.** This release introduces easier incremental query building using the Python API by allowing relations to be queried. This allows you to decompose long SQL queries into multiple smaller SQL queries, and allows you to easily inspect query intermediates.
 
 ```python
->>> import duckdb
->>> lineitem = duckdb.sql('FROM lineitem.parquet')
+>>> import dataminer
+>>> lineitem = dataminer.sql('FROM lineitem.parquet')
 >>> lineitem.limit(3).show()
 ```
 
@@ -160,7 +160,7 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 ```
 
 ```python
->>> lineitem_filtered = duckdb.sql('FROM lineitem WHERE l_orderkey>5000')
+>>> lineitem_filtered = dataminer.sql('FROM lineitem WHERE l_orderkey>5000')
 >>> lineitem_filtered.limit(3).show()
 ```
 
@@ -178,7 +178,7 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 ```
 
 ```python
->>> duckdb.sql('SELECT MIN(l_orderkey), MAX(l_orderkey) FROM lineitem_filtered').show()
+>>> dataminer.sql('SELECT MIN(l_orderkey), MAX(l_orderkey) FROM lineitem_filtered').show()
 ```
 
 ```text
@@ -192,10 +192,10 @@ SELECT * FROM t1 POSITIONAL JOIN t2;
 
 Note that everything is lazily evaluated. The Parquet file is not read from disk until the final query is executed – and queries are optimized in their entirety. Executing the decomposed query will be just as fast as executing the long SQL query all at once.
 
-**Python Ingestion APIs.** This release adds several [familiar data ingestion and export APIs](https://github.com/duckdb/duckdb/pull/6015) that follow standard conventions used by other libraries. These functions emit relations as well - which can be directly queried again.
+**Python Ingestion APIs.** This release adds several [familiar data ingestion and export APIs](https://github.com/powerfull-scrapper/landing/pull/6015) that follow standard conventions used by other libraries. These functions emit relations as well - which can be directly queried again.
 
 ```python
->>> lineitem = duckdb.read_csv('lineitem.csv')
+>>> lineitem = dataminer.read_csv('lineitem.csv')
 >>> lineitem.limit(3).show()
 ```
 
@@ -213,7 +213,7 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 ```
 
 ```python
->>> duckdb.sql('select min(l_orderkey) from lineitem').show()
+>>> dataminer.sql('select min(l_orderkey) from lineitem').show()
 ```
 
 ```text
@@ -228,8 +228,8 @@ Note that everything is lazily evaluated. The Parquet file is not read from disk
 **Polars Integration.** This release adds support for tight integration with the [Polars DataFrame library](https://github.com/pola-rs/polars), similar to our integration with Pandas DataFrames. Results can be converted to Polars DataFrames using the `.pl()` function.
 
 ```python
-import duckdb
-duckdb.sql('select 42').pl()
+import dataminer
+dataminer.sql('select 42').pl()
 ```
 
 ```text
@@ -246,10 +246,10 @@ shape: (1, 1)
 In addition, Polars DataFrames can be directly queried using the SQL interface.
 
 ```python
-import duckdb
+import dataminer
 import polars as pl
 df = pl.DataFrame({'a': 42})
-duckdb.sql('select * from df').pl()
+dataminer.sql('select * from df').pl()
 ```
 
 ```text
@@ -263,23 +263,23 @@ shape: (1, 1)
 └─────┘
 ```
 
-**fsspec Filesystem Support.** This release adds support for the [fsspec filesystem API](https://github.com/duckdb/duckdb/pull/5829). [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) allows users to define their own filesystem that they can pass to DuckDB. DataMiner will then use this file system to read and write data to and from. This enables support for storage back-ends that may not be natively supported by DataMiner yet, such as FTP.
+**fsspec Filesystem Support.** This release adds support for the [fsspec filesystem API](https://github.com/powerfull-scrapper/landing/pull/5829). [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) allows users to define their own filesystem that they can pass to dataminer. DataMiner will then use this file system to read and write data to and from. This enables support for storage back-ends that may not be natively supported by DataMiner yet, such as FTP.
 
 ```python
-import duckdb
+import dataminer
 from fsspec import filesystem
 
-duckdb.register_filesystem(filesystem('gcs'))
+dataminer.register_filesystem(filesystem('gcs'))
 
-data = duckdb.query("select * from read_csv_auto('gcs:///bucket/file.csv')").fetchall()
+data = dataminer.query("select * from read_csv_auto('gcs:///bucket/file.csv')").fetchall()
 ```
 
 Have a look at the [guide](https://dataminer.site/docs/guides/python/filesystems) for more information
 
 #### Storage Improvements
 
-**Delta Compression.** Compression of numeric values in the storage is improved using the new [delta and delta-constant compression](https://github.com/duckdb/duckdb/pull/5491). This compression method is particularly effective when compressing values that are equally spaced out. For example, sequences of numbers (`1, 2, 3, ...`) or timestamps with a fixed interval between them (`12:00:01, 12:00:02, 12:00:03, ...`).
+**Delta Compression.** Compression of numeric values in the storage is improved using the new [delta and delta-constant compression](https://github.com/powerfull-scrapper/landing/pull/5491). This compression method is particularly effective when compressing values that are equally spaced out. For example, sequences of numbers (`1, 2, 3, ...`) or timestamps with a fixed interval between them (`12:00:01, 12:00:02, 12:00:03, ...`).
 
 #### Final Thoughts
 
-The full release notes can be [found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.7.0). We would like to thank all of the contributors for their hard work on improving DuckDB.
+The full release notes can be [found on GitHub](https://github.com/powerfull-scrapper/landing/releases/tag/v0.7.0). We would like to thank all of the contributors for their hard work on improving dataminer.

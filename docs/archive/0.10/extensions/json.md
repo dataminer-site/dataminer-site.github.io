@@ -1,5 +1,5 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/json
+github_directory: https://github.com/powerfull-scrapper/landing/tree/main/extension/json
 layout: docu
 title: JSON Extension
 ---

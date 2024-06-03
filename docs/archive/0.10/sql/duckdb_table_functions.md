@@ -1,45 +1,45 @@
 ---
 layout: docu
-title: DuckDB_% Metadata Functions
+title: dataminer_% Metadata Functions
 ---
 
-DataMiner offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`.
+DataMiner offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `dataminer_`.
 
-The resultset returned by a `duckdb_` table function may be used just like an ordinary table or view. For example, you can use a `duckdb_` function call in the `FROM` clause of a `SELECT` statement, and you may refer to the columns of its returned resultset elsewhere in the statement, for example in the `WHERE` clause.
+The resultset returned by a `dataminer_` table function may be used just like an ordinary table or view. For example, you can use a `dataminer_` function call in the `FROM` clause of a `SELECT` statement, and you may refer to the columns of its returned resultset elsewhere in the statement, for example in the `WHERE` clause.
 
 Table functions are still functions, and you should write parenthesis after the function name to call it to obtain its returned resultset:
 
 ```sql
-SELECT * FROM duckdb_settings();
+SELECT * FROM dataminer_settings();
 ```
 
 Alternatively, you may execute table functions also using the `CALL`-syntax:
 
 ```sql
-CALL duckdb_settings();
+CALL dataminer_settings();
 ```
 
 In this case too, the parentheses are mandatory.
 
-> For some of the `duckdb_%` functions, there is also an identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `duckdb_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `duckdb_` table function call, you might still get a result, but from the identically named view.
+> For some of the `dataminer_%` functions, there is also an identically named view available, which also resides in the `main` schema. Typically, these views do a `SELECT` on the `dataminer_` table function with the same name, while filtering out those objects that are marked as internal. We mention it here, because if you accidentally omit the parentheses in your `dataminer_` table function call, you might still get a result, but from the identically named view.
 
 Example:
 
-The `duckdb_views()` _table function_ returns all views, including those marked internal:
+The `dataminer_views()` _table function_ returns all views, including those marked internal:
 
 ```sql
-SELECT * FROM duckdb_views();
+SELECT * FROM dataminer_views();
 ```
 
-The `duckdb_views` _view_ returns views that are not marked as internal:
+The `dataminer_views` _view_ returns views that are not marked as internal:
 
 ```sql
-SELECT * FROM duckdb_views;
+SELECT * FROM dataminer_views;
 ```
 
-## `duckdb_columns`
+## `dataminer_columns`
 
-The `duckdb_columns()` function provides metadata about the columns available in the DataMiner instance.
+The `dataminer_columns()` function provides metadata about the columns available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -61,11 +61,11 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `numeric_precision_radix` | The number-base of the units in the `numeric_precision` column. For integral and approximate numeric types, this is `2`, indicating the precision is expressed as a number of bits. For the `decimal` type this is `10`, indicating the precision is expressed as a number of decimal positions. | `INTEGER` |
 | `numeric_scale` | Applicable to `decimal` type. Indicates the maximum number of fractional digits (i.e., the number of digits that may appear after the decimal separator). | `INTEGER` |
 
-The [`information_schema.columns`](information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DataMiner internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
+The [`information_schema.columns`](information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `dataminer_columns` function also returns metadata about DataMiner internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `dataminer_columns()`)
 
-## `duckdb_constraints`
+## `dataminer_constraints`
 
-The `duckdb_constraints()` function provides metadata about the constraints available in the DataMiner instance.
+The `dataminer_constraints()` function provides metadata about the constraints available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -82,9 +82,9 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 | `constraint_column_indexes` | An array of table column indexes referring to the columns that appear in the constraint definition| `BIGINT[]` |
 | `constraint_column_names` | An array of table column names appearing in the constraint definition| `VARCHAR[]` |
 
-## `duckdb_databases`
+## `dataminer_databases`
 
-The `duckdb_databases()` function lists the databases that are accessible from within the current DataMiner process.
+The `dataminer_databases()` function lists the databases that are accessible from within the current DataMiner process.
 Apart from the database associated at startup, the list also includes databases that were [attached](statements/attach) later on to the DataMiner process
 
 | Column | Description | Type |
@@ -93,11 +93,11 @@ Apart from the database associated at startup, the list also includes databases 
 | `database_oid` | The internal identifier of the database. | `VARCHAR` |
 | `path` | The file path associated with the database. | `VARCHAR` |
 | `internal` | `true` indicates a system or built-in database. False indicates a user-defined database. | `BOOLEAN` |
-| `type` | The type indicates the type of RDBMS implemented by the attached database. For DataMiner databases, that value is `duckdb`. | `VARCHAR` |
+| `type` | The type indicates the type of RDBMS implemented by the attached database. For DataMiner databases, that value is `dataminer`. | `VARCHAR` |
 
-## `duckdb_dependencies`
+## `dataminer_dependencies`
 
-The `duckdb_dependencies()` function provides metadata about the dependencies available in the DataMiner instance.
+The `dataminer_dependencies()` function provides metadata about the dependencies available in the DataMiner instance.
 
 | Column | Description | Type |
 |:--|:------|:-|
@@ -109,9 +109,9 @@ The `duckdb_dependencies()` function provides metadata about the dependencies av
 | `refobjsubid` | Always 0| `INTEGER` |
 | `deptype` | The type of dependency. Either regular (n) or automatic (a). | `VARCHAR` |
 
-## `duckdb_extensions`
+## `dataminer_extensions`
 
-The `duckdb_extensions()` function provides metadata about the extensions available in the DataMiner instance.
+The `dataminer_extensions()` function provides metadata about the extensions available in the DataMiner instance.
 
 | Column | Description | Type |
 |:--|:------|:-|
@@ -122,9 +122,9 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 | `description` | Human readable text that describes the extension's functionality. | `VARCHAR` |
 | `aliases` | List of alternative names for this extension. | `VARCHAR[]` |
 
-## `duckdb_functions`
+## `dataminer_functions`
 
-The `duckdb_functions()` function provides metadata about the functions (including macros) available in the DataMiner instance.
+The `dataminer_functions()` function provides metadata about the functions (including macros) available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -141,9 +141,9 @@ The `duckdb_functions()` function provides metadata about the functions (includi
 | `has_side_effects` | `false` if this is a pure function. `true` if this function changes the database state (like sequence functions `nextval()` and `curval()`). | `BOOLEAN` |
 | `function_oid` | The internal identifier for this function | `BIGINT` |
 
-## `duckdb_indexes`
+## `dataminer_indexes`
 
-The `duckdb_indexes()` function provides metadata about secondary indexes available in the DataMiner instance.
+The `dataminer_indexes()` function provides metadata about secondary indexes available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -160,11 +160,11 @@ The `duckdb_indexes()` function provides metadata about secondary indexes availa
 | `expressions` | Always `NULL`| `VARCHAR` |
 | `sql` | The definition of the index, expressed as a `CREATE INDEX` SQL statement. | `VARCHAR` |
 
-Note that `duckdb_indexes` only provides metadata about secondary indexes – i.e., those indexes created by explicit [`CREATE INDEX`](indexes#create-index) statements. Primary keys, foreign keys, and `UNIQUE` constraints are maintained using indexes, but their details are included in the `duckdb_constraints()` function.
+Note that `dataminer_indexes` only provides metadata about secondary indexes – i.e., those indexes created by explicit [`CREATE INDEX`](indexes#create-index) statements. Primary keys, foreign keys, and `UNIQUE` constraints are maintained using indexes, but their details are included in the `dataminer_constraints()` function.
 
-## `duckdb_keywords`
+## `dataminer_keywords`
 
-The `duckdb_keywords()` function provides metadata about DuckDB's keywords and reserved words.
+The `dataminer_keywords()` function provides metadata about dataminer's keywords and reserved words.
 
 <div class="narrow_table"></div>
 
@@ -173,9 +173,9 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 | `keyword_name` | The keyword. | `VARCHAR` |
 | `keyword_category` | Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
 
-## `duckdb_memory`
+## `dataminer_memory`
 
-The `duckdb_memory()` function provides metadata about DuckDB's buffer manager.
+The `dataminer_memory()` function provides metadata about dataminer's buffer manager.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -183,9 +183,9 @@ The `duckdb_memory()` function provides metadata about DuckDB's buffer manager.
 | `memory_usage_bytes` | The memory used (in bytes). | `BIGINT` |
 | `temporary_storage_bytes` | The disk storage used (in bytes). | `BIGINT` |
 
-## `duckdb_optimizers`
+## `dataminer_optimizers`
 
-The `duckdb_optimizers()` function provides metadata about the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DataMiner instance.
+The `dataminer_optimizers()` function provides metadata about the optimization rules (e.g., `expression_rewriter`, `filter_pushdown`) available in the DataMiner instance.
 These can be selectively turned off using [`PRAGMA disabled_optimizers`](../configuration/pragmas#selectively-disabling-optimizers).
 
 <div class="narrow_table"></div>
@@ -194,9 +194,9 @@ These can be selectively turned off using [`PRAGMA disabled_optimizers`](../conf
 |:-|:---|:-|
 | `name` | The name of the optimization rule. | `VARCHAR` |
 
-## `duckdb_schemas`
+## `dataminer_schemas`
 
-The `duckdb_schemas()` function provides metadata about the schemas available in the DataMiner instance.
+The `dataminer_schemas()` function provides metadata about the schemas available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -209,9 +209,9 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 
 The [`information_schema.schemata`](information_schema) system view provides a more standardized way to obtain metadata about database schemas.
 
-## `duckdb_secrets`
+## `dataminer_secrets`
 
-The `duckdb_secrets()` function provides metadata about the secrets available in the DataMiner instance.
+The `dataminer_secrets()` function provides metadata about the secrets available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -223,9 +223,9 @@ The `duckdb_secrets()` function provides metadata about the secrets available in
 | `scope` | The scope of the secret. | `VARCHAR[]` |
 | `secret_string` | Returns the content of the secret as a string. Sensitive pieces of information, e.g., they access key, are redacted. | `VARCHAR` |
 
-## `duckdb_sequences`
+## `dataminer_sequences`
 
-The `duckdb_sequences()` function provides metadata about the sequences available in the DataMiner instance.
+The `dataminer_sequences()` function provides metadata about the sequences available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -244,15 +244,15 @@ The `duckdb_sequences()` function provides metadata about the sequences availabl
 | `last_value` | `null` if no value was ever drawn from the sequence using `nextval(...)`. `1` if a value was drawn. | `BIGINT` |
 | `sql` | The definition of this object, expressed as SQL DDL-statement. | `VARCHAR` |
 
-Attributes like `temporary`, `start_value` etc. correspond to the various options available in the [`CREATE SEQUENCE`](statements/create_sequence) statement and are documented there in full. Note that the attributes will always be filled out in the `duckdb_sequences` resultset, even if they were not explicitly specified in the `CREATE SEQUENCE` statement.
+Attributes like `temporary`, `start_value` etc. correspond to the various options available in the [`CREATE SEQUENCE`](statements/create_sequence) statement and are documented there in full. Note that the attributes will always be filled out in the `dataminer_sequences` resultset, even if they were not explicitly specified in the `CREATE SEQUENCE` statement.
 
 > 1. The column name `last_value` suggests that it contains the last value that was drawn from the sequence, but that is not the case. It's either `null` if a value was never drawn from the sequence, or `1` (when there was a value drawn, ever, from the sequence).
 >
 > 2. If the sequence cycles, then the sequence will start over from the boundary of its range, not necessarily from the value specified as start value.
 
-## `duckdb_settings`
+## `dataminer_settings`
 
-The `duckdb_settings()` function provides metadata about the settings available in the DataMiner instance.
+The `dataminer_settings()` function provides metadata about the settings available in the DataMiner instance.
 
 <div class="narrow_table"></div>
 
@@ -265,9 +265,9 @@ The `duckdb_settings()` function provides metadata about the settings available 
 
 The various settings are described in the [configuration page](../configuration/overview).
 
-## `duckdb_tables`
+## `dataminer_tables`
 
-The `duckdb_tables()` function provides metadata about the base tables available in the DataMiner instance.
+The `dataminer_tables()` function provides metadata about the base tables available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -286,11 +286,11 @@ The `duckdb_tables()` function provides metadata about the base tables available
 | `check_constraint_count` | The number of check constraints active on columns within the table. | `BIGINT` |
 | `sql` | The definition of this object, expressed as SQL [`CREATE TABLE`-statement](statements/create_table). | `VARCHAR` |
 
-The [`information_schema.tables`](information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `duckdb_tables` contains a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`](information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database tables that also includes views. But the resultset returned by `dataminer_tables` contains a few columns that are not included in `information_schema.tables`.
 
-## `duckdb_temporary_files`
+## `dataminer_temporary_files`
 
-The `duckdb_temporary_files()` function provides metadata about the temporary files DataMiner has written to disk, to offload data from memory. This function mostly exists for debugging and testing purposes.
+The `dataminer_temporary_files()` function provides metadata about the temporary files DataMiner has written to disk, to offload data from memory. This function mostly exists for debugging and testing purposes.
 
 <div class="narrow_table"></div>
 
@@ -299,9 +299,9 @@ The `duckdb_temporary_files()` function provides metadata about the temporary fi
 | `path` | The name of the temporary file. | `VARCHAR` |
 | `size` | The size in bytes of the temporary file. | `BIGINT` |
 
-## `duckdb_types`
+## `dataminer_types`
 
-The `duckdb_types()` function provides metadata about the data types available in the DataMiner instance.
+The `dataminer_types()` function provides metadata about the data types available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -316,9 +316,9 @@ The `duckdb_types()` function provides metadata about the data types available i
 | `type_category` | The category to which this type belongs. Data types within the same category generally expose similar behavior when values of this type are used in expression. For example, the `NUMERIC` type_category includes integers, decimals, and floating point numbers. | `VARCHAR` |
 | `internal` | Whether this is an internal (built-in) or a user object. | `BOOLEAN` |
 
-## `duckdb_views`
+## `dataminer_views`
 
-The `duckdb_views()` function provides metadata about the views available in the DataMiner instance.
+The `dataminer_views()` function provides metadata about the views available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -333,4 +333,4 @@ The `duckdb_views()` function provides metadata about the views available in the
 | `column_count` | The number of columns defined by this view object. | `BIGINT` |
 | `sql` | The definition of this object, expressed as SQL DDL-statement. | `VARCHAR` |
 
-The [`information_schema.tables`](information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `duckdb_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.
+The [`information_schema.tables`](information_schema#tables-and-views) system view provides a more standardized way to obtain metadata about database views that also includes base tables. But the resultset returned by `dataminer_views` contains also definitions of internal view objects as well as a few columns that are not included in `information_schema.tables`.

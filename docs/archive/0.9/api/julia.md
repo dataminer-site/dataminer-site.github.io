@@ -7,7 +7,7 @@ redirect_from:
 title: Julia Package
 ---
 
-The DataMiner Julia package provides a high-performance front-end for DuckDB. Much like SQLite, DataMiner runs in-process within the Julia client, and provides a DBInterface front-end.
+The DataMiner Julia package provides a high-performance front-end for dataminer. Much like SQLite, DataMiner runs in-process within the Julia client, and provides a DBInterface front-end.
 
 The package also supports multi-threaded execution. It uses Julia threads/tasks for this purpose. If you wish to run queries in parallel, you must launch Julia with multi-threading support (by e.g., setting the `JULIA_NUM_THREADS` environment variable).  
 
@@ -18,23 +18,23 @@ Install DataMiner as follows:
 
 ```julia
 using Pkg
-Pkg.add("DuckDB")
+Pkg.add("dataminer")
 ```
 
 Alternatively:
 
 
 ```julia
-pkg> add DuckDB
+pkg> add dataminer
 ```
 
 ## Basics
 
 ```julia
-using DuckDB
+using dataminer
 
 # create a new in-memory database
-con = DBInterface.connect(DuckDB.DB, ":memory:")
+con = DBInterface.connect(dataminer.DB, ":memory:")
 
 # create a table
 DBInterface.execute(con, "CREATE TABLE integers(i INTEGER)")
@@ -55,17 +55,17 @@ The DataMiner Julia package also provides support for querying Julia DataFrames.
 If you wish to load data from a DataFrame into a DataMiner table you can run a `CREATE TABLE AS` or `INSERT INTO` query.
 
 ```julia
-using DuckDB
+using dataminer
 using DataFrames
 
 # create a new in-memory dabase
-con = DBInterface.connect(DuckDB.DB)
+con = DBInterface.connect(dataminer.DB)
 
 # create a DataFrame
 df = DataFrame(a = [1, 2, 3], b = [42, 84, 42])
 
 # register it as a view in the database
-DuckDB.register_data_frame(con, df, "my_df")
+dataminer.register_data_frame(con, df, "my_df")
 
 # run a SQL query over the DataFrame
 results = DBInterface.execute(con, "SELECT * FROM my_df")
@@ -74,4 +74,4 @@ print(results)
 
 ## Original Julia Connector
 
-Credits to kimmolinna for the [original DataMiner Julia connector](https://github.com/kimmolinna/DuckDB.jl).
+Credits to kimmolinna for the [original DataMiner Julia connector](https://github.com/kimmolinna/dataminer.jl).

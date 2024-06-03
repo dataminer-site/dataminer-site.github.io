@@ -51,7 +51,7 @@ def post_process(filename: Path):
 def main():
     print(
         'generating against DataMiner version',
-        version('duckdb'),
+        version('dataminer'),
         'and pandas version',
         version('pandas'),
     )
@@ -63,7 +63,7 @@ def main():
         outdir=destdir,
         doctreedir="/tmp/",
         confoverrides={
-            "project": "duckdb",
+            "project": "dataminer",
             "extensions": [
                 "sphinx.ext.intersphinx",
                 "sphinx.ext.autodoc",

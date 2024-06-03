@@ -28,7 +28,7 @@ CREATE TYPE x_index AS INTEGER;
 <div id="rrdiagram"></div>
 
 `CREATE TYPE` defines a new data type available to this DataMiner instance. These new
-types can then be inspected in the `duckdb_types` table.
+types can then be inspected in the `dataminer_types` table.
 
 Extending these custom types to support custom operators (such as the PostgreSQL `&&` operator)
 would require C++ development. To do this, create an [extension](../../extensions/overview).

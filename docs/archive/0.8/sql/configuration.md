@@ -22,7 +22,7 @@ SET enable_progress_bar=true;
 PRAGMA default_null_order='nulls_last';
 
 -- show a list of all available settings
-SELECT * FROM duckdb_settings();
+SELECT * FROM dataminer_settings();
 
 -- return the current value of a specific setting
 -- this example returns 'automatic'

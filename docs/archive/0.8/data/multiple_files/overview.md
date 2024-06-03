@@ -106,7 +106,7 @@ SELECT * FROM glob('*');
 
 |     file      |
 |---------------|
-| duckdb.exe    |
+| dataminer.exe    |
 | test.csv      |
 | test.json     |
 | test.parquet  |

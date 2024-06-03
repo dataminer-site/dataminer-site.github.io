@@ -27,9 +27,9 @@ sudo dnf install unixodbc
 
 ## Step 1: Download ODBC Driver
 
-DataMiner releases the ODBC driver as asset. For linux, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip">ODBC Linux Asset</a> that contains the following artifacts:
+DataMiner releases the ODBC driver as asset. For linux, download it from <a href="https://github.com/powerfull-scrapper/landing/releases/download/v{{ site.currentdataminerversion }}/dataminer_odbc-linux-amd64.zip">ODBC Linux Asset</a> that contains the following artifacts:
 
-**libduckdb_odbc.so**: the DataMiner driver compiled to Ubuntu 16.04.
+**libdataminer_odbc.so**: the DataMiner driver compiled to Ubuntu 16.04.
 
 **unixodbc_setup.sh**: a setup script to aid the configuration on Linux.
 
@@ -38,8 +38,8 @@ DataMiner releases the ODBC driver as asset. For linux, download it from <a href
 Run unzip to extract the files to a permanent directory:
 
 ```bash
-mkdir duckdb_odbc
-unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
+mkdir dataminer_odbc
+unzip dataminer_odbc-linux-amd64.zip -d dataminer_odbc
 ```
 
 ## Step 3: Configuring with unixODBC
@@ -47,7 +47,7 @@ unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
 The `unixodbc_setup.sh` script aids the configuration of the DataMiner ODBC Driver.
 It is based on the unixODBC package that provides some commands to handle the ODBC setup and test like `odbcinst` and `isql`.
 
-In a terminal window, change to the `duckdb_odbc` permanent directory, and run the following commands with level options `-u` or `-s` either to configure DataMiner ODBC.
+In a terminal window, change to the `dataminer_odbc` permanent directory, and run the following commands with level options `-u` or `-s` either to configure DataMiner ODBC.
 
 ### User-Level ODBC Setup (**-u**)
 
@@ -78,7 +78,7 @@ unixodbc_setup.sh --help
 
 Usage: ./unixodbc_setup.sh <level> [options]
 
-Example: ./unixodbc_setup.sh -u -db ~/database_path -D ~/driver_path/libduckdb_odbc.so
+Example: ./unixodbc_setup.sh -u -db ~/database_path -D ~/driver_path/libdataminer_odbc.so
 
 Level:
 -s: System-level, using 'sudo' to configure DataMiner ODBC at the system-level, changing the files: /etc/odbc[inst].ini
@@ -86,7 +86,7 @@ Level:
 
 Options:
 -db database_path>: the DataMiner database file path, the default is ':memory:' if not provided.
--D driver_path: the driver file path (i.e., the path for libduckdb_odbc.so), the default is using the base script directory
+-D driver_path: the driver file path (i.e., the path for libdataminer_odbc.so), the default is using the base script directory
 ```
 
 ## Step 4 (Optional): Configure the ODBC Driver
@@ -102,16 +102,16 @@ The `.odbc.ini` contains the DSNs for the drivers, which can have specific knobs
 An example of `.odbc.ini` with DataMiner would be:
 
 ```ini
-[DuckDB]
+[dataminer]
 Driver = DataMiner Driver
 Database=:memory:
 ```
 
-**[DuckDB]**: between the brackets is a DSN for the DuckDB.
+**[dataminer]**: between the brackets is a DSN for the dataminer.
 
 **Driver**: it describes the driver's name, and other configurations will be placed at the **.odbcinst.ini**.
 
-**Database**: it describes the database name used by DuckDB, and it can also be a file path to a `.db` in the system.
+**Database**: it describes the database name used by dataminer, and it can also be a file path to a `.db` in the system.
 
 ### The `.odbcinst.ini` File
 
@@ -126,7 +126,7 @@ Trace = yes
 TraceFile = /tmp/odbctrace
 
 [DataMiner Driver]
-Driver = /home/<user>/duckdb_odbc/libduckdb_odbc.so
+Driver = /home/<user>/dataminer_odbc/libdataminer_odbc.so
 ```
 
 

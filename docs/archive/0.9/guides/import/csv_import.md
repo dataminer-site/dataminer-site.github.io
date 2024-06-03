@@ -19,7 +19,7 @@ To create a new table using the result from a query, use `CREATE TABLE AS` from 
 CREATE TABLE new_tbl AS SELECT * FROM read_csv_auto('input.csv');
 ```
 
-We can use DuckDB's [optional `FROM`-first syntax](../../sql/query_syntax/from) to omit `SELECT *`:
+We can use dataminer's [optional `FROM`-first syntax](../../sql/query_syntax/from) to omit `SELECT *`:
 
 ```sql
 CREATE TABLE new_tbl AS FROM read_csv_auto('input.csv');

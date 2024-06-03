@@ -6,16 +6,16 @@ selected: Client APIs
 title: Relational API
 ---
 
-The Relational API is an alternative API that can be used to incrementally construct queries. The API is centered around `DuckDBPyRelation` nodes. The relations can be seen as symbolic representations of SQL queries. They do not hold any data - and nothing is executed - until a method that triggers execution is called.
+The Relational API is an alternative API that can be used to incrementally construct queries. The API is centered around `dataminerPyRelation` nodes. The relations can be seen as symbolic representations of SQL queries. They do not hold any data - and nothing is executed - until a method that triggers execution is called.
 
 #### Constructing Relations
-Relations can be created from SQL queries using the `duckdb.sql` method. Alternatively, they can be created from the various data ingestion methods (`read_parquet`, `read_csv`, `read_json`).
+Relations can be created from SQL queries using the `dataminer.sql` method. Alternatively, they can be created from the various data ingestion methods (`read_parquet`, `read_csv`, `read_json`).
 
 For example, here we create a relation from a SQL query:
 
 ```py
-import duckdb
-rel = duckdb.sql('SELECT * FROM range(10000000000) tbl(id)');
+import dataminer
+rel = dataminer.sql('SELECT * FROM range(10000000000) tbl(id)');
 rel.show()
 ```
 ```
@@ -71,9 +71,9 @@ Outside of SQL queries, the following methods are provided to construct relation
 Relation objects can be queried through SQL through so-called **replacement scans**. If you have a relation object stored in a variable, you can refer to that variable as if it was a SQL table (in the `FROM` clause). This allows you to incrementally build queries using relation objects.
 
 ```py
-import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
-duckdb.sql('SELECT SUM(id) FROM rel').show()
+import dataminer
+rel = dataminer.sql('SELECT * FROM range(1000000) tbl(id)');
+dataminer.sql('SELECT SUM(id) FROM rel').show()
 ```
 ```
 ┌──────────────┐
@@ -91,8 +91,8 @@ There are a number of operations that can be performed on relations. These are a
 Apply an (optionally grouped) aggregate over the relation. The system will automatically group by any columns that are not aggregates.
 
 ```py
-import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
+import dataminer
+rel = dataminer.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.aggregate('id % 2 AS g, sum(id), min(id), max(id)')
 ```
 ```
@@ -109,9 +109,9 @@ rel.aggregate('id % 2 AS g, sum(id), min(id), max(id)')
 Select all rows in the first relation, that do not occur in the second relation. The relations must have the same number of columns.
 
 ```py
-import duckdb
-r1 = duckdb.sql('SELECT * FROM range(10) tbl(id)');
-r2 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
+import dataminer
+r1 = dataminer.sql('SELECT * FROM range(10) tbl(id)');
+r2 = dataminer.sql('SELECT * FROM range(5) tbl(id)');
 r1.except_(r2).show()
 ```
 ```
@@ -132,8 +132,8 @@ r1.except_(r2).show()
 Apply the given condition to the relation, filtering any rows that do not satisfy the condition.
 
 ```py
-import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
+import dataminer
+rel = dataminer.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.filter('id > 5').limit(3).show()
 ```
 ```
@@ -151,9 +151,9 @@ rel.filter('id > 5').limit(3).show()
 Select the intersection of two relations - returning all rows that occur in both relations. The relations must have the same number of columns.
 
 ```py
-import duckdb
-r1 = duckdb.sql('SELECT * FROM range(10) tbl(id)');
-r2 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
+import dataminer
+r1 = dataminer.sql('SELECT * FROM range(10) tbl(id)');
+r2 = dataminer.sql('SELECT * FROM range(5) tbl(id)');
 r1.intersect(r2).show()
 ```
 ```
@@ -173,9 +173,9 @@ r1.intersect(r2).show()
 Combine two relations, joining them based on the provided condition. 
 
 ```py
-import duckdb
-r1 = duckdb.sql('SELECT * FROM range(5) tbl(id)').set_alias('r1');
-r2 = duckdb.sql('SELECT * FROM range(10, 15) tbl(id)').set_alias('r2');
+import dataminer
+r1 = dataminer.sql('SELECT * FROM range(5) tbl(id)').set_alias('r1');
+r2 = dataminer.sql('SELECT * FROM range(10, 15) tbl(id)').set_alias('r2');
 r1.join(r2, 'r1.id + 10 = r2.id').show()
 ```
 ```
@@ -196,8 +196,8 @@ r1.join(r2, 'r1.id + 10 = r2.id').show()
 Select the first *n* rows, optionally offset by *offset*.
 
 ```py
-import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
+import dataminer
+rel = dataminer.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.limit(3).show()
 ```
 ```
@@ -216,8 +216,8 @@ rel.limit(3).show()
 Sort the relation by the given set of expressions.
 
 ```py
-import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
+import dataminer
+rel = dataminer.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.order('id DESC').limit(3).show()
 ```
 ```
@@ -236,8 +236,8 @@ rel.order('id DESC').limit(3).show()
 Apply the given expression to each row in the relation.
 
 ```py
-import duckdb
-rel = duckdb.sql('SELECT * FROM range(1000000) tbl(id)');
+import dataminer
+rel = dataminer.sql('SELECT * FROM range(1000000) tbl(id)');
 rel.project('id + 10 AS id_plus_ten').limit(3).show()
 ```
 ```
@@ -255,9 +255,9 @@ rel.project('id + 10 AS id_plus_ten').limit(3).show()
 Combine two relations, returning all rows in `r1` followed by all rows in `r2`. The relations must have the same number of columns.
 
 ```py
-import duckdb
-r1 = duckdb.sql('SELECT * FROM range(5) tbl(id)');
-r2 = duckdb.sql('SELECT * FROM range(10, 15) tbl(id)');
+import dataminer
+r1 = dataminer.sql('SELECT * FROM range(5) tbl(id)');
+r2 = dataminer.sql('SELECT * FROM range(10, 15) tbl(id)');
 r1.union(r2).show()
 ```
 ```

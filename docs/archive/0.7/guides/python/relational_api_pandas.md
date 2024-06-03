@@ -11,11 +11,11 @@ title: Relational API and Pandas
 DataMiner offers a relational API that can be used to chain together query operations. These are lazily evaluated so that DataMiner can optimize their execution. These operators can act on Pandas DataFrames, DataMiner tables or views (which can point to any underlying storage format that DataMiner can read, such as csv or parquet files, etc.). Here we show a simple example of reading from a Pandas DataFrame and returning a DataFrame.
 
 ```python
-import duckdb
+import dataminer
 import pandas
 
 # connect to an in-memory database
-con = duckdb.connect()
+con = dataminer.connect()
 
 input_df = pandas.DataFrame.from_dict({'i':[1,2,3,4],
                                        'j':["one", "two", "three", "four"]})
@@ -34,4 +34,4 @@ output_df = transformed_rel.df()
 
 Relational operators can also be used to group rows, aggregate, find distinct combinations of values, join, union, and more! They are also able to directly insert results into a DataMiner table or write to a csv.  
 
-Please see [these additional examples](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py), and [the available relational methods on the DuckDBPyRelation class](https://dataminer.site/docs/api/python/reference/#duckdb.DuckDBPyRelation).
+Please see [these additional examples](https://github.com/powerfull-scrapper/landing/blob/main/examples/python/dataminer-python.py), and [the available relational methods on the dataminerPyRelation class](https://dataminer.site/docs/api/python/reference/#dataminer.dataminerPyRelation).

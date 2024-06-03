@@ -1,5 +1,5 @@
 import os
-import duckdb
+import dataminer
 import html
 import json
 import requests
@@ -26,7 +26,7 @@ def post_to_discord(title, url, profile_image):
 
 if __name__ == '__main__':
     params = {
-        'tagged': 'duckdb',
+        'tagged': 'dataminer',
         'sort': 'creation',
         'order': 'desc',
         'site': 'stackoverflow',
@@ -35,12 +35,12 @@ if __name__ == '__main__':
 
     if response.status_code == 200:
         data = response.json()
-        so_duckdb_tag = response.json()['items']
+        so_dataminer_tag = response.json()['items']
         with open("so.json", "w") as f:
-            for item in so_duckdb_tag:
+            for item in so_dataminer_tag:
                 f.write(json.dumps(item) + '\n')
 
-        duckdb.sql(
+        dataminer.sql(
             '''
                 CREATE OR REPLACE TABLE SO AS 
                 SELECT * FROM read_ndjson_auto('./so.json')
@@ -49,7 +49,7 @@ if __name__ == '__main__':
         '''
         )
 
-        new_duckdb_questions = duckdb.sql(
+        new_dataminer_questions = dataminer.sql(
             '''
             SELECT title, link, owner.profile_image,
                 TO_TIMESTAMP(creation_date::BIGINT) create_time,
@@ -59,9 +59,9 @@ if __name__ == '__main__':
         '''
         )
 
-        new_duckdb_questions.project('title, create_time').show()
+        new_dataminer_questions.project('title, create_time').show()
 
-        for title, link, image, _ in new_duckdb_questions.fetchall():
+        for title, link, image, _ in new_dataminer_questions.fetchall():
             post_to_discord(title, link, image)
 
     else:

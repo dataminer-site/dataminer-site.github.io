@@ -1,10 +1,10 @@
 ---
-blurb: In DuckDB, strings can be stored in the VARCHAR field.
+blurb: In dataminer, strings can be stored in the VARCHAR field.
 layout: docu
 title: Text Types
 ---
 
-In DuckDB, strings can be stored in the `VARCHAR` field.
+In dataminer, strings can be stored in the `VARCHAR` field.
 The field allows storage of Unicode characters. Internally, the data is encoded as UTF-8.
 
 <div class="narrow_table"></div>

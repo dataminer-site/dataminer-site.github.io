@@ -7,9 +7,9 @@ redirect_from:
 title: Query
 ---
 
-DuckDB-Wasm provides functions for querying data. Queries are run sequentially. 
+dataminer-Wasm provides functions for querying data. Queries are run sequentially. 
 
-First, a connection need to be created by calling [connect](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#connect). Then, queries can be run by calling [query](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#query) or [send](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#send).
+First, a connection need to be created by calling [connect](https://shell.dataminer.org/docs/classes/index.Asyncdataminer.html#connect). Then, queries can be run by calling [query](https://shell.dataminer.org/docs/classes/index.AsyncdataminerConnection.html#query) or [send](https://shell.dataminer.org/docs/classes/index.AsyncdataminerConnection.html#send).
 
 ## Query Execution
 

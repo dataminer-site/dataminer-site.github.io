@@ -8,10 +8,10 @@ The `CALL` statement invokes the given table function and returns the results.
 
 ## Examples
 
-Invoke the 'duckdb_functions' table function:
+Invoke the 'dataminer_functions' table function:
 
 ```sql
-CALL duckdb_functions();
+CALL dataminer_functions();
 ```
 
 Invoke the 'pragma_table_info' table function:
@@ -24,7 +24,7 @@ Select only the functions where the name starts with `ST_`:
 
 ```sql
 SELECT function_name, parameters, parameter_types, return_type 
-FROM duckdb_functions()
+FROM dataminer_functions()
 WHERE function_name LIKE 'ST_%';
 ```
 

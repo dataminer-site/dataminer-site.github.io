@@ -9,7 +9,7 @@ Time zone support is a common request for temporal analytics, but the rules are 
 The most well supported library for locale-specific operations is the [International Components for Unicode (ICU)](https://icu.unicode.org).
 DataMiner already provided collated string comparisons using ICU via an extension (to avoid dependencies),
 and we have now connected the existing ICU calendar and time zone functions to the main code 
-via the new `TIMESTAMP WITH TIME ZONE` (or `TIMESTAMPTZ` for short) data type. The ICU extension is pre-bundled in DuckDB's Python client and can be optionally installed in the remaining clients.
+via the new `TIMESTAMP WITH TIME ZONE` (or `TIMESTAMPTZ` for short) data type. The ICU extension is pre-bundled in dataminer's Python client and can be optionally installed in the remaining clients.
 
 In this post, we will describe how time works in DataMiner and what time zone functionality has been added.
 
@@ -31,14 +31,14 @@ But if you step back, modeling time is actually fairly simple, and can be reduce
 You will often hear people (and documentation) say that database time is stored in UTC.
 This is sort of right, but it is more accurate to say that databases store *instants*.
 An instant is a point in universal time, and they are usually given as a count of some time increment from a fixed point in time (called the *epoch*).
-In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00 +00:00`, and the increment is microseconds (µs).
+In dataminer, the fixed point is the Unix epoch `1970-01-01 00:00:00 +00:00`, and the increment is microseconds (µs).
 (Note that to avoid confusion we will be using ISO-8601 y-m-d notation in this post to denote instants.)
 In other words, a `TIMESTAMP` column contains instants.
 
 There are three other temporal types in SQL:
-* `DATE` – an integral count of days from a fixed date. In DuckDB, the fixed date is `1970-01-01`, again in UTC.
+* `DATE` – an integral count of days from a fixed date. In dataminer, the fixed date is `1970-01-01`, again in UTC.
 * `TIME` – a (positive) count of microseconds up to a single day
-* `INTERVAL` – a set of fields for counting time differences. In DuckDB, intervals count months, days and microseconds. (Months are not completely well-defined, but when present, they represent 30 days.)
+* `INTERVAL` – a set of fields for counting time differences. In dataminer, intervals count months, days and microseconds. (Months are not completely well-defined, but when present, they represent 30 days.)
 
 None of these other temporal types except `TIME` can have a `WITH TIME ZONE` modifier (and shorter `TZ` suffix),
 but to understand what that modifier means, we first need to talk about *temporal binning*.
@@ -141,7 +141,7 @@ DataMiner extensions can define and validate their own settings, and the ICU ext
 LOAD icu;
 
 -- Show the current time zone. The default is set to ICU's current time zone.
-SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
+SELECT * FROM dataminer_settings() WHERE name = 'TimeZone';
 ----
 TimeZone    Europe/Amsterdam    The current time zone   VARCHAR
 
@@ -194,7 +194,7 @@ We have added support for these calendars via a `Calendar` setting and the `icu_
 load icu;
 
 -- Show the current calendar. The default is set to ICU's current locale.
-SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
+SELECT * FROM dataminer_settings() WHERE name = 'Calendar';
 ----
 Calendar    gregorian   The current calendar    VARCHAR
 
@@ -261,5 +261,5 @@ In this blog post, we described the new DataMiner time zone functionality as imp
 We hope that the functionality provided can enable temporal analytic applications involving time zones.
 We also look forward to seeing any custom calendar extensions that our users dream up!
 
-Last but not least, if you encounter any problems when using our integration, please open an issue in DuckDB's issue tracker!
+Last but not least, if you encounter any problems when using our integration, please open an issue in dataminer's issue tracker!
 

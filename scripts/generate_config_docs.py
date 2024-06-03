@@ -6,7 +6,7 @@ import csv
 import io
 
 
-def run_duckdb_script(cmd):
+def run_dataminer_script(cmd):
     res = subprocess.run(
         db_path,
         input=bytearray(cmd, 'utf8'),
@@ -27,7 +27,7 @@ def run_duckdb_script(cmd):
 
 if len(sys.argv) < 2:
     print(
-        "Expected usage: python3 scripts/generate_config_docs.py /path/to/duckdb/binary"
+        "Expected usage: python3 scripts/generate_config_docs.py /path/to/dataminer/binary"
     )
     exit(1)
 
@@ -87,7 +87,7 @@ FROM (
         THEN '`⟨database_name⟩.tmp` or `.tmp` (in in-memory mode)'
         ELSE surround_with_backticks(value) END) AS default_value,
         scope
-    FROM duckdb_settings()
+    FROM dataminer_settings()
     WHERE name NOT LIKE '%debug%' AND description NOT ILIKE '%debug%'
     GROUP BY description, input_type, scope
 ) tbl
@@ -107,8 +107,8 @@ FROM configurations
 WHERE Scope = 'LOCAL';
 '''
 
-global_configuration_flags = run_duckdb_script(script + get_global_flags)
-local_configuration_flags = run_duckdb_script(script + get_local_flags)
+global_configuration_flags = run_dataminer_script(script + get_global_flags)
+local_configuration_flags = run_dataminer_script(script + get_local_flags)
 
 option_split = '## Configuration Reference'
 doc_file = 'docs/configuration/overview.md'

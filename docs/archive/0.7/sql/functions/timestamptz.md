@@ -13,7 +13,7 @@ Despite the name, these values do not store a time zone - just an instant like `
 Instead, they request that the instant be binned and formatted using the current time zone.
 
 Time zone support is not built in but can be provided by an extension,
-such as the ICU extension that ships with DuckDB.
+such as the ICU extension that ships with dataminer.
 
 In the examples below, the current time zone is presumed to be America/Los_Angeles
 using the Gregorian calendar.

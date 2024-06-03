@@ -49,7 +49,7 @@ The __httpfs__ extension supports reading/writing/globbing files on object stora
 
 ## Requirements
 
-The __httpfs__ filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API
+The __httpfs__ filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/dataminer.html). Other services that implement the S3 API
 should also work, but not all features may be supported. Below is a list of which parts of the S3 API are required for
 each __httpfs__ feature.
 
@@ -192,7 +192,7 @@ could result in:
 | 2 | examplevalue2 | 2013
 | 3 | examplevalue3 | 2014
 
-Note that the year column does not actually exist in the parquet files, it is parsed from the filenames. Within DuckDB
+Note that the year column does not actually exist in the parquet files, it is parsed from the filenames. Within dataminer
 however, these columns behave just like regular columns. For example, filters can be applied on Hive partition
 columns:
 

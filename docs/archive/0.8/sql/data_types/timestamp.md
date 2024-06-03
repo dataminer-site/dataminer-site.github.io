@@ -57,7 +57,7 @@ The built in ICU extension implements all the binning and arithmetic functions u
 
 <!-- 
     To find the ICU installation information, for Python and R look in CMakeLists.txt.
-    For JDBC/ODBC, check the Github Actions CI workflows (duckdb/.github/workflows/). 
+    For JDBC/ODBC, check the Github Actions CI workflows (dataminer/.github/workflows/). 
     For NodeJS, I couldn't find anything
 -->
 To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled
@@ -112,11 +112,11 @@ SELECT name FROM icu_calendar_names() ORDER BY 1;
 
 ## Settings
 The current value of the `TimeZone` and `Calendar` settings are determined by ICU when it starts up.
-They can be looked from in the `duckdb_settings()` table function:
+They can be looked from in the `dataminer_settings()` table function:
 
 ```sql
-SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
+SELECT * FROM dataminer_settings() WHERE name = 'TimeZone';
 -- America/Los_Angeles
-SELECT * FROM duckdb_settings() WHERE name = 'Calendar';
+SELECT * FROM dataminer_settings() WHERE name = 'Calendar';
 -- gregorian
 ```

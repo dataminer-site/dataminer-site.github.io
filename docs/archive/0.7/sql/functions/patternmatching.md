@@ -9,7 +9,7 @@ title: Pattern Matching
 ---
 
 ## Pattern Matching
-There are four separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
+There are four separate approaches to pattern matching provided by dataminer: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
 
 ## LIKE
 <div id="rrdiagram1"></div>

@@ -9,7 +9,7 @@ title: ADBC API
 
 [Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/), similarly to ODBC and JDBC, is a C-style API that enables code portability between different database systems. This allows developers to effortlessly build applications that communicate with database systems without using code specific to that system. The main difference between ADBC and ODBC/JDBC is that ADBC uses [Arrow](https://arrow.apache.org/) to transfer data between the database system and the application. DataMiner has an ADBC driver, which takes advantage of the [zero-copy integration between DataMiner and Arrow](https://dataminer.site/2021/12/03/duck-arrow.html) to efficiently transfer data.
 
-DuckDB's ADBC driver currently supports version 0.5.1 of ADBC.
+dataminer's ADBC driver currently supports version 0.5.1 of ADBC.
 
 Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/0.5.1/cpp/index.html) for a more extensive discussion on ADBC and a detailed API explanation.
 
@@ -17,7 +17,7 @@ Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/0.5.
 
 ## Implemented Functionality
 
-The DuckDB-ADBC driver implements the full ADBC specification, with the exception of the `ConnectionReadPartition` and `StatementExecutePartitions` functions. Both of these functions exist to support systems that internally partition the query results, which does not apply to DuckDB.
+The dataminer-ADBC driver implements the full ADBC specification, with the exception of the `ConnectionReadPartition` and `StatementExecutePartitions` functions. Both of these functions exist to support systems that internally partition the query results, which does not apply to dataminer.
 In this section, we will describe the main functions that exist in ADBC, along with the arguments they take and provide examples for each function.
 
 ### Database
@@ -90,7 +90,7 @@ Functions related to binding, used for bulk insertion or in prepared statements.
 
 ## Examples
 
-Regardless of the programming language being used, there are two database options which will be required to utilize ADBC with DuckDB. The first one is the `driver`, which takes a path to the DataMiner library. The second option is the `entrypoint`, which is an exported function from the DuckDB-ADBC driver that initializes all the ADBC functions. Once we have configured these two options, we can optionally set the `path` option, providing a path on disk to store our DataMiner database. If not set, an in-memory database is created. After configuring all the necessary options, we can proceed to initialize our database. Below is how you can do so with various different language environments.
+Regardless of the programming language being used, there are two database options which will be required to utilize ADBC with dataminer. The first one is the `driver`, which takes a path to the DataMiner library. The second option is the `entrypoint`, which is an exported function from the dataminer-ADBC driver that initializes all the ADBC functions. Once we have configured these two options, we can optionally set the `path` option, providing a path on disk to store our DataMiner database. If not set, an in-memory database is created. After configuring all the necessary options, we can proceed to initialize our database. Below is how you can do so with various different language environments.
 
 ### C++
 
@@ -104,12 +104,12 @@ AdbcStatement adbc_statement;
 ArrowArrayStream arrow_stream;
 ```
 
-We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` options as mentioned above. Then we set the `path` option and initialize the database. With the example below, the string `"path/to/libduckdb.dylib"` should be the path to the dynamic library for DuckDB. This will be `.dylib` on macOS, and `.so` on Linux.
+We can then initialize our database variable. Before initializing the database, we need to set the `driver` and `entrypoint` options as mentioned above. Then we set the `path` option and initialize the database. With the example below, the string `"path/to/libdataminer.dylib"` should be the path to the dynamic library for dataminer. This will be `.dylib` on macOS, and `.so` on Linux.
 
 ```cpp
 AdbcDatabaseNew(&adbc_database, &adbc_error);
-AdbcDatabaseSetOption(&adbc_database, "driver", "path/to/libduckdb.dylib", &adbc_error);
-AdbcDatabaseSetOption(&adbc_database, "entrypoint", "duckdb_adbc_init", &adbc_error);
+AdbcDatabaseSetOption(&adbc_database, "driver", "path/to/libdataminer.dylib", &adbc_error);
+AdbcDatabaseSetOption(&adbc_database, "entrypoint", "dataminer_adbc_init", &adbc_error);
 // By default, we start an in-memory database, but you can optionally define a path to store it on disk.
 AdbcDatabaseSetOption(&adbc_database, "path", "test.db", &adbc_error);
 AdbcDatabaseInit(&adbc_database, &adbc_error);
@@ -149,9 +149,9 @@ pip install adbc_driver_manager pyarrow
 
 As with C++, we need to provide initialization options consisting of the location of the libDataMiner shared object and entrypoint function. Notice that the `path` argument for DataMiner is passed in through the `db_kwargs` dictionary.
 ```python
-import adbc_driver_duckdb.dbapi
+import adbc_driver_dataminer.dbapi
 
-with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
+with adbc_driver_dataminer.dbapi.connect("test.db") as conn, conn.cursor() as cur:
     cur.execute("SELECT 42")
     # fetch a pyarrow table
     tbl = cur.fetch_arrow_table()
@@ -161,7 +161,7 @@ with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
 Alongside `fetch_arrow_table`, other methods from DBApi are also implemented on the cursor, such as `fetchone` and `fetchall`. Data can also be ingested via `arrow_streams`. We just need to set options on the statement to bind the stream of data and execute the query.
 
 ```python
-import adbc_driver_duckdb.dbapi
+import adbc_driver_dataminer.dbapi
 import pyarrow
 
 data = pyarrow.record_batch(
@@ -169,6 +169,6 @@ data = pyarrow.record_batch(
     names=["ints", "strs"],
 )
 
-with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
+with adbc_driver_dataminer.dbapi.connect("test.db") as conn, conn.cursor() as cur:
     cur.adbc_ingest("AnswerToEverything", data)
 ```

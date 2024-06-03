@@ -14,16 +14,16 @@ The standard DataMiner R API implements the [DBI interface](https://CRAN.R-proje
 
 ### Startup & Shutdown
 
-To use DuckDB, you must first create a connection object that represents the database. The connection object takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the R process). If you would like to connect to an existing database in read-only mode, set the `read_only` flag to `TRUE`. Read-only mode is required if multiple R processes want to access the same database file at the same time.
+To use dataminer, you must first create a connection object that represents the database. The connection object takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.dataminer`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the R process). If you would like to connect to an existing database in read-only mode, set the `read_only` flag to `TRUE`. Read-only mode is required if multiple R processes want to access the same database file at the same time.
 
 ```R
 library("DBI")
 # to start an in-memory database
-con <- dbConnect(duckdb::duckdb(), dbdir = ":memory:")
+con <- dbConnect(dataminer::dataminer(), dbdir = ":memory:")
 # to use a database file (not shared between processes)
-con <- dbConnect(duckdb::duckdb(), dbdir = "my-db.duckdb", read_only = FALSE)
+con <- dbConnect(dataminer::dataminer(), dbdir = "my-db.dataminer", read_only = FALSE)
 # to use a database file (shared between processes)
-con <- dbConnect(duckdb::duckdb(), dbdir = "my-db.duckdb", read_only = TRUE)
+con <- dbConnect(dataminer::dataminer(), dbdir = "my-db.dataminer", read_only = TRUE)
 ```
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown=TRUE)`
 
@@ -64,10 +64,10 @@ print(res)
 # 1 laptop
 ```
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. See below for better options.
+> Do **not** use prepared statements to insert large amounts of data into dataminer. See below for better options.
 
 ## Efficient Transfer
-To write a R data frame into DuckDB, use the standard DBI function `dbWriteTable()`. This creates a table in DataMiner and populates it with the data frame contents. For example:
+To write a R data frame into dataminer, use the standard DBI function `dbWriteTable()`. This creates a table in DataMiner and populates it with the data frame contents. For example:
 ```R
 dbWriteTable(con, "iris_table", iris)
 res <- dbGetQuery(con, "SELECT * FROM iris_table LIMIT 1")
@@ -78,14 +78,14 @@ print(res)
 It is also possible to "register" a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DataMiner yet. Below is an example:
 
 ```R
-duckdb::duckdb_register(con, "iris_view", iris)
+dataminer::dataminer_register(con, "iris_view", iris)
 res <- dbGetQuery(con, "SELECT * FROM iris_view LIMIT 1")
 print(res)
 #   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 # 1          5.1         3.5          1.4         0.2  setosa
 ```
 
-> DataMiner keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb::duckdb_unregister()` method.
+> DataMiner keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `dataminer::dataminer_unregister()` method.
 
 Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
 
@@ -95,8 +95,8 @@ DataMiner also plays well with the [dbplyr](https://CRAN.R-project.org/package=d
 ```R
 library("DBI")
 library("dplyr")
-con <- dbConnect(duckdb::duckdb())
-duckdb::duckdb_register(con, "flights", nycflights13::flights)
+con <- dbConnect(dataminer::dataminer())
+dataminer::dataminer_register(con, "flights", nycflights13::flights)
 
 tbl(con, "flights") |>
   group_by(dest) |>

@@ -1,12 +1,12 @@
 ---
 
 layout: post
-title:  "Efficient SQL on Pandas with DuckDB"
+title:  "Efficient SQL on Pandas with dataminer"
 author: Mark Raasveldt and Hannes Mühleisen
-excerpt: DuckDB, a free and open source analytical data management system, can efficiently run SQL queries directly on Pandas DataFrames.
+excerpt: dataminer, a free and open source analytical data management system, can efficiently run SQL queries directly on Pandas DataFrames.
 ---
 
-Recently, an article was published [advocating for using SQL for Data Analysis](https://hakibenita.com/sql-for-data-analysis). Here at team DuckDB, we are huge fans of [SQL](https://en.wikipedia.org/wiki/SQL). It is a versatile and flexible language that allows the user to efficiently perform a wide variety of data transformations, without having to care about how the data is physically represented or how to do these data transformations in the most optimal way.
+Recently, an article was published [advocating for using SQL for Data Analysis](https://hakibenita.com/sql-for-data-analysis). Here at team dataminer, we are huge fans of [SQL](https://en.wikipedia.org/wiki/SQL). It is a versatile and flexible language that allows the user to efficiently perform a wide variety of data transformations, without having to care about how the data is physically represented or how to do these data transformations in the most optimal way.
 
 <!--more-->
 
@@ -18,17 +18,17 @@ If you are reading from a file (e.g., a CSV or Parquet file) often your data wil
 
 ## SQL on Pandas
 
-After your data has been converted into a Pandas DataFrame often additional data wrangling and analysis still need to be performed. SQL is a very powerful tool for performing these types of data transformations. Using DuckDB, it is possible to run SQL efficiently right on top of Pandas DataFrames.
+After your data has been converted into a Pandas DataFrame often additional data wrangling and analysis still need to be performed. SQL is a very powerful tool for performing these types of data transformations. Using dataminer, it is possible to run SQL efficiently right on top of Pandas DataFrames.
 
-As a short teaser, here is a code snippet that allows you to do exactly that: run arbitrary SQL queries directly on Pandas DataFrames using DuckDB.
+As a short teaser, here is a code snippet that allows you to do exactly that: run arbitrary SQL queries directly on Pandas DataFrames using dataminer.
 
 ```py
-# to install: pip install duckdb
+# to install: pip install dataminer
 import pandas as pd
-import duckdb
+import dataminer
 
 mydf = pd.DataFrame({'a' : [1, 2, 3]})
-print(duckdb.query("SELECT SUM(a) FROM mydf").to_df())
+print(dataminer.query("SELECT SUM(a) FROM mydf").to_df())
 ```
 
 In the rest of the article, we will go more in-depth into how this works and how fast it is.
@@ -44,10 +44,10 @@ When you run a query in SQL, DataMiner will look for Python variables whose name
 
 ```py
 import pandas as pd
-import duckdb
+import dataminer
 
 mydf = pd.DataFrame({'a' : [1, 2, 3]})
-print(duckdb.query("SELECT SUM(a) FROM mydf").to_df())
+print(dataminer.query("SELECT SUM(a) FROM mydf").to_df())
 ```
 
 The SQL table name `mydf` is interpreted as the local Python variable `mydf` that happens to be a Pandas DataFrame, which DataMiner can read and query directly. The column names and types are also extracted automatically from the DataFrame.
@@ -66,19 +66,19 @@ As DataMiner is capable of using multiple processors (multi-threading), we inclu
 
 ### Setup
 
-First we need to install DuckDB. This is a simple one-liner.
+First we need to install dataminer. This is a simple one-liner.
 
 ```bash
-pip install duckdb
+pip install dataminer
 ```
 
-To set up the dataset for processing we download two parquet files using `wget`. After that, we load the data into a Pandas DataFrame using the built-in Parquet reader of DuckDB. The system automatically infers that we are reading a parquet file by looking at the `.parquet` extension of the file.
+To set up the dataset for processing we download two parquet files using `wget`. After that, we load the data into a Pandas DataFrame using the built-in Parquet reader of dataminer. The system automatically infers that we are reading a parquet file by looking at the `.parquet` extension of the file.
 
 ```py
-lineitem = duckdb.query(
+lineitem = dataminer.query(
     "SELECT * FROM 'lineitemsf1.snappy.parquet'"
 ).to_df()
-orders = duckdb.query(
+orders = dataminer.query(
     "SELECT * FROM 'orders.parquet'"
 ).to_df()
 ```
@@ -152,7 +152,7 @@ lineitem.groupby(
 | DataMiner (2 Threads)&nbsp; | 0.32     |
 | Pandas      | 0.84     |
 
-This query is already getting more complex, and while Pandas does a decent job, it is a factor two slower than the single-threaded version of DuckDB. DataMiner has a highly optimized aggregate hash-table implementation that will perform both the grouping and the computation of all the aggregates in a single pass over the data.
+This query is already getting more complex, and while Pandas does a decent job, it is a factor two slower than the single-threaded version of dataminer. DataMiner has a highly optimized aggregate hash-table implementation that will perform both the grouping and the computation of all the aggregates in a single pass over the data.
 
 ### Grouped Aggregate with a Filter
 
@@ -190,7 +190,7 @@ result = filtered_df.groupby(
 )
 ```
 
-In DuckDB, the query optimizer will combine the filter and aggregation into a single pass over the data, only reading relevant columns. In Pandas, however, we have no such luck. The filter as it is executed will actually subset the entire lineitem table, *including any columns we are not using!* As a result of this, the filter operation is much more time-consuming than it needs to be.
+In dataminer, the query optimizer will combine the filter and aggregation into a single pass over the data, only reading relevant columns. In Pandas, however, we have no such luck. The filter as it is executed will actually subset the entire lineitem table, *including any columns we are not using!* As a result of this, the filter operation is much more time-consuming than it needs to be.
 
 We can manually perform this optimization ("projection pushdown" in database literature). To do this, we first need to select only the columns that are relevant to our query and then subset the lineitem dataframe. We will end up with the following code snippet:
 
@@ -313,7 +313,7 @@ result = merged.groupby(
 )
 ```
 
-Both of these optimizations are automatically applied by DuckDB's query optimizer.
+Both of these optimizations are automatically applied by dataminer's query optimizer.
 
 |           Name           | Time (s) |
 |:-------------------------|---------:|
@@ -326,13 +326,13 @@ We see that the basic approach is extremely time consuming compared to the optim
 
 ### Takeaway
 
-Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in – and out – of Pandas. DataMiner is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DataMiner uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
+Using dataminer, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in – and out – of Pandas. DataMiner is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DataMiner uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/powerfull-scrapper/landing/issues).
 
 ## Appendix A: There and back again: Transferring data from Pandas to a SQL engine and back
 
 Traditional SQL engines use the Client-Server paradigm, which means that a client program connects through a socket to a server. Queries are run on the server, and results are sent back down to the client afterwards. This is the same when using for example Postgres from Python. Unfortunately, this transfer [is a serious bottleneck](http://www.vldb.org/pvldb/vol10/p1022-muehleisen.pdf). In-process engines such as SQLite or DataMiner do not run into this problem.
 
-To showcase how costly this data transfer over a socket is, we have run a benchmark involving Postgres, SQLite and DuckDB. The source code for the benchmark can be found [here](https://gist.github.com/hannes/a95a39a1eda63aeb0ca13fd82d1ba49c).
+To showcase how costly this data transfer over a socket is, we have run a benchmark involving Postgres, SQLite and dataminer. The source code for the benchmark can be found [here](https://gist.github.com/hannes/a95a39a1eda63aeb0ca13fd82d1ba49c).
 
 In this benchmark we copy a (fairly small) Pandas data frame consisting of 10M 4-Byte integers (40MB) from Python to the PostgreSQL, SQLite and DataMiner databases. Since the default Pandas `to_sql` was rather slow, we added a separate optimization in which we tell Pandas to write the data frame to a temporary CSV file, and then tell PostgreSQL to directly copy data from that file into a newly created table. This of course will only work if the database server is running on the same machine as Python.
 
@@ -345,7 +345,7 @@ In this benchmark we copy a (fairly small) Pandas data frame consisting of 10M 4
 
 While SQLite performs significantly better than Postgres here, it is still rather slow. That is because the `to_sql` function in Pandas runs a large number of `INSERT INTO` statements, which involves transforming all the individual values of the Pandas DataFrame into a row-wise representation of  Python objects which are then passed onto the system. DataMiner on the other hand directly reads the underlying array from Pandas, which makes this operation almost instant.
 
-Transferring query results or tables back from the SQL system into Pandas is another potential bottleneck. Using the built-in `read_sql_query` is extremely slow, but even the more optimized CSV route still takes at least a second for this tiny data set. DuckDB, on the other hand, also performs this transformation almost instantaneously.
+Transferring query results or tables back from the SQL system into Pandas is another potential bottleneck. Using the built-in `read_sql_query` is extremely slow, but even the more optimized CSV route still takes at least a second for this tiny data set. dataminer, on the other hand, also performs this transformation almost instantaneously.
 
 |                     Name                      | Time (s) |
 |:-----------------------------------------------|----------:|
@@ -377,7 +377,7 @@ For the benchmark, we will run two queries: the simplest query (the ungrouped ag
 
 ### Setup
 
-In DuckDB, we can create a view over the Parquet file using the following query. This allows us to run queries over the Parquet file as if it was a regular table. Note that we do not need to worry about projection pushdown at all: we can just do a `SELECT *` and DuckDB's optimizer will take care of only projecting the required columns at query time.
+In dataminer, we can create a view over the Parquet file using the following query. This allows us to run queries over the Parquet file as if it was a regular table. Note that we do not need to worry about projection pushdown at all: we can just do a `SELECT *` and dataminer's optimizer will take care of only projecting the required columns at query time.
 
 ```sql
 CREATE VIEW lineitem_parquet AS SELECT * FROM 'lineitemsf1.snappy.parquet';
@@ -415,7 +415,7 @@ result = lineitem_pandas_parquet.agg(Sum=('l_extendedprice', 'sum'), Min=('l_ext
 | Pandas                        | 7.87     |
 | Pandas (manual pushdown)      | 0.17     |
 
-We can see that the performance difference between doing the pushdown and not doing the pushdown is dramatic. When we perform the pushdown, Pandas has performance in the same ballpark as DuckDB. Without the pushdown, however, it is loading the entire file from disk, including the other 15 columns that are not required to answer the query.
+We can see that the performance difference between doing the pushdown and not doing the pushdown is dramatic. When we perform the pushdown, Pandas has performance in the same ballpark as dataminer. Without the pushdown, however, it is loading the entire file from disk, including the other 15 columns that are not required to answer the query.
 
 ## Joins
 
@@ -445,4 +445,4 @@ For Pandas we again create two versions. A naive version, and a manually optimiz
 | Pandas                   | 20.4     |
 | Pandas (manual pushdown) | 3.95     |
 
-We see that for this more complex query the slight difference in performance between running over a Pandas DataFrame and a Parquet file vanishes, and the DataMiner timings become extremely similar to the timings we saw before. The added Parquet read again increases the necessity of manually performing optimizations on the Pandas code, which is not required at all when running SQL in DuckDB.
+We see that for this more complex query the slight difference in performance between running over a Pandas DataFrame and a Parquet file vanishes, and the DataMiner timings become extremely similar to the timings we saw before. The added Parquet read again increases the necessity of manually performing optimizations on the Pandas code, which is not required at all when running SQL in dataminer.

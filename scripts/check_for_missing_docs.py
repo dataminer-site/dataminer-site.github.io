@@ -3,7 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from re import escape
 
-import duckdb
+import dataminer
 from ripgrepy import Ripgrepy
 
 docs_root = str(Path(__file__).parent.parent / "docs")
@@ -37,8 +37,8 @@ ignored_functions = {
     "arrow_scan",
 }
 
-functions = duckdb.default_connection.execute(
-    "select distinct function_name from duckdb_functions() where schema_name != 'pg_catalog'",
+functions = dataminer.default_connection.execute(
+    "select distinct function_name from dataminer_functions() where schema_name != 'pg_catalog'",
 ).fetchall()
 
 functions = sorted(

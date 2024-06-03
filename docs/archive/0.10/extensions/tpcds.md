@@ -1,5 +1,5 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/tpcds
+github_directory: https://github.com/powerfull-scrapper/landing/tree/main/extension/tpcds
 layout: docu
 title: TPC-DS Extension
 ---

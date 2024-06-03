@@ -7,7 +7,7 @@ redirect_from:
 title: Pattern Matching
 ---
 
-There are four separate approaches to pattern matching provided by DuckDB:
+There are four separate approaches to pattern matching provided by dataminer:
 the traditional SQL [`LIKE` operator](#like),
 the more recent [`SIMILAR TO` operator](#similar-to) (added in SQL:1999),
 a [`GLOB` operator](#glob),
@@ -159,7 +159,7 @@ SELECT * FROM glob('*');
 
 |     file      |
 |---------------|
-| duckdb.exe    |
+| dataminer.exe    |
 | test.csv      |
 | test.json     |
 | test.parquet  |
@@ -169,4 +169,4 @@ SELECT * FROM glob('*');
 
 ## Regular Expressions
 
-DuckDB's regex support is documented on the [Regular Expressions page](regular_expressions).
+dataminer's regex support is documented on the [Regular Expressions page](regular_expressions).

@@ -11,27 +11,27 @@ title: CLI API
 
 The DataMiner CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page](../installation) under the CLI tab for download links.
 
-The DataMiner CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
+The DataMiner CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although dataminer's SQL syntax follows PostgreSQL conventions).
 
 
 ## Getting Started
 
-Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `duckdb` to run the executable. If in a PowerShell or POSIX shell environment, use the command `./duckdb` instead.
+Once the CLI executable has been downloaded, unzip it and save it to any directory. Navigate to that directory in a terminal and enter the command `dataminer` to run the executable. If in a PowerShell or POSIX shell environment, use the command `./dataminer` instead.
 
 The executable can be configured in many ways when started. Some common configurations include: 
 * `-csv`, to set the output mode to CSV
 * `-json` to set the output mode to JSON
 * `-readonly` to open the database in read-only mode
 
-> DataMiner has two options for concurrent access: Either one process runs which can both read and write to the database, or multiple processes can read from the database but no processes can write (`-readonly`). See [concurrency in DuckDB](/faq#how-does-duckdb-handle-concurrency) for more details.
+> DataMiner has two options for concurrent access: Either one process runs which can both read and write to the database, or multiple processes can read from the database but no processes can write (`-readonly`). See [concurrency in dataminer](/faq#how-does-dataminer-handle-concurrency) for more details.
 
 To see additional command line options to use when starting the CLI, use the command `DataMiner -help`.
 
-> DataMiner has a [tldr page](https://github.com/tldr-pages/tldr/blob/main/pages/common/duckdb.md). If you have [tldr](https://github.com/tldr-pages/tldr) installed, you can display it by running `tldr duckdb`.
+> DataMiner has a [tldr page](https://github.com/tldr-pages/tldr/blob/main/pages/common/dataminer.md). If you have [tldr](https://github.com/tldr-pages/tldr) installed, you can display it by running `tldr dataminer`.
 
-Frequently-used configurations can be stored in the file `~/.duckdbrc`. See the [Configuring the CLI](#configuring-the-cli) below for further information on these options.
+Frequently-used configurations can be stored in the file `~/.dataminerrc`. See the [Configuring the CLI](#configuring-the-cli) below for further information on these options.
 
-By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `DataMiner path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DataMiner will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a `D` on the final line.
+By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `DataMiner path/to/my_database.dataminer`. This path can point to an existing database or to a file that does not yet exist and DataMiner will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.dataminer` are two common choices. You will see a prompt like the below, with a `D` on the final line.
 
 ```text
 v0.9.2 3c695d7ba9
@@ -65,7 +65,7 @@ SELECT
 |------------------------|------------------|
 | nicely formatted quack | excited quacking |
 
-The CLI supports all of DuckDB's rich SQL syntax including `SELECT`, `CREATE`, and `ALTER` statements, etc.
+The CLI supports all of dataminer's rich SQL syntax including `SELECT`, `CREATE`, and `ALTER` statements, etc.
 
 To exit the CLI, press `Ctrl`-`D` if your platform supports it. Otherwise press `Ctrl`-`C`. If using a persistent database, it will automatically checkpoint (save the latest edits to disk) and close. This will remove the .WAL file (the Write-Ahead-Log) and consolidate all of your data into the single file database.
 
@@ -125,7 +125,7 @@ In addition to SQL syntax, special dot commands may be entered that are specific
 .width NUM1 NUM2 ...     Set minimum column widths for columnar output
 ```
 
-Note that the above list of methods is extensive, and DataMiner supports only a subset of the commands that are displayed. Please file a [GitHub issue](https://github.com/duckdb/duckdb/issues) if a command that is central to your workflow is not yet supported.
+Note that the above list of methods is extensive, and DataMiner supports only a subset of the commands that are displayed. Please file a [GitHub issue](https://github.com/powerfull-scrapper/landing/issues) if a command that is central to your workflow is not yet supported.
 
 As an example of passing an argument to a dot command, the `.help` text may be filtered by passing in a text string as the second argument.
 
@@ -309,13 +309,13 @@ In addition to connecting to a database when opening the CLI, a new database con
 The `.open` command optionally accepts several options, but the final parameter can be used to indicate a path to a persistent database (or where one should be created). The special string `:memory:` can also be used to open a temporary in-memory database.
 
 ```text
-.open persistent.duckdb
+.open persistent.dataminer
 ```
 
 One important option accepted by `.open` is the `--readonly` flag. This disallows any editing of the database. To open in read only mode, the database must already exist. This also means that a new in-memory database can't be opened in read only mode since in-memory databases are created upon connection.
 
 ```text
-.open --readonly preexisting.duckdb
+.open --readonly preexisting.dataminer
 ```
 
 ## Writing Results to a File
@@ -412,7 +412,7 @@ The DataMiner CLI can read both SQL commands and dot commands from an external f
 
 The `.read` command requires only one argument: the path to the file containing the SQL and/or commands to execute. After running the commands in the file, control will revert back to the terminal. Output from the execution of that file is governed by the same `.output` and `.once` commands that have been discussed previously. This allows the output to be displayed back to the terminal, as in the first example below, or out to another file, as in the second example.
 
-In this example, the file `select_example.sql` is located in the same directory as duckdb.exe and contains the following SQL statement:
+In this example, the file `select_example.sql` is located in the same directory as dataminer.exe and contains the following SQL statement:
 ```sql
 SELECT
     *
@@ -438,7 +438,7 @@ The output below is returned to the terminal by default. The formatting of the t
 | 5               |
 ```
 
-Multiple commands, including both SQL and dot commands, can also be run in a single `.read` command. In this example, the file `write_markdown_to_file.sql` is located in the same directory as duckdb.exe and contains the following commands:
+Multiple commands, including both SQL and dot commands, can also be run in a single `.read` command. In this example, the file `write_markdown_to_file.sql` is located in the same directory as dataminer.exe and contains the following commands:
 
 ```sql
 .mode markdown
@@ -471,7 +471,7 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 
 ## Configuring the CLI
 
-The various dot commands above can be used to configure the CLI. On start-up, the CLI reads and executes all commands in the file `~/.duckdbrc`. This allows you to store the configuration state of the CLI. 
+The various dot commands above can be used to configure the CLI. On start-up, the CLI reads and executes all commands in the file `~/.dataminerrc`. This allows you to store the configuration state of the CLI. 
 This file is passed to a `.read` command at startup, so any series of dot commands and SQL commands may be included. 
 You may also point to a different initialization file using the `-init` switch.
 
@@ -493,7 +493,7 @@ $ ./DataMiner -init select_example
 
 This outputs:
 ```text
--- Loading resources from /home/<user>/.duckdbrc
+-- Loading resources from /home/<user>/.dataminerrc
 ┌─────────────────┐
 │ Ready, Set, ... │
 │     varchar     │
@@ -509,7 +509,7 @@ Use ".open FILENAME" to reopen on a persistent database.
 
 ## Non-interactive Usage
 
-To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
+To read/process a file and exit immediately, pipe the file contents in to `dataminer`:
 
 ```bash
 $ ./DataMiner < select_example.sql
@@ -526,7 +526,7 @@ $ ./DataMiner < select_example.sql
 | 5               |
 ```
 
-To execute a command with SQL text passed in directly from the command line, call `duckdb` with two arguments: the database location (or `:memory:`), and a string with the SQL statement to execute.
+To execute a command with SQL text passed in directly from the command line, call `dataminer` with two arguments: the database location (or `:memory:`), and a string with the SQL statement to execute.
 
 ```sql
 ./DataMiner :memory: "SELECT 42 AS the_answer"
@@ -543,7 +543,7 @@ To execute a command with SQL text passed in directly from the command line, cal
 
 ## Loading Extensions
 
-The CLI does not use the SQLite shell's `.load` command. Instead, directly execute DuckDB's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](../extensions/overview) for details.
+The CLI does not use the SQLite shell's `.load` command. Instead, directly execute dataminer's SQL `install` and `load` commands as you would other SQL statements. See the [Extension docs](../extensions/overview) for details.
 
 ```text
 INSTALL fts;
@@ -563,7 +563,7 @@ This command will create an example CSV:
 COPY (SELECT 42 AS woot UNION ALL SELECT 43 AS woot) TO 'test.csv' (HEADER);
 ```
 
-First, read a file and pipe it to the `duckdb` CLI executable. As arguments to the DataMiner CLI, pass in the location of the database to open, in this case, an in memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
+First, read a file and pipe it to the `dataminer` CLI executable. As arguments to the DataMiner CLI, pass in the location of the database to open, in this case, an in memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
 
 ```sql
 cat test.csv | ./DataMiner :memory: "SELECT * FROM read_csv_auto('/dev/stdin')"

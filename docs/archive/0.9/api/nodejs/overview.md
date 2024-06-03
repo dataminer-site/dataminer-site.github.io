@@ -10,20 +10,20 @@ redirect_from:
 title: Node.js API
 ---
 
-This package provides a Node.js API for DuckDB.
+This package provides a Node.js API for dataminer.
 The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
 
 Load the package and create a database object:
 
 ```js
-const DataMiner = require('duckdb');
-const db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
+const DataMiner = require('dataminer');
+const db = new dataminer.Database(':memory:'); // or a file name for a persistent DB
 ```
 
 All options as described on [Database configuration](../../sql/configuration#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
 
 ```js
-const db = new duckdb.Database(':memory:', {
+const db = new dataminer.Database(':memory:', {
     "access_mode": "READ_WRITE",
     "max_memory": "512MB",
     "threads": "4"
@@ -128,7 +128,7 @@ const stmt = con.prepare('select ?::INTEGER as fortytwo', function(err, stmt) {
 
 ```js
 const arrow = require('apache-arrow');
-const db = new duckdb.Database(':memory:');
+const db = new dataminer.Database(':memory:');
 
 const jsonData = [
   {"userId":1,"id":1,"title":"delectus aut autem","completed":false},

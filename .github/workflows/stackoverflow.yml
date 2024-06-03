@@ -1,5 +1,6 @@
 name: Discord stackoverflow bot 
 
+# @to-do: change this to our internal
 on:
   workflow_dispatch:
   schedule:
@@ -9,7 +10,7 @@ jobs:
   build:
     name: Discord stackoverflow bot 
     runs-on: ubuntu-latest
-    if: github.repository == 'duckdb/duckdb-web'
+    if: github.repository == 'powerfull-scrapper/landing'
 
     steps:
       - uses: actions/checkout@v4

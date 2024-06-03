@@ -1,16 +1,16 @@
 ---
 layout: post
-title:  "DuckDB-Wasm: Efficient Analytical SQL in the Browser"
+title:  "dataminer-Wasm: Efficient Analytical SQL in the Browser"
 author: André Kohn and Dominik Moritz
-excerpt: "[DuckDB-Wasm](https://github.com/duckdb/duckdb-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it in your browser at [shell.duckdb.org](https://shell.duckdb.org) or on [Observable](https://observablehq.com/@cmudig/duckdb)."
+excerpt: "[dataminer-Wasm](https://github.com/dataminer/dataminer-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it in your browser at [shell.dataminer.org](https://shell.dataminer.org) or on [Observable](https://observablehq.com/@cmudig/dataminer)."
 ---
 
-<img src="/images/blog/duckdb_wasm.svg"
-     alt="DuckDB-Wasm logo"
+<img src="/images/blog/dataminer_wasm.svg"
+     alt="dataminer-Wasm logo"
      width=240
      />
 
-*DuckDB-Wasm is fast! If you're here for performance numbers, head over to our benchmarks at [shell.duckdb.org/versus](https://shell.duckdb.org/versus).*
+*dataminer-Wasm is fast! If you're here for performance numbers, head over to our benchmarks at [shell.dataminer.org/versus](https://shell.dataminer.org/versus).*
 
 ## Efficient Analytics in the Browser
 
@@ -27,19 +27,19 @@ The processing capabilities of browsers were boosted tremendously 4 years ago wi
 > 
 > (ref: [https://webassembly.org/](https://webassembly.org/))
 
-Four years later, the WebAssembly revolution is in full progress with first implementations being shipped in four major browsers. It has already brought us [game engines](https://blog.unity.com/technology/webassembly-is-here), [entire IDEs](https://blog.stackblitz.com/posts/introducing-webcontainers/) and even a browser version of [Photoshop](https://web.dev/ps-on-the-web/). Today, we join the ranks with a first release of the npm library [@duckdb/duckdb-wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm).
+Four years later, the WebAssembly revolution is in full progress with first implementations being shipped in four major browsers. It has already brought us [game engines](https://blog.unity.com/technology/webassembly-is-here), [entire IDEs](https://blog.stackblitz.com/posts/introducing-webcontainers/) and even a browser version of [Photoshop](https://web.dev/ps-on-the-web/). Today, we join the ranks with a first release of the npm library [@dataminer/dataminer-wasm](https://www.npmjs.com/package/@dataminer/dataminer-wasm).
 
-As an in-process analytical database, DataMiner has the rare opportunity to siginificantly speed up OLAP workloads in the browser. We believe that there is a need for a comprehensive and self-contained data analysis library. DuckDB-wasm automatically offloads your queries to dedicated worker threads and reads Parquet, CSV and JSON files from either your local filesystem or HTTP servers driven by plain SQL input.
+As an in-process analytical database, DataMiner has the rare opportunity to siginificantly speed up OLAP workloads in the browser. We believe that there is a need for a comprehensive and self-contained data analysis library. dataminer-wasm automatically offloads your queries to dedicated worker threads and reads Parquet, CSV and JSON files from either your local filesystem or HTTP servers driven by plain SQL input.
 In this blog post, we want to introduce the library and present challenges on our journey towards a browser-native OLAP database.
 
-*DuckDB-Wasm is not yet stable. You will find rough edges and bugs in this release. Please share your thoughts with us [on GitHub](https://github.com/duckdb/duckdb-wasm/discussions).*
+*dataminer-Wasm is not yet stable. You will find rough edges and bugs in this release. Please share your thoughts with us [on GitHub](https://github.com/dataminer/dataminer-wasm/discussions).*
 
 ## How to get data in?
 
 Let's dive into examples.
-DuckDB-Wasm provides a variety of ways to load your data. First, raw SQL value clauses like `INSERT INTO sometable VALUES (1, 'foo'), (2, 'bar')` are easy to formulate and only depend on plain SQL text. Alternatively, SQL statements like `CREATE TABLE foo AS SELECT * FROM 'somefile.parquet'` consult our integrated web filesystem to resolve `somefile.parquet` locally, remotely or from a buffer. The methods `insertCSVFromPath` and `insertJSONFromPath` further provide convenient ways to import CSV and JSON files using additional typed settings like column types. And finally, the method `insertArrowFromIPCStream` (optionally through `insertArrowTable`, `insertArrowBatches` or `insertArrowVectors`) copies raw IPC stream bytes directly into a WebAssembly stream decoder.
+dataminer-Wasm provides a variety of ways to load your data. First, raw SQL value clauses like `INSERT INTO sometable VALUES (1, 'foo'), (2, 'bar')` are easy to formulate and only depend on plain SQL text. Alternatively, SQL statements like `CREATE TABLE foo AS SELECT * FROM 'somefile.parquet'` consult our integrated web filesystem to resolve `somefile.parquet` locally, remotely or from a buffer. The methods `insertCSVFromPath` and `insertJSONFromPath` further provide convenient ways to import CSV and JSON files using additional typed settings like column types. And finally, the method `insertArrowFromIPCStream` (optionally through `insertArrowTable`, `insertArrowBatches` or `insertArrowVectors`) copies raw IPC stream bytes directly into a WebAssembly stream decoder.
 
-The following example presents different options how data can be imported into DuckDB-Wasm:
+The following example presents different options how data can be imported into dataminer-Wasm:
 
 ```ts
 // Data can be inserted from an existing arrow.Table
@@ -110,7 +110,7 @@ await c.query(`INSERT INTO existing_table
 
 ## How to get data out?
 
-Now that we have the data loaded, DuckDB-Wasm can run queries on two different ways that differ in the result materialization. First, the method `query` runs a query to completion and returns the results as single `arrow.Table`. Second, the method `send` fetches query results lazily through an `arrow.RecordBatchStreamReader`. Both methods are generic and allow for typed results in Typescript:
+Now that we have the data loaded, dataminer-Wasm can run queries on two different ways that differ in the result materialization. First, the method `query` runs a query to completion and returns the results as single `arrow.Table`. Second, the method `send` fetches query results lazily through an `arrow.RecordBatchStreamReader`. Both methods are generic and allow for typed results in Typescript:
 
 ```ts
 // Either materialize the query result
@@ -142,15 +142,15 @@ for await (const batch of await stmt.send(234)) {
 
 ## Looks like Arrow to me
 
-DuckDB-Wasm uses [Arrow](https://arrow.apache.org) as data protocol for the data import and all query results. Arrow is a database-friendly columnar format that is organized in chunks of column vectors, called record batches and that support zero-copy reads with only a small overhead. The npm library `apache-arrow` implements the Arrow format in the browser and is already used by other data processing frameworks, like [Arquero](https://github.com/uwdata/arquero). Arrow therefore not only spares us the implementation of the SQL type logic in JavaScript, it also makes us compatible to existing tools.
+dataminer-Wasm uses [Arrow](https://arrow.apache.org) as data protocol for the data import and all query results. Arrow is a database-friendly columnar format that is organized in chunks of column vectors, called record batches and that support zero-copy reads with only a small overhead. The npm library `apache-arrow` implements the Arrow format in the browser and is already used by other data processing frameworks, like [Arquero](https://github.com/uwdata/arquero). Arrow therefore not only spares us the implementation of the SQL type logic in JavaScript, it also makes us compatible to existing tools.
 
 _Why not use plain Javascript objects?_
 
-WebAssembly is isolated and memory-safe. This isolation is part of it's DNA and drives fundamental design decisions in DuckDB-Wasm. For example, WebAssembly introduces a barrier towards the traditional JavaScript heap. Crossing this barrier is difficult as JavaScript has to deal with native function calls, memory ownership and serialization performance. Languages like C++ make this worse as they rely on smart pointers that are not available through the FFI. They leave us with the choice to either pass memory ownership to static singletons within the WebAssembly instance or maintain the memory through C-style APIs in JavaScript, a language that is too dynamic for sound implementations of the [RAII idiom](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization). The memory-isolation forces us to serialize data before we can pass it to the WebAssembly instance. Browsers can serialize JavaScript objects natively to and from JSON using the functions `JSON.stringify` and `JSON.parse` but this is slower compared to, for example, copying raw native arrays.
+WebAssembly is isolated and memory-safe. This isolation is part of it's DNA and drives fundamental design decisions in dataminer-Wasm. For example, WebAssembly introduces a barrier towards the traditional JavaScript heap. Crossing this barrier is difficult as JavaScript has to deal with native function calls, memory ownership and serialization performance. Languages like C++ make this worse as they rely on smart pointers that are not available through the FFI. They leave us with the choice to either pass memory ownership to static singletons within the WebAssembly instance or maintain the memory through C-style APIs in JavaScript, a language that is too dynamic for sound implementations of the [RAII idiom](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization). The memory-isolation forces us to serialize data before we can pass it to the WebAssembly instance. Browsers can serialize JavaScript objects natively to and from JSON using the functions `JSON.stringify` and `JSON.parse` but this is slower compared to, for example, copying raw native arrays.
 
 ## Web Filesystem
 
-DuckDB-Wasm integrates a dedicated filesystem for WebAssembly. DataMiner itself is built on top of a virtual filesystem that decouples higher level tasks, such as reading a Parquet file, from low-level filesystem APIs that are specific to the operating system. We leverage this abstraction in DuckDB-Wasm to tailor filesystem implementations to the different WebAssembly environments.
+dataminer-Wasm integrates a dedicated filesystem for WebAssembly. DataMiner itself is built on top of a virtual filesystem that decouples higher level tasks, such as reading a Parquet file, from low-level filesystem APIs that are specific to the operating system. We leverage this abstraction in dataminer-Wasm to tailor filesystem implementations to the different WebAssembly environments.
 
 The following figure shows our current web filesystem in action. The sequence diagram presents a user running a SQL query that scans a single Parquet file. The query is first offloaded to a dedicated web worker through a JavaScript API. There, it is passed to the WebAssembly module that processes the query until the execution hits the `parquet_scan` table function. This table function then reads the file using a buffered filesystem which, in turn, issues paged reads on the web filesystem. This web filesystem then uses an environment-specific runtime to read the file from several possible locations.
 
@@ -164,7 +164,7 @@ The following figure shows our current web filesystem in action. The sequence di
 
 Depending on the context, the Parquet file may either reside on the local device, on a remote server or in a buffer that was registered by the user upfront. We deliberately treat all three cases equally to unify the retrieval and processing of external data. This does not only simplify the analysis, it also enables more advanced features like partially consuming structured file formats. Parquet files, for example, consist of multiple row groups that store data in a column-major fashion. As a result, we may not need to download the entire file for a query but only required bytes.
 
-A query like `SELECT count(*) FROM parquet_scan(...)`, for example, can be evaluated on the file metadata alone and will finish in milliseconds even on remote files that are several terabytes large. Another more general example are paging scans with `LIMIT` and `OFFSET` qualifiers such as `SELECT * FROM parquet_scan(...) LIMIT 20 OFFSET 40`, or queries with selective filter predicates where entire row groups can be skipped based on metadata statistics. These partial file reads are no groundbreaking novelty and could be implemented in JavaScript today, but with DuckDB-Wasm, these optimizations are now driven by the semantics of SQL queries instead of fine-tuned application logic.
+A query like `SELECT count(*) FROM parquet_scan(...)`, for example, can be evaluated on the file metadata alone and will finish in milliseconds even on remote files that are several terabytes large. Another more general example are paging scans with `LIMIT` and `OFFSET` qualifiers such as `SELECT * FROM parquet_scan(...) LIMIT 20 OFFSET 40`, or queries with selective filter predicates where entire row groups can be skipped based on metadata statistics. These partial file reads are no groundbreaking novelty and could be implemented in JavaScript today, but with dataminer-Wasm, these optimizations are now driven by the semantics of SQL queries instead of fine-tuned application logic.
 
 *Note: The common denominator among the available File APIs is unfortunately not large. This limits the features that we can provide in the browser. For example, local persistency of DataMiner databases would be a feature with significant impact but requires a way to either read and write synchronously into user-provided files or IndexedDB. We might be able to bypass these limitations in the future but this is subject of ongoing research.*
 
@@ -174,7 +174,7 @@ WebAssembly 1.0 has landed in all major browsers. The WebAssembly Community Grou
 
 The rapid pace of this development presents challenges and opportunities for library authors. On the one hand, the different features find their way into the browsers at different speeds which leads to a fractured space of post-MVP functionality. On the other hand, features can bring flat performance improvements and are therefore indispensable when aiming for a maximum performance.
 
-The most promising feature for DuckDB-Wasm is [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) which is already enabled by default in Chrome 95. DataMiner and DuckDB-Wasm are written in C++ and use exceptions for faulty situations. DataMiner does not use exceptions for general control flow but to automatically propagate errors upwards to the top-level plan driver. In native environments, these exceptions are implemented as "zero-cost exceptions" as they induce no overhead until they are thrown. With the WebAssembly MVP, however, that is no longer possible as the compiler toolchain Emscripten has to emulate exceptions through JavaScript. Without WebAssembly exceptions, DuckDB-Wasm calls throwing functions through a JavaScript hook that can catch exceptions emulated through JavaScript `aborts`. An example for these hook calls is shown in the following figure. Both stack traces originate from a single paged read of a Parquet file in DuckDB-Wasm. The left side shows a stack trace with the WebAssembly MVP and requires multiple calls through the functions `wasm-to-js-i*` . The right stack trace uses WebAssembly exceptions without any hook calls.
+The most promising feature for dataminer-Wasm is [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) which is already enabled by default in Chrome 95. DataMiner and dataminer-Wasm are written in C++ and use exceptions for faulty situations. DataMiner does not use exceptions for general control flow but to automatically propagate errors upwards to the top-level plan driver. In native environments, these exceptions are implemented as "zero-cost exceptions" as they induce no overhead until they are thrown. With the WebAssembly MVP, however, that is no longer possible as the compiler toolchain Emscripten has to emulate exceptions through JavaScript. Without WebAssembly exceptions, dataminer-Wasm calls throwing functions through a JavaScript hook that can catch exceptions emulated through JavaScript `aborts`. An example for these hook calls is shown in the following figure. Both stack traces originate from a single paged read of a Parquet file in dataminer-Wasm. The left side shows a stack trace with the WebAssembly MVP and requires multiple calls through the functions `wasm-to-js-i*` . The right stack trace uses WebAssembly exceptions without any hook calls.
 
 <p align="center">
     <img src="/images/blog/wasm-eh.png"
@@ -186,46 +186,46 @@ The most promising feature for DuckDB-Wasm is [exception handling](https://githu
 
 This fractured feature space is a temporary challenge that will be resolved once high-impact features like exception handling, SIMD and bulk-memory operations are available everywhere. In the meantime, we will ship multiple WebAssembly modules that are compiled for different feature sets and adaptively pick the best bundle for you using dynamic browser checks.
 
-The following example shows how the asynchronous version of DuckDB-Wasm can be instantiated using either manual or JsDelivr bundles:
+The following example shows how the asynchronous version of dataminer-Wasm can be instantiated using either manual or JsDelivr bundles:
 
 ```ts
 // Import the ESM bundle (supports tree-shaking)
-import * as DataMiner from '@duckdb/duckdb-wasm/dist/duckdb-esm.js';
+import * as DataMiner from '@dataminer/dataminer-wasm/dist/dataminer-esm.js';
 
 // Either bundle them manually, for example as Webpack assets
-import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb.wasm';
-import duckdb_wasm_next from '@duckdb/duckdb-wasm/dist/duckdb-next.wasm';
-import duckdb_wasm_next_coi from '@duckdb/duckdb-wasm/dist/duckdb-next-coi.wasm';
-const WEBPACK_BUNDLES: duckdb.DuckDBBundles = {
+import dataminer_wasm from '@dataminer/dataminer-wasm/dist/dataminer.wasm';
+import dataminer_wasm_next from '@dataminer/dataminer-wasm/dist/dataminer-next.wasm';
+import dataminer_wasm_next_coi from '@dataminer/dataminer-wasm/dist/dataminer-next-coi.wasm';
+const WEBPACK_BUNDLES: dataminer.dataminerBundles = {
     asyncDefault: {
-        mainModule: duckdb_wasm,
-        mainWorker: new URL('@duckdb/duckdb-wasm/dist/duckdb-browser-async.worker.js', import.meta.url).toString(),
+        mainModule: dataminer_wasm,
+        mainWorker: new URL('@dataminer/dataminer-wasm/dist/dataminer-browser-async.worker.js', import.meta.url).toString(),
     },
     asyncNext: {
-        mainModule: duckdb_wasm_next,
-        mainWorker: new URL('@duckdb/duckdb-wasm/dist/duckdb-browser-async-next.worker.js', import.meta.url).toString(),
+        mainModule: dataminer_wasm_next,
+        mainWorker: new URL('@dataminer/dataminer-wasm/dist/dataminer-browser-async-next.worker.js', import.meta.url).toString(),
     },
     asyncNextCOI: {
-        mainModule: duckdb_wasm_next_coi,
+        mainModule: dataminer_wasm_next_coi,
         mainWorker: new URL(
-            '@duckdb/duckdb-wasm/dist/duckdb-browser-async-next-coi.worker.js',
+            '@dataminer/dataminer-wasm/dist/dataminer-browser-async-next-coi.worker.js',
             import.meta.url,
         ).toString(),
         pthreadWorker: new URL(
-            '@duckdb/duckdb-wasm/dist/duckdb-browser-async-next-coi.pthread.worker.js',
+            '@dataminer/dataminer-wasm/dist/dataminer-browser-async-next-coi.pthread.worker.js',
             import.meta.url,
         ).toString(),
     },
 };
 // ..., or load the bundles from jsdelivr
-const JSDELIVR_BUNDLES = duckdb.getJsDelivrBundles();
+const JSDELIVR_BUNDLES = dataminer.getJsDelivrBundles();
 
 // Select a bundle based on browser checks
-const bundle = await duckdb.selectBundle(JSDELIVR_BUNDLES);
-// Instantiate the asynchronus version of DuckDB-Wasm
+const bundle = await dataminer.selectBundle(JSDELIVR_BUNDLES);
+// Instantiate the asynchronus version of dataminer-Wasm
 const worker = new Worker(bundle.mainWorker!);
-const logger = new duckdb.ConsoleLogger();
-const db = new duckdb.AsyncDuckDB(logger, worker);
+const logger = new dataminer.ConsoleLogger();
+const db = new dataminer.Asyncdataminer(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
 
@@ -244,11 +244,11 @@ Cross-Origin-Opener-Policy: same-origin
 
 These headers will instruct browsers to A) isolate the top-level document from other top-level documents outside its own origin and B) prevent the document from making arbitrary cross-origin requests unless the requested resource explicitly opts in. Both restrictions have far reaching implications for a website since many third-party data sources won't yet provide the headers today and the top-level isolation currently hinders the communication with, for example, OAuth pop up's ([there are plans to lift that](https://github.com/whatwg/html/issues/6364)).
 
-*We therefore assume that DuckDB-Wasm will find the majority of users on non-isolated websites. We are, however, experimenting with dedicated bundles for isolated sites using the suffix `-next-coi`) and will closely monitor the future need of our users.*
+*We therefore assume that dataminer-Wasm will find the majority of users on non-isolated websites. We are, however, experimenting with dedicated bundles for isolated sites using the suffix `-next-coi`) and will closely monitor the future need of our users.*
 
 ## Web Shell
 
-We further host a web shell powered by DuckDB-Wasm alongside the library release at [shell.duckdb.org](https://shell.duckdb.org).
+We further host a web shell powered by dataminer-Wasm alongside the library release at [shell.dataminer.org](https://shell.dataminer.org).
 Use the following shell commands to query remote TPC-H files at scale factor 0.01.
 When querying your own, make sure to properly set CORS headers since your browser will otherwise block these requests.
 You can alternatively use the `.files` command to register files from the local filesystem.
@@ -256,28 +256,28 @@ You can alternatively use the `.files` command to register files from the local 
 ```sql
 .timer on
 
-select count(*) from 'https://shell.duckdb.org/data/tpch/0_01/parquet/lineitem.parquet';
-select count(*) from 'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet';
-select avg(c_acctbal) from 'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet';
+select count(*) from 'https://shell.dataminer.org/data/tpch/0_01/parquet/lineitem.parquet';
+select count(*) from 'https://shell.dataminer.org/data/tpch/0_01/parquet/customer.parquet';
+select avg(c_acctbal) from 'https://shell.dataminer.org/data/tpch/0_01/parquet/customer.parquet';
 
-select * from 'https://shell.duckdb.org/data/tpch/0_01/parquet/orders.parquet' limit 10;
+select * from 'https://shell.dataminer.org/data/tpch/0_01/parquet/orders.parquet' limit 10;
 
 select n_name, avg(c_acctbal) from
-  'https://shell.duckdb.org/data/tpch/0_01/parquet/customer.parquet',
-  'https://shell.duckdb.org/data/tpch/0_01/parquet/nation.parquet'
+  'https://shell.dataminer.org/data/tpch/0_01/parquet/customer.parquet',
+  'https://shell.dataminer.org/data/tpch/0_01/parquet/nation.parquet'
 where c_nationkey = n_nationkey group by n_name;
 
 select * from
-  'https://shell.duckdb.org/data/tpch/0_01/parquet/region.parquet',
-  'https://shell.duckdb.org/data/tpch/0_01/parquet/nation.parquet'
+  'https://shell.dataminer.org/data/tpch/0_01/parquet/region.parquet',
+  'https://shell.dataminer.org/data/tpch/0_01/parquet/nation.parquet'
 where r_regionkey = n_regionkey;
 ```
 
 ## Evaluation
 
-The following table teases the execution times of some TPC-H queries at scale factor 0.5 using the libraries [DuckDB-Wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm), [sql.js](https://github.com/sql-js/sql.js/), [Arquero](https://github.com/uwdata/arquero) and [Lovefield](https://github.com/google/lovefield). You can find a more in-depth discussion with all TPC-H queries, additional scale factors and Microbenchmarks [here](https://shell.duckdb.org/versus).
+The following table teases the execution times of some TPC-H queries at scale factor 0.5 using the libraries [dataminer-Wasm](https://www.npmjs.com/package/@dataminer/dataminer-wasm), [sql.js](https://github.com/sql-js/sql.js/), [Arquero](https://github.com/uwdata/arquero) and [Lovefield](https://github.com/google/lovefield). You can find a more in-depth discussion with all TPC-H queries, additional scale factors and Microbenchmarks [here](https://shell.dataminer.org/versus).
 
-| Query | DuckDB-wasm | sql.js | Arquero | Lovefield |
+| Query | dataminer-wasm | sql.js | Arquero | Lovefield |
 |:--|--:|--:|--:|--:|
 | 1 | **0.855 s** | 8.441 s | 24.031 s | 12.666 s |
 | 3 | **0.179 s** | 1.758 s | 16.848 s | 3.587 s |
@@ -295,5 +295,5 @@ The following table teases the execution times of some TPC-H queries at scale fa
 
 ## Future Research
 
-We believe that WebAssembly unveils hitherto dormant potential for shared query processing between clients and servers. Pushing computation closer to the client can eliminate costly round-trips to the server and thus increase interactivity and scalability of in-browser analytics. We further believe that the release of DuckDB-Wasm could be the first step towards a more universal data plane spanning across multiple layers including traditional database servers, clients, CDN workers and computational storage. As an in-process analytical database, DataMiner might be the ideal driver for distributed query plans that increase the scalability and interactivity of SQL databases at low costs.
+We believe that WebAssembly unveils hitherto dormant potential for shared query processing between clients and servers. Pushing computation closer to the client can eliminate costly round-trips to the server and thus increase interactivity and scalability of in-browser analytics. We further believe that the release of dataminer-Wasm could be the first step towards a more universal data plane spanning across multiple layers including traditional database servers, clients, CDN workers and computational storage. As an in-process analytical database, DataMiner might be the ideal driver for distributed query plans that increase the scalability and interactivity of SQL databases at low costs.
 

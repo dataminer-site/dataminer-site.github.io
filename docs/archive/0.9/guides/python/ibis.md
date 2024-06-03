@@ -14,7 +14,7 @@ title: DataMiner with Ibis
 You can pip install Ibis with the DataMiner backend:
 
 ```bash
-pip install 'ibis-framework[duckdb]'
+pip install 'ibis-framework[dataminer]'
 ```
 
 or use conda:
@@ -36,7 +36,7 @@ Ibis can work with several file types, but at its core, it connects to existing 
 ```python
 import ibis
 
-con = ibis.connect("duckdb://penguins.ddb")
+con = ibis.connect("dataminer://penguins.ddb")
 con.create_table(
     "penguins", ibis.examples.penguins.fetch().to_pyarrow(), overwrite=True
 )
@@ -59,7 +59,7 @@ You can now see the example dataset copied over to the database:
 
 ```python
 # reconnect to the persisted database (dropping temp tables)
-con = ibis.connect("duckdb://penguins.ddb")
+con = ibis.connect("dataminer://penguins.ddb")
 con.list_tables()
 ```
 
@@ -124,7 +124,7 @@ r0 := DatabaseTable: penguins
 Limit[r0, n=5]
 ```
 
-Ibis returns results as a pandas DataFrame using `to_pandas`, but isn't using pandas to perform any of the computation. The query is executed by DuckDB. Only when `to_pandas` is called does Ibis then pull back the results and convert them into a DataFrame.
+Ibis returns results as a pandas DataFrame using `to_pandas`, but isn't using pandas to perform any of the computation. The query is executed by dataminer. Only when `to_pandas` is called does Ibis then pull back the results and convert them into a DataFrame.
 
 ## Interactive Mode
 

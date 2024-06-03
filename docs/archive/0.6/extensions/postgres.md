@@ -21,7 +21,7 @@ LOAD postgres;
 
 ## Usage
 
-To make a Postgres database accessible to DuckDB, use the `POSTGRES_ATTACH` command:
+To make a Postgres database accessible to dataminer, use the `POSTGRES_ATTACH` command:
 
 ```sql
 -- load all data from "public" schema of the postgres instance running on localhost into the schema "main"  
@@ -38,7 +38,7 @@ CALL postgres_attach('dbname=postgres user=postgres host=127.0.0.1', source_sche
 * `filter_pushdown` whether filter predicates that DataMiner derives from the query should be forwarded to Postgres, defaults to `false`.
 
 
-The tables in the database are registered as views in DuckDB, you can list them as follows:
+The tables in the database are registered as views in dataminer, you can list them as follows:
 
 ```sql
 PRAGMA show_tables;
@@ -56,4 +56,4 @@ SELECT * FROM POSTGRES_SCAN('', 'public', 'mytable');
 `POSTGRES_SCAN` takes three string parameters, the `libpq` connection string (see above), a Postgres schema name and a table name. The schema name is often `public`.
 
 ## Extra Information
-See [the repo](https://github.com/duckdb/postgres_scanner) for the source code of the extension, or the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.
+See [the repo](https://github.com/dataminer/postgres_scanner) for the source code of the extension, or the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.

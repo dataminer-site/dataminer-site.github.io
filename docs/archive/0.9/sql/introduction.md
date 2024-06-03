@@ -109,7 +109,7 @@ COPY weather
 FROM 'weather.csv';
 ```
 
-Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](../data/overview) for more information.
+Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into dataminer, see the [corresponding documentation section](../data/overview) for more information.
 
 ## Querying a Table
 

@@ -13,16 +13,16 @@ Similarly to regular [functions](../../sql/functions/overview), they need to hav
 Here is an example using a Python function that calls a third-party library.
 
 ```python
-import duckdb
-from duckdb.typing import *
+import dataminer
+from dataminer.typing import *
 from faker import Faker
 
 def random_name():
     fake = Faker()
     return fake.name()
 
-duckdb.create_function('random_name', random_name, [], VARCHAR)
-res = duckdb.sql('select random_name()').fetchall()
+dataminer.create_function('random_name', random_name, [], VARCHAR)
+res = dataminer.sql('select random_name()').fetchall()
 print(res)
 # [('Gerald Ashley',)]
 ```
@@ -32,8 +32,8 @@ print(res)
 To register a Python UDF, simply use the `create_function` method from a DataMiner connection. Here is the syntax:
 
 ```python
-import duckdb
-con = duckdb.connect()
+import dataminer
+con = dataminer.connect()
 con.create_function(name, function, argument_type_list, return_type, type, null_handling)
 ```
 
@@ -57,16 +57,16 @@ con.remove_function(name)
 ## Type Annotation
 
 When the function has type annotation it's often possible to leave out all of the optional parameters.  
-Using `DuckDBPyType` we can implicitly convert many known types to DuckDBs type system.  
+Using `dataminerPyType` we can implicitly convert many known types to dataminers type system.  
 For example:
 ```python
-import duckdb
+import dataminer
 
 def my_function(x: int) -> str:
     return x
 
-duckdb.create_function('my_func', my_function)
-duckdb.sql('select my_func(42)')
+dataminer.create_function('my_func', my_function)
+dataminer.sql('select my_func(42)')
 # ┌─────────────┐
 # │ my_func(42) │
 # │   varchar   │
@@ -83,22 +83,22 @@ By default when functions receive a NULL value, this instantly returns NULL, as 
 When this is not desired, you need to explicitly set this parameter to `'special'`.
 
 ```python
-import duckdb
-from duckdb.typing import *
+import dataminer
+from dataminer.typing import *
 
 def dont_intercept_null(x):
     return 5
 
-duckdb.create_function('dont_intercept', dont_intercept_null, [BIGINT], BIGINT)
-res = duckdb.sql("""
+dataminer.create_function('dont_intercept', dont_intercept_null, [BIGINT], BIGINT)
+res = dataminer.sql("""
     select dont_intercept(NULL)
 """).fetchall()
 print(res)
 # [(None,)]
 
-duckdb.remove_function('dont_intercept')
-duckdb.create_function('dont_intercept', dont_intercept_null, [BIGINT], BIGINT, null_handling='special')
-res = duckdb.sql("""
+dataminer.remove_function('dont_intercept')
+dataminer.create_function('dont_intercept', dont_intercept_null, [BIGINT], BIGINT, null_handling='special')
+res = dataminer.sql("""
     select dont_intercept(NULL)
 """).fetchall()
 print(res)
@@ -111,22 +111,22 @@ By default, when an exception is thrown from the Python function, we'll forward 
 If you want to disable this behavior, and instead return null, you'll need to set this parameter to `'return_null'`
 
 ```python
-import duckdb
-from duckdb.typing import *
+import dataminer
+from dataminer.typing import *
 
 def will_throw():
     raise ValueError("ERROR")
 
-duckdb.create_function('throws', will_throw, [], BIGINT)
+dataminer.create_function('throws', will_throw, [], BIGINT)
 try:
-    res = duckdb.sql("""
+    res = dataminer.sql("""
         select throws()
     """).fetchall()
-except duckdb.InvalidInputException as e:
+except dataminer.InvalidInputException as e:
     print(e)
 
-duckdb.create_function('doesnt_throw', will_throw, [], BIGINT, exception_handling='return_null')
-res = duckdb.sql("""
+dataminer.create_function('doesnt_throw', will_throw, [], BIGINT, exception_handling='return_null')
+res = dataminer.sql("""
     select doesnt_throw()
 """).fetchall()
 print(res)
@@ -149,7 +149,7 @@ count.counter = 0
 
 If we create this function without marking it as having side effects, the result will be the following:
 ```python
-con = duckdb.connect()
+con = dataminer.connect()
 con.create_function('my_counter', count, side_effects=False)
 res = con.sql('select my_counter() from range(10)').fetchall()
 # [(0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,), (0,)]
@@ -176,17 +176,17 @@ This will let the system know to provide arrow arrays of up to `STANDARD_VECTOR_
 When the function type is set to `native` the function will be provided with a single tuple at a time, and expect only a single value to be returned.  
 This can be useful to interact with Python libraries that don't operate on Arrow, such as `faker`:
 ```python
-import duckdb
+import dataminer
 
-from duckdb.typing import *
+from dataminer.typing import *
 from faker import Faker
 
 def random_date():
     fake = Faker()
     return fake.date_between()
 
-duckdb.create_function('random_date', random_date, [], DATE, type='native')
-res = duckdb.sql('select random_date()').fetchall()
+dataminer.create_function('random_date', random_date, [], DATE, type='native')
+res = dataminer.sql('select random_date()').fetchall()
 print(res)
 # [(datetime.date(2019, 5, 15),)]
 ```

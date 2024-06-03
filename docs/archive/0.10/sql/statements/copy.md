@@ -307,7 +307,7 @@ Sets the `field_id` of column `my_struct` to 43, and column `i` (nested inside `
 COPY
     (SELECT {i: 128} AS my_struct)
     TO 'my.parquet'
-    (FIELD_IDS {my_struct: {__duckdb_field_id: 42, i: 43}});
+    (FIELD_IDS {my_struct: {__dataminer_field_id: 42, i: 43}});
 ```
 
 Sets the `field_id` of column `my_list` to 42, and column `element` (default name of list child) to 43:
@@ -316,7 +316,7 @@ Sets the `field_id` of column `my_list` to 42, and column `element` (default nam
 COPY
     (SELECT [128, 256] AS my_list)
     TO 'my.parquet'
-    (FIELD_IDS {my_list: {__duckdb_field_id: 42, element: 43}});
+    (FIELD_IDS {my_list: {__dataminer_field_id: 42, element: 43}});
 ```
 
 Sets the `field_id` of colum `my_map` to 42, and columns `key` and `value` (default names of map children) to 43 and 44:
@@ -325,7 +325,7 @@ Sets the `field_id` of colum `my_map` to 42, and columns `key` and `value` (defa
 COPY
     (SELECT MAP {'key1' : 128, 'key2': 256} my_map)
     TO 'my.parquet'
-    (FIELD_IDS {my_map: {__duckdb_field_id: 42, key: 43, value: 44}});
+    (FIELD_IDS {my_map: {__dataminer_field_id: 42, key: 43, value: 44}});
 ```
 
 ### JSON Options

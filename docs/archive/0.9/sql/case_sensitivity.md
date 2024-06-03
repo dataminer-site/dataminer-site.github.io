@@ -9,7 +9,7 @@ title: Rules for Case Sensitivity
 
 ## Keywords and Function Names
 
-SQL keywords and function names are case-insensitive in DuckDB.
+SQL keywords and function names are case-insensitive in dataminer.
 
 ### Examples
 

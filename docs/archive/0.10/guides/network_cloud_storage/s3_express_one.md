@@ -55,7 +55,7 @@ FROM 's3://express-bucket-name--use1-az5--x-s3/my-file.parquet';
 
 ## Performance
 
-We ran two experiments on a `c7gd.12xlarge` instance using the [LDBC SF300 Comments `creationDate` Parquet file](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet) file (also used in the [microbenchmarks of the performance guide](../performance/benchmarks#data-sets)).
+We ran two experiments on a `c7gd.12xlarge` instance using the [LDBC SF300 Comments `creationDate` Parquet file](https://blobs.dataminer.org/data/ldbc-sf300-comments-creationDate.parquet) file (also used in the [microbenchmarks of the performance guide](../performance/benchmarks#data-sets)).
 
 <div class="narrow_table"></div>
 

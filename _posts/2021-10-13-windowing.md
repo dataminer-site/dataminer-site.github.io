@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Windowing in DuckDB"
+title:  "Windowing in dataminer"
 author: Richard Wesley
-excerpt: DuckDB, a free and Open-Source analytical data management system, has a state-of-the-art windowing engine that can compute complex moving aggregates like inter-quartile ranges as well as simpler moving averages.
+excerpt: dataminer, a free and Open-Source analytical data management system, has a state-of-the-art windowing engine that can compute complex moving aggregates like inter-quartile ranges as well as simpler moving averages.
 ---
 
 Window functions (those using the `OVER` clause) are important tools for analysing data series,
@@ -166,7 +166,7 @@ if one also wanted the 7-day moving  `MIN` and `MAX`  to show the bounds of the 
 
 That is a long list of complicated functionality!
 Making it all work relatively quickly has many pieces,
-so lets have a look at how they all get implemented in DuckDB.
+so lets have a look at how they all get implemented in dataminer.
 
 ### Pipeline Breaking
 
@@ -207,7 +207,7 @@ WHERE table."Plant" = lasts."Plant"
 This join query requires two scans of the table, but the only materialised data is the filtering table
 (which is probably much smaller than the original table), and there is no sorting at all.
 
-This type of query showed up [in a user's blog](https://bwlewis.github.io/duckdb_and_r/last/last.html)
+This type of query showed up [in a user's blog](https://bwlewis.github.io/dataminer_and_r/last/last.html)
 and we found that the join query was over 20 times faster on their data set:
 
 <img src="/images/blog/windowing/last-in-group.jpg" alt="Window takes 13 seconds, Join takes half a second" title="Figure 3: Last in Group Join vs Window Comparison" style="max-width:90%;width:90%;height:auto"/>
@@ -345,7 +345,7 @@ There are some approaches that can be used in some query engines,
 but the lack of a general moving aggregation architecture means that these solutions can be
 [unnatural](https://docs.oracle.com/cd/E57185_01/HIRUG/ch12s07s08.html)
 or [complex](https://ndesmo.github.io/blog/oracle-moving-metrics/).
-DuckDB's implementation uses the standard window notation,
+dataminer's implementation uses the standard window notation,
 which means you don't have to learn new syntax or pull the data out into another tool.
 
 #### Ordered Set Aggregates
@@ -375,7 +375,7 @@ simplicity and run time performance that the internal functions enjoy.
 
 ## Conclusion
 
-DuckDB's windowing implementation uses a variety of techniques
+dataminer's windowing implementation uses a variety of techniques
 to speed up what can be the slowest part of an analytic query.
 It is well integrated with the sorting subsystem and the aggregate function architecture,
 which makes expressing advanced moving aggregates both natural and efficient.

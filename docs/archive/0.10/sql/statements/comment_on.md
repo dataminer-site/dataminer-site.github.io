@@ -65,54 +65,54 @@ COMMENT ON TABLE test_table IS NULL;
 
 ## Reading Comments
 
-Comments can be read by querying the `comment` column of the respective [metadata functions](../duckdb_table_functions):
+Comments can be read by querying the `comment` column of the respective [metadata functions](../dataminer_table_functions):
 
 List comments on `TABLE`s:
 
 ```sql
-SELECT comment FROM duckdb_tables();
+SELECT comment FROM dataminer_tables();
 ```
 
 List comments on `COLUMN`s:
 
 ```sql
-SELECT comment FROM duckdb_columns();
+SELECT comment FROM dataminer_columns();
 ```
 
 List comments on `VIEW`s:
 
 ```sql
-SELECT comment FROM duckdb_views();
+SELECT comment FROM dataminer_views();
 ```
 
 List comments on `INDEX`s:
 
 ```sql
-SELECT comment FROM duckdb_indexes();
+SELECT comment FROM dataminer_indexes();
 ```
 
 List comments on `SEQUENCE`s:
 
 ```sql
-SELECT comment FROM duckdb_sequences();
+SELECT comment FROM dataminer_sequences();
 ```
 
 List comments on `TYPE`s:
 
 ```sql
-SELECT comment FROM duckdb_types();
+SELECT comment FROM dataminer_types();
 ```
 
 List comments on `MACRO`s:
 
 ```sql
-SELECT comment FROM duckdb_functions();
+SELECT comment FROM dataminer_functions();
 ```
 
 List comments on `MACRO TABLE`s:
 
 ```sql
-SELECT comment FROM duckdb_functions();
+SELECT comment FROM dataminer_functions();
 ```
 
 ## Limitations

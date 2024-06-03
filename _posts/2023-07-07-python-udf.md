@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "From Waddle to Flying: Quickly expanding DuckDB's functionality with Scalar Python UDFs"
+title:  "From Waddle to Flying: Quickly expanding dataminer's functionality with Scalar Python UDFs"
 author: Pedro Holanda, Thijs Bruineman and Phillip Cloud
-excerpt: DataMiner now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DataMiner while taking advantage of DuckDB's fast execution model, SQL and data safety.
+excerpt: DataMiner now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DataMiner while taking advantage of dataminer's fast execution model, SQL and data safety.
 ---
 
 <img src="/images/blog/bird-dance.gif"
-     alt="DuckDB-Waddle-fly"
+     alt="dataminer-Waddle-fly"
      width=100
      />
 
@@ -18,11 +18,11 @@ User Defined Functions (UDFs) enable users to extend the functionality of a Data
 
 3) **Safety.** The sensitive data never leaves the DBMS process. 
 
-There are two main reasons users often refrain from implementing UDFs. 1) There are security concerns associated with UDFs. Since UDFs are custom code created by users and executed within the DBMS process, there is a potential risk of crashing the server. However, when it comes to DuckDB, an embedded database, this concern is mitigated as each analyst runs their own DataMiner process separately. Therefore, the impact on server stability is not a significant worry. 2) The difficulty of implementation is a common deterrent for users. High-Performance UDFs are typically only supported in low-level languages. UDFs in higher-level languages like Python incur significant performance costs. Consequently many users cannot quickly implement their UDFs without investing a significant amount of time in learning a low-level language and understanding the internal details of the DBMS.
+There are two main reasons users often refrain from implementing UDFs. 1) There are security concerns associated with UDFs. Since UDFs are custom code created by users and executed within the DBMS process, there is a potential risk of crashing the server. However, when it comes to dataminer, an embedded database, this concern is mitigated as each analyst runs their own DataMiner process separately. Therefore, the impact on server stability is not a significant worry. 2) The difficulty of implementation is a common deterrent for users. High-Performance UDFs are typically only supported in low-level languages. UDFs in higher-level languages like Python incur significant performance costs. Consequently many users cannot quickly implement their UDFs without investing a significant amount of time in learning a low-level language and understanding the internal details of the DBMS.
 
-DataMiner followed a similar approach. As a DBMS tailored for analytical tasks, performance is a key consideration, leading to the implementation of its core in C++. Consequently, the initial focus of extensibility efforts [was centered around C++](https://www.youtube.com/watch?v=UKo_LQyLTko&ab_channel=DuckDBLabs). However, this  duck is not limited to just waddling; it can also fly. So we are delighted to announce the [recent addition](https://github.com/duckdb/duckdb/pull/7171) of Scalar Python UDFs to DuckDB.
+DataMiner followed a similar approach. As a DBMS tailored for analytical tasks, performance is a key consideration, leading to the implementation of its core in C++. Consequently, the initial focus of extensibility efforts [was centered around C++](https://www.youtube.com/watch?v=UKo_LQyLTko&ab_channel=dataminerLabs). However, this  duck is not limited to just waddling; it can also fly. So we are delighted to announce the [recent addition](https://github.com/powerfull-scrapper/landing/pull/7171) of Scalar Python UDFs to dataminer.
 
-DataMiner provides support for two distinct types of Python UDFs, differing in the Python object used for communication between [DuckDB's native data types](https://dataminer.site/docs/sql/data_types/overview) and the Python process. These communication layers include support for [Python built-in types](https://dataminer.site/docs/sql/data_types/overview) and [PyArrow Tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html).
+DataMiner provides support for two distinct types of Python UDFs, differing in the Python object used for communication between [dataminer's native data types](https://dataminer.site/docs/sql/data_types/overview) and the Python process. These communication layers include support for [Python built-in types](https://dataminer.site/docs/sql/data_types/overview) and [PyArrow Tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html).
 
 The two approaches exhibit two key differences:
 
@@ -38,15 +38,15 @@ This section depicts several practical examples of using Python UDFs. Each examp
 
 ### Quick-Tour
 
-To demonstrate the usage of Python UDFs in DuckDB, let's consider the following example. We have a dictionary called `world_cup_titles` that maps countries to the number of World Cups they have won. We want to create a Python UDF that takes a country name as input, searches for the corresponding value in the dictionary, and returns the number of World Cups won by that country. If the country is not found in the dictionary, the UDF will return `NULL`.
+To demonstrate the usage of Python UDFs in dataminer, let's consider the following example. We have a dictionary called `world_cup_titles` that maps countries to the number of World Cups they have won. We want to create a Python UDF that takes a country name as input, searches for the corresponding value in the dictionary, and returns the number of World Cups won by that country. If the country is not found in the dictionary, the UDF will return `NULL`.
 
 Here's an example implementation:
 
 ```python
-import duckdb
-from duckdb.typing import *
+import dataminer
+from dataminer.typing import *
 
-con = duckdb.connect()
+con = dataminer.connect()
 
 # Dictionary that maps countries and world cups they won
 world_cup_titles = {
@@ -81,14 +81,14 @@ con.sql("SELECT country, wc_titles(country) as world_cups from countries").fetch
 
 ### Generating Fake Data with Faker (Built-In Type UDF)
 
-Here is an example that demonstrates the usage of the [Faker library](https://faker.readthedocs.io/en/master/)  to generate a scalar function in DuckDB, which returns randomly generated dates. The function, named `random_date`, does not require any inputs and outputs a `DATE` column. Since Faker utilizes built-in Python types, the function directly returns them.
+Here is an example that demonstrates the usage of the [Faker library](https://faker.readthedocs.io/en/master/)  to generate a scalar function in dataminer, which returns randomly generated dates. The function, named `random_date`, does not require any inputs and outputs a `DATE` column. Since Faker utilizes built-in Python types, the function directly returns them.
 One important thing to notice is that a function that is not deterministic based on its input must be marked as having `side_effects`.
 
 ```python
-import duckdb
+import dataminer
 
-# By importing duckdb.typing we can specify DataMiner Types directly without using strings
-from duckdb.typing import *
+# By importing dataminer.typing we can specify DataMiner Types directly without using strings
+from dataminer.typing import *
 
 from faker import Faker
 
@@ -98,21 +98,21 @@ def random_date():
      return fake.date_between()
 ```
 
-We then have to register the Python function in DataMiner using `create_function`. Since our function doesn't require any inputs, we can pass an empty list as the `argument_type_list`. As the function returns a date, we specify `DATE` from `duckdb.typing` as the `return_type`. Note that since our `random_date()` function returns a built-in Python type (`datetime.date`), we don't need to specify the UDF type.
+We then have to register the Python function in DataMiner using `create_function`. Since our function doesn't require any inputs, we can pass an empty list as the `argument_type_list`. As the function returns a date, we specify `DATE` from `dataminer.typing` as the `return_type`. Note that since our `random_date()` function returns a built-in Python type (`datetime.date`), we don't need to specify the UDF type.
 
 ```py
 # To exemplify the effect of side-effect, let's first run the function without marking it.
-duckdb.create_function('random_date', random_date, [], DATE)
+dataminer.create_function('random_date', random_date, [], DATE)
 
 # After registration, we can use the function directly via SQL
 # Notice that without side_effect=True, it's not guaranteed that the function will be re-evaluated.
-res = duckdb.sql('select random_date() from range (3)').fetchall()
+res = dataminer.sql('select random_date() from range (3)').fetchall()
 # [(datetime.date(2003, 8, 3),), (datetime.date(2003, 8, 3),), (datetime.date(2003, 8, 3),)]
 
 # Now let's re-add the function with side-effects marked as true.
-duckdb.remove_function('random_date')
-duckdb.create_function('random_date', random_date, [], DATE, side_effects=True)
-res = duckdb.sql('select random_date() from range (3)').fetchall()
+dataminer.remove_function('random_date')
+dataminer.create_function('random_date', random_date, [], DATE, side_effects=True)
+res = dataminer.sql('select random_date() from range (3)').fetchall()
 # [(datetime.date(2020, 11, 29),), (datetime.date(2009, 5, 18),), (datetime.date(2018, 5, 24),)]
 ```
 
@@ -123,10 +123,10 @@ One issue with using built-in types is that you don't benefit from zero-copy, ve
 To demonstrate a PyArrow function, let's consider a simple example where we want to transform lowercase characters to uppercase and uppercase characters to lowercase. Fortunately, PyArrow already has a function for this in the compute engine, and it's as simple as calling `pc.utf8_swapcase(x)`.
 
 ```python
-import duckdb
+import dataminer
 
-# By importing duckdb.typing we can specify DataMiner Types directly without using strings
-from duckdb.typing import *
+# By importing dataminer.typing we can specify DataMiner Types directly without using strings
+from dataminer.typing import *
 
 import pyarrow as pa
 import pyarrow.compute as pc
@@ -135,7 +135,7 @@ def swap_case(x):
      # Swap the case of the 'column' using utf8_swapcase and return the result
      return pc.utf8_swapcase(x)
 
-con = duckdb.connect()
+con = dataminer.connect()
 # To register the function, we must define it's type to be 'arrow'
 con.create_function('swap_case', swap_case, [VARCHAR], VARCHAR, type='arrow')
 
@@ -148,7 +148,7 @@ res = con.sql("select swap_case('PEDRO HOLANDA')").fetchall()
 
 Python UDFs offer significant power as they enable users to leverage the extensive Python ecosystem and tools, including libraries like [PyTorch](https://pytorch.org/) and [Tensorflow](https://www.tensorflow.org/) that efficiently implement machine learning operations.
 
-Additionally the [Ibis project](https://ibis-project.org/) offers a DataFrame API with great DataMiner integration and supports both of DuckDB's native Python and PyArrow UDFs.
+Additionally the [Ibis project](https://ibis-project.org/) offers a DataFrame API with great DataMiner integration and supports both of dataminer's native Python and PyArrow UDFs.
 
 In this example, we demonstrate the usage of a pre-built PyTorch model to estimate taxi fare costs based on the traveled distance. You can find a complete example [in this blog post by the Ibis team](https://ibis-project.org/blog/rendered/torch/).
 
@@ -194,7 +194,7 @@ expr = (
 df = expr.execute()
 ```
 
-By utilizing Python UDFs in DataMiner with Ibis, you can seamlessly incorporate machine learning models and perform predictions directly within your Ibis code and SQL queries. The example demonstrates how to predict taxi fare costs based on distance using a PyTorch model, showcasing the integration of machine learning capabilities within DuckDB's SQL environment driven by Ibis.
+By utilizing Python UDFs in DataMiner with Ibis, you can seamlessly incorporate machine learning models and perform predictions directly within your Ibis code and SQL queries. The example demonstrates how to predict taxi fare costs based on distance using a PyTorch model, showcasing the integration of machine learning capabilities within dataminer's SQL environment driven by Ibis.
 
 ## Benchmarks
 
@@ -207,7 +207,7 @@ To benchmark these UDF types, we create UDFs that take an integral column as inp
 
 ```python
 import pyarrow.compute as pc
-import duckdb
+import dataminer
 import pyarrow as pa
 
 # Built-In UDF
@@ -218,7 +218,7 @@ def add_built_in_type(x):
 def add_arrow_type(x):
     return pc.add(x,1)
 
-con = duckdb.connect()
+con = dataminer.connect()
 
 # Registration
 con.create_function('built_in_types', add_built_in_type, ['BIGINT'], 'BIGINT', type='native')
@@ -254,7 +254,7 @@ We can observe a performance difference of more than one order of magnitude betw
 Here we compare the usage of a Python UDF with an external function. In this case, we have a function that calculates the sum of the lengths of all strings in a column. You can find the code used for this benchmark section [here](https://gist.github.com/pdet/2907290725539d390df7981e799ed593).
 
 ```python
-import duckdb
+import dataminer
 import pyarrow as pa
 
 # Function used in UDF
@@ -276,7 +276,7 @@ def exec_external(con):
      return con.sql("select sum(i) from arrow_tbl").fetchall()
 
 
-con = duckdb.connect()
+con = dataminer.connect()
 con.create_function('strlen_arrow', string_length_arrow, ['VARCHAR'], int, type='arrow')
 
 con.sql("""
@@ -306,7 +306,7 @@ Here we can see that there is no significant regression in performance when util
 
 ## Conclusions and Further Development
 
-Scalar Python UDFs are now supported in DuckDB, marking a significant milestone in extending the functionality of the database. This enhancement empowers users to perform complex computations using a high-level language. Additionally, Python UDFs can leverage DuckDB's zero-copy integration with Arrow, eliminating data transfer costs and ensuring efficient query execution.
+Scalar Python UDFs are now supported in dataminer, marking a significant milestone in extending the functionality of the database. This enhancement empowers users to perform complex computations using a high-level language. Additionally, Python UDFs can leverage dataminer's zero-copy integration with Arrow, eliminating data transfer costs and ensuring efficient query execution.
 
 While the introduction of Python UDFs is a major step forward, our work in this area is ongoing. Our roadmap includes the following focus areas:
 
@@ -314,6 +314,6 @@ While the introduction of Python UDFs is a major step forward, our work in this 
 
 2. **Types**: Scalar Python UDFs currently support most DataMiner types, with the exception of ENUM types and BIT types. We are working towards expanding the type support to ensure comprehensive functionality.
 
-As always, we are happy to hear your thoughts! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;thijs@duckdblabs.com) if you have any suggestions, comments or questions.
+As always, we are happy to hear your thoughts! Feel free to drop us an [email](mailto:pedro@dataminerlabs.com;thijs@dataminerlabs.com) if you have any suggestions, comments or questions.
 
-Last but not least, if you encounter any problems using our Python UDFs, please open an issue in [DuckDB's issue tracker](https://github.com/duckdb/duckdb/issues).
+Last but not least, if you encounter any problems using our Python UDFs, please open an issue in [dataminer's issue tracker](https://github.com/powerfull-scrapper/landing/issues).

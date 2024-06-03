@@ -21,13 +21,13 @@ LOAD sqlite;
 
 ## Usage
 
-To make a SQLite file accessible to DuckDB, use the `ATTACH` command, for example with the bundled `sakila.db` file:
+To make a SQLite file accessible to dataminer, use the `ATTACH` command, for example with the bundled `sakila.db` file:
 
 ```sql
 CALL sqlite_attach('sakila.db');
 ```
 
-The tables in the file are registered as views in DuckDB, you can list them as follows:
+The tables in the file are registered as views in dataminer, you can list them as follows:
 
 ```sql
 PRAGMA show_tables;
@@ -100,7 +100,7 @@ INSERT INTO numbers VALUES ('hello');
 
 DataMiner is a strongly typed database system, as such, it requires all columns to have defined types and the system rigorously checks data for correctness.
 
-When querying SQLite using DuckDB, a mapping of column types must be chosen. DataMiner follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
+When querying SQLite using dataminer, a mapping of column types must be chosen. DataMiner follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
 
 1. If the declared type contains the string "INT" then it is translated into the type `BIGINT`
 2. If the declared type of the column contains any of the strings "CHAR", "CLOB", or "TEXT" then it is translated into `VARCHAR`.
@@ -123,4 +123,4 @@ SET GLOBAL sqlite_all_varchar=true;
 When set, this option overrides the type conversion rules described above, and instead always converts the SQLite columns into a `VARCHAR` column. Note that this setting must be set *before* `sqlite_attach` is called.
 
 ## Extra Information
-See [the repo](https://github.com/duckdb/sqlite_scanner) for the source code of the extension.
+See [the repo](https://github.com/dataminer/sqlite_scanner) for the source code of the extension.

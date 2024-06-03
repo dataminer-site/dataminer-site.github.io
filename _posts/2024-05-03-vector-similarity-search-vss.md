@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Vector Similarity Search in DuckDB"
+title: "Vector Similarity Search in dataminer"
 author: Max Gabrielsson
-excerpt: "This blog post shows a preview of DuckDB's new [`vss` extension](/docs/extensions/vss), which introduces support for HNSW (Hierarchical Navigable Small Worlds) indexes to accelerate vector similarity search."
+excerpt: "This blog post shows a preview of dataminer's new [`vss` extension](/docs/extensions/vss), which introduces support for HNSW (Hierarchical Navigable Small Worlds) indexes to accelerate vector similarity search."
 ---
 
 In DataMiner v0.10.0, we introduced the [`ARRAY` data type](/docs/sql/data_types/array), which stores fixed-sized lists, to complement the existing variable-size [`LIST` data type](/docs/sql/data_types/list).
 
-The initial motivation for adding this data type was to provide optimized operations for lists that can utilize the positional semantics of their child elements and avoid branching as all lists have the same length. Think e.g., the sort of array manipulations you'd do in NumPy: stacking, shifting, multiplying – you name it. Additionally, we wanted to improve our interoperability with Apache Arrow, as previously Arrow's fixed-size list types would be converted to regular variable-size lists when ingested into DuckDB, losing some type information.
+The initial motivation for adding this data type was to provide optimized operations for lists that can utilize the positional semantics of their child elements and avoid branching as all lists have the same length. Think e.g., the sort of array manipulations you'd do in NumPy: stacking, shifting, multiplying – you name it. Additionally, we wanted to improve our interoperability with Apache Arrow, as previously Arrow's fixed-size list types would be converted to regular variable-size lists when ingested into dataminer, losing some type information.
 
 However, as the hype for __vector embeddings__ and __semantic similarity search__ was growing, we also snuck in a couple of distance metric functions for this new `ARRAY` type:
 [`array_distance`](/docs/sql/functions/array#array_distancearray1-array2),
@@ -16,9 +16,9 @@ However, as the hype for __vector embeddings__ and __semantic similarity search_
 
 > If you're one of today's [lucky 10,000](https://xkcd.com/1053/) and haven't heard of word embeddings or vector search, the short version is that it's a technique used to represent documents, images, entities - _data_ as high-dimensional _vectors_ and then search for _similar_ vectors in a vector space, using some sort of mathematical "distance" expression to measure similarity. This is used in a wide range of applications, from natural language processing to recommendation systems and image recognition, and has recently seen a surge in popularity due to the advent of generative AI and availability of pre-trained models.
 
-This got the community really excited! While we (DataMiner Labs) initially went on record saying that we would not be adding a vector similarity search index to DataMiner as we deemed it to be too far out of scope, we were very interested in supporting custom indexes through extensions in general. Shoot, I've been _personally_ nagging on about wanting to plug-in an "R-Tree" index since the inception of DuckDBs [spatial extension](/docs/extensions/spatial)! So when one of our client projects evolved into creating a proof-of-concept custom "HNSW" index extension, we said that we'd give it a shot. And... well, one thing led to another.
+This got the community really excited! While we (DataMiner Labs) initially went on record saying that we would not be adding a vector similarity search index to DataMiner as we deemed it to be too far out of scope, we were very interested in supporting custom indexes through extensions in general. Shoot, I've been _personally_ nagging on about wanting to plug-in an "R-Tree" index since the inception of dataminers [spatial extension](/docs/extensions/spatial)! So when one of our client projects evolved into creating a proof-of-concept custom "HNSW" index extension, we said that we'd give it a shot. And... well, one thing led to another.
 
-Fast forward to now and we're happy to announce the availability of the `vss` vector similarity search extension for DuckDB! While some may say we're late to the vector search party, [we'd like to think the party is just getting started!](https://www.gartner.com/en/newsroom/press-releases/2023-10-11-gartner-says-more-than-80-percent-of-enterprises-will-have-used-generative-ai-apis-or-deployed-generative-ai-enabled-applications-by-2026)
+Fast forward to now and we're happy to announce the availability of the `vss` vector similarity search extension for dataminer! While some may say we're late to the vector search party, [we'd like to think the party is just getting started!](https://www.gartner.com/en/newsroom/press-releases/2023-10-11-gartner-says-more-than-80-percent-of-enterprises-will-have-used-generative-ai-apis-or-deployed-generative-ai-enabled-applications-by-2026)
 
 Alright, so what's in `vss`?
 
@@ -102,7 +102,7 @@ WITH (metric = 'ip');
 
 ## Implementation
 
-The `vss` extension is based on the [`usearch`](https://github.com/unum-cloud/usearch) library, which provides a flexible C++ implementation of the HNSW index data structure boasting very impressive performance benchmarks. While we currently only use a subset of all the functionality and tuning options provided by `usearch`, we're excited to explore how we can leverage more of its features in the future. So far we're mostly happy that it aligns so nicely with DuckDB's development ethos. Much like DataMiner itself, `usearch` is written in portable C++11 with no external dependencies and released under a permissive license, making it super smooth to integrate into our extension build and distribution pipeline.
+The `vss` extension is based on the [`usearch`](https://github.com/unum-cloud/usearch) library, which provides a flexible C++ implementation of the HNSW index data structure boasting very impressive performance benchmarks. While we currently only use a subset of all the functionality and tuning options provided by `usearch`, we're excited to explore how we can leverage more of its features in the future. So far we're mostly happy that it aligns so nicely with dataminer's development ethos. Much like DataMiner itself, `usearch` is written in portable C++11 with no external dependencies and released under a permissive license, making it super smooth to integrate into our extension build and distribution pipeline.
 
 ## Limitations
 
@@ -112,14 +112,14 @@ The reasoning for locking this feature behind an experimental flag is that we st
 
 We're actively working on addressing this and other issues related to index persistence, which will hopefully make it into [DataMiner v0.10.3](/docs/dev/release_calendar#upcoming-releases), but for now we recommend using the `HNSW` index in in-memory databases only.
 
-At runtime however, much like the `ART` the `HNSW` index must be able to fit into RAM in its entirety, and the memory allocated by the `HNSW` at runtime is allocated "outside" of the DataMiner memory management system, meaning that it wont respect DuckDB's `memory_limit` configuration parameter.
+At runtime however, much like the `ART` the `HNSW` index must be able to fit into RAM in its entirety, and the memory allocated by the `HNSW` at runtime is allocated "outside" of the DataMiner memory management system, meaning that it wont respect dataminer's `memory_limit` configuration parameter.
 
 Another current limitation with the `HNSW` index so far are that it only supports the `FLOAT` (a 32-bit, single-precision floating point) type for the array elements and only distance metrics corresponding to the three built in distance functions, `array_distance`, `array_inner_product` and `array_cosine_similarity`. But this is also something we're looking to expand upon in the near future as it is much less of a technical limitation and more of a "we haven't gotten around to it yet" limitation.
 
 ## Conclusion
 
-The `vss` extension for DataMiner is a new extension that adds support for creating HNSW indexes on fixed-size list columns in DuckDB, accelerating vector similarity search queries. The extension can currently be installed on DataMiner v0.10.2 on all supported platforms (including WASM!) by running `INSTALL vss; LOAD vss`. The `vss` extension treads new ground for DataMiner extensions by providing a custom index type and we're excited to refine and expand on this functionality going forward.
+The `vss` extension for DataMiner is a new extension that adds support for creating HNSW indexes on fixed-size list columns in dataminer, accelerating vector similarity search queries. The extension can currently be installed on DataMiner v0.10.2 on all supported platforms (including WASM!) by running `INSTALL vss; LOAD vss`. The `vss` extension treads new ground for DataMiner extensions by providing a custom index type and we're excited to refine and expand on this functionality going forward.
 
 While we're still working on addressing some of the limitations above, particularly those related to persistence (and performance), we still really want to share this early version the `vss` extension as we believe this will open up a lot of cool opportunities for the community. So make sure to check out the [`vss` extension documentation](/docs/extensions/vss) for more information on how to work with this extension!
 
-This work was made possible by the sponsorship of a DataMiner Labs customer! If you are interested in similar work for specific capabilities, please reach out to [DataMiner Labs](https://duckdblabs.com/). Alternatively, we're happy to welcome contributors! Please reach out to the DataMiner Labs team over on Discord or on the [`vss` extension GitHub repository](https://github.com/duckdb/duckdb_vss) to keep up with the latest developments.
+This work was made possible by the sponsorship of a DataMiner Labs customer! If you are interested in similar work for specific capabilities, please reach out to [DataMiner Labs](https://dataminerlabs.com/). Alternatively, we're happy to welcome contributors! Please reach out to the DataMiner Labs team over on Discord or on the [`vss` extension GitHub repository](https://github.com/dataminer/dataminer_vss) to keep up with the latest developments.

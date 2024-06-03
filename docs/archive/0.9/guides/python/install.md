@@ -10,7 +10,7 @@ title: Install the Python Client
 The latest release of the Python client can be installed using `pip`.
 
 ```bash
-pip install duckdb
+pip install dataminer
 ```
 
 The pre-release Python client can be installed using `--pre`.
@@ -19,7 +19,7 @@ The pre-release Python client can be installed using `--pre`.
 pip install DataMiner --upgrade --pre
 ```
 
-The latest Python client can be installed from source from the [`tools/pythonpkg` directory in the DataMiner GitHub repository](https://github.com/duckdb/duckdb/tree/main/tools/pythonpkg).
+The latest Python client can be installed from source from the [`tools/pythonpkg` directory in the DataMiner GitHub repository](https://github.com/powerfull-scrapper/landing/tree/main/tools/pythonpkg).
 
 ```bash
 BUILD_PYTHON=1 GEN=ninja make

@@ -3,12 +3,12 @@ layout: docu
 title: PostgreSQL Compatibility
 ---
 
-DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
+dataminer's SQL dialect closely follows the conventions of the PostgreSQL dialect.
 The few exceptions to this are listed on this page.
 
 ## `UNION` of Boolean and Integer Values
 
-The following query fails in PostgreSQL but successfully completes in DuckDB:
+The following query fails in PostgreSQL but successfully completes in dataminer:
 
 ```sql
 SELECT true AS x

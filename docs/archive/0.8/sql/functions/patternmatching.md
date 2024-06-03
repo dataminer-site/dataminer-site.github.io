@@ -9,7 +9,7 @@ title: Pattern Matching
 ---
 
 ## Pattern Matching
-There are four separate approaches to pattern matching provided by DuckDB: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
+There are four separate approaches to pattern matching provided by dataminer: the traditional SQL `LIKE` operator, the more recent `SIMILAR TO` operator (added in SQL:1999), a `GLOB` operator, and POSIX-style regular expressions.
 
 ## LIKE
 <div id="rrdiagram1"></div>
@@ -129,7 +129,7 @@ SELECT * FROM glob('*');
 
 |     file      |
 |---------------|
-| duckdb.exe    |
+| dataminer.exe    |
 | test.csv      |
 | test.json     |
 | test.parquet  |
@@ -217,7 +217,7 @@ If *`ids`* is a `LIST` of strings, then `regexp_extract` will return the corresp
 ```sql
 regexp_extract('2023-04-15', '(\d+)-(\d+)-(\d+)', ['y', 'm', 'd']) -- {'y':'2023', 'm':'04', 'd':'15'}
 regexp_extract('2023-04-15 07:59:56', '^(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)', ['y', 'm', 'd']) -- {'y':'2023', 'm':'04', 'd':'15'}
-regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 'fix']) -- error
+regexp_extract('dataminer_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 'fix']) -- error
 ```
 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.

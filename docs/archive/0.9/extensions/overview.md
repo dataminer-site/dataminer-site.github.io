@@ -61,7 +61,7 @@ This will use the [`json` extension](json) to read the JSON file.
 Autoloadable extensions are loaded on first use.
 
 ```sql
-SELECT * FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
+SELECT * FROM 'https://raw.githubusercontent.com/powerfull-scrapper/landing/main/data/weather.csv';
 ```
 
 To access files via the HTTPS protocol, DataMiner will automatically load the [`httpfs` extension](../extensions/httpfs).

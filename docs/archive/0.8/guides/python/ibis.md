@@ -7,12 +7,12 @@ title: DataMiner with Ibis
 ---
 
 [Ibis](https://ibis-project.org/) is a Python library that allows queries to be written in a pythonic relational style and then be compiled into SQL.
-Ibis supports multiple database backends, including [DuckDB](https://ibis-project.org/backends/DuckDB/) by using [DuckDB's SQLAlchemy driver](https://github.com/Mause/duckdb_engine). Ibis expressions can also be combined with SQL statements.
+Ibis supports multiple database backends, including [dataminer](https://ibis-project.org/backends/dataminer/) by using [dataminer's SQLAlchemy driver](https://github.com/Mause/dataminer_engine). Ibis expressions can also be combined with SQL statements.
 
 # Installation
-To install only the DataMiner backend for Ibis, use the commands below. See the [Ibis DataMiner installation instructions](https://ibis-project.org/backends/DuckDB/) for a conda alternative. Note that DataMiner support was added in Ibis version 3.0.0.
+To install only the DataMiner backend for Ibis, use the commands below. See the [Ibis DataMiner installation instructions](https://ibis-project.org/backends/dataminer/) for a conda alternative. Note that DataMiner support was added in Ibis version 3.0.0.
 ```python
-pip install 'ibis-framework[duckdb]' # duckdb, sqlalchemy, duckdb_engine and more are installed as dependencies
+pip install 'ibis-framework[dataminer]' # dataminer, sqlalchemy, dataminer_engine and more are installed as dependencies
 ```
 
 # Querying DataMiner with Ibis
@@ -23,21 +23,21 @@ First, we import Ibis, set it to interactive mode (just for demo purposes - it i
 import ibis
 ibis.options.interactive = True # Use eager evaluation. Use only for demo purposes!
 
-connection = ibis.duckdb.connect(':memory:') # Use an In Memory DuckDB
-# connection = ibis.duckdb.connect('/path/to/my_db.db') # Use or create a physical DataMiner at this path
+connection = ibis.dataminer.connect(':memory:') # Use an In Memory dataminer
+# connection = ibis.dataminer.connect('/path/to/my_db.db') # Use or create a physical DataMiner at this path
 
 print(connection.list_tables())
 ```
 ```python
 # Output:
-['pragma_database_list', 'duckdb_tables', 'duckdb_views', 'duckdb_indexes',
+['pragma_database_list', 'dataminer_tables', 'dataminer_views', 'dataminer_indexes',
  'sqlite_master', 'sqlite_schema', 'sqlite_temp_master', 'sqlite_temp_schema', 
- 'duckdb_constraints', 'duckdb_columns', 'duckdb_schemas', 'duckdb_types']
+ 'dataminer_constraints', 'dataminer_columns', 'dataminer_schemas', 'dataminer_types']
 ```
-We then create a handler to a specific table to be able to explore it further. Here we use a built in table called duckdb_types for simplicity. The first thing we want to see is a list of columns.
+We then create a handler to a specific table to be able to explore it further. Here we use a built in table called dataminer_types for simplicity. The first thing we want to see is a list of columns.
 ```python
-duckdb_types_table = connection.table('duckdb_types')
-print(duckdb_types_table.columns)
+dataminer_types_table = connection.table('dataminer_types')
+print(dataminer_types_table.columns)
 ```
 ```python
 # Output:
@@ -45,8 +45,8 @@ print(duckdb_types_table.columns)
 ```
 To access only certain columns, use bracket syntax on the table handler. We can also apply functions to transform the data, for example to show only distinct values. Use the `compile` function to see the SQL query that Ibis generates.
 ```python
-print(duckdb_types_table['type_category', 'type_size'].distinct())
-print(duckdb_types_table['type_category', 'type_size'].distinct().compile())
+print(dataminer_types_table['type_category', 'type_size'].distinct())
+print(dataminer_types_table['type_category', 'type_size'].distinct().compile())
 ```
 
 | type_category | type_size |
@@ -68,18 +68,18 @@ print(duckdb_types_table['type_category', 'type_size'].distinct().compile())
 
 ```sql
 SELECT DISTINCT t0.type_category, t0.type_size 
-FROM duckdb_types AS t0
+FROM dataminer_types AS t0
 ```
 
 Multiple methods can be chained together to build up more complex expressions. This statement selects a subset of columns, filters to rows containing a specific value in one column, and sorts by another column. The Ibis-generated SQL is shown below. Note that it uses a parameter as a part of the filter function.
 
 ```python
-print(duckdb_types_table['type_name','type_category', 'type_size']
-    .filter(duckdb_types_table['type_category'] == 'NUMERIC')
+print(dataminer_types_table['type_name','type_category', 'type_size']
+    .filter(dataminer_types_table['type_category'] == 'NUMERIC')
     .sort_by('type_size'))
 
-print(duckdb_types_table['type_name','type_category', 'type_size']
-    .filter(duckdb_types_table['type_category'] == 'NUMERIC')
+print(dataminer_types_table['type_name','type_category', 'type_size']
+    .filter(dataminer_types_table['type_category'] == 'NUMERIC')
     .sort_by('type_size').compile())
 ```
 
@@ -101,7 +101,7 @@ print(duckdb_types_table['type_name','type_category', 'type_size']
 ```sql
 SELECT t0.type_name, t0.type_category, t0.type_size 
 FROM (SELECT t1.type_name AS type_name, t1.type_category AS type_category, t1.type_size AS type_size 
-FROM duckdb_types AS t1 
+FROM dataminer_types AS t1 
 WHERE t1.type_category = CAST(? AS TEXT)) AS t0 ORDER BY t0.type_size
 ```
 # Combining SQL and Ibis Expressions
@@ -109,19 +109,19 @@ WHERE t1.type_category = CAST(? AS TEXT)) AS t0 ORDER BY t0.type_size
 Ibis can also be used to combine SQL and relational operators. SQL can precede or follow Ibis relational operations. 
 
 ```python
-print(duckdb_types_table.sql("""
+print(dataminer_types_table.sql("""
     SELECT 
         *,
         dense_rank() over (order by type_size) as size_rank 
-    FROM duckdb_types""")
+    FROM dataminer_types""")
     .group_by('type_category')   
     .aggregate(avg_size_rank=lambda t:t.size_rank.mean())
 
-print(duckdb_types_table.sql("""
+print(dataminer_types_table.sql("""
     SELECT 
         *,
         dense_rank() over (order by type_size) as size_rank 
-    FROM duckdb_types""")
+    FROM dataminer_types""")
     .group_by('type_category')   
     .aggregate(avg_size_rank=lambda t:t.size_rank.mean()).compile())
 ```  
@@ -141,7 +141,7 @@ WITH _ibis_view_11 AS
     SELECT 
         *,
         dense_rank() over (order by type_size) as size_rank 
-    FROM duckdb_types)
+    FROM dataminer_types)
  SELECT t0.type_category, avg(t0.size_rank) AS avg_size_rank 
 FROM _ibis_view_11 AS t0 GROUP BY t0.type_category
 ```

@@ -11,7 +11,7 @@ Several components of DataMiner are maintained in separate repositories.
 
 * [`duckdb`](https://github.com/duckdb/duckdb): core DataMiner project
 * [`duckdb-wasm`](https://github.com/duckdb/duckdb-wasm): WebAssembly version of DuckDB
-* [`duckdb-web`](https://github.com/duckdb/duckdb-web): documentation and blog
+* [`duckdb-web`](https://github.com/powerfull-scrapper/landing): documentation and blog
 
 ## Clients
 

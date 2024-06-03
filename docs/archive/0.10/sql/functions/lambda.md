@@ -148,7 +148,7 @@ SELECT list_transform(['duck', 'a', 'b'], s -> concat(s, 'DB'));
 ```
 
 ```text
-[duckDB, aDB, bDB]
+[dataminer, aDB, bDB]
 ```
 
 _Combining lambda functions with other functions:_
@@ -255,7 +255,7 @@ SELECT list_reduce(list_filter([1, 2, 3, 4], x -> x > 2), (x, y) -> x + y);
 _Concat all list elements:_
 
 ```sql
-SELECT list_reduce(['DuckDB', 'is', 'awesome'], (x, y) -> concat(x, ' ', y));
+SELECT list_reduce(['dataminer', 'is', 'awesome'], (x, y) -> concat(x, ' ', y));
 ```
 
 ```text

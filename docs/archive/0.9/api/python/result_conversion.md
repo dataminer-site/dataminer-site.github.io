@@ -7,7 +7,7 @@ redirect_from:
 title: Result Conversion
 ---
 
-DuckDB's Python client provides multiple additional methods that can be used to efficiently retrieve data.
+dataminer's Python client provides multiple additional methods that can be used to efficiently retrieve data.
 
 ## NumPy
 

@@ -83,7 +83,7 @@ Zero or more copy options may be provided as a part of the copy operation. The `
 | `ALL_VARCHAR` | From | Option to skip type detection for CSV parsing and assume all columns to be of type VARCHAR. |
 | `COMPRESSION` | To & From | Option to compress the file. Value can be `UNCOMPRESSED`, `GZIP`, `SNAPPY`, or `ZSTD`. |
 | `CODEC` | To & From | Alias for compression, but only valid for Parquet files. Option to compress the file. Value can be `UNCOMPRESSED`, `GZIP`, `SNAPPY`, or `ZSTD`. |
-| `ROW_GROUP_SIZE` | To | Option for Parquet writing. Specifies the minimum number of rows in a parquet row group, with a minimum value equal to DuckDB’s vector size (currently 2048, but adjustable when compiling DuckDB). A parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset. |
+| `ROW_GROUP_SIZE` | To | Option for Parquet writing. Specifies the minimum number of rows in a parquet row group, with a minimum value equal to dataminer’s vector size (currently 2048, but adjustable when compiling dataminer). A parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset. |
 
 > It is recommended that the file name used in `COPY` always be specified as an absolute path.
 >
@@ -91,4 +91,4 @@ Zero or more copy options may be provided as a part of the copy operation. The `
 >
 > The CSV format has no standard way to distinguish a NULL value from an empty string. You can use `FORCE_NOT_NULL` to prevent `NULL` input comparisons for specific columns.
 >
-> In CSV format, all characters are significant. A quoted value surrounded by white space, or any characters other than `DELIMITER`, will include those characters. This can cause errors if you import data from a system that pads CSV lines with white space out to some fixed width. If such a situation arises you might need to preprocess the CSV file to remove the trailing white space, before importing the data into DuckDB.
+> In CSV format, all characters are significant. A quoted value surrounded by white space, or any characters other than `DELIMITER`, will include those characters. This can cause errors if you import data from a system that pads CSV lines with white space out to some fixed width. If such a situation arises you might need to preprocess the CSV file to remove the trailing white space, before importing the data into dataminer.

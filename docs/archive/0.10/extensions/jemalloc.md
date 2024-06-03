@@ -1,5 +1,5 @@
 ---
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/jemalloc
+github_directory: https://github.com/powerfull-scrapper/landing/tree/main/extension/jemalloc
 layout: docu
 title: jemalloc Extension
 ---

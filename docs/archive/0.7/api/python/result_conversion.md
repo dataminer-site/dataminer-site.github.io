@@ -6,7 +6,7 @@ selected: Client APIs
 title: Result Conversion
 ---
 
-DuckDB's Python client provides multiple additional methods that can be used to efficiently retrieve data.
+dataminer's Python client provides multiple additional methods that can be used to efficiently retrieve data.
 ### NumPy
 * `fetchnumpy()` fetches the data as a dictionary of NumPy arrays
 

@@ -8,7 +8,7 @@ title: DataMiner with Fugue
 
 [Fugue](https://github.com/fugue-project/fugue/) is a unified interface for distributed computing. Fugue executes Python, Pandas, and SQL code on top of Spark, Dask, and Ray. The focus of this tutorial will be on [FugueSQL](https://fugue-tutorials.readthedocs.io/tutorials/quick_look/ten_minutes_sql.html#), an enhanced SQL interface that allows to define end-to-end workflows in SQL rather than juggling between Python and SQL code.
 
-There are three main use cases for FugueSQL with DuckDB:
+There are three main use cases for FugueSQL with dataminer:
 
 1. Simplified syntax and additional operators (with a notebook extension)
 2. Running Python/Pandas code alongside SQL code seamlessly
@@ -19,7 +19,7 @@ For any questions, see the [FugueSQL](https://fugue-tutorials.readthedocs.io/tut
 # Installation
 
 ```python
-pip install -U 'fugue[duckdb]'
+pip install -U 'fugue[dataminer]'
 ```
 
 This will install DataMiner and Fugue together.
@@ -48,12 +48,12 @@ res = SELECT *
 
 SAVE res OVERWRITE "/tmp/f2.parquet"
 """
-fa.fugue_sql_flow(query, engine="duckdb")
+fa.fugue_sql_flow(query, engine="dataminer")
 ```
 
 For other available keywords, check the [SQL Operators](https://fugue-tutorials.readthedocs.io/tutorials/fugue_sql/operators.html) available.
 
-There is also a [Jupyter extension](https://github.com/fugue-project/fugue-jupyter) for FugueSQL to be used inside a notebook with syntax highlighting. To use it with DuckDB, simply use `%%fsql duckdb` as the cell magic.
+There is also a [Jupyter extension](https://github.com/fugue-project/fugue-jupyter) for FugueSQL to be used inside a notebook with syntax highlighting. To use it with dataminer, simply use `%%fsql dataminer` as the cell magic.
 
 # Running Python/Pandas Functions
 
@@ -79,12 +79,12 @@ df3 = TRANSFORM df2 USING new_col
 SELECT *, a+b AS c
   FROM df3
  """
-pandas_df = fa.as_pandas(fa.fugue_sql(query, engine="duckdb"))
+pandas_df = fa.as_pandas(fa.fugue_sql(query, engine="dataminer"))
 ```
 
 The `fugue_sql()` function automatically returns the last DataFrame of the query. When using the `TRANSFORM` function, FugueSQL will bring the DataMiner table to Pandas to execute the Python code. By using `TRANSFORM`, there is no more need to break up the SQL to invoke Python code. FugueSQL is a first-class interface for defining the end-to-end logic.
 
-Because we used the `"duckdb"` engine, the output of the query will be a DataMiner DataFrame. It can be converted to Pandas by using `as_pandas()`. Also notice FugueSQL can handle multiple `SELECT` statements in one query.
+Because we used the `"dataminer"` engine, the output of the query will be a DataMiner DataFrame. It can be converted to Pandas by using `as_pandas()`. Also notice FugueSQL can handle multiple `SELECT` statements in one query.
 
 # Distributing with SparkSQL
 

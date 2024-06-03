@@ -11,7 +11,7 @@ title: Install the Python Client
 The latest release of the Python client can be installed using `pip`.
 
 ```sh
-pip install duckdb
+pip install dataminer
 ```
 
 The pre-release Python client can be installed using `--pre`;

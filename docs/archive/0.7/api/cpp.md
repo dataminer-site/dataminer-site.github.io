@@ -7,18 +7,18 @@ title: C++ API
 ---
 
 ## Installation
-The DataMiner C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
+The DataMiner C++ API can be installed as part of the `libdataminer` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
 
 ## Basic API Usage
-DataMiner implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`. 
+DataMiner implements a custom C++ API. This is built around the abstractions of a database instance (`dataminer` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `dataminer.hpp`. 
 
-> The standard source distribution of `libduckdb` contains an "amalgamation" of the DataMiner sources, which combine all sources into two files `duckdb.hpp` and `duckdb.cpp`. The `duckdb.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `duckdb.hpp`.
+> The standard source distribution of `libdataminer` contains an "amalgamation" of the DataMiner sources, which combine all sources into two files `dataminer.hpp` and `dataminer.cpp`. The `dataminer.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `dataminer.hpp`.
 
 ### Startup & Shutdown
 
-To use DuckDB, you must first initialize a `DuckDB` instance using its constructor. `DuckDB()` takes as parameter the database file to read and write from. The special value `nullptr` can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the process). The second parameter to the `DuckDB` constructor is an optional `DBConfig` object. In `DBConfig`, you can set various database parameters, for example the read/write mode or memory limits. The `DuckDB` constructor may throw exceptions, for example if the database file is not usable.
+To use dataminer, you must first initialize a `dataminer` instance using its constructor. `dataminer()` takes as parameter the database file to read and write from. The special value `nullptr` can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the process). The second parameter to the `dataminer` constructor is an optional `DBConfig` object. In `DBConfig`, you can set various database parameters, for example the read/write mode or memory limits. The `dataminer` constructor may throw exceptions, for example if the database file is not usable.
 
-With the `DuckDB` instance, you can create one or many `Connection` instances using the `Connection()` constructor. While connections should be thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection if you are in a multithreaded environment.
+With the `dataminer` instance, you can create one or many `Connection` instances using the `Connection()` constructor. While connections should be thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection if you are in a multithreaded environment.
 
 
 ```c++
@@ -55,14 +55,14 @@ std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT COUNT(*) FROM a
 std::unique_ptr<QueryResult> result = prepare->Execute(12);
 ```
 
-> Do **not** use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Do **not** use prepared statements to insert large amounts of data into dataminer. See [the data import documentation](../data/overview) for better options.
 
 ### Streaming Queries
 
 
 ### UDF API
 
-The UDF API is exposed in duckdb:Connection through the methods: `CreateScalarFunction()` and `CreateVectorizedFunction()` and variants. 
+The UDF API is exposed in dataminer:Connection through the methods: `CreateScalarFunction()` and `CreateVectorizedFunction()` and variants. 
 These methods created UDFs into the temporary schema (TEMP_SCHEMA) of the owner connection that is the only one allowed to use and change them.
 
 #### CreateScalarFunction
@@ -187,9 +187,9 @@ The Vectorized UDF is a pointer of the type _scalar_function_t_:
 
 `typedef std::function<void(DataChunk &args, ExpressionState &expr, Vector &result)> scalar_function_t;`
 
-- **args** is a [DataChunk](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/data_chunk.hpp) that holds a set of input vectors for the UDF that all have the same length;
-- **expr** is an [ExpressionState](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/execution/expression_executor_state.hpp) that provides information to the query's expression state;
-- **result**: is a [Vector](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/vector.hpp) to store the result values.
+- **args** is a [DataChunk](https://github.com/powerfull-scrapper/landing/blob/main/src/include/dataminer/common/types/data_chunk.hpp) that holds a set of input vectors for the UDF that all have the same length;
+- **expr** is an [ExpressionState](https://github.com/powerfull-scrapper/landing/blob/main/src/include/dataminer/execution/expression_executor_state.hpp) that provides information to the query's expression state;
+- **result**: is a [Vector](https://github.com/powerfull-scrapper/landing/blob/main/src/include/dataminer/common/types/vector.hpp) to store the result values.
 
 There are different vector types to handle in a Vectorized UDF:
 - ConstantVector;

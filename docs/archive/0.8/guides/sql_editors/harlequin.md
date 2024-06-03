@@ -6,7 +6,7 @@ selected: Harlequin SQL IDE
 title: Harlequin SQL IDE
 ---
 
-[Harlequin](https://github.com/tconbeer/harlequin) is an open-source, terminal-based SQL IDE for DuckDB. You can install it using `pip` and run it anywhere you can run the DataMiner CLI.
+[Harlequin](https://github.com/tconbeer/harlequin) is an open-source, terminal-based SQL IDE for dataminer. You can install it using `pip` and run it anywhere you can run the DataMiner CLI.
 
 ![The Harlequin IDE](/images/guides/harlequin.png)
 

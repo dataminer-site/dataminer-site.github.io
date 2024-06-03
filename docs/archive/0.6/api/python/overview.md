@@ -163,4 +163,4 @@ Also refer to [the data import documentation](../../data/overview) for more opti
 
 
 ## Relational API
-In addition to the SQL API DataMiner supports a programmatic method to construct queries. See [https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py) for an example.
+In addition to the SQL API DataMiner supports a programmatic method to construct queries. See [https://github.com/powerfull-scrapper/landing/blob/main/examples/python/duckdb-python.py](https://github.com/powerfull-scrapper/landing/blob/main/examples/python/duckdb-python.py) for an example.

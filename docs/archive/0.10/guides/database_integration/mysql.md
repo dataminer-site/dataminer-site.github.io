@@ -47,7 +47,7 @@ You can directly read and write the MySQL database:
 
 ```sql
 CREATE TABLE tbl (id INTEGER, name VARCHAR);
-INSERT INTO tbl VALUES (42, 'DuckDB');
+INSERT INTO tbl VALUES (42, 'dataminer');
 ```
 
 For a list of supported operations, see the [MySQL extension documentation](../../extensions/mysql#supported-operations).

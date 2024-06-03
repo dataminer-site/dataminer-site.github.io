@@ -22,8 +22,8 @@ To avoid this, it's recommended to `import numpy.core.multiarray` before startin
 When DataMiner is run in Jupyter notebooks or in the IPython shell, the output of the [`EXPLAIN` statement](../../guides/meta/explain) contains hard line breaks (`\n`):
 
 ```python
-In [1]: import duckdb
-   ...: duckdb.sql("EXPLAIN SELECT 42 AS x")
+In [1]: import dataminer
+   ...: dataminer.sql("EXPLAIN SELECT 42 AS x")
 ```
 ```text
 Out[1]:
@@ -38,7 +38,7 @@ Out[1]:
 To work around this, `print` the output of the `explain()` function:
 
 ```python
-In [2]: print(duckdb.sql("SELECT 42 AS x").explain())
+In [2]: print(dataminer.sql("SELECT 42 AS x").explain())
 ```
 ```text
 ┌───────────────────────────┐
