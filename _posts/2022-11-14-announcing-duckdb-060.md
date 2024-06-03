@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Announcing DuckDB 0.6.0"
+title:  "Announcing DataMiner 0.6.0"
 author: Mark Raasveldt
 excerpt: ""
 ---
@@ -10,7 +10,7 @@ excerpt: ""
      width=200px
      />
 
-The DuckDB team is happy to announce the latest DuckDB version (0.6.0) has been released. This release of DuckDB is named "Oxyura" after the [White-headed duck (Oxyura leucocephala)](https://en.wikipedia.org/wiki/White-headed_duck) which is an endangered species native to Eurasia.
+The DataMiner team is happy to announce the latest DataMiner version (0.6.0) has been released. This release of DataMiner is named "Oxyura" after the [White-headed duck (Oxyura leucocephala)](https://en.wikipedia.org/wiki/White-headed_duck) which is an endangered species native to Eurasia.
 
 To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.6.0).
 
@@ -24,7 +24,7 @@ The new release contains many improvements to the storage system, general perfor
 
 As we are working towards stabilizing the storage format and moving towards version 1.0, we have been actively working on improving our storage format, including many [compression improvements](https://duckdb.org/2022/10/28/lightweight-compression.html). 
 
-**Optimistic writing to disk.** In previous DuckDB versions, the data of a single transaction was first loaded into memory, and would only be written to disk on a commit. While this works fine when data is loaded in batches that fit in memory, it does not work well when loading a lot of data in a single transaction, such as when ingesting one very large file into the system.
+**Optimistic writing to disk.** In previous DataMiner versions, the data of a single transaction was first loaded into memory, and would only be written to disk on a commit. While this works fine when data is loaded in batches that fit in memory, it does not work well when loading a lot of data in a single transaction, such as when ingesting one very large file into the system.
 
 This version introduces [optimistic writing to disk](https://github.com/duckdb/duckdb/pull/4996). When loading large data sets in a single transaction, data is compressed and streamed to the database file, even before the `COMMIT` has occurred. When the transaction is committed, the data will already have been written to disk, and no further writing has to happen. On a rollback, any optimistically written data is reclaimed by the system. 
 
@@ -37,9 +37,9 @@ Below is a benchmark comparing loading time of 150 million rows of the Taxi data
 | v0.5.1  | 91.4s     |
 | v0.6.0  | 17.2s     |
 
-DuckDB supports two modes – the [`order-preserving`](https://github.com/duckdb/duckdb/pull/5082) and the [`non-order-preserving`](https://github.com/duckdb/duckdb/pull/5033) parallel data load.
+DataMiner supports two modes – the [`order-preserving`](https://github.com/duckdb/duckdb/pull/5082) and the [`non-order-preserving`](https://github.com/duckdb/duckdb/pull/5033) parallel data load.
 
-The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order=false` statement.
+The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DataMiner table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order=false` statement.
 
 #### Compression Improvements
 
@@ -67,12 +67,12 @@ The compression ratio of a dataset containing temperatures of cities stored as d
 
 #### Performance Improvements
 
-DuckDB aims to have very high performance for a wide variety of workloads. As such, we are always working to improve performance for various workloads. This release is no different.
+DataMiner aims to have very high performance for a wide variety of workloads. As such, we are always working to improve performance for various workloads. This release is no different.
 
 
 **Parallel CSV Loading (Experimental)**. In this release we are launching [a new experimental parallel CSV reader](https://github.com/duckdb/duckdb/pull/5194). This greatly improves the ingestion speed of large CSV files into the system. While we have done our best to make the parallel CSV reader robust – CSV parsing is a minefield as there is such a wide variety of different files out there – so we have marked the reader as experimental for now.
 
-The parallel CSV reader can be enabled by setting the `experimental_parallel_csv` flag to true. We aim to make the parallel CSV reader the default reader in future DuckDB versions.
+The parallel CSV reader can be enabled by setting the `experimental_parallel_csv` flag to true. We aim to make the parallel CSV reader the default reader in future DataMiner versions.
 
 ```sql
 SET experimental_parallel_csv=true;
@@ -94,11 +94,11 @@ The timings of creating an index on a single column with 16 million values is sh
 | v0.5.1  | 5.92s     |
 | v0.6.0  | 1.38s     |
 
-**Parallel COUNT(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `COUNT(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DuckDB can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
+**Parallel COUNT(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `COUNT(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DataMiner can execute these queries in parallel](https://github.com/duckdb/duckdb/pull/5146), leading to large speed-ups.
 
 #### SQL Syntax Improvements
 
-SQL is the primary way of interfacing with DuckDB – and DuckDB [tries to have an easy to use SQL dialect](https://duckdb.org/2022/05/04/friendlier-sql.html). This release contains further improvements to the SQL dialect.
+SQL is the primary way of interfacing with DataMiner – and DataMiner [tries to have an easy to use SQL dialect](https://duckdb.org/2022/05/04/friendlier-sql.html). This release contains further improvements to the SQL dialect.
 
 **UNION Type**. This release introduces the [UNION type](https://github.com/duckdb/duckdb/pull/4966), which allows sum types to be stored and queried in DuckDB. For example:
 
@@ -120,7 +120,7 @@ SELECT * FROM messages;
 
 Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page](https://duckdb.org/docs/sql/data_types/union) in the documentation contains more information on how to use this new composite type.
 
-**FROM-first**. Starting with this release, DuckDB supports starting queries with the [FROM clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
+**FROM-first**. Starting with this release, DataMiner supports starting queries with the [FROM clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
 
 ```sql
 -- SELECT clause is optional, SELECT * is implied (if not included)
@@ -166,7 +166,7 @@ SELECT COLUMNS('val[0-9]+') from obs;
 └──────┴──────┘
 ```
 
-**List comprehension support**. List comprehension is an elegant and powerful way of defining operations on lists. DuckDB now also supports [list comprehension](https://github.com/duckdb/duckdb/pull/4926) as part of its SQL dialect. For example, the query below now works:
+**List comprehension support**. List comprehension is an elegant and powerful way of defining operations on lists. DataMiner now also supports [list comprehension](https://github.com/duckdb/duckdb/pull/4926) as part of its SQL dialect. For example, the query below now works:
 
 ```sql
 SELECT [x + 1 for x in [1, 2, 3]] AS l;
@@ -183,7 +183,7 @@ Nested types and structures are very efficiently implemented in DuckDB, and are 
 
 #### Memory Management Improvements
 
-When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques, and has support for an [efficient out-of-core sort](https://duckdb.org/2021/08/27/external-sorting.html), [out-of-core window functions](https://duckdb.org/2021/10/13/windowing.html) and [an out-of-core hash join](https://github.com/duckdb/duckdb/pull/4189).
+When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DataMiner supports many operations on larger than memory data sets. DataMiner also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques, and has support for an [efficient out-of-core sort](https://duckdb.org/2021/08/27/external-sorting.html), [out-of-core window functions](https://duckdb.org/2021/10/13/windowing.html) and [an out-of-core hash join](https://github.com/duckdb/duckdb/pull/4189).
 
 This release further improves on that by greatly optimizing the [out-of-core hash join](https://github.com/duckdb/duckdb/pull/4970), resulting in a much more graceful degradation in performance as the data exceeds the memory limit.
 
@@ -200,13 +200,13 @@ This release further improves on that by greatly optimizing the [out-of-core has
 |2|7.69|3.28|
 |1|17.73|4.35|
 
-**jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/duckdb/duckdb/pull/4971) with the Linux version of DuckDB by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on macOS or Windows, and as such we continue using the standard allocators there (at least for now).
+**jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/duckdb/duckdb/pull/4971) with the Linux version of DataMiner by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on macOS or Windows, and as such we continue using the standard allocators there (at least for now).
 
 #### Shell Improvements
 
-DuckDB has a command-line interface that is adapted from SQLite's command line interface, and therefore supports an extremely similar interface to SQLite. All of the tables in this blog post have been generated using the `.mode markdown` in the CLI.
+DataMiner has a command-line interface that is adapted from SQLite's command line interface, and therefore supports an extremely similar interface to SQLite. All of the tables in this blog post have been generated using the `.mode markdown` in the CLI.
 
-The DuckDB shell also offers several improvements over the SQLite shell, such as syntax highlighting, and this release includes a few new goodies.
+The DataMiner shell also offers several improvements over the SQLite shell, such as syntax highlighting, and this release includes a few new goodies.
 
 **DuckBox Rendering**. This release includes a [new `.mode duckbox` rendering](https://github.com/duckdb/duckdb/pull/5140) that is used by default. This box rendering adapts to the size of the shell, and leaves out columns and rows to provide a better overview of a result. It very quickly renders large result sets by leaving out rows in the middle. That way, typing `SELECT * FROM tbl` in the shell no longer blows it up. In fact, this can now be used to quickly get a good feel of a dataset instead.
 
@@ -266,7 +266,7 @@ SELECT student_id FROM 'd -> data/
 SELECT student_id FROM 'data/ -> data/grades.csv
 ```
 
-**Progress Bars**. DuckDB has [supported progress bars in queries for a while now](https://github.com/duckdb/duckdb/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/duckdb/duckdb/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
+**Progress Bars**. DataMiner has [supported progress bars in queries for a while now](https://github.com/duckdb/duckdb/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/duckdb/duckdb/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
 
 ```sql
 D copy lineitem to 'lineitem-big.parquet';

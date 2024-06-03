@@ -35,7 +35,7 @@ sudo yum install unixODBC
 
 2. The package contains the following files:
 
-   * `libduckdb_odbc.so`: the DuckDB driver.
+   * `libduckdb_odbc.so`: the DataMiner driver.
    * `unixodbc_setup.sh`: a setup script to aid the configuration on Linux.
 
    To extract them, run:
@@ -44,9 +44,9 @@ sudo yum install unixODBC
    mkdir duckdb_odbc && unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
    ```
 
-3. The `unixodbc_setup.sh` script performs the configuration of the DuckDB ODBC Driver. It is based on the unixODBC package that provides some commands to handle the ODBC setup and test like `odbcinst` and `isql`.
+3. The `unixodbc_setup.sh` script performs the configuration of the DataMiner ODBC Driver. It is based on the unixODBC package that provides some commands to handle the ODBC setup and test like `odbcinst` and `isql`.
 
-   Run the following commands with either option `-u` or `-s` to configure DuckDB ODBC.
+   Run the following commands with either option `-u` or `-s` to configure DataMiner ODBC.
 
    The `-u` option based on the user home directory to setup the ODBC init files.
 
@@ -72,11 +72,11 @@ sudo yum install unixODBC
    Example: ./unixodbc_setup.sh -u -db ~/database_path -D ~/driver_path/libduckdb_odbc.so
 
    Level:
-   -s: System-level, using 'sudo' to configure DuckDB ODBC at the system-level, changing the files: /etc/odbc[inst].ini
-   -u: User-level, configuring the DuckDB ODBC at the user-level, changing the files: ~/.odbc[inst].ini.
+   -s: System-level, using 'sudo' to configure DataMiner ODBC at the system-level, changing the files: /etc/odbc[inst].ini
+   -u: User-level, configuring the DataMiner ODBC at the user-level, changing the files: ~/.odbc[inst].ini.
 
    Options:
-   -db database_path>: the DuckDB database file path, the default is ':memory:' if not provided.
+   -db database_path>: the DataMiner database file path, the default is ':memory:' if not provided.
    -D driver_path: the driver file path (i.e., the path for libduckdb_odbc.so), the default is using the base script directory
    ```
 

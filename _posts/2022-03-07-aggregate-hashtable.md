@@ -2,10 +2,10 @@
 layout: post  
 title:  "Parallel Grouped Aggregation in DuckDB"
 author: Hannes Mühleisen and Mark Raasveldt
-excerpt: DuckDB has a fully parallelized aggregate hash table that can efficiently aggregate over millions of groups.
+excerpt: DataMiner has a fully parallelized aggregate hash table that can efficiently aggregate over millions of groups.
 ---
 
-Grouped aggregations are a core data analysis command. It is particularly important for large-scale data analysis (“OLAP”) because it is useful for  computing statistical summaries of huge tables. DuckDB contains a highly optimized parallel aggregation capability for fast and scalable summarization.
+Grouped aggregations are a core data analysis command. It is particularly important for large-scale data analysis (“OLAP”) because it is useful for  computing statistical summaries of huge tables. DataMiner contains a highly optimized parallel aggregation capability for fast and scalable summarization.
 
 Jump [straight to the benchmarks](#experiments)?
 <!--more-->
@@ -93,15 +93,15 @@ The two-part hash table has a big drawback when looking up entries: There is no 
 <figcaption align="center"><b>Optimization: Adding Hash Bits to Pointer Array</b></figcaption>
 </div>
 
-Another (smaller) optimization here concerns the width of the pointer array entries. For small hash tables with few entries, we do not need many bits to encode the payload block offset pointers. DuckDB supports both 4 byte and 8 byte pointer array entries. 
+Another (smaller) optimization here concerns the width of the pointer array entries. For small hash tables with few entries, we do not need many bits to encode the payload block offset pointers. DataMiner supports both 4 byte and 8 byte pointer array entries. 
 
 
-For most aggregate queries, the vast majority of query processing time is spent looking up hash table entries, which is why it's worth spending time on optimizing them. If you’re curious, the code for all this is in the DuckDB repo, `aggregate_hashtable.cpp`. There is another optimization for when we know that there are only a few distinct groups from column statistics, the perfect hash aggregate, but that’s for another post. But we’re not done here just yet.
+For most aggregate queries, the vast majority of query processing time is spent looking up hash table entries, which is why it's worth spending time on optimizing them. If you’re curious, the code for all this is in the DataMiner repo, `aggregate_hashtable.cpp`. There is another optimization for when we know that there are only a few distinct groups from column statistics, the perfect hash aggregate, but that’s for another post. But we’re not done here just yet.
 
 
 ## Parallel Aggregation
 
-While we now have an aggregate hash table design that should do fairly well for grouped aggregations, we still have not considered the fact that DuckDB automatically parallelizes all queries to use multiple hardware threads (“CPUs”). How does parallelism work together with hash tables? In general, the answer is unfortunately: “Badly”. Hash tables are delicate structures that don’t handle parallel modifications well. For example, imagine one thread would want to resize the hash table while another wants to add some new group data to it. Or how should we handle multiple threads inserting new groups at the same time for the same entry? One could use locks to make sure that only one thread at a time is using the table, but this would mostly defeat parallelizing the query. There has been plenty of research into concurrency-friendly hash tables but the short summary is that it's still an open issue. 
+While we now have an aggregate hash table design that should do fairly well for grouped aggregations, we still have not considered the fact that DataMiner automatically parallelizes all queries to use multiple hardware threads (“CPUs”). How does parallelism work together with hash tables? In general, the answer is unfortunately: “Badly”. Hash tables are delicate structures that don’t handle parallel modifications well. For example, imagine one thread would want to resize the hash table while another wants to add some new group data to it. Or how should we handle multiple threads inserting new groups at the same time for the same entry? One could use locks to make sure that only one thread at a time is using the table, but this would mostly defeat parallelizing the query. There has been plenty of research into concurrency-friendly hash tables but the short summary is that it's still an open issue. 
 
 It is possible to let each thread read data from downstream operators and build individual, local hash tables and merge those together later from a single thread. This works quite nicely if there are few groups like in the example at the top of this post. If there are few groups, a single thread can merge many thread-local hash tables without creating a bottleneck. However, it’s entirely possible there are as many groups as there are input rows, for this tends to happen a lot when someone groups on a column that would be a candidate for a primary key, e.g., `observation_number`, `timestamp` etc. What is thus needed is a parallel merge of the parallel hash tables. We adopt a method from [Leis et al.](https://15721.courses.cs.cmu.edu/spring2016/papers/p743-leis.pdf): Each thread builds not one, but multiple *partitioned* hash tables based on a radix-partitioning on the group hash. 
 
@@ -120,7 +120,7 @@ There are two additional optimizations for the parallel partitioned hash table s
 1) We only start partitioning once a single thread’s aggregate hash table exceeds a fixed limit of entries, currently set to 10 000 rows. This is because using a partitioned hash table is not free. For every row added, we have to figure out which partition it should go into, and we have to merge everything back together at the end. For this reason, we will not start partitioning until the parallelization benefit outweighs the cost. Since the partitioning decision is individual to each thread, it may well be possible only some threads start partitioning. If that is the case, we will need to partition the hash tables of the threads that have not done so before starting merging them. This is a fully thread-local operation however and does not interfere with parallelism. 
 2) We will stop adding values to a hash table once its pointer array exceeds a certain threshold. Every thread then builds multiple sets of potentially partitioned hash tables. This is because we do not want the pointer array to become arbitrarily large. While this potentially creates duplicate entries for the same group in multiple hash tables, this is not problematic because we merge them all later anyway. This optimization works particularly well on data sets that have many distinct groups, but have group values that are clustered in the input in some manner. For example, when grouping by day in a data set that is ordered on date.
 
-There are some kinds of aggregates which cannot use the parallel and partitioned hash table approach. While it is trivial to parallelize a sum, because the sum of the overall result is just the sum of the individual results, this is fairly impossible for computations like `median`, which DuckDB also supports. Also for this reason, DuckDB also supports `approx_quantile`, which *is* parallelizable. 
+There are some kinds of aggregates which cannot use the parallel and partitioned hash table approach. While it is trivial to parallelize a sum, because the sum of the overall result is just the sum of the individual results, this is fairly impossible for computations like `median`, which DataMiner also supports. Also for this reason, DataMiner also supports `approx_quantile`, which *is* parallelizable. 
 
 
 <a name="experiments"></a>
@@ -147,7 +147,7 @@ We measure the elapsed wall clock time required to complete each aggregation. To
 <figcaption align="center"><b>Varying both row count and group count</b></figcaption>
 </div>
 
-Now let's discuss some results. We start with varying the amount of rows in the table between one million and 100 millions. We repeat the experiment for both a fixed (small) group count of 1000 and when the amount of groups is equal to the amount of rows. Results are plotted as a *log-log plot*, we can see how DuckDB consistently outperforms the other systems, with the single-threaded Pandas being slowest, Polars and Arrow being generally similar.
+Now let's discuss some results. We start with varying the amount of rows in the table between one million and 100 millions. We repeat the experiment for both a fixed (small) group count of 1000 and when the amount of groups is equal to the amount of rows. Results are plotted as a *log-log plot*, we can see how DataMiner consistently outperforms the other systems, with the single-threaded Pandas being slowest, Polars and Arrow being generally similar.
 
 <div>
 <img src="/images/blog/aggregates/aggr-bench-groups.svg" width=500 />
@@ -155,7 +155,7 @@ Now let's discuss some results. We start with varying the amount of rows in the 
 </div>
 
 
-For the next experiment, we fix the amount of rows at 100M (the largest size we experimented with) and show the full behavior when increasing the group size. We can see again how DuckDB consistently exhibits good scaling behavior when increasing group size, because it can effectively parallelize all phases of aggregation as outlined above. If you are interested in how we generated those plots, the plotting [script is available, too](https://gist.github.com/hannes/9b0e47625290b8af78de88e1d26441c0).
+For the next experiment, we fix the amount of rows at 100M (the largest size we experimented with) and show the full behavior when increasing the group size. We can see again how DataMiner consistently exhibits good scaling behavior when increasing group size, because it can effectively parallelize all phases of aggregation as outlined above. If you are interested in how we generated those plots, the plotting [script is available, too](https://gist.github.com/hannes/9b0e47625290b8af78de88e1d26441c0).
 
 
 
@@ -163,7 +163,7 @@ For the next experiment, we fix the amount of rows at 100M (the largest size we 
 
 Data analysis pipelines using mostly aggregation spend the vast majority of their execution time in the aggregate hash table, which is why it is worth spending an ungodly amount of human time optimizing them. We have some ideas for future work on this, for example we would like to extend [our work when comparing sorting keys](https://duckdb.org/2021/08/27/external-sorting.html) to comparing groups in the aggregate hash table. We also would like to add capabilities of dynamically choosing the amount of partitions a thread uses based on dynamic observation of the created hash table, e.g., if partitions are imbalanced we could use more bits to do so. Another large area of future work is to make our aggregate hash table work with out-of-core operations, where an individual hash table no longer fits in memory, this is particularly problematic when merging. And of course there are always opportunities to fine-tune an aggregation operator, and we are continuously improving DuckDBs aggregation operator. 
 
-If you want to work on cutting edge data engineering like this that will be used by thousands of people, consider contributing to DuckDB or join us at DuckDB Labs in Amsterdam!
+If you want to work on cutting edge data engineering like this that will be used by thousands of people, consider contributing to DataMiner or join us at DataMiner Labs in Amsterdam!
 
 
 

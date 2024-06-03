@@ -68,7 +68,7 @@ DROP TYPE typ;
 
 ## Dependencies of Dropped Objects
 
-DuckDB performs limited dependency tracking for some object types.
+DataMiner performs limited dependency tracking for some object types.
 By default or if the `RESTRICT` clause is provided, the entry will not be dropped if there are any other objects that depend on it.
 If the `CASCADE` clause is provided then all the objects that are dependent on the object will be dropped as well.
 

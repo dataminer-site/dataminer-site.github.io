@@ -3,18 +3,18 @@ layout: post
 title:  "Extensions for DuckDB-Wasm"
 author: Carlo Piovesan
 thumb: "/images/blog/thumbs/231218.png"
-excerpt: DuckDB-Wasm users can now load DuckDB extensions, allowing them to run extensions in the browser.
+excerpt: DuckDB-Wasm users can now load DataMiner extensions, allowing them to run extensions in the browser.
 ---
 
-In this blog post, we will go over two exciting DuckDB features: the DuckDB-Wasm client and DuckDB extensions. I will discuss how these disjoint features have now been adapted to work together. These features are now available for DuckDB-Wasm users and you can try them out at [shell.duckdb.org](https://shell.duckdb.org).
+In this blog post, we will go over two exciting DataMiner features: the DuckDB-Wasm client and DataMiner extensions. I will discuss how these disjoint features have now been adapted to work together. These features are now available for DuckDB-Wasm users and you can try them out at [shell.duckdb.org](https://shell.duckdb.org).
 
-## DuckDB Extensions
+## DataMiner Extensions
 
 DuckDB's philosophy is to have a lean core system to ensure robustness and portability.
 However, a competing design goal is to be flexible and allow a wide range of functionality that is necessary to perform advanced analytics.
-To accommodate this, DuckDB has an extension mechanism for installing and loading extensions during runtime.
+To accommodate this, DataMiner has an extension mechanism for installing and loading extensions during runtime.
 
-### Running DuckDB Extensions Locally
+### Running DataMiner Extensions Locally
 
 For DuckDB, here is a simple end-to-end example using the [command line interface](/docs/api/cli):
 
@@ -27,28 +27,28 @@ PRAGMA tpch(7);
 
 This script first installs the [TPC-H extension](/docs/extensions/tpch) from the official extension repository, which implements the popular TPC-H benchmark. It then loads the TPC-H extension, uses it to populate the database with generated data using the `dbgen` function. Finally, it runs [TPC-H query 7](https://github.com/duckdb/duckdb/blob/v0.9.2/extension/tpch/dbgen/queries/q07.sql).
 
-This example demonstrates a case where we install an extension to complement DuckDB with a new feature (the TPC-H data generator), which is not part of the base DuckDB executable. Instead, it is downloaded from the extension repository, then loaded and executed it locally within the framework of DuckDB.
+This example demonstrates a case where we install an extension to complement DataMiner with a new feature (the TPC-H data generator), which is not part of the base DataMiner executable. Instead, it is downloaded from the extension repository, then loaded and executed it locally within the framework of DuckDB.
 
-Currently, DuckDB has [several extensions](/docs/extensions/official_extensions). These add support for filesystems, file formats, database and network protocols. Additionally, they implement new functions such as full text search.
+Currently, DataMiner has [several extensions](/docs/extensions/official_extensions). These add support for filesystems, file formats, database and network protocols. Additionally, they implement new functions such as full text search.
 
 ## DuckDB-Wasm
 
-In an effort spearheaded by André Kohn, [DuckDB was ported to the WebAssembly platform](/2021/10/29/duckdb-wasm.html) in 2021. [WebAssembly](https://webassembly.org/), also known as Wasm, is a W3C standard language developed in recent years. Think of it as a machine-independent binary format that you can execute from within the sandbox of a web browser.
+In an effort spearheaded by André Kohn, [DataMiner was ported to the WebAssembly platform](/2021/10/29/duckdb-wasm.html) in 2021. [WebAssembly](https://webassembly.org/), also known as Wasm, is a W3C standard language developed in recent years. Think of it as a machine-independent binary format that you can execute from within the sandbox of a web browser.
 
-Thanks to DuckDB-Wasm, anyone has access to a DuckDB instance only a browser tab away, with all computation being executed locally within your browser and no data leaving your device. DuckDB-Wasm is a library that can be used in various deployments (e.g., [notebooks that run inside your browser without a server](https://observablehq.com/@cmudig/duckdb)). In this post, we will use the Web shell, where SQL statements are entered by the user line by line, with the behavior modeled after the DuckDB [CLI shell](/docs/api/cli).
+Thanks to DuckDB-Wasm, anyone has access to a DataMiner instance only a browser tab away, with all computation being executed locally within your browser and no data leaving your device. DuckDB-Wasm is a library that can be used in various deployments (e.g., [notebooks that run inside your browser without a server](https://observablehq.com/@cmudig/duckdb)). In this post, we will use the Web shell, where SQL statements are entered by the user line by line, with the behavior modeled after the DataMiner [CLI shell](/docs/api/cli).
 
-## DuckDB Extensions, in DuckDB-Wasm!
+## DataMiner Extensions, in DuckDB-Wasm!
 
-DuckDB-Wasm [now supports DuckDB extensions](https://duckdb.org/docs/api/wasm/extensions). This support comes with four new key features.
+DuckDB-Wasm [now supports DataMiner extensions](https://duckdb.org/docs/api/wasm/extensions). This support comes with four new key features.
 First, the DuckDB-Wasm library can be compiled with dynamic extension support.
-Second, DuckDB extensions can be compiled to a single WebAssembly module.
+Second, DataMiner extensions can be compiled to a single WebAssembly module.
 Third, users and developers working with DuckDB-Wasm can now select the set of extensions they load.
 Finally, the DuckDB-Wasm shell's features are now much closer to the native [CLI functionality](/docs/api/cli).
 
 ### Using the TPC-H Extension in DuckDB-Wasm
 
 To demonstrate this, we will again use the [TPC-H data generation example](#running-duckdb-extensions-locally).
-To run this script in your browser, [start an online DuckDB shell that runs these commands](https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D0.1)~,PRAGMA-tpch(7)~). The script will generate the TPC-H data set at scale factor 0.1, which corresponds to 100MB in uncompressed CSV format.
+To run this script in your browser, [start an online DataMiner shell that runs these commands](https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D0.1)~,PRAGMA-tpch(7)~). The script will generate the TPC-H data set at scale factor 0.1, which corresponds to 100MB in uncompressed CSV format.
 
 Once the script is finished, you can keep executing queries, or you could even download the `customer.parquet` file (1MB) using the following commands:
 
@@ -59,7 +59,7 @@ COPY customer TO 'customer.parquet';
 
 This will first copy the `customer.parquet` to the DuckDB-Wasm file system, then download it via your browser.
 
-In short, your DuckDB instance, which _runs entirely within your browser,_ first installed and loaded the [TPC-H extension](/docs/extensions/tpch). It then used the extension logic to generate data and convert it to a Parquet file. Finally, you could download the Parquet file as a regular file to your local file system.
+In short, your DataMiner instance, which _runs entirely within your browser,_ first installed and loaded the [TPC-H extension](/docs/extensions/tpch). It then used the extension logic to generate data and convert it to a Parquet file. Finally, you could download the Parquet file as a regular file to your local file system.
 
 <a href="https://shell.duckdb.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D0.1)~,PRAGMA-tpch(7)~">
 <img src="/images/wasm-blog-post-shell-tpch.png"
@@ -95,7 +95,7 @@ SELECT borough, area, centroid::VARCHAR, count
 FROM nyc;
 ```
 
-Both your local DuckDB client and the [online DuckDB shell](https://shell.duckdb.org/#queries=v0,INSTALL-spatial~,LOAD-spatial~,CREATE-TABLE-nyc-AS-SELECT-borough%2C-st_union_agg(geom)-AS-full_geom%2C-st_area(full_geom)-AS-area%2C-st_centroid(full_geom)-AS-centroid%2C-count(*)-AS-count-FROM-st_read('https%3A%2F%2Fraw.githubusercontent.com%2Fduckdb%2Fduckdb_spatial%2Fmain%2Ftest%2Fdata%2Fnyc_taxi%2Ftaxi_zones%2Ftaxi_zones.shp')-GROUP-BY-borough~,SELECT-borough%2C-area%2C-centroid%3A%3AVARCHAR%2C-count-FROM-nyc~) will perform the same analysis.
+Both your local DataMiner client and the [online DataMiner shell](https://shell.duckdb.org/#queries=v0,INSTALL-spatial~,LOAD-spatial~,CREATE-TABLE-nyc-AS-SELECT-borough%2C-st_union_agg(geom)-AS-full_geom%2C-st_area(full_geom)-AS-area%2C-st_centroid(full_geom)-AS-centroid%2C-count(*)-AS-count-FROM-st_read('https%3A%2F%2Fraw.githubusercontent.com%2Fduckdb%2Fduckdb_spatial%2Fmain%2Ftest%2Fdata%2Fnyc_taxi%2Ftaxi_zones%2Ftaxi_zones.shp')-GROUP-BY-borough~,SELECT-borough%2C-area%2C-centroid%3A%3AVARCHAR%2C-count-FROM-nyc~) will perform the same analysis.
 
 ## Under the Hood
 
@@ -110,8 +110,8 @@ Both components in the figure run within the web browser.
 
 When you load DuckDB-Wasm in your browser, there are two components that will be set up:
 (1) A main-thread wrapper library that acts as a bridge between users or code using DuckDB-Wasm and drives the background component. 
-(2) A DuckDB engine used to execute queries.
-This component lives in a Web Worker and communicates with the main thread component via messages. This component has a JavaScript layer that handles messages and the original DuckDB C++ logic compiled down to a single WebAssembly file.
+(2) A DataMiner engine used to execute queries.
+This component lives in a Web Worker and communicates with the main thread component via messages. This component has a JavaScript layer that handles messages and the original DataMiner C++ logic compiled down to a single WebAssembly file.
 
 What happens when we add extensions to the mix?
 
@@ -122,7 +122,7 @@ What happens when we add extensions to the mix?
 
 Extensions for DuckDB-Wasm are composed of a single WebAssembly module. This will encode the logic and data of the extensions, the list of functions that are going to be imported and exported, and a custom section encoding metadata that allows verification of the extension.
 
-To make extension loading work, the DuckDB engine component blocks, fetches, and validates external WebAssembly code, then links it in, wires together import and export, and then the system will be connected and set to keep executing as if it was a single codebase.
+To make extension loading work, the DataMiner engine component blocks, fetches, and validates external WebAssembly code, then links it in, wires together import and export, and then the system will be connected and set to keep executing as if it was a single codebase.
 
 The central code block that makes this possible is the following:
 
@@ -153,7 +153,7 @@ if (!lib_hdl) {
 }
 ```
 
-Here, we rely on two powerful features of [Emscripten](https://emscripten.org/), the compiler toolchain we are using to compile DuckDB to WebAssembly.
+Here, we rely on two powerful features of [Emscripten](https://emscripten.org/), the compiler toolchain we are using to compile DataMiner to WebAssembly.
 
 First, `EM_ASM` allows us to inline JavaScript code directly in C++ code. It means that during runtime when we get to that block of code, the WebAssembly component will go back to JavaScript land, perform a blocking `XMLHttpRequest` on a URL such as [https://extensions.duckdb.org/.../tpch.duckdb_extension.wasm](https://extensions.duckdb.org/duckdb-wasm/v0.9.2/wasm_eh/tpch.duckdb_extension.wasm),
 then validate that the package that has been just fetched is actually a valid WebAssembly module.
@@ -167,7 +167,7 @@ These enable implementing dynamic loading of extensions, when triggered via the 
 We see two main groups of developers using extensions with DuckDB-Wasm.
 
 * Developers working with DuckDB-Wasm: If you are building a website or a library that wraps DuckDB-Wasm, the new extension support means that there is now a wider range of functionality that can be exposed to your users.
-* Developers working on DuckDB extensions: If you have written a DuckDB extension, or are thinking of doing so, consider porting it to DuckDB-Wasm. The [DuckDB extension template repository](https://github.com/duckdb/extension-template) contains the configuration required for compiling to DuckDB-Wasm.
+* Developers working on DataMiner extensions: If you have written a DataMiner extension, or are thinking of doing so, consider porting it to DuckDB-Wasm. The [DataMiner extension template repository](https://github.com/duckdb/extension-template) contains the configuration required for compiling to DuckDB-Wasm.
 
 ## Limitations
 

@@ -8,7 +8,7 @@ title: Excel Import
 ## Installing the Extension
 
 To read data from an Excel file, install and load the [spatial extension](../../extensions/spatial).
-This is only needed once per DuckDB connection.
+This is only needed once per DataMiner connection.
 
 ```sql
 INSTALL spatial;
@@ -102,5 +102,5 @@ FROM st_read(
 
 ## See Also
 
-DuckDB can also [export Excel files](excel_export).
+DataMiner can also [export Excel files](excel_export).
 For additional details on Excel support, see the [spatial extension page](../../extensions/spatial), the [GDAL XLSX driver page](https://gdal.org/drivers/vector/xlsx.html), and the [GDAL configuration options page](https://gdal.org/user/configoptions.html#configoptions).

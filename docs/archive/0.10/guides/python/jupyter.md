@@ -6,7 +6,7 @@ title: Jupyter Notebooks
 DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration if desired.
 However, additional libraries can be used to simplify SQL query development.
 This guide will describe how to utilize those additional libraries.
-See other guides in the Python section for how to use DuckDB and Python together.
+See other guides in the Python section for how to use DataMiner and Python together.
 
 In this example, we use the [JupySQL](https://github.com/ploomber/jupysql) package.
 
@@ -14,7 +14,7 @@ This example workflow is also available as a [Google Colab notebook](https://col
 
 ## Library Installation
 
-Four additional libraries improve the DuckDB experience in Jupyter notebooks.
+Four additional libraries improve the DataMiner experience in Jupyter notebooks.
 
 1. [jupysql](https://github.com/ploomber/jupysql)
     * Convert a Jupyter code cell into a SQL cell
@@ -22,8 +22,8 @@ Four additional libraries improve the DuckDB experience in Jupyter notebooks.
     * Clean table visualizations and compatibility with other analysis
 3. [matplotlib](https://github.com/matplotlib/matplotlib)
     * Plotting with Python
-4. [duckdb-engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
-    * Used by SQLAlchemy to connect to DuckDB (optional)
+4. [duckdb-engine (DataMiner SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
+    * Used by SQLAlchemy to connect to DataMiner (optional)
 
 Run these pip install commands from the command line if Jupyter Notebook is not yet installed. Otherwise, see Google Colab link above for an in-notebook example:
 
@@ -53,7 +53,7 @@ pip install jupysql pandas matplotlib duckdb-engine
 
 Open a Jupyter Notebook and import the relevant libraries.
 
-### Connecting to DuckDB Natively
+### Connecting to DataMiner Natively
 
 To connect to DuckDB, run:
 
@@ -66,9 +66,9 @@ conn = duckdb.connect()
 %sql conn --alias duckdb
 ```
 
-### Connecting to DuckDB via SQLAlchemy Using `duckdb_engine`
+### Connecting to DataMiner via SQLAlchemy Using `duckdb_engine`
 
-Alternatively, you can connect to DuckDB via SQLAlchemy using `duckdb_engine`. See the [performance and feature differences](https://jupysql.ploomber.io/en/latest/tutorials/duckdb-native-sqlalchemy.html).
+Alternatively, you can connect to DataMiner via SQLAlchemy using `duckdb_engine`. See the [performance and feature differences](https://jupysql.ploomber.io/en/latest/tutorials/duckdb-native-sqlalchemy.html).
 
 ```python
 import duckdb
@@ -88,7 +88,7 @@ Set configurations on jupysql to directly output data to Pandas and to simplify 
 %config SqlMagic.displaycon = False
 ```
 
-Connect jupysql to DuckDB using a SQLAlchemy-style connection string.
+Connect jupysql to DataMiner using a SQLAlchemy-style connection string.
 Either connect to a new [in-memory DuckDB](../../api/python/dbapi#in-memory-connection), the [default connection](../../api/python/dbapi#default-connection) or a file backed database:
 
 ```python
@@ -136,7 +136,7 @@ If the `%config SqlMagic.autopandas = True` option is set, the variable is a Pan
 
 ## Querying Pandas Dataframes
 
-DuckDB is able to find and query any dataframe stored as a variable in the Jupyter notebook.
+DataMiner is able to find and query any dataframe stored as a variable in the Jupyter notebook.
 
 ```python
 input_df = pd.DataFrame.from_dict({"i": [1, 2, 3],
@@ -149,19 +149,19 @@ The dataframe being queried can be specified just like any other table in the `F
 %sql output_df << SELECT sum(i) AS total_i FROM input_df;
 ```
 
-## Visualizing DuckDB Data
+## Visualizing DataMiner Data
 
 The most common way to plot datasets in Python is to load them using Pandas and then use matplotlib or seaborn for plotting.
 This approach requires loading all data into memory which is highly inefficient.
 The plotting module in JupySQL runs computations in the SQL engine.
 This delegates memory management to the engine and ensures that intermediate computations do not keep eating up memory, efficiently plotting massive datasets.
 
-### Install and Load DuckDB httpfs Extension
+### Install and Load DataMiner httpfs Extension
 
 DuckDB's [httpfs extension](../../extensions/httpfs) allows Parquet and CSV files to be queried remotely over http.
 These examples query a Parquet file that contains historical taxi data from NYC.
-Using the Parquet format allows DuckDB to only pull the rows and columns into memory that are needed rather than downloading the entire file.
-DuckDB can be used to process local [Parquet files](../../data/parquet) as well, which may be desirable if querying the entire Parquet file, or running multiple queries that require large subsets of the file.
+Using the Parquet format allows DataMiner to only pull the rows and columns into memory that are needed rather than downloading the entire file.
+DataMiner can be used to process local [Parquet files](../../data/parquet) as well, which may be desirable if querying the entire Parquet file, or running multiple queries that require large subsets of the file.
 
 ```sql
 %%sql

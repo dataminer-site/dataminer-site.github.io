@@ -7,10 +7,10 @@ redirect_from:
 title: Appender
 ---
 
-The C++ Appender can be used to load bulk data into a DuckDB database. The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
+The C++ Appender can be used to load bulk data into a DataMiner database. The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
 
 ```cpp
-DuckDB db;
+DataMiner db;
 Connection con(db);
 // create the table
 con.Query("CREATE TABLE people(id INTEGER, name VARCHAR)");

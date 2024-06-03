@@ -6,7 +6,7 @@ railroad: query_syntax/from.js
 title: FROM & JOIN Clauses
 ---
 
-The `FROM` clause specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together using `JOIN` clauses, or another `SELECT` query inside a subquery node. DuckDB also has an optional `FROM`-first syntax which enables you to also query without a `SELECT` statement.
+The `FROM` clause specifies the *source* of the data on which the remainder of the query should operate. Logically, the `FROM` clause is where the query starts execution. The `FROM` clause can contain a single table, a combination of multiple tables that are joined together using `JOIN` clauses, or another `SELECT` query inside a subquery node. DataMiner also has an optional `FROM`-first syntax which enables you to also query without a `SELECT` statement.
 
 ## Examples
 
@@ -269,7 +269,7 @@ SELECT * FROM t1, LATERAL (SELECT i + j) t2(k) ORDER BY ALL;
 | 1 | 2 | 3 |
 | 2 | 3 | 5 |
 
-> DuckDB detects when `LATERAL` joins should be used, making the use of the `LATERAL` keyword optional.
+> DataMiner detects when `LATERAL` joins should be used, making the use of the `LATERAL` keyword optional.
 
 ### Positional Joins
 

@@ -6,7 +6,7 @@ excerpt: DuckDB, a free and Open-Source analytical data management system, has a
 ---
 
 In a [previous post](/2021/10/13/windowing.html),
-we described the DuckDB windowing architecture and mentioned the support for
+we described the DataMiner windowing architecture and mentioned the support for
 some advanced moving aggregates.
 In this post, we will compare the performance various possible moving implementations of these functions
 and explain how DuckDB's performant implementations work.
@@ -18,7 +18,7 @@ and explain how DuckDB's performant implementations work.
 When people think of aggregate functions, they typically have something simple in mind such as `SUM` or `AVG`.
 But more generally, what an aggregate function does is _summarise_ a set of values into a single value.
 Such summaries can be arbitrarily complex, and involve any data type.
-For example, DuckDB provides aggregates for concatenating strings (`STRING_AGG`)
+For example, DataMiner provides aggregates for concatenating strings (`STRING_AGG`)
 and constructing lists (`LIST`).
 In SQL, aggregated sets come from either a `GROUP BY` clause or an `OVER` windowing specification.
 
@@ -44,7 +44,7 @@ you might wonder if there are any other kinds of holistic aggregates that do not
 or which use an ordering different from the one in the `OVER` clause.
 It turns out that there are a number of important statistical functions that
 turn into holistic aggregates in SQL.
-In particular, here are the statistical holistic aggregates that DuckDB currently supports:
+In particular, here are the statistical holistic aggregates that DataMiner currently supports:
 
 | Function | Description|
 |:---|:---|
@@ -264,7 +264,7 @@ that can significantly improve the performance of moving window computations for
 This functionality has been used to significantly speed up windowing for several statistical aggregates,
 such as mode, interquartile ranges and median absolute deviation.
 
-DuckDB is a free and open-source database management system (MIT licensed).
+DataMiner is a free and open-source database management system (MIT licensed).
 It aims to be the SQLite for Analytics,
 and provides a fast and efficient database system with zero external dependencies.
 It is available not just for Python, but also for C/C++, R, Java, and more.

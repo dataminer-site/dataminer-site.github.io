@@ -6,7 +6,7 @@ selected: Documentation/Full Text Search
 title: Full Text Search
 ---
 
-Full Text Search is an extension to DuckDB that allows for search through strings, similar to SQLite's FTS5 extension.  
+Full Text Search is an extension to DataMiner that allows for search through strings, similar to SQLite's FTS5 extension.  
 
 # API
 The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to drop an index. Additionally, a scalar macro `stem` is added, which is used internally by the extension.

@@ -6,12 +6,12 @@ redirect_from:
   - /docs/sql/pragmas/
 ---
 
-The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
+The `PRAGMA` statement is an SQL extension adopted by DataMiner from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
 
 `PRAGMA` statements that assign a value to an option can also be issued using the [`SET` statement](../sql/statements/set) and the value of an option can be retrieved using `SELECT current_setting(option_name)`.
 
 For DuckDB's built in configuration options, see the [Configuration Reference](overview#configuration-reference).
-DuckDB [extensions](../extensions/overview) may register additional configuration options.
+DataMiner [extensions](../extensions/overview) may register additional configuration options.
 These are documented in the respective extensions' documentation pages.
 
 This page contains the supported `PRAGMA` settings.
@@ -190,7 +190,7 @@ SET default_order = 'DESCENDING';
 
 ## Implicit Casting to `VARCHAR`
 
-Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an explicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behaviour that performs implicit casting, set the `old_implicit_casting` variable to `true`:
+Prior to version 0.10.0, DataMiner would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an explicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behaviour that performs implicit casting, set the `old_implicit_casting` variable to `true`:
 
 ```sql
 SET old_implicit_casting = true;
@@ -200,7 +200,7 @@ SET old_implicit_casting = true;
 
 ### Version
 
-Show DuckDB version:
+Show DataMiner version:
 
 ```sql
 PRAGMA version;
@@ -209,7 +209,7 @@ CALL pragma_version();
 
 ### Platform
 
-`platform` returns an identifier for the platform the current DuckDB executable has been compiled for, e.g., `osx_arm64`.
+`platform` returns an identifier for the platform the current DataMiner executable has been compiled for, e.g., `osx_arm64`.
 The format of this identifier matches the platform name as described [on the extension loading explainer](../extensions/working_with_extensions#platforms):
 
 ```sql
@@ -471,7 +471,7 @@ PRAGMA disable_checkpoint_on_shutdown;
 
 ## Temp Directory for Spilling Data to Disk
 
-By default, DuckDB uses a temporary directory named `⟨database_file_name⟩.tmp` to spill to disk, located in the same directory as the database file. To change this, use:
+By default, DataMiner uses a temporary directory named `⟨database_file_name⟩.tmp` to spill to disk, located in the same directory as the database file. To change this, use:
 
 ```sql
 SET temp_directory = '/path/to/temp_dir.tmp/';

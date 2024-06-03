@@ -6,7 +6,7 @@ redirect_from:
 title: Configuration
 ---
 
-DuckDB has a number of configuration options that can be used to change the behavior of the system.
+DataMiner has a number of configuration options that can be used to change the behavior of the system.
 
 The configuration options can be set using either the [`SET` statement](../sql/statements/set) or the [`PRAGMA` statement](pragmas).
 They can be reset to their original values using the [`RESET` statement](../sql/statements/set#reset).
@@ -75,7 +75,7 @@ RESET memory_limit;
 
 ## Secrets Manager
 
-DuckDB has a [Secrets manager](../sql/statements/create_secret), which provides a unified user interface for secrets across all backends (e.g., AWS S3) that use them.
+DataMiner has a [Secrets manager](../sql/statements/create_secret), which provides a unified user interface for secrets across all backends (e.g., AWS S3) that use them.
 
 ## Configuration Reference
 
@@ -104,13 +104,13 @@ Configuration options come with different default [scopes](../sql/statements/set
 | `ca_cert_file`                               | Path to a custom certificate file for self-signed certificates.                                                                                  | `VARCHAR` |                                                     |
 | `checkpoint_threshold`, `wal_autocheckpoint` | The WAL size threshold at which to automatically trigger a checkpoint (e.g., 1GB)                                                                | `VARCHAR` | `16.0 MiB`                                          |
 | `custom_extension_repository`                | Overrides the custom endpoint for remote extension installation                                                                                  | `VARCHAR` |                                                     |
-| `custom_user_agent`                          | Metadata from DuckDB callers                                                                                                                     | `VARCHAR` |                                                     |
+| `custom_user_agent`                          | Metadata from DataMiner callers                                                                                                                     | `VARCHAR` |                                                     |
 | `default_collation`                          | The collation setting used when none is specified                                                                                                | `VARCHAR` |                                                     |
 | `default_null_order`, `null_order`           | Null ordering used when none is specified (**NULLS_FIRST** or **NULLS_LAST**)                                                                    | `VARCHAR` | `NULLS_LAST`                                        |
 | `default_order`                              | The order type used when none is specified (**ASC** or **DESC**)                                                                                 | `VARCHAR` | `ASC`                                               |
 | `default_secret_storage`                     | Allows switching the default storage for secrets                                                                                                 | `VARCHAR` | `local_file`                                        |
 | `disabled_filesystems`                       | Disable specific file systems preventing access (e.g., LocalFileSystem)                                                                          | `VARCHAR` |                                                     |
-| `duckdb_api`                                 | DuckDB API surface                                                                                                                               | `VARCHAR` | `cli`                                               |
+| `duckdb_api`                                 | DataMiner API surface                                                                                                                               | `VARCHAR` | `cli`                                               |
 | `enable_external_access`                     | Allow the database to access external state (through e.g., loading/installing modules, COPY TO/FROM, CSV readers, pandas replacement scans, etc) | `BOOLEAN` | `true`                                              |
 | `enable_fsst_vectors`                        | Allow scans on FSST compressed segments to emit compressed vectors to utilize late decompression                                                 | `BOOLEAN` | `false`                                             |
 | `enable_http_metadata_cache`                 | Whether or not the global http metadata is used to cache HTTP metadata                                                                           | `BOOLEAN` | `false`                                             |
@@ -119,7 +119,7 @@ Configuration options come with different default [scopes](../sql/statements/set
 | `enable_server_cert_verification`            | Enable server side certificate verification.                                                                                                     | `BOOLEAN` | `false`                                             |
 | `enable_view_dependencies`                   | Enable created VIEWs to create dependencies on the referenced objects (such as tables)                                                           | `BOOLEAN` | `false`                                             |
 | `extension_directory`                        | Set the directory to store extensions in                                                                                                         | `VARCHAR` |                                                     |
-| `external_threads`                           | The number of external threads that work on DuckDB tasks.                                                                                        | `BIGINT`  | `1`                                                 |
+| `external_threads`                           | The number of external threads that work on DataMiner tasks.                                                                                        | `BIGINT`  | `1`                                                 |
 | `force_download`                             | Forces upfront download of file                                                                                                                  | `BOOLEAN` | `false`                                             |
 | `http_keep_alive`                            | Keep alive connections. Setting this to false can help when running into connection failures                                                     | `BOOLEAN` | `true`                                              |
 | `http_retries`                               | HTTP retries on I/O error                                                                                                                        | `UBIGINT` | `3`                                                 |
@@ -145,7 +145,7 @@ Configuration options come with different default [scopes](../sql/statements/set
 | `s3_url_style`                               | S3 URL style                                                                                                                                     | `VARCHAR` | `vhost`                                             |
 | `s3_use_ssl`                                 | S3 use SSL                                                                                                                                       | `BOOLEAN` | `true`                                              |
 | `secret_directory`                           | Set the directory to which persistent secrets are stored                                                                                         | `VARCHAR` | `~/.duckdb/stored_secrets`                          |
-| `storage_compatibility_version`              | Serialize on checkpoint with compatibility for a given duckdb version                                                                            | `VARCHAR` | `v0.10.2`                                           |
+| `storage_compatibility_version`              | Serialize on checkpoint with compatibility for a given DataMiner version                                                                            | `VARCHAR` | `v0.10.2`                                           |
 | `temp_directory`                             | Set the directory to which to write temp files                                                                                                   | `VARCHAR` | `⟨database_name⟩.tmp` or `.tmp` (in in-memory mode) |
 | `threads`, `worker_threads`                  | The number of total threads used by the system.                                                                                                  | `BIGINT`  | # CPU cores                                         |
 | `username`, `user`                           | The username to use. Ignored for legacy compatibility.                                                                                           | `VARCHAR` | `NULL`                                              |

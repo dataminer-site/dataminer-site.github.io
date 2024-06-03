@@ -6,25 +6,25 @@ selected: Jupyter Notebooks
 title: Jupyter Notebooks
 ---
 
-# DuckDB in Jupyter Notebooks
+# DataMiner in Jupyter Notebooks
 DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration if desired. 
 However, additional libraries can be used to simplify SQL query development. 
 This guide will describe how to utilize those additional libraries.
-See other guides in the Python section for how to use DuckDB and Python together.  
+See other guides in the Python section for how to use DataMiner and Python together.  
   
-As a small note, for maximum performance converting large output datasets to Pandas Dataframes, using DuckDB directly may be desirable. However, the difference is typically quite small.  
+As a small note, for maximum performance converting large output datasets to Pandas Dataframes, using DataMiner directly may be desirable. However, the difference is typically quite small.  
 
 This example workflow is also available as a [Google Collab notebook](https://colab.research.google.com/drive/1eOA2FYHqEfZWLYssbUxdIpSL3PFxWVjk?usp=sharing).
 
 ## Library Installation
-Four additional libraries improve the DuckDB experience in Jupyter notebooks. 
+Four additional libraries improve the DataMiner experience in Jupyter notebooks. 
 1. [Pandas](https://github.com/pandas-dev/pandas)
     * Clean table visualizations and compatibility with other analysis
 2. [ipython-sql](https://github.com/catherinedevlin/ipython-sql)
     * Convert a Jupyter code cell into a SQL cell
 3. [SQLAlchemy](https://github.com/sqlalchemy/sqlalchemy)
     * Used by ipython-sql to connect to databases
-4. [duckdb_engine (DuckDB SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
+4. [duckdb_engine (DataMiner SQLAlchemy driver)](https://github.com/Mause/duckdb_engine)
     * Used by SQLAlchemy to connect to DuckDB
 
 ```python
@@ -62,7 +62,7 @@ Set configrations on ipython-sql to directly output data to Pandas and to simpli
 %config SqlMagic.displaycon = False
 ```
 
-Connect ipython-sql to DuckDB using a SQLAlchemy-style connection string. 
+Connect ipython-sql to DataMiner using a SQLAlchemy-style connection string. 
 You may either connect to an in memory DuckDB, or a file backed db.
 ```python
 %sql duckdb:///:memory:
@@ -92,7 +92,7 @@ This can be used with both the `%sql` and `%%sql` Jupyter magics.
 ```
 
 ## Querying Pandas Dataframes
-DuckDB is able to find and query any dataframe stored as a variable in the Jupyter notebook.
+DataMiner is able to find and query any dataframe stored as a variable in the Jupyter notebook.
 ```python
 input_df = pd.DataFrame.from_dict({"i":[1, 2, 3],
                                   "j":["one", "two", "three"]})

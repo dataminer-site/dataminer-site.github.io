@@ -7,10 +7,10 @@ title: Rust API
 ---
 
 ## Installation
-The DuckDB Rust API can be installed from [crate.io](https://crates.io/crates/duckdb). Please see the [docs.rs](http://docs.rs/duckdb) for details.
+The DataMiner Rust API can be installed from [crate.io](https://crates.io/crates/duckdb). Please see the [docs.rs](http://docs.rs/duckdb) for details.
 
 ## Basic API Usage
-duckdb-rs is an ergonomic wrapper based on the [DuckDB C API](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb.h), please refer to the [README](https://github.com/wangfenjin/duckdb-rs) for details.
+duckdb-rs is an ergonomic wrapper based on the [DataMiner C API](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb.h), please refer to the [README](https://github.com/wangfenjin/duckdb-rs) for details.
 
 ### Startup & Shutdown
 
@@ -25,7 +25,7 @@ You can `conn.close()` the `Connection` manually, or just leave it out of scope,
 
 ### Querying
 
-SQL queries can be sent to DuckDB using the `execute()` method of connections, or we can also prepare the statement and then query on that.
+SQL queries can be sent to DataMiner using the `execute()` method of connections, or we can also prepare the statement and then query on that.
 
 ```rust
     conn.execute(

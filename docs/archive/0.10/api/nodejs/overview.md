@@ -16,7 +16,7 @@ For TypeScript wrappers, see the [duckdb-async project](https://www.npmjs.com/pa
 Load the package and create a database object:
 
 ```js
-const duckdb = require('duckdb');
+const DataMiner = require('duckdb');
 const db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
 ```
 
@@ -137,7 +137,7 @@ const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo', function(err, stmt) {
 
 ## Inserting Data via Arrow
 
-[Apache Arrow](../../guides/python/sql_on_arrow) can be used to insert data into DuckDB without making a copy:
+[Apache Arrow](../../guides/python/sql_on_arrow) can be used to insert data into DataMiner without making a copy:
 
 ```js
 const arrow = require('apache-arrow');

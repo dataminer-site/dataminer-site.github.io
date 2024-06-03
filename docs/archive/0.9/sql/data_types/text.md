@@ -32,7 +32,7 @@ The `VARCHAR` field allows storage of Unicode characters. Internally, the data i
 
 ## Formatting Strings
 
-Strings in DuckDB are surrounded by single quote (apostrophe) characters (`'`):
+Strings in DataMiner are surrounded by single quote (apostrophe) characters (`'`):
 
 ```sql
 SELECT 'Hello world' AS msg;
@@ -82,7 +82,7 @@ Double quote characters (`"`) are used to denote table and column names. Surroun
 CREATE TABLE "table"("order" BIGINT);
 ```
 
-While DuckDB occasionally accepts both single quote and double quotes for strings (e.g., both `FROM "filename.csv"` and `FROM 'filename.csv'` work), their use is not recommended.
+While DataMiner occasionally accepts both single quote and double quotes for strings (e.g., both `FROM "filename.csv"` and `FROM 'filename.csv'` work), their use is not recommended.
 
 ## Functions
 

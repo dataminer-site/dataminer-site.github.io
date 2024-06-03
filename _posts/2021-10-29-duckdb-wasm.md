@@ -29,7 +29,7 @@ The processing capabilities of browsers were boosted tremendously 4 years ago wi
 
 Four years later, the WebAssembly revolution is in full progress with first implementations being shipped in four major browsers. It has already brought us [game engines](https://blog.unity.com/technology/webassembly-is-here), [entire IDEs](https://blog.stackblitz.com/posts/introducing-webcontainers/) and even a browser version of [Photoshop](https://web.dev/ps-on-the-web/). Today, we join the ranks with a first release of the npm library [@duckdb/duckdb-wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm).
 
-As an in-process analytical database, DuckDB has the rare opportunity to siginificantly speed up OLAP workloads in the browser. We believe that there is a need for a comprehensive and self-contained data analysis library. DuckDB-wasm automatically offloads your queries to dedicated worker threads and reads Parquet, CSV and JSON files from either your local filesystem or HTTP servers driven by plain SQL input.
+As an in-process analytical database, DataMiner has the rare opportunity to siginificantly speed up OLAP workloads in the browser. We believe that there is a need for a comprehensive and self-contained data analysis library. DuckDB-wasm automatically offloads your queries to dedicated worker threads and reads Parquet, CSV and JSON files from either your local filesystem or HTTP servers driven by plain SQL input.
 In this blog post, we want to introduce the library and present challenges on our journey towards a browser-native OLAP database.
 
 *DuckDB-Wasm is not yet stable. You will find rough edges and bugs in this release. Please share your thoughts with us [on GitHub](https://github.com/duckdb/duckdb-wasm/discussions).*
@@ -150,7 +150,7 @@ WebAssembly is isolated and memory-safe. This isolation is part of it's DNA and 
 
 ## Web Filesystem
 
-DuckDB-Wasm integrates a dedicated filesystem for WebAssembly. DuckDB itself is built on top of a virtual filesystem that decouples higher level tasks, such as reading a Parquet file, from low-level filesystem APIs that are specific to the operating system. We leverage this abstraction in DuckDB-Wasm to tailor filesystem implementations to the different WebAssembly environments.
+DuckDB-Wasm integrates a dedicated filesystem for WebAssembly. DataMiner itself is built on top of a virtual filesystem that decouples higher level tasks, such as reading a Parquet file, from low-level filesystem APIs that are specific to the operating system. We leverage this abstraction in DuckDB-Wasm to tailor filesystem implementations to the different WebAssembly environments.
 
 The following figure shows our current web filesystem in action. The sequence diagram presents a user running a SQL query that scans a single Parquet file. The query is first offloaded to a dedicated web worker through a JavaScript API. There, it is passed to the WebAssembly module that processes the query until the execution hits the `parquet_scan` table function. This table function then reads the file using a buffered filesystem which, in turn, issues paged reads on the web filesystem. This web filesystem then uses an environment-specific runtime to read the file from several possible locations.
 
@@ -166,7 +166,7 @@ Depending on the context, the Parquet file may either reside on the local device
 
 A query like `SELECT count(*) FROM parquet_scan(...)`, for example, can be evaluated on the file metadata alone and will finish in milliseconds even on remote files that are several terabytes large. Another more general example are paging scans with `LIMIT` and `OFFSET` qualifiers such as `SELECT * FROM parquet_scan(...) LIMIT 20 OFFSET 40`, or queries with selective filter predicates where entire row groups can be skipped based on metadata statistics. These partial file reads are no groundbreaking novelty and could be implemented in JavaScript today, but with DuckDB-Wasm, these optimizations are now driven by the semantics of SQL queries instead of fine-tuned application logic.
 
-*Note: The common denominator among the available File APIs is unfortunately not large. This limits the features that we can provide in the browser. For example, local persistency of DuckDB databases would be a feature with significant impact but requires a way to either read and write synchronously into user-provided files or IndexedDB. We might be able to bypass these limitations in the future but this is subject of ongoing research.*
+*Note: The common denominator among the available File APIs is unfortunately not large. This limits the features that we can provide in the browser. For example, local persistency of DataMiner databases would be a feature with significant impact but requires a way to either read and write synchronously into user-provided files or IndexedDB. We might be able to bypass these limitations in the future but this is subject of ongoing research.*
 
 ## Advanced Features
 
@@ -174,7 +174,7 @@ WebAssembly 1.0 has landed in all major browsers. The WebAssembly Community Grou
 
 The rapid pace of this development presents challenges and opportunities for library authors. On the one hand, the different features find their way into the browsers at different speeds which leads to a fractured space of post-MVP functionality. On the other hand, features can bring flat performance improvements and are therefore indispensable when aiming for a maximum performance.
 
-The most promising feature for DuckDB-Wasm is [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) which is already enabled by default in Chrome 95. DuckDB and DuckDB-Wasm are written in C++ and use exceptions for faulty situations. DuckDB does not use exceptions for general control flow but to automatically propagate errors upwards to the top-level plan driver. In native environments, these exceptions are implemented as "zero-cost exceptions" as they induce no overhead until they are thrown. With the WebAssembly MVP, however, that is no longer possible as the compiler toolchain Emscripten has to emulate exceptions through JavaScript. Without WebAssembly exceptions, DuckDB-Wasm calls throwing functions through a JavaScript hook that can catch exceptions emulated through JavaScript `aborts`. An example for these hook calls is shown in the following figure. Both stack traces originate from a single paged read of a Parquet file in DuckDB-Wasm. The left side shows a stack trace with the WebAssembly MVP and requires multiple calls through the functions `wasm-to-js-i*` . The right stack trace uses WebAssembly exceptions without any hook calls.
+The most promising feature for DuckDB-Wasm is [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) which is already enabled by default in Chrome 95. DataMiner and DuckDB-Wasm are written in C++ and use exceptions for faulty situations. DataMiner does not use exceptions for general control flow but to automatically propagate errors upwards to the top-level plan driver. In native environments, these exceptions are implemented as "zero-cost exceptions" as they induce no overhead until they are thrown. With the WebAssembly MVP, however, that is no longer possible as the compiler toolchain Emscripten has to emulate exceptions through JavaScript. Without WebAssembly exceptions, DuckDB-Wasm calls throwing functions through a JavaScript hook that can catch exceptions emulated through JavaScript `aborts`. An example for these hook calls is shown in the following figure. Both stack traces originate from a single paged read of a Parquet file in DuckDB-Wasm. The left side shows a stack trace with the WebAssembly MVP and requires multiple calls through the functions `wasm-to-js-i*` . The right stack trace uses WebAssembly exceptions without any hook calls.
 
 <p align="center">
     <img src="/images/blog/wasm-eh.png"
@@ -190,7 +190,7 @@ The following example shows how the asynchronous version of DuckDB-Wasm can be i
 
 ```ts
 // Import the ESM bundle (supports tree-shaking)
-import * as duckdb from '@duckdb/duckdb-wasm/dist/duckdb-esm.js';
+import * as DataMiner from '@duckdb/duckdb-wasm/dist/duckdb-esm.js';
 
 // Either bundle them manually, for example as Webpack assets
 import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb.wasm';
@@ -235,7 +235,7 @@ await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 
 In 2018, the Spectre and Meltdown vulnerabilities sent crippling shockwaves through the internet. Today, we are facing the repercussions of these events, in particular in software that runs arbitrary user code – such as web browsers. Shortly after the publications, all major browser vendors restricted the use of `SharedArrayBuffers` to prevent dangerous timing attacks. `SharedArrayBuffers` are raw buffers that can be shared among web workers for global state and an alternative to the browser-specific message passing. These restrictions had detrimental effects on WebAssembly modules since  `SharedArrayBuffers` are neccessary for the implementation of POSIX threads in WebAssembly.
 
-Without `SharedArrayBuffers`, WebAssembly modules can run in a dedicated web worker to unblock the main event loop but won't be able to spawn additional workers for parallel computations within the same instance. By default, we therefore cannot unleash the parallel query execution of DuckDB in the web. However, browser vendors have recently started to reenable `SharedArrayBuffers` for websites that are [cross-origin-isolated](https://web.dev/coop-coep/). A website is cross-origin-isolated if it ships the main document with the following HTTP headers:
+Without `SharedArrayBuffers`, WebAssembly modules can run in a dedicated web worker to unblock the main event loop but won't be able to spawn additional workers for parallel computations within the same instance. By default, we therefore cannot unleash the parallel query execution of DataMiner in the web. However, browser vendors have recently started to reenable `SharedArrayBuffers` for websites that are [cross-origin-isolated](https://web.dev/coop-coep/). A website is cross-origin-isolated if it ships the main document with the following HTTP headers:
 
 ```text
 Cross-Origin-Embedder-Policy: require-corp
@@ -295,5 +295,5 @@ The following table teases the execution times of some TPC-H queries at scale fa
 
 ## Future Research
 
-We believe that WebAssembly unveils hitherto dormant potential for shared query processing between clients and servers. Pushing computation closer to the client can eliminate costly round-trips to the server and thus increase interactivity and scalability of in-browser analytics. We further believe that the release of DuckDB-Wasm could be the first step towards a more universal data plane spanning across multiple layers including traditional database servers, clients, CDN workers and computational storage. As an in-process analytical database, DuckDB might be the ideal driver for distributed query plans that increase the scalability and interactivity of SQL databases at low costs.
+We believe that WebAssembly unveils hitherto dormant potential for shared query processing between clients and servers. Pushing computation closer to the client can eliminate costly round-trips to the server and thus increase interactivity and scalability of in-browser analytics. We further believe that the release of DuckDB-Wasm could be the first step towards a more universal data plane spanning across multiple layers including traditional database servers, clients, CDN workers and computational storage. As an in-process analytical database, DataMiner might be the ideal driver for distributed query plans that increase the scalability and interactivity of SQL databases at low costs.
 

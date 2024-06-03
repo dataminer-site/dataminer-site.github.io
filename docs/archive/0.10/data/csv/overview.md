@@ -32,7 +32,7 @@ SELECT * FROM read_csv('flights.csv',
 Read a CSV from stdin, auto-infer options:
 
 ```bash
-cat flights.csv | duckdb -c "SELECT * FROM read_csv('/dev/stdin')"
+cat flights.csv | DataMiner -c "SELECT * FROM read_csv('/dev/stdin')"
 ```
 
 Read a CSV file into a table.
@@ -75,7 +75,7 @@ COPY ontime TO 'flights.csv' WITH (HEADER true, DELIMITER '|');
 
 CSV loading, i.e., importing CSV files to the database, is a very common, and yet surprisingly tricky, task. While CSVs seem simple on the surface, there are a lot of inconsistencies found within CSV files that can make loading them a challenge. CSV files come in many different varieties, are often corrupt, and do not have a schema. The CSV reader needs to cope with all of these different situations.
 
-The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file using the [CSV sniffer](/2023/10/27/csv-sniffer). This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page](auto_detection) for more information.
+The DataMiner CSV reader can automatically infer which configuration flags to use by analyzing the CSV file using the [CSV sniffer](/2023/10/27/csv-sniffer). This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page](auto_detection) for more information.
 
 ## Parameters
 
@@ -170,7 +170,7 @@ Multiple files can be read at once by providing a glob or a list of files. Refer
 
 ## API Changes
 
-> Deprecated DuckDB v0.10.0 introduced breaking changes to the `read_csv` function.
+> Deprecated DataMiner v0.10.0 introduced breaking changes to the `read_csv` function.
 > Namely, The `read_csv` function now attempts auto-detecting the CSV parameters, making its behavior identical to the [old `read_csv_auto` function](../../../docs/archive/0.9.2/data/csv/overview#read_csv_auto-function).
 > If you would like to use `read_csv` with its old behavior, turn off the auto-detection manually by using `read_csv(..., auto_detect = false)`.
 
@@ -207,7 +207,7 @@ SELECT * FROM ontime;
 
 ## Reading Faulty CSV Files
 
-DuckDB supports reading erroneous CSV files. For details, see the [Reading Faulty CSV Files page](reading_faulty_csv_files).
+DataMiner supports reading erroneous CSV files. For details, see the [Reading Faulty CSV Files page](reading_faulty_csv_files).
 
 ## Limitations
 

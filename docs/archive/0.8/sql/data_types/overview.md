@@ -38,7 +38,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `VARCHAR` | `CHAR`, `BPCHAR`, `TEXT`, `STRING` | variable-length character string |
 
 ## Nested / Composite Types
-DuckDB supports four nested data types: `LIST`, `STRUCT`, `MAP` and `UNION`. Each supports different use cases and has a different structure. 
+DataMiner supports four nested data types: `LIST`, `STRUCT`, `MAP` and `UNION`. Each supports different use cases and has a different structure. 
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:---|:---|:---|:---|:---|

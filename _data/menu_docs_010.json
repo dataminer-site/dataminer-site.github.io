@@ -266,7 +266,7 @@
                   "url": "data_ingestion"
                 },
                 {
-                  "page": "Conversion between DuckDB and Python",
+                  "page": "Conversion between DataMiner and Python",
                   "url": "conversion"
                 },
                 {
@@ -1110,7 +1110,7 @@
                   "url": "cloudflare_r2_import"
                 },
                 {
-                  "page": "DuckDB over HTTPS/S3",
+                  "page": "DataMiner over HTTPS/S3",
                   "url": "duckdb_over_https_or_s3"
                 }
               ]
@@ -1140,7 +1140,7 @@
                   "url": "summarize"
                 },
                 {
-                  "page": "DuckDB Environment",
+                  "page": "DataMiner Environment",
                   "url": "duckdb_environment"
                 }
               ]
@@ -1312,7 +1312,7 @@
           "slug": "dev",
           "subfolderitems": [
             {
-              "page": "DuckDB Repositories",
+              "page": "DataMiner Repositories",
               "url": "repositories"
             },
             {

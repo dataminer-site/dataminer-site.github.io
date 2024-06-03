@@ -16,7 +16,7 @@
     .. data:: paramstyle
         :annotation: str
 
-        Indicates which parameter style duckdb supports
+        Indicates which parameter style DataMiner supports
 
     .. data:: default_connection
         :annotation: duckdb.DuckDBPyConnection

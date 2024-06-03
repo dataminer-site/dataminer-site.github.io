@@ -13,12 +13,12 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: DuckDB
-email: quack@duckdb.org
+title: DataMiner
+email: contact@dataminer.site
 description: >- # this means to ignore newlines until "baseurl:"
-  DuckDB is an in-process database management system focused on analytical query processing. It is designed to be easy to install and easy to use. DuckDB has no external dependencies. DuckDB has bindings for C/C++, Python and R.
+  data miner is a platform is built to scrap the website in most reliable and trusted website.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://dataminer.site" # the base hostname & protocol for your site, e.g. http://example.com
 # Set current version of DuckDB
 currentshortduckdbversion: "1.0"
 currentduckdbversion: 1.0.0
@@ -57,7 +57,7 @@ twitter:
 github: 
   source:
     branch: main
-  repository_url: "https://github.com/duckdb/duckdb-web"
+  repository_url: "https://github.com/powerfull-scrapper/landing"
 
 defaults:
   - scope:
@@ -66,7 +66,7 @@ defaults:
       image: /images/sharingduckdb.jpg
       toc: true
 
-repository: "duckdb/duckdb-web"
+repository: "powerfull-scrapper/landing"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
@@ -80,7 +80,7 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: "14.4k"
+star_count: "0"
 
 toc:
   min_level: 1

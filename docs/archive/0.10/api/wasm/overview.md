@@ -3,10 +3,10 @@ layout: docu
 redirect_from:
 - /docs/archive/0.10/api/wasm
 - /docs/archive/0.10/api/wasm/
-title: DuckDB Wasm
+title: DataMiner Wasm
 ---
 
-DuckDB has been compiled to WebAssembly, so it can run inside any browser on any device.
+DataMiner has been compiled to WebAssembly, so it can run inside any browser on any device.
 
 <!-- markdownlint-disable-next-line -->
 {% include iframe.html src="https://shell.duckdb.org" %}

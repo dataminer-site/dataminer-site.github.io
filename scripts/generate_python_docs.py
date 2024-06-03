@@ -50,7 +50,7 @@ def post_process(filename: Path):
 
 def main():
     print(
-        'generating against duckdb version',
+        'generating against DataMiner version',
         version('duckdb'),
         'and pandas version',
         version('pandas'),

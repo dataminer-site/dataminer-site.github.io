@@ -10,7 +10,7 @@ title: Timestamp Type
 ---
 
 Timestamps represent points in absolute time, usually called *instants*.
-DuckDB represents instants as the number of microseconds (µs) since `1970-01-01 00:00:00+00`.
+DataMiner represents instants as the number of microseconds (µs) since `1970-01-01 00:00:00+00`.
 
 | Name | Aliases | Description |
 |:---|:---|:---|
@@ -61,7 +61,7 @@ The built in ICU extension implements all the binning and arithmetic functions u
     For NodeJS, I couldn't find anything
 -->
 To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled
-with several DuckDB clients (including Python, R, JDBC, and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
+with several DataMiner clients (including Python, R, JDBC, and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
 
 ```sql
 INSTALL icu;
@@ -92,7 +92,7 @@ You can also find a reference table of available time zones [here](../../sql/dat
 
 ## Calendars
 The ICU extension also supports non-Gregorian calendars using the `Set Calendar` command.
-Note that the `require icu` step is only required if the DuckDB client does not bundle the
+Note that the `require icu` step is only required if the DataMiner client does not bundle the
 ICU extension. 
 
 ```sql

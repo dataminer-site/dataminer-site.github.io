@@ -40,7 +40,7 @@ EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
 ### Parquet Files
-Parquet files are compressed columnar files that are efficient to load and process. DuckDB provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
+Parquet files are compressed columnar files that are efficient to load and process. DataMiner provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
 
 # Parameters
 Parquet files are self-describing, as such far fewer parameters are required than with CSV files. Nevertheless, there are a number of options exposed that can be passed to the `read_parquet` function, or the `COPY` statement.
@@ -69,9 +69,9 @@ SELECT * FROM 'test.parquet';
 Multiple files can be read at once by providing a glob or a list of files. Refer to the [multiple files section](../multiple_files/overview) for more information.
 
 ### Partial Reading
-DuckDB supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
+DataMiner supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
 
-DuckDB also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
+DataMiner also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
 
 Filter and projection pushdown provide significant performance benefits. See [our blog post on this](/2021/06/25/querying-parquet.html) for more information.
 
@@ -95,7 +95,7 @@ SELECT * FROM people;
 ```
 
 ### Writing to Parquet Files
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [Copy Statement page](../../sql/statements/copy) for details, including all possible parameters for the copy statement.
+DataMiner also has support for writing to Parquet files using the `COPY` statement syntax. See the [Copy Statement page](../../sql/statements/copy) for details, including all possible parameters for the copy statement.
 
 ```sql
 -- write a query to a snappy compressed parquet file

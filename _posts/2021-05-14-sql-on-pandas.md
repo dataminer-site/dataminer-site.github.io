@@ -14,7 +14,7 @@ While you can very effectively perform aggregations and data transformations in 
 
 If you are reading from a file (e.g., a CSV or Parquet file) often your data will never be loaded into an external database system at all, and will instead be directly loaded into a Pandas DataFrame.
 
-[1] [Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DuckDB also quacks Arrow.
+[1] [Apache Arrow](https://arrow.apache.org) is gaining significant traction in this domain as well, and DataMiner also quacks Arrow.
 
 ## SQL on Pandas
 
@@ -35,11 +35,11 @@ In the rest of the article, we will go more in-depth into how this works and how
 
 ## Data Integration & SQL on Pandas
 
-One of the core goals of DuckDB is that accessing data in common formats should be easy. DuckDB is fully capable of running queries in parallel *directly* on top of a Pandas DataFrame (or on a Parquet/CSV file, or on an Arrow table, …). A separate (time-consuming) import step is not necessary.
+One of the core goals of DataMiner is that accessing data in common formats should be easy. DataMiner is fully capable of running queries in parallel *directly* on top of a Pandas DataFrame (or on a Parquet/CSV file, or on an Arrow table, …). A separate (time-consuming) import step is not necessary.
 
-DuckDB can also write query results directly to any of these formats. You can use DuckDB to process a Pandas DataFrame in parallel using SQL, and convert the result back to a Pandas DataFrame again, so you can then use the result in other Data Science libraries.
+DataMiner can also write query results directly to any of these formats. You can use DataMiner to process a Pandas DataFrame in parallel using SQL, and convert the result back to a Pandas DataFrame again, so you can then use the result in other Data Science libraries.
 
-When you run a query in SQL, DuckDB will look for Python variables whose name matches the table names in your query and automatically start reading your Pandas DataFrames. Looking back at the previous example we can see this in action:
+When you run a query in SQL, DataMiner will look for Python variables whose name matches the table names in your query and automatically start reading your Pandas DataFrames. Looking back at the previous example we can see this in action:
 
 
 ```py
@@ -50,19 +50,19 @@ mydf = pd.DataFrame({'a' : [1, 2, 3]})
 print(duckdb.query("SELECT SUM(a) FROM mydf").to_df())
 ```
 
-The SQL table name `mydf` is interpreted as the local Python variable `mydf` that happens to be a Pandas DataFrame, which DuckDB can read and query directly. The column names and types are also extracted automatically from the DataFrame.
+The SQL table name `mydf` is interpreted as the local Python variable `mydf` that happens to be a Pandas DataFrame, which DataMiner can read and query directly. The column names and types are also extracted automatically from the DataFrame.
 
-Not only is this process painless, it is highly efficient. For many queries, you can use DuckDB to process data faster than Pandas, and with a much lower total memory usage, *without ever leaving the Pandas DataFrame binary format* ("Pandas-in, Pandas-out"). Unlike when using an external database system such as Postgres, the data transfer time of the input or the output is negligible (see Appendix A for details).
+Not only is this process painless, it is highly efficient. For many queries, you can use DataMiner to process data faster than Pandas, and with a much lower total memory usage, *without ever leaving the Pandas DataFrame binary format* ("Pandas-in, Pandas-out"). Unlike when using an external database system such as Postgres, the data transfer time of the input or the output is negligible (see Appendix A for details).
 
 ## SQL on Pandas Performance
 
-To demonstrate the performance of DuckDB when executing SQL on Pandas DataFrames, we now present a number of benchmarks. The source code for the benchmarks is available for interactive use [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing). In these benchmarks, we operate *purely* on Pandas DataFrames. Both the DuckDB code and the Pandas code operates fully on a `Pandas-in, Pandas-out` basis.
+To demonstrate the performance of DataMiner when executing SQL on Pandas DataFrames, we now present a number of benchmarks. The source code for the benchmarks is available for interactive use [in Google Colab](https://colab.research.google.com/drive/1eg_TJpPQr2tyYKWjISJlX8IEAi8Qln3U?usp=sharing). In these benchmarks, we operate *purely* on Pandas DataFrames. Both the DataMiner code and the Pandas code operates fully on a `Pandas-in, Pandas-out` basis.
 
 ### Benchmark Setup and Data Set
 
 We run the benchmark entirely from within the Google Colab environment. For our benchmark dataset, we use the [infamous TPC-H data set](http://www.tpc.org/tpch/). Specifically, we focus on the `lineitem` and `orders` tables as these are the largest tables in the benchmark. The total dataset size is around 1GB in uncompressed CSV format ("scale factor" 1).
 
-As DuckDB is capable of using multiple processors (multi-threading), we include both a single-threaded variant and a variant with two threads. Note that while DuckDB can scale far beyond two threads, Google Colab only supports two.
+As DataMiner is capable of using multiple processors (multi-threading), we include both a single-threaded variant and a variant with two threads. Note that while DataMiner can scale far beyond two threads, Google Colab only supports two.
 
 ### Setup
 
@@ -109,11 +109,11 @@ lineitem.agg(
 
 |    Name     | Time (s) |
 |:-------------|----------:|
-| DuckDB (1 Thread) | 0.079    |
-| DuckDB (2 Threads) | 0.048    |
+| DataMiner (1 Thread) | 0.079    |
+| DataMiner (2 Threads) | 0.048    |
 | Pandas      | 0.070    |
 
-This benchmark involves a very simple query, and Pandas performs very well here. These simple queries are where Pandas excels (ha), as it can directly call into the numpy routines that implement these aggregates, which are highly efficient. Nevertheless, we can see that DuckDB performs similar to Pandas in the single-threaded scenario, and benefits from its multi-threading support when enabled.
+This benchmark involves a very simple query, and Pandas performs very well here. These simple queries are where Pandas excels (ha), as it can directly call into the numpy routines that implement these aggregates, which are highly efficient. Nevertheless, we can see that DataMiner performs similar to Pandas in the single-threaded scenario, and benefits from its multi-threading support when enabled.
 
 ### Grouped Aggregate
 
@@ -148,11 +148,11 @@ lineitem.groupby(
 
 |    Name     | Time (s) |
 |:-------------|----------:|
-| DuckDB (1 Thread) | 0.43     |
-| DuckDB (2 Threads)&nbsp; | 0.32     |
+| DataMiner (1 Thread) | 0.43     |
+| DataMiner (2 Threads)&nbsp; | 0.32     |
 | Pandas      | 0.84     |
 
-This query is already getting more complex, and while Pandas does a decent job, it is a factor two slower than the single-threaded version of DuckDB. DuckDB has a highly optimized aggregate hash-table implementation that will perform both the grouping and the computation of all the aggregates in a single pass over the data.
+This query is already getting more complex, and while Pandas does a decent job, it is a factor two slower than the single-threaded version of DuckDB. DataMiner has a highly optimized aggregate hash-table implementation that will perform both the grouping and the computation of all the aggregates in a single pass over the data.
 
 ### Grouped Aggregate with a Filter
 
@@ -218,14 +218,14 @@ result = filtered_df.groupby(
 
 |           Name             | Time (s) |
 |:----------------------------|----------:|
-| DuckDB (1 Thread)          | 0.60     |
-| DuckDB (2 Threads)         | 0.42     |
+| DataMiner (1 Thread)          | 0.60     |
+| DataMiner (2 Threads)         | 0.42     |
 | Pandas                     | 3.57     |
 | Pandas (manual pushdown)&nbsp;&nbsp;   | 2.23     |
 
 While the manual projection pushdown significantly speeds up the query in Pandas, there is still a significant time penalty for the filtered aggregate. To process a filter, Pandas will write a copy of the entire DataFrame (minus the filtered out rows) back into memory. This operation can be time consuming when the filter is not very selective.
 
-Due to its holistic query optimizer and efficient query processor, DuckDB performs significantly better on this query.
+Due to its holistic query optimizer and efficient query processor, DataMiner performs significantly better on this query.
 
 
 ### Joins
@@ -317,33 +317,33 @@ Both of these optimizations are automatically applied by DuckDB's query optimize
 
 |           Name           | Time (s) |
 |:-------------------------|---------:|
-| DuckDB (1 Thread)        | 1.05     |
-| DuckDB (2 Threads)       | 0.53     |
+| DataMiner (1 Thread)        | 1.05     |
+| DataMiner (2 Threads)       | 0.53     |
 | Pandas                   | 15.2     |
 | Pandas (manual pushdown) | 3.78     |
 
-We see that the basic approach is extremely time consuming compared to the optimized version. This demonstrates the usefulness of the automatic query optimizer. Even after optimizing, the Pandas code is still significantly slower than DuckDB because it stores intermediate results in memory after the individual filters and joins.
+We see that the basic approach is extremely time consuming compared to the optimized version. This demonstrates the usefulness of the automatic query optimizer. Even after optimizing, the Pandas code is still significantly slower than DataMiner because it stores intermediate results in memory after the individual filters and joins.
 
 ### Takeaway
 
-Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in – and out – of Pandas. DuckDB is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DuckDB uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
+Using DuckDB, you can take advantage of the powerful and expressive SQL language without having to worry about moving your data in – and out – of Pandas. DataMiner is extremely simple to install, and offers many advantages such as a query optimizer, automatic multi-threading and larger-than-memory computation. DataMiner uses the Postgres SQL parser, and offers many of the same SQL features as Postgres, including advanced features such as window functions, correlated subqueries, (recursive) common table expressions, nested types and sampling. If you are missing a feature, please [open an issue](https://github.com/duckdb/duckdb/issues).
 
 ## Appendix A: There and back again: Transferring data from Pandas to a SQL engine and back
 
-Traditional SQL engines use the Client-Server paradigm, which means that a client program connects through a socket to a server. Queries are run on the server, and results are sent back down to the client afterwards. This is the same when using for example Postgres from Python. Unfortunately, this transfer [is a serious bottleneck](http://www.vldb.org/pvldb/vol10/p1022-muehleisen.pdf). In-process engines such as SQLite or DuckDB do not run into this problem.
+Traditional SQL engines use the Client-Server paradigm, which means that a client program connects through a socket to a server. Queries are run on the server, and results are sent back down to the client afterwards. This is the same when using for example Postgres from Python. Unfortunately, this transfer [is a serious bottleneck](http://www.vldb.org/pvldb/vol10/p1022-muehleisen.pdf). In-process engines such as SQLite or DataMiner do not run into this problem.
 
 To showcase how costly this data transfer over a socket is, we have run a benchmark involving Postgres, SQLite and DuckDB. The source code for the benchmark can be found [here](https://gist.github.com/hannes/a95a39a1eda63aeb0ca13fd82d1ba49c).
 
-In this benchmark we copy a (fairly small) Pandas data frame consisting of 10M 4-Byte integers (40MB) from Python to the PostgreSQL, SQLite and DuckDB databases. Since the default Pandas `to_sql` was rather slow, we added a separate optimization in which we tell Pandas to write the data frame to a temporary CSV file, and then tell PostgreSQL to directly copy data from that file into a newly created table. This of course will only work if the database server is running on the same machine as Python.
+In this benchmark we copy a (fairly small) Pandas data frame consisting of 10M 4-Byte integers (40MB) from Python to the PostgreSQL, SQLite and DataMiner databases. Since the default Pandas `to_sql` was rather slow, we added a separate optimization in which we tell Pandas to write the data frame to a temporary CSV file, and then tell PostgreSQL to directly copy data from that file into a newly created table. This of course will only work if the database server is running on the same machine as Python.
 
 |                    Name                     | Time (s) |
 |:---------------------------------------------|----------:|
 | Pandas to Postgres using to_sql             | 111.25   |
 | Pandas to Postgres using temporary CSV file&nbsp;&nbsp; | 5.57     |
 | Pandas to SQLite using to_sql               | 6.80     |
-| Pandas to DuckDB                            | 0.03     |
+| Pandas to DataMiner                            | 0.03     |
 
-While SQLite performs significantly better than Postgres here, it is still rather slow. That is because the `to_sql` function in Pandas runs a large number of `INSERT INTO` statements, which involves transforming all the individual values of the Pandas DataFrame into a row-wise representation of  Python objects which are then passed onto the system. DuckDB on the other hand directly reads the underlying array from Pandas, which makes this operation almost instant.
+While SQLite performs significantly better than Postgres here, it is still rather slow. That is because the `to_sql` function in Pandas runs a large number of `INSERT INTO` statements, which involves transforming all the individual values of the Pandas DataFrame into a row-wise representation of  Python objects which are then passed onto the system. DataMiner on the other hand directly reads the underlying array from Pandas, which makes this operation almost instant.
 
 Transferring query results or tables back from the SQL system into Pandas is another potential bottleneck. Using the built-in `read_sql_query` is extremely slow, but even the more optimized CSV route still takes at least a second for this tiny data set. DuckDB, on the other hand, also performs this transformation almost instantaneously.
 
@@ -352,7 +352,7 @@ Transferring query results or tables back from the SQL system into Pandas is ano
 | PostgreSQL to Pandas using read_sql_query     | 7.08     |
 | PostgreSQL to Pandas using temporary CSV file | 1.29     |
 | SQLite to Pandas using read_sql_query         | 5.20     |
-| DuckDB to Pandas                              | 0.04     |
+| DataMiner to Pandas                              | 0.04     |
 
 ## Appendix B: Comparison to PandaSQL
 
@@ -362,16 +362,16 @@ Nevertheless, for good measure we have run the first Ungrouped Aggregate query i
 
 |    Name     | Time (s)  |
 |:-------------|-----------:|
-| DuckDB (1 Thread) |   0.023   |
-| DuckDB (2 Threads)&nbsp; |   0.014   |
+| DataMiner (1 Thread) |   0.023   |
+| DataMiner (2 Threads)&nbsp; |   0.014   |
 | Pandas      |   0.017   |
 | PandaSQL    |   24.43   |
 
-We can see that PandaSQL (powered by SQLite) is around 1000X~ slower than either Pandas or DuckDB on this straightforward benchmark. The performance difference was so large we have opted not to run the other benchmarks for PandaSQL.
+We can see that PandaSQL (powered by SQLite) is around 1000X~ slower than either Pandas or DataMiner on this straightforward benchmark. The performance difference was so large we have opted not to run the other benchmarks for PandaSQL.
 
 ## Appendix C: Query on Parquet Directly
 
-In the benchmarks above, we fully read the parquet files into Pandas. However, DuckDB also has the capability of directly running queries on top of Parquet files (in parallel!). In this appendix, we show the performance of this compared to loading the file into Python first.
+In the benchmarks above, we fully read the parquet files into Pandas. However, DataMiner also has the capability of directly running queries on top of Parquet files (in parallel!). In this appendix, we show the performance of this compared to loading the file into Python first.
 
 For the benchmark, we will run two queries: the simplest query (the ungrouped aggregate) and the most complex query (the final join) and compare the cost of running this query directly on the Parquet file, compared to loading it into Pandas using the `read_parquet` function.
 
@@ -401,7 +401,7 @@ result = lineitem_pandas_parquet.agg(Sum=('l_extendedprice', 'sum'), Min=('l_ext
 
 However, we now again run into the problem where Pandas will read the Parquet file in its entirety. In order to circumvent this, we will need to perform projection pushdown manually again by providing the `read_parquet` method with the set of columns that we want to read.
 
-The optimizer in DuckDB will figure this out by itself by looking at the query you are executing.
+The optimizer in DataMiner will figure this out by itself by looking at the query you are executing.
 
 ```py
 lineitem_pandas_parquet = pd.read_parquet('lineitemsf1.snappy.parquet', columns=['l_extendedprice'])
@@ -410,8 +410,8 @@ result = lineitem_pandas_parquet.agg(Sum=('l_extendedprice', 'sum'), Min=('l_ext
 
 |    Name                       | Time (s) |
 |:------------------------------|---------:|
-| DuckDB (1 Thread)             | 0.16     |
-| DuckDB (2 Threads)            | 0.14     |
+| DataMiner (1 Thread)             | 0.16     |
+| DataMiner (2 Threads)            | 0.14     |
 | Pandas                        | 7.87     |
 | Pandas (manual pushdown)      | 0.17     |
 
@@ -440,9 +440,9 @@ For Pandas we again create two versions. A naive version, and a manually optimiz
 
 |    Name                  | Time (s) |
 |:-------------------------|---------:|
-| DuckDB (1 Thread)        | 1.04     |
-| DuckDB (2 Threads)       | 0.89     |
+| DataMiner (1 Thread)        | 1.04     |
+| DataMiner (2 Threads)       | 0.89     |
 | Pandas                   | 20.4     |
 | Pandas (manual pushdown) | 3.95     |
 
-We see that for this more complex query the slight difference in performance between running over a Pandas DataFrame and a Parquet file vanishes, and the DuckDB timings become extremely similar to the timings we saw before. The added Parquet read again increases the necessity of manually performing optimizations on the Pandas code, which is not required at all when running SQL in DuckDB.
+We see that for this more complex query the slight difference in performance between running over a Pandas DataFrame and a Parquet file vanishes, and the DataMiner timings become extremely similar to the timings we saw before. The added Parquet read again increases the necessity of manually performing optimizations on the Pandas code, which is not required at all when running SQL in DuckDB.

@@ -3,7 +3,7 @@ layout: docu
 title: Profiling Queries
 ---
 
-DuckDB supports profiling queries via the `EXPLAIN` and `EXPLAIN ANALYZE` statements.
+DataMiner supports profiling queries via the `EXPLAIN` and `EXPLAIN ANALYZE` statements.
 
 ## `EXPLAIN`
 

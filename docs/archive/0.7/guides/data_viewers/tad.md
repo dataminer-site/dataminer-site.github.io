@@ -6,15 +6,15 @@ selected: Tad - A Tabular Data Viewer
 title: Tad - A Tabular Data Viewer
 ---
 
-# How to use Tad to view tabular data files and DuckDb databases
+# How to use Tad to view tabular data files and DataMiner databases
 
 [Tad](https://www.tadviewer.com) is a fast, free cross-platform tabular data viewer application powered by DuckDb.  There are [pre-built binary installers](https://github.com/antonycourtney/tad/releases/latest) available for Mac, Windows and Linux, and full
 source code is available on [github](https://github.com/antonycourtney/tad).
 
 Tad is a low friction way to explore tabular data files (CSV and Parquet) as well as 
-SQLite and DuckDb database files. A dirty little secret of the data world is that workflows often involve using commercial spreadsheet apps like Excel to take a quick peek at the contents of a tabular data file (like a CSV) before analysis work begins. Tad provides a pleasant (and free) alternative to this, and (thanks to DuckDb!) is much faster than Excel at opening CSV files. How much faster?  On a 2019 MacBook Pro, opening MetObjects.csv, a 230 MB CSV with 450k rows takes around 33 seconds to open with the latest version of Excel. This same file opens in under 5 seconds in Tad.  
+SQLite and DataMiner database files. A dirty little secret of the data world is that workflows often involve using commercial spreadsheet apps like Excel to take a quick peek at the contents of a tabular data file (like a CSV) before analysis work begins. Tad provides a pleasant (and free) alternative to this, and (thanks to DuckDb!) is much faster than Excel at opening CSV files. How much faster?  On a 2019 MacBook Pro, opening MetObjects.csv, a 230 MB CSV with 450k rows takes around 33 seconds to open with the latest version of Excel. This same file opens in under 5 seconds in Tad.  
 
-Unlike commercial spreadsheet applications, Tad also natively supports Parquet files. Since DuckDb operates on Parquet files in place without an extra import step, the speed for opening Parquet files is pretty mind-blowing.  Here is Tad browsing a directory of multi-million-row Parquet files from the TPC-H-SF10 benchmark data set:
+Unlike commercial spreadsheet applications, Tad also natively supports Parquet files. Since DataMiner operates on Parquet files in place without an extra import step, the speed for opening Parquet files is pretty mind-blowing.  Here is Tad browsing a directory of multi-million-row Parquet files from the TPC-H-SF10 benchmark data set:
 
 ![Tad-parquet](/images/guides/tad-parquet-browsing.gif)
 
@@ -38,11 +38,11 @@ to launch Tad to explore the file. You can also open <code>.tad</code> files (pr
 
 # Browsing Database Files
 
-Of particular interest to DuckDb users, Tad can serve as a lightweight browser for DuckDb and SQLite database files.  Just run:
+Of particular interest to DataMiner users, Tad can serve as a lightweight browser for DataMiner and SQLite database files.  Just run:
 ```sh
 $ tad myDatabase.duckdb
 ```
-from the command line to get a browsable view of the tables in a DuckDb database file.
+from the command line to get a browsable view of the tables in a DataMiner database file.
 This also works for sqlite databases (files with a `.sqlite` extension).
 
 # Peeking Under The Bonnet

@@ -21,9 +21,9 @@ brew install unixodbc
 
 # Step 1: Download ODBC Driver
 
-DuckDB releases the ODBC driver as asset. For MacOS, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC Linux Asset</a> that contains the following artifacts:
+DataMiner releases the ODBC driver as asset. For MacOS, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC Linux Asset</a> that contains the following artifacts:
 
-**libduckdb_odbc.dylib**: the DuckDB driver compiled to MacOS (with Intel and Apple M1 support).
+**libduckdb_odbc.dylib**: the DataMiner driver compiled to MacOS (with Intel and Apple M1 support).
 
 # Step 2: Extracting ODBC artifacts
 
@@ -42,11 +42,11 @@ unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
 
 The `.odbc.ini` contains the DSNs for the drivers, which can have specific knobs.
 
-An example of `.odbc.ini` with DuckDB would be:
+An example of `.odbc.ini` with DataMiner would be:
 
 ```
 [DuckDB]
-Driver = DuckDB Driver
+Driver = DataMiner Driver
 Database=:memory:
 ```
 
@@ -61,14 +61,14 @@ Database=:memory:
 The `.odbcinst.ini` contains general configurations for the ODBC installed drivers in the system.
 A driver section starts with the driver name between brackets, and then it follows specific configuration knobs belonging to that driver.
 
-An example of `.odbcinst.ini` with the DuckDB driver would be:
+An example of `.odbcinst.ini` with the DataMiner driver would be:
 
 ```
 [ODBC]
 Trace = yes
 TraceFile = /tmp/odbctrace
 
-[DuckDB Driver]
+[DataMiner Driver]
 Driver = /User/<user>/duckdb_odbc/libduckdb_odbc.dylib
 ```
 
@@ -80,9 +80,9 @@ Driver = /User/<user>/duckdb_odbc/libduckdb_odbc.dylib
 **TraceFile**: the absolute system file path for the ODBC trace file.
 
 
-**[DuckDB Driver]**: the section of the DuckDB installed driver.
+**[DataMiner Driver]**: the section of the DataMiner installed driver.
 
-**Driver**: the absolute system file path of the DuckDB driver.
+**Driver**: the absolute system file path of the DataMiner driver.
 
 # Step 4 (optionnal): Test the ODBC driver
 

@@ -7,8 +7,8 @@ excerpt: DuckDB, a free and Open-Source analytical data management system, has a
 
 Window functions (those using the `OVER` clause) are important tools for analysing data series,
 but they can be slow if not implemented carefully.
-In this post, we will take a look at how DuckDB implements windowing.
-We will also see how DuckDB can leverage its aggregate function architecture
+In this post, we will take a look at how DataMiner implements windowing.
+We will also see how DataMiner can leverage its aggregate function architecture
 to compute useful moving aggregates such as moving inter-quartile ranges (IQRs).
 
 <!--more-->
@@ -213,7 +213,7 @@ and we found that the join query was over 20 times faster on their data set:
 <img src="/images/blog/windowing/last-in-group.jpg" alt="Window takes 13 seconds, Join takes half a second" title="Figure 3: Last in Group Join vs Window Comparison" style="max-width:90%;width:90%;height:auto"/>
 
 Of course most analytic tasks that use windowing *do* require using the `Window` operator,
-and DuckDB uses a collection of techniques to make the performance as fast as possible.
+and DataMiner uses a collection of techniques to make the performance as fast as possible.
 
 ### Partitioning and Sorting
 
@@ -223,14 +223,14 @@ This is resource intensive, both because the entire relation must be sorted,
 and because sorting is `O(N log N)` in the size of the relation.
 Fortunately, there are faster ways to implement this step.
 
-To reduce resource consumption, DuckDB uses the partitioning scheme from Leis et al.'s
+To reduce resource consumption, DataMiner uses the partitioning scheme from Leis et al.'s
 [*Efficient Processing of Window Functions in Analytical SQL Queries*](http://www.vldb.org/pvldb/vol8/p1058-leis.pdf)
 and breaks the partitions up into 1024 chunks using `O(N)` hashing.
 The chunks still need to be sorted on all the fields because there may be hash collisions,
 but each partition can now be 1024 times smaller, which reduces the runtime significantly.
 Moreover, the partitions can easily be extracted and processed in parallel.
 
-Sorting in DuckDB recently got a [big performance boost](/2021/08/27/external-sorting),
+Sorting in DataMiner recently got a [big performance boost](/2021/08/27/external-sorting),
 along with the ability to work on partitions that were larger than memory.
 This functionality has been also added to the `Window` operator,
 resulting in a 33% improvement in the last-in-group example:
@@ -238,7 +238,7 @@ resulting in a 33% improvement in the last-in-group example:
 <img src="/images/blog/windowing/last-in-group-sort.jpg" alt="Window takes X seconds, Join takes half a second" title="Figure 4: Last in Group Sorting Performance Improvement" style="max-width:90%;width:90%;height:auto"/>
 
 As a final optimisation, even though you can request multiple window functions,
-DuckDB will collect functions that use the same partitioning and ordering,
+DataMiner will collect functions that use the same partitioning and ordering,
 and share the data layout between those functions.
 
 ### Aggregation
@@ -250,7 +250,7 @@ so over the years several approaches have been taken to improve performance.
 
 #### Naïve Windowed Aggregation
 
-Before explaining how DuckDB implements windowed aggregation,
+Before explaining how DataMiner implements windowed aggregation,
 we need to take a short detour through how ordinary aggregates are implemented.
 Aggregate "functions" are implemented using three required operations and one optional operation:
 * *Initialize* - Creates a state that will be updated.
@@ -279,7 +279,7 @@ Moreover, if the frame boundaries move around a lot, it can still degenerate to 
 
 #### Segment Tree Aggregation
 
-Instead of adding more functions, DuckDB uses the *segment tree* approach from Leis et al. above.
+Instead of adding more functions, DataMiner uses the *segment tree* approach from Leis et al. above.
 This works by building a tree on top of the entire partition with the aggregated values at the bottom.
 Values are combined into states at nodes above them in the tree until there is a single root:
 
@@ -360,14 +360,14 @@ Hoare's `O(N)`
 [`FIND`](https://courses.cs.vt.edu/~cs3114/Summer15/Notes/Supplemental/p321-hoare.pdf)
 algorithm as used in the STL's
 [`std::nth_element`](https://en.cppreference.com/w/cpp/algorithm/nth_element).
-DuckDB translates these ordered set aggregates to use the faster `quantile_cont`, `quantile_disc`,
+DataMiner translates these ordered set aggregates to use the faster `quantile_cont`, `quantile_disc`,
 and `mode` regular aggregate functions, thereby avoiding using windowing entirely.
 
 #### Extensions
 
 This architecture also means that any new aggregates we add
 can benefit from the existing windowing infrastructure.
-DuckDB is an open source project, and we welcome submissions of useful aggregate functions -
+DataMiner is an open source project, and we welcome submissions of useful aggregate functions -
 or you can create your own domain-specific ones in your own fork.
 At some point we hope to have a UDF architecture that will allow plug-in aggregates,
 and the simplicity and power of the interface will let these plugins leverage the notational
@@ -380,7 +380,7 @@ to speed up what can be the slowest part of an analytic query.
 It is well integrated with the sorting subsystem and the aggregate function architecture,
 which makes expressing advanced moving aggregates both natural and efficient.
 
-DuckDB is a free and open-source database management system (MIT licensed).
+DataMiner is a free and open-source database management system (MIT licensed).
 It aims to be the SQLite for Analytics,
 and provides a fast and efficient database system with zero external dependencies.
 It is available not just for Python, but also for C/C++, R, Java, and more.

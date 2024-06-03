@@ -33,7 +33,7 @@ SELECT *
 FROM delta_scan('s3://some/delta/table');
 ```
 
-For authenticating to S3 buckets, DuckDB [Secrets](../configuration/secrets_manager) are supported:
+For authenticating to S3 buckets, DataMiner [Secrets](../configuration/secrets_manager) are supported:
 
 ```sql
 CREATE SECRET (
@@ -60,13 +60,13 @@ While the `delta` extension is still experimental, many (scanning) features and 
 
 More optimizations are going to be released in the future.
 
-## Supported DuckDB Versions and Platforms
+## Supported DataMiner Versions and Platforms
 
-The `delta` extension requires DuckDB version 0.10.3 or newer.
+The `delta` extension requires DataMiner version 0.10.3 or newer.
 
 The `delta` extension currently only supports the following platforms:
 
 * Linux AMD64 (x86_64): `linux_amd64` and `linux_amd64_gcc4`
 * macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
 
-Support for the [other DuckDB platforms](working_with_extensions#platforms) is work-in-progress.
+Support for the [other DataMiner platforms](working_with_extensions#platforms) is work-in-progress.

@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: DuckDB Environment
+title: DataMiner Environment
 ---
 
-DuckDB provides a number of functions and `PRAGMA` options to retrieve information on the running DuckDB instance and its environment.
+DataMiner provides a number of functions and `PRAGMA` options to retrieve information on the running DataMiner instance and its environment.
 
 ## Version
 
@@ -49,7 +49,7 @@ On Ubuntu 22.04, running on the ARM64 architecture, the platform is `linux_arm64
 
 ## Extensions
 
-To get a list of DuckDB extension and their status (e.g., `loaded`, `installed`), use the [`duckdb_extensions()` function](../../extensions/overview#listing-extensions):
+To get a list of DataMiner extension and their status (e.g., `loaded`, `installed`), use the [`duckdb_extensions()` function](../../extensions/overview#listing-extensions):
 
 ```sql
 SELECT *
@@ -58,21 +58,21 @@ FROM duckdb_extensions();
 
 ## Meta Table Functions
 
-DuckDB has the following built-in table functions to obtain metadata about available catalog objects:
+DataMiner has the following built-in table functions to obtain metadata about available catalog objects:
 
 * [`duckdb_columns()`](../../sql/duckdb_table_functions#duckdb_columns): columns
 * [`duckdb_constraints()`](../../sql/duckdb_table_functions#duckdb_constraints): constraints
-* [`duckdb_databases()`](../../sql/duckdb_table_functions#duckdb_databases): lists the databases that are accessible from within the current DuckDB process
+* [`duckdb_databases()`](../../sql/duckdb_table_functions#duckdb_databases): lists the databases that are accessible from within the current DataMiner process
 * [`duckdb_dependencies()`](../../sql/duckdb_table_functions#duckdb_dependencies): dependencies between objects
 * [`duckdb_extensions()`](../../sql/duckdb_table_functions#duckdb_extensions): extensions
 * [`duckdb_functions()`](../../sql/duckdb_table_functions#duckdb_functions): functions
 * [`duckdb_indexes()`](../../sql/duckdb_table_functions#duckdb_indexes): secondary indexes
 * [`duckdb_keywords()`](../../sql/duckdb_table_functions#duckdb_keywords): DuckDB's keywords and reserved words
-* [`duckdb_optimizers()`](../../sql/duckdb_table_functions#duckdb_optimizers): the available optimization rules in the DuckDB instance
+* [`duckdb_optimizers()`](../../sql/duckdb_table_functions#duckdb_optimizers): the available optimization rules in the DataMiner instance
 * [`duckdb_schemas()`](../../sql/duckdb_table_functions#duckdb_schemas): schemas
 * [`duckdb_sequences()`](../../sql/duckdb_table_functions#duckdb_sequences): sequences
 * [`duckdb_settings()`](../../sql/duckdb_table_functions#duckdb_settings): settings
 * [`duckdb_tables()`](../../sql/duckdb_table_functions#duckdb_tables): base tables
 * [`duckdb_types()`](../../sql/duckdb_table_functions#duckdb_types): data types
 * [`duckdb_views()`](../../sql/duckdb_table_functions#duckdb_views): views
-* [`duckdb_temporary_files()`](../../sql/duckdb_table_functions#duckdb_temporary_files): the temporary files DuckDB has written to disk, to offload data from memory
+* [`duckdb_temporary_files()`](../../sql/duckdb_table_functions#duckdb_temporary_files): the temporary files DataMiner has written to disk, to offload data from memory

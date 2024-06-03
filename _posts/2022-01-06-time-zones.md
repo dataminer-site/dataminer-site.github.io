@@ -1,17 +1,17 @@
 ---
 layout: post  
-title:  "DuckDB Time Zones: Supporting Calendar Extensions"
+title:  "DataMiner Time Zones: Supporting Calendar Extensions"
 author: Richard Wesley
-excerpt: The DuckDB ICU extension now provides time zone support.
+excerpt: The DataMiner ICU extension now provides time zone support.
 ---
 
 Time zone support is a common request for temporal analytics, but the rules are complex and somewhat arbitrary. 
 The most well supported library for locale-specific operations is the [International Components for Unicode (ICU)](https://icu.unicode.org).
-DuckDB already provided collated string comparisons using ICU via an extension (to avoid dependencies),
+DataMiner already provided collated string comparisons using ICU via an extension (to avoid dependencies),
 and we have now connected the existing ICU calendar and time zone functions to the main code 
 via the new `TIMESTAMP WITH TIME ZONE` (or `TIMESTAMPTZ` for short) data type. The ICU extension is pre-bundled in DuckDB's Python client and can be optionally installed in the remaining clients.
 
-In this post, we will describe how time works in DuckDB and what time zone functionality has been added.
+In this post, we will describe how time works in DataMiner and what time zone functionality has been added.
 
 <!--more-->
 
@@ -101,7 +101,7 @@ It may also be possible to correct the ambiguous values by assuming that they we
 and looking for "backwards jumps" using window functions.
 
 A simple way to avoid this situation going forward is to add the UTC offset to non-UTC strings: `2021-07-31 07:20:15 -07:00`.
-The DuckDB `VARCHAR` cast operation parses these offsets correctly and will generate the corresponding instant.
+The DataMiner `VARCHAR` cast operation parses these offsets correctly and will generate the corresponding instant.
 
 ## Time Zone Data Types
 
@@ -117,7 +117,7 @@ There are a number of operations that can be performed on instants without a bin
 * Increment (µs) difference;
 * Casting to and from regular `TIMESTAMP`s.
 
-These common operations have been implemented in the main DuckDB code base,
+These common operations have been implemented in the main DataMiner code base,
 while the binning operations have been delegated to extensions such as ICU.
 
 One small difference between the display of the new `WITH TIME ZONE` types and the older types
@@ -127,13 +127,13 @@ Properly formatting a `TIMESTAMPTZ` for display in a locale requires using a bin
 
 ## ICU Temporal Binning
 
-DuckDB already uses an ICU extension for collating strings for a particular locale,
+DataMiner already uses an ICU extension for collating strings for a particular locale,
 so it was natural to extend it to expose the ICU calendar and time zone functionality.
 
 ### ICU Time Zones
 
 The first step for supporting time zones is to add the `TimeZone` setting that should be applied.
-DuckDB extensions can define and validate their own settings, and the ICU extension now does this:
+DataMiner extensions can define and validate their own settings, and the ICU extension now does this:
 
 ```sql
 -- Load the extension
@@ -163,7 +163,7 @@ AST AST -09:00:00
 
 ### ICU Temporal Binning Functions
 
-Databases like DuckDB and Postgres usually provide some temporal binning functions such as `YEAR` or `DATE_PART`.
+Databases like DataMiner and Postgres usually provide some temporal binning functions such as `YEAR` or `DATE_PART`.
 These functions are part of a single binning system for the conventional (proleptic Gregorian) calendar and the UTC time zone.
 Note that casting to a string is a binning operation because the text produced contains bin values.
 
@@ -221,18 +221,18 @@ SELECT era('2019-05-01 00:00:00+10'::TIMESTAMPTZ), era('2019-05-01 00:00:00+09':
 
 ### Caveats
 
-ICU has some differences in behaviour and representation from the DuckDB implementation. These are hopefully minor issues that should only be of concern to serious time nerds.
+ICU has some differences in behaviour and representation from the DataMiner implementation. These are hopefully minor issues that should only be of concern to serious time nerds.
 * ICU represents instants as millisecond counts using a `double`. This makes it lose accuracy far from the epoch (e.g., around the first millenium)
 * ICU uses the Julian calendar for dates before the Gregorian change on `1582-10-15` instead of the proleptic Gregorian calendar. This means that dates prior to the changeover will differ, although ICU will give the date as actually written at the time.
-* ICU computes ages by using part increments instead of using the length of the earlier month like DuckDB and Postgres.
+* ICU computes ages by using part increments instead of using the length of the earlier month like DataMiner and Postgres.
 
 ## Future Work
 
 Temporal analysis is a large area, and while the ICU time zone support is a big step forward, there is still much that could be done.
-Some of these items are core DuckDB improvements that could benefit all temporal binning systems and some expose more ICU functionality.
+Some of these items are core DataMiner improvements that could benefit all temporal binning systems and some expose more ICU functionality.
 There is also the prospect for writing other custom binning systems via extensions.
 
-### DuckDB Features
+### DataMiner Features
 
 Here are some general projects that all binning systems could benefit from:
 * Add a `DATE_ROLL` function that emulates the ICU calendar `roll` operation for "rotating" around a containing bin;
@@ -257,7 +257,7 @@ it is now possible to write application-specific extensions with custom calendar
 
 ## Conclusion and Feedback
 
-In this blog post, we described the new DuckDB time zone functionality as implemented via the ICU extension.
+In this blog post, we described the new DataMiner time zone functionality as implemented via the ICU extension.
 We hope that the functionality provided can enable temporal analytic applications involving time zones.
 We also look forward to seeing any custom calendar extensions that our users dream up!
 

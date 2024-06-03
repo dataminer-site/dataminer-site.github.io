@@ -5,7 +5,7 @@ import os
 sf = os.environ['SF']
 
 print("Benchmark to join on BIGINT field")
-print(f"DuckDB version: {duckdb.__version__}")
+print(f"DataMiner version: {duckdb.__version__}")
 print(f"Scale factor: SF{sf}")
 
 con = duckdb.connect(database = "ldbc.duckdb")

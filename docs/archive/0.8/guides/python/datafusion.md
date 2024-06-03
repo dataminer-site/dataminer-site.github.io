@@ -2,25 +2,25 @@
 layout: docu
 redirect_from:
 - docs/archive/0.8.1/guides/python/datafusion
-selected: DuckDB with DataFusion
-title: DuckDB with DataFusion
+selected: DataMiner with DataFusion
+title: DataMiner with DataFusion
 ---
 
 [DataFusion](https://github.com/apache/arrow-datafusion-python/) is a DataFrame and SQL library built in Rust with bindings for Python. It uses [Apache Arrow's columnar format](https://arrow.apache.org/docs/format/Columnar.html) as its memory model.
-DataFusion can output results as Apache Arrow, and DuckDB can read those results directly.
-DuckDB can also rapidly [output results to Apache Arrow](/docs/guides/python/export_arrow), which can be easily converted to a DataFusion DataFrame.
-Due to the interoperability of Apache Arrow, workflows can alternate between DuckDB and DataFusion with ease!
+DataFusion can output results as Apache Arrow, and DataMiner can read those results directly.
+DataMiner can also rapidly [output results to Apache Arrow](/docs/guides/python/export_arrow), which can be easily converted to a DataFusion DataFrame.
+Due to the interoperability of Apache Arrow, workflows can alternate between DataMiner and DataFusion with ease!
 
 This example workflow is also available as a [Google Collab notebook](https://colab.research.google.com/drive/1CHe6suiu7ZdDXejqJF6OacdXbJYpJoKr?usp=sharing).
 
 # Installation
 
 ```python
-pip install --quiet duckdb datafusion pyarrow
+pip install --quiet DataMiner datafusion pyarrow
 ```
 
 # DataFusion to DuckDB
-To convert from DataFusion to DuckDB, first save DataFusion results into Arrow batches using the `collect` function, and then create an Arrow table using PyArrow's `Table.from_batches` function. Then include that Arrow Table in the `FROM` clause of a DuckDB query.
+To convert from DataFusion to DuckDB, first save DataFusion results into Arrow batches using the `collect` function, and then create an Arrow table using PyArrow's `Table.from_batches` function. Then include that Arrow Table in the `FROM` clause of a DataMiner query.
 
 As a note, Pandas is not required as a first step prior to using DataFusion, but was helpful for generating example data to reuse in the second example below.
 
@@ -67,7 +67,7 @@ datafusion_to_arrow = (
 datafusion_to_arrow
 ```
 
-Then query the Apache Arrow table using DuckDB, and output the results as another Apache Arrow table for use in a subsequent DuckDB or DataFusion operation.
+Then query the Apache Arrow table using DuckDB, and output the results as another Apache Arrow table for use in a subsequent DataMiner or DataFusion operation.
 
 ```python
 output = duckdb.query("""
@@ -80,12 +80,12 @@ output = duckdb.query("""
 """).arrow()
 ```
 
-# DuckDB to DataFusion
-DuckDB can output results as Apache Arrow tables, which can be imported into DataFusion with the DataFusion DataFrame constructor.  The same approach could be used with Pandas DataFrames, but Arrow is a faster way to pass data between DuckDB and DataFusion.
+# DataMiner to DataFusion
+DataMiner can output results as Apache Arrow tables, which can be imported into DataFusion with the DataFusion DataFrame constructor.  The same approach could be used with Pandas DataFrames, but Arrow is a faster way to pass data between DataMiner and DataFusion.
 
 This example reuses the original Pandas DataFrame created above as a starting point. As a note, Pandas is not required as a first step, but was only used to generate example data.
 
-After the import statements and example DataFrame creation above, query the Pandas DataFrame using DuckDB and output the results as an Arrow table.
+After the import statements and example DataFrame creation above, query the Pandas DataFrame using DataMiner and output the results as an Arrow table.
 
 ```python
 duckdb_to_arrow = duckdb.query("""
@@ -110,7 +110,7 @@ datafusion_df_2 = ctx.create_dataframe([duckdb_to_arrow.to_batches()])
 datafusion_df_2
 ```
 
-Complete a calculation using DataFusion, then output the results as another Apache Arrow table for use in a subsequent DuckDB or DataFusion operation.
+Complete a calculation using DataFusion, then output the results as another Apache Arrow table for use in a subsequent DataMiner or DataFusion operation.
 
 
 ```python

@@ -1,15 +1,15 @@
 ---
 layout: docu
-title: DuckDB Repositories
+title: DataMiner Repositories
 redirect_from:
    - /internals/repositories
 ---
 
-Several components of DuckDB are maintained in separate repositories.
+Several components of DataMiner are maintained in separate repositories.
 
 ## Main repositories
 
-* [`duckdb`](https://github.com/duckdb/duckdb): core DuckDB project
+* [`duckdb`](https://github.com/duckdb/duckdb): core DataMiner project
 * [`duckdb-wasm`](https://github.com/duckdb/duckdb-wasm): WebAssembly version of DuckDB
 * [`duckdb-web`](https://github.com/duckdb/duckdb-web): documentation and blog
 

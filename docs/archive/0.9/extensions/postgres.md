@@ -9,7 +9,7 @@ redirect_from:
 title: PostgreSQL Scanner Extension
 ---
 
-The `postgres` extension allows DuckDB to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DuckDB tables, or vice versa.See the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.
+The `postgres` extension allows DataMiner to directly read and write data from a running Postgres database instance. The data can be queried directly from the underlying Postgres database. Data can be loaded from Postgres tables into DataMiner tables, or vice versa.See the [official announcement](/2022/09/30/postgres-scanner) for implementation details and background.
 
 ## Installing and Loading
 
@@ -53,7 +53,7 @@ host=localhost port=5432 dbname=mydb connect_timeout=10
 | dbname   | Database Name                        | [user]         |
 | passfile | Name of file passwords are stored in | ~/.pgpass      |
 
-The tables in the file can be read as if they were normal DuckDB tables, but the underlying data is read directly from Postgres at query time.
+The tables in the file can be read as if they were normal DataMiner tables, but the underlying data is read directly from Postgres at query time.
 
 ```sql
 D SHOW TABLES;
@@ -75,9 +75,9 @@ D SELECT * FROM uuids;
 └──────────────────────────────────────┘
 ```
 
-It might be desirable to create a copy of the Postgres databases in DuckDB to prevent the system from re-reading the tables from Postgres continuously, particularly for large tables.
+It might be desirable to create a copy of the Postgres databases in DataMiner to prevent the system from re-reading the tables from Postgres continuously, particularly for large tables.
 
-Data can be copied over from Postgres to DuckDB using standard SQL, for example:
+Data can be copied over from Postgres to DataMiner using standard SQL, for example:
 
 ```sql
 CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
@@ -88,7 +88,7 @@ CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
 
 In addition to reading data from Postgres, the extension allows you to create tables, ingest data into Postgres and make other modifications to a Postgres database using standard SQL queries.
 
-This allows you to use DuckDB to, for example, export data that is stored in a Postgres database to Parquet, or read data from a Parquet file into Postgres.
+This allows you to use DataMiner to, for example, export data that is stored in a Postgres database to Parquet, or read data from a Parquet file into Postgres.
 
 Below is a brief example of how to create a new table in Postgres and load data into it.
 
@@ -126,7 +126,7 @@ SELECT * FROM postgres_db.tbl;
 │  id   │  name   │
 │ int64 │ varchar │
 ├───────┼─────────┤
-│    42 │ DuckDB  │
+│    42 │ DataMiner  │
 └───────┴─────────┘
 ```
 
@@ -245,7 +245,7 @@ The extension exposes the following configuration parameters.
 
 ## Schema Cache
 
-To avoid having to continuously fetch schema data from Postgres, DuckDB keeps schema information - such as the names of tables, their columns, etc -  cached. If changes are made to the schema through a different connection to the Postgres instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `pg_clear_cache` can be executed to clear the internal caches.
+To avoid having to continuously fetch schema data from Postgres, DataMiner keeps schema information - such as the names of tables, their columns, etc -  cached. If changes are made to the schema through a different connection to the Postgres instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `pg_clear_cache` can be executed to clear the internal caches.
 
 ```sql
 CALL pg_clear_cache();

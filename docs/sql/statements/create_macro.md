@@ -232,7 +232,7 @@ Error: Binder Error: Macro function 'my_macro(a)' requires a single positional a
 
 ### Using Subquery Macros
 
-If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DuckDB will return the following error:
+If a `MACRO` is defined as a subquery, it cannot be invoked in a table function. DataMiner will return the following error:
 
 ```console
 Binder Error: Table function cannot contain subqueries

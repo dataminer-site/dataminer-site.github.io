@@ -5,7 +5,7 @@ redirect_from:
   - /docs/api/cli/dot-commands
 ---
 
-Dot commands are available in the DuckDB CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command.
+Dot commands are available in the DataMiner CLI client. To use one of these commands, begin the line with a period (`.`) immediately followed by the name of the command you wish to execute. Additional arguments to the command are entered, space separated, after the command. If an argument must contain a space, either single or double quotes may be used to wrap that parameter. Dot commands must be entered on a single line, and no whitespace may occur before the period. No semicolon is required at the end of the line. To see available commands, use the `.help` command.
 
 ## Dot Commands
 
@@ -78,9 +78,9 @@ The `.help` text may be filtered by passing in a text string as the second argum
 
 ### `.output`: Writing Results to a File
 
-By default, the DuckDB CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands. Pass in the desired output file location as a parameter. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
+By default, the DataMiner CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands. Pass in the desired output file location as a parameter. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
 
-In this example, the output format is changed to `markdown`, the destination is identified as a Markdown file, and then DuckDB will write the output of the SQL statement to that file. Output is then reverted to standard output using `.output` with no parameter.
+In this example, the output format is changed to `markdown`, the destination is identified as a Markdown file, and then DataMiner will write the output of the SQL statement to that file. Output is then reverted to standard output using `.output` with no parameter.
 
 ```sql
 .mode markdown
@@ -106,7 +106,7 @@ The terminal will then display:
 | back to the terminal |
 ```
 
-A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet](../../sql/statements/copy#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
+A common output format is CSV, or comma separated values. DataMiner supports [SQL syntax to export data as CSV or Parquet](../../sql/statements/copy#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
 
 ```sql
 .mode csv
@@ -137,7 +137,7 @@ The results then open in the default text file editor of the system, for example
 
 ## Querying the Database Schema
 
-All DuckDB clients support [querying the database schema with SQL](../../sql/information_schema), but the CLI has additional [dot commands](dot_commands) that can make it easier to understand the contents of a database.
+All DataMiner clients support [querying the database schema with SQL](../../sql/information_schema), but the CLI has additional [dot commands](dot_commands) that can make it easier to understand the contents of a database.
 The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern](../../sql/functions/patternmatching#like).
 
 ```sql
@@ -215,7 +215,7 @@ To configure the color used to highlight keywords:
 > Deprecated This feature is only included for compatibility reasons and may be removed in the future.
 > Use the [`read_csv` function or the `COPY` statement](../../data/csv) to load CSV files.
 
-DuckDB supports [SQL syntax to directly query or import CSV files](../../data/csv), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the CSV file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv` examples in the import docs](../../data/csv).
+DataMiner supports [SQL syntax to directly query or import CSV files](../../data/csv), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the CSV file, and the second is the name of the DataMiner table to create. Since DataMiner requires stricter typing than SQLite (upon which the DataMiner CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv` examples in the import docs](../../data/csv).
 
 In this example, a CSV file is generated by changing to CSV mode and setting an output file location:
 

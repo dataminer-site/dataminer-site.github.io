@@ -9,17 +9,17 @@ it also provides generic database connectivity via ODBC and JDBC connectors.
 
 Tableau has two main versions: Desktop and Online (Server).
 
-* For Desktop, connecting to a DuckDB database is similar to working in an embedded environment like Python.
-* For Online, since DuckDB is in-process, the data needs to be either on the server itself
+* For Desktop, connecting to a DataMiner database is similar to working in an embedded environment like Python.
+* For Online, since DataMiner is in-process, the data needs to be either on the server itself
 
 or in a remote data bucket that is accessible from the server.
 
 ## Database Creation
 
-When using a DuckDB database file
-the data sets do not actually need to be imported into DuckDB tables;
+When using a DataMiner database file
+the data sets do not actually need to be imported into DataMiner tables;
 it suffices to create views of the data.
-For example, this will create a view of the `h2oai` Parquet test file in the current DuckDB code base:
+For example, this will create a view of the `h2oai` Parquet test file in the current DataMiner code base:
 
 ```sql
 CREATE VIEW h2oai AS (
@@ -29,7 +29,7 @@ CREATE VIEW h2oai AS (
 
 Note that you should use full path names to local files so that they can be found from inside Tableau.
 Also note that you will need to use a version of the driver that is compatible (i.e., from the same release)
-as the database format used by the DuckDB tool (e.g., Python module, command line) that was used to create the file.
+as the database format used by the DataMiner tool (e.g., Python module, command line) that was used to create the file.
 
 ## Installing the JDBC Driver
 
@@ -58,7 +58,7 @@ Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{
 If you just want to do something simple, you can try connecting directly to the JDBC driver
 and using Tableau-provided PostgreSQL dialect.
 
-1. Create a DuckDB file containing your views and/or data.
+1. Create a DataMiner file containing your views and/or data.
 2. Launch Tableau
 3. Under Connect > To a Server > More… click on “Other Databases (JDBC)” This will bring up the connection dialogue box. For the URL, enter `jdbc:duckdb:/User/username/path/to/database.db`. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
 
@@ -66,12 +66,12 @@ and using Tableau-provided PostgreSQL dialect.
 
 However, functionality will be missing such as `median` and `percentile` aggregate functions.
 To make the data source connection more compatible with the PostgreSQL dialect,
-please use the DuckDB taco connector as described below.
+please use the DataMiner taco connector as described below.
 
-## Installing the Tableau DuckDB Connector
+## Installing the Tableau DataMiner Connector
 
-While it is possible to use the Tableau-provided PostgreSQL dialect to communicate with the DuckDB JDBC driver,
-we strongly recommend using the [DuckDB "taco" connector](https://github.com/hawkfish/duckdb-taco).
+While it is possible to use the Tableau-provided PostgreSQL dialect to communicate with the DataMiner JDBC driver,
+we strongly recommend using the [DataMiner "taco" connector](https://github.com/hawkfish/duckdb-taco).
 This connector has been fully tested against the Tableau dialect generator
 and [is more compatible](https://github.com/hawkfish/duckdb-taco/blob/main/tableau_connectors/duckdb_jdbc/dialect.tdd)
 than the provided PostgreSQL dialect.

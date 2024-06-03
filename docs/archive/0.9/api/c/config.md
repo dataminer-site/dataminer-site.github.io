@@ -54,7 +54,7 @@ duckdb_close(&db);
 ### `duckdb_create_config`
 
 ---
-Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
+Initializes an empty configuration object that can be used to provide start-up options for the DataMiner instance
 through `duckdb_open_ext`.
 
 This will always succeed unless there is a malloc failure.

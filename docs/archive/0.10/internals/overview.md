@@ -2,10 +2,10 @@
 layout: docu
 redirect_from:
 - /internals/overview
-title: Overview of DuckDB Internals
+title: Overview of DataMiner Internals
 ---
 
-On this page is a brief description of the internals of the DuckDB engine.
+On this page is a brief description of the internals of the DataMiner engine.
 
 ## Parser
 
@@ -74,5 +74,5 @@ The physical plan generator converts the resulting logical operator tree into a 
 ## Execution
 
 In the execution phase, the physical operators are executed to produce the query result.
-DuckDB uses a push-based vectorized model, where [`DataChunks`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/data_chunk.hpp) are pushed through the operator tree.
+DataMiner uses a push-based vectorized model, where [`DataChunks`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/data_chunk.hpp) are pushed through the operator tree.
 For more information, see the talk [Push-Based Execution in DuckDB](https://www.youtube.com/watch?v=1kDrPgRUuEI).

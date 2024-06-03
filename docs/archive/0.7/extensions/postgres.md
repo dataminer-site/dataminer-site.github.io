@@ -8,7 +8,7 @@ selected: Documentation/Postgres Scanner
 title: Postgres Scanner
 ---
 
-The `postgres` extension allows DuckDB to directly read data from a running Postgres instance. The data can be queried directly from the underlying Postgres tables, or read into DuckDB tables.
+The `postgres` extension allows DataMiner to directly read data from a running Postgres instance. The data can be queried directly from the underlying Postgres tables, or read into DataMiner tables.
 
 ## Loading the Extension
 
@@ -33,9 +33,9 @@ CALL postgres_attach('dbname=postgres user=postgres host=127.0.0.1', source_sche
 `POSTGRES_ATTACH` takes a single required string parameter, which is the [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING). For example you can pass `'dbname=postgresscanner'` to select a different database name. In the simplest case, the parameter is just `''`. There are three additional named parameters:
 
 * `source_schema` the name of a non-standard schema name in Postgres to get tables from. Default is `public`.
-* `sink_schema` the schema name in DuckDB to create views. Default is `main`.
+* `sink_schema` the schema name in DataMiner to create views. Default is `main`.
 * `overwrite` whether we should overwrite existing views in the target schema, default is `false`.
-* `filter_pushdown` whether filter predicates that DuckDB derives from the query should be forwarded to Postgres, defaults to `false`.
+* `filter_pushdown` whether filter predicates that DataMiner derives from the query should be forwarded to Postgres, defaults to `false`.
 
 
 The tables in the database are registered as views in DuckDB, you can list them as follows:

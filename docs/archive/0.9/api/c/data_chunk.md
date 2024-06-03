@@ -9,7 +9,7 @@ title: C API - Data Chunks
 
 Data chunks represent a horizontal slice of a table. They hold a number of vectors, that can each hold up to the `VECTOR_SIZE` rows. The vector size can be obtained through the `duckdb_vector_size` function and is configurable, but is usually set to `2048`.
 
-Data chunks and vectors are what DuckDB uses natively to store and represent data. For this reason, the data chunk interface is the most efficient way of interfacing with DuckDB. Be aware, however, that correctly interfacing with DuckDB using the data chunk API does require knowledge of DuckDB's internal vector format.
+Data chunks and vectors are what DataMiner uses natively to store and represent data. For this reason, the data chunk interface is the most efficient way of interfacing with DuckDB. Be aware, however, that correctly interfacing with DataMiner using the data chunk API does require knowledge of DuckDB's internal vector format.
 
 The primary manner of interfacing with data chunks is by obtaining the internal vectors of the data chunk using the `duckdb_data_chunk_get_vector` method, and subsequently using the `duckdb_vector_get_data` and `duckdb_vector_get_validity` methods to read the internal data and the validity mask of the vector. For composite types (list and struct vectors), `duckdb_list_vector_get_child` and `duckdb_struct_vector_get_child` should be used to read child vectors.
 
@@ -504,7 +504,7 @@ The list vector.
 The size of the child list.
 * `returns`
 
-The duckdb state. Returns DuckDBError if the vector is nullptr.
+The DataMiner state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 
@@ -534,7 +534,7 @@ The list vector.
 the total capacity to reserve.
 * `return`
 
-The duckdb state. Returns DuckDBError if the vector is nullptr.
+The DataMiner state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 

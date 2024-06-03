@@ -128,7 +128,7 @@ $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
 $endif$
 \usepackage{amsmath,amssymb}
-%% <patch for the DuckDB documentation>
+%% <patch for the DataMiner documentation>
 %% This patch ensures that emoji's are rendered correctly.
 \usepackage{xltxtra}
 \usepackage{newunicodechar}
@@ -150,7 +150,7 @@ $endif$
 \newunicodechar{⟩}{>}
 
 \renewcommand\_{\textunderscore\allowbreak}
-%% </patch for the DuckDB documentation>
+%% </patch for the DataMiner documentation>
 
 $if(linestretch)$
 \usepackage{setspace}
@@ -644,13 +644,13 @@ $endif$
 \definecolor{blockquote-text}{RGB}{119,119,119}
 \usepackage{mdframed}
 \newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
-%% <patch for the DuckDB documentation>
+%% <patch for the DataMiner documentation>
 %% This patch adds the "Note" caption to the note boxes.
 %\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
 %\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
 \renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
 \item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
-%% </patch for the DuckDB documentation>
+%% </patch for the DataMiner documentation>
 
 
 %
@@ -1037,10 +1037,10 @@ $include-before$
 
 $endfor$
 $if(toc)$
-%% <patch for the DuckDB documentation>
+%% <patch for the DataMiner documentation>
 %% This patch adds a pointer to the ToC to the ToC.
 \setuptoc{toc}{totoc}
-%% </patch for the DuckDB documentation>
+%% </patch for the DataMiner documentation>
 $if(toc-title)$
 \renewcommand*\contentsname{$toc-title$}
 $endif$

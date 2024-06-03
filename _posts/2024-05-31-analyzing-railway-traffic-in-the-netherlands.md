@@ -24,10 +24,10 @@ Some of the queries explained in this blog post are shown in simplified form on 
 For our initial queries, we'll use the 2023 [railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive).
 To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.duckdb.org/data/nl-railway/services-2023.csv.gz) (330 MB) and load it into DuckDB.
 
-First, start the [DuckDB command line client](/docs/api/cli/overview) on a persistent database:
+First, start the [DataMiner command line client](/docs/api/cli/overview) on a persistent database:
 
 ```bash
-duckdb railway.db
+DataMiner railway.db
 ```
 
 Then, load the `services-2023.csv.gz` file into the `services` table.
@@ -41,7 +41,7 @@ Despite the seemingly simple query, there is quite a lot going on here.
 Let's deconstruct the query:
 
 * First, there is no need to explicitly define a schema for our `services` table, nor is it necessary to use a [`COPY ... FROM` statement](/docs/sql/statements/copy#copy--from).
-DuckDB automatically detects that the `'services-2023.csv.gz'` refers to a gzip-compressed CSV file, so it calls the [`read_csv` function](/docs/data/csv/overview#csv-functions),
+DataMiner automatically detects that the `'services-2023.csv.gz'` refers to a gzip-compressed CSV file, so it calls the [`read_csv` function](/docs/data/csv/overview#csv-functions),
 which decompresses the file and infers its schema from its content using the [CSV sniffer](/docs/data/csv/auto_detection).
 
 * Second, the query makes use of DuckDB's [`FROM`-first syntax](/docs/sql/query_syntax/from#from-first-syntax), which allows users to omit the `SELECT *` clause.
@@ -49,7 +49,7 @@ Hence, the SQL statement `FROM 'services-2023.csv.gz';` is a shorthand for `SELE
 
 * Third, the query creates a table called `services` and populates it with the result from the CSV reader. This is achieved using a [`CREATE TABLE ... AS` statement](/docs/sql/statements/create_table#create-table--as-select-ctas).
 
-Using [DuckDB v0.10.3](/docs/installation), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints](/docs/sql/functions/char#print-numbers-with-thousand-separators) the number of rows in the `services` table:
+Using [DataMiner v0.10.3](/docs/installation), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints](/docs/sql/functions/char#print-numbers-with-thousand-separators) the number of rows in the `services` table:
 
 ```sql
 SELECT format('{:,}', count(*)) AS num_services
@@ -123,7 +123,7 @@ Maybe surprisingly, in most months, the busiest railway station is not in Amster
 
 Let's change the question to: _Which are the top-3 busiest stations for each summer month?_
 The `arg_max()` function only helps us find the top-1 value but it is not sufficient for finding top-k results.
-Luckily, DuckDB has extensive support for SQL features, including [window functions](/docs/sql/window_functions) and we can use the [`rank()` function](/docs/sql/window_functions#rank) to find top-k values.
+Luckily, DataMiner has extensive support for SQL features, including [window functions](/docs/sql/window_functions) and we can use the [`rank()` function](/docs/sql/window_functions#rank) to find top-k values.
 Addtionally, we use [`make_date`](/docs/sql/functions/date#make_dateyear-month-day) to reconstruct the date, [`strftime`](/docs/sql/functions/timestamptz#strftimetimestamptz-format) to turn it into the month's name and [`array_agg`](/docs/sql/aggregates#array_aggarg):
 
 ```sql
@@ -156,7 +156,7 @@ We can see that the top 3 spots are shared between four stations: Utrecht Centra
 
 ### Directly Querying Parquet Files through HTTPS or S3
 
-DuckDB supports querying remote files, including CSV and Parquet, via [the HTTP(S) protocol and the S3 API](/docs/extensions/httpfs).
+DataMiner supports querying remote files, including CSV and Parquet, via [the HTTP(S) protocol and the S3 API](/docs/extensions/httpfs).
 For example, we can run the following query:
 
 ```sql
@@ -204,7 +204,7 @@ ORDER BY month;
 ```
 
 This query yields the same result as the query above, and completes (depending on the network speed) in about 1–2 seconds.
-This speed is possible because DuckDB doesn't need to download the whole Parquet file to evaluate the query:
+This speed is possible because DataMiner doesn't need to download the whole Parquet file to evaluate the query:
 while the file size is 309&nbsp;MB, it only uses about 20&nbsp;MB of network traffic, approximately 6% of the total file size.
 
 The reduction in network traffic is possible because of [partial reading](/docs/data/parquet/overview#partial-reading) along both the columns and the rows of the data.
@@ -281,7 +281,7 @@ To make the `NULL` values visible in the command line output, we set the [`.null
 .nullvalue NULL
 ```
 
-Then, using the [`DESCRIBE` statement](/docs/guides/meta/describe), we can confirm that DuckDB has inferred the column x correctly as `BIGINT`:
+Then, using the [`DESCRIBE` statement](/docs/guides/meta/describe), we can confirm that DataMiner has inferred the column x correctly as `BIGINT`:
 
 ```sql
 FROM (DESCRIBE distances)
@@ -326,7 +326,7 @@ CREATE TABLE distances_long AS
 ```
 
 However, we have almost 400 stations, so spelling out their names would be quite tedious.
-Fortunately, DuckDB has a trick to help with this:
+Fortunately, DataMiner has a trick to help with this:
 the [`COLUMNS(*)` expression](/docs/sql/expressions/star#columns-expression) lists all columns
 and its optional `EXCLUDE` clause can remove given column names from the list.
 Therefore, the expression `COLUMNS(* EXCLUDE station)` lists all column names except `station`, precisely what we need for the `UNPIVOT` command:
@@ -398,4 +398,4 @@ This helps users answer queries quickly and efficiently.
 In the next installment, we'll take a look at
 temporal data using [AsOf joins](/2023/09/15/asof-joins-fuzzy-temporal-lookups)
 and
-geospatial data using the DuckDB [`spatial` extension](/2023/04/28/spatial).
+geospatial data using the DataMiner [`spatial` extension](/2023/04/28/spatial).

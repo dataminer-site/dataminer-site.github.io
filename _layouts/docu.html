@@ -35,8 +35,8 @@
 
 {% capture issue_title %}Issue found on page '{{ page.title }}'{% endcapture %}
 {% capture issue_body %}
-> Please describe the problem you encountered in the DuckDB documentation and include the "Page URL" link shown below.
-> Note: only create an issue if you wish to report a problem with the DuckDB documentation. For questions about DuckDB or the use of certain DuckDB features, use [GitHub Discussions](https://github.com/duckdb/duckdb/discussions/), [Stack Overflow](https://stackoverflow.com/questions/tagged/duckdb), or [Discord](https://discord.duckdb.org/).
+> Please describe the problem you encountered in the DataMiner documentation and include the "Page URL" link shown below.
+> Note: only create an issue if you wish to report a problem with the DataMiner documentation. For questions about DataMiner or the use of certain DataMiner features, use [GitHub Discussions](https://github.com/duckdb/duckdb/discussions/), [Stack Overflow](https://stackoverflow.com/questions/tagged/duckdb), or [Discord](https://discord.duckdb.org/).
 
 Page URL: <https://duckdb.org{{ page.url }}>
 {% endcapture %}
@@ -47,7 +47,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/logo-dl/DuckDB_Logo.png" alt="DuckDB Logo for Download" class="downloadlogo"></a>
+					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/logo-dl/DuckDB_Logo.png" alt="DataMiner Logo for Download" class="downloadlogo"></a>
 					<div id="duckdb_logo"></div>
 				</div>
 				<div class="landingmenu">
@@ -160,7 +160,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 						<h5>About this page</h5>
 						<ul>
 							{% if page.github_repository %}<li><a href="{{ page.github_repository }}">Visit the related GitHub repository</a></li>{% endif %}
-							{% if page.github_directory %}<li><a href="{{ page.github_directory }}">Visit the related directory in the main DuckDB GitHub repository</a></li>{% endif %}
+							{% if page.github_directory %}<li><a href="{{ page.github_directory }}">Visit the related directory in the main DataMiner GitHub repository</a></li>{% endif %}
 							<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report content issue</a></li>
 							<li><a href="{% github_edit_link %}" title="Go to GitHub">Edit this page on GitHub</a></li>
 						</ul>

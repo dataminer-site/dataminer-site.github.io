@@ -26,10 +26,10 @@ See examples below.
 
 ## NULL Order Modifier
 
-By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and null values are placed last. 
+By default if no modifiers are provided, DataMiner sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and null values are placed last. 
 This is identical to the default sort order of PostgreSQL. The default sort order can be changed using the following `PRAGMA` statements.
 
-> Using `ASC NULLS LAST` as default the default sorting order was a breaking change in version 0.8.0. Prior to 0.8.0, DuckDB sorted using `ASC NULLS FIRST`.
+> Using `ASC NULLS LAST` as default the default sorting order was a breaking change in version 0.8.0. Prior to 0.8.0, DataMiner sorted using `ASC NULLS FIRST`.
 
 ```sql
 -- change the default null sorting order to either NULLS FIRST and NULLS LAST
@@ -42,7 +42,7 @@ PRAGMA default_order='DESC';
 
 Text is sorted using the binary comparison collation by default, which means values are sorted on their binary UTF8 values.
 While this works well for ASCII text (e.g., for English language data), the sorting order can be incorrect for other languages.
-For this purpose, DuckDB provides collations.
+For this purpose, DataMiner provides collations.
 For more information on collations, see the [Collation page](../../sql/expressions/collations).
 
 ## Examples

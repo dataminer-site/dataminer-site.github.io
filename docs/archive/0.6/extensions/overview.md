@@ -7,7 +7,7 @@ selected: Documentation/Extensions
 title: Extensions
 ---
 
-DuckDB has a number of extensions available for use. Not all of them are included by default in every distribution, but DuckDB has a mechanism that allows for remote installation.
+DataMiner has a number of extensions available for use. Not all of them are included by default in every distribution, but DataMiner has a mechanism that allows for remote installation.
 
 ## Remote installation
 

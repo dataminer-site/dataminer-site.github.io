@@ -66,7 +66,7 @@ The results below show that joining on `BIGINT` columns is approx. 1.8× faster 
 
 ## Constraints
 
-DuckDB allows defining [constraints](../../sql/constraints) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing](indexing) for more details).
+DataMiner allows defining [constraints](../../sql/constraints) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DataMiner does not rely on these indexes for join and aggregation operators (see [indexing](indexing) for more details).
 
 > Bestpractice Do not define constraints unless your goal is to ensure data integrity.
 

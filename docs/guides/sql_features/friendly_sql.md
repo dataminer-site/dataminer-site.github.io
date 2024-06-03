@@ -3,7 +3,7 @@ layout: docu
 title: Friendly SQL
 ---
 
-DuckDB offers several advanced SQL features as well as extensions to the SQL syntax. We call these colloquially as "friendly SQL".
+DataMiner offers several advanced SQL features as well as extensions to the SQL syntax. We call these colloquially as "friendly SQL".
 
 > Several of these features are also supported in other systems while some are (currently) exclusive to DuckDB.
 
@@ -12,7 +12,7 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 * [`CREATE OR REPLACE TABLE`](../../sql/statements/create_table#create-or-replace): this clause allows avoiding `DROP TABLE IF EXISTS` statements in scripts.
 * [`CREATE TABLE ... AS SELECT` (CTAS)](../../sql/statements/create_table#create-table--as-select-ctas): this clause allows creating a new table from the output of a table without manually defining a schema.
 * [`DESCRIBE`](../meta/describe): this clause provides a succinct summary of the schema of a table or query.
-* [`FROM`-first syntax with an optional `SELECT` clause](../../sql/query_syntax/from#from-first-syntax): DuckDB allows queries in the form of `FROM tbl` which selects all columns (performing a `SELECT *` statement).
+* [`FROM`-first syntax with an optional `SELECT` clause](../../sql/query_syntax/from#from-first-syntax): DataMiner allows queries in the form of `FROM tbl` which selects all columns (performing a `SELECT *` statement).
 * [`GROUP BY ALL`](../../sql/query_syntax/groupby#group-by-all): this clause allows omitting the group-by columns by inferring them from the list of attributes in the `SELECT` clause.
 * [`INSERT INTO ... BY NAME`](../../sql/statements/insert#insert-into--by-name): this variant of the `INSERT` statement allows using column names instead of positions.
 * [`ORDER BY ALL`](../../sql/query_syntax/orderby#order-by-all): this clause allows ordering on all columns (e.g., to ensure deterministic results).
@@ -67,7 +67,7 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 
 ## Trailing Commas
 
-DuckDB allows [trailing commas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas), both when listing entities (e.g., column and table names) and when constructing [`LIST` items](../../sql/data_types/list#creating-lists). For example, the following query works:
+DataMiner allows [trailing commas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas), both when listing entities (e.g., column and table names) and when constructing [`LIST` items](../../sql/data_types/list#creating-lists). For example, the following query works:
 
 ```sql
 SELECT

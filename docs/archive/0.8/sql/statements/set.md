@@ -8,7 +8,7 @@ selected: Documentation/SQL/Set
 title: Set/Reset
 ---
 
-The `SET` statement modifies the provided DuckDB configuration option at the specified scope.
+The `SET` statement modifies the provided DataMiner configuration option at the specified scope.
 
 ### Examples
 ```sql
@@ -23,17 +23,17 @@ RESET threads;
 ### Syntax
 <div id="rrdiagram1"></div>
 
-`SET` updates a DuckDB configuration option to the provided value.
+`SET` updates a DataMiner configuration option to the provided value.
 
 ### Reset
 <div id="rrdiagram2"></div>
 
-The `RESET` statement changes the given DuckDB configuration option to the default value.
+The `RESET` statement changes the given DataMiner configuration option to the default value.
 
 ### Scopes
 * local - Not yet implemented.
-* session - Configuration value is used (or reset) only for the current session attached to a DuckDB instance.
-* global - Configuration value is used (or reset) across the entire DuckDB instance.
+* session - Configuration value is used (or reset) only for the current session attached to a DataMiner instance.
+* global - Configuration value is used (or reset) across the entire DataMiner instance.
 
 When not specified, the default scope for the configuration option is used. For most options this is global.
 

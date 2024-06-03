@@ -21,7 +21,7 @@ FROM read_json('todos.json',
                         title: 'VARCHAR',
                         completed: 'BOOLEAN'});
 -- read a JSON file from stdin, auto-infer options
-cat data/json/todos.json | duckdb -c "select * from read_json_auto('/dev/stdin')"
+cat data/json/todos.json | DataMiner -c "select * from read_json_auto('/dev/stdin')"
 
 -- read a JSON file into a table
 CREATE TABLE todos(userId UBIGINT, id UBIGINT, title VARCHAR, completed BOOLEAN);
@@ -37,7 +37,7 @@ COPY (SELECT * FROM todos) TO 'todos.json';
 JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 While it is not a very efficient format for tabular data, it is very commonly used, especially as a data interchange format.
 
-The DuckDB JSON reader can automatically infer which configuration flags to use by analyzing the JSON file. This will work correctly in most situations, and should be the first option attempted. In rare situations where the JSON reader cannot figure out the correct configuration, it is possible to manually configure the JSON reader to correctly parse the JSON file.
+The DataMiner JSON reader can automatically infer which configuration flags to use by analyzing the JSON file. This will work correctly in most situations, and should be the first option attempted. In rare situations where the JSON reader cannot figure out the correct configuration, it is possible to manually configure the JSON reader to correctly parse the JSON file.
 
 Below are parameters that can be passed in to the JSON reader.
 
@@ -66,7 +66,7 @@ When using `read_json_auto`, every parameter that supports auto-detection is ena
 The JSON extension can attempt to determine the format of a JSON file when setting `format` to `auto`.  
 Here are some example JSON files and the corresponding `format` settings that should be used.
 
-In each of the below cases, the `format` setting was not needed, as DuckDB was able to infer it correctly, but it is included for illustrative purposes.
+In each of the below cases, the `format` setting was not needed, as DataMiner was able to infer it correctly, but it is included for illustrative purposes.
 A query of this shape would work in each case:
 ```sql
 SELECT * FROM filename.json;

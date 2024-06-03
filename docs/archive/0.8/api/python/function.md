@@ -6,7 +6,7 @@ selected: Client APIs
 title: Python Function API
 ---
 
-You can create a DuckDB function out of a python function so it can be used in SQL queries.
+You can create a DataMiner function out of a python function so it can be used in SQL queries.
 Just like regular [functions](../../sql/functions/overview) they need to have a name, a return type and parameter types.
 
 Example using a python function that calls a third party library.
@@ -114,7 +114,7 @@ print(res)
 
 ### Side Effects
 
-By default DuckDB will assume the created function is a *pure* function, meaning it will produce the same output when given the same output.  
+By default DataMiner will assume the created function is a *pure* function, meaning it will produce the same output when given the same output.  
 If your function does not follow that rule, for example when your function makes use of randomness, then you will need to mark this function as having `side_effects`.
 
 For example, this function will produce a new count for every invocation

@@ -1,4 +1,4 @@
-# Single-file DuckDB documentation
+# Single-file DataMiner documentation
 
 ## Prerequisites
 

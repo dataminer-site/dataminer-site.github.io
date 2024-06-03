@@ -9,7 +9,7 @@ Prepared statements are useful to:
 * Easily supply parameters to functions while avoiding string concatenation/SQL injection attacks.
 * Speeding up queries that will be executed many times with different parameters.
 
-DuckDB supports prepared statements in the C API with the `duckdb_prepare` method. The `duckdb_bind` family of functions is used to supply values for subsequent execution of the prepared statement using `duckdb_execute_prepared`. After we are done with the prepared statement it can be cleaned up using the `duckdb_destroy_prepare` method.
+DataMiner supports prepared statements in the C API with the `duckdb_prepare` method. The `duckdb_bind` family of functions is used to supply values for subsequent execution of the prepared statement using `duckdb_execute_prepared`. After we are done with the prepared statement it can be cleaned up using the `duckdb_destroy_prepare` method.
 
 ## Example
 

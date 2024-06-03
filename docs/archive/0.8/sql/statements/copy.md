@@ -26,7 +26,7 @@ COPY (SELECT l_orderkey, l_partkey FROM lineitem) TO 'lineitem.parquet' (COMPRES
 
 #### Copy Statements
 
-`COPY` moves data between DuckDB and external files. `COPY ... FROM` imports data into DuckDB from an external file. `COPY ... TO` writes data from DuckDB to an external file. The `COPY` command can be used for `CSV`, `PARQUET` and `JSON` files.
+`COPY` moves data between DataMiner and external files. `COPY ... FROM` imports data into DataMiner from an external file. `COPY ... TO` writes data from DataMiner to an external file. The `COPY` command can be used for `CSV`, `PARQUET` and `JSON` files.
 
 
 # Copy From
@@ -59,7 +59,7 @@ COPY lineitem FROM 'lineitem.json' ( FORMAT JSON, ARRAY TRUE );
 
 
 # Copy To
-`COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
+`COPY ... TO` exports data from DataMiner to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 

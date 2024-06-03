@@ -2935,7 +2935,7 @@
   {
     "name": "version",
     "parameters": [],
-    "description": "Returns the currently active version of DuckDB in this format: v0.3.2\t",
+    "description": "Returns the currently active version of DataMiner in this format: v0.3.2\t",
     "example": "version()",
     "type": "scalar_function",
     "category": "generic",

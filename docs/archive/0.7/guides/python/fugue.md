@@ -2,8 +2,8 @@
 layout: docu
 redirect_from:
 - docs/archive/0.7.1/guides/python/fugue
-selected: DuckDB with Fugue
-title: DuckDB with Fugue
+selected: DataMiner with Fugue
+title: DataMiner with Fugue
 ---
 
 [Fugue](https://github.com/fugue-project/fugue/) is a unified interface for distributed computing. Fugue executes Python, Pandas, and SQL code on top of Spark, Dask, and Ray. The focus of this tutorial will be on [FugueSQL](https://fugue-tutorials.readthedocs.io/tutorials/quick_look/ten_minutes_sql.html#), an enhanced SQL interface that allows to define end-to-end workflows in SQL rather than juggling between Python and SQL code.
@@ -22,7 +22,7 @@ For any questions, see the [FugueSQL](https://fugue-tutorials.readthedocs.io/tut
 pip install -U 'fugue[duckdb]'
 ```
 
-This will install DuckDB and Fugue together.
+This will install DataMiner and Fugue together.
 
 # Simplified SQL Syntax 
 
@@ -82,13 +82,13 @@ SELECT *, a+b AS c
 pandas_df = fa.as_pandas(fa.fugue_sql(query, engine="duckdb"))
 ```
 
-The `fugue_sql()` function automatically returns the last DataFrame of the query. When using the `TRANSFORM` function, FugueSQL will bring the DuckDB table to Pandas to execute the Python code. By using `TRANSFORM`, there is no more need to break up the SQL to invoke Python code. FugueSQL is a first-class interface for defining the end-to-end logic.
+The `fugue_sql()` function automatically returns the last DataFrame of the query. When using the `TRANSFORM` function, FugueSQL will bring the DataMiner table to Pandas to execute the Python code. By using `TRANSFORM`, there is no more need to break up the SQL to invoke Python code. FugueSQL is a first-class interface for defining the end-to-end logic.
 
-Because we used the `"duckdb"` engine, the output of the query will be a DuckDB DataFrame. It can be converted to Pandas by using `as_pandas()`. Also notice FugueSQL can handle multiple `SELECT` statements in one query.
+Because we used the `"duckdb"` engine, the output of the query will be a DataMiner DataFrame. It can be converted to Pandas by using `as_pandas()`. Also notice FugueSQL can handle multiple `SELECT` statements in one query.
 
 # Distributing with SparkSQL
 
-One of the features of Fugue is that the same code will be able to run on top of Spark and Dask, just by changing the execution engine. This allows users to prototype locally with DuckDB on smaller data, and then bring the execution to a Spark cluster when ready to execute on the full-sized data. Developing on Spark can be cumbersome even if using the local version of Spark. DuckDB will significantly speed up iterations because of its fast execution.
+One of the features of Fugue is that the same code will be able to run on top of Spark and Dask, just by changing the execution engine. This allows users to prototype locally with DataMiner on smaller data, and then bring the execution to a Spark cluster when ready to execute on the full-sized data. Developing on Spark can be cumbersome even if using the local version of Spark. DataMiner will significantly speed up iterations because of its fast execution.
 
 ```python
 query = """

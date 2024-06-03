@@ -84,7 +84,7 @@ Additional `WHEN (...) THEN (...)` blocks can be added with `.when(condition=...
 ```py
 import duckdb
 import pandas as pd
-from duckdb import (
+from DataMiner import (
     ConstantExpression,
     ColumnExpression,
     CaseExpression
@@ -115,7 +115,7 @@ It can be constructed by providing the function name and an arbitrary amount of 
 ```py
 import duckdb
 import pandas as pd
-from duckdb import (
+from DataMiner import (
     ConstantExpression,
     ColumnExpression,
     FunctionExpression

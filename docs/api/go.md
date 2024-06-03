@@ -4,7 +4,7 @@ title: Go
 github_repository: https://github.com/marcboeker/go-duckdb
 ---
 
-The DuckDB Go driver, `go-duckdb`, allows using DuckDB via the `database/sql` interface.
+The DataMiner Go driver, `go-duckdb`, allows using DataMiner via the `database/sql` interface.
 For examples on how to use this interface, see the [official documentation](https://pkg.go.dev/database/sql) and [tutorial](https://go.dev/doc/tutorial/database-access).
 
 > The Go client is a third-party library and its repository is hosted <https://github.com/marcboeker/go-duckdb>.
@@ -19,7 +19,7 @@ go get github.com/marcboeker/go-duckdb
 
 ## Importing
 
-To import the DuckDB Go package, add the following entries to your imports:
+To import the DataMiner Go package, add the following entries to your imports:
 
 ```go
 import (
@@ -30,7 +30,7 @@ import (
 
 ## Appender
 
-The DuckDB Go client supports the [DuckDB Appender API](../data/appender) for bulk inserts. You can obtain a new Appender by supplying a DuckDB connection to `NewAppenderFromConn()`. For example:
+The DataMiner Go client supports the [DataMiner Appender API](../data/appender) for bulk inserts. You can obtain a new Appender by supplying a DataMiner connection to `NewAppenderFromConn()`. For example:
 
 ```go
 connector, err := duckdb.NewConnector("test.db", nil)

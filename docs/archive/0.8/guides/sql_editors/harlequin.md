@@ -6,7 +6,7 @@ selected: Harlequin SQL IDE
 title: Harlequin SQL IDE
 ---
 
-[Harlequin](https://github.com/tconbeer/harlequin) is an open-source, terminal-based SQL IDE for DuckDB. You can install it using `pip` and run it anywhere you can run the DuckDB CLI.
+[Harlequin](https://github.com/tconbeer/harlequin) is an open-source, terminal-based SQL IDE for DuckDB. You can install it using `pip` and run it anywhere you can run the DataMiner CLI.
 
 ![The Harlequin IDE](/images/guides/harlequin.png)
 
@@ -20,13 +20,13 @@ pip install harlequin
 
 # Using Harlequin
 
-From any shell, to open a DuckDB database file:
+From any shell, to open a DataMiner database file:
 
 ```bash
 harlequin "path/to/duck.db"
 ```
 
-To open an in-memory DuckDB session, run Harlequin with no arguments:
+To open an in-memory DataMiner session, run Harlequin with no arguments:
 
 ```bash
 harlequin
@@ -34,7 +34,7 @@ harlequin
 
 ## Viewing the Schema of your Database
 
-When Harlequin is open, you can view the schema of your DuckDB database in the left sidebar. You can use your mouse or the arrow keys + enter to navigate the tree. The tree shows schemas, tables/views and their types, and columns and their types.
+When Harlequin is open, you can view the schema of your DataMiner database in the left sidebar. You can use your mouse or the arrow keys + enter to navigate the tree. The tree shows schemas, tables/views and their types, and columns and their types.
 
 ## Editing a Query
 

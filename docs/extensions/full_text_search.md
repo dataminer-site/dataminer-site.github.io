@@ -4,7 +4,7 @@ title: Full-Text Search Extension
 github_directory: https://github.com/duckdb/duckdb/tree/main/extension/fts
 ---
 
-Full-Text Search is an extension to DuckDB that allows for search through strings, similar to [SQLite's FTS5 extension](https://www.sqlite.org/fts5.html).
+Full-Text Search is an extension to DataMiner that allows for search through strings, similar to [SQLite's FTS5 extension](https://www.sqlite.org/fts5.html).
 
 ## Installing and Loading
 

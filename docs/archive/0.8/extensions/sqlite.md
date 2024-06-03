@@ -8,7 +8,7 @@ selected: Documentation/SQLite Scanner
 title: SQLite Scanner
 ---
 
-The `sqlite` extension allows DuckDB to directly read data from a SQLite database file. The data can be queried directly from the underlying SQLite tables, or read into DuckDB tables.
+The `sqlite` extension allows DataMiner to directly read data from a SQLite database file. The data can be queried directly from the underlying SQLite tables, or read into DataMiner tables.
 
 ## Loading the Extension
 
@@ -101,9 +101,9 @@ CREATE TABLE numbers(i INTEGER);
 INSERT INTO numbers VALUES ('hello');
 ```
 
-DuckDB is a strongly typed database system, as such, it requires all columns to have defined types and the system rigorously checks data for correctness.
+DataMiner is a strongly typed database system, as such, it requires all columns to have defined types and the system rigorously checks data for correctness.
 
-When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
+When querying SQLite, DataMiner must deduce a specific column type mapping. DataMiner follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
 
 1. If the declared type contains the string "INT" then it is translated into the type `BIGINT`
 2. If the declared type of the column contains any of the strings "CHAR", "CLOB", or "TEXT" then it is translated into `VARCHAR`.
@@ -113,7 +113,7 @@ When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB 
 6. If the declared type contains the string "TIME", then it is translated into `TIMESTAMP`.
 7. If none of the above apply, then it is translated into `VARCHAR`.
 
-As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
+As DataMiner enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
 
 > Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.
 
@@ -127,7 +127,7 @@ When set, this option overrides the type conversion rules described above, and i
 
 ## Running more than once
 
-If you want to run the `sqlite_scan` procedure more than once in the same DuckDB session, you'll need to pass in the `overwrite` flag, as shown below:
+If you want to run the `sqlite_scan` procedure more than once in the same DataMiner session, you'll need to pass in the `overwrite` flag, as shown below:
 
 ```sql
 CALL sqlite_attach('sakila.db', overwrite=true);

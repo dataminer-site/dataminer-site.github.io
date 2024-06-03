@@ -161,23 +161,23 @@
               "url": "multiple_threads"
             },
             {
-              "page": "DuckDB with Ibis",
+              "page": "DataMiner with Ibis",
               "url": "ibis"
             },
             {
-              "page": "DuckDB with Polars",
+              "page": "DataMiner with Polars",
               "url": "polars"
             },
             {
-              "page": "DuckDB with Vaex",
+              "page": "DataMiner with Vaex",
               "url": "vaex"
             },
             {
-              "page": "DuckDB with DataFusion",
+              "page": "DataMiner with DataFusion",
               "url": "datafusion"
             },
             {
-              "page": "DuckDB with fsspec Filesystems",
+              "page": "DataMiner with fsspec Filesystems",
               "url": "filesystems"
             }
           ]

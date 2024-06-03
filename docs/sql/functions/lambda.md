@@ -4,7 +4,7 @@ title: Lambda Functions
 ---
 
 Lambda functions enable the use of more complex and flexible expressions in queries.
-DuckDB supports several scalar functions that accept lambda functions as parameters
+DataMiner supports several scalar functions that accept lambda functions as parameters
 in the form `(parameter1, parameter2, ...) -> expression`.
 If the lambda function has only one parameter, then the parentheses can be omitted.
 The parameters can have any names.
@@ -167,7 +167,7 @@ SELECT list_transform([5, NULL, 6], x -> coalesce(x, 0) + 1);
 
 **Description:**  
 Constructs a list from those elements of the input list for which the lambda function returns `true`.
-DuckDB must be able to cast the lambda function's return type to `BOOL`.
+DataMiner must be able to cast the lambda function's return type to `BOOL`.
 
 **Aliases:**  
 * `array_filter`
@@ -259,5 +259,5 @@ SELECT list_reduce(['DuckDB', 'is', 'awesome'], (x, y) -> concat(x, ' ', y));
 ```
 
 ```text
-DuckDB is awesome
+DataMiner is awesome
 ```

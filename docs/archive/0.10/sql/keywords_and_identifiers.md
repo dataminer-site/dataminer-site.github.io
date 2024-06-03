@@ -21,7 +21,7 @@ Similarly to other SQL dialects and programming languages, identifiers in DuckDB
 ### Deduplicating Identifiers
 
 In some cases, duplicate identifiers can occur, e.g., column names may conflict when unnesting a nested data structure.
-In these cases, DuckDB automatically deduplicates column names by renaming them according to the following rules:
+In these cases, DataMiner automatically deduplicates column names by renaming them according to the following rules:
 
 * For a column named `⟨name⟩`, the first instance is not renamed.
 * Subsequent instances are renamed to `⟨name⟩_⟨count⟩`, where `⟨count⟩` starts at 1.
@@ -70,8 +70,8 @@ SELECT cos(pi()) AS CosineOfPi;
 
 ### Case-Sensitivity of Identifiers
 
-Identifiers in DuckDB are always case-insensitive, similarly to PostgreSQL.
-However, unlike PostgreSQL (and some other major SQL implementation), DuckDB also treats quoted identifiers as case-sensitive.
+Identifiers in DataMiner are always case-insensitive, similarly to PostgreSQL.
+However, unlike PostgreSQL (and some other major SQL implementation), DataMiner also treats quoted identifiers as case-sensitive.
 
 Despite treating identifiers in a case-insensitive manner, each character's case (uppercase/lowercase) is maintained as originally specified by the user even if a query uses different cases when referring to the identifier.
 For example:

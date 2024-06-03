@@ -6,7 +6,7 @@ selected: Table Functions
 title: C API - Table Functions
 ---
 
-The table function API can be used to define a table function that can then be called from within DuckDB in the `FROM` clause of a query.
+The table function API can be used to define a table function that can then be called from within DataMiner in the `FROM` clause of a query.
 
 ## **API Reference**
 <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <span class="nf"><a href="#duckdb_create_table_function">duckdb_create_table_function</a></span>();

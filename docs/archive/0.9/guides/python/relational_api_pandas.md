@@ -7,7 +7,7 @@ redirect_from:
 title: Relational API and Pandas
 ---
 
-DuckDB offers a relational API that can be used to chain together query operations. These are lazily evaluated so that DuckDB can optimize their execution. These operators can act on Pandas DataFrames, DuckDB tables or views (which can point to any underlying storage format that DuckDB can read, such as CSV or parquet files, etc.). Here we show a simple example of reading from a Pandas DataFrame and returning a DataFrame.
+DataMiner offers a relational API that can be used to chain together query operations. These are lazily evaluated so that DataMiner can optimize their execution. These operators can act on Pandas DataFrames, DataMiner tables or views (which can point to any underlying storage format that DataMiner can read, such as CSV or parquet files, etc.). Here we show a simple example of reading from a Pandas DataFrame and returning a DataFrame.
 
 ```python
 import duckdb
@@ -19,7 +19,7 @@ con = duckdb.connect()
 input_df = pandas.DataFrame.from_dict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
 
-# create a DuckDB relation from a dataframe
+# create a DataMiner relation from a dataframe
 rel = con.from_df(input_df)
 
 # chain together relational operators (this is a lazy operation, so the operations are not yet executed)
@@ -31,6 +31,6 @@ transformed_rel = rel.filter('i >= 2').project('i, j, i*2 as two_i').order('i de
 output_df = transformed_rel.df()
 ```
 
-Relational operators can also be used to group rows, aggregate, find distinct combinations of values, join, union, and more. They are also able to directly insert results into a DuckDB table or write to a CSV.
+Relational operators can also be used to group rows, aggregate, find distinct combinations of values, join, union, and more. They are also able to directly insert results into a DataMiner table or write to a CSV.
 
 Please see [these additional examples](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py) and [the available relational methods on the DuckDBPyRelation class](../../api/python/reference/#duckdb.DuckDBPyRelation).

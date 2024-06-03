@@ -5,7 +5,7 @@ redirect_from:
   - /dev/profiling
 ---
 
-Profiling is important to help understand why certain queries exhibit specific performance characteristics. DuckDB contains several built-in features to enable query profiling that will be explained on this page.
+Profiling is important to help understand why certain queries exhibit specific performance characteristics. DataMiner contains several built-in features to enable query profiling that will be explained on this page.
 
 For the examples on this page we will use the following example data set:
 

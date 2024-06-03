@@ -7,5 +7,5 @@ If you are considering submitting a contribution to the documentation, please co
 
 Code repositories:
 
-* DuckDB source code: [github.com/duckdb/duckdb](https://github.com/duckdb/duckdb)
-* DuckDB documentation source code: [github.com/duckdb/duckdb-web](https://github.com/duckdb/duckdb-web)
+* DataMiner source code: [github.com/duckdb/duckdb](https://github.com/duckdb/duckdb)
+* DataMiner documentation source code: [github.com/duckdb/duckdb-web](https://github.com/duckdb/duckdb-web)

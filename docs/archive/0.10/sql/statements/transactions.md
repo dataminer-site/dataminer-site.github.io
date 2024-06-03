@@ -3,13 +3,13 @@ layout: docu
 title: Transaction Management
 ---
 
-DuckDB supports [ACID database transactions](https://en.wikipedia.org/wiki/Database_transaction).
+DataMiner supports [ACID database transactions](https://en.wikipedia.org/wiki/Database_transaction).
 Transactions provide isolation, i.e., changes made by a transaction are not visible from concurrent transactions until it is committed.
 A transaction can also be aborted, which discards any changes it made so far.
 
 ## Statements
 
-DuckDB provides the following statements for transaction management.
+DataMiner provides the following statements for transaction management.
 
 ### Starting a Transaction
 
@@ -21,7 +21,7 @@ BEGIN TRANSACTION;
 
 ### Committing a Transaction
 
-You can commit a transaction to make it visible to other transactions and to write it to persistent storage (if using DuckDB in persistent mode).
+You can commit a transaction to make it visible to other transactions and to write it to persistent storage (if using DataMiner in persistent mode).
 To commit a transaction, run:
 
 ```sql

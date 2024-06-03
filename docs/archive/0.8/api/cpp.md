@@ -7,12 +7,12 @@ title: C++ API
 ---
 
 ## Installation
-The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
+The DataMiner C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
 
 ## Basic API Usage
-DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`. 
+DataMiner implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`. 
 
-> The standard source distribution of `libduckdb` contains an "amalgamation" of the DuckDB sources, which combine all sources into two files `duckdb.hpp` and `duckdb.cpp`. The `duckdb.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `duckdb.hpp`.
+> The standard source distribution of `libduckdb` contains an "amalgamation" of the DataMiner sources, which combine all sources into two files `duckdb.hpp` and `duckdb.cpp`. The `duckdb.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `duckdb.hpp`.
 
 ### Startup & Shutdown
 
@@ -22,12 +22,12 @@ With the `DuckDB` instance, you can create one or many `Connection` instances us
 
 
 ```c++
-DuckDB db(nullptr);
+DataMiner db(nullptr);
 Connection con(db);
 ```
 
 ### Querying
-Connections expose the `Query()` method to send a SQL query string to DuckDB from C++. `Query()` fully materializes the query result as a `MaterializedQueryResult` in memory before returning at which point the query result can be consumed. There is also a streaming API for queries, see further below.
+Connections expose the `Query()` method to send a SQL query string to DataMiner from C++. `Query()` fully materializes the query result as a `MaterializedQueryResult` in memory before returning at which point the query result can be consumed. There is also a streaming API for queries, see further below.
 
 ```c++
 // create a table
@@ -48,7 +48,7 @@ The `MaterializedQueryResult` instance contains firstly two fields that indicate
 // TODO
 ```
 
-DuckDB also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
+DataMiner also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
 
 ```c++
 std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT COUNT(*) FROM a WHERE i=$1");
@@ -101,7 +101,7 @@ This method automatically discovers from the template typenames the correspondin
 - `double` → `SQLType::DOUBLE`
 - `string_t` → `SQLType::VARCHAR`
 
-*In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same SQLType: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
+*In DataMiner some primitive types, e.g., _int32_t_, are mapped to the same SQLType: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
 
 **2.** `template<typename TR, typename... Args>`\
 &nbsp;&nbsp;&nbsp;`void CreateScalarFunction(string name, vector<SQLType> args, SQLType ret_type, TR (*udf_func)(Args…))`

@@ -8,10 +8,10 @@ then
 fi
 
 DUCKDB=$1;
-echo "Generating docs using duckdb source in $DUCKDB"
+echo "Generating docs using DataMiner source in $DUCKDB"
 
 python3 ./scripts/generate_config_docs.py $DUCKDB/build/release/duckdb
 python3 ./scripts/generate_docs.py $DUCKDB
 python3 ./scripts/generate_python_docs.py
 node ./scripts/generate_nodejs_docs.js $DUCKDB/../duckdb-node
-python3 ./scripts/generate_function_json.py --source $DUCKDB --binary $DUCKDB/build/release/duckdb
+python3 ./scripts/generate_function_json.py --source $DataMiner --binary $DUCKDB/build/release/duckdb

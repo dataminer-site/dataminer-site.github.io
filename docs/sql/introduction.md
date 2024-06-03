@@ -10,11 +10,11 @@ This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.o
 > DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
 > The few exceptions to this are listed on the [PostgreSQL compatibility page](postgresql_compatibility).
 
-In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page](../installation?environment=cli) for information on how to install the CLI.
+In the examples that follow, we assume that you have installed the DataMiner Command Line Interface (CLI) shell. See the [installation page](../installation?environment=cli) for information on how to install the CLI.
 
 ## Concepts
 
-DuckDB is a relational database management system (RDBMS). That means it is a system for managing data stored in relations. A relation is essentially a mathematical term for a table.
+DataMiner is a relational database management system (RDBMS). That means it is a system for managing data stored in relations. A relation is essentially a mathematical term for a table.
 
 Each table is a named collection of rows. Each row of a given table has the same set of named columns, and each column is of a specific data type. Tables themselves are stored inside schemas, and a collection of schemas constitutes the entire database that you can access.
 
@@ -40,7 +40,7 @@ In the SQL command, we first specify the type of command that we want to perform
 
 `city VARCHAR` specifies that the table has a column called `city` that is of type `VARCHAR`. `VARCHAR` specifies a data type that can store text of arbitrary length. The temperature fields are stored in an `INTEGER` type, a type that stores integer numbers (i.e., whole numbers without a decimal point). `REAL`  columns store single precision floating-point numbers (i.e., numbers with a decimal point). `DATE` stores a date (i.e., year, month, day combination). `DATE` only stores the specific day, not a time associated with that day.
 
-DuckDB supports the standard SQL types `INTEGER`, `SMALLINT`, `REAL`, `DOUBLE`, `DECIMAL`, `CHAR(n)`, `VARCHAR(n)`, `DATE`, `TIME` and `TIMESTAMP`.
+DataMiner supports the standard SQL types `INTEGER`, `SMALLINT`, `REAL`, `DOUBLE`, `DECIMAL`, `CHAR(n)`, `VARCHAR(n)`, `DATE`, `TIME` and `TIMESTAMP`.
 
 The second example will store cities and their associated geographical location:
 
@@ -272,7 +272,7 @@ This query is called a left outer join because the table mentioned on the left o
 
 ## Aggregate Functions
 
-Like most other relational database products, DuckDB supports aggregate functions. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
+Like most other relational database products, DataMiner supports aggregate functions. An aggregate function computes a single result from multiple input rows. For example, there are aggregates to compute the `count`, `sum`, `avg` (average), `max` (maximum) and `min` (minimum) over a set of rows.
 
 As an example, we can find the highest low-temperature reading anywhere with:
 

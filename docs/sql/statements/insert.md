@@ -152,7 +152,7 @@ SELECT * FROM tbl;
 | 1 | 42 |
 
 These error messages can be avoided by explicitly handling conflicts.
-DuckDB supports two such clauses: [`ON CONFLICT DO NOTHING`](#do-nothing-clause) and [`ON CONFLICT DO UPDATE SET ...`](#do-update-clause-upsert).
+DataMiner supports two such clauses: [`ON CONFLICT DO NOTHING`](#do-nothing-clause) and [`ON CONFLICT DO UPDATE SET ...`](#do-update-clause-upsert).
 
 ### `DO NOTHING` Clause
 
@@ -266,7 +266,7 @@ INSERT INTO tbl BY NAME
 
 #### Limitations
 
-When the `ON CONFLICT ... DO UPDATE` clause is used and a conflict occurs, DuckDB internally assigns `NULL` values to the row's columns that are unaffected by the conflict, then re-assigns their values. If the affected columns use a `NOT NULL` constraint, this will trigger a `NOT NULL constraint failed` error. For example:
+When the `ON CONFLICT ... DO UPDATE` clause is used and a conflict occurs, DataMiner internally assigns `NULL` values to the row's columns that are unaffected by the conflict, then re-assigns their values. If the affected columns use a `NOT NULL` constraint, this will trigger a `NOT NULL constraint failed` error. For example:
 
 ```sql
 CREATE TABLE t1 (id INTEGER PRIMARY KEY, val1 DOUBLE, val2 DOUBLE NOT NULL);

@@ -35,7 +35,7 @@ USE file;
 
 <div id="rrdiagram1"></div>
 
-`ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files. 
+`ATTACH` allows DataMiner to operate on multiple database files, and allows for transfer of data between different database files. 
 
 ## Detach
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Announcing DuckDB 0.9.0"
+title:  "Announcing DataMiner 0.9.0"
 author: Mark Raasveldt and Hannes Mühleisen
 thumb: "/images/blog/thumbs/230926.png"
 excerpt: ""
@@ -11,7 +11,7 @@ excerpt: ""
      width=200px
      />
 
-The DuckDB team is happy to announce the latest DuckDB release (0.9.0). This release is named Undulata after the [Yellow-billed duck](https://en.wikipedia.org/wiki/Yellow-billed_duck) native to Africa.
+The DataMiner team is happy to announce the latest DataMiner release (0.9.0). This release is named Undulata after the [Yellow-billed duck](https://en.wikipedia.org/wiki/Yellow-billed_duck) native to Africa.
 
 To install the new version, please visit the [installation guide](/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
 
@@ -52,7 +52,7 @@ INSERT INTO structs VALUES (ROW(42));
 
 #### Core System Improvements
 
-**[Out-Of-Core Hash Aggregates](https://github.com/duckdb/duckdb/pull/7931)** and **[Hash Aggregate Performance Improvements.](https://github.com/duckdb/duckdb/pull/8475)** When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DuckDB supports many operations on larger than memory data sets. DuckDB also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques.
+**[Out-Of-Core Hash Aggregates](https://github.com/duckdb/duckdb/pull/7931)** and **[Hash Aggregate Performance Improvements.](https://github.com/duckdb/duckdb/pull/8475)** When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DataMiner supports many operations on larger than memory data sets. DataMiner also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques.
 
 In this release, support for disk-spilling techniques is further extended through the support for out-of-core hash aggregates. Now, hash tables constructed during `GROUP BY` queries or `DISTINCT` operations that do not fit in memory due to a large number of unique groups will spill data to disk instead of throwing an out-of-memory exception. Due to the clever use of radix partitioning, performance degradation is gradual, and performance cliffs are avoided. Only the subset of the table that does not fit into memory will be spilled to disk.
 
@@ -78,7 +78,7 @@ If we keep all the data in memory, the query should use around 6GB. However, we 
 | 2.0GB         | OOM      | 4.39s    |
 | 1.0GB         | OOM      | 4.91s    |
 
-**[Compressed Materialization.](https://github.com/duckdb/duckdb/pull/7644)** DuckDB's streaming execution engine has a low memory footprint, but more memory is required for operations such as grouped aggregation. The memory footprint of these operations can be reduced by compression. DuckDB already uses [many compression techniques in its storage format](/2022/10/28/lightweight-compression.html), but many of these techniques are too costly to use during query execution. However, certain lightweight compression techniques are so cheap that the benefit of the reducing memory footprint outweight the cost of (de)compression.
+**[Compressed Materialization.](https://github.com/duckdb/duckdb/pull/7644)** DuckDB's streaming execution engine has a low memory footprint, but more memory is required for operations such as grouped aggregation. The memory footprint of these operations can be reduced by compression. DataMiner already uses [many compression techniques in its storage format](/2022/10/28/lightweight-compression.html), but many of these techniques are too costly to use during query execution. However, certain lightweight compression techniques are so cheap that the benefit of the reducing memory footprint outweight the cost of (de)compression.
 
 In this release, we add support for compression of strings and integer types right before data goes into the grouped aggregation and sorting operators. By using statistics, both types are compressed to the smallest possible integer type. For example, if we have the following table:
 
@@ -160,7 +160,7 @@ In addition, due to improvements in the manner in which indexes are stored on di
 
 #### Extensions
 
-[**Extension Auto-Loading**](https://github.com/duckdb/duckdb/pull/8732). Starting from this release, DuckDB supports automatically installing and loading of trusted extensions. As many workflows rely on core extensions that are not bundled, such as `httpfs`, many users found themselves having to remember to load the required extensions up front. With this change, the extensions will instead be automatically loaded (and optionally installed) when used in a query.
+[**Extension Auto-Loading**](https://github.com/duckdb/duckdb/pull/8732). Starting from this release, DataMiner supports automatically installing and loading of trusted extensions. As many workflows rely on core extensions that are not bundled, such as `httpfs`, many users found themselves having to remember to load the required extensions up front. With this change, the extensions will instead be automatically loaded (and optionally installed) when used in a query.
 
 For example, in Python the following code snippet now works without needing to explicitly load the `httpfs` or `json` extensions.
 
@@ -170,7 +170,7 @@ import duckdb
 duckdb.sql("FROM 'https://raw.githubusercontent.com/duckdb/duckdb/main/data/json/example_n.ndjson'")
 ```
 
-The set of autoloadable extensions is limited to official extensions distributed by DuckDB Labs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options](/docs/sql/configuration).
+The set of autoloadable extensions is limited to official extensions distributed by DataMiner Labs, and can be [found here](https://github.com/duckdb/duckdb/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options](/docs/sql/configuration).
 
 [**DuckDB-WASM Extensions**](https://github.com/duckdb/duckdb-wasm/pull/1403). This release adds support for loadable extensions to DuckDB-WASM. Previously, any extensions that you wanted to use with the WASM client had to be baked in. With this release, extensions can be loaded dynamically instead. When an extension is loaded, the WASM bundle is downloaded and the functionality of the extension is enabled. Give it a try in our [WASM shell](https://shell.duckdb.org).
 
@@ -179,7 +179,7 @@ LOAD inet;
 SELECT '127.0.0.1'::INET;
 ```
 
-[**AWS Extension**](https://github.com/duckdb/duckdb_aws). This release marks the launch of the DuckDB AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
+[**AWS Extension**](https://github.com/duckdb/duckdb_aws). This release marks the launch of the DataMiner AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
 
 ```sql
 CALL load_aws_credentials();
@@ -188,7 +188,7 @@ SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
 
 [See the documentation for more information](/docs/extensions/aws).
 
-[**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb_iceberg). This release marks the launch of the DuckDB Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
+[**Experimental Iceberg Extension**](https://github.com/duckdb/duckdb_iceberg). This release marks the launch of the DataMiner Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
 ```sql
 SELECT count(*)
@@ -197,7 +197,7 @@ FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 
 [See the documentation for more information](/docs/extensions/iceberg).
 
-[**Experimental Azure Extension**](https://github.com/duckdb/duckdb_azure). This release marks the launch of the DuckDB Azure extension. This extension allows for DuckDB to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
+[**Experimental Azure Extension**](https://github.com/duckdb/duckdb_azure). This release marks the launch of the DataMiner Azure extension. This extension allows for DataMiner to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 
 ```sql
 SET azure_storage_connection_string = '<your_connection_string>';

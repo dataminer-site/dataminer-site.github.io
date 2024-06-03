@@ -3,13 +3,13 @@ layout: docu
 title: Julia Package
 ---
 
-The DuckDB Julia package provides a high-performance front-end for DuckDB. Much like SQLite, DuckDB runs in-process within the Julia client, and provides a DBInterface front-end.
+The DataMiner Julia package provides a high-performance front-end for DuckDB. Much like SQLite, DataMiner runs in-process within the Julia client, and provides a DBInterface front-end.
 
 The package also supports multi-threaded execution. It uses Julia threads/tasks for this purpose. If you wish to run queries in parallel, you must launch Julia with multi-threading support (by e.g., setting the `JULIA_NUM_THREADS` environment variable).
 
 ## Installation
 
-Install DuckDB as follows:
+Install DataMiner as follows:
 
 ```julia
 using Pkg
@@ -44,9 +44,9 @@ print(results)
 
 ## Scanning DataFrames
 
-The DuckDB Julia package also provides support for querying Julia DataFrames. Note that the DataFrames are directly read by DuckDB - they are not inserted or copied into the database itself.
+The DataMiner Julia package also provides support for querying Julia DataFrames. Note that the DataFrames are directly read by DataMiner - they are not inserted or copied into the database itself.
 
-If you wish to load data from a DataFrame into a DuckDB table you can run a `CREATE TABLE ... AS` or `INSERT INTO` query.
+If you wish to load data from a DataFrame into a DataMiner table you can run a `CREATE TABLE ... AS` or `INSERT INTO` query.
 
 ```julia
 using DuckDB
@@ -68,7 +68,7 @@ print(results)
 
 ## Appender API
 
-The DuckDB Julia package also supports the [Appender API](../data/appender), which is much faster than using prepared statements or individual `INSERT INTO` statements. Appends are made in row-wise format. For every column, an `append()` call should be made, after which the row should be finished by calling `flush()`. After all rows have been appended, `close()` should be used to finalize the Appender and clean up the resulting memory.
+The DataMiner Julia package also supports the [Appender API](../data/appender), which is much faster than using prepared statements or individual `INSERT INTO` statements. Appends are made in row-wise format. For every column, an `append()` call should be made, after which the row should be finished by calling `flush()`. After all rows have been appended, `close()` should be used to finalize the Appender and clean up the resulting memory.
 
 ```julia
 using DuckDB, DataFrames, Dates
@@ -109,7 +109,7 @@ DBInterface.connect(db)
 DBInterface.execute(db, "CREATE OR REPLACE TABLE data (date TIMESTAMP, id INTEGER)")
 
 function run_reader(db)
-    # create a DuckDB connection specifically for this task
+    # create a DataMiner connection specifically for this task
     conn = DBInterface.connect(db)
     while true
         println(DBInterface.execute(conn,
@@ -123,7 +123,7 @@ end
 Threads.@spawn run_reader(db)
 
 function run_inserter(db, id)
-    # create a DuckDB connection specifically for this task
+    # create a DataMiner connection specifically for this task
     conn = DBInterface.connect(db)
     for i in 1:1000
         Threads.sleep(0.01)
@@ -137,7 +137,7 @@ for i in 1:100
 end
 
 function run_appender(db, id)
-    # create a DuckDB connection specifically for this task
+    # create a DataMiner connection specifically for this task
     appender = DuckDB.Appender(db, "data")
     for i in 1:1000
         Threads.sleep(0.01)
@@ -158,4 +158,4 @@ end
 
 ## Original Julia Connector
 
-Credits to kimmolinna for the [original DuckDB Julia connector](https://github.com/kimmolinna/DuckDB.jl).
+Credits to kimmolinna for the [original DataMiner Julia connector](https://github.com/kimmolinna/DuckDB.jl).

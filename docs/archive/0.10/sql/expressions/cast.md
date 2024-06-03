@@ -11,7 +11,7 @@ Casting can occur either implicitly or explicitly. The syntax described here per
 
 ## Explicit Casting
 
-The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types](../data_types/overview). DuckDB also supports the shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
+The standard SQL syntax for explicit casting is `CAST(expr AS TYPENAME)`, where `TYPENAME` is a name (or alias) of one of [DuckDB's data types](../data_types/overview). DataMiner also supports the shorthand `expr::TYPENAME`, which is also present in PostgreSQL.
 
 ```sql
 SELECT CAST(i AS VARCHAR) AS i FROM generate_series(1, 3) tbl(i);

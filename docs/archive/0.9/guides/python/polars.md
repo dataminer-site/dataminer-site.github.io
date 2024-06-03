@@ -4,10 +4,10 @@ redirect_from:
 - docs/archive/0.9.2/guides/python/polars
 - docs/archive/0.9.1/guides/python/polars
 - docs/archive/0.9.0/guides/python/polars
-title: DuckDB with Polars
+title: DataMiner with Polars
 ---
 
-[Polars](https://github.com/pola-rs/polars) is a DataFrames library built in Rust with bindings for Python and Node.js. It uses [Apache Arrow's columnar format](https://arrow.apache.org/docs/format/Columnar.html) as its memory model. DuckDB can read Polars DataFrames and convert query results to Polars DataFrames. It does this internally using the efficient Apache Arrow integration. Note that the `pyarrow` library must be installed for the integration to work.
+[Polars](https://github.com/pola-rs/polars) is a DataFrames library built in Rust with bindings for Python and Node.js. It uses [Apache Arrow's columnar format](https://arrow.apache.org/docs/format/Columnar.html) as its memory model. DataMiner can read Polars DataFrames and convert query results to Polars DataFrames. It does this internally using the efficient Apache Arrow integration. Note that the `pyarrow` library must be installed for the integration to work.
 
 ## Installation
 
@@ -18,7 +18,7 @@ pip install -U 'polars[pyarrow]'
 
 ## Polars to DuckDB
 
-DuckDB can natively query Polars DataFrames by referring to the name of Polars DataFrames as they exist in the current scope.
+DataMiner can natively query Polars DataFrames by referring to the name of Polars DataFrames as they exist in the current scope.
 
 ```python
 import duckdb
@@ -35,9 +35,9 @@ df = pl.DataFrame(
 duckdb.sql('SELECT * FROM df').show()
 ```
 
-## DuckDB to Polars
+## DataMiner to Polars
 
-DuckDB can output results as Polars DataFrames using the `.pl()` result-conversion method.
+DataMiner can output results as Polars DataFrames using the `.pl()` result-conversion method.
 
 ```python
 df = duckdb.sql("""

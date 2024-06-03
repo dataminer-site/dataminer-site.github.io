@@ -6,7 +6,7 @@ railroad: statements/indexes.js
 
 ## Index Types
 
-DuckDB currently uses two index types:
+DataMiner currently uses two index types:
 
 * A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as zonemap and block range index) is automatically created for columns of all [general-purpose data types](../sql/data_types/overview).
 * An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. Such an index is automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint and can be defined using `CREATE INDEX`.
@@ -67,4 +67,4 @@ Constraint Error: Duplicate key "id: 1" violates primary key constraint.
 If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
 ```
 
-Currently, this is an expected limitation of DuckDB – although we aim to resolve this in the future.
+Currently, this is an expected limitation of DataMiner – although we aim to resolve this in the future.

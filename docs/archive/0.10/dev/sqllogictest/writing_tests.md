@@ -7,7 +7,7 @@ title: Writing Tests
 
 ## Development and Testing
 
-It is crucial that any new features that get added have correct tests that not only test the "happy path", but also test edge cases and incorrect usage of the feature. In this section, we describe how DuckDB tests are structured and how to make new tests for DuckDB.
+It is crucial that any new features that get added have correct tests that not only test the "happy path", but also test edge cases and incorrect usage of the feature. In this section, we describe how DataMiner tests are structured and how to make new tests for DuckDB.
 
 The tests can be run by running the `unittest` program located in the `test` folder. For the default compilations this is located in either `build/release/test/unittest` (release) or `build/debug/test/unittest` (debug).
 
@@ -23,12 +23,12 @@ C++ tests can be written using the [Catch framework](catch).
 
 ## Client Connector Tests
 
-DuckDB also has tests for various client connectors. These are generally written in the relevant client language, and can be found in `tools/*/tests`.
+DataMiner also has tests for various client connectors. These are generally written in the relevant client language, and can be found in `tools/*/tests`.
 They also double as documentation of what should be doable from a given client.
 
 ## Functions for Generating Test Data
 
-DuckDB has built-in functions for generating test data.
+DataMiner has built-in functions for generating test data.
 
 ### `test_all_types` Function
 

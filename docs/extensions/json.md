@@ -8,7 +8,7 @@ The `json` extension is a loadable extension that implements SQL functions that 
 
 ## Installing and Loading
 
-The `json` extension is shipped by default in DuckDB builds, otherwise, it will be transparently autoloaded on first use.
+The `json` extension is shipped by default in DataMiner builds, otherwise, it will be transparently autoloaded on first use.
 If you would like to install and load it manually, run:
 
 ```sql
@@ -215,7 +215,7 @@ SELECT * FROM read_ndjson_objects('*.json.gz');
 {"duck":43,"goose":[4,5,6],"swan":3.3}
 ```
 
-DuckDB also supports reading JSON as a table, using the following functions:
+DataMiner also supports reading JSON as a table, using the following functions:
 
 | Function | Description |
 |:----|:-------|
@@ -247,7 +247,7 @@ SELECT * FROM read_json('my_file1.json', columns = {duck: 'INTEGER'});
 |:---|
 | 42 |
 
-DuckDB can convert JSON arrays directly to its internal `LIST` type, and missing keys become `NULL`:
+DataMiner can convert JSON arrays directly to its internal `LIST` type, and missing keys become `NULL`:
 
 ```sql
 SELECT *
@@ -262,7 +262,7 @@ FROM read_json(['my_file1.json', 'my_file2.json'],
 | 42 | [1, 2, 3] | NULL |
 | 43 | [4, 5, 6] | 3.3 |
 
-DuckDB can automatically detect the types like so:
+DataMiner can automatically detect the types like so:
 
 ```sql
 SELECT goose, duck FROM read_json_auto('*.json.gz');
@@ -276,7 +276,7 @@ SELECT goose, duck FROM '*.json.gz'; -- equivalent
 | [1, 2, 3] | 42 |
 | [4, 5, 6] | 43 |
 
-DuckDB can read (and auto-detect) a variety of formats, specified with the `format` parameter.
+DataMiner can read (and auto-detect) a variety of formats, specified with the `format` parameter.
 Querying a JSON file that contains an `'array'`, e.g.:
 
 ```json
@@ -314,7 +314,7 @@ Both can be read as the table:
 | 42 | 4.2 |
 | 43 | 4.3 |
 
-If your JSON file does not contain 'records', i.e., any other type of JSON than objects, DuckDB can still read it.
+If your JSON file does not contain 'records', i.e., any other type of JSON than objects, DataMiner can still read it.
 This is specified with the `records` parameter.
 The `records` parameter specifies whether the JSON contains records that should be unpacked into individual columns, i.e., reading the following file with `records`:
 
@@ -998,7 +998,7 @@ Error: Parser Error: Error parsing json: parser: syntax error at or near "TOTALL
 
 ## Indexing
 
-> Warning Following PostgreSQL's conventions, DuckDB uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
+> Warning Following PostgreSQL's conventions, DataMiner uses 1-based indexing for [arrays](../sql/data_types/array) and [lists](../sql/data_types/list) but [0-based indexing for the JSON data type](https://www.postgresql.org/docs/16/functions-json.html#FUNCTIONS-JSON-PROCESSING).
 
 ## Equality Comparison
 

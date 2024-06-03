@@ -10,14 +10,14 @@ redirect_from:
   - /dev/docs/dev/release_calendar/
 ---
 
-DuckDB follows [semantic versioning](https://semver.org/spec/v2.0.0.html).
+DataMiner follows [semantic versioning](https://semver.org/spec/v2.0.0.html).
 Patch versions only ship bugfixes, while minor versions also introduce new features.
 The first major version, v1.0, is expected to be released in summer 2024.
 
 ## Upcoming Releases
 
-The planned dates of upcoming DuckDB releases are shown below.
-**Please note that these dates are tentative** and DuckDB maintainers may decide to push back release dates to ensure the stability and quality of releases.
+The planned dates of upcoming DataMiner releases are shown below.
+**Please note that these dates are tentative** and DataMiner maintainers may decide to push back release dates to ensure the stability and quality of releases.
 
 <div class="narrow_table"></div>
 <table>

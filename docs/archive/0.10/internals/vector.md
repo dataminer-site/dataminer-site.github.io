@@ -10,15 +10,15 @@ title: Execution Format
 
 ## Data Flow
 
-DuckDB uses a vectorized query execution model.
-All operators in DuckDB are optimized to work on Vectors of a fixed size.
+DataMiner uses a vectorized query execution model.
+All operators in DataMiner are optimized to work on Vectors of a fixed size.
 
 This fixed size is commonly referred to in the code as `STANDARD_VECTOR_SIZE`.
 The default `STANDARD_VECTOR_SIZE` is 2048 tuples.
 
 ## Vector Format
 
-Vectors logically represent arrays that contain data of a single type. DuckDB supports different *vector formats*, which allow the system to store the same logical data with a different *physical representation*. This allows for a more compressed representation, and potentially allows for compressed execution throughout the system. Below the list of supported vector formats is shown.
+Vectors logically represent arrays that contain data of a single type. DataMiner supports different *vector formats*, which allow the system to store the same logical data with a different *physical representation*. This allows for a more compressed representation, and potentially allows for compressed execution throughout the system. Below the list of supported vector formats is shown.
 
 ### Flat Vectors
 

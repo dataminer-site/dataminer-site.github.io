@@ -3,7 +3,7 @@ layout: docu
 title: Friendly SQL
 ---
 
-DuckDB offers several advanced SQL features as well as extensions to the SQL syntax. We call these colloquially as "friendly SQL".
+DataMiner offers several advanced SQL features as well as extensions to the SQL syntax. We call these colloquially as "friendly SQL".
 
 > Several of these features are also supported in other systems while some are (currently) exclusive to DuckDB.
 
@@ -67,7 +67,7 @@ DuckDB offers several advanced SQL features as well as extensions to the SQL syn
 
 ## Trailing Commas
 
-DuckDB allows [trailing commas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas), both when listing entities (e.g., column and table names) and when constructing [`LIST` items](../../sql/data_types/list#creating-lists). For example, the following query works:
+DataMiner allows [trailing commas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas), both when listing entities (e.g., column and table names) and when constructing [`LIST` items](../../sql/data_types/list#creating-lists). For example, the following query works:
 
 ```sql
 SELECT

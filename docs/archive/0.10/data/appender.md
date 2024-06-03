@@ -3,12 +3,12 @@ layout: docu
 title: Appender
 ---
 
-The Appender can be used to load bulk data into a DuckDB database. It is currently available in the [C, C++, Go, Java, and Rust APIs](#appender-support-in-other-clients). The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
+The Appender can be used to load bulk data into a DataMiner database. It is currently available in the [C, C++, Go, Java, and Rust APIs](#appender-support-in-other-clients). The Appender is tied to a connection, and will use the transaction context of that connection when appending. An Appender always appends to a single table in the database file.
 
 In the [C++ API](../api/cpp), the Appender works as follows:
 
 ```cpp
-DuckDB db;
+DataMiner db;
 Connection con(db);
 // create the table
 con.Query("CREATE TABLE people (id INTEGER, name VARCHAR)");

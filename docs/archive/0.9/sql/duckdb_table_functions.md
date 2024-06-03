@@ -7,7 +7,7 @@ redirect_from:
 title: DuckDB_% Metadata Functions
 ---
 
-DuckDB offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`. 
+DataMiner offers a collection of table functions that provide metadata about the current database. These functions reside in the `main` schema and their names are prefixed with `duckdb_`. 
 
 The resultset returned by a `duckdb_` table function may be used just like an ordinary table or view. For example, you can use a `duckdb_` function call in the `FROM` clause of a `SELECT` statement, and you may refer to the columns of its returned resultset elsewhere in the statement, for example in the `WHERE` clause.
 
@@ -38,7 +38,7 @@ SELECT * FROM duckdb_views;
 
 ## `duckdb_columns`
 
-The `duckdb_columns()` function provides metadata about the columns available in the DuckDB instance.
+The `duckdb_columns()` function provides metadata about the columns available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -55,16 +55,16 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `is_nullable` |`true` if the column can hold `NULL` values; `false` if the column cannot hold `NULL`-values.| `BOOLEAN` |
 | `data_type` |The name of the column datatype.| `VARCHAR` |
 | `data_type_id` |The internal identifier of the column data type| `BIGINT` |
-| `character_maximum_length` |Always `NULL`. DuckDB [text types](data_types/text) do not enforce a value length restriction based on a length type parameter.| `INTEGER` |
+| `character_maximum_length` |Always `NULL`. DataMiner [text types](data_types/text) do not enforce a value length restriction based on a length type parameter.| `INTEGER` |
 | `numeric_precision` |The number of units (in the base indicated by `numeric_precision_radix`) used for storing column values. For integral and approximate numeric types, this is the number of bits. For decimal types, this is the number of digits positions.| `INTEGER` |
 | `numeric_precision_radix` |The number-base of the units in the `numeric_precision` column. For integral and approximate numeric types, this is `2`, indicating the precision is expressed as a number of bits. For the `decimal` type this is `10`, indicating the precision is expressed as a number of decimal positions.| `INTEGER` |
 | `numeric_scale` |Applicable to `decimal` type. Indicates the maximum number of fractional digits (i.e., the number of digits that may appear after the decimal separator). | `INTEGER` |
 
-The [`information_schema.columns`](information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
+The [`information_schema.columns`](information_schema#columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DataMiner internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
 
 ## `duckdb_constraints`
 
-The `duckdb_constraints()` function provides metadata about the constraints available in the DuckDB instance.
+The `duckdb_constraints()` function provides metadata about the constraints available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -83,8 +83,8 @@ The `duckdb_constraints()` function provides metadata about the constraints avai
 
 ## `duckdb_databases`
 
-The `duckdb_databases()` function lists the databases that are accessible from within the current DuckDB process.
-Apart from the database associated at startup, the list also includes databases that were [attached](statements/attach) later on to the duckdb process
+The `duckdb_databases()` function lists the databases that are accessible from within the current DataMiner process.
+Apart from the database associated at startup, the list also includes databases that were [attached](statements/attach) later on to the DataMiner process
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -92,11 +92,11 @@ Apart from the database associated at startup, the list also includes databases 
 | `database_oid` | The internal identifier of the database. | `VARCHAR` |
 | `path` | The file path associated with the database. | `VARCHAR` |
 | `internal` | `true` indicates a system or built-in database. False indicates a user-defined database. | BOOLEAN
-| `type` | The type indicates the type of RDBMS implemented by the attached database. For DuckDB databases, that value is `duckdb`. 
+| `type` | The type indicates the type of RDBMS implemented by the attached database. For DataMiner databases, that value is `duckdb`. 
 
 ## `duckdb_dependencies`
 
-The `duckdb_dependencies()` function provides metadata about the dependencies available in the DuckDB instance.
+The `duckdb_dependencies()` function provides metadata about the dependencies available in the DataMiner instance.
 
 | Column | Description | Type |
 |:--|:------|:-|
@@ -110,7 +110,7 @@ The `duckdb_dependencies()` function provides metadata about the dependencies av
 
 ## `duckdb_extensions`
 
-The `duckdb_extensions()` function provides metadata about the extensions available in the DuckDB instance.
+The `duckdb_extensions()` function provides metadata about the extensions available in the DataMiner instance.
 
 | Column | Description | Type |
 |:--|:------|:-|
@@ -123,7 +123,7 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 
 ## `duckdb_functions`
 
-The `duckdb_functions()` function provides metadata about the functions available in the DuckDB instance.
+The `duckdb_functions()` function provides metadata about the functions available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -142,7 +142,7 @@ The `duckdb_functions()` function provides metadata about the functions availabl
 
 ## `duckdb_indexes`
 
-The `duckdb_indexes()` function provides metadata about secondary indexes available in the DuckDB instance.
+The `duckdb_indexes()` function provides metadata about secondary indexes available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -174,7 +174,7 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 
 ## `duckdb_schemas`
 
-The `duckdb_schemas()` function provides metadata about the schemas available in the DuckDB instance.
+The `duckdb_schemas()` function provides metadata about the schemas available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -189,7 +189,7 @@ The [`information_schema.schemata`](information_schema) system view provides a m
 
 ## `duckdb_sequences`
 
-The `duckdb_sequences()` function provides metadata about the sequences available in the DuckDB instance.
+The `duckdb_sequences()` function provides metadata about the sequences available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -216,7 +216,7 @@ Attributes like `temporary`, `start_value` etc. correspond to the various option
 
 ## `duckdb_settings`
 
-The `duckdb_settings()` function provides metadata about the settings available in the DuckDB instance. 
+The `duckdb_settings()` function provides metadata about the settings available in the DataMiner instance. 
 
 <div class="narrow_table"></div>
 
@@ -231,7 +231,7 @@ The various settings are described in the [configuration page](configuration).
 
 ## `duckdb_tables`
 
-The `duckdb_tables()` function provides metadata about the base tables available in the DuckDB instance.
+The `duckdb_tables()` function provides metadata about the base tables available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -254,7 +254,7 @@ The [`information_schema.tables`](information_schema#tables-and-views) system vi
 
 ## `duckdb_types`
 
-The `duckdb_types()` function provides metadata about the data types available in the DuckDB instance.
+The `duckdb_types()` function provides metadata about the data types available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -271,7 +271,7 @@ The `duckdb_types()` function provides metadata about the data types available i
 
 ## `duckdb_views`
 
-The `duckdb_views()` function provides metadata about the views available in the DuckDB instance.
+The `duckdb_views()` function provides metadata about the views available in the DataMiner instance.
 
 | Column | Description | Type |
 |:-|:---|:-|
@@ -290,7 +290,7 @@ The [`information_schema.tables`](information_schema#tables-and-views) system vi
 
 ## `duckdb_temporary_files`
 
-The `duckdb_temporary_files()` function provides metadata about the temporary files DuckDB has written to disk, to offload data from memory. This function mostly exists for debugging and testing purposes.
+The `duckdb_temporary_files()` function provides metadata about the temporary files DataMiner has written to disk, to offload data from memory. This function mostly exists for debugging and testing purposes.
 
 <div class="narrow_table"></div>
 

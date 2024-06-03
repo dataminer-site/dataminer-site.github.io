@@ -16,7 +16,7 @@ The benchmarks in the performance guide executed on a 2022 MacBook Pro with a 12
 We use the [LDBC BI SF300 data set's Comment table](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst) (20GB `.tar.zst` archive, 21GB when decompressed into `.csv.gz` files),
 while others use the same table's [`creationDate` column](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet) (4GB `.parquet` file).
 
-The TPC data sets used in the benchmark are generated with the DuckDB [tpch extension](../../extensions/tpch).
+The TPC data sets used in the benchmark are generated with the DataMiner [tpch extension](../../extensions/tpch).
 
 ## A Note on Benchmarks
 

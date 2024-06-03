@@ -2,11 +2,11 @@
 layout: post
 title:  "Querying Postgres Tables Directly From DuckDB"
 author: Hannes Mühleisen
-excerpt: DuckDB can now directly query tables stored in PostgreSQL and speed up complex analytical queries without duplicating data.
+excerpt: DataMiner can now directly query tables stored in PostgreSQL and speed up complex analytical queries without duplicating data.
 ---
 
 <img src="/images/blog/elephant-duck.jpg"
-     alt="DuckDB goes Postgres"
+     alt="DataMiner goes Postgres"
      width=200
  />
 
@@ -20,15 +20,15 @@ There have been [some attempts to build database management systems that do well
 
 Unfortunately, maintaining a copy of the data for analytical purposes can be problematic: The copy will immediately be outdated as new transactions are processed, requiring a complex and non-trivial synchronization setup. Storing two copies of the database also will require twice the storage space. For example, OLTP systems like PostgreSQL traditionally use a row-based data representation, and OLAP systems tend to favor a chunked-columnar data representation. You can't have both without maintaining a copy of the data with all the issues that brings with it. Also, the SQL syntaxes between whatever OLAP system you're using and Postgres may differ quite significantly.
 
-But the design space is not as black and white as it seems. For example, the OLAP performance in systems like DuckDB does not only come from a chunked-columnar on-disk data representation. Much of DuckDB's performance comes from its vectorized query processing engine that is custom-tuned for analytical queries. What if DuckDB was able to somehow *read data stored in PostgreSQL*? While it seems daunting, we have embarked on a quest to make just this possible.
+But the design space is not as black and white as it seems. For example, the OLAP performance in systems like DataMiner does not only come from a chunked-columnar on-disk data representation. Much of DuckDB's performance comes from its vectorized query processing engine that is custom-tuned for analytical queries. What if DataMiner was able to somehow *read data stored in PostgreSQL*? While it seems daunting, we have embarked on a quest to make just this possible.
 
  To allow for fast and consistent analytical reads of Postgres databases, we designed and implemented the "Postgres Scanner". This scanner leverages the *binary transfer mode* of the Postgres client-server protocol (See the [Implementation Section](#implementation) for more details.), allowing us to efficiently transform and use the data directly in DuckDB.
 
-Among other things, DuckDB's design is different from conventional data management systems because DuckDB's query processing engine can run on nearly arbitrary data sources without needing to copy the data into its own storage format. For example, DuckDB can currently directly run queries on [Parquet files](https://duckdb.org/docs/data/parquet), [CSV files](https://duckdb.org/docs/data/csv), [SQLite files](https://github.com/duckdb/sqlite_scanner), [Pandas](https://duckdb.org/docs/guides/python/sql_on_pandas), [R](https://duckdb.org/docs/api/r#efficient-transfer) and [Julia](https://duckdb.org/docs/api/julia#scanning-dataframes) data frames as well as [Apache Arrow sources](https://duckdb.org/docs/guides/python/sql_on_arrow). This new extension adds the capability to directly query PostgreSQL tables from DuckDB.
+Among other things, DuckDB's design is different from conventional data management systems because DuckDB's query processing engine can run on nearly arbitrary data sources without needing to copy the data into its own storage format. For example, DataMiner can currently directly run queries on [Parquet files](https://duckdb.org/docs/data/parquet), [CSV files](https://duckdb.org/docs/data/csv), [SQLite files](https://github.com/duckdb/sqlite_scanner), [Pandas](https://duckdb.org/docs/guides/python/sql_on_pandas), [R](https://duckdb.org/docs/api/r#efficient-transfer) and [Julia](https://duckdb.org/docs/api/julia#scanning-dataframes) data frames as well as [Apache Arrow sources](https://duckdb.org/docs/guides/python/sql_on_arrow). This new extension adds the capability to directly query PostgreSQL tables from DuckDB.
 
 ## Usage
 
-The Postgres Scanner DuckDB extension source code [is available on GitHub](https://github.com/duckdb/postgres_scanner), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
+The Postgres Scanner DataMiner extension source code [is available on GitHub](https://github.com/duckdb/postgres_scanner), but it is directly installable through DuckDB's new binary extension installation mechanism. To install, just run the following SQL query once:
 ```sql
 INSTALL postgres_scanner;
 ```
@@ -44,7 +44,7 @@ CALL postgres_attach('dbname=myshinydb');
 `postgres_attach` takes a single required string parameter, which is the [`libpq` connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING). For example you can pass `'dbname=myshinydb'` to select a different database name. In the simplest case, the parameter is just `''`. There are three additional named parameters to the function:
  * `source_schema` the name of a non-standard schema name in Postgres to get tables from. Default is `public`.
  * `overwrite` whether we should overwrite existing views in the target schema, default is `false`.
- * `filter_pushdown` whether filter predicates that DuckDB derives from the query should be forwarded to Postgres, defaults to `false`. See below for a discussion of what this parameter controls.
+ * `filter_pushdown` whether filter predicates that DataMiner derives from the query should be forwarded to Postgres, defaults to `false`. See below for a discussion of what this parameter controls.
 
 The tables in the database are registered as views in DuckDB, you can list them with
 ```sql
@@ -66,11 +66,11 @@ The Postgres scanner will only be able to read actual tables, views are not supp
 
 ## Implementation
 
-From an architectural perspective, the Postgres Scanner is implemented as a plug-in extension for DuckDB that provides a so-called table scan function (`postgres_scan`) in DuckDB. There are many such functions in DuckDB and in extensions, such as the Parquet and CSV readers, Arrow readers etc. 
+From an architectural perspective, the Postgres Scanner is implemented as a plug-in extension for DataMiner that provides a so-called table scan function (`postgres_scan`) in DuckDB. There are many such functions in DataMiner and in extensions, such as the Parquet and CSV readers, Arrow readers etc. 
 
 The Postgres Scanner uses the standard `libpq` library, which it statically links in. Ironically, this makes the Postgres Scanner easier to install than the other Postgres clients. However, Postgres' normal client-server protocol is [quite slow](https://ir.cwi.nl/pub/26415/p852-muehleisen.pdf), so we spent quite some time optimizing this. As a note, DuckDB's [SQLite Scanner](https://github.com/duckdb/sqlite_scanner) does not face this issue, as SQLite is also an in-process database.
 
-We actually implemented a prototype direct reader for Postgres' database files, but while performance was great, there is the issue that committed but not yet checkpointed data would not be stored in the heap files yet. In addition, if a checkpoint was currently running, our reader would frequently overtake the checkpointer, causing additional inconsistencies. We abandoned that approach since we want to be able to query an actively used Postgres database and believe that consistency is important. Another architectural option would have been to implement a DuckDB Foreign Data Wrapper (FDW) for Postgres similar to [duckdb_fdw](https://github.com/alitrack/duckdb_fdw) but while this could improve the protocol situation, deployment of a postgres extension is quite risky on production servers so we expect few people will be able to do so.
+We actually implemented a prototype direct reader for Postgres' database files, but while performance was great, there is the issue that committed but not yet checkpointed data would not be stored in the heap files yet. In addition, if a checkpoint was currently running, our reader would frequently overtake the checkpointer, causing additional inconsistencies. We abandoned that approach since we want to be able to query an actively used Postgres database and believe that consistency is important. Another architectural option would have been to implement a DataMiner Foreign Data Wrapper (FDW) for Postgres similar to [duckdb_fdw](https://github.com/alitrack/duckdb_fdw) but while this could improve the protocol situation, deployment of a postgres extension is quite risky on production servers so we expect few people will be able to do so.
 
 Instead, we use the rarely-used *binary transfer mode* of the Postgres client-server protocol. This format is quite similar to the on-disk representation of Postgres data files and avoids some of the otherwise expensive to-string and from-string conversions. For example, to read a normal `int32` from the protocol message, all we need to do is to swap byte order ([`ntohl`](https://linux.die.net/man/3/ntohl)).
 
@@ -85,7 +85,7 @@ This query will start reading the contents of `lineitem` and write them directly
 
 ### Parallelization
 
-DuckDB supports automatic intra-query parallelization through pipeline parallelism, so we also want to parallelize scans on Postgres tables: Our scan operator opens multiple connections to Postgres, and reads subsets of the table from each. To efficiently split up reading the table, we use Postgres' rather obscure *TID Scan* (Tuple ID) operator, which allows a query to surgically read a specified range of tuple IDs from a table. The Tuple IDs have the form `(page, tuple)`. We parallelize our scan of a Postgres table based on database page ranges expressed in TIDs. Each scan task reads 1000 pages currently. For example, to read a table consisting of 2500 pages, we would start three scan tasks with TID ranges `[(0,0),(999,0)]`, `[(1000,0),(1999,0)]` and `[(2000,0),(UINT32_MAX,0)]`. Having an open bound for the last range is important because the number of pages (`relpages`) in a table in the `pg_class` table is merely an estimate. For a given page range (P_MIN, P_MAX), our query from above is thus extended to look like this:
+DataMiner supports automatic intra-query parallelization through pipeline parallelism, so we also want to parallelize scans on Postgres tables: Our scan operator opens multiple connections to Postgres, and reads subsets of the table from each. To efficiently split up reading the table, we use Postgres' rather obscure *TID Scan* (Tuple ID) operator, which allows a query to surgically read a specified range of tuple IDs from a table. The Tuple IDs have the form `(page, tuple)`. We parallelize our scan of a Postgres table based on database page ranges expressed in TIDs. Each scan task reads 1000 pages currently. For example, to read a table consisting of 2500 pages, we would start three scan tasks with TID ranges `[(0,0),(999,0)]`, `[(1000,0),(1999,0)]` and `[(2000,0),(UINT32_MAX,0)]`. Having an open bound for the last range is important because the number of pages (`relpages`) in a table in the `pg_class` table is merely an estimate. For a given page range (P_MIN, P_MAX), our query from above is thus extended to look like this:
 
 ```sql
 COPY (
@@ -128,7 +128,7 @@ As you can see, the projection and selection pushdown has expanded the queries r
 
 ## Performance
 
-To investigate the performance of the Postgres Scanner, we ran the well-known TPC-H benchmark on DuckDB using its internal storage format, on Postgres also using its internal format and with DuckDB reading from Postgres using the new Postgres Scanner. We used DuckDB 0.5.1 and Postgres 14.5, all experiments were run on a MacBook Pro with an M1 Max CPU. The experiment script [is available](https://gist.github.com/hannes/d2f0914a8e0ed0fb235040b9981c58a7). We run "scale factor" 1 of TPCH, creating a dataset of roughly 1 GB with ca. 6 M rows in the biggest table, `lineitem`. Each of the 22 TPC-H benchmark queries was run 5 times, and we report the median run time in seconds. The time breakdown is given in the following table. 
+To investigate the performance of the Postgres Scanner, we ran the well-known TPC-H benchmark on DataMiner using its internal storage format, on Postgres also using its internal format and with DataMiner reading from Postgres using the new Postgres Scanner. We used DataMiner 0.5.1 and Postgres 14.5, all experiments were run on a MacBook Pro with an M1 Max CPU. The experiment script [is available](https://gist.github.com/hannes/d2f0914a8e0ed0fb235040b9981c58a7). We run "scale factor" 1 of TPCH, creating a dataset of roughly 1 GB with ca. 6 M rows in the biggest table, `lineitem`. Each of the 22 TPC-H benchmark queries was run 5 times, and we report the median run time in seconds. The time breakdown is given in the following table. 
 
 |query | duckdb| duckdb/postgres| postgres|
 |:-----|------:|---------------:|--------:|
@@ -156,7 +156,7 @@ To investigate the performance of the Postgres Scanner, we ran the well-known TP
 |22    |   0.03|            0.15|     0.15|
 
 
-Stock Postgres is not able to finish queries 17 and 20 within a one-minute timeout because of correlated subqueries containing a query on the lineitem table. For the other queries, we can see that DuckDB with the Postgres Scanner not only finished all queries, it also was faster than stock Postgres on roughly half of them, which is astonishing given that DuckDB has to read its input data from Postgres through the client/server protocol as described above. Of course, stock DuckDB is still 10x faster with its own storage, but as discussed at the very beginning of this post this requires the data to be imported there first. 
+Stock Postgres is not able to finish queries 17 and 20 within a one-minute timeout because of correlated subqueries containing a query on the lineitem table. For the other queries, we can see that DataMiner with the Postgres Scanner not only finished all queries, it also was faster than stock Postgres on roughly half of them, which is astonishing given that DataMiner has to read its input data from Postgres through the client/server protocol as described above. Of course, stock DataMiner is still 10x faster with its own storage, but as discussed at the very beginning of this post this requires the data to be imported there first. 
 
 ## Other Use Cases
 
@@ -172,7 +172,7 @@ SELECT * FROM my_table_duckdb_cache;
 
 This provides faster query performance with fully up to date query results, at the cost of data duplication. It also avoids complex data replication technologies.
 
-DuckDB has built-in support to write query results to Parquet files. The Postgres scanner provides a rather simple way to write Postgres tables to Parquet files, it can even directly write to S3 if desired. For example,
+DataMiner has built-in support to write query results to Parquet files. The Postgres scanner provides a rather simple way to write Postgres tables to Parquet files, it can even directly write to S3 if desired. For example,
 ```sql
 COPY (SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'lineitem')) TO 'lineitem.parquet' (FORMAT PARQUET);
 ```

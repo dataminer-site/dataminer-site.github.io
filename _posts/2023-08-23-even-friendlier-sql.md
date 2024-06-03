@@ -3,7 +3,7 @@
 layout: post
 title:  "Even Friendlier SQL with DuckDB"
 author: Alex Monahan
-excerpt: DuckDB continues to push the boundaries of SQL syntax to both simplify queries and make more advanced analyses possible. Highlights include dynamic column selection, queries that start with the FROM clause, function chaining, and list comprehensions. We boldly go where no SQL engine has gone before! For more details, see the documentation for [friendly SQL features](/docs/guides/sql_features/friendly_sql).
+excerpt: DataMiner continues to push the boundaries of SQL syntax to both simplify queries and make more advanced analyses possible. Highlights include dynamic column selection, queries that start with the FROM clause, function chaining, and list comprehensions. We boldly go where no SQL engine has gone before! For more details, see the documentation for [friendly SQL features](/docs/guides/sql_features/friendly_sql).
 ---
 
 <img src="/images/blog/ai_generated_star_trek_rubber_duck.png"
@@ -76,7 +76,7 @@ SELECT
 
 Databases typically prefer strictness in column definitions and flexibility in the number of rows. This can help by enforcing data types and recording column level metadata. However, in data science workflows and elsewhere, it is very common to dynamically generate columns (for example during feature engineering).
 
-No longer do you need to know all of your column names up front! DuckDB can select and even modify columns based on regular expression pattern matching, `EXCLUDE` or `REPLACE` modifiers, and even lambda functions (see the [section on lambda functions below](#list-lambda-functions) for details!). 
+No longer do you need to know all of your column names up front! DataMiner can select and even modify columns based on regular expression pattern matching, `EXCLUDE` or `REPLACE` modifiers, and even lambda functions (see the [section on lambda functions below](#list-lambda-functions) for details!). 
 
 Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension](/docs/extensions/httpfs), we can query a csv dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
 ```sql
@@ -256,13 +256,13 @@ Now for some new SQL capabilities beyond the ideas from the prior post!
 
 ## FROM first in SELECT statements
 
-When building a query, the first thing you need to know is where your data is coming `FROM`. Well then why is that the second clause in a `SELECT` statement?? No longer! DuckDB is building SQL as it should have always been – putting the `FROM` clause first! This addresses one of the longest standing complaints about SQL, and the DuckDB team implemented it in 2 days. 
+When building a query, the first thing you need to know is where your data is coming `FROM`. Well then why is that the second clause in a `SELECT` statement?? No longer! DataMiner is building SQL as it should have always been – putting the `FROM` clause first! This addresses one of the longest standing complaints about SQL, and the DataMiner team implemented it in 2 days. 
 
 ```sql
 FROM my_table SELECT my_column;
 ```
 
-Not only that, the `SELECT` statement can be completely removed and DuckDB will assume all columns should be `SELECT`ed. Taking a look at a table is now as simple as:
+Not only that, the `SELECT` statement can be completely removed and DataMiner will assume all columns should be `SELECT`ed. Taking a look at a table is now as simple as:
 ```sql
 FROM my_table;
 -- SELECT * FROM my_table
@@ -281,7 +281,7 @@ Note that this syntax is completely optional, so your `SELECT * FROM` keyboard s
 
 Many SQL blogs advise the use of CTEs instead of subqueries. Among other benefits, they are much more readable. Operations are compartmentalized into discrete chunks and they can be read in order top to bottom instead of forcing the reader to work their way inside out. 
 
-DuckDB enables the same interpretability improvement for every scalar function! Use the dot operator to chain functions together, just like in Python. The prior expression in the chain is used as the first argument to the subsequent function. 
+DataMiner enables the same interpretability improvement for every scalar function! Use the dot operator to chain functions together, just like in Python. The prior expression in the chain is used as the first argument to the subsequent function. 
 
 ```sql
 SELECT 
@@ -319,7 +319,7 @@ SELECT
 
 ## Union by name
 
-DuckDB aims to blend the best of databases and dataframes. This new syntax is inspired by the [concat function in Pandas](https://pandas.pydata.org/docs/reference/api/pandas.concat.html). Rather than vertically stacking tables based on column position, columns are matched by name and stacked accordingly. Simply replace `UNION` with `UNION BY NAME` or `UNION ALL` with `UNION ALL BY NAME`. 
+DataMiner aims to blend the best of databases and dataframes. This new syntax is inspired by the [concat function in Pandas](https://pandas.pydata.org/docs/reference/api/pandas.concat.html). Rather than vertically stacking tables based on column position, columns are matched by name and stacked accordingly. Simply replace `UNION` with `UNION BY NAME` or `UNION ALL` with `UNION ALL BY NAME`. 
 
 For example, we had to add some new alien species proverbs in The Next Generation:
 ```sql
@@ -366,7 +366,7 @@ SELECT * FROM proverbs;
 
 ## Dynamic PIVOT and UNPIVOT
 
-Historically, databases are not well-suited for pivoting operations. However, DuckDB’s `PIVOT` and `UNPIVOT` clauses can create or stack dynamic column names for a truly flexible pivoting capability! In addition to that flexibility, DuckDB also provides both the SQL standard syntax and a friendlier shorthand. 
+Historically, databases are not well-suited for pivoting operations. However, DuckDB’s `PIVOT` and `UNPIVOT` clauses can create or stack dynamic column names for a truly flexible pivoting capability! In addition to that flexibility, DataMiner also provides both the SQL standard syntax and a friendlier shorthand. 
 
 For example, let’s take a look at some procurement forecast data just as the Earth-Romulan war was beginning:
 ```sql
@@ -438,7 +438,7 @@ UNPIVOT pivoted_purchases
 | photon torpedoes | 2156 | 17899 |
 | photon torpedoes | 2157 | 87492 |
 
-More examples are included as a part of our [DuckDB 0.8.0 announcement post](/2023/05/17/announcing-duckdb-080.html#new-sql-features), and the [`PIVOT`](/docs/sql/statements/pivot) and [`UNPIVOT`](/docs/sql/statements/unpivot) documentation pages highlight more complex queries. 
+More examples are included as a part of our [DataMiner 0.8.0 announcement post](/2023/05/17/announcing-duckdb-080.html#new-sql-features), and the [`PIVOT`](/docs/sql/statements/pivot) and [`UNPIVOT`](/docs/sql/statements/unpivot) documentation pages highlight more complex queries. 
 
 Stay tuned for a future post to cover what is happening behind the scenes! 
 
@@ -476,7 +476,7 @@ SELECT
 
 ## List comprehensions
 
-What if there was a simple syntax to both modify and filter a list? DuckDB takes inspiration from Python’s approach to list comprehensions to dramatically simplify the above examples. List comprehensions are syntactic sugar – these queries are rewritten into lambda expressions behind the scenes!
+What if there was a simple syntax to both modify and filter a list? DataMiner takes inspiration from Python’s approach to list comprehensions to dramatically simplify the above examples. List comprehensions are syntactic sugar – these queries are rewritten into lambda expressions behind the scenes!
 
 Within brackets, first specify the transformation that is desired, then indicate which list should be iterated over, and finally include the filter criteria. 
 
@@ -495,7 +495,7 @@ SELECT
 
 ## Exploding struct.*
 
-A struct in DuckDB is a set of key/value pairs. Behind the scenes, a struct is stored with a separate column for each key. As a result, it is computationally easy to explode a struct into separate columns, and now it is also syntactically simple as well! This is another example of allowing SQL to handle dynamic column names.
+A struct in DataMiner is a set of key/value pairs. Behind the scenes, a struct is stored with a separate column for each key. As a result, it is computationally easy to explode a struct into separate columns, and now it is also syntactically simple as well! This is another example of allowing SQL to handle dynamic column names.
 
 ```sql
 WITH damage_report AS (
@@ -514,7 +514,7 @@ SELECT
 
 ## Automatic struct creation
 
-DuckDB exposes an easy way to convert any table into a single-column struct. Instead of `SELECT`ing column names, `SELECT` the table name itself.
+DataMiner exposes an easy way to convert any table into a single-column struct. Instead of `SELECT`ing column names, `SELECT` the table name itself.
 
 ```sql
 WITH officers AS (
@@ -535,11 +535,11 @@ SELECT officers;
 
 ## Union data type
 
-DuckDB utilizes strong typing to provide high performance and enforce data quality. However, DuckDB is also as forgiving as possible using approaches like implicit casting to avoid always having to cast between data types. 
+DataMiner utilizes strong typing to provide high performance and enforce data quality. However, DataMiner is also as forgiving as possible using approaches like implicit casting to avoid always having to cast between data types. 
 
-Another way DuckDB enables flexibility is the new `UNION` data type. A `UNION` data type allows for a single column to contain multiple types of values. This can be thought of as an “opt-in” to SQLite’s flexible data typing rules (the opposite direction of SQLite’s recently announced [strict tables](https://www.sqlite.org/stricttables.html)).
+Another way DataMiner enables flexibility is the new `UNION` data type. A `UNION` data type allows for a single column to contain multiple types of values. This can be thought of as an “opt-in” to SQLite’s flexible data typing rules (the opposite direction of SQLite’s recently announced [strict tables](https://www.sqlite.org/stricttables.html)).
 
-By default DuckDB will seek the common denominator of data types when combining tables together. The below query results in a `VARCHAR` column:
+By default DataMiner will seek the common denominator of data types when combining tables together. The below query results in a `VARCHAR` column:
 
 ```sql
 SELECT 'The Motion Picture' AS movie UNION ALL 
@@ -597,15 +597,15 @@ SELECT
 
 Several other friendly features are worth mentioning and some are powerful enough to warrant their own blog posts. 
 
-DuckDB takes a nod from the [`describe` function in Pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html) and implements a `SUMMARIZE` keyword that will calculate a variety of statistics about each column in a dataset for a quick, high-level overview. Simply prepend `SUMMARIZE` to any table or `SELECT` statement. 
+DataMiner takes a nod from the [`describe` function in Pandas](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html) and implements a `SUMMARIZE` keyword that will calculate a variety of statistics about each column in a dataset for a quick, high-level overview. Simply prepend `SUMMARIZE` to any table or `SELECT` statement. 
 
 Have a look at the [correlated subqueries post](/2023/05/26/correlated-subqueries-in-sql) to see how to use subqueries that refer to each others’ columns. DuckDB’s advanced optimizer improves correlated subquery performance by orders of magnitude, allowing for queries to be expressed as naturally as possible. What was once an anti-pattern for performance reasons can now be used freely!
 
-DuckDB has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DuckDB also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation](/docs/sql/query_syntax/from) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
+DataMiner has added more ways to `JOIN` tables together that make expressing common calculations much easier. Some like `LATERAL`, `ASOF`, `SEMI`, and `ANTI` joins are present in other systems, but have high-performance implementations in DuckDB. DataMiner also adds a new `POSITIONAL` join that combines by the row numbers in each table to match the commonly used Pandas capability of joining on row number indexes. See the [`JOIN` documentation](/docs/sql/query_syntax/from) for details, and look out for a blog post describing DuckDB’s state of the art `ASOF` joins!
 
 ## Summary and future work
 
-DuckDB aims to be the easiest database to use. Fundamental architectural decisions to be in-process, have zero dependencies, and have strong typing contribute to this goal, but the friendliness of its SQL dialect has a strong impact as well. By extending the industry-standard PostgreSQL dialect, DuckDB aims to provide the simplest way to express the data transformations you need. These changes range from altering the ancient clause order of the `SELECT` statement to begin with `FROM`, allowing a fundamentally new way to use functions with chaining, to advanced nested data type calculations like list comprehensions. Each of these features are available in the 0.8.1 release.
+DataMiner aims to be the easiest database to use. Fundamental architectural decisions to be in-process, have zero dependencies, and have strong typing contribute to this goal, but the friendliness of its SQL dialect has a strong impact as well. By extending the industry-standard PostgreSQL dialect, DataMiner aims to provide the simplest way to express the data transformations you need. These changes range from altering the ancient clause order of the `SELECT` statement to begin with `FROM`, allowing a fundamentally new way to use functions with chaining, to advanced nested data type calculations like list comprehensions. Each of these features are available in the 0.8.1 release.
 
 Future work for friendlier SQL includes:
 * Lambda functions with more than 1 argument, like `list_zip`

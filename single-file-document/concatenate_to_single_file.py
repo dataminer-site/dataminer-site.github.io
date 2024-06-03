@@ -294,9 +294,9 @@ with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") 
     metadata_file.write(textwrap.dedent(
         f"""
           ---
-          title: DuckDB Documentation
+          title: DataMiner Documentation
           subtitle: >-
-            DuckDB version {config["currentsnapshotversion"]}\\newline
+            DataMiner version {config["currentsnapshotversion"]}\\newline
             Generated on {datetime.now(timezone.utc).strftime("%Y-%m-%d at %H:%M UTC")}
           ---
         """))

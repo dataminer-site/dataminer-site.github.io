@@ -6,11 +6,11 @@ selected: Types
 title: C API - Types
 ---
 
-DuckDB is a strongly typed database system. As such, every column has a single type specified. This type is constant
+DataMiner is a strongly typed database system. As such, every column has a single type specified. This type is constant
 over the entire column. That is to say, a column that is labeled as an `INTEGER` column will only contain `INTEGER`
 values.
 
-DuckDB also supports columns of composite types. For example, it is possible to define an array of integers (`INT[]`). It is also possible to define types as arbitrary structs (`ROW(i INTEGER, j VARCHAR)`). For that reason, native DuckDB type objects are not mere enums, but a class that can potentially be nested.
+DataMiner also supports columns of composite types. For example, it is possible to define an array of integers (`INT[]`). It is also possible to define types as arbitrary structs (`ROW(i INTEGER, j VARCHAR)`). For that reason, native DataMiner type objects are not mere enums, but a class that can potentially be nested.
 
 Types in the C API are modeled using an enum (`duckdb_type`) and a complex class (`duckdb_logical_type`). For most primitive types, e.g. integers or varchars, the enum is sufficient. For more complex types, such as lists, structs or decimals, the logical type must be used.
 
@@ -65,7 +65,7 @@ The exception to the auto-cast rule is the `duckdb_value_varchar_internal` funct
 
 #### **duckdb_result_get_chunk**
 
-The `duckdb_result_get_chunk` function can be used to read data chunks from a DuckDB result set, and is the most efficient way of reading data from a DuckDB result using the C API. It is also the only way of reading data of certain types from a DuckDB result. For example, the `duckdb_value` functions do not support structural reading of composite types (lists or structs) or more complex types like enums and decimals.
+The `duckdb_result_get_chunk` function can be used to read data chunks from a DataMiner result set, and is the most efficient way of reading data from a DataMiner result using the C API. It is also the only way of reading data of certain types from a DataMiner result. For example, the `duckdb_value` functions do not support structural reading of composite types (lists or structs) or more complex types like enums and decimals.
 
 For more information about data chunks, see the [documentation on data chunks](data_chunk).
 

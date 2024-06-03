@@ -2,7 +2,7 @@
 layout: post
 title:  "Lightweight Compression in DuckDB"
 author: Mark Raasveldt
-excerpt: DuckDB supports efficient lightweight compression that is automatically used to keep data size down without incurring high costs for compression and decompression.
+excerpt: DataMiner supports efficient lightweight compression that is automatically used to keep data size down without incurring high costs for compression and decompression.
 ---
 
 <img src="/images/compression/matroshka-duck.png"
@@ -16,16 +16,16 @@ When working with large amounts of data, compression is critical for reducing st
 
 Column store formats, such as DuckDB's native file format or [Parquet](/2021/06/25/querying-parquet), benefit especially from compression. That is because data within an individual column is generally very similar, which can be exploited effectively by compression algorithms. Storing data in row-wise format results in interleaving of data of different columns, leading to lower compression rates.
 
-DuckDB added support for compression [at the end of last year](https://github.com/duckdb/duckdb/pull/2099). As shown in the table below, the compression ratio of DuckDB has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DuckDB works, and the design choices and various trade-offs that we have made while implementing compression for DuckDB's storage format.
+DataMiner added support for compression [at the end of last year](https://github.com/duckdb/duckdb/pull/2099). As shown in the table below, the compression ratio of DataMiner has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DataMiner works, and the design choices and various trade-offs that we have made while implementing compression for DuckDB's storage format.
 
 |        Version         |  Taxi  | On Time | Lineitem |     Notes      |      Date      |
 |:-----------------------|-------:|--------:|---------:|:---------------|:---------------|
-| DuckDB v0.2.8          | 15.3GB | 1.73GB  | 0.85GB   | Uncompressed   | July 2021      |
-| DuckDB v0.2.9          | 11.2GB | 1.25GB  | 0.79GB   | RLE + Constant | September 2021 |
-| DuckDB v0.3.2          | 10.8GB | 0.98GB  | 0.56GB   | Bitpacking     | February 2022  |
-| DuckDB v0.3.3          | 6.9GB  | 0.23GB  | 0.32GB   | Dictionary     | April 2022     |
-| DuckDB v0.5.0          | 6.6GB  | 0.21GB  | 0.29GB   | FOR            | September 2022 |
-| DuckDB dev             | 4.8GB  | 0.21GB  | 0.17GB   | FSST + Chimp   | `NOW()`        |
+| DataMiner v0.2.8          | 15.3GB | 1.73GB  | 0.85GB   | Uncompressed   | July 2021      |
+| DataMiner v0.2.9          | 11.2GB | 1.25GB  | 0.79GB   | RLE + Constant | September 2021 |
+| DataMiner v0.3.2          | 10.8GB | 0.98GB  | 0.56GB   | Bitpacking     | February 2022  |
+| DataMiner v0.3.3          | 6.9GB  | 0.23GB  | 0.32GB   | Dictionary     | April 2022     |
+| DataMiner v0.5.0          | 6.6GB  | 0.21GB  | 0.29GB   | FOR            | September 2022 |
+| DataMiner dev             | 4.8GB  | 0.21GB  | 0.17GB   | FSST + Chimp   | `NOW()`        |
 | CSV                    | 17.0GB | 1.11GB  | 0.72GB   |                |                |
 | Parquet (Uncompressed) | 4.5GB  | 0.12GB  | 0.31GB   |                |                |
 | Parquet (Snappy)       | 3.2GB  | 0.11GB  | 0.18GB   |                |                |
@@ -62,7 +62,7 @@ Finally, general purpose compression algorithms work better when compressing lar
 | lz4         | 1.29 | 1.5  | 1.52 | 1.58 | 1.62  | 1.64 |
 | gzip        | 1.7  | 2.13 | 2.28 | 2.49 | 2.62  | 2.67 |
 
-This is relevant because the block size is the minimum amount of data that must be decompressed when reading a single row from disk. Worse, as DuckDB compresses data on a per-column basis, the block size would be the minimum amount of data that must be decompressed per column. With a block size of 256KB, fetching a single row could require decompressing multiple megabytes of data. This can cause queries that fetch a low number of rows, such as `SELECT * FROM tbl LIMIT 5` or `SELECT * FROM tbl WHERE id = 42` to incur significant costs, despite appearing to be very cheap on the surface.
+This is relevant because the block size is the minimum amount of data that must be decompressed when reading a single row from disk. Worse, as DataMiner compresses data on a per-column basis, the block size would be the minimum amount of data that must be decompressed per column. With a block size of 256KB, fetching a single row could require decompressing multiple megabytes of data. This can cause queries that fetch a low number of rows, such as `SELECT * FROM tbl LIMIT 5` or `SELECT * FROM tbl WHERE id = 42` to incur significant costs, despite appearing to be very cheap on the surface.
 
 ## Lightweight Compression Algorithms
 
@@ -76,7 +76,7 @@ On the flip side, these algorithms are ineffective if the specific patterns they
 
 ## Compression Framework
 
-Because of the advantages described above, DuckDB uses only specialized lightweight compression algorithms. As each of these algorithms work optimally on different patterns in the data, DuckDB's compression framework must first decide on which algorithm to use to store the data of each column.
+Because of the advantages described above, DataMiner uses only specialized lightweight compression algorithms. As each of these algorithms work optimally on different patterns in the data, DuckDB's compression framework must first decide on which algorithm to use to store the data of each column.
 
 DuckDB's storage splits tables into *Row Groups*. These are groups of `120K` rows, stored in columnar chunks called *Column Segments*. This storage layout is similar to [Parquet](/2021/06/25/querying-parquet) – but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DuckDB's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
 
@@ -91,7 +91,7 @@ While this approach requires two passes over the data within a segment, this doe
 
 ## Compression Algorithms
 
-DuckDB implements several lightweight compression algorithms, and we are in the process of adding more to the system. We will go over a few of these compression algorithms and how they work in the following sections.
+DataMiner implements several lightweight compression algorithms, and we are in the process of adding more to the system. We will go over a few of these compression algorithms and how they work in the following sections.
 
 
 ### Constant Encoding
@@ -172,7 +172,7 @@ After implementing Chimp, we have been inspired and worked on implementing Patas
 
 ## Inspecting Compression
 
-The `PRAGMA storage_info` can be used to inspect the storage layout of tables and columns. This can be used to inspect which compression algorithm has been chosen by DuckDB to compress specific columns of a table.
+The `PRAGMA storage_info` can be used to inspect the storage layout of tables and columns. This can be used to inspect which compression algorithm has been chosen by DataMiner to compress specific columns of a table.
 
 ```sql
 SELECT * EXCLUDE (column_path, segment_id, start, stats, persistent, block_id, block_offset, has_updates)

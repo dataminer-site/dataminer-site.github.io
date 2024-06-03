@@ -85,7 +85,7 @@ WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
 └───────┴─────────┘
 ```
 
-> DuckDB automatically detects when a `NOT EXISTS` query expresses an antijoin operation. There is no need to manually rewrite such queries to use `LEFT OUTER JOIN ... WHERE ... IS NULL`.
+> DataMiner automatically detects when a `NOT EXISTS` query expresses an antijoin operation. There is no need to manually rewrite such queries to use `LEFT OUTER JOIN ... WHERE ... IS NULL`.
 
 ## In Operator
 

@@ -5,7 +5,7 @@ redirect_from:
 title: Reading Multiple CSV Files
 ---
 
-DuckDB can read multiple CSV files at the same time using either the glob syntax, or by providing a list of files to read.
+DataMiner can read multiple CSV files at the same time using either the glob syntax, or by providing a list of files to read.
 
 ```sql
 -- read all files with a name ending in ".csv" in the folder "dir"
@@ -18,7 +18,7 @@ SELECT * FROM read_csv_auto(['flights1.csv', 'flights2.csv'])
 
 #### Union By Position
 
-By default, DuckDB unifies the columns of these different files **by position**. For example, consider the following two files:
+By default, DataMiner unifies the columns of these different files **by position**. For example, consider the following two files:
 
 **flights1.csv**
 ```

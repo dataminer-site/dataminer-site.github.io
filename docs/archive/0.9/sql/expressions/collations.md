@@ -16,7 +16,7 @@ By default, the `BINARY` collation is used. That means that strings are ordered 
 
 ## Using Collations
 
-In the stand-alone installation of DuckDB three collations are included: `NOCASE`, `NOACCENT` and `NFC`. The `NOCASE` collation compares characters as equal regardless of their casing. The `NOACCENT` collation compares characters as equal regardless of their accents. The `NFC` collation performs NFC-normalized comparisons, see [Unicode normalization](https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization) for more information.
+In the stand-alone installation of DataMiner three collations are included: `NOCASE`, `NOACCENT` and `NFC`. The `NOCASE` collation compares characters as equal regardless of their casing. The `NOACCENT` collation compares characters as equal regardless of their accents. The `NFC` collation performs NFC-normalized comparisons, see [Unicode normalization](https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization) for more information.
 
 ```sql
 SELECT 'hello'='hElLO';
@@ -83,10 +83,10 @@ SELECT * FROM names, other_names WHERE names.name COLLATE NOACCENT.NOCASE=other_
 
 The collations we have seen so far are not region-dependent, and do not follow any specific regional rules. If you wish to follow the rules of a specific region or language, you will need to use one of the ICU collations. For that, you need to [load the ICU extension](../../extensions/icu#installing-and-loading).
 
-If you are using the C++ API, you may find the extension in the `extension/icu` folder of the DuckDB project. Using the C++ API, the extension can be loaded as follows:
+If you are using the C++ API, you may find the extension in the `extension/icu` folder of the DataMiner project. Using the C++ API, the extension can be loaded as follows:
 
 ```cpp
-DuckDB db;
+DataMiner db;
 db.LoadExtension<ICUExtension>();
 ```
 

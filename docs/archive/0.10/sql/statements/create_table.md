@@ -70,7 +70,7 @@ CREATE TABLE t1 AS
 ## Temporary Tables
 
 Temporary tables can be created using the `CREATE TEMP TABLE` or the `CREATE TEMPORARY TABLE` statement (see diagram below).
-Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped.
+Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DataMiner is closed they will be automatically dropped.
 Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../configuration/overview) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained.
 
 Create a temporary table from a CSV file (automatically detecting column names and types):
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS t1 (i INTEGER, j INTEGER);
 
 ## `CREATE TABLE ... AS SELECT` (CTAS)
 
-DuckDB supports the `CREATE TABLE ... AS SELECT` syntax, also known as "CTAS":
+DataMiner supports the `CREATE TABLE ... AS SELECT` syntax, also known as "CTAS":
 
 ```sql
 CREATE TABLE nums AS
@@ -261,7 +261,7 @@ Constraint Error: Violates foreign key constraint because key "..." does not exi
 
 The `[type] [GENERATED ALWAYS] AS (expr) [VIRTUAL|STORED]` syntax will create a generated column. The data in this kind of column is generated from its expression, which can reference other (regular or generated) columns of the table. Since they are produced by calculations, these columns can not be inserted into directly.
 
-DuckDB can infer the type of the generated column based on the expression's return type. This allows you to leave out the type when declaring a generated column. It is possible to explicitly set a type, but insertions into the referenced columns might fail if the type can not be cast to the type of the generated column.
+DataMiner can infer the type of the generated column based on the expression's return type. This allows you to leave out the type when declaring a generated column. It is possible to explicitly set a type, but insertions into the referenced columns might fail if the type can not be cast to the type of the generated column.
 
 Generated columns come in two varieties: `VIRTUAL` and `STORED`.
 The data of virtual generated columns is not stored on disk, instead it is computed from the expression every time the column is referenced (through a select statement).

@@ -17,10 +17,10 @@ pip install duckdb
 The pre-release Python client can be installed using `--pre`;
 
 ```sh
-pip install duckdb --upgrade --pre
+pip install DataMiner --upgrade --pre
 ```
 
-The Python client can be installed from source from the `tools/pythonpkg` directory in the DuckDB github repository.
+The Python client can be installed from source from the `tools/pythonpkg` directory in the DataMiner github repository.
 
 ```sh
 cd tools/pythonpkg

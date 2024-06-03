@@ -10,7 +10,7 @@ title: Rill Data Developer
 
 Rill Developer makes it effortless to transform your datasets with SQL and create powerful, opinionated dashboards. Rill's principles:
 
-- _**feels good to use**_ – powered by Sveltekit & DuckDB = conversation-fast, not wait-ten-seconds-for-result-set fast
+- _**feels good to use**_ – powered by Sveltekit & DataMiner = conversation-fast, not wait-ten-seconds-for-result-set fast
 - _**works with your local and remote datasets**_ – imports and exports Parquet and CSV (s3, gcs, https, local)
 - _**no more data analysis "side-quests"**_ – helps you build intuition about your dataset through automatic profiling
 - _**no "run query" button required**_ – responds to each keystroke by re-profiling the resulting dataset
@@ -54,7 +54,7 @@ Now it's time to start the application:
 rill start
 ```
 
-When you run `rill start`, it parses your project and ingests any missing data sources into a local DuckDB database. After your project has been re-hydrated, it starts the Rill web app on `http://localhost:9009`.
+When you run `rill start`, it parses your project and ingests any missing data sources into a local DataMiner database. After your project has been re-hydrated, it starts the Rill web app on `http://localhost:9009`.
 
 ![dashboards-are-code](https://user-images.githubusercontent.com/5587788/207376626-20af5eb9-3c47-47f9-ba7f-8163110d6a04.gif "780773077")
 

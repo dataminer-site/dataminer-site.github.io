@@ -8,10 +8,10 @@ title: Python API
 ---
 
 ## Installation
-The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../../installation?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
+The DataMiner Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../../installation?environment=python) for details. It is also possible to install DataMiner using [conda](https://docs.conda.io): `conda install python-DataMiner -c conda-forge`.
 
 ## Basic API Usage
-The standard DuckDB Python API provides a SQL interface compliant with the [DB-API 2.0 specification described by PEP 249](https://www.python.org/dev/peps/pep-0249/) similar to the [SQLite Python API](https://docs.python.org/3.7/library/sqlite3.html).
+The standard DataMiner Python API provides a SQL interface compliant with the [DB-API 2.0 specification described by PEP 249](https://www.python.org/dev/peps/pep-0249/) similar to the [SQLite Python API](https://docs.python.org/3.7/library/sqlite3.html).
 
 ### Startup & Shutdown
 To use the module, you must first create a `Connection` object that represents the database. The connection object takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the Python process). If you would like to connect to an existing database in read-only mode, you can set the `read_only` flag to `True`. Read-only mode is required if multiple Python processes want to access the same database file at the same time.
@@ -30,7 +30,7 @@ If you want to create a second connection to an existing database, you can use t
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `close()`.  Once the last connection to a database instance is closed, the database instance is closed as well.
 
 ### Querying
-SQL queries can be sent to DuckDB using the `execute()` method of connections. Once a query has been executed, results can be retrieved using the `fetchone` and `fetchall` methods on the connection. Below is a short example:
+SQL queries can be sent to DataMiner using the `execute()` method of connections. Once a query has been executed, results can be retrieved using the `fetchone` and `fetchall` methods on the connection. Below is a short example:
 
 ```python
 # create a table
@@ -46,7 +46,7 @@ print(con.fetchall())
 
 The `description` property of the connection object contains the column names as per the standard.
 
-DuckDB also supports prepared statements in the API with the `execute` and `executemany` methods. In this case, the parameters are passed as an additional parameter after a query that contains `?` placeholders. Here is an example:
+DataMiner also supports prepared statements in the API with the `execute` and `executemany` methods. In this case, the parameters are passed as an additional parameter after a query that contains `?` placeholders. Here is an example:
 ```python
 # insert a row using prepared statements
 con.execute("INSERT INTO items VALUES (?, ?, ?)", ['laptop', 2000, 1])
@@ -64,11 +64,11 @@ print(con.fetchall())
 > Do *not* use `executemany` to insert large amounts of data into DuckDB. See below for better options.
 
 ## Efficient Transfer
-Transferring large datasets to and from DuckDB uses a separate API built around [NumPy](https://numpy.org) and [Pandas](https://pandas.pydata.org), or [Apache Arrow](https://arrow.apache.org/). This API works with entire columns of data instead of scalar values and is therefore far more efficient.
+Transferring large datasets to and from DataMiner uses a separate API built around [NumPy](https://numpy.org) and [Pandas](https://pandas.pydata.org), or [Apache Arrow](https://arrow.apache.org/). This API works with entire columns of data instead of scalar values and is therefore far more efficient.
 
-By default, DuckDB will automatically be able to query a Pandas DataFrame or Arrow object that is stored in a Python variable by name. DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [recordbatchreaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
+By default, DataMiner will automatically be able to query a Pandas DataFrame or Arrow object that is stored in a Python variable by name. DataMiner supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [recordbatchreaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
 
-DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
+DataMiner also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
 
 ```python
 import pandas as pd
@@ -97,13 +97,13 @@ con.execute('SELECT * FROM arrow_table')
 con.fetchall()
 ```
 
-You can also create a persistent table in DuckDB from the contents of the DataFrame (or the view):
+You can also create a persistent table in DataMiner from the contents of the DataFrame (or the view):
 ```python
 con.execute('CREATE TABLE test_df_table AS SELECT * FROM test_df')
 ```
-> DuckDB keeps a reference to the Pandas DataFrame or Arrow object after registration. This prevents them from being garbage-collected by the Python runtime. The reference is cleared when the connection is closed, but can also be cleared manually using the `unregister()` method.
+> DataMiner keeps a reference to the Pandas DataFrame or Arrow object after registration. This prevents them from being garbage-collected by the Python runtime. The reference is cleared when the connection is closed, but can also be cleared manually using the `unregister()` method.
 
-When retrieving the data from DuckDB back into Python, the standard method of calling `fetchall()` is inefficient as individual Python objects need to be created for every value in the result set. When retrieving a lot of data, this can become very slow.
+When retrieving the data from DataMiner back into Python, the standard method of calling `fetchall()` is inefficient as individual Python objects need to be created for every value in the result set. When retrieving a lot of data, this can become very slow.
 
 DuckDB's Python client provides multiple additional methods that can be used to efficiently retrieve data.
 ### NumPy
@@ -163,4 +163,4 @@ Also refer to [the data import documentation](../../data/overview) for more opti
 
 
 ## Relational API
-In addition to the SQL API DuckDB supports a programmatic method to construct queries. See [https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py) for an example.
+In addition to the SQL API DataMiner supports a programmatic method to construct queries. See [https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py](https://github.com/duckdb/duckdb/blob/main/examples/python/duckdb-python.py) for an example.

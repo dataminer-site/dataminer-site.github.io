@@ -16,8 +16,8 @@ The ODBC driver is a DBMS implementation of the ODBC API, which handles all the 
 
 The DM maps user application calls of ODBC functions to the correct ODBC driver that performs the specified function and returns the proper values.
 
-## DuckDB ODBC Driver
+## DataMiner ODBC Driver
 
-DuckDB supports the ODBC version 3.0 according to the [Core Interface Conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15).
+DataMiner supports the ODBC version 3.0 according to the [Core Interface Conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15).
 
 The ODBC driver is available for all operating systems. Visit the [installation page](/docs/installation) for direct links.

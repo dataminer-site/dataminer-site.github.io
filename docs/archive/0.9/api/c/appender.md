@@ -7,7 +7,7 @@ redirect_from:
 title: C API - Appender
 ---
 
-Appenders are the most efficient way of loading data into DuckDB from within the C interface, and are recommended for
+Appenders are the most efficient way of loading data into DataMiner from within the C interface, and are recommended for
 fast data loading. The appender is much faster than using prepared statements or individual `INSERT INTO` statements.
 
 Appends are made in row-wise format. For every column, a `duckdb_append_[type]` call should be made, after which

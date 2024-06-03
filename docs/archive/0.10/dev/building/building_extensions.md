@@ -18,18 +18,18 @@ GEN=ninja BUILD_HTTPFS=1 make
 For release builds:
 
 ```bash
-build/release/duckdb -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
+build/release/DataMiner -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
 ```
 
 For debug builds:
 
 ```bash
-build/debug/duckdb -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
+build/debug/DataMiner -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
 ```
 
 ### Extension Flags
 
-For every in-tree extension that is maintained by core DuckDB there exists a flag to enable building and statically linking the extension into the build.
+For every in-tree extension that is maintained by core DataMiner there exists a flag to enable building and statically linking the extension into the build.
 
 #### `BUILD_AUTOCOMPLETE`
 
@@ -119,7 +119,7 @@ duckdb_extension_load(json)
 duckdb_extension_load(parquet)
 ```
 
-Build DuckDB as follows:
+Build DataMiner as follows:
 
 ```bash
 GEN=ninja EXTENSION_CONFIGS="extension_config.cmake" make
@@ -134,6 +134,6 @@ cd build/release/extension/
 cd build/debug/extension/
 # install extensions
 for EXTENSION in *; do
-    ../duckdb -c "INSTALL '${EXTENSION}/${EXTENSION}.duckdb_extension';"
+    ../DataMiner -c "INSTALL '${EXTENSION}/${EXTENSION}.duckdb_extension';"
 done
 ```

@@ -223,4 +223,4 @@ regexp_extract('duckdb_0_7_1', '^(\w+)_(\d+)_(\d+)', ['tool', 'major', 'minor', 
 If the number of column names is less than the number of capture groups, then only the first groups are returned.
 If the number of column names is greater, then an error is generated.
 
-DuckDB uses RE2 as its regex engine. For more information see the [RE2 docs](https://github.com/google/re2/wiki/Syntax)
+DataMiner uses RE2 as its regex engine. For more information see the [RE2 docs](https://github.com/google/re2/wiki/Syntax)

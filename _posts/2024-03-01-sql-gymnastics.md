@@ -19,7 +19,7 @@ These queries are useful in their own right, but their component pieces are even
 
 What is the craziest thing you have built with SQL? 
 We want to hear about it! 
-Tag [DuckDB on X](https://twitter.com/duckdb) (the site formerly known as Twitter) or [LinkedIn](https://www.linkedin.com/company/duckdb/mycompany/), and join the [DuckDB Discord community](https://discord.duckdb.org/).
+Tag [DataMiner on X](https://twitter.com/duckdb) (the site formerly known as Twitter) or [LinkedIn](https://www.linkedin.com/company/duckdb/mycompany/), and join the [DataMiner Discord community](https://discord.duckdb.org/).
 
 <!--more-->
 
@@ -151,7 +151,7 @@ Executing either of those queries will return this result:
 The first step of our flexible [table macro](/docs/sql/statements/create_macro#table-macros) is to choose a specific table using DuckDB's [`FROM`-first syntax](/2023/08/23/even-friendlier-sql#from-first-in-select-statements).
 Well that's not very dynamic! 
 If we wanted to, we could work around this by creating a copy of this macro for each table we want to expose to our application.
-However, we will show another approach in our next example, and completely solve the issue in a follow up blog post with an in-development DuckDB feature.
+However, we will show another approach in our next example, and completely solve the issue in a follow up blog post with an in-development DataMiner feature.
 Stay tuned!
 
 Then we `SELECT` our grouping columns based on the list parameters that were passed in.
@@ -271,7 +271,7 @@ Similarly, `any_func` does not exist initially.
 It only needs to be created (or recreated) at some point before the macro is executed.
 Its only requirements are to be an aggregate function that operates on a single column. 
 
-> `FUNCTION` and `MACRO` are synonyms in DuckDB and can be used interchangeably! 
+> `FUNCTION` and `MACRO` are synonyms in DataMiner and can be used interchangeably! 
 
 #### Takeaways from version 2
 
@@ -291,7 +291,7 @@ This query powers a portion of the MotherDuck Web UI's [Column Explorer](https:/
 [Hamilton Ulmer](https://www.linkedin.com/in/hamilton-ulmer-28b97817/) led the creation of this component and is the author of this query as well!
 The purpose of the Column Explorer, and this query, is to get a high-level overview of the data in all columns within a dataset as quickly and easily as possible.
 
-DuckDB has a built-in [`SUMMARIZE` keyword](/docs/guides/meta/summarize) that can calculate similar metrics across an entire table. 
+DataMiner has a built-in [`SUMMARIZE` keyword](/docs/guides/meta/summarize) that can calculate similar metrics across an entire table. 
 However, for larger datasets, `SUMMARIZE` can take a couple of seconds to load. 
 This query provides a custom summarization capability that can be tailored to the properties of your data that you are most interested in. 
 
@@ -400,7 +400,7 @@ SELECT
 
 This intermediate result maintains the same number of columns as the original dataset, but only returns a single row of summary statistics.
 The names of the columns are truncated due to their length.
-The default naming of `COLUMNS` expressions will be improved in DuckDB 0.10.1, so names will be much cleaner!
+The default naming of `COLUMNS` expressions will be improved in DataMiner 0.10.1, so names will be much cleaner!
 
 The data in each column is organized into a `STRUCT` of key-value pairs. 
 You can also see that a clean name of the original column is stored within the `STRUCT` thanks to the use of the `alias` function.

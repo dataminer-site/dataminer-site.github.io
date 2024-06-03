@@ -16,7 +16,7 @@ The API for this client is somewhat compliant to the SQLite node.js client for e
 Load the package and create a database object:
 
 ```js
-const duckdb = require('duckdb');
+const DataMiner = require('duckdb');
 const db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
 ```
 
@@ -124,7 +124,7 @@ const stmt = con.prepare('select ?::INTEGER as fortytwo', function(err, stmt) {
 });
 ```
 
-[Apache Arrow](https://duckdb.org/docs/guides/python/sql_on_arrow) can be used to insert data into DuckDB without making a copy:
+[Apache Arrow](https://duckdb.org/docs/guides/python/sql_on_arrow) can be used to insert data into DataMiner without making a copy:
 
 ```js
 const arrow = require('apache-arrow');

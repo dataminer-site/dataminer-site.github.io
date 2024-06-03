@@ -15,9 +15,9 @@ For detailed information checkout out the [Common ODBC Component Files](https://
 
 # Step 1: Download ODBC Driver
 
-DuckDB releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
+DataMiner releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
 
-**duckdb_odbc.dll**: the DuckDB driver compiled for Windows.
+**duckdb_odbc.dll**: the DataMiner driver compiled for Windows.
 
 **duckdb_odbc_setup.dll**: a setup DLL used by the Windows ODBC Data Source Administrator tool.
 
@@ -36,7 +36,7 @@ unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
 
 # Step 3: ODBC Windows Installer
 
-The `odbc_install.exe` aids the configuration of the DuckDB ODBC Driver on Windows.
+The `odbc_install.exe` aids the configuration of the DataMiner ODBC Driver on Windows.
 It depends on the `Odbccp32.dll` that provides functions to configure the ODBC registry entries.
 
 Inside the permanent directory (e.g., `duckdb_odbc`), double-click on the `odbc_install.exe`.
@@ -58,17 +58,17 @@ It also can be launched thought the Windows start:
 
 <img src="/images/blog/odbc/launch_odbcad.png" style="width: 60%; height: 60%"/>
 
-## Default DuckDB DSN
+## Default DataMiner DSN
 
 In the the Windows ODBC Data Source Administrator tool, at ***System DSN*** tab is placed the default installed DSN for ***DuckDB***:
 
 ![Windows ODBC Config Tool](/images/blog/odbc/odbcad32_exe.png)
 
-## Changing DuckDB DSN
+## Changing DataMiner DSN
 
 Selecting the default DSN (i.e., `DuckDB`) or add a new configuration, the following setup window will display:
 
-![DuckDB Windows DSN Setup](/images/blog/odbc/duckdb_DSN_setup.png)
+![DataMiner Windows DSN Setup](/images/blog/odbc/duckdb_DSN_setup.png)
 
 For now, it is possible to set the DSN and the database file path associated with that DSN.
 
@@ -83,7 +83,7 @@ The `odbc_install.exe` changes this entry that has two subkeys: `ODBC.INI` and `
 
 The `ODBC.INI` is where users usually insert DSN registry entries for the drivers.
 
-For example, the DSN registry for DuckDB would look like this:
+For example, the DSN registry for DataMiner would look like this:
 
 ![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](/images/blog/odbc/odbc_ini-registry-entry.png)
 

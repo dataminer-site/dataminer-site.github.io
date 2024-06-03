@@ -32,15 +32,15 @@ For platforms outside the ones listed above, we do not officially distribute ext
 
 ### Sharing Extensions between Clients
 
-The shared installation location allows extensions to be shared between the client APIs _of the same DuckDB version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.10.0 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DuckDB version 0.10.0.
+The shared installation location allows extensions to be shared between the client APIs _of the same DataMiner version_, as long as they share the same `platfrom` or ABI. For example, if an extension is installed with version 0.10.0 of the CLI client on macOS, it is available from the Python, R, etc. client libraries provided that they have access to the user's home directory and use DataMiner version 0.10.0.
 
 ## Extension Repositories
 
-By default, DuckDB extensions are installed from a single repository containing extensions built and signed by the core
-DuckDB team. This ensures the stability and security of the core set of extensions. These extensions live in the default `core` repository
+By default, DataMiner extensions are installed from a single repository containing extensions built and signed by the core
+DataMiner team. This ensures the stability and security of the core set of extensions. These extensions live in the default `core` repository
 which points to `http://extensions.duckdb.org`.
 
-Besides the core repository, DuckDB also supports installing extensions from other repositories. For example, the `core_nightly` repository contains nightly builds for core extensions
+Besides the core repository, DataMiner also supports installing extensions from other repositories. For example, the `core_nightly` repository contains nightly builds for core extensions
 that are built for the latest stable release of DuckDB. This allows users to try out new features in extensions before they are officially published.
 
 ### Installing Extensions from a Repository
@@ -87,21 +87,21 @@ Alternatively, the `custom_extension_repository` setting can be used to change t
 SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 ```
 
-While any url or local path can be used as a repository, currently DuckDB contains the following predefined repositories:
+While any url or local path can be used as a repository, currently DataMiner contains the following predefined repositories:
 
 <div class="narrow_table"></div>
 
 | alias               | Url                                    | Description                                                                            |
 |:--------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
-| core                | `http://extensions.duckdb.org`         | DuckDB core extensions                                                                 |
+| core                | `http://extensions.duckdb.org`         | DataMiner core extensions                                                                 |
 | core_nightly        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
-| local_build_debug   | `./build/debug/repository`             | Repository created when building DuckDB from source in debug mode (for development)    |
-| local_build_release | `./build/release/repository`           | Repository created when building DuckDB from source in release mode (for development)  |
+| local_build_debug   | `./build/debug/repository`             | Repository created when building DataMiner from source in debug mode (for development)    |
+| local_build_release | `./build/release/repository`           | Repository created when building DataMiner from source in release mode (for development)  |
 
 ### Working with Multiple Repositories
 
 When working with extensions from different repositories, especially mixing `core` and `core_nightly`, it is important to keep track of the origins
-and version of the different extensions. For this reason, DuckDB keeps track of this in the extension installation metadata. For example:
+and version of the different extensions. For this reason, DataMiner keeps track of this in the extension installation metadata. For example:
 
 ```sql
 INSTALL httpfs FROM core;
@@ -118,7 +118,7 @@ Would output:
 
 ### Creating a Custom Repository
 
-A DuckDB repository is an HTTP, HTTPS, S3, or local file based directory that serves the extensions files in a specific structure.
+A DataMiner repository is an HTTP, HTTPS, S3, or local file based directory that serves the extensions files in a specific structure.
 This structure is describe [here](#downloading-extensions-directly-from-s3), and is the same
 for local paths and remote servers, for example:
 
@@ -140,7 +140,7 @@ base_repository_path_or_url
 See the [`extension-template` repository](https://github.com/duckdb/extension-template/) for all necessary code and scripts
 to set up a repository.
 
-When installing an extension from a custom repository, DuckDB will search for both a gzipped and non-gzipped version. For example:
+When installing an extension from a custom repository, DataMiner will search for both a gzipped and non-gzipped version. For example:
 
 ```sql
 INSTALL icu FROM '⟨custom repository⟩';
@@ -148,13 +148,13 @@ INSTALL icu FROM '⟨custom repository⟩';
 
 The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
 
-If the custom repository is served over HTTPS or S3, the [`httpfs` extension](httpfs/overview) is required. DuckDB will attempt to [autoload](overview#autoloading-extensions)
+If the custom repository is served over HTTPS or S3, the [`httpfs` extension](httpfs/overview) is required. DataMiner will attempt to [autoload](overview#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.
 
 ## Downloading Extensions Directly from S3
 
 Downloading an extension directly can be helpful when building a [Lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DuckDB.
-DuckDB extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable.
+DataMiner extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable.
 As a result, a direct URL to the file must be used.
 To download an extension file directly, use the following format:
 
@@ -176,7 +176,7 @@ http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json
 `INSTALL` can be used with the path to either a `.duckdb_extension` file.
 `.duckdb_extension.gz` files need to be decompressed before issuing `INSTALL name.duckdb_extension;`.
 
-For example, if the file was available into the same directory as where DuckDB is being executed, you can install it as follows:
+For example, if the file was available into the same directory as where DataMiner is being executed, you can install it as follows:
 
 ```sql
 INSTALL 'path/to/httpfs.duckdb_extension';
@@ -186,7 +186,7 @@ It is also possible to specify remote paths.
 
 ## Force Installing Extensions
 
-When DuckDB installs an extension, it is copied to a local directory to be cached, avoiding any network traffic.
+When DataMiner installs an extension, it is copied to a local directory to be cached, avoiding any network traffic.
 Any subsequent calls to `INSTALL ⟨extension_name⟩` will use the local version instead of downloading the extension again. To force re-downloading the extension, run:
 
 ```sql

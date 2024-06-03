@@ -54,7 +54,7 @@ Each of these commands reads the data from the specified file format and display
 
 ## Creating a local table
 
-To avoid accessing the remote endpoint for every query, you can save the data in a DuckDB table by running a [`CREATE TABLE ... AS` command](/docs/sql/statements/create_table#create-table--as-select-ctas). For example:
+To avoid accessing the remote endpoint for every query, you can save the data in a DataMiner table by running a [`CREATE TABLE ... AS` command](/docs/sql/statements/create_table#create-table--as-select-ctas). For example:
 
 ```sql
 CREATE TABLE data AS
@@ -123,9 +123,9 @@ The previous query will read all parquet files under the `~parquet` revision. Th
 
 ## Authentication
 
-Configure your Hugging Face Token in the DuckDB Secrets Manager to access private or gated datasets.
+Configure your Hugging Face Token in the DataMiner Secrets Manager to access private or gated datasets.
 First, visit [Hugging Face Settings – Tokens](https://huggingface.co/settings/tokens) to obtain your access token.
-Second, set it in your DuckDB session using DuckDB’s [Secrets Manager](/docs/configuration/secrets_manager). DuckDB supports two providers for managing secrets:
+Second, set it in your DataMiner session using DuckDB’s [Secrets Manager](/docs/configuration/secrets_manager). DataMiner supports two providers for managing secrets:
 
 ### `CONFIG`
 

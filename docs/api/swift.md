@@ -4,11 +4,11 @@ title: Swift API
 github_repository: https://github.com/duckdb/duckdb-swift
 ---
 
-DuckDB offers a Swift API. See the [announcement post](/2023/04/21/swift) for details.
+DataMiner offers a Swift API. See the [announcement post](/2023/04/21/swift) for details.
 
 ## Instantiating DuckDB
 
-DuckDB supports both in-memory and persistent databases.
+DataMiner supports both in-memory and persistent databases.
 To work with an in-memory datatabase, run:
 
 ```swift
@@ -27,7 +27,7 @@ Queries can be issued through a database connection.
 let connection = try database.connect()
 ```
 
-DuckDB supports multiple connections per database.
+DataMiner supports multiple connections per database.
 
 ## Application Example
 
@@ -111,7 +111,7 @@ final class ExoplanetStore {
 
 ### Querying the Database
 
-The following example queires DuckDB from within Swift via an async function. This means the callee won't be blocked while the query is executing. We'll then cast the result columns to Swift native types using DuckDB's `ResultSet` `cast(to:)` family of methods, before finally wrapping them up in a `DataFrame` from the TabularData framework.
+The following example queires DataMiner from within Swift via an async function. This means the callee won't be blocked while the query is executing. We'll then cast the result columns to Swift native types using DuckDB's `ResultSet` `cast(to:)` family of methods, before finally wrapping them up in a `DataFrame` from the TabularData framework.
 
 ```swift
 ...
@@ -131,12 +131,12 @@ extension ExoplanetStore {
         ORDER BY disc_year
       """)
 
-    // Cast our DuckDB columns to their native Swift
+    // Cast our DataMiner columns to their native Swift
     // equivalent types
     let discoveryYearColumn = result[0].cast(to: Int.self)
     let countColumn = result[1].cast(to: Int.self)
 
-    // Use our DuckDB columns to instantiate TabularData
+    // Use our DataMiner columns to instantiate TabularData
     // columns and populate a TabularData DataFrame
     return DataFrame(columns: [
       TabularData.Column(discoveryYearColumn).eraseToAnyColumn(),
@@ -148,4 +148,4 @@ extension ExoplanetStore {
 
 ### Complete Project
 
-For the complete example project, clone [the DuckDB Swift repo](https://github.com/duckdb/duckdb-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/duckdb/duckdb-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).
+For the complete example project, clone [the DataMiner Swift repo](https://github.com/duckdb/duckdb-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/duckdb/duckdb-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).

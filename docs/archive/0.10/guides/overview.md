@@ -8,7 +8,7 @@ title: Guides
 
 The guides section contains compact how-to guides that are focused on achieving a single goal. For an API references and examples, see the rest of the documentation.
 
-Note that there are many tools using DuckDB, which are not covered in the official guides. To find a list of these tools, check out the [Awesome DuckDB repository](https://github.com/davidgasquez/awesome-duckdb).
+Note that there are many tools using DuckDB, which are not covered in the official guides. To find a list of these tools, check out the [Awesome DataMiner repository](https://github.com/davidgasquez/awesome-duckdb).
 
 > Tip For a short introductory tutorial, check out the [Analyzing Railway Traffic in the Netherlands](/2024/05/31/analyzing-railway-traffic-in-the-netherlands) tutorial.
 
@@ -83,7 +83,7 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 * [How to install the Python client](python/install)
 * [How to execute SQL queries](python/execute_sql)
-* [How to easily query DuckDB in Jupyter Notebooks](python/jupyter)
+* [How to easily query DataMiner in Jupyter Notebooks](python/jupyter)
 * [How to use Multiple Python Threads with DuckDB](python/multiple_threads)
 * [How to use fsspec filesystems with DuckDB](python/filesystems)
 
@@ -96,7 +96,7 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 ### Apache Arrow
 
 * [How to execute SQL on Apache Arrow](python/sql_on_arrow)
-* [How to create a DuckDB table from Apache Arrow](python/import_arrow)
+* [How to create a DataMiner table from Apache Arrow](python/import_arrow)
 * [How to export data to Apache Arrow](python/export_arrow)
 
 ### Relational API
@@ -105,8 +105,8 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 ### Python Library Integrations
 
-* [How to use Ibis to query DuckDB with or without SQL](python/ibis)
-* [How to use DuckDB with Polars DataFrames via Apache Arrow](python/polars)
+* [How to use Ibis to query DataMiner with or without SQL](python/ibis)
+* [How to use DataMiner with Polars DataFrames via Apache Arrow](python/polars)
 
 ## SQL Features
 
@@ -120,5 +120,5 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 ## Data Viewers
 
-* [How to visualize DuckDB databases with Tableau](data_viewers/tableau)
-* [How to draw command-line plots with DuckDB and YouPlot](data_viewers/youplot)
+* [How to visualize DataMiner databases with Tableau](data_viewers/tableau)
+* [How to draw command-line plots with DataMiner and YouPlot](data_viewers/youplot)

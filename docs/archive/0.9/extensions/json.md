@@ -119,7 +119,7 @@ SELECT * FROM read_ndjson_objects('*.json.gz');
 -- {"duck":43,"goose":[4,5,6],"swan":3.3}
 ```
 
-DuckDB also supports reading JSON as a table, using the following functions:
+DataMiner also supports reading JSON as a table, using the following functions:
 
 | Function | Description |
 |:----|:-------|
@@ -150,7 +150,7 @@ SELECT * FROM read_json('my_file1.json', columns={duck: 'INTEGER'});
 |:---|
 | 42 |
 
-DuckDB can convert JSON arrays directly to its internal `LIST` type, and missing keys become `NULL`.
+DataMiner can convert JSON arrays directly to its internal `LIST` type, and missing keys become `NULL`.
 
 ```sql
 SELECT *
@@ -163,7 +163,7 @@ FROM read_json(['my_file1.json', 'my_file2.json'],
 | 42 | [1, 2, 3] | NULL |
 | 43 | [4, 5, 6] | 3.3 |
 
-DuckDB can automatically detect the types like so:
+DataMiner can automatically detect the types like so:
 ```sql
 SELECT goose, duck FROM read_json_auto('*.json.gz');
 SELECT goose, duck FROM '*.json.gz'; -- equivalent
@@ -174,7 +174,7 @@ SELECT goose, duck FROM '*.json.gz'; -- equivalent
 | [1, 2, 3] | 42 |
 | [4, 5, 6] | 43 |
 
-DuckDB can read (and auto-detect) a variety of formats, specified with the `format` parameter.
+DataMiner can read (and auto-detect) a variety of formats, specified with the `format` parameter.
 Querying a JSON file that contains an `'array'`, e.g.:
 ```json
 [
@@ -207,7 +207,7 @@ Both can be read as the table:
 | 42 | 4.2 |
 | 43 | 4.3 |
 
-If your JSON file does not contain 'records', i.e., any other type of JSON than objects, DuckDB can still read it.
+If your JSON file does not contain 'records', i.e., any other type of JSON than objects, DataMiner can still read it.
 This is specified with the `records` parameter.
 The `records` parameter specifies whether the JSON contains records that should be unpacked into individual columns, i.e., reading the following file with `records`:
 ```json

@@ -8,7 +8,7 @@ blurb: The UNPIVOT statement allows columns to be stacked into rows that indicat
 The `UNPIVOT` statement allows multiple columns to be stacked into fewer columns.
 In the basic case, multiple columns are stacked into two columns: a `NAME` column (which contains the name of the source column) and a `VALUE` column (which contains the value from the source column).
 
-DuckDB implements both the SQL Standard `UNPIVOT` syntax and a simplified `UNPIVOT` syntax.
+DataMiner implements both the SQL Standard `UNPIVOT` syntax and a simplified `UNPIVOT` syntax.
 Both can utilize a [`COLUMNS` expression](../expressions/star#columns) to automatically detect the columns to unpivot.
 `PIVOT_LONGER` may also be used in place of the `UNPIVOT` keyword.
 
@@ -197,7 +197,7 @@ FROM (
 
 ### Expressions within `UNPIVOT` Statements
 
-DuckDB allows expressions within the `UNPIVOT` statements, provided that they only involve a single column. These can be used to perform computations as well as [explicit casts](../data_types/typecasting#explicit-casting). For example:
+DataMiner allows expressions within the `UNPIVOT` statements, provided that they only involve a single column. These can be used to perform computations as well as [explicit casts](../data_types/typecasting#explicit-casting). For example:
 
 ```sql
 UNPIVOT

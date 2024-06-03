@@ -38,7 +38,7 @@ Implicit and explicit typecasting is possible between numerous types, see the [T
 
 ## Nested / Composite Types
 
-DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION`. Each supports different use cases and has a different structure.
+DataMiner supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION`. Each supports different use cases and has a different structure.
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:-|:---|:---|:--|:--|
@@ -50,7 +50,7 @@ DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `U
 
 ### Updating Values of Nested Types
 
-When performing _updates_ on values of nested types, DuckDB performs a _delete_ operation followed by an _insert_ operation.
+When performing _updates_ on values of nested types, DataMiner performs a _delete_ operation followed by an _insert_ operation.
 When used in a table with ART indexes (either via explicit indexes or primary keys/unique constraints), this can lead to [unexpected constraint violations](../indexes#over-eager-unique-constraint-checking).
 For example:
 

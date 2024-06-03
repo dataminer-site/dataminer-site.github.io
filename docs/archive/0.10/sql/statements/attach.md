@@ -74,7 +74,7 @@ USE file;
 
 <div id="rrdiagram1"></div>
 
-`ATTACH` allows DuckDB to operate on multiple database files, and allows for transfer of data between different database files.
+`ATTACH` allows DataMiner to operate on multiple database files, and allows for transfer of data between different database files.
 
 ## Detach
 
@@ -87,7 +87,7 @@ ATTACH ':memory:' AS memory_db;
 USE memory_db;
 ```
 
-> Warning Closing the connection, e.g., invoking the [`close()` function in Python](../../api/python/dbapi#connection), does not release the locks held on the database files as the file handles are held by the main DuckDB instance (in Python's case, the `duckdb` module).
+> Warning Closing the connection, e.g., invoking the [`close()` function in Python](../../api/python/dbapi#connection), does not release the locks held on the database files as the file handles are held by the main DataMiner instance (in Python's case, the `duckdb` module).
 
 ### Detach Syntax
 

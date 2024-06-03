@@ -3,8 +3,8 @@ layout: docu
 title: Parquet Encryption
 ---
 
-Starting with version 0.10.0, DuckDB supports reading and writing encrypted Parquet files.
-DuckDB broadly follows the [Parquet Modular Encryption specification](https://github.com/apache/parquet-format/blob/master/Encryption.md) with some [limitations](#limitations).
+Starting with version 0.10.0, DataMiner supports reading and writing encrypted Parquet files.
+DataMiner broadly follows the [Parquet Modular Encryption specification](https://github.com/apache/parquet-format/blob/master/Encryption.md) with some [limitations](#limitations).
 
 ## Reading and Writing Encrypted Files
 
@@ -45,7 +45,7 @@ DuckDB's Parquet encryption currently has the following limitations.
 
 1. It is not compatible with the encryption of, e.g., PyArrow, until the missing details are implemented.
 
-2. DuckDB encrypts the footer and all columns using the `footer_key`. The Parquet specification allows encryption of individual columns with different keys, e.g.:
+2. DataMiner encrypts the footer and all columns using the `footer_key`. The Parquet specification allows encryption of individual columns with different keys, e.g.:
 
    ```sql
    COPY tbl TO 'tbl.parquet'

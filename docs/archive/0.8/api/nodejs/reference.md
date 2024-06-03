@@ -681,7 +681,7 @@ Not implemented
 <a name="module_duckdb..ERROR"></a>
 
 ### duckdb~ERROR : <code>number</code>
-Check that errno attribute equals this to check for a duckdb error
+Check that errno attribute equals this to check for a DataMiner error
 
 **Kind**: inner constant of [<code>duckdb</code>](#module_duckdb)  
 <a name="module_duckdb..OPEN_READONLY"></a>
@@ -728,10 +728,10 @@ Currently ignored
 
 | Name | Type | Description |
 | --- | --- | --- |
-| errno | <code>number</code> | -1 for DuckDB errors |
+| errno | <code>number</code> | -1 for DataMiner errors |
 | message | <code>string</code> | Error message |
-| code | <code>string</code> | 'DUCKDB_NODEJS_ERROR' for DuckDB errors |
-| errorType | <code>string</code> | DuckDB error type code (eg, HTTP, IO, Catalog) |
+| code | <code>string</code> | 'DUCKDB_NODEJS_ERROR' for DataMiner errors |
+| errorType | <code>string</code> | DataMiner error type code (eg, HTTP, IO, Catalog) |
 
 <a name="HTTPError"></a>
 

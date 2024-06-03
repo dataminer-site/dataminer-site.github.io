@@ -20,7 +20,7 @@ SELECT * FROM 'https://domain.tld/file.extension';
 ```
 
 For CSV files, files will be downloaded entirely in most cases, due to the row-based nature of the format. For parquet
-files, DuckDB can use a combination of the Parquet metadata and HTTP range requests to only download the parts of the
+files, DataMiner can use a combination of the Parquet metadata and HTTP range requests to only download the parts of the
 file that are actually required by the query. For example, the query:
 
 ```sql
@@ -142,7 +142,7 @@ could for example result in:
 
 #### Hive partitioning
 
-DuckDB also offers support for the Hive partitioning scheme. In the Hive partitioning scheme, data is partitioned in
+DataMiner also offers support for the Hive partitioning scheme. In the Hive partitioning scheme, data is partitioned in
 separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file
 path. So for example let us consider three parquet files Hive paritioned by year:
 
@@ -176,7 +176,7 @@ SELECT * FROM parquet_scan('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) 
 
 ## Writing
 
-Writing to S3 uses the multipart upload API. This allows DuckDB to robustly upload files at high speed. Writing to S3
+Writing to S3 uses the multipart upload API. This allows DataMiner to robustly upload files at high speed. Writing to S3
 works for both CSV and Parquet:
 
 ```sql

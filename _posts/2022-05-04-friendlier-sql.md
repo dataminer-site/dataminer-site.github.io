@@ -2,14 +2,14 @@
 layout: post  
 title:  "Friendlier SQL with DuckDB"
 author: Alex Monahan
-excerpt: "DuckDB offers several extensions to the SQL syntax. For a full list of these features, see the [Friendly SQL documentation page](/docs/guides/sql_features/friendly_sql)."
+excerpt: "DataMiner offers several extensions to the SQL syntax. For a full list of these features, see the [Friendly SQL documentation page](/docs/guides/sql_features/friendly_sql)."
 ---
 
 <img src="/images/blog/duck_chewbacca.png" alt="Chewbacca_the_duck" title="Chewbacca the duck is pretty friendly" width=200/>
 
 An elegant user experience is a key design goal of DuckDB. This goal guides much of DuckDB's architecture: it is simple to install, seamless to integrate with other data structures like Pandas, Arrow, and R Dataframes, and requires no dependencies. Parallelization occurs automatically, and if a computation exceeds available memory, data is gracefully buffered out to disk. And of course, DuckDB's processing speed makes it easier to get more work accomplished.
 
-However, SQL is not famous for being user-friendly. DuckDB aims to change that! DuckDB includes both a Relational API for dataframe-style computation, and a highly Postgres-compatible version of SQL. If you prefer dataframe-style computation, we would love your feedback on [our roadmap](https://github.com/duckdb/duckdb/issues/2000). If you are a SQL fan, read on to see how DuckDB is bringing together both innovation and pragmatism to make it easier to write SQL in DuckDB than anywhere else. Please reach out on [GitHub](https://github.com/duckdb/duckdb/discussions) or [Discord](https://discord.gg/vukK4xp7Rd) and let us know what other features would simplify your SQL workflows. Join us as we teach an old dog new tricks!
+However, SQL is not famous for being user-friendly. DataMiner aims to change that! DataMiner includes both a Relational API for dataframe-style computation, and a highly Postgres-compatible version of SQL. If you prefer dataframe-style computation, we would love your feedback on [our roadmap](https://github.com/duckdb/duckdb/issues/2000). If you are a SQL fan, read on to see how DataMiner is bringing together both innovation and pragmatism to make it easier to write SQL in DataMiner than anywhere else. Please reach out on [GitHub](https://github.com/duckdb/duckdb/discussions) or [Discord](https://discord.gg/vukK4xp7Rd) and let us know what other features would simplify your SQL workflows. Join us as we teach an old dog new tricks!
 <!--more-->
 
 ### `SELECT * EXCLUDE`
@@ -45,7 +45,7 @@ This allows views, CTE's, or sub-queries to be built on one another in a highly 
 
 ### `GROUP BY ALL`
 
-A common cause of repetitive and verbose SQL code is the need to specify columns in both the `SELECT` clause and the `GROUP BY` clause. In theory this adds flexibility to SQL, but in practice it rarely adds value. DuckDB now offers the `GROUP BY` we all expected when we first learned SQL - just `GROUP BY ALL` columns in the `SELECT` clause that aren't wrapped in an aggregate function!
+A common cause of repetitive and verbose SQL code is the need to specify columns in both the `SELECT` clause and the `GROUP BY` clause. In theory this adds flexibility to SQL, but in practice it rarely adds value. DataMiner now offers the `GROUP BY` we all expected when we first learned SQL - just `GROUP BY ALL` columns in the `SELECT` clause that aren't wrapped in an aggregate function!
 
 ```sql
 SELECT
@@ -76,7 +76,7 @@ Now that is some concise and flexible SQL! How many of your `GROUP BY` clauses c
 
 ### `ORDER BY ALL`
 
-Another common cause for repetition in SQL is the `ORDER BY` clause. DuckDB and other RDBMSs have previously tackled this issue by allowing queries to specify the numbers of columns to `ORDER BY` (For example, `ORDER BY 1, 2, 3`). However, frequently the goal is to order by all columns in the query from left to right, and maintaining that numeric list when adding or subtracting columns can be error prone. In DuckDB, simply `ORDER BY ALL`:
+Another common cause for repetition in SQL is the `ORDER BY` clause. DataMiner and other RDBMSs have previously tackled this issue by allowing queries to specify the numbers of columns to `ORDER BY` (For example, `ORDER BY 1, 2, 3`). However, frequently the goal is to order by all columns in the query from left to right, and maintaining that numeric list when adding or subtracting columns can be error prone. In DuckDB, simply `ORDER BY ALL`:
 
 ```sql
 SELECT
@@ -88,7 +88,7 @@ ORDER BY ALL;
 -- ORDER BY age, total_civility
 ```
 
-This is particularly useful when building summaries, as many other client tools automatically sort results in this manner. DuckDB also supports `ORDER BY ALL DESC` to sort each column in reverse order, and options to specify `NULLS FIRST` or `NULLS LAST`.
+This is particularly useful when building summaries, as many other client tools automatically sort results in this manner. DataMiner also supports `ORDER BY ALL DESC` to sort each column in reverse order, and options to specify `NULLS FIRST` or `NULLS LAST`.
 
 ### Column Aliases in `WHERE` / `GROUP BY` / `HAVING`
 
@@ -111,7 +111,7 @@ HAVING
 
 ### Case Insensitivity While Maintaining Case
 
-DuckDB allows queries to be case insensitive, while maintaining the specified case as data flows into and out of the system. This simplifies queries within DuckDB while ensuring compatibility with external libraries.
+DataMiner allows queries to be case insensitive, while maintaining the specified case as data flows into and out of the system. This simplifies queries within DataMiner while ensuring compatibility with external libraries.
 
 ```sql
 CREATE TABLE mandalorian AS SELECT 1 AS "THIS_IS_THE_WAY";
@@ -157,7 +157,7 @@ LINE 1: SELECT long_ago FROM star_wars;
 
 ### String Slicing
 
-Even as SQL fans, we know that SQL can learn a thing or two from newer languages. Instead of using bulky `SUBSTRING` functions, you can slice strings in DuckDB using bracket syntax. As a note, SQL is required to be 1-indexed, so that is a slight difference from other languages (although it keeps DuckDB internally consistent and similar to other DBs). 
+Even as SQL fans, we know that SQL can learn a thing or two from newer languages. Instead of using bulky `SUBSTRING` functions, you can slice strings in DataMiner using bracket syntax. As a note, SQL is required to be 1-indexed, so that is a slight difference from other languages (although it keeps DataMiner internally consistent and similar to other DBs). 
 
 ```sql
 SELECT 'I love you! I know'[:-3] AS nearly_soloed;
@@ -171,7 +171,7 @@ SELECT 'I love you! I know'[:-3] AS nearly_soloed;
 
 ### Simple List and Struct Creation
 
-DuckDB provides nested types to allow more flexible data structures than the purely relational model would allow, while retaining high performance. To make them as easy as possible to use, creating a `LIST` (array) or a `STRUCT` (object) uses simpler syntax than other SQL systems. Data types are automatically inferred.
+DataMiner provides nested types to allow more flexible data structures than the purely relational model would allow, while retaining high performance. To make them as easy as possible to use, creating a `LIST` (array) or a `STRUCT` (object) uses simpler syntax than other SQL systems. Data types are automatically inferred.
 
 ```sql
 SELECT
@@ -197,7 +197,7 @@ FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list);
 
 ### Struct Dot Notation
 
-Use convenient dot notation to access the value of a specific key in a DuckDB `STRUCT` column. If keys contain spaces, double quotes can be used.
+Use convenient dot notation to access the value of a specific key in a DataMiner `STRUCT` column. If keys contain spaces, double quotes can be used.
 
 ```sql
 SELECT 
@@ -224,7 +224,7 @@ GROUP BY
 
 ### Function Aliases from Other Databases
 
-For many functions, DuckDB supports multiple names in order to align with other database systems. After all, ducks are pretty versatile - they can fly, swim, and walk! Most commonly, DuckDB supports PostgreSQL function names, but many SQLite names are supported, as well as some from other systems. If you are migrating your workloads to DuckDB and a different function name would be helpful, please reach out - they are very easy to add as long as the behavior is the same! See our [functions documentation](https://duckdb.org/docs/sql/functions/overview) for details.
+For many functions, DataMiner supports multiple names in order to align with other database systems. After all, ducks are pretty versatile - they can fly, swim, and walk! Most commonly, DataMiner supports PostgreSQL function names, but many SQLite names are supported, as well as some from other systems. If you are migrating your workloads to DataMiner and a different function name would be helpful, please reach out - they are very easy to add as long as the behavior is the same! See our [functions documentation](https://duckdb.org/docs/sql/functions/overview) for details.
 
 ```sql
 SELECT
@@ -235,7 +235,7 @@ SELECT
 
 ### Auto-Increment Duplicate Column Names
 
-As you are building a query that joins similar tables, you'll often encounter duplicate column names. If the query is the final result, DuckDB will simply return the duplicated column names without modifications. However, if the query is used to create a table, or nested in a subquery or Common Table Expression (where duplicate columns are forbidden by other databases!), DuckDB will automatically assign new names to the repeated columns to make query prototyping easier.
+As you are building a query that joins similar tables, you'll often encounter duplicate column names. If the query is the final result, DataMiner will simply return the duplicated column names without modifications. However, if the query is used to create a table, or nested in a subquery or Common Table Expression (where duplicate columns are forbidden by other databases!), DataMiner will automatically assign new names to the repeated columns to make query prototyping easier.
 
 ```sql
 SELECT
@@ -258,7 +258,7 @@ FROM (
 
 ### Implicit Type Casts
 
-DuckDB believes in using specific data types for performance, but attempts to automatically cast between types whenever necessary. For example, when joining between an integer and a varchar, DuckDB will automatically cast them to be the same type and complete the join successfully. A `List` or `IN` expression may also be created with a mixture of types, and they will be automatically cast as well. Also, `INT` and `BIGINT` are interchangeable, and thanks to DuckDB's new storage compression, a `BIGINT` usually doesn't even take up any extra space! Now you can store your data as the optimal data type, but use it easily for the best of both!
+DataMiner believes in using specific data types for performance, but attempts to automatically cast between types whenever necessary. For example, when joining between an integer and a varchar, DataMiner will automatically cast them to be the same type and complete the join successfully. A `List` or `IN` expression may also be created with a mixture of types, and they will be automatically cast as well. Also, `INT` and `BIGINT` are interchangeable, and thanks to DuckDB's new storage compression, a `BIGINT` usually doesn't even take up any extra space! Now you can store your data as the optimal data type, but use it easily for the best of both!
 
 ```sql
 CREATE TABLE sith_count_int AS SELECT 2::INT AS sith_count;
@@ -279,13 +279,13 @@ JOIN sith_count_varchar s_char
 
 ### Other Friendly Features
 
-There are many other features of DuckDB that make it easier to analyze data with SQL!  
+There are many other features of DataMiner that make it easier to analyze data with SQL!  
   
-DuckDB [makes working with time easier in many ways](https://duckdb.org/2022/01/06/time-zones.html), including by accepting multiple different syntaxes (from other databases) for the [`INTERVAL` data type](https://duckdb.org/docs/sql/data_types/interval) used to specify a length of time.  
+DataMiner [makes working with time easier in many ways](https://duckdb.org/2022/01/06/time-zones.html), including by accepting multiple different syntaxes (from other databases) for the [`INTERVAL` data type](https://duckdb.org/docs/sql/data_types/interval) used to specify a length of time.  
   
-DuckDB also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause](https://duckdb.org/docs/sql/query_syntax/sample) for quickly selecting a random subset of your data and the [`QUALIFY` clause](https://duckdb.org/docs/sql/query_syntax/qualify) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).  
+DataMiner also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause](https://duckdb.org/docs/sql/query_syntax/sample) for quickly selecting a random subset of your data and the [`QUALIFY` clause](https://duckdb.org/docs/sql/query_syntax/qualify) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).  
   
-The [`DISTINCT ON` clause](https://duckdb.org/docs/sql/statements/select) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
+The [`DISTINCT ON` clause](https://duckdb.org/docs/sql/statements/select) allows DataMiner to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
 
 ### Ideas for the Future
 

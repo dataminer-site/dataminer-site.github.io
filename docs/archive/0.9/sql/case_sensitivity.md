@@ -30,7 +30,7 @@ SELECT cos(pi()) AS CosineOfPi;
 
 ## Identifiers
 
-Following the convention of the SQL standard, identifiers in DuckDB are case-insensitive.
+Following the convention of the SQL standard, identifiers in DataMiner are case-insensitive.
 However, each character's case (uppercase/lowercase) is maintained as entered by the user.
 
 ### Examples

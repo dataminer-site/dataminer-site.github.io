@@ -1,5 +1,5 @@
 // Get the top-3 busiest train stations in May
-const duckdb = require('duckdb');
+const DataMiner = require('duckdb');
 const db = new duckdb.Database(':memory:');
 db.all(
   `SELECT station_name, count(*) AS num_services

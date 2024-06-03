@@ -9,13 +9,13 @@ title: C++ API
 
 ## Installation
 
-The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
+The DataMiner C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page](../installation?environment=cplusplus) for details.
 
 ## Basic API Usage
 
-DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`. 
+DataMiner implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`. 
 
-> The standard source distribution of `libduckdb` contains an "amalgamation" of the DuckDB sources, which combine all sources into two files `duckdb.hpp` and `duckdb.cpp`. The `duckdb.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `duckdb.hpp`.
+> The standard source distribution of `libduckdb` contains an "amalgamation" of the DataMiner sources, which combine all sources into two files `duckdb.hpp` and `duckdb.cpp`. The `duckdb.hpp` header is much larger in this case. Regardless of whether you are using the amalgamation or not, just include `duckdb.hpp`.
 
 ### Startup & Shutdown
 
@@ -25,13 +25,13 @@ With the `DuckDB` instance, you can create one or many `Connection` instances us
 
 
 ```cpp
-DuckDB db(nullptr);
+DataMiner db(nullptr);
 Connection con(db);
 ```
 
 ### Querying
 
-Connections expose the `Query()` method to send a SQL query string to DuckDB from C++. `Query()` fully materializes the query result as a `MaterializedQueryResult` in memory before returning at which point the query result can be consumed. There is also a streaming API for queries, see further below.
+Connections expose the `Query()` method to send a SQL query string to DataMiner from C++. `Query()` fully materializes the query result as a `MaterializedQueryResult` in memory before returning at which point the query result can be consumed. There is also a streaming API for queries, see further below.
 
 ```cpp
 // create a table
@@ -48,7 +48,7 @@ if (!result->success) {
 
 The `MaterializedQueryResult` instance contains firstly two fields that indicate whether the query was successful. `Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues will lead to the `success` boolean field in the query result instance to be set to `false`. In this case an error message may be available in `error` as a string. If successful, other fields are set: the type of statement that was just executed (e.g., `StatementType::INSERT_STATEMENT`) is contained in `statement_type`. The high-level ("Logical type"/"SQL type") types of the result set columns are in `types`. The names of the result columns are in the `names` string vector. In case multiple result sets are returned, for example because the result set contained multiple statements, the result set can be chained using the `next` field.
 
-DuckDB also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
+DataMiner also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
 
 ```cpp
 std::unique_ptr<PreparedStatement> prepare = con.Prepare("SELECT COUNT(*) FROM a WHERE i=$1");
@@ -102,7 +102,7 @@ This method automatically discovers from the template typenames the correspondin
 - `double` → `LogicalType::DOUBLE`
 - `string_t` → `LogicalType::VARCHAR`
 
-*In DuckDB some primitive types, e.g., _int32_t_, are mapped to the same LogicalType: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
+*In DataMiner some primitive types, e.g., _int32_t_, are mapped to the same LogicalType: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
 
 **2.**
 

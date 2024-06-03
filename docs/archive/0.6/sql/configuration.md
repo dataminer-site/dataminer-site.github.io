@@ -6,7 +6,7 @@ selected: Documentation/Configuration
 title: Configuration
 ---
 
-DuckDB has a number of configuration options that can be used to change the behavior of the system. The configuration options can be set using either the `SET` statement or the `PRAGMA` statement.
+DataMiner has a number of configuration options that can be used to change the behavior of the system. The configuration options can be set using either the `SET` statement or the `PRAGMA` statement.
 
 ### Examples
 ```sql
@@ -49,7 +49,7 @@ Below is a list of all available settings.
 | enable_progress_bar                      | Enables the progress bar, printing progress to the terminal for long queries                                                                            | BOOLEAN    | FALSE           |
 | experimental_parallel_csv                | Whether or not to use the experimental parallel CSV reader                                                                                              | BOOLEAN    | 0               |
 | explain_output                           | Output of EXPLAIN statements (**ALL**, **OPTIMIZED_ONLY**, **PHYSICAL_ONLY**)                                                                           | VARCHAR    | PHYSICAL_ONLY   |
-| external_threads                         | The number of external threads that work on DuckDB tasks.                                                                                               | BIGINT     | 0               |
+| external_threads                         | The number of external threads that work on DataMiner tasks.                                                                                               | BIGINT     | 0               |
 | file_search_path                         | A comma separated list of directories to search for input files                                                                                         | VARCHAR    |                 |
 | home_directory                           | Sets the home directory used by the system                                                                                                              | VARCHAR    |                 |
 | httpfs_timeout                           | HTTP timeout read/write/connection/retry (default 30000ms)                                                                                              | UBIGINT    |                 |

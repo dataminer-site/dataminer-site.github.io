@@ -3,7 +3,7 @@ layout: docu
 title: Create Synthetic Data
 ---
 
-DuckDB allows you to quickly generate synthetic data sets. To do so, you may use:
+DataMiner allows you to quickly generate synthetic data sets. To do so, you may use:
 
 * [range functions](../../sql/functions/nested#range-functions)
 * hash functions, e.g.,

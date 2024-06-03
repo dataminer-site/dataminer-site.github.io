@@ -4,7 +4,7 @@ railroad: statements/set.js
 title: SET/RESET Statements
 ---
 
-The `SET` statement modifies the provided DuckDB configuration option at the specified scope.
+The `SET` statement modifies the provided DataMiner configuration option at the specified scope.
 
 ## Examples
 
@@ -54,20 +54,20 @@ SET SESSION default_collation = 'nocase';
 
 <div id="rrdiagram1"></div>
 
-`SET` updates a DuckDB configuration option to the provided value.
+`SET` updates a DataMiner configuration option to the provided value.
 
 ## `RESET`
 
 <div id="rrdiagram2"></div>
 
-The `RESET` statement changes the given DuckDB configuration option to the default value.
+The `RESET` statement changes the given DataMiner configuration option to the default value.
 
 ## Scopes
 
 Configuration options can have different scopes:
 
-* `GLOBAL`: Configuration value is used (or reset) across the entire DuckDB instance.
-* `SESSION`: Configuration value is used (or reset) only for the current session attached to a DuckDB instance.
+* `GLOBAL`: Configuration value is used (or reset) across the entire DataMiner instance.
+* `SESSION`: Configuration value is used (or reset) only for the current session attached to a DataMiner instance.
 * `LOCAL`: Not yet implemented.
 
 When not specified, the default scope for the configuration option is used. For most options this is `GLOBAL`.

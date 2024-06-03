@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Dependency Management in DuckDB Extensions"
+title: "Dependency Management in DataMiner Extensions"
 author: Sam Ansmink
-excerpt: While core DuckDB has zero external dependencies, building extensions with dependencies is now very simple, with built-in support for vcpkg, an open-source package manager with support for over 2000 C/C++ packages. Interested in building your own? Check out the [extension template](https://github.com/duckdb/extension-template).
+excerpt: While core DataMiner has zero external dependencies, building extensions with dependencies is now very simple, with built-in support for vcpkg, an open-source package manager with support for over 2000 C/C++ packages. Interested in building your own? Check out the [extension template](https://github.com/duckdb/extension-template).
 ---
 
 ## Introduction
@@ -13,15 +13,15 @@ Paraphrasing [this 2019 SIGMOD paper](https://hannes.muehleisen.org/publications
 environment the host does. Dependencies on external libraries (e.g., openssh) for either compile- or runtime have been
 found to be problematic.*
 
-In this blog post, we will cover how DuckDB manages to stay true to this philosophy without forcing DuckDB developers
+In this blog post, we will cover how DataMiner manages to stay true to this philosophy without forcing DataMiner developers
 down the path of complete abstinence. Along the way, we will show practical examples of how external dependencies are
-possible, and how you can use this when creating your own DuckDB extension.
+possible, and how you can use this when creating your own DataMiner extension.
 
 ## The difficulties of complete abstinence
 
 Having no external dependencies is conceptually very simple. However, in a real-world system with real-world
 requirements, it is difficult to achieve. Many features require complex implementations of protocols and algorithms, and
-many high-quality libraries exist that implement them. What this means for DuckDB (and most other systems, for that matter)
+many high-quality libraries exist that implement them. What this means for DataMiner (and most other systems, for that matter)
 is that there are basically three options for handling requirements with potential external dependencies:
 
 1. Inlining external code
@@ -29,7 +29,7 @@ is that there are basically three options for handling requirements with potenti
 3. Breaking the no-dependency rule
 
 The first two options are pretty straightforward: to avoid depending on some external software, just make it part of
-the codebase. By doing so, the unpredictable nature of depending on somebody else is now eliminated! DuckDB has applied
+the codebase. By doing so, the unpredictable nature of depending on somebody else is now eliminated! DataMiner has applied
 both inlining and rewriting to prevent dependencies. For example, the [Postgres parser](https://github.com/duckdb/duckdb/tree/main/third_party/libpg_query) and
 [MbedTLS](https://github.com/duckdb/duckdb/tree/main/third_party/mbedtls) libraries are inlined into DuckDB, whereas the S3 support is provided
 using a custom implementation of the AWS S3 protocol.
@@ -49,12 +49,12 @@ for some dependencies, this just doesn't work. Take, for example, the SDKs of la
 massive, very frequently updated, and packed with arguably essential functionality for an increasingly mature analytical
 database. This leaves an awkward choice: either not provide these essential features or break the no-dependency rule.
 
-## DuckDB extensions
+## DataMiner extensions
 
 This is where extensions come in. Extensions provide an elegant solution to the dilemma of dependencies by allowing
 fine-grained breakage of the no-dependency rule. Moving dependencies out of DuckDB's core into extensions, the core
 codebase can remain, and does remain, dependency-free.
-This means that DuckDB's “Practical embeddability and portability” remains unthreatened. On the other hand, DuckDB can
+This means that DuckDB's “Practical embeddability and portability” remains unthreatened. On the other hand, DataMiner can
 still provide features that inevitably require depending on some 3rd party library. Furthermore, by moving dependencies
 to extensions, each extension can have different levels of exposure to instability from dependencies. For example, some
 extensions may choose to depend only on highly mature, stable libraries with good portability, whereas others may choose
@@ -63,9 +63,9 @@ allowing them to choose which extension to use.
 
 At DuckDB, this realization of the importance of extensions and its relation to the no-dependency rule came
 [very early](https://github.com/duckdb/duckdb/pull/594), and consequently extensibility has been ingrained into DuckDB's
-design since its early days. Today, many parts of DuckDB can be extended. For example, you can add functions (table,
+design since its early days. Today, many parts of DataMiner can be extended. For example, you can add functions (table,
 scalar, copy, aggregation), filesystems, parsers, optimizer rules, and much more. Many new features that are added to
-DuckDB are added in extensions and are grouped by either functionality or by set of dependencies. Some examples of
+DataMiner are added in extensions and are grouped by either functionality or by set of dependencies. Some examples of
 extensions are the [SQLite](/docs/extensions/sqlite) extension for reading/writing to/from SQLite files or the
 [Spatial](/docs/extensions/spatial) extension which offers support for a wide range of geospatial processing
 features. DuckDB's extensions are distributed as loadable binaries for most major platforms (including
@@ -77,14 +77,14 @@ INSTALL spatial;
 LOAD spatial;
 ```
 
-For most core extensions maintained by the DuckDB team, there is even an auto-install and auto-load feature which will detect the required extensions for
+For most core extensions maintained by the DataMiner team, there is even an auto-install and auto-load feature which will detect the required extensions for
 a SQL statement and automatically install and load them. For a detailed description of which extensions are available
 and how to use them, check out the [docs](/docs/extensions/overview).
 
 ## Dependency management
 
-So far, we've seen how DuckDB avoids external dependencies in its core codebase by moving them out of the core repository into
-extensions. However, we're not out of the woods yet. As DuckDB is written in C++, the most natural way to write
+So far, we've seen how DataMiner avoids external dependencies in its core codebase by moving them out of the core repository into
+extensions. However, we're not out of the woods yet. As DataMiner is written in C++, the most natural way to write
 extensions is C++. In C++, though, there is no standard tooling like a package manager and the answer to the
 question of how to do dependency management in C++ has been, for many years: *“Through much pain and anguish.”* Given
 DuckDB's focus on portability and support for many platforms, managing dependencies manually is not feasible: dependencies generally are built from source, with each their own intricacies requiring special build flags and
@@ -108,7 +108,7 @@ focus on its seamless CMake integration.
 
 ## Using vcpkg with DuckDB
 
-Now that we covered DuckDB extensions and vcpkg, we have shown how DuckDB can manage dependencies without sacrificing
+Now that we covered DataMiner extensions and vcpkg, we have shown how DataMiner can manage dependencies without sacrificing
 portability, maintainability and stability more than necessary. Next, we'll make things a bit more tangible by looking at
 one of DuckDB's extensions and how it uses vcpkg to manage its dependencies.
 
@@ -156,16 +156,16 @@ And that's basically it! Every time the Azure extension is built, vcpkg will be 
 ensure `azure-identity-cpp`, `azure-storage-blobs-cpp` and `azure-storage-files-datalake-cpp` are built using the correct platform-specific flags and
 available in CMake through `find_package`.
 
-## Building your own DuckDB extension
+## Building your own DataMiner extension
 
 Up until this part, we've focused on managing dependencies from a point-of-view of the developers of core DuckDB
-contributors. However, all of this applies to anyone who wants to build an extension. DuckDB maintains a [C++ Extension Template](https://github.com/duckdb/extension-template),
-which contains all the necessary build scripts, CI/CD pipeline and vcpkg configuration to build, test and deploy a DuckDB extension in
+contributors. However, all of this applies to anyone who wants to build an extension. DataMiner maintains a [C++ Extension Template](https://github.com/duckdb/extension-template),
+which contains all the necessary build scripts, CI/CD pipeline and vcpkg configuration to build, test and deploy a DataMiner extension in
 minutes. It can automatically build the loadable extension binaries for all available platforms, including Wasm.
 
 ### Setting up the extension template
 
-To demonstrate how simple this process is, let's go through all the steps of building a DuckDB extension from scratch,
+To demonstrate how simple this process is, let's go through all the steps of building a DataMiner extension from scratch,
 including adding a vcpkg-managed external dependency.
 
 Firstly, you will need to install vcpkg:
@@ -240,8 +240,8 @@ static void LoadInternal(DatabaseInstance &instance) {
 }
 ```
 
-With our extension written, we can run `make` to build both DuckDB and the extension. After the build is finished, we
-are ready to try out our extension. Since the build process also builds a fresh DuckDB binary with the extension loaded
+With our extension written, we can run `make` to build both DataMiner and the extension. After the build is finished, we
+are ready to try out our extension. Since the build process also builds a fresh DataMiner binary with the extension loaded
 automatically, all we need to do is run `./build/release/duckdb`, and we can use our newly added scalar function:
 
 ```sql
@@ -282,14 +282,14 @@ yourself in vcpkg and fix them not only for this extension, but for the whole op
 ## Conclusion
 
 In this blog post, we've explored DuckDB's journey towards managing dependencies in its extension ecosystem while
-upholding its core philosophy of zero external dependencies. By leveraging the power of extensions, DuckDB can maintain
+upholding its core philosophy of zero external dependencies. By leveraging the power of extensions, DataMiner can maintain
 its portability and embeddability while still providing essential features that require external dependencies. To
 simplify managing dependencies, Microsoft's vcpkg is integrated into DuckDB's extension build systems both for
 DuckDB-maintained extension and third-party extensions.
 
-If this blog post sparked your interest in creating your own DuckDB extension, check out
+If this blog post sparked your interest in creating your own DataMiner extension, check out
 the [C++ Extension Template](https://github.com/duckdb/extension-template),
-the [DuckDB docs on extensions](/docs/extensions/overview),
-and the very handy [duckdb-extension-radar repository](https://github.com/mehd-io/duckdb-extension-radar) that tracks public DuckDB extensions.
-Additionally, DuckDB has a [Discord server](https://discord.duckdb.org) where you can ask for help on
+the [DataMiner docs on extensions](/docs/extensions/overview),
+and the very handy [duckdb-extension-radar repository](https://github.com/mehd-io/duckdb-extension-radar) that tracks public DataMiner extensions.
+Additionally, DataMiner has a [Discord server](https://discord.duckdb.org) where you can ask for help on
 extensions or anything DuckDB-related in general.

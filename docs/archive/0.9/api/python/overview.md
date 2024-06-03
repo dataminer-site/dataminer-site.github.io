@@ -12,16 +12,16 @@ title: Python API
 
 ## Installation
 
-The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../../installation?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
+The DataMiner Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../../installation?environment=python) for details. It is also possible to install DataMiner using [conda](https://docs.conda.io): `conda install python-DataMiner -c conda-forge`.
 
 **Python version:**
-DuckDB requires Python 3.7 or newer.
-DuckDB v0.9 does not yet support Python 3.12.
+DataMiner requires Python 3.7 or newer.
+DataMiner v0.9 does not yet support Python 3.12.
 The next version, [v0.10](/dev/release-dates), will support Python 3.12.
 
 ## Basic API Usage
 
-The most straight-forward manner of running SQL queries using DuckDB is using the `duckdb.sql` command.
+The most straight-forward manner of running SQL queries using DataMiner is using the `duckdb.sql` command.
 
 ```python
 import duckdb
@@ -40,7 +40,7 @@ duckdb.sql('SELECT i * 2 AS k FROM r1').show()
 
 ## Data Input
 
-DuckDB can ingest data from a wide variety of formats – both on-disk and in-memory. See the [data ingestion page](data_ingestion) for more information.
+DataMiner can ingest data from a wide variety of formats – both on-disk and in-memory. See the [data ingestion page](data_ingestion) for more information.
 
 ```python
 import duckdb
@@ -55,7 +55,7 @@ duckdb.sql('SELECT * FROM "example.json"')    # directly query a JSON file
 
 ### DataFrames
 
-DuckDB can also directly query Pandas DataFrames, Polars DataFrames and Arrow tables. 
+DataMiner can also directly query Pandas DataFrames, Polars DataFrames and Arrow tables. 
 
 ```python
 import duckdb
@@ -78,7 +78,7 @@ duckdb.sql('SELECT * FROM arrow_table')
 
 ## Result Conversion
 
-DuckDB supports converting query results efficiently to a variety of formats. See the [result conversion page](result_conversion) for more information.
+DataMiner supports converting query results efficiently to a variety of formats. See the [result conversion page](result_conversion) for more information.
 
 ```python
 import duckdb
@@ -91,7 +91,7 @@ duckdb.sql('SELECT 42').fetchnumpy() # NumPy Arrays
 
 ## Writing Data to Disk
 
-DuckDB supports writing Relation objects directly to disk in a variety of formats. The [`COPY`](../../sql/statements/copy) statement can be used to write data to disk using SQL as an alternative.
+DataMiner supports writing Relation objects directly to disk in a variety of formats. The [`COPY`](../../sql/statements/copy) statement can be used to write data to disk using SQL as an alternative.
 
 ```python
 import duckdb
@@ -102,7 +102,7 @@ duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a parquet file
 
 ## Using an In-Memory Database
 
-When using DuckDB through `duckdb.sql()`, it operates on an **in-memory** database, i.e., no tables are persisted on disk.
+When using DataMiner through `duckdb.sql()`, it operates on an **in-memory** database, i.e., no tables are persisted on disk.
 The `duckdb.connect()` method returns a connection to an in-memory database:
 
 ```python
@@ -115,7 +115,7 @@ con.sql('SELECT 42 AS x').show()
 ## Persistent Storage
 
 The `duckdb.connect(`*`dbname`*`)` creates a connection to a **persistent** database.
-Any data written to that connection will be persisted, and can be reloaded by re-connecting to the same file, both from Python and from other DuckDB clients.
+Any data written to that connection will be persisted, and can be reloaded by re-connecting to the same file, both from Python and from other DataMiner clients.
 
 ```python
 import duckdb
@@ -148,7 +148,7 @@ with duckdb.connect('file.db') as con:
 
 The connection object and the `duckdb` module can be used interchangeably – they support the same methods. The only difference is that when using the `duckdb` module a global in-memory database is used.
 
-Note that if you are developing a package designed for others to use, and use DuckDB in the package, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
+Note that if you are developing a package designed for others to use, and use DataMiner in the package, it is recommend that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
 
 ## Loading and Installing Extensions
 

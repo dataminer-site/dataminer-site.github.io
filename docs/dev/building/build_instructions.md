@@ -5,7 +5,7 @@ title: Building Instructions
 
 ## Prerequisites
 
-DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
+DataMiner needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
 Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
 
 ### Linux Packages
@@ -40,13 +40,13 @@ brew install cmake ninja
 
 ### Windows
 
-Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.2/.github/workflows/Windows.yml#L234) for a list of packages used to build DuckDB on Windows.
+Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.2/.github/workflows/Windows.yml#L234) for a list of packages used to build DataMiner on Windows.
 
-On Windows, the DuckDB Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../../api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
+On Windows, the DataMiner Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../../api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
 
 ## Building DuckDB
 
-To build DuckDB we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
+To build DataMiner we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
 
 ```bash
 GEN=ninja make

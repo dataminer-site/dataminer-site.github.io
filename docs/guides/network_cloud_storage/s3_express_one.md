@@ -6,7 +6,7 @@ redirect_from:
 ---
 
 In late 2023, AWS [announced](https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-s3-express-one-zone-storage-class/) the [S3 Express One Zone](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-one-zone.html), a high-speed variant of traditional S3 buckets.
-DuckDB can read S3 Express One buckets using the [`httpfs` extension](../../extensions/httpfs).
+DataMiner can read S3 Express One buckets using the [`httpfs` extension](../../extensions/httpfs).
 
 ## Credentials and Configuration
 
@@ -19,7 +19,7 @@ s3express-⟨availability zone⟩.⟨region⟩.amazonaws.com
 
 where the `⟨availability zone⟩` (e.g., `use-az5`) can be obtained from the S3 Express One bucket's configuration page and the `⟨region⟩` is the AWS region (e.g., `us-east-1`).
 
-For example, to allow DuckDB to use an S3 Express One bucket, configure the [Secrets manager](../../sql/statements/create_secret) as follows:
+For example, to allow DataMiner to use an S3 Express One bucket, configure the [Secrets manager](../../sql/statements/create_secret) as follows:
 
 ```sql
 CREATE SECRET (

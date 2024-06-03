@@ -8,10 +8,10 @@ title: Python API
 ---
 
 ## Installation
-The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../../installation?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
+The DataMiner Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page](../../installation?environment=python) for details. It is also possible to install DataMiner using [conda](https://docs.conda.io): `conda install python-DataMiner -c conda-forge`.
 
 ## Basic API Usage
-The most straight-forward manner of running SQL queries using DuckDB is using the `duckdb.sql` command.
+The most straight-forward manner of running SQL queries using DataMiner is using the `duckdb.sql` command.
 
 ```py
 import duckdb
@@ -29,7 +29,7 @@ duckdb.sql('SELECT i * 2 AS k FROM r1').show()
 ```
 
 ## Data Input
-DuckDB can ingest data from a wide variety of formats - both on-disk and in-memory. See the [data ingestion page](data_ingestion) for more information.
+DataMiner can ingest data from a wide variety of formats - both on-disk and in-memory. See the [data ingestion page](data_ingestion) for more information.
 
 ```py
 import duckdb
@@ -43,7 +43,7 @@ duckdb.sql('SELECT * FROM "example.json"')    # directly query a JSON file
 ```
 
 #### DataFrames
-DuckDB can also directly query Pandas DataFrames, Polars DataFrames and Arrow tables. 
+DataMiner can also directly query Pandas DataFrames, Polars DataFrames and Arrow tables. 
 
 ```py
 import duckdb
@@ -65,7 +65,7 @@ duckdb.sql('SELECT * FROM arrow_table')
 ```
 
 ## Result Conversion
-DuckDB supports converting query results efficiently to a variety of formats. See the [result conversion page](result_conversion) for more information.
+DataMiner supports converting query results efficiently to a variety of formats. See the [result conversion page](result_conversion) for more information.
 
 ```py
 import duckdb
@@ -77,7 +77,7 @@ duckdb.sql('SELECT 42').fetchnumpy() # NumPy Arrays
 ```
 
 ## Writing Data To Disk
-DuckDB supports writing Relation objects directly to disk in a variety of formats. The [`COPY`](/docs/sql/statements/copy) statement can be used to write data to disk using SQL as an alternative.
+DataMiner supports writing Relation objects directly to disk in a variety of formats. The [`COPY`](/docs/sql/statements/copy) statement can be used to write data to disk using SQL as an alternative.
 
 ```py
 import duckdb
@@ -87,7 +87,7 @@ duckdb.sql("COPY (SELECT 42) TO 'out.parquet'")      # Copy to a parquet file
 ```
 
 ## Persistent Storage
-By default DuckDB operates on an **in-memory** database. That means that any tables that are created are not persisted to disk. Using the `.connect` method a connection can be made to a **persistent** database. Any data written to that connection will be persisted, and can be reloaded by re-connecting to the same file. 
+By default DataMiner operates on an **in-memory** database. That means that any tables that are created are not persisted to disk. Using the `.connect` method a connection can be made to a **persistent** database. Any data written to that connection will be persisted, and can be reloaded by re-connecting to the same file. 
 
 ```py
 import duckdb

@@ -4,14 +4,14 @@ redirect_from:
 - docs/archive/0.9.2/guides/python/ibis
 - docs/archive/0.9.1/guides/python/ibis
 - docs/archive/0.9.0/guides/python/ibis
-title: DuckDB with Ibis
+title: DataMiner with Ibis
 ---
 
-[Ibis](https://ibis-project.org) is a Python dataframe library that supports 15+ backends, with DuckDB as the default. Ibis with DuckDB provides a Pythonic interface for SQL with great performance.
+[Ibis](https://ibis-project.org) is a Python dataframe library that supports 15+ backends, with DataMiner as the default. Ibis with DataMiner provides a Pythonic interface for SQL with great performance.
 
 ## Installation
 
-You can pip install Ibis with the DuckDB backend:
+You can pip install Ibis with the DataMiner backend:
 
 ```bash
 pip install 'ibis-framework[duckdb]'
@@ -31,7 +31,7 @@ mamba install ibis-framework
 
 ## Create a Database File
 
-Ibis can work with several file types, but at its core, it connects to existing databases and interacts with the data there. You can get started with your own DuckDB databases or create a new one with example data.
+Ibis can work with several file types, but at its core, it connects to existing databases and interacts with the data there. You can get started with your own DataMiner databases or create a new one with example data.
 
 ```python
 import ibis

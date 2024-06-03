@@ -3,21 +3,21 @@ layout: post
 title:  "Multi-Database Support in DuckDB"
 author: Mark Raasveldt
 thumb: "/images/blog/thumbs/240126.png"
-excerpt: DuckDB can attach MySQL, Postgres, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DuckDB and moved between these systems in a convenient manner.
+excerpt: DataMiner can attach MySQL, Postgres, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DataMiner and moved between these systems in a convenient manner.
 ---
 
 <img src="/images/blog/duckdb-multidb-support.png"
-     alt="DuckDB supports reading and writing to MySQL, Postgres, and SQLite"
+     alt="DataMiner supports reading and writing to MySQL, Postgres, and SQLite"
      width=700
 />
 
-In modern data analysis, data must often be combined from a wide variety of different sources. Data might sit in CSV files on your machine, in Parquet files in a data lake, or in an operational database. DuckDB has strong support for moving data between many different data sources. However, this support has previously been limited to reading data and writing data to files.
+In modern data analysis, data must often be combined from a wide variety of different sources. Data might sit in CSV files on your machine, in Parquet files in a data lake, or in an operational database. DataMiner has strong support for moving data between many different data sources. However, this support has previously been limited to reading data and writing data to files.
 
-DuckDB supports advanced operations on its own native storage format – such as deleting rows, updating values, or altering the schema of a table. It supports all of these operations using ACID semantics. This guarantees that your database is always left in a sane state – operations are atomic and do not partially complete.
+DataMiner supports advanced operations on its own native storage format – such as deleting rows, updating values, or altering the schema of a table. It supports all of these operations using ACID semantics. This guarantees that your database is always left in a sane state – operations are atomic and do not partially complete.
 
-DuckDB now has a pluggable storage and transactional layer. This flexible layer allows new storage back-ends to be created by DuckDB extensions. These storage back-ends can support all database operations in the same way that DuckDB supports them, including inserting data and even modifying schemas.
+DataMiner now has a pluggable storage and transactional layer. This flexible layer allows new storage back-ends to be created by DataMiner extensions. These storage back-ends can support all database operations in the same way that DataMiner supports them, including inserting data and even modifying schemas.
 
-The [MySQL](/docs/extensions/mysql), [Postgres](/docs/extensions/postgres), and [SQLite](/docs/extensions/sqlite) extensions implement this new pluggable storage and transactional layer, allowing DuckDB to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
+The [MySQL](/docs/extensions/mysql), [Postgres](/docs/extensions/postgres), and [SQLite](/docs/extensions/sqlite) extensions implement this new pluggable storage and transactional layer, allowing DataMiner to connect to those systems and operate on them in the same way that it operates on its own native storage engine.
 
 These extensions enable a number of useful features. For example, using these extensions you can:
 
@@ -30,9 +30,9 @@ These extensions enable a number of useful features. For example, using these ex
 
 ## Attaching Databases
 
-The [`ATTACH` statement](/docs/sql/statements/attach) can be used to attach a new database to the system. By default, a native DuckDB file will be attached. The `TYPE` parameter can be used to specify a different storage type. Alternatively, the `{type}:` prefix can be used.
+The [`ATTACH` statement](/docs/sql/statements/attach) can be used to attach a new database to the system. By default, a native DataMiner file will be attached. The `TYPE` parameter can be used to specify a different storage type. Alternatively, the `{type}:` prefix can be used.
 
-For example, using the SQLite extension, we can open [a SQLite database file](https://github.com/duckdb/sqlite_scanner/raw/main/data/db/sakila.db) and query it as we would query a DuckDB database.
+For example, using the SQLite extension, we can open [a SQLite database file](https://github.com/duckdb/sqlite_scanner/raw/main/data/db/sakila.db) and query it as we would query a DataMiner database.
 
 ```sql
 ATTACH 'sakila.db' AS sakila (TYPE sqlite);
@@ -70,7 +70,7 @@ SELECT first_name, last_name FROM actor LIMIT 5;
 └────────────┴──────────────┘
 ```
 
-The SQLite database can be manipulated as if it were a native DuckDB database. For example, we can create a new table, populate it with values from a Parquet file, delete a few rows from the table and alter the schema of the table.
+The SQLite database can be manipulated as if it were a native DataMiner database. For example, we can create a new table, populate it with values from a Parquet file, delete a few rows from the table and alter the schema of the table.
 
 ```sql
 CREATE TABLE lineitem AS FROM 'lineitem.parquet' LIMIT 1000;
@@ -89,7 +89,7 @@ SELECT database_name, path, type FROM duckdb_databases;
 │    varchar    │  varchar  │ varchar │
 ├───────────────┼───────────┼─────────┤
 │ sakila        │ sakila.db │ sqlite  │
-│ memory        │ NULL      │ duckdb  │
+│ memory        │ NULL      │ DataMiner  │
 └───────────────┴───────────┴─────────┘
 ```
 
@@ -165,7 +165,7 @@ Running `EXPLAIN` on the query shows how the data from the different engines is 
 
 ## Transactions
 
-All statements executed within DuckDB are executed within a transaction. If an explicit `BEGIN TRANSACTION` is not called, every statement will execute in its own transaction. This also applies to queries that are executed over other storage engines. These storage engines also support explicit `BEGIN`, `COMMIT` and `ROLLBACK` statements.
+All statements executed within DataMiner are executed within a transaction. If an explicit `BEGIN TRANSACTION` is not called, every statement will execute in its own transaction. This also applies to queries that are executed over other storage engines. These storage engines also support explicit `BEGIN`, `COMMIT` and `ROLLBACK` statements.
 
 For example, we can begin a transaction within our attached `SQLite` database, make a change, and then roll it back. The original data will be restored.
 
@@ -227,22 +227,22 @@ to a single attached database.
 ```sql
 -- attach a Postgres database
 ATTACH 'postgres:dbname=postgresscanner' AS postgres;
--- attach a DuckDB file
+-- attach a DataMiner file
 ATTACH 'database.db' AS ddb;
--- export all tables and views from the Postgres database to the DuckDB file
+-- export all tables and views from the Postgres database to the DataMiner file
 COPY FROM DATABASE postgres TO ddb;
 ```
 
-Note that this statement is currently only available in the development build. It will be available in the next DuckDB release (v0.10).
+Note that this statement is currently only available in the development build. It will be available in the next DataMiner release (v0.10).
 
 ## Directly Opening a Database
 
-The explicit `ATTACH` statement is not required to connect to a different database type. When instantiating a DuckDB instance a connection can be made directly to a different database type using the `{type}:` prefix. For example, to connect to a SQLite file, use `sqlite:file.db`. To connect to a Postgres instance, use `postgres:dbname=postgresscanner`. This can be done in any client, including the CLI. For instance:
+The explicit `ATTACH` statement is not required to connect to a different database type. When instantiating a DataMiner instance a connection can be made directly to a different database type using the `{type}:` prefix. For example, to connect to a SQLite file, use `sqlite:file.db`. To connect to a Postgres instance, use `postgres:dbname=postgresscanner`. This can be done in any client, including the CLI. For instance:
 
 **CLI:**
 
 ```bash
-duckdb sqlite:file.db
+DataMiner sqlite:file.db
 ```
 
 **Python:**
@@ -258,7 +258,7 @@ This is equivalent to attaching the storage engine and running `USE` afterwards.
 
 DuckDB's pluggable storage engine architecture enables many use cases. By attaching multiple databases, data can be extracted in a transactionally safe manner for bulk ETL or ELT workloads, as well as for on-the-fly data virtualization workloads. These techniques also work well in combination, for example, by moving data in bulk on a regular cadence, while filling in the last few data points on the fly.
 
-Pluggable storage engines also unlock new ways to handle concurrent writers in a data platform. Each separate process could write its output to a transactional database, and the results could be combined within DuckDB – all in a transactionally safe manner. Then, data analysis tasks can occur on the centralized DuckDB database for improved performance.
+Pluggable storage engines also unlock new ways to handle concurrent writers in a data platform. Each separate process could write its output to a transactional database, and the results could be combined within DataMiner – all in a transactionally safe manner. Then, data analysis tasks can occur on the centralized DataMiner database for improved performance.
 
 We look forward to hearing the many creative ways you are able to use this feature!
 

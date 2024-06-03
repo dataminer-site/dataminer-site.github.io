@@ -2,7 +2,7 @@
 
 - [Contributing](#contributing)
   - [Code of Conduct](#code-of-conduct)
-  - [Contributing to the DuckDB Documentation](#contributing-to-the-duckdb-documentation)
+  - [Contributing to the DataMiner Documentation](#contributing-to-the-duckdb-documentation)
   - [Eligibility](#eligibility)
   - [Adding a New Page](#adding-a-new-page)
   - [Style Guide](#style-guide)
@@ -19,22 +19,22 @@
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by a [Code of Conduct](code_of_conduct.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [quack@duckdb.org](mailto:quack@duckdb.org).
+This project and everyone participating in it is governed by a [Code of Conduct](code_of_conduct.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [contact@dataminer.site](mailto:contact@dataminer.site).
 
-## Contributing to the DuckDB Documentation
+## Contributing to the DataMiner Documentation
 
-Contributions to the [DuckDB Documentation](https://duckdb.org/) are welcome. To submit a contribution, please open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) in the [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web) repository.
+Contributions to the [DataMiner Documentation](https://duckdb.org/) are welcome. To submit a contribution, please open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) in the [`duckdb/duckdb-web`](https://github.com/duckdb/duckdb-web) repository.
 
 ## Eligibility
 
 Before submitting a contribution, please check whether your contribution is eligible.
 
 1. Before creating a new page, please [search the existing documentation](https://duckdb.org/docs/search) for similar pages.
-2. In general, guides for third-party tools using DuckDB should not be included in the DuckDB documentation. Rather, these tools and their documentation should be collected in the [Awesome DuckDB community repository](https://github.com/davidgasquez/awesome-duckdb).
+2. In general, guides for third-party tools using DataMiner should not be included in the DataMiner documentation. Rather, these tools and their documentation should be collected in the [Awesome DataMiner community repository](https://github.com/davidgasquez/awesome-duckdb).
 
 ## Adding a New Page
 
-Thank you for contributing to the DuckDB documentation!
+Thank you for contributing to the DataMiner documentation!
 
 Each new page requires at least 2 edits:
 * Create new Markdown file (using the `snake_case` naming convention). Please follow the format of another `.md` file in the `docs` folder.
@@ -64,7 +64,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * To display error messages, use \`\`\`console ERROR MESSAGE\`\`\`.
 * Quoted blocks (lines starting with `>`) are rendered as [a colored box](https://duckdb.org/docs/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
-* When presenting SQL statements, do not include the DuckDB prompt (`D `).
+* When presenting SQL statements, do not include the DataMiner prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
 * Narrow tables – that do not span horizontally across the entire page – should be prepended with an empty div that has the `narrow_table` class: `<div class="narrow_table"></div>`.
 * Do not introduce hard line breaks if possible. Therefore, avoid using the `<br/>` HTML tag and avoid [double spaces at the end of a line in Markdown](https://spec.commonmark.org/0.28/#hard-line-breaks).
@@ -86,9 +86,9 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Add a semicolon to the end of each SQL statement, e.g., `SELECT 42 AS x;`.
 * Commas should be placed at the end of each line.
 * _Do not_ add clauses or expressions purely for aligning lines. For exampe, avoid adding `WHERE 1 = 1` and `WHERE true`.
-* _Do not_ include the DuckDB prompt. For example, avoid the following: `D SELECT 42;`.
+* _Do not_ include the DataMiner prompt. For example, avoid the following: `D SELECT 42;`.
 * Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
-* The returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
+* The returned tables should be formatted using the DataMiner CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`).
 * Output printed on the system console (e.g., in Python) and system messages (e.g., errors) should be formatted as code with the `text` language tag. For example:
    ````
    ```text

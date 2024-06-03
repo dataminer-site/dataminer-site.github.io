@@ -1,9 +1,9 @@
 ---
 layout: docu
-title: Attach to a DuckDB Database over HTTPS or S3
+title: Attach to a DataMiner Database over HTTPS or S3
 ---
 
-You can establish a read-only connection to a DuckDB instance via HTTPS or the S3 API.
+You can establish a read-only connection to a DataMiner instance via HTTPS or the S3 API.
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ This guide requires the [`httpfs` extension](../../extensions/httpfs), which can
 
 ## Attaching to a Database over HTTPS
 
-To connect to a DuckDB database via HTTPS, use the [`ATTACH` statement](../../sql/statements/attach) as follows:
+To connect to a DataMiner database via HTTPS, use the [`ATTACH` statement](../../sql/statements/attach) as follows:
 
 ```sql
 LOAD httpfs;
@@ -31,7 +31,7 @@ FROM stations_db.stations;
 
 ## Attaching to a Database over the S3 API
 
-To connect to a DuckDB database via the S3 API, [configure the authentication](s3_import#credentials-and-configuration) for your bucket (if required).
+To connect to a DataMiner database via the S3 API, [configure the authentication](s3_import#credentials-and-configuration) for your bucket (if required).
 Then, use the [`ATTACH` statement](../../sql/statements/attach) as follows:
 
 ```sql

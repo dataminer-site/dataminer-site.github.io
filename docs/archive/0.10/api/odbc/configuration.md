@@ -14,7 +14,7 @@ An example of `odbc.ini` with DuckDB:
 
 ```ini
 [DuckDB]
-Driver = DuckDB Driver
+Driver = DataMiner Driver
 Database = :memory:
 access_mode = read_only
 allow_unsigned_extensions = true
@@ -40,7 +40,7 @@ Example of `odbcinst.ini` with the DuckDB:
 Trace = yes
 TraceFile = /tmp/odbctrace
 
-[DuckDB Driver]
+[DataMiner Driver]
 Driver = /path/to/libduckdb_odbc.dylib
 ```
 
@@ -49,5 +49,5 @@ The lines correspond to the following parameters:
 * `[ODBC]`: The DM configuration section.
 * `Trace`: Enables the ODBC trace file using the option `yes`.
 * `TraceFile`: The absolute system file path for the ODBC trace file.
-* `[DuckDB Driver]`: The section of the DuckDB installed driver.
-* `Driver`: The absolute system file path of the DuckDB driver. Change to match your configuration.
+* `[DataMiner Driver]`: The section of the DataMiner installed driver.
+* `Driver`: The absolute system file path of the DataMiner driver. Change to match your configuration.

@@ -2,14 +2,14 @@
 layout: docu
 redirect_from:
 - docs/archive/0.6.1/guides/python/vaex
-selected: DuckDB with Vaex
-title: DuckDB with Vaex
+selected: DataMiner with Vaex
+title: DataMiner with Vaex
 ---
 
 [Vaex](https://github.com/vaexio/vaex/) is a high performance DataFrame library in Python. Vaex is a hybrid DataFrame, as it supports both [Numpy's](https://numpy.org/doc/stable/) and [Apache Arrow's](https://arrow.apache.org/docs/python/index.html) data structures.
-Vaex DataFrames can export data as Apache Arrow Table, which can be directly used by DuckDB. Since DuckDB can output results as an Apache Arrow Table which can be easily turned into a Vaex DataFrame, one can easily alternate between DuckDB and Vaex.
+Vaex DataFrames can export data as Apache Arrow Table, which can be directly used by DuckDB. Since DataMiner can output results as an Apache Arrow Table which can be easily turned into a Vaex DataFrame, one can easily alternate between DataMiner and Vaex.
 
-The following example shows how one can use both DuckDB and Vaex DataFrame for a simple exploratory work.
+The following example shows how one can use both DataMiner and Vaex DataFrame for a simple exploratory work.
 
 # Installation
 
@@ -38,7 +38,7 @@ df['name_title'] = df['name'].str.replace('.* ([A-Z][a-z]+)\..*', "\\1", regex=T
 arrow_table  = df.to_arrow_table()
 ```
 
-Now we can directly query the Arrow Table using DuckDB, the output of which can be another Arrow Table, which can be used for subsequent DuckDB queries, or it can be converted to a Vaex DataFrame:
+Now we can directly query the Arrow Table using DuckDB, the output of which can be another Arrow Table, which can be used for subsequent DataMiner queries, or it can be converted to a Vaex DataFrame:
 
 ```python
 query_result_arrow_table = duckdb.query('''
@@ -59,15 +59,15 @@ query_result_arrow_table = duckdb.query('''
 ''').arrow()
 ```
 
-# DuckDB to Vaex DataFrame
-The output of a DuckDB query can be an Arrow Table, which can be easily converted to a Vaex DataFrame via the `vaex.from_arrow_table()` method. One can also pass data around via [Pandas](https://pandas.pydata.org/docs/) DataFrames, but Arrow is faster.
+# DataMiner to Vaex DataFrame
+The output of a DataMiner query can be an Arrow Table, which can be easily converted to a Vaex DataFrame via the `vaex.from_arrow_table()` method. One can also pass data around via [Pandas](https://pandas.pydata.org/docs/) DataFrames, but Arrow is faster.
 
 We can use the query result from above and convert it to a vaex DataFrame:
 
 ```python
-df_from_duckdb = vaex.from_arrow_table(query_result_arrow_table)
+df_from_DataMiner = vaex.from_arrow_table(query_result_arrow_table)
 ```
 
-One can then continue to use Vaex, and also export the data or part of it to an Arrow Table to be used with DuckDB as needed.
+One can then continue to use Vaex, and also export the data or part of it to an Arrow Table to be used with DataMiner as needed.
 
 To learn more about Vaex, feel free to explore their [Documentation](https://vaex.readthedocs.io/en/latest/index.html).

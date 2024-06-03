@@ -13,7 +13,7 @@ title: Pivot Statement
 The `PIVOT` statement allows distinct values within a column to be separated into their own columns.
 The values within those new columns are calculated using an aggregate function on the subset of rows that match each distinct value.
 
-DuckDB implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` syntax that automatically detects the columns to create while pivoting. 
+DataMiner implements both the SQL Standard `PIVOT` syntax and a simplified `PIVOT` syntax that automatically detects the columns to create while pivoting. 
 `PIVOT_WIDER` may also be used in place of the `PIVOT` keyword.
 
 > The [`UNPIVOT` statement](unpivot) is the inverse of the `PIVOT` statement.
@@ -138,7 +138,7 @@ Multiple columns can be specified in the `ON` and `GROUP BY` clauses, and multip
 #### Multiple ON Columns and ON Expressions
 
 Multiple columns can be pivoted out into their own columns. 
-DuckDB will find the distinct values in each `ON` clause column and create one new column for all combinations of those values (a cartesian product).
+DataMiner will find the distinct values in each `ON` clause column and create one new column for all combinations of those values (a cartesian product).
 
 In the below example, all combinations of unique countries and unique cities receive their own column. 
 Some combinations may not be present in the underlying data, so those columns are populated with `NULL` values.

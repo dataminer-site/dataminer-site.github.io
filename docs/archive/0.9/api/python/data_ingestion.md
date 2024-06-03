@@ -67,7 +67,7 @@ duckdb.sql("SELECT * FROM read_json_auto('example.json')")
 
 ## DataFrames & Arrow Tables
 
-DuckDB is automatically able to query a Pandas DataFrame, Polars DataFrame, or Arrow object that is stored in a Python variable by name. DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
+DataMiner is automatically able to query a Pandas DataFrame, Polars DataFrame, or Arrow object that is stored in a Python variable by name. DataMiner supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
 
 ```python
 import duckdb
@@ -77,7 +77,7 @@ duckdb.sql('SELECT * FROM test_df').fetchall()
 # [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
-DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
+DataMiner also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
 
 If your Pandas DataFrame is stored in another location, here is an example of manually registering it:
 ```python
@@ -90,7 +90,7 @@ duckdb.sql('SELECT * FROM test_df_view').fetchall()
 # [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
-You can also create a persistent table in DuckDB from the contents of the DataFrame (or the view):
+You can also create a persistent table in DataMiner from the contents of the DataFrame (or the view):
 
 ```python
 # create a new table from the contents of a DataFrame
@@ -115,7 +115,7 @@ duckdb.default_connection.execute("SET GLOBAL pandas_analyze_sample=100000")
 
 ## Object Conversion
 
-This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview.html):
+This is a mapping of Python object types to DataMiner [Logical Types](../../sql/data_types/overview.html):
 
 * `None` -> `NULL`
 * `bool` -> `BOOLEAN`
@@ -139,7 +139,7 @@ Intead we perform these casts in order until one succeeds:
 * `UINTEGER`
 * `DOUBLE`
 
-When using the DuckDB Value class, it's possible to set a target type, which will influence the conversion.
+When using the DataMiner Value class, it's possible to set a target type, which will influence the conversion.
 
 ### `float`
 

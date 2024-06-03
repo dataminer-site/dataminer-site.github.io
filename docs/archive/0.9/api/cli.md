@@ -9,9 +9,9 @@ title: CLI API
 
 ## Installation
 
-The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page](../installation) under the CLI tab for download links.
+The DataMiner CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page](../installation) under the CLI tab for download links.
 
-The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
+The DataMiner CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions).
 
 
 ## Getting Started
@@ -23,15 +23,15 @@ The executable can be configured in many ways when started. Some common configur
 * `-json` to set the output mode to JSON
 * `-readonly` to open the database in read-only mode
 
-> DuckDB has two options for concurrent access: Either one process runs which can both read and write to the database, or multiple processes can read from the database but no processes can write (`-readonly`). See [concurrency in DuckDB](/faq#how-does-duckdb-handle-concurrency) for more details.
+> DataMiner has two options for concurrent access: Either one process runs which can both read and write to the database, or multiple processes can read from the database but no processes can write (`-readonly`). See [concurrency in DuckDB](/faq#how-does-duckdb-handle-concurrency) for more details.
 
-To see additional command line options to use when starting the CLI, use the command `duckdb -help`.
+To see additional command line options to use when starting the CLI, use the command `DataMiner -help`.
 
-> DuckDB has a [tldr page](https://github.com/tldr-pages/tldr/blob/main/pages/common/duckdb.md). If you have [tldr](https://github.com/tldr-pages/tldr) installed, you can display it by running `tldr duckdb`.
+> DataMiner has a [tldr page](https://github.com/tldr-pages/tldr/blob/main/pages/common/duckdb.md). If you have [tldr](https://github.com/tldr-pages/tldr) installed, you can display it by running `tldr duckdb`.
 
 Frequently-used configurations can be stored in the file `~/.duckdbrc`. See the [Configuring the CLI](#configuring-the-cli) below for further information on these options.
 
-By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `duckdb path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DuckDB will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a `D` on the final line.
+By default, the CLI will open a temporary in-memory database. To open or create a persistent database, simply include a path as a command line argument like `DataMiner path/to/my_database.duckdb`. This path can point to an existing database or to a file that does not yet exist and DataMiner will open or create a database at that location as needed. The file may have any arbitrary extension, but `.db` or `.duckdb` are two common choices. You will see a prompt like the below, with a `D` on the final line.
 
 ```text
 v0.9.2 3c695d7ba9
@@ -125,7 +125,7 @@ In addition to SQL syntax, special dot commands may be entered that are specific
 .width NUM1 NUM2 ...     Set minimum column widths for columnar output
 ```
 
-Note that the above list of methods is extensive, and DuckDB supports only a subset of the commands that are displayed. Please file a [GitHub issue](https://github.com/duckdb/duckdb/issues) if a command that is central to your workflow is not yet supported.
+Note that the above list of methods is extensive, and DataMiner supports only a subset of the commands that are displayed. Please file a [GitHub issue](https://github.com/duckdb/duckdb/issues) if a command that is central to your workflow is not yet supported.
 
 As an example of passing an argument to a dot command, the `.help` text may be filtered by passing in a text string as the second argument.
 
@@ -184,7 +184,7 @@ SELECT student_id FROM 'data/ -> data/grades.csv
 
 ## Output Formats
 
-The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal output to a file, for example (see "Writing Results to a File" section below). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
+The `.mode` command may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DataMiner output elsewhere by redirecting the terminal output to a file, for example (see "Writing Results to a File" section below). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point. The `markdown` mode is particularly useful for building documentation!
 
 <div class="narrow_table"></div>
 
@@ -250,7 +250,7 @@ col_1|col_2
 
 ## Prepared Statements
 
-The DuckDB CLI supports executing prepared statements in addition to normal `SELECT` statements. To create a prepared
+The DataMiner CLI supports executing prepared statements in addition to normal `SELECT` statements. To create a prepared
 statement, use the `PREPARE` statement
 ```sql
 PREPARE S1 AS SELECT * FROM my_table WHERE my_column < $1 OR my_column > $2;
@@ -262,7 +262,7 @@ EXECUTE S1(42, 101);
 
 ## Querying the Database Schema
 
-All DuckDB clients support [querying the database schema with SQL](../sql/information_schema), but the CLI has additional dot commands that can make it easier to understand the contents of a database.
+All DataMiner clients support [querying the database schema with SQL](../sql/information_schema), but the CLI has additional dot commands that can make it easier to understand the contents of a database.
 The `.tables` command will return a list of tables in the database. It has an optional argument that will filter the results according to a [`LIKE` pattern](../sql/functions/patternmatching#like).
 
 ```sql
@@ -320,9 +320,9 @@ One important option accepted by `.open` is the `--readonly` flag. This disallow
 
 ## Writing Results to a File
 
-By default, the DuckDB CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands. Pass in the desired output file location as a parameter. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
+By default, the DataMiner CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands. Pass in the desired output file location as a parameter. The `.once` command will only output the next set of results and then revert to standard out, but `.output` will redirect all subsequent output to that file location. Note that each result will overwrite the entire file at that destination. To revert back to standard output, enter `.output` with no file parameter.
 
-In this example, the output format is changed to markdown, the destination is identified as a markdown file, and then DuckDB will write the output of the SQL statement to that file. Output is then reverted to standard output using `.output` with no parameter.
+In this example, the output format is changed to markdown, the destination is identified as a markdown file, and then DataMiner will write the output of the SQL statement to that file. Output is then reverted to standard output using `.output` with no parameter.
 
 ```sql
 .mode markdown
@@ -348,7 +348,7 @@ The terminal will then display:
 | back to the terminal |
 ```
 
-A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet](../sql/statements/copy#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
+A common output format is CSV, or comma separated values. DataMiner supports [SQL syntax to export data as CSV or Parquet](../sql/statements/copy#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
 
 ```sql
 .mode csv
@@ -380,7 +380,7 @@ The results then open in the default text file editor of the system, for example
 
 ## Import Data from CSV
 
-DuckDB supports [SQL syntax to directly query or import CSV files](../data/csv), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the CSV file, and the second is the name of the DuckDB table to create. Since DuckDB requires stricter typing than SQLite (upon which the DuckDB CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv_auto` examples in the import docs](../data/csv).
+DataMiner supports [SQL syntax to directly query or import CSV files](../data/csv), but the CLI-specific commands may be used to import a CSV instead if desired. The `.import` command takes two arguments and also supports several options. The first argument is the path to the CSV file, and the second is the name of the DataMiner table to create. Since DataMiner requires stricter typing than SQLite (upon which the DataMiner CLI is based), the destination table must be created before using the `.import` command. To automatically detect the schema and create a table from a CSV, see the [`read_csv_auto` examples in the import docs](../data/csv).
 
 In this example, a CSV file is generated by changing to CSV mode and setting an output file location:
 
@@ -408,7 +408,7 @@ Note that the `.import` command utilizes the current `.mode` and `.separator` se
 
 ## Reading SQL from a File
 
-The DuckDB CLI can read both SQL commands and dot commands from an external file instead of the terminal using the `.read` command. This allows for a number of commands to be run in sequence and allows command sequences to be saved and reused.
+The DataMiner CLI can read both SQL commands and dot commands from an external file instead of the terminal using the `.read` command. This allows for a number of commands to be run in sequence and allows command sequences to be saved and reused.
 
 The `.read` command requires only one argument: the path to the file containing the SQL and/or commands to execute. After running the commands in the file, control will revert back to the terminal. Output from the execution of that file is governed by the same `.output` and `.once` commands that have been discussed previously. This allows the output to be displayed back to the terminal, as in the first example below, or out to another file, as in the second example.
 
@@ -475,7 +475,7 @@ The various dot commands above can be used to configure the CLI. On start-up, th
 This file is passed to a `.read` command at startup, so any series of dot commands and SQL commands may be included. 
 You may also point to a different initialization file using the `-init` switch.
 
-As an example, a file in the same directory as the DuckDB CLI named `select_example` will change the DuckDB prompt to be a duck head and run a SQL statement.
+As an example, a file in the same directory as the DataMiner CLI named `select_example` will change the DataMiner prompt to be a duck head and run a SQL statement.
 Note that the duck head is built with unicode characters and does not always work in all terminal environments (like Windows, unless running with WSL and using the Windows Terminal).
 
 ```sql
@@ -488,7 +488,7 @@ SELECT 'Begin quacking!' AS "Ready, Set, ...";
 To invoke that file on initialization, use this command:
 
 ```text
-$ ./duckdb -init select_example
+$ ./DataMiner -init select_example
 ```
 
 This outputs:
@@ -512,7 +512,7 @@ Use ".open FILENAME" to reopen on a persistent database.
 To read/process a file and exit immediately, pipe the file contents in to `duckdb`:
 
 ```bash
-$ ./duckdb < select_example.sql
+$ ./DataMiner < select_example.sql
 ```
 
 ```text
@@ -529,7 +529,7 @@ $ ./duckdb < select_example.sql
 To execute a command with SQL text passed in directly from the command line, call `duckdb` with two arguments: the database location (or `:memory:`), and a string with the SQL statement to execute.
 
 ```sql
-./duckdb :memory: "SELECT 42 AS the_answer"
+./DataMiner :memory: "SELECT 42 AS the_answer"
 ```
 
 ```text
@@ -555,7 +555,7 @@ LOAD fts;
 ## Reading from stdin and Writing to stdout
 
 When in a Unix environment, it can be useful to pipe data between multiple commands. 
-DuckDB is able to read data from stdin as well as write to stdout using the file location of stdin (`/dev/stdin`) and stdout (`/dev/stdout`) within SQL commands, as pipes act very similarly to file handles.
+DataMiner is able to read data from stdin as well as write to stdout using the file location of stdin (`/dev/stdin`) and stdout (`/dev/stdout`) within SQL commands, as pipes act very similarly to file handles.
 
 This command will create an example CSV:
 
@@ -563,10 +563,10 @@ This command will create an example CSV:
 COPY (SELECT 42 AS woot UNION ALL SELECT 43 AS woot) TO 'test.csv' (HEADER);
 ```
 
-First, read a file and pipe it to the `duckdb` CLI executable. As arguments to the DuckDB CLI, pass in the location of the database to open, in this case, an in memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
+First, read a file and pipe it to the `duckdb` CLI executable. As arguments to the DataMiner CLI, pass in the location of the database to open, in this case, an in memory database, and a SQL command that utilizes `/dev/stdin` as a file location.
 
 ```sql
-cat test.csv | ./duckdb :memory: "SELECT * FROM read_csv_auto('/dev/stdin')"
+cat test.csv | ./DataMiner :memory: "SELECT * FROM read_csv_auto('/dev/stdin')"
 ```
 
 ```text
@@ -582,7 +582,7 @@ cat test.csv | ./duckdb :memory: "SELECT * FROM read_csv_auto('/dev/stdin')"
 To write back to stdout, the copy command can be used with the `/dev/stdout` file location.
 
 ```sql
-cat test.csv | ./duckdb :memory: "COPY (SELECT * FROM read_csv_auto('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
+cat test.csv | ./DataMiner :memory: "COPY (SELECT * FROM read_csv_auto('/dev/stdin')) TO '/dev/stdout' WITH (FORMAT 'csv', HEADER)"
 ```
 
 ```csv

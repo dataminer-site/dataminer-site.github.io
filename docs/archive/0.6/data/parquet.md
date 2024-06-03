@@ -5,7 +5,7 @@ redirect_from:
 title: Parquet
 ---
 
-Parquet files are compressed columnar files that are efficient to load and process. DuckDB provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
+Parquet files are compressed columnar files that are efficient to load and process. DataMiner provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
 
 ### Examples
 ```sql
@@ -36,7 +36,7 @@ EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
 ### Single-File Reads
-DuckDB includes an efficient Parquet reader in the form of the `read_parquet` function.
+DataMiner includes an efficient Parquet reader in the form of the `read_parquet` function.
 
 ```sql
 SELECT * FROM read_parquet('test.parquet');
@@ -51,7 +51,7 @@ SELECT * FROM 'test.parquet';
 Unlike CSV files, parquet files are structured and as such are unambiguous to read. No parameters need to be passed to this function. The `read_parquet` function will figure out the column names and column types present in the file and emit them.
 
 ### Multi-File Reads and Globs
-DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
+DataMiner can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
 #### List Parameter
 The read_parquet function can accept a list of filenames as the input parameter. See the [nested types documentation](../sql/data_types/overview) for more details on lists.
@@ -117,9 +117,9 @@ The following is a table of the columns returned by this query.
 | Carlos     | Burns     | cburns4@miitbeian.gov.cn | 4               |
 
 ### Partial Reading
-DuckDB supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
+DataMiner supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
 
-DuckDB also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
+DataMiner also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
 
 Filter and projection pushdown provide significant performance benefits. See [our blog post on this](https://duckdb.org/2021/06/25/querying-parquet.html) for more information.
 
@@ -205,7 +205,7 @@ Below is a table of the columns returned by `parquet_schema`.
 | logical_type    | VARCHAR |
 
 ### Writing to Parquet Files
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. You can specify which compression format should be used using the `CODEC` parameter (options: `UNCOMPRESSED`, `SNAPPY` (default), `ZSTD`, `GZIP`).
+DataMiner also has support for writing to Parquet files using the `COPY` statement syntax. You can specify which compression format should be used using the `CODEC` parameter (options: `UNCOMPRESSED`, `SNAPPY` (default), `ZSTD`, `GZIP`).
 
 ```sql
 -- write a query to a snappy compressed parquet file

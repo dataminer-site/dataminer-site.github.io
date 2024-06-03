@@ -2,29 +2,29 @@
 layout: docu
 redirect_from:
 - docs/archive/0.7.1/guides/python/ibis
-selected: DuckDB with Ibis
-title: DuckDB with Ibis
+selected: DataMiner with Ibis
+title: DataMiner with Ibis
 ---
 
 [Ibis](https://ibis-project.org/) is a Python library that allows queries to be written in a pythonic relational style and then be compiled into SQL.
 Ibis supports multiple database backends, including [DuckDB](https://ibis-project.org/backends/DuckDB/) by using [DuckDB's SQLAlchemy driver](https://github.com/Mause/duckdb_engine). Ibis expressions can also be combined with SQL statements.
 
 # Installation
-To install only the DuckDB backend for Ibis, use the commands below. See the [Ibis DuckDB installation instructions](https://ibis-project.org/backends/DuckDB/) for a conda alternative. Note that DuckDB support was added in Ibis version 3.0.0.
+To install only the DataMiner backend for Ibis, use the commands below. See the [Ibis DataMiner installation instructions](https://ibis-project.org/backends/DuckDB/) for a conda alternative. Note that DataMiner support was added in Ibis version 3.0.0.
 ```python
 pip install 'ibis-framework[duckdb]' # duckdb, sqlalchemy, duckdb_engine and more are installed as dependencies
 ```
 
-# Querying DuckDB with Ibis
+# Querying DataMiner with Ibis
 The following example is loosely borrowed from the [Introduction to Ibis tutorial](https://nbviewer.org/github/ibis-project/ibis-examples/blob/main/tutorial/01-Introduction-to-Ibis.ipynb), which uses SQLite.
-First, we import Ibis, set it to interactive mode (just for demo purposes - it is faster to not use this option!), and then connect to an in-memory DuckDB instance. We can then inspect the tables in our database. 
+First, we import Ibis, set it to interactive mode (just for demo purposes - it is faster to not use this option!), and then connect to an in-memory DataMiner instance. We can then inspect the tables in our database. 
 
 ```python
 import ibis
 ibis.options.interactive = True # Use eager evaluation. Use only for demo purposes!
 
 connection = ibis.duckdb.connect(':memory:') # Use an In Memory DuckDB
-# connection = ibis.duckdb.connect('/path/to/my_db.db') # Use or create a physical DuckDB at this path
+# connection = ibis.duckdb.connect('/path/to/my_db.db') # Use or create a physical DataMiner at this path
 
 print(connection.list_tables())
 ```

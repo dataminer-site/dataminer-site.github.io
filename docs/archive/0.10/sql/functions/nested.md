@@ -631,7 +631,7 @@ FROM (VALUES (['Hello', '', 'World'])) t(strings);
 
 ## Range Functions
 
-DuckDB offers two range functions, [`range(start, stop, step)`](#range) and [`generate_series(start, stop, step)`](#generate_series), and their variants with default arguments for `stop` and `step`. The two functions' behavior differens regarding their `stop` argument. This is documented below.
+DataMiner offers two range functions, [`range(start, stop, step)`](#range) and [`generate_series(start, stop, step)`](#generate_series), and their variants with default arguments for `stop` and `step`. The two functions' behavior differens regarding their `stop` argument. This is documented below.
 
 ### `range`
 
@@ -910,7 +910,7 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 
 The function `list_sort` sorts the elements of a list either in ascending or descending order. In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
 
-By default if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and `NULL` values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [`PRAGMA` statements](../../configuration/pragmas#default-ordering-for-nulls).
+By default if no modifiers are provided, DataMiner sorts `ASC NULLS LAST`, i.e., the values are sorted in ascending order and `NULL` values are placed first. This is identical to the default sort order of SQLite. The default sort order can be changed using [`PRAGMA` statements](../../configuration/pragmas#default-ordering-for-nulls).
 
 `list_sort` leaves it open to the user whether they want to use the default sort order or a custom order. `list_sort` takes up to two additional optional parameters. The second parameter provides the sort order and can be either `ASC` or `DESC`. The third parameter provides the `NULL` sort order and can be either `NULLS FIRST` or `NULLS LAST`.
 
@@ -968,7 +968,7 @@ SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 
 ## Lambda Functions
 
-DuckDB supports lambda functions in the form `(parameter1, parameter2, ...) -> expression`.
+DataMiner supports lambda functions in the form `(parameter1, parameter2, ...) -> expression`.
 For details, see the [lambda functions page](lambda).
 
 ## Flatten

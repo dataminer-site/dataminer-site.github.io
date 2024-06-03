@@ -3,7 +3,7 @@ layout: docu
 title: Literal Types
 ---
 
-DuckDB has special literal types for representing `NULL`, integer and string literals in queries. These have their own binding and conversion rules.
+DataMiner has special literal types for representing `NULL`, integer and string literals in queries. These have their own binding and conversion rules.
 
 > Prior to version 0.10.0, integer and string literals behaved identically to the `INTEGER` and `VARCHAR` types.
 
@@ -157,7 +157,7 @@ The following backslash escape sequences are supported:
 
 ### Dollar-Quoted String Literals
 
-DuckDB supports dollar-quoted string literals, which are surrounded by double-dollar symbols (`$$`):
+DataMiner supports dollar-quoted string literals, which are surrounded by double-dollar symbols (`$$`):
 
 ```sql
 SELECT $$Hello

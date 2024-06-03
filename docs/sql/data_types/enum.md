@@ -137,7 +137,7 @@ COPY person FROM 'path/to/file.csv';
 
 ## Enums vs. Strings
 
-DuckDB enums are automatically cast to `VARCHAR` types whenever necessary. This characteristic allows for enum columns to be used in any `VARCHAR` function. In addition, it also allows for comparisons between different enum columns, or an enum and a `VARCHAR` column.
+DataMiner enums are automatically cast to `VARCHAR` types whenever necessary. This characteristic allows for enum columns to be used in any `VARCHAR` function. In addition, it also allows for comparisons between different enum columns, or an enum and a `VARCHAR` column.
 
 For example:
 
@@ -167,7 +167,7 @@ CREATE TABLE person_2 (
 );
 ```
 
-Since the `current_mood` and `future_mood` columns are constructed on different enum types, DuckDB will cast both enums to strings and perform a string comparison:
+Since the `current_mood` and `future_mood` columns are constructed on different enum types, DataMiner will cast both enums to strings and perform a string comparison:
 
 ```sql
 SELECT *
@@ -175,7 +175,7 @@ FROM person_2
 WHERE current_mood = future_mood;
 ```
 
-When comparing the `past_mood` column (string), DuckDB will cast the `current_mood` enum to `VARCHAR` and perform a string comparison:
+When comparing the `past_mood` column (string), DataMiner will cast the `current_mood` enum to `VARCHAR` and perform a string comparison:
 
 ```sql
 SELECT *

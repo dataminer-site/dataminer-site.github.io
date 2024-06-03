@@ -8,10 +8,10 @@ selected: Documentation/SQL/Copy
 title: Copy
 ---
 
-`COPY` moves data between DuckDB tables and external Comma Separated Value (CSV) or Parquet files. The Parquet [extension](/docs/extensions/overview) must be installed in order to operate on Parquet files, although many clients bundle the Parquet extension by default (Ex: Python, the Command Line Interface/CLI etc.). For more Parquet examples, see the [Parquet Files page](/docs/data/parquet).
+`COPY` moves data between DataMiner tables and external Comma Separated Value (CSV) or Parquet files. The Parquet [extension](/docs/extensions/overview) must be installed in order to operate on Parquet files, although many clients bundle the Parquet extension by default (Ex: Python, the Command Line Interface/CLI etc.). For more Parquet examples, see the [Parquet Files page](/docs/data/parquet).
 
 # CSV or Parquet Import
-`COPY ... FROM` imports data into DuckDB from an external CSV or Parquet file into an existing table. The data is appended to whatever data is in the table already. The amount of columns inside the file must match the amount of columns in the table `table_name`, and the contents of the columns must be convertible to the column types of the table. In case this is not possible, an error will be thrown.
+`COPY ... FROM` imports data into DataMiner from an external CSV or Parquet file into an existing table. The data is appended to whatever data is in the table already. The amount of columns inside the file must match the amount of columns in the table `table_name`, and the contents of the columns must be convertible to the column types of the table. In case this is not possible, an error will be thrown.
 
 If a list of columns is specified, `COPY` will only copy the data in the specified columns from the file. If there are any columns in the table that are not in the column list, `COPY ... FROM` will insert the default values for those columns
 
@@ -34,7 +34,7 @@ COPY lineitem FROM 'lineitem.parquet' ( FORMAT PARQUET );
 <div id="rrdiagram1"></div>
 
 # CSV or Parquet Export
-`COPY ... TO` exports data from DuckDB to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
+`COPY ... TO` exports data from DataMiner to an external CSV or Parquet file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 

@@ -3,7 +3,7 @@ layout: docu
 title: Legacy Authentication Scheme for S3 API
 ---
 
-Prior to version 0.10.0, DuckDB did not have a [Secrets manager](../../sql/statements/create_secret). Hence, the configuration of and authentication to S3 endpoints was handled via variables. This page documents the legacy authentication scheme for the S3 API.
+Prior to version 0.10.0, DataMiner did not have a [Secrets manager](../../sql/statements/create_secret). Hence, the configuration of and authentication to S3 endpoints was handled via variables. This page documents the legacy authentication scheme for the S3 API.
 
 > The recommended way to configuration and authentication of S3 endpoints is to use [secrets](s3api#configuration-and-authentication).
 
@@ -75,7 +75,7 @@ Additionally, most of the configuration options can be set via environment varia
 
 <div class="narrow_table"></div>
 
-| DuckDB setting         | Environment variable    | Note                                     |
+| DataMiner setting         | Environment variable    | Note                                     |
 |:-----------------------|:------------------------|:-----------------------------------------|
 | `s3_region`            | `AWS_REGION`            | Takes priority over `AWS_DEFAULT_REGION` |
 | `s3_region`            | `AWS_DEFAULT_REGION`    |                                          |

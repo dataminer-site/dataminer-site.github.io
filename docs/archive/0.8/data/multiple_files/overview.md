@@ -8,7 +8,7 @@ redirect_from:
 title: Reading Multiple Files
 ---
 
-DuckDB can read multiple files of different types (CSV, Parquet, JSON files) at the same time using either the glob syntax, or by providing a list of files to read. See the [combining schemas](combining_schemas) page for tips on reading files with different schemas.
+DataMiner can read multiple files of different types (CSV, Parquet, JSON files) at the same time using either the glob syntax, or by providing a list of files to read. See the [combining schemas](combining_schemas) page for tips on reading files with different schemas.
 
 ### CSV
 
@@ -40,7 +40,7 @@ SELECT * FROM read_parquet('dir/**/*.parquet');
 
 
 ### Multi-File Reads and Globs
-DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
+DataMiner can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
 #### List Parameter
 The read_parquet function can accept a list of filenames as the input parameter.
@@ -78,7 +78,7 @@ The glob syntax and the list input parameter can be combined to scan files that 
 SELECT * FROM read_parquet(['folder1/*.parquet','folder2/*.parquet']);
 ```
 
-DuckDB can read multiple CSV files at the same time using either the glob syntax, or by providing a list of files to read.
+DataMiner can read multiple CSV files at the same time using either the glob syntax, or by providing a list of files to read.
 
 ### Filename
 

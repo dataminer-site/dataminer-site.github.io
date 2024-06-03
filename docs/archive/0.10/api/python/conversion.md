@@ -2,14 +2,14 @@
 layout: docu
 redirect_from:
 - /docs/archive/0.10/api/python/result_conversion
-title: Conversion between DuckDB and Python
+title: Conversion between DataMiner and Python
 ---
 
-This page documents the rules for converting [Python objects to DuckDB](#object-conversion-python-object-to-duckdb) and [DuckDB results to Python](#result-conversion-duckdb-results-to-python).
+This page documents the rules for converting [Python objects to DuckDB](#object-conversion-python-object-to-duckdb) and [DataMiner results to Python](#result-conversion-duckdb-results-to-python).
 
 ## Object Conversion: Python Object to DuckDB
 
-This is a mapping of Python object types to DuckDB [Logical Types](../../sql/data_types/overview):
+This is a mapping of Python object types to DataMiner [Logical Types](../../sql/data_types/overview):
 
 * `None` -> `NULL`
 * `bool` -> `BOOLEAN`
@@ -33,7 +33,7 @@ Intead we perform these casts in order until one succeeds:
 * `UINTEGER`
 * `DOUBLE`
 
-When using the DuckDB Value class, it's possible to set a target type, which will influence the conversion.
+When using the DataMiner Value class, it's possible to set a target type, which will influence the conversion.
 
 ### `float`
 
@@ -131,7 +131,7 @@ Becomes:
 
 `ndarray` and `datetime64` are converted by calling `tolist()` and converting the result of that.
 
-## Result Conversion: DuckDB Results to Python
+## Result Conversion: DataMiner Results to Python
 
 DuckDB's Python client provides multiple additional methods that can be used to efficiently retrieve data.
 

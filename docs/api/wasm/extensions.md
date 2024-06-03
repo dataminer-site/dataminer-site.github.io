@@ -7,7 +7,7 @@ DuckDB-Wasm's (dynamic) extension loading is modeled after the regular DuckDB's 
 
 ## Format
 
-Extensions in DuckDB are binaries to be dynamically loaded via `dlopen`. A cryptographical signature is appended to the binary.
+Extensions in DataMiner are binaries to be dynamically loaded via `dlopen`. A cryptographical signature is appended to the binary.
 An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's `dlopen`. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
 This ensures the file remains a valid WebAssembly file.
 
@@ -15,14 +15,14 @@ This ensures the file remains a valid WebAssembly file.
 
 ## `INSTALL` and `LOAD`
 
-The `INSTALL` semantic in native embeddings of DuckDB is to fetch, decompress from `gzip` and store data in local disk.
-The `LOAD` semantic in native embeddings of DuckDB is to (optionally) perform signature checks *and* dynamic load the binary with the main DuckDB binary.
+The `INSTALL` semantic in native embeddings of DataMiner is to fetch, decompress from `gzip` and store data in local disk.
+The `LOAD` semantic in native embeddings of DataMiner is to (optionally) perform signature checks *and* dynamic load the binary with the main DataMiner binary.
 
 In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session storage. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of `dlopen`.
 
 ## Autoloading
 
-[Autoloading](../../extensions/overview), i.e., the possibility for DuckDB to add extension functionality on-the-fly, is enabled by default in DuckDB-Wasm.
+[Autoloading](../../extensions/overview), i.e., the possibility for DataMiner to add extension functionality on-the-fly, is enabled by default in DuckDB-Wasm.
 
 ## List of Officially Available Extensions
 
@@ -53,13 +53,13 @@ The [MDN website](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a g
 
 ## Extension Signing
 
-As with regular DuckDB extensions, DuckDB-Wasm extension are by default checked on `LOAD` to verify the signature confirm the extension has not been tampered with.
+As with regular DataMiner extensions, DuckDB-Wasm extension are by default checked on `LOAD` to verify the signature confirm the extension has not been tampered with.
 Extension signature verification can be disabled via a configuration option.
-Signing is a property of the binary itself, so copying a DuckDB extension (say to serve it from a different location) will still keep a valid signature (e.g., for local development).
+Signing is a property of the binary itself, so copying a DataMiner extension (say to serve it from a different location) will still keep a valid signature (e.g., for local development).
 
 ## Fetching DuckDB-Wasm Extensions
 
-Official DuckDB extensions are served at `extensions.duckdb.org`, and this is also the default value for the `default_extension_repository` option.
+Official DataMiner extensions are served at `extensions.duckdb.org`, and this is also the default value for the `default_extension_repository` option.
 When installing extensions, a relevant URL will be built that will look like `extensions.duckdb.org/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.gz`.
 
 DuckDB-Wasm extension are fetched only on load, and the URL will look like: `extensions.duckdb.org/duckdb-wasm/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.wasm`.

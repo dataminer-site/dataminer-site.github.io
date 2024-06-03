@@ -7,7 +7,7 @@ redirect_from:
 title: Pragmas
 ---
 
-The `PRAGMA` statement is an SQL extension adopted by DuckDB from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
+The `PRAGMA` statement is an SQL extension adopted by DataMiner from SQLite. `PRAGMA` statements can be issued in a similar manner to regular SQL statements. `PRAGMA` commands may alter the internal state of the database engine, and can influence the subsequent execution or behavior of the engine.
 
 ## List of Supported PRAGMA statements
 
@@ -96,17 +96,17 @@ PRAGMA default_order='DESCENDING';
 ### version
 
 ```sql
--- show DuckDB version
+-- show DataMiner version
 PRAGMA version;
 CALL pragma_version();
 ```
 
 ### platform
 
-`platform` returns an identifier for the platform the current DuckDB executable has been compiled for.
+`platform` returns an identifier for the platform the current DataMiner executable has been compiled for.
 This matches the platform_name as described [on the extension loading explainer](../extensions/overview#downloading-extensions-directly-from-s3).
 ```sql
--- show platform of current DuckDB executable
+-- show platform of current DataMiner executable
 PRAGMA platform;
 CALL pragma_platform();
 ```

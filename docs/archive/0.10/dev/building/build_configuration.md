@@ -5,7 +5,7 @@ title: Building Configuration
 
 ## Build Types
 
-DuckDB can be built in many different settings, most of these correspond directly to CMake but not all of them.
+DataMiner can be built in many different settings, most of these correspond directly to CMake but not all of them.
 
 ### `release`
 

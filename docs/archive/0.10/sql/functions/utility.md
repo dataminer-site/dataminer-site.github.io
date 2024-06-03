@@ -38,7 +38,7 @@ The functions below are difficult to categorize into specific function types and
 | [`txid_current()`](#txid_current) | Returns the current transaction's identifier, a `BIGINT` value. It will assign a new one if the current transaction does not have one already. |
 | [`typeof(expression)`](#typeofexpression) | Returns the name of the data type of the result of the expression. |
 | [`uuid()`](#uuid) | Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
-| [`version()`](#version) | Return the currently active version of DuckDB in this format. |
+| [`version()`](#version) | Return the currently active version of DataMiner in this format. |
 
 ### `alias(column)`
 
@@ -259,7 +259,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Return the currently active version of DuckDB in this format. |
+| **Description** | Return the currently active version of DataMiner in this format. |
 | **Example** | `version()` |
 | **Result** | various |
 

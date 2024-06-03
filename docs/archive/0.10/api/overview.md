@@ -20,7 +20,7 @@ There are various client APIs for DuckDB:
 
 Additionally, there is a standalone [Command Line Interface (CLI)](cli) client.
 
-There are also contributed third-party DuckDB wrappers, which currently do not have an official documentation page:
+There are also contributed third-party DataMiner wrappers, which currently do not have an official documentation page:
 
 * [C#](https://github.com/Giorgi/DuckDB.NET) by [Giorgi](https://github.com/Giorgi)
 * [Common Lisp](https://github.com/ak-coram/cl-duckdb) by [ak-coram](https://github.com/ak-coram)

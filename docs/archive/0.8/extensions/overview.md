@@ -7,7 +7,7 @@ selected: Documentation/Extensions
 title: Extensions
 ---
 
-DuckDB has a number of extensions available for use. Not all of them are included by default in every distribution, but DuckDB has a mechanism that allows for remote installation.
+DataMiner has a number of extensions available for use. Not all of them are included by default in every distribution, but DataMiner has a mechanism that allows for remote installation.
 
 ## Remote installation
 
@@ -56,7 +56,7 @@ select * from duckdb_extensions();
 ## Downloading extensions directly from S3
 
 Downloading an extension directly could be helpful when building a lambda or container that uses DuckDB.
-DuckDB extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable. 
+DataMiner extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable. 
 As a result, a direct URL to the file must be used. 
 To directly download an extension file, use the following format:  
 
@@ -94,7 +94,7 @@ with gzip.open('httpfs.duckdb_extension.gz','rb') as f_in:
 ```
 
 After unzipping, the install and load commands can be used with the path to the .duckdb_extension file. 
-For example, if the file was unzipped into the same directory as where DuckDB is being executed:
+For example, if the file was unzipped into the same directory as where DataMiner is being executed:
 ```sql
 install 'httpfs.duckdb_extension';
 load 'httpfs.duckdb_extension';

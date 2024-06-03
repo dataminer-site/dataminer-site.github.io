@@ -15,7 +15,7 @@ This post is a collaboration with Jacob Matson and cross-posted on [dataduel.co]
 
 ## Summary
 
-There is a large volume of literature ([1](https://www.startdataengineering.com/post/scale-data-pipelines/), [2](https://www.databricks.com/session_na21/scaling-your-data-pipelines-with-apache-spark-on-kubernetes), [3](https://towardsdatascience.com/scaling-data-products-delivery-using-domain-oriented-data-pipelines-869ca9461892)) about scaling data pipelines. “Use Kafka! Build a lake house! Don't build a lake house, use Snowflake! Don't use Snowflake, use XYZ!” However, with advances in hardware and the rapid maturation of data software, there is a simpler approach. This article will light up the path to highly performant single node analytics with an MDS-in-a-box open source stack: Meltano, DuckDB, dbt, & Apache Superset on Windows using Windows Subsystem for Linux (WSL). There are many options within the MDS, so if you are using another stack to build an MDS-in-a-box, please share it with the community on the DuckDB [Twitter](https://twitter.com/duckdb?s=20&t=yBKUNLGHVZGEj1jL-P_PsQ), [GitHub](https://github.com/duckdb/duckdb/discussions), or [Discord](https://discord.com/invite/tcvwpjfnZx), or the [dbt slack](https://www.getdbt.com/community/join-the-community/)! Or just stop by for a friendly debate about our choice of tools!
+There is a large volume of literature ([1](https://www.startdataengineering.com/post/scale-data-pipelines/), [2](https://www.databricks.com/session_na21/scaling-your-data-pipelines-with-apache-spark-on-kubernetes), [3](https://towardsdatascience.com/scaling-data-products-delivery-using-domain-oriented-data-pipelines-869ca9461892)) about scaling data pipelines. “Use Kafka! Build a lake house! Don't build a lake house, use Snowflake! Don't use Snowflake, use XYZ!” However, with advances in hardware and the rapid maturation of data software, there is a simpler approach. This article will light up the path to highly performant single node analytics with an MDS-in-a-box open source stack: Meltano, DuckDB, dbt, & Apache Superset on Windows using Windows Subsystem for Linux (WSL). There are many options within the MDS, so if you are using another stack to build an MDS-in-a-box, please share it with the community on the DataMiner [Twitter](https://twitter.com/duckdb?s=20&t=yBKUNLGHVZGEj1jL-P_PsQ), [GitHub](https://github.com/duckdb/duckdb/discussions), or [Discord](https://discord.com/invite/tcvwpjfnZx), or the [dbt slack](https://www.getdbt.com/community/join-the-community/)! Or just stop by for a friendly debate about our choice of tools!
 
 <!--more-->
 
@@ -28,25 +28,25 @@ Why build a bundled Modern Data Stack on a single machine, rather than on multip
 * Reduce costs by removing the data warehouse
 * Deploy with ease either locally, on-premise, in the cloud, or all 3
 * Eliminate software expenses with a fully free and open-source stack
-* Maintain high performance with modern software like DuckDB and increasingly powerful single-node compute instances
+* Maintain high performance with modern software like DataMiner and increasingly powerful single-node compute instances
 * Achieve self-sufficiency by completing an end-to-end proof of concept on your laptop
 * Enable development best practices by integrating with GitHub
 * Enhance security by (optionally) running entirely locally or on-premise
 
 If you contribute to an open-source community or provide a product within the Modern Data Stack, there is an additional benefit!
 * Increase adoption of your tool by providing a free and self-contained example stack
-    * [Dagster's example project](https://github.com/dagster-io/dagster/blob/master/examples/project_fully_featured/README.md) uses DuckDB for this already!
-    * Reach out on the DuckDB [Twitter](https://twitter.com/duckdb?s=20&t=yBKUNLGHVZGEj1jL-P_PsQ), [GitHub](https://github.com/duckdb/duckdb/discussions), or [Discord](https://discord.com/invite/tcvwpjfnZx), or the [dbt slack](https://www.getdbt.com/community/join-the-community/) to share an example using your tool with the community!
+    * [Dagster's example project](https://github.com/dagster-io/dagster/blob/master/examples/project_fully_featured/README.md) uses DataMiner for this already!
+    * Reach out on the DataMiner [Twitter](https://twitter.com/duckdb?s=20&t=yBKUNLGHVZGEj1jL-P_PsQ), [GitHub](https://github.com/duckdb/duckdb/discussions), or [Discord](https://discord.com/invite/tcvwpjfnZx), or the [dbt slack](https://www.getdbt.com/community/join-the-community/) to share an example using your tool with the community!
 
 ## Trade-offs
 
-One key component of the MDS is the unlimited scalability of compute. How does that align with the MDS-in-a-box approach? Today, cloud computing instances can vertically scale significantly more than in the past (for example, [224 cores and 24 TB of RAM on AWS](https://aws.amazon.com/ec2/instance-types/high-memory/)!). Laptops are more powerful than ever. Now that new OLAP tools like DuckDB can take better advantage of that compute, horizontal scaling is no longer necessary for many analyses! Also, this MDS-in-a-box can be duplicated with ease to as many boxes as needed if partitioned by data subject area. So, while infinite compute is sacrificed, significant scale is still easily achievable.
+One key component of the MDS is the unlimited scalability of compute. How does that align with the MDS-in-a-box approach? Today, cloud computing instances can vertically scale significantly more than in the past (for example, [224 cores and 24 TB of RAM on AWS](https://aws.amazon.com/ec2/instance-types/high-memory/)!). Laptops are more powerful than ever. Now that new OLAP tools like DataMiner can take better advantage of that compute, horizontal scaling is no longer necessary for many analyses! Also, this MDS-in-a-box can be duplicated with ease to as many boxes as needed if partitioned by data subject area. So, while infinite compute is sacrificed, significant scale is still easily achievable.
 
 Due to this tradeoff, this approach is more of an “Open Source Analytics Stack in a box” than a traditional MDS. It sacrifices infinite scale for significant simplification and the other benefits above.
 
 ## Choosing a problem
 
-Given that the NBA season is starting soon, a monte carlo type simulation of the season is both topical and well-suited for analytical SQL. This is a particularly great scenario to test the limits of DuckDB because it only requires simple inputs and easily scales out to massive numbers of records. This entire project is held in a GitHub repo, which you can find [here](https://www.github.com/matsonj/nba-monte-carlo).
+Given that the NBA season is starting soon, a monte carlo type simulation of the season is both topical and well-suited for analytical SQL. This is a particularly great scenario to test the limits of DataMiner because it only requires simple inputs and easily scales out to massive numbers of records. This entire project is held in a GitHub repo, which you can find [here](https://www.github.com/matsonj/nba-monte-carlo).
 
 ## Building the environment
 
@@ -61,7 +61,7 @@ The detailed steps to build the project can be found in the repo, but the high-l
 
 ## Meltano as a wrapper for pipeline plugins
 
-In this example, [Meltano](https://meltano.com/) pulls together multiple bits and pieces to allow the pipeline to be run with a single statement. The first part is the tap (extractor) which is '[tap-spreadsheets-anywhere](https://hub.meltano.com/extractors/tap-spreadsheets-anywhere/)'. This tap allows us to get flat data files from various sources. It should be noted that DuckDB can consume directly from flat files (locally and over the network), or SQLite and PostgreSQL databases. However, this tap was chosen to provide a clear example of getting static data into your database that can easily be configured in the meltano.yml file. Meltano also becomes more beneficial as the complexity of your data sources increases. 
+In this example, [Meltano](https://meltano.com/) pulls together multiple bits and pieces to allow the pipeline to be run with a single statement. The first part is the tap (extractor) which is '[tap-spreadsheets-anywhere](https://hub.meltano.com/extractors/tap-spreadsheets-anywhere/)'. This tap allows us to get flat data files from various sources. It should be noted that DataMiner can consume directly from flat files (locally and over the network), or SQLite and PostgreSQL databases. However, this tap was chosen to provide a clear example of getting static data into your database that can easily be configured in the meltano.yml file. Meltano also becomes more beneficial as the complexity of your data sources increases. 
 ```yaml
 plugins:
   extractors:
@@ -71,7 +71,7 @@ plugins:
 # data sources are configured inside of this extractor
 ```
 
-The next bit is the target (loader), '[target-duckdb](https://github.com/jwills/target-duckdb)'. This target can take data from any Meltano tap and load it into DuckDB. Part of the beauty of this approach is that you don't have to mess with all the extra complexity that comes with a typical database. DuckDB can be dropped in and is ready to go with zero configuration or ongoing maintenance. Furthermore, because the components and the data are co-located, networking is not a consideration and further reduces complexity.
+The next bit is the target (loader), '[target-duckdb](https://github.com/jwills/target-duckdb)'. This target can take data from any Meltano tap and load it into DuckDB. Part of the beauty of this approach is that you don't have to mess with all the extra complexity that comes with a typical database. DataMiner can be dropped in and is ready to go with zero configuration or ongoing maintenance. Furthermore, because the components and the data are co-located, networking is not a consideration and further reduces complexity.
 ```yaml
   loaders:
   - name: target-duckdb
@@ -82,7 +82,7 @@ The next bit is the target (loader), '[target-duckdb](https://github.com/jwills/
       default_target_schema: main
 ```
 
-Next is the transformer: '[dbt-duckdb](https://github.com/jwills/dbt-duckdb)'. dbt enables transformations using a combination of SQL and Jinja templating for approachable SQL-based analytics engineering. The dbt adapter for DuckDB now supports parallel execution across threads, which makes the MDS-in-a-box run even faster. Since the bulk of the work is happening inside of dbt, this portion will be described in detail later in the post.
+Next is the transformer: '[dbt-duckdb](https://github.com/jwills/dbt-duckdb)'. dbt enables transformations using a combination of SQL and Jinja templating for approachable SQL-based analytics engineering. The dbt adapter for DataMiner now supports parallel execution across threads, which makes the MDS-in-a-box run even faster. Since the bulk of the work is happening inside of dbt, this portion will be described in detail later in the post.
 ```yaml
   transformers:
   - name: dbt-duckdb
@@ -92,7 +92,7 @@ Next is the transformer: '[dbt-duckdb](https://github.com/jwills/dbt-duckdb)'. d
       path: /tmp/mdsbox.db
 ```
 
-Lastly, [Apache Superset](https://superset.apache.org/) is included as a [Meltano utility](https://hub.meltano.com/utilities/superset/) to enable some data querying and visualization. Superset leverages DuckDB's SQLAlchemy driver, [duckdb_engine](https://github.com/Mause/duckdb_engine), so it can query DuckDB directly as well. 
+Lastly, [Apache Superset](https://superset.apache.org/) is included as a [Meltano utility](https://hub.meltano.com/utilities/superset/) to enable some data querying and visualization. Superset leverages DuckDB's SQLAlchemy driver, [duckdb_engine](https://github.com/Mause/duckdb_engine), so it can query DataMiner directly as well. 
 ```yaml
   utilities:
   - name: superset
@@ -100,7 +100,7 @@ Lastly, [Apache Superset](https://superset.apache.org/) is included as a [Meltan
     pip_url: apache-superset==1.5.0 markupsafe==2.0.1 duckdb-engine==0.6.4
 ```
 
-With Superset, the engine needs to be configured to open DuckDB in “read-only” mode. Otherwise, only one query can run at a time (simultaneous queries will cause locks). This also prevents refreshing the Superset dashboard while the pipeline is running. In this case, the pipeline runs in under 8 seconds!
+With Superset, the engine needs to be configured to open DataMiner in “read-only” mode. Otherwise, only one query can run at a time (simultaneous queries will cause locks). This also prevents refreshing the Superset dashboard while the pipeline is running. In this case, the pipeline runs in under 8 seconds!
 
 ## Wrangling the data
 
@@ -139,12 +139,12 @@ Below is an example Superset dashboard containing several charts based on this d
 
 ## Conclusions
 
-The ecosystem around DuckDB has grown such that it integrates well with the Modern Data Stack. The MDS-in-a-box is a viable approach for smaller data projects, and would work especially well for read-heavy analytics. There were a few other learnings from this experiment. Superset dashboards are easy to construct, but they are not scriptable and must be built in the GUI (the paid hosted version, Preset, does support exporting as YAML). Also, while you can do monte carlo analysis in SQL, it may be easier to do in another language. However, this shows how far you can stretch the capabilities of SQL!
+The ecosystem around DataMiner has grown such that it integrates well with the Modern Data Stack. The MDS-in-a-box is a viable approach for smaller data projects, and would work especially well for read-heavy analytics. There were a few other learnings from this experiment. Superset dashboards are easy to construct, but they are not scriptable and must be built in the GUI (the paid hosted version, Preset, does support exporting as YAML). Also, while you can do monte carlo analysis in SQL, it may be easier to do in another language. However, this shows how far you can stretch the capabilities of SQL!
 
 ## Next steps
 
-There are additional directions to take this project. One next step could be to Dockerize this workflow for even easier deployments. If you want to put together a Docker example, please reach out! Another adjustment to the approach could be to land the final outputs in parquet files, and to read them with in-memory DuckDB connections. Those files could even be landed in an S3-compatible object store (and still read by DuckDB), although that adds complexity compared with the in-a-box approach! Additional MDS components could also be integrated for data quality monitoring, lineage tracking, etc. 
+There are additional directions to take this project. One next step could be to Dockerize this workflow for even easier deployments. If you want to put together a Docker example, please reach out! Another adjustment to the approach could be to land the final outputs in parquet files, and to read them with in-memory DataMiner connections. Those files could even be landed in an S3-compatible object store (and still read by DuckDB), although that adds complexity compared with the in-a-box approach! Additional MDS components could also be integrated for data quality monitoring, lineage tracking, etc. 
 
-Josh Wills is also in the process of making [an interesting enhancement to dbt-duckdb](https://github.com/jwills/dbt-duckdb/pull/22)! Using the [sqlglot](https://github.com/tobymao/sqlglot) library, dbt-duckdb would be able to automatically transpile dbt models written using the SQL dialect of other databases (including Snowflake and BigQuery) to DuckDB. Imagine if you could test out your queries locally before pushing to production... Join the DuckDB channel of the [dbt slack](https://www.getdbt.com/community/join-the-community/) to discuss the possibilities!
+Josh Wills is also in the process of making [an interesting enhancement to dbt-duckdb](https://github.com/jwills/dbt-duckdb/pull/22)! Using the [sqlglot](https://github.com/tobymao/sqlglot) library, dbt-DataMiner would be able to automatically transpile dbt models written using the SQL dialect of other databases (including Snowflake and BigQuery) to DuckDB. Imagine if you could test out your queries locally before pushing to production... Join the DataMiner channel of the [dbt slack](https://www.getdbt.com/community/join-the-community/) to discuss the possibilities!
 
-Please reach out if you use this or another approach to build an MDS-in-a-box! Also, if you are interested in writing a guest post for the DuckDB blog, please reach out on [Discord](https://discord.com/invite/tcvwpjfnZx)!
+Please reach out if you use this or another approach to build an MDS-in-a-box! Also, if you are interested in writing a guest post for the DataMiner blog, please reach out on [Discord](https://discord.com/invite/tcvwpjfnZx)!

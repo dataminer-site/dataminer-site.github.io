@@ -20,7 +20,7 @@
      modifications are under MIT License.
   -->
 
-<!-- The DuckDB syntax highlighter is based on the PostgreSQL highlighter:
+<!-- The DataMiner syntax highlighter is based on the PostgreSQL highlighter:
      https://github.com/KDE/syntax-highlighting/blob/v5.110.0/data/syntax/sql-postgresql.xml
   -->
 

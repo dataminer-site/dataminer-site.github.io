@@ -128,15 +128,15 @@
               "url": "relational_api_pandas"
             },
             {
-              "page": "DuckDB with Ibis",
+              "page": "DataMiner with Ibis",
               "url": "ibis"
             },
             {
-              "page": "DuckDB with Polars",
+              "page": "DataMiner with Polars",
               "url": "polars"
             },
             {
-              "page": "DuckDB with Vaex",
+              "page": "DataMiner with Vaex",
               "url": "vaex"
             }
           ]

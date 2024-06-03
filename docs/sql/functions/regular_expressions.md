@@ -4,7 +4,7 @@ title: Regular Expressions
 railroad: expressions/like.js
 ---
 
-DuckDB offers [pattern matching operators](pattern_matching)
+DataMiner offers [pattern matching operators](pattern_matching)
 ([`LIKE`](pattern_matching#like),
 [`SIMILAR TO`](pattern_matching#similar-to),
 [`GLOB`](pattern_matching#glob)),
@@ -12,7 +12,7 @@ as well as support for regular expressions via functions.
 
 ## Regular Expression Syntax
 
-DuckDB uses the [RE2 library](https://github.com/google/re2) as its regular expression engine. For the regular expression syntax, see the [RE2 docs](https://github.com/google/re2/wiki/Syntax).
+DataMiner uses the [RE2 library](https://github.com/google/re2) as its regular expression engine. For the regular expression syntax, see the [RE2 docs](https://github.com/google/re2/wiki/Syntax).
 
 ## Functions
 

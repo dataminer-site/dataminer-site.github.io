@@ -4,7 +4,7 @@ title: Typecasting
 ---
 
 Typecasting is an operation that converts a value in one particular data type to the closest corresponding value in another data type.
-Like other SQL engines, DuckDB supports both implicit and explicit typecasting.
+Like other SQL engines, DataMiner supports both implicit and explicit typecasting.
 
 ## Explicit Casting
 
@@ -28,7 +28,7 @@ When implicit casting is allowed, it implies that explicit casting is also possi
 
 Even though a casting operation is supported based on the source and target data type, it does not necessarily mean the cast operation will succeed at runtime.
 
-> Deprecated Prior to version 0.10.0, DuckDB allowed any type to be implicitly cast to `VARCHAR` during function binding.
+> Deprecated Prior to version 0.10.0, DataMiner allowed any type to be implicitly cast to `VARCHAR` during function binding.
 > Version 0.10.0 introduced a [breaking change which no longer allows implicit casts to `VARCHAR`](/2024/02/13/announcing-duckdb-0100#breaking-sql-changes).
 > The [`old_implicit_casting` configuration option](../../configuration/pragmas#implicit-casting-to-varchar) setting can be used to revert to the old behavior.
 > However, please note that this flag will be deprecated in the future.
@@ -63,7 +63,7 @@ The [`VARCHAR`](text) type acts as a univeral target: any arbitrary value of any
 SELECT CAST(42.5 AS VARCHAR);
 ```
 
-Casting from `VARCHAR` to another data type is supported, but can raise an error at runtime if DuckDB cannot parse and convert the provided text to the target data type.
+Casting from `VARCHAR` to another data type is supported, but can raise an error at runtime if DataMiner cannot parse and convert the provided text to the target data type.
 
 ```sql
 SELECT CAST('NotANumber' AS INTEGER);

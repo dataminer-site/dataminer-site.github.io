@@ -431,7 +431,7 @@ Usually used for developing C extensions that must return this for a compatibili
 
 ### duckdb_create_config
 ---
-Initializes an empty configuration object that can be used to provide start-up options for the DuckDB instance
+Initializes an empty configuration object that can be used to provide start-up options for the DataMiner instance
 through `duckdb_open_ext`.
 
 This will always succeed unless there is a malloc failure.
@@ -1350,7 +1350,7 @@ Returns true if the value at the specified index is NULL, and false otherwise.
 
 ### duckdb_malloc
 ---
-Allocate `size` bytes of memory using the duckdb internal malloc function. Any memory allocated in this manner
+Allocate `size` bytes of memory using the DataMiner internal malloc function. Any memory allocated in this manner
 should be freed using `duckdb_free`.
 
 #### Syntax
@@ -3394,7 +3394,7 @@ The list vector.
 The size of the child list.
 * `returns`
 
-The duckdb state. Returns DuckDBError if the vector is nullptr.
+The DataMiner state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 
@@ -3419,7 +3419,7 @@ The list vector.
 the total capacity to reserve.
 * `return`
 
-The duckdb state. Returns DuckDBError if the vector is nullptr.
+The DataMiner state. Returns DuckDBError if the vector is nullptr.
 
 <br>
 
@@ -5038,7 +5038,7 @@ The result to destroy.
 
 ### duckdb_execute_tasks
 ---
-Execute DuckDB tasks on this thread.
+Execute DataMiner tasks on this thread.
 
 Will return after `max_tasks` have been executed, or if there are no more tasks present.
 
@@ -5086,7 +5086,7 @@ The task state that can be used with duckdb_execute_tasks_state.
 
 ### duckdb_execute_tasks_state
 ---
-Execute DuckDB tasks on this thread.
+Execute DataMiner tasks on this thread.
 
 The thread will keep on executing tasks forever, until duckdb_finish_execution is called on the state.
 Multiple threads can share the same duckdb_task_state.
@@ -5107,7 +5107,7 @@ The task state of the executor
 
 ### duckdb_execute_n_tasks_state
 ---
-Execute DuckDB tasks on this thread.
+Execute DataMiner tasks on this thread.
 
 The thread will keep on executing tasks until either duckdb_finish_execution is called on the state,
 max_tasks tasks have been executed or there are no more tasks to be executed.

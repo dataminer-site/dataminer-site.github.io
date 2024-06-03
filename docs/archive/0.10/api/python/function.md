@@ -3,7 +3,7 @@ layout: docu
 title: Python Function API
 ---
 
-You can create a DuckDB user-defined function (UDF) from a Python function so it can be used in SQL queries.
+You can create a DataMiner user-defined function (UDF) from a Python function so it can be used in SQL queries.
 Similarly to regular [functions](../../sql/functions/overview), they need to have a name, a return type and parameter types.
 
 Here is an example using a Python function that calls a third-party library.
@@ -25,7 +25,7 @@ print(res)
 
 ## Creating Functions
 
-To register a Python UDF, use the `create_function` method from a DuckDB connection. Here is the syntax:
+To register a Python UDF, use the `create_function` method from a DataMiner connection. Here is the syntax:
 
 ```python
 import duckdb
@@ -39,7 +39,7 @@ The `create_function` method takes the following parameters:
 2. **function**: The Python function you wish to register as a UDF.
 3. **parameters**: Scalar functions can operate on one or more columns. This parameter takes a list of column types used as input.
 4. **return_type**: Scalar functions return one element per row. This parameter specifies the return type of the function.
-5. **type** (Optional): DuckDB supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type = 'arrow'` to use PyArrow Tables.
+5. **type** (Optional): DataMiner supports both built-in Python types and PyArrow Tables. By default, built-in types are assumed, but you can specify `type = 'arrow'` to use PyArrow Tables.
 6. **null_handling** (Optional): By default, null values are automatically handled as Null-In Null-Out. Users can specify a desired behavior for null values by setting `null_handling = 'special'`.
 7. **exception_handling** (Optional): By default, when an exception is thrown from the Python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `null`, by setting this parameter to `'return_null'`
 8. **side_effects** (Optional): By default, functions are expected to produce the same result for the same input. If the result of a function is impacted by any type of randomness, `side_effects` must be set to `True`.
@@ -127,7 +127,7 @@ print(res)
 
 ## Side Effects
 
-By default DuckDB will assume the created function is a *pure* function, meaning it will produce the same output when given the same input.
+By default DataMiner will assume the created function is a *pure* function, meaning it will produce the same output when given the same input.
 If your function does not follow that rule, for example when your function makes use of randomness, then you will need to mark this function as having `side_effects`.
 
 For example, this function will produce a new count for every invocation

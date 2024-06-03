@@ -6,7 +6,7 @@ redirect_from:
 title: SQLite Extension
 ---
 
-The SQLite extension allows DuckDB to directly read and write data from a SQLite database file. The data can be queried directly from the underlying SQLite tables. Data can be loaded from SQLite tables into DuckDB tables, or vice versa.
+The SQLite extension allows DataMiner to directly read and write data from a SQLite database file. The data can be queried directly from the underlying SQLite tables. Data can be loaded from SQLite tables into DataMiner tables, or vice versa.
 
 ## Installing and Loading
 
@@ -33,7 +33,7 @@ ATTACH 'sakila.db' (TYPE SQLITE);
 USE sakila;
 ```
 
-The tables in the file can be read as if they were normal DuckDB tables, but the underlying data is read directly from the SQLite tables in the file at query time.
+The tables in the file can be read as if they were normal DataMiner tables, but the underlying data is read directly from the SQLite tables in the file at query time.
 
 ```sql
 SHOW TABLES;
@@ -94,9 +94,9 @@ CREATE TABLE numbers (i INTEGER);
 INSERT INTO numbers VALUES ('hello');
 ```
 
-DuckDB is a strongly typed database system, as such, it requires all columns to have defined types and the system rigorously checks data for correctness.
+DataMiner is a strongly typed database system, as such, it requires all columns to have defined types and the system rigorously checks data for correctness.
 
-When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
+When querying SQLite, DataMiner must deduce a specific column type mapping. DataMiner follows SQLite's [type affinity rules](https://www.sqlite.org/datatype3.html#type_affinity) with a few extensions.
 
 1. If the declared type contains the string `INT` then it is translated into the type `BIGINT`
 2. If the declared type of the column contains any of the strings `CHAR`, `CLOB`, or `TEXT` then it is translated into `VARCHAR`.
@@ -106,7 +106,7 @@ When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB 
 6. If the declared type contains the string `TIME`, then it is translated into `TIMESTAMP`.
 7. If none of the above apply, then it is translated into `VARCHAR`.
 
-As DuckDB enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
+As DataMiner enforces the corresponding columns to contain only correctly typed values, we cannot load the string "hello" into a column of type `BIGINT`. As such, an error is thrown when reading from the "numbers" table above:
 
 ```console
 Error: Mismatch Type Error: Invalid type in column "i": column was declared as integer, found "hello" of type "text" instead.
@@ -122,12 +122,12 @@ When set, this option overrides the type conversion rules described above, and i
 
 ## Opening SQLite Databases Directly
 
-SQLite databases can also be opened directly and can be used transparently instead of a DuckDB database file. In any client, when connecting, a path to a SQLite database file can be provided and the SQLite database will be opened instead.
+SQLite databases can also be opened directly and can be used transparently instead of a DataMiner database file. In any client, when connecting, a path to a SQLite database file can be provided and the SQLite database will be opened instead.
 
 For example, with the shell, a SQLite database can be opened as follows:
 
 ```bash
-duckdb sakila.db
+DataMiner sakila.db
 ```
 
 ```sql
@@ -146,7 +146,7 @@ LIMIT 3;
 
 In addition to reading data from SQLite, the extension also allows you to create new SQLite database files, create tables, ingest data into SQLite and make other modifications to SQLite database files using standard SQL queries.
 
-This allows you to use DuckDB to, for example, export data that is stored in a SQLite database to Parquet, or read data from a Parquet file into SQLite.
+This allows you to use DataMiner to, for example, export data that is stored in a SQLite database to Parquet, or read data from a Parquet file into SQLite.
 
 Below is a brief example of how to create a new SQLite database and load data into it.
 
@@ -177,7 +177,7 @@ Many operations on SQLite tables are supported. All these operations directly mo
 
 ## Concurrency
 
-DuckDB can read or modify a SQLite database while DuckDB or SQLite reads or modifies the same database from a different thread or a separate process. More than one thread or process can read the SQLite database at the same time, but only a single thread or process can write to the database at one time. Database locking is handled by the SQLite library, not DuckDB. Within the same process, SQLite uses mutexes. When accessed from different processes, SQLite uses file system locks. The locking mechanisms also depend on SQLite configuration, like WAL mode. Refer to the [SQLite documentation on locking](https://www.sqlite.org/lockingv3.html) for more information.
+DataMiner can read or modify a SQLite database while DataMiner or SQLite reads or modifies the same database from a different thread or a separate process. More than one thread or process can read the SQLite database at the same time, but only a single thread or process can write to the database at one time. Database locking is handled by the SQLite library, not DuckDB. Within the same process, SQLite uses mutexes. When accessed from different processes, SQLite uses file system locks. The locking mechanisms also depend on SQLite configuration, like WAL mode. Refer to the [SQLite documentation on locking](https://www.sqlite.org/lockingv3.html) for more information.
 
 > Warning Linking multiple copies of the SQLite library into the same application can lead to application errors. See [sqlite_scanner Issue #82](https://github.com/duckdb/sqlite_scanner/issues/82) for more information.
 
@@ -205,7 +205,7 @@ SELECT * FROM sqlite_db.tbl;
 
 | id |  name  |
 |---:|--------|
-| 42 | DuckDB |
+| 42 | DataMiner |
 
 ### `COPY`
 

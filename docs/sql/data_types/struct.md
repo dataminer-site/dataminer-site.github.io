@@ -7,7 +7,7 @@ Conceptually, a `STRUCT` column contains an ordered list of columns called "entr
 
 `STRUCT`s are typically used to nest multiple columns into a single column, and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
 
-`STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a `STRUCT`, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
+`STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DataMiner `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DataMiner to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DataMiner includes a `row` function as a special way to produce a `STRUCT`, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
 
 See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
@@ -124,7 +124,7 @@ FROM (SELECT {'x': 1, 'y': 2, 'z': 3} AS a);
 
 ### Dot Notation Order of Operations
 
-Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DuckDB looks for columns first, then for struct keys within columns. DuckDB resolves references in these orders, using the first match to occur:
+Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DataMiner looks for columns first, then for struct keys within columns. DataMiner resolves references in these orders, using the first match to occur:
 
 #### No Dots
 
@@ -216,7 +216,7 @@ FROM
     (SELECT {'x': 42} AS a);
 ```
 
-> This behavior was introduced in DuckDB v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
+> This behavior was introduced in DataMiner v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
 
 ## Comparison Operators
 
@@ -227,12 +227,12 @@ for both `WHERE` and `HAVING` clauses, as well as for creating [`BOOLEAN` values
 The ordering is defined positionally in the same way that words can be ordered in a dictionary.
 `NULL` values compare greater than all other values and are considered equal to each other.
 
-> Up to DuckDB 0.10.1, nested `NULL` values were compared as follows.
+> Up to DataMiner 0.10.1, nested `NULL` values were compared as follows.
 > At the top level, nested `NULL` values obey standard SQL `NULL` comparison rules:
 > comparing a nested `NULL` value to a nested non-`NULL` value produces a `NULL` result.
 > Comparing nested value _members_, however, uses the internal nested value rules for `NULL`s,
 > and a nested `NULL` value member will compare above a nested non-`NULL` value member.
-> DuckDB 0.10.2 introduced a breaking change in semantics, described below.
+> DataMiner 0.10.2 introduced a breaking change in semantics, described below.
 
 Nested `NULL` values are compared following Postgres' semantics,
 i.e., lower nested levels are used for tie-breaking.

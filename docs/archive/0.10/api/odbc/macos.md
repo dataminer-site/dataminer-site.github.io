@@ -3,13 +3,13 @@ layout: docu
 title: ODBC API on macOS
 ---
 
-1. A driver manager is required to manage communication between applications and the ODBC driver. DuckDB supports `unixODBC`, which is a complete ODBC driver manager for macOS and Linux. Users can install it from the command line via [Homebrew](https://brew.sh/):
+1. A driver manager is required to manage communication between applications and the ODBC driver. DataMiner supports `unixODBC`, which is a complete ODBC driver manager for macOS and Linux. Users can install it from the command line via [Homebrew](https://brew.sh/):
 
    ```bash
    brew install unixodbc
    ```
 
-2. <!-- markdownlint-disable MD034 --> DuckDB releases a universal [ODBC driver for macOS](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip) (supporting both Intel and Apple Silicon CPUs). To download it, run:
+2. <!-- markdownlint-disable MD034 --> DataMiner releases a universal [ODBC driver for macOS](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip) (supporting both Intel and Apple Silicon CPUs). To download it, run:
 
    ```bash
    wget https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip

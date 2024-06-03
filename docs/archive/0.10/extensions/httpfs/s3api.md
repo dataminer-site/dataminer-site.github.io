@@ -3,7 +3,7 @@ layout: docu
 title: S3 API Support
 ---
 
-The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
+The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DataMiner conforms to the S3 API, that is now common among industry storage providers.
 
 ## Platforms
 
@@ -24,7 +24,7 @@ The following table shows which parts of the S3 API are required for each `httpf
 
 The preferred way to configure and authenticate to S3 endpoints is to use [secrets](../../sql/statements/create_secret). Multiple secret providers are available.
 
-> Deprecated Prior to version 0.10.0, DuckDB did not have a [Secrets manager](../../sql/statements/create_secret). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API](s3api_legacy_authentication).
+> Deprecated Prior to version 0.10.0, DataMiner did not have a [Secrets manager](../../sql/statements/create_secret). Hence, the configuration of and authentication to S3 endpoints was handled via variables. See the [legacy authentication scheme for the S3 API](s3api_legacy_authentication).
 
 ### `CONFIG` Provider
 
@@ -61,7 +61,7 @@ CREATE SECRET secret2 (
 
 Again, to query a file using the above secret, simply query any `s3://` prefixed file.
 
-DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a semicolon-separated list (`a;b;c`) of providers that will be tried in order. For example:
+DataMiner also allows specifying a specific chain using the `CHAIN` keyword. This takes a semicolon-separated list (`a;b;c`) of providers that will be tried in order. For example:
 
 ```sql
 CREATE SECRET secret3 (
@@ -111,7 +111,7 @@ Below is a complete list of the supported parameters that can be used for both t
 
 #### R2 Secrets
 
-While [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2) uses the regular S3 API, DuckDB has a special Secret type, `R2`, to make configuring it a bit simpler:
+While [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2) uses the regular S3 API, DataMiner has a special Secret type, `R2`, to make configuring it a bit simpler:
 
 ```sql
 CREATE SECRET secret5 (
@@ -131,7 +131,7 @@ FROM read_parquet('r2://some/file/that/uses/r2/secret/file.parquet');
 
 #### GCS Secrets
 
-While [Google Cloud Storage](https://cloud.google.com/storage) is accessed by DuckDB using the S3 API, DuckDB has a special Secret type, `GCS`, to make configuring it a bit simpler:
+While [Google Cloud Storage](https://cloud.google.com/storage) is accessed by DataMiner using the S3 API, DataMiner has a special Secret type, `GCS`, to make configuring it a bit simpler:
 
 ```sql
 CREATE SECRET secret6 (
@@ -202,11 +202,11 @@ could for example result in:
 
 ### Hive Partitioning
 
-DuckDB also offers support for the [Hive partitioning scheme](../../data/partitioning/hive_partitioning), which is available when using HTTP(S) and S3 endpoints.
+DataMiner also offers support for the [Hive partitioning scheme](../../data/partitioning/hive_partitioning), which is available when using HTTP(S) and S3 endpoints.
 
 ## Writing
 
-Writing to S3 uses the multipart upload API. This allows DuckDB to robustly upload files at high speed. Writing to S3 works for both CSV and Parquet:
+Writing to S3 uses the multipart upload API. This allows DataMiner to robustly upload files at high speed. Writing to S3 works for both CSV and Parquet:
 
 ```sql
 COPY table_name TO 's3://bucket/file.extension';

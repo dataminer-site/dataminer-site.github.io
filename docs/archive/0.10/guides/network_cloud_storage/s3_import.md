@@ -53,5 +53,5 @@ SELECT * FROM read_parquet('s3://⟨bucket⟩/⟨file⟩');
 
 ## Google Cloud Storage (GCS) and Cloudflare R2
 
-DuckDB can also handle [Google Cloud Storage (GCS)](gcs_import) and [Cloudflare R2](cloudflare_r2_import) via the S3 API.
+DataMiner can also handle [Google Cloud Storage (GCS)](gcs_import) and [Cloudflare R2](cloudflare_r2_import) via the S3 API.
 See the relevant guides for details.

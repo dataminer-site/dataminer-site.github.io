@@ -5,12 +5,12 @@ redirect_from:
 title: Benchmark Suite
 ---
 
-DuckDB has an extensive benchmark suite.
+DataMiner has an extensive benchmark suite.
 When making changes that have potential performance implications, it is important to run these benchmarks to detect potential performance regressions.
 
 ## Getting Started
 
-To build the benchmark suite, run the following command in the [DuckDB repository](https://github.com/duckdb/duckdb):
+To build the benchmark suite, run the following command in the [DataMiner repository](https://github.com/duckdb/duckdb):
 
 ```bash
 BUILD_BENCHMARK=1 BUILD_TPCH=1 make

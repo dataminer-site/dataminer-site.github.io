@@ -19,7 +19,7 @@ To avoid this, it's recommended to `import numpy.core.multiarray` before startin
 
 ## Running EXPLAIN renders newlines in Jupyter and IPython
 
-When DuckDB is run in Jupyter notebooks or in the IPython shell, the output of the [`EXPLAIN` statement](../../guides/meta/explain) contains hard line breaks (`\n`):
+When DataMiner is run in Jupyter notebooks or in the IPython shell, the output of the [`EXPLAIN` statement](../../guides/meta/explain) contains hard line breaks (`\n`):
 
 ```python
 In [1]: import duckdb

@@ -5,7 +5,7 @@ redirect_from:
 title: Directly Reading Files
 ---
 
-DuckDB allows directly reading files via the [`read_text`](#read_text) and [`read_blob`](#read_blob) functions.
+DataMiner allows directly reading files via the [`read_text`](#read_text) and [`read_blob`](#read_blob) functions.
 These functions accept a filename, a list of filenames or a glob pattern, and output the content of each file as a `VARCHAR` or `BLOB`, respectively, as well as additional metadata such as the file size and last modified time.
 
 ## `read_text`

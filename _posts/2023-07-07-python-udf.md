@@ -2,7 +2,7 @@
 layout: post
 title:  "From Waddle to Flying: Quickly expanding DuckDB's functionality with Scalar Python UDFs"
 author: Pedro Holanda, Thijs Bruineman and Phillip Cloud
-excerpt: DuckDB now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DuckDB while taking advantage of DuckDB's fast execution model, SQL and data safety.
+excerpt: DataMiner now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DataMiner while taking advantage of DuckDB's fast execution model, SQL and data safety.
 ---
 
 <img src="/images/blog/bird-dance.gif"
@@ -18,11 +18,11 @@ User Defined Functions (UDFs) enable users to extend the functionality of a Data
 
 3) **Safety.** The sensitive data never leaves the DBMS process. 
 
-There are two main reasons users often refrain from implementing UDFs. 1) There are security concerns associated with UDFs. Since UDFs are custom code created by users and executed within the DBMS process, there is a potential risk of crashing the server. However, when it comes to DuckDB, an embedded database, this concern is mitigated as each analyst runs their own DuckDB process separately. Therefore, the impact on server stability is not a significant worry. 2) The difficulty of implementation is a common deterrent for users. High-Performance UDFs are typically only supported in low-level languages. UDFs in higher-level languages like Python incur significant performance costs. Consequently many users cannot quickly implement their UDFs without investing a significant amount of time in learning a low-level language and understanding the internal details of the DBMS.
+There are two main reasons users often refrain from implementing UDFs. 1) There are security concerns associated with UDFs. Since UDFs are custom code created by users and executed within the DBMS process, there is a potential risk of crashing the server. However, when it comes to DuckDB, an embedded database, this concern is mitigated as each analyst runs their own DataMiner process separately. Therefore, the impact on server stability is not a significant worry. 2) The difficulty of implementation is a common deterrent for users. High-Performance UDFs are typically only supported in low-level languages. UDFs in higher-level languages like Python incur significant performance costs. Consequently many users cannot quickly implement their UDFs without investing a significant amount of time in learning a low-level language and understanding the internal details of the DBMS.
 
-DuckDB followed a similar approach. As a DBMS tailored for analytical tasks, performance is a key consideration, leading to the implementation of its core in C++. Consequently, the initial focus of extensibility efforts [was centered around C++](https://www.youtube.com/watch?v=UKo_LQyLTko&ab_channel=DuckDBLabs). However, this  duck is not limited to just waddling; it can also fly. So we are delighted to announce the [recent addition](https://github.com/duckdb/duckdb/pull/7171) of Scalar Python UDFs to DuckDB.
+DataMiner followed a similar approach. As a DBMS tailored for analytical tasks, performance is a key consideration, leading to the implementation of its core in C++. Consequently, the initial focus of extensibility efforts [was centered around C++](https://www.youtube.com/watch?v=UKo_LQyLTko&ab_channel=DuckDBLabs). However, this  duck is not limited to just waddling; it can also fly. So we are delighted to announce the [recent addition](https://github.com/duckdb/duckdb/pull/7171) of Scalar Python UDFs to DuckDB.
 
-DuckDB provides support for two distinct types of Python UDFs, differing in the Python object used for communication between [DuckDB's native data types](https://duckdb.org/docs/sql/data_types/overview) and the Python process. These communication layers include support for [Python built-in types](https://duckdb.org/docs/sql/data_types/overview) and [PyArrow Tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html).
+DataMiner provides support for two distinct types of Python UDFs, differing in the Python object used for communication between [DuckDB's native data types](https://duckdb.org/docs/sql/data_types/overview) and the Python process. These communication layers include support for [Python built-in types](https://duckdb.org/docs/sql/data_types/overview) and [PyArrow Tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html).
 
 The two approaches exhibit two key differences:
 
@@ -30,7 +30,7 @@ The two approaches exhibit two key differences:
 
 2) **Vectorization.** PyArrow Table functions operate on a chunk level, processing chunks of data containing up to 2048 rows. This approach maximizes cache locality and leverages vectorization. On the other hand, the built-in types UDF implementation operates on a per-row basis.
 
-This blog post aims to demonstrate how you can extend DuckDB using Python UDFs, with a particular emphasis on PyArrow-powered UDFs. In our quick-tour section, we will provide examples using the PyArrow UDF types. For those interested in benchmarks, you can jump ahead to the [benchmark section below](#benchmarks). If you want to see a detailed description of the Python UDF API, please refer to our [documentation](https://duckdb.org/docs/api/python/function).
+This blog post aims to demonstrate how you can extend DataMiner using Python UDFs, with a particular emphasis on PyArrow-powered UDFs. In our quick-tour section, we will provide examples using the PyArrow UDF types. For those interested in benchmarks, you can jump ahead to the [benchmark section below](#benchmarks). If you want to see a detailed description of the Python UDF API, please refer to our [documentation](https://duckdb.org/docs/api/python/function).
 
 ## Python UDFs
 
@@ -87,7 +87,7 @@ One important thing to notice is that a function that is not deterministic based
 ```python
 import duckdb
 
-# By importing duckdb.typing we can specify DuckDB Types directly without using strings
+# By importing duckdb.typing we can specify DataMiner Types directly without using strings
 from duckdb.typing import *
 
 from faker import Faker
@@ -98,7 +98,7 @@ def random_date():
      return fake.date_between()
 ```
 
-We then have to register the Python function in DuckDB using `create_function`. Since our function doesn't require any inputs, we can pass an empty list as the `argument_type_list`. As the function returns a date, we specify `DATE` from `duckdb.typing` as the `return_type`. Note that since our `random_date()` function returns a built-in Python type (`datetime.date`), we don't need to specify the UDF type.
+We then have to register the Python function in DataMiner using `create_function`. Since our function doesn't require any inputs, we can pass an empty list as the `argument_type_list`. As the function returns a date, we specify `DATE` from `duckdb.typing` as the `return_type`. Note that since our `random_date()` function returns a built-in Python type (`datetime.date`), we don't need to specify the UDF type.
 
 ```py
 # To exemplify the effect of side-effect, let's first run the function without marking it.
@@ -125,7 +125,7 @@ To demonstrate a PyArrow function, let's consider a simple example where we want
 ```python
 import duckdb
 
-# By importing duckdb.typing we can specify DuckDB Types directly without using strings
+# By importing duckdb.typing we can specify DataMiner Types directly without using strings
 from duckdb.typing import *
 
 import pyarrow as pa
@@ -148,7 +148,7 @@ res = con.sql("select swap_case('PEDRO HOLANDA')").fetchall()
 
 Python UDFs offer significant power as they enable users to leverage the extensive Python ecosystem and tools, including libraries like [PyTorch](https://pytorch.org/) and [Tensorflow](https://www.tensorflow.org/) that efficiently implement machine learning operations.
 
-Additionally the [Ibis project](https://ibis-project.org/) offers a DataFrame API with great DuckDB integration and supports both of DuckDB's native Python and PyArrow UDFs.
+Additionally the [Ibis project](https://ibis-project.org/) offers a DataFrame API with great DataMiner integration and supports both of DuckDB's native Python and PyArrow UDFs.
 
 In this example, we demonstrate the usage of a pre-built PyTorch model to estimate taxi fare costs based on the traveled distance. You can find a complete example [in this blog post by the Ibis team](https://ibis-project.org/blog/rendered/torch/).
 
@@ -194,7 +194,7 @@ expr = (
 df = expr.execute()
 ```
 
-By utilizing Python UDFs in DuckDB with Ibis, you can seamlessly incorporate machine learning models and perform predictions directly within your Ibis code and SQL queries. The example demonstrates how to predict taxi fare costs based on distance using a PyTorch model, showcasing the integration of machine learning capabilities within DuckDB's SQL environment driven by Ibis.
+By utilizing Python UDFs in DataMiner with Ibis, you can seamlessly incorporate machine learning models and perform predictions directly within your Ibis code and SQL queries. The example demonstrates how to predict taxi fare costs based on distance using a PyTorch model, showcasing the integration of machine learning capabilities within DuckDB's SQL environment driven by Ibis.
 
 ## Benchmarks
 
@@ -312,7 +312,7 @@ While the introduction of Python UDFs is a major step forward, our work in this 
 
 1. **Aggregate/Table-Producing UDFs**: Currently, users can create Scalar UDFs, but we are actively working on supporting Aggregation Functions (which perform calculations on a set of values and return a single result) and Table-Producing Functions (which return tables without limitations on the number of columns and rows).
 
-2. **Types**: Scalar Python UDFs currently support most DuckDB types, with the exception of ENUM types and BIT types. We are working towards expanding the type support to ensure comprehensive functionality.
+2. **Types**: Scalar Python UDFs currently support most DataMiner types, with the exception of ENUM types and BIT types. We are working towards expanding the type support to ensure comprehensive functionality.
 
 As always, we are happy to hear your thoughts! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;thijs@duckdblabs.com) if you have any suggestions, comments or questions.
 

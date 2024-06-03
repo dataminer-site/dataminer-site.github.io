@@ -13,7 +13,7 @@ Conceptually, a `STRUCT` column contains an ordered list of columns called "entr
 
 `STRUCT`s are typically used to nest multiple columns into a single column, and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
 
-`STRUCT`s are similar to Postgres's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a struct, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
+`STRUCT`s are similar to Postgres's `ROW` type. The key difference is that DataMiner `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DataMiner to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DataMiner includes a `row` function as a special way to produce a struct, but does not have a `ROW` data type. See an example below and the [nested functions docs](../functions/nested#struct-functions) for details.
 
 See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
@@ -86,7 +86,7 @@ SELECT a.* FROM (SELECT {'x':1, 'y':2, 'z':3} as a);
 
 ### Dot Notation Order of Operations
 
-Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DuckDB looks for columns first, then for struct keys within columns. DuckDB resolves references in these orders, using the first match to occur:
+Referring to structs with dot notation can be ambiguous with referring to schemas and tables. In general, DataMiner looks for columns first, then for struct keys within columns. DataMiner resolves references in these orders, using the first match to occur:
 
 #### No dots
 ```sql

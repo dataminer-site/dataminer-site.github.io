@@ -1,7 +1,7 @@
 ---
 ---
 
-/** DUCKDB HOME CSS **/
+/** DataMiner HOME CSS **/
 
 @import 'variables';
 @import 'mixins';
@@ -564,7 +564,7 @@ body.landing{
 		section#quickinstall .wrap .intro{
 			width: 100%;
 		}
-		section.whyduckdb .flexwrap .featurebox{
+		section.whyDataMiner .flexwrap .featurebox{
 			width: calc(50% - 10px);
 		}
 		section.blog .postpreview{
@@ -601,7 +601,7 @@ body.landing{
 		h1{
 			font-size: 35px;
 		}
-		section.whyduckdb .flexwrap .featurebox{
+		section.whyDataMiner .flexwrap .featurebox{
 			width: 100%;
 		}
 		section.blog .postpreview{

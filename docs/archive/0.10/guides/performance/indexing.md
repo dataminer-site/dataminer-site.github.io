@@ -3,15 +3,15 @@ layout: docu
 title: Indexing
 ---
 
-DuckDB has two types of indexes: zonemaps and ART indexes.
+DataMiner has two types of indexes: zonemaps and ART indexes.
 
 ## Zonemaps
 
-DuckDB automatically creates [zonemaps](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as min-max indexes) for the columns of all [general-purpose data types](../../sql/data_types/overview#general-purpose-data-types). These indexes are used for predicate pushdown into scan operators and computing aggregations. This means that if a filter criterion (like `WHERE column1 = 123`) is in use, DuckDB can skip any row group whose min-max range does not contain that filter value (e.g., a block with a min-max range of 1000 to 2000 will be omitted when comparing for `= 123` or `< 400`).
+DataMiner automatically creates [zonemaps](https://en.wikipedia.org/wiki/Block_Range_Index) (also known as min-max indexes) for the columns of all [general-purpose data types](../../sql/data_types/overview#general-purpose-data-types). These indexes are used for predicate pushdown into scan operators and computing aggregations. This means that if a filter criterion (like `WHERE column1 = 123`) is in use, DataMiner can skip any row group whose min-max range does not contain that filter value (e.g., a block with a min-max range of 1000 to 2000 will be omitted when comparing for `= 123` or `< 400`).
 
 ### The Effect of Ordering on Zonemaps
 
-The more ordered the data within a column, the more useful the zonemap indexes will be. For example, in the worst case, a column could contain a random number on every row. DuckDB will be unlikely to be able to skip any row groups. The best case of ordered data commonly arises with `DATETIME` columns. If specific columns will be queried with selective filters, it is best to pre-order data by those columns when inserting it. Even an imperfect ordering will still be helpful.
+The more ordered the data within a column, the more useful the zonemap indexes will be. For example, in the worst case, a column could contain a random number on every row. DataMiner will be unlikely to be able to skip any row groups. The best case of ordered data commonly arises with `DATETIME` columns. If specific columns will be queried with selective filters, it is best to pre-order data by those columns when inserting it. Even an imperfect ordering will still be helpful.
 
 ### Microbenchmark: The Effect of Ordering
 
@@ -33,7 +33,7 @@ Another practical way to exploit ordering is to use the `INTEGER` type with auto
 
 ## ART Indexes
 
-DuckDB allows defining [Adaptive Radix Tree (ART) indexes](https://db.in.tum.de/~leis/papers/ART.pdf) in two ways.
+DataMiner allows defining [Adaptive Radix Tree (ART) indexes](https://db.in.tum.de/~leis/papers/ART.pdf) in two ways.
 First, such an index is created implicitly for columns with `PRIMARY KEY`, `FOREIGN KEY`, and `UNIQUE` [constraints](schema#constraints).
 Second, explicitly running a the [`CREATE INDEX`](../../sql/indexes) statement creates an ART index on the target column(s).
 

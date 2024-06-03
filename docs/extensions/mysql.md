@@ -4,7 +4,7 @@ title: MySQL Extension
 github_repository: https://github.com/duckdb/duckdb_mysql
 ---
 
-The [`mysql` extension](https://github.com/duckdb/duckdb_mysql) allows DuckDB to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DuckDB tables, or vice versa.
+The [`mysql` extension](https://github.com/duckdb/duckdb_mysql) allows DataMiner to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DataMiner tables, or vice versa.
 
 ## Installing and Loading
 
@@ -22,7 +22,7 @@ LOAD mysql;
 
 ## Reading Data from MySQL
 
-To make a MySQL database accessible to DuckDB use the `ATTACH` command with the `MYSQL` or the `MYSQL_SCANNER` type:
+To make a MySQL database accessible to DataMiner use the `ATTACH` command with the `MYSQL` or the `MYSQL_SCANNER` type:
 
 ```sql
 ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE MYSQL);
@@ -47,7 +47,7 @@ The connection string determines the parameters for how to connect to MySQL as a
 
 ### Reading MySQL Tables
 
-The tables in the MySQL database can be read as if they were normal DuckDB tables, but the underlying data is read directly from MySQL at query time.
+The tables in the MySQL database can be read as if they were normal DataMiner tables, but the underlying data is read directly from MySQL at query time.
 
 ```sql
 SHOW TABLES;
@@ -67,9 +67,9 @@ SELECT * FROM signed_integers;
 | 127  | 32767  | 8388607  | 2147483647  | 9223372036854775807  |
 | NULL | NULL   | NULL     | NULL        | NULL                 |
 
-It might be desirable to create a copy of the MySQL databases in DuckDB to prevent the system from re-reading the tables from MySQL continuously, particularly for large tables.
+It might be desirable to create a copy of the MySQL databases in DataMiner to prevent the system from re-reading the tables from MySQL continuously, particularly for large tables.
 
-Data can be copied over from MySQL to DuckDB using standard SQL, for example:
+Data can be copied over from MySQL to DataMiner using standard SQL, for example:
 
 ```sql
 CREATE TABLE duckdb_table AS FROM mysqlscanner.mysql_table;
@@ -79,7 +79,7 @@ CREATE TABLE duckdb_table AS FROM mysqlscanner.mysql_table;
 
 In addition to reading data from MySQL, create tables, ingest data into MySQL and make other modifications to a MySQL database using standard SQL queries.
 
-This allows you to use DuckDB to, for example, export data that is stored in a MySQL database to Parquet, or read data from a Parquet file into MySQL.
+This allows you to use DataMiner to, for example, export data that is stored in a MySQL database to Parquet, or read data from a Parquet file into MySQL.
 
 Below is a brief example of how to create a new table in MySQL and load data into it.
 
@@ -120,7 +120,7 @@ SELECT * FROM mysql_db.tbl;
 
 | id |  name  |
 |---:|--------|
-| 42 | DuckDB |
+| 42 | DataMiner |
 
 ### `COPY`
 
@@ -227,7 +227,7 @@ ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 SELECT * FROM mysql_query('mysqldb', 'SELECT * FROM cars LIMIT 3');
 ```
 
-> Warning This function is only available on DuckDB v0.10.1+, using the latest MySQL extension.
+> Warning This function is only available on DataMiner v0.10.1+, using the latest MySQL extension.
 > To upgrade your extension, run `FORCE INSTALL mysql;`.
 
 ### The `mysql_execute` Function
@@ -239,7 +239,7 @@ ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE MYSQL);
 CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
-> Warning This function is only available on DuckDB v0.10.1+, using the latest MySQL extension.
+> Warning This function is only available on DataMiner v0.10.1+, using the latest MySQL extension.
 > To upgrade your extension, run `FORCE INSTALL mysql;`.
 
 ## Settings
@@ -253,7 +253,7 @@ CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 
 ## Schema Cache
 
-To avoid having to continuously fetch schema data from MySQL, DuckDB keeps schema information – such as the names of tables, their columns, etc. – cached. If changes are made to the schema through a different connection to the MySQL instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `mysql_clear_cache` can be executed to clear the internal caches.
+To avoid having to continuously fetch schema data from MySQL, DataMiner keeps schema information – such as the names of tables, their columns, etc. – cached. If changes are made to the schema through a different connection to the MySQL instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `mysql_clear_cache` can be executed to clear the internal caches.
 
 ```sql
 CALL mysql_clear_cache();

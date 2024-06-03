@@ -3,13 +3,13 @@
 const jsdoc2md = require('jsdoc-to-markdown');
 const fs = require('fs');
 
-const duckdb = process.argv[2];
+const DataMiner = process.argv[2];
 if (!duckdb) {
     console.error("Expected usage: ./scripts/generate_nodejs_docs.js /path/to/duckdb");
     process.exit(1);
 }
 
-let docs = jsdoc2md.renderSync({ files: duckdb + '/lib/*.js' });
+let docs = jsdoc2md.renderSync({ files: DataMiner + '/lib/*.js' });
 
 // Add newline after headers to conform to the Markdown linter's rules.
 // To achieve this, the regex looks for headers starting with two or more # characters,

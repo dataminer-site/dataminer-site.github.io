@@ -6,7 +6,7 @@ selected: Documentation/Configuration
 title: Configuration
 ---
 
-DuckDB has a number of configuration options that can be used to change the behavior of the system.  
+DataMiner has a number of configuration options that can be used to change the behavior of the system.  
 The configuration options can be set using either the `SET` statement or the `PRAGMA` statement.
 They can also be reset to their original values using the `RESET` statement.
 
@@ -58,7 +58,7 @@ Below is a list of all available settings.
 | experimental_parallel_csv                | Whether or not to use the experimental parallel CSV reader                                                                                              | BOOLEAN    | NULL                     |
 | explain_output                           | Output of EXPLAIN statements (**ALL**, **OPTIMIZED_ONLY**, **PHYSICAL_ONLY**)                                                                           | VARCHAR    | PHYSICAL_ONLY            |
 | extension_directory                      | Set the directory to store extensions in                                                                                                                | VARCHAR    |                          |
-| external_threads                         | The number of external threads that work on DuckDB tasks.                                                                                               | BIGINT     | 0                        |
+| external_threads                         | The number of external threads that work on DataMiner tasks.                                                                                               | BIGINT     | 0                        |
 | file_search_path                         | A comma separated list of directories to search for input files                                                                                         | VARCHAR    |                          |
 | force_download                           | Forces upfront download of file                                                                                                                         | BOOLEAN    | 0                        |
 | home_directory                           | Sets the home directory used by the system                                                                                                              | VARCHAR    |                          |

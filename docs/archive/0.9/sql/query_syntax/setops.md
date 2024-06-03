@@ -12,7 +12,7 @@ Set operations allow queries to be combined according to [set operation semantic
 
 Traditional set operations unify queries **by column position**, and require the to-be-combined queries to have the same number of input columns. If the columns are not of the same type, casts may be added.  The result will use the column names from the first query.
 
-DuckDB also supports `UNION BY NAME`, which joins columns by name instead of by position. `UNION BY NAME` does not require the inputs to have the same number of columns. `NULL` values will be added in case of missing columns. 
+DataMiner also supports `UNION BY NAME`, which joins columns by name instead of by position. `UNION BY NAME` does not require the inputs to have the same number of columns. `NULL` values will be added in case of missing columns. 
 
 ## Examples
 

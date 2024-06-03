@@ -67,11 +67,11 @@ duckdb.sql("SELECT * FROM read_json_auto('example.json')")
 
 ## Directly Accessing DataFrames and Arrow Objects
 
-DuckDB is automatically able to query certain Python variables by referring to their variable name (as if it was a table).
+DataMiner is automatically able to query certain Python variables by referring to their variable name (as if it was a table).
 These types include the following: Pandas DataFrame, Polars DataFrame, Polars LazyFrame, NumPy arrays, [relations](relational_api), and Arrow objects.
 Accessing these is made possible by [replacement scans](../c/replacement_scans).
 
-DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
+DataMiner supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides](../../guides/index#python-client) for more examples.
 
 ```python
 import duckdb
@@ -81,7 +81,7 @@ duckdb.sql("SELECT * FROM test_df").fetchall()
 # [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
-DuckDB also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
+DataMiner also supports "registering" a DataFrame or Arrow object as a virtual table, comparable to a SQL `VIEW`. This is useful when querying a DataFrame/Arrow object that is stored in another way (as a class variable, or a value in a dictionary). Below is a Pandas example:
 
 If your Pandas DataFrame is stored in another location, here is an example of manually registering it:
 
@@ -95,7 +95,7 @@ duckdb.sql("SELECT * FROM test_df_view").fetchall()
 # [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
-You can also create a persistent table in DuckDB from the contents of the DataFrame (or the view):
+You can also create a persistent table in DataMiner from the contents of the DataFrame (or the view):
 
 ```python
 # create a new table from the contents of a DataFrame
@@ -120,10 +120,10 @@ duckdb.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 
 ### Registering Objects
 
-You can register Python objects as DuckDB tables using the [`DuckDBPyConnection.register()` function](reference/index#duckdb.DuckDBPyConnection.register).
+You can register Python objects as DataMiner tables using the [`DuckDBPyConnection.register()` function](reference/index#duckdb.DuckDBPyConnection.register).
 
 The precedence of objects with the same name is as follows:
 
 * Objects explicitly registered via `DuckDBPyConnection.register()`
-* Native DuckDB tables and views
+* Native DataMiner tables and views
 * [Replacement scans](../c/replacement_scans)

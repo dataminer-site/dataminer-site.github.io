@@ -32,7 +32,7 @@ CREATE TABLE t1 AS FROM read_csv_auto ('path/file.csv');
 ## Temporary Tables
 
 Temporary tables can be created using a `CREATE TEMP TABLE` statement (see diagram below). 
-Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DuckDB is closed they will be automatically dropped. 
+Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DataMiner is closed they will be automatically dropped. 
 Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../sql/configuration) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained. 
 
 ```sql
@@ -146,7 +146,7 @@ CREATE TABLE t6(id INTEGER PRIMARY KEY, t5_id INTEGER, FOREIGN KEY (t5_id) REFER
 
 The `[type] [GENERATED ALWAYS] AS (expr) [VIRTUAL|STORED]` syntax will create a generated column. The data in this kind of column is generated from its expression, which can reference other (regular or generated) columns of the table. Since they are produced by calculations, these columns can not be inserted into directly.
 
-DuckDB can infer the type of the generated column based on the expression's return type. This allows you to leave out the type when declaring a generated column. It is possible to explicitly set a type, but insertions into the referenced columns might fail if the type can not be cast to the type of the generated column.
+DataMiner can infer the type of the generated column based on the expression's return type. This allows you to leave out the type when declaring a generated column. It is possible to explicitly set a type, but insertions into the referenced columns might fail if the type can not be cast to the type of the generated column.
   
 Generated columns come in two varieties: `VIRTUAL` and `STORED`.  
 The data of virtual generated columns is not stored on disk, instead it is computed from the expression every time the column is referenced (through a select statement).  

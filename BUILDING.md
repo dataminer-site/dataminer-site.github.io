@@ -1,8 +1,8 @@
-# Building the DuckDB documentation
+# Building the DataMiner documentation
 
 ## Table of contents
 
-- [Building the DuckDB documentation](#building-the-duckdb-documentation)
+- [Building the DataMiner documentation](#building-the-duckdb-documentation)
   - [Table of contents](#table-of-contents)
   - [Using a local Jekyll installation](#using-a-local-jekyll-installation)
     - [Prerequisites](#prerequisites)

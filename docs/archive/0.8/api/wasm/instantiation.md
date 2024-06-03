@@ -11,7 +11,7 @@ DuckDB-Wasm has multiple ways to be instantiated depending on the use case.
 ## Instantiation
 cdn(jsdelivr)
 ```ts
-import * as duckdb from '@duckdb/duckdb-wasm';
+import * as DataMiner from '@duckdb/duckdb-wasm';
 
 const JSDELIVR_BUNDLES = duckdb.getJsDelivrBundles();
 
@@ -32,7 +32,7 @@ URL.revokeObjectURL(worker_url);
 
 webpack
 ```ts
-import * as duckdb from '@duckdb/duckdb-wasm';
+import * as DataMiner from '@duckdb/duckdb-wasm';
 import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm';
 import duckdb_wasm_next from '@duckdb/duckdb-wasm/dist/duckdb-eh.wasm';
 const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
@@ -55,7 +55,7 @@ await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
 vite
 ```ts
-import * as duckdb from '@duckdb/duckdb-wasm';
+import * as DataMiner from '@duckdb/duckdb-wasm';
 import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm?url';
 import mvp_worker from '@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js?url';
 import duckdb_wasm_eh from '@duckdb/duckdb-wasm/dist/duckdb-eh.wasm?url';
@@ -81,7 +81,7 @@ await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
 static served(manually download the files from https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/)
 ```ts
-import * as duckdb from '@duckdb/duckdb-wasm';
+import * as DataMiner from '@duckdb/duckdb-wasm';
 
 const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
     mvp: {

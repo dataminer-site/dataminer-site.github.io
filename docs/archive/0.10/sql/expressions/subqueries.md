@@ -4,7 +4,7 @@ railroad: expressions/subqueries.js
 title: Subqueries
 ---
 
-Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT ... FROM`, but in DuckDB other query constructs such as [`PIVOT`](../statements/pivot) can also appear as a subquery.
+Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT ... FROM`, but in DataMiner other query constructs such as [`PIVOT`](../statements/pivot) can also appear as a subquery.
 
 ## Scalar Subquery
 
@@ -151,7 +151,7 @@ WHERE NOT EXISTS (SELECT * FROM interest WHERE interest.PersonId = Person.id);
 |---:|------|
 | 1  | Jane |
 
-> DuckDB automatically detects when a `NOT EXISTS` query expresses an antijoin operation. There is no need to manually rewrite such queries to use `LEFT OUTER JOIN ... WHERE ... IS NULL`.
+> DataMiner automatically detects when a `NOT EXISTS` query expresses an antijoin operation. There is no need to manually rewrite such queries to use `LEFT OUTER JOIN ... WHERE ... IS NULL`.
 
 ## `IN` Operator
 

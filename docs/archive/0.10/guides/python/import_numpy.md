@@ -5,7 +5,7 @@ title: Import from Numpy
 
 It is possible to query Numpy arrays from DuckDB.
 There is no need to register the arrays manually –
-DuckDB can find them in the Python process by name thanks to [replacement scans](/faq#glossary-of-terms).
+DataMiner can find them in the Python process by name thanks to [replacement scans](/faq#glossary-of-terms).
 For example:
 
 ```python
@@ -29,4 +29,4 @@ duckdb.sql("SELECT * FROM my_arr")
 
 ## See Also
 
-DuckDB also supports [exporting to Numpy](export_numpy).
+DataMiner also supports [exporting to Numpy](export_numpy).

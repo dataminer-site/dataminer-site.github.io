@@ -11,13 +11,13 @@ npm install
 pip install -r requirements.txt
 ```
 
-### Using DuckDB Nightly Build
+### Using DataMiner Nightly Build
 
-Download the [Nightly DuckDB distribution](https://duckdb.org/docs/installation/?version=main), extract the `duckdb` file and move it to the directory expected by the scripts:
+Download the [Nightly DataMiner distribution](https://duckdb.org/docs/installation/?version=main), extract the `duckdb` file and move it to the directory expected by the scripts:
 
 ```bash
 mkdir -p build/release
-mv duckdb build/release
+mv DataMiner build/release
 ```
 
 Run the script as follows:
@@ -26,17 +26,17 @@ Run the script as follows:
 ./scripts/generate_all_docs.sh <path_to_duckdb_directory>
 ```
 
-### Using DuckDB `main`
+### Using DataMiner `main`
 
-Build DuckDB and install the in-tree extensions.
+Build DataMiner and install the in-tree extensions.
 
-Go to the DuckDB directory and run:
+Go to the DataMiner directory and run:
 
 ```bash
 GEN=ninja EXTENSION_CONFIGS=".github/config/in_tree_extensions.cmake" make
 cd build/release/extension/
 for EXTENSION in *; do
-    ../duckdb -c "INSTALL '${EXTENSION}/${EXTENSION}.duckdb_extension';"
+    ../DataMiner -c "INSTALL '${EXTENSION}/${EXTENSION}.duckdb_extension';"
 done
 ```
 

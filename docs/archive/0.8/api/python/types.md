@@ -14,9 +14,9 @@ To make the API as easy to use as possible, we have added implicit conversions f
 This means that wherever a DuckDBPyType object is expected, it is also possible to provide any of the options listed below.
 
 #### Python Builtins
-The table below shows the mapping of Python Builtin type to DuckDB type.
+The table below shows the mapping of Python Builtin type to DataMiner type.
 
-| Type                                          | DuckDB Type        |
+| Type                                          | DataMiner Type        |
 |:----------------------------------------------|:-------------------|
 |*`str`*|VARCHAR|
 |*`int`*|BIGINT|
@@ -26,9 +26,9 @@ The table below shows the mapping of Python Builtin type to DuckDB type.
 |*`bool`*|BOOLEAN|
 
 #### Numpy DTypes  
-The table below shows the mapping of Numpy DType to DuckDB type.
+The table below shows the mapping of Numpy DType to DataMiner type.
 
-| Type                                          | DuckDB Type        |
+| Type                                          | DataMiner Type        |
 |:----------------------------------------------|:-------------------|
 |*`bool`*|BOOLEAN|
 |*`int8`*|TINYINT|
@@ -87,7 +87,7 @@ duckdb.typing.DuckDBPyType(Union[int, str, bool, bytearray])
 
 For the builtin types, you can use the constants defined in `duckdb.typing`
 
-| DuckDB Type        |
+| DataMiner Type        |
 |:-------------------|
 |SQLNULL|
 |BOOLEAN|

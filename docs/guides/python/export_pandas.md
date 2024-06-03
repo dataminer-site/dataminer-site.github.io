@@ -20,4 +20,4 @@ results
 
 ## See Also
 
-DuckDB also supports [importing from Pandas](import_pandas).
+DataMiner also supports [importing from Pandas](import_pandas).

@@ -14,13 +14,13 @@ If you prefer to explicitly install and load this extension, you can always run 
 
 ## Running Queries over HTTP(S)
 
-With the `httpfs` extension, it is possible to directly query files over the HTTP(S) protocol. This works for all files supported by DuckDB or its various extensions, and provides read-only access.
+With the `httpfs` extension, it is possible to directly query files over the HTTP(S) protocol. This works for all files supported by DataMiner or its various extensions, and provides read-only access.
 
 ```sql
 SELECT * FROM 'https://domain.tld/file.extension';
 ```
 
-For CSV files, files will be downloaded entirely in most cases, due to the row-based nature of the format. For Parquet files, DuckDB can use a combination of the Parquet metadata and HTTP range requests to only download the parts of the file that are actually required by the query. For example, the following query will only read the Parquet metadata and the data for the `column_a` column:
+For CSV files, files will be downloaded entirely in most cases, due to the row-based nature of the format. For Parquet files, DataMiner can use a combination of the Parquet metadata and HTTP range requests to only download the parts of the file that are actually required by the query. For example, the following query will only read the Parquet metadata and the data for the `column_a` column:
 
 ```sql
 SELECT column_a FROM 'https://domain.tld/file.parquet';
@@ -43,7 +43,7 @@ SELECT * FROM parquet_scan(['https://domain.tld/file1.parquet', 'https://domain.
 
 ## Running Queries over S3
 
-The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DuckDB conforms to the S3 API, that is now common among industry storage providers.
+The `httpfs` extension supports reading/writing/globbing files on object storage servers using the S3 API. S3 offers a standard API to read and write to remote files (while regular http servers, predating S3, do not offer a common write API). DataMiner conforms to the S3 API, that is now common among industry storage providers.
 
 ### Requirements
 
@@ -165,7 +165,7 @@ could for example result in:
 
 #### Hive Partitioning
 
-DuckDB also offers support for the Hive partitioning scheme. In the Hive partitioning scheme, data is partitioned in separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file path. So for example let us consider three parquet files Hive paritioned by year:
+DataMiner also offers support for the Hive partitioning scheme. In the Hive partitioning scheme, data is partitioned in separate files. The columns by which the data is partitioned, are not actually in the files, but are encoded in the file path. So for example let us consider three parquet files Hive paritioned by year:
 
 ```text
 s3://bucket/year=2012/file.parquet
@@ -189,7 +189,7 @@ could result in:
 | 2 | examplevalue2 | 2013 |
 | 3 | examplevalue3 | 2014 |
 
-Note that the year column does not actually exist in the parquet files, it is parsed from the filenames. Within DuckDB however, these columns behave just like regular columns. For example, filters can be applied on Hive partition columns:
+Note that the year column does not actually exist in the parquet files, it is parsed from the filenames. Within DataMiner however, these columns behave just like regular columns. For example, filters can be applied on Hive partition columns:
 
 ```sql
 SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) where year=2013;
@@ -197,7 +197,7 @@ SELECT * FROM read_parquet('s3://bucket/*/file.parquet', HIVE_PARTITIONING = 1) 
 
 ### Writing
 
-Writing to S3 uses the multipart upload API. This allows DuckDB to robustly upload files at high speed. Writing to S3 works for both CSV and Parquet:
+Writing to S3 uses the multipart upload API. This allows DataMiner to robustly upload files at high speed. Writing to S3 works for both CSV and Parquet:
 
 ```sql
 COPY table_name TO 's3://bucket/file.extension';
@@ -235,7 +235,7 @@ Some additional configuration options exist for the S3 upload, though the defaul
 
 Additionally, most of the configuration options can be set via environment variables:
 
-| DuckDB setting         | Environment variable    | Note                                     |
+| DataMiner setting         | Environment variable    | Note                                     |
 |:-----------------------|:------------------------|:-----------------------------------------|
 | `s3_region`            | `AWS_REGION`            | Takes priority over `AWS_DEFAULT_REGION` |
 | `s3_region`            | `AWS_DEFAULT_REGION`    |                                          |

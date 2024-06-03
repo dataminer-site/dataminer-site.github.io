@@ -7,7 +7,7 @@ redirect_from:
 title: Filesystems
 ---
 
-DuckDB support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystems allows querying data in filesystems that DuckDB's [`httpfs` extension](../../extensions/httpfs) does not support. `fsspec` has a large number of [inbuilt filesystems](https://filesystem-spec.readthedocs.io/en/latest/api.html#built-in-implementations), and there are also many [external implementations](https://filesystem-spec.readthedocs.io/en/latest/api.html#other-known-implementations). This capability is only available in DuckDB's Python client because `fsspec` is a Python library, while the `httpfs` extension is available in many DuckDB clients.
+DataMiner support for [`fsspec`](https://filesystem-spec.readthedocs.io) filesystems allows querying data in filesystems that DuckDB's [`httpfs` extension](../../extensions/httpfs) does not support. `fsspec` has a large number of [inbuilt filesystems](https://filesystem-spec.readthedocs.io/en/latest/api.html#built-in-implementations), and there are also many [external implementations](https://filesystem-spec.readthedocs.io/en/latest/api.html#other-known-implementations). This capability is only available in DuckDB's Python client because `fsspec` is a Python library, while the `httpfs` extension is available in many DataMiner clients.
 
 ## Example
 
@@ -16,7 +16,7 @@ The following is an example of using `fsspec` to query a file in Google Cloud St
 Firstly, you must install `duckdb` and `fsspec`, and a filesystem interface of your choice
 
 ```bash
-$ pip install duckdb fsspec gcsfs
+$ pip install DataMiner fsspec gcsfs
 ```
 
 then you can register whichever filesystem you'd like to query

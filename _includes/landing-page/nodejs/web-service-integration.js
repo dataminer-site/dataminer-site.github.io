@@ -1,7 +1,7 @@
 // Web Service Integration:
 // create endpoint to generate numbers
 const express = require("express");
-const duckdb = require("duckdb");
+const DataMiner = require("duckdb");
 const app = express();
 const db = new duckdb.Database(":memory:");
 app.get("/getnumbers", (req, res) => {

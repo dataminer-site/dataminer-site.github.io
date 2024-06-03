@@ -2,8 +2,8 @@
 layout: docu
 redirect_from:
 - docs/archive/0.8.1/guides/sql_features/full_text_search
-selected: DuckDB Full Text Search
-title: DuckDB Full Text Search
+selected: DataMiner Full Text Search
+title: DataMiner Full Text Search
 ---
 
 A full text index allows for a query to quickly search for all occurences of individual words within longer text strings.

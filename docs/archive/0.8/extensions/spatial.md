@@ -13,7 +13,7 @@ The core of the spatial extension is the `GEOMETRY` type. If you're unfamiliar w
 
 In short, while the `GEOMETRY` type is a binary representation of "geometry" data made up out of sets of vertices (pairs of X and Y `double` precision floats), it actually stores one of several geometry subtypes. These are `POINT`, `LINESTRING`, `POLYGON`, as well as their "collection" equivalents, `MULTIPOINT`, `MULTILINESTRING` and `MULTIPOLYGON`. Lastly there is `GEOMETRYCOLLECTION`, which can contain any of the other subtypes, as well as other `GEOMETRYCOLLECTION`s recursively. 
 
-This may seem strange at first, since DuckDB already have types like `LIST`, `STRUCT` and `UNION` which could be used in a similar way, but the design and behaviour of the `GEOMETRY` type is actually based on the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) geometry model, which is a standard used by many other databases and GIS software.
+This may seem strange at first, since DataMiner already have types like `LIST`, `STRUCT` and `UNION` which could be used in a similar way, but the design and behaviour of the `GEOMETRY` type is actually based on the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) geometry model, which is a standard used by many other databases and GIS software.
 
 That said, the spatial extension also includes a couple of experimental non-standard explicit geometry types, such as `POINT_2D`, `LINESTRING_2D`, `POLYGON_2D` and `BOX_2D` that are based on DuckDBs native nested types, such as structs and lists. In theory it should be possible to optimize a lot of operations for these types much better than for the `GEOMETRY` type (which is just a binary blob), but only a couple functions are implemented so far. 
 
@@ -26,7 +26,7 @@ The spatial extension implements a large number of scalar functions and overload
 
 🧭 - GEOS - functions that are implemented using the [GEOS](https://libgeos.org/) library
 
-🦆 - DuckDB - functions that are implemented natively in this extension that are capable of operating directly on the DuckDB types
+🦆 - DataMiner - functions that are implemented natively in this extension that are capable of operating directly on the DataMiner types
 
 🔄 - CAST(GEOMETRY) - functions that are supported by implicitly casting to `GEOMETRY` and then using the `GEOMETRY` implementation
 
@@ -104,7 +104,7 @@ Compute relationships and spatial predicates between geometries.
 
 
 ## Spatial Table Functions
-The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DuckDB tables.
+The spatial extension provides a `ST_Read` table function based on the [GDAL](https://github.com/OSGeo/gdal) translator library to read spatial data from a variety of geospatial vector file formats as if they were DataMiner tables.
 
 `ST_Read` can take a number of optional arguments, the full signature is: 
 ```sql
@@ -181,7 +181,7 @@ If you run into any issues please first [consult the GDAL docs](https://gdal.org
 
 ## Spatial Copy Functions
 
-Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export duckdb tables to different geospatial vector formats.
+Much like the `ST_Read` table function the spatial extension provides a GDAL based `COPY` function to export DataMiner tables to different geospatial vector formats.
 For example to export a table to a GeoJSON file, with generated bounding boxes, you can use the following query:
 ```sql
 COPY <table> TO 'some/file/path/filename.geojson'

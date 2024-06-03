@@ -5,7 +5,7 @@ redirect_from:
 title: Parquet
 ---
 
-Parquet files are compressed columnar files that are efficient to load and process. DuckDB provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
+Parquet files are compressed columnar files that are efficient to load and process. DataMiner provides support for both reading and writing Parquet files in an efficient manner, as well as support for pushing filters and projections into the Parquet file scans.
 
 ### Examples
 ```sql
@@ -38,7 +38,7 @@ EXPORT DATABASE 'target_directory' (FORMAT PARQUET);
 ```
 
 ### Single-File Reads
-DuckDB includes an efficient Parquet reader in the form of the `read_parquet` function.
+DataMiner includes an efficient Parquet reader in the form of the `read_parquet` function.
 
 ```sql
 SELECT * FROM read_parquet('test.parquet');
@@ -53,7 +53,7 @@ SELECT * FROM 'test.parquet';
 Unlike CSV files, parquet files are structured and as such are unambiguous to read. No parameters need to be passed to this function. The `read_parquet` function will figure out the column names and column types present in the file and emit them.
 
 ### Multi-File Reads and Globs
-DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
+DataMiner can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
 #### List Parameter
 The read_parquet function can accept a list of filenames as the input parameter. See the [nested types documentation](../sql/data_types/overview) for more details on lists.
@@ -119,9 +119,9 @@ The following is a table of the columns returned by this query.
 | Carlos     | Burns     | cburns4@miitbeian.gov.cn | 4               |
 
 ### Partial Reading
-DuckDB supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
+DataMiner supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by the system.
 
-DuckDB also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
+DataMiner also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
 
 Filter and projection pushdown provide significant performance benefits. See [our blog post on this](https://duckdb.org/2021/06/25/querying-parquet.html) for more information.
 
@@ -207,13 +207,13 @@ Below is a table of the columns returned by `parquet_schema`.
 | logical_type    | VARCHAR |
 
 ### Writing to Parquet Files
-DuckDB also has support for writing to Parquet files using the `COPY` statement syntax. See the [Copy Statement page](/docs/sql/statements/copy) for details, including all possible parameters for the copy statement.
+DataMiner also has support for writing to Parquet files using the `COPY` statement syntax. See the [Copy Statement page](/docs/sql/statements/copy) for details, including all possible parameters for the copy statement.
 
 Parameter values can be passed in with or without wrapping in single quotes.
 
 You can specify which compression format should be used using the `CODEC` parameter (options: `UNCOMPRESSED`, `SNAPPY` (default), `ZSTD`, `GZIP`). `COMPRESSION` is an alias for `CODEC` and can be used instead with the same options. 
 
-The `ROW_GROUP_SIZE` parameter specifies the minimum number of rows in a parquet row group, with a minimum value equal to DuckDB's vector size (currently 2048, but adjustable when compiling DuckDB). A parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset. Compression algorithms are only applied per row group, so the larger the row group size, the more opportunities to compress the data. DuckDB can read parquet row groups in parallel even within the same file and uses predicate pushdown to only scan the row groups whose metadata ranges match the `WHERE` clause of the query. However there is some overhead associated with reading the metadata in each group. A good approach would be to ensure that within each file, the total number of row groups is at least as large as the number of CPU threads used to query that file. More row groups beyond the thread count would improve the speed of highly selective queries, but slow down queries that must scan the whole file like aggregations.
+The `ROW_GROUP_SIZE` parameter specifies the minimum number of rows in a parquet row group, with a minimum value equal to DuckDB's vector size (currently 2048, but adjustable when compiling DuckDB). A parquet row group is a partition of rows, consisting of a column chunk for each column in the dataset. Compression algorithms are only applied per row group, so the larger the row group size, the more opportunities to compress the data. DataMiner can read parquet row groups in parallel even within the same file and uses predicate pushdown to only scan the row groups whose metadata ranges match the `WHERE` clause of the query. However there is some overhead associated with reading the metadata in each group. A good approach would be to ensure that within each file, the total number of row groups is at least as large as the number of CPU threads used to query that file. More row groups beyond the thread count would improve the speed of highly selective queries, but slow down queries that must scan the whole file like aggregations.
 
 ```sql
 -- write a query to a snappy compressed parquet file

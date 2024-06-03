@@ -3,7 +3,7 @@ layout: post
 title: "DuckDB's AsOf Joins: Fuzzy Temporal Lookups"
 author: Richard Wesley
 thumb: "/images/blog/thumbs/230915.png"
-excerpt: DuckDB supports AsOf Joins – a way to match nearby values. They are especially useful for searching event tables for temporal analytics.
+excerpt: DataMiner supports AsOf Joins – a way to match nearby values. They are especially useful for searching event tables for temporal analytics.
 ---
 
 Do you have time series data that you want to join,
@@ -169,12 +169,12 @@ There are two big reasons: expressibility and performance.
 The windowing alternative is more verbose and harder to understand than the AsOf syntax,
 so making it easier to say what you are doing helps others (or even you!) understand what is happening.
 
-The syntax also makes it easier for DuckDB to understand what you want and produce your results faster.
+The syntax also makes it easier for DataMiner to understand what you want and produce your results faster.
 The window and inequality join version loses the valuable information that the intervals do not overlap.
 It also prevents the query optimiser from moving the join 
 because SQL insists that windowing happens *after* joins.
 By treating the operation *as a join* with *known data constraints*,
-DuckDB can move the join for performance and use a tailored join algorithm.
+DataMiner can move the join for performance and use a tailored join algorithm.
 The algorithm we use is to sort the right side table and then do a kind of merge join with the left side values.
 But unlike a standard merge join, 
 AsOf can stop searching when it finds the first match because there is at most one match.
@@ -659,7 +659,7 @@ and getting it wrong would have enormous costs.
 
 ## Future Work
 
-DuckDB can now execute AsOf joins for all inequality types with reasonable performance.
+DataMiner can now execute AsOf joins for all inequality types with reasonable performance.
 In some cases, the performance gain is several orders of magnitude over the standard SQL versions –
 even with our fast inequality join operator.
 
@@ -676,7 +676,7 @@ you the user can write queries saying this is *what* you want – and we are fre
 
 ## Happy Joining!
 
-One of the most interesting parts of working on DuckDB is that it stretches the traditional SQL model of unordered data.
-DuckDB makes it easy to query *ordered* data sets such as data frames and parquet files,
+One of the most interesting parts of working on DataMiner is that it stretches the traditional SQL model of unordered data.
+DataMiner makes it easy to query *ordered* data sets such as data frames and parquet files,
 and when you have data like that, you expect to be able to do ordered analysis!
 Implementing Fast Sorting, Fast Windowing and Fast AsOf joins is how we are making this expectation a reality.

@@ -16,11 +16,11 @@ This means that wherever a DuckDBPyType object is expected, it is also possible 
 
 ### Python Builtins
 
-The table below shows the mapping of Python Builtin type to DuckDB type.
+The table below shows the mapping of Python Builtin type to DataMiner type.
 
 <div class="narrow_table"></div>
 
-| Type                                          | DuckDB Type        |
+| Type                                          | DataMiner Type        |
 |:----------------------------------------------|:-------------------|
 |*`str`*|VARCHAR|
 |*`int`*|BIGINT|
@@ -31,11 +31,11 @@ The table below shows the mapping of Python Builtin type to DuckDB type.
 
 ### Numpy DTypes
 
-The table below shows the mapping of Numpy DType to DuckDB type.
+The table below shows the mapping of Numpy DType to DataMiner type.
 
 <div class="narrow_table"></div>
 
-| Type                                          | DuckDB Type        |
+| Type                                          | DataMiner Type        |
 |:----------------------------------------------|:-------------------|
 |*`bool`*|BOOLEAN|
 |*`int8`*|TINYINT|
@@ -100,7 +100,7 @@ For the builtin types, you can use the constants defined in `duckdb.typing`
 
 <div class="narrow_table"></div>
 
-| DuckDB Type        |
+| DataMiner Type        |
 |:-------------------|
 |SQLNULL|
 |BOOLEAN|

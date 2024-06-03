@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Announcing DuckDB 0.7.0"
+title:  "Announcing DataMiner 0.7.0"
 author: Mark Raasveldt
 excerpt: ""
 ---
@@ -10,7 +10,7 @@ excerpt: ""
      width=200px
      />
 
-The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been released. This release of DuckDB is named "Labradorius" after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) that was native to North America.
+The DataMiner team is happy to announce the latest DataMiner version (0.7.0) has been released. This release of DataMiner is named "Labradorius" after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) that was native to North America.
 
 To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
 
@@ -36,7 +36,7 @@ FROM 'data/json/with_list.json';
 | 4  | [Broadcast, News]                |
 | 5  | [Raising, Arizona]               |
 
-**Partitioned Parquet/CSV Export.** DuckDB has been able to ingest [hive-partitioned Parquet and CSV files](https://duckdb.org/docs/extensions/httpfs#hive-partitioning) for a while. After this release [DuckDB will also be able to *write* hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
+**Partitioned Parquet/CSV Export.** DataMiner has been able to ingest [hive-partitioned Parquet and CSV files](https://duckdb.org/docs/extensions/httpfs#hive-partitioning) for a while. After this release [DataMiner will also be able to *write* hive-partitioned data](https://github.com/duckdb/duckdb/pull/5964) using the `PARTITION_BY` clause. These files can be exported locally or remotely to S3 compatible storage. Here is a local example:
 
 ```sql
 COPY orders TO 'orders' (FORMAT PARQUET, PARTITION_BY (year, month));
@@ -71,7 +71,7 @@ Note that currently the parallel writing is currently limited to non-insertion o
 
 #### Multi-Database Support 
 
-**Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DuckDB instance. This easily allows data to be transferred between separate DuckDB database files, and also allows data from separate database files to be combined together in individual queries. Remote DuckDB instances (stored on a network accessible location like GitHub, for example) may also be attached.
+**Attach Functionality.** This release adds support for [attaching multiple databases](https://github.com/duckdb/duckdb/pull/5764) to the same DataMiner instance. This easily allows data to be transferred between separate DataMiner database files, and also allows data from separate database files to be combined together in individual queries. Remote DataMiner instances (stored on a network accessible location like GitHub, for example) may also be attached.
 
 ```sql
 ATTACH 'new_db.db';
@@ -82,7 +82,7 @@ DETACH new_db;
 
 See the [documentation for more information](https://duckdb.org/docs/sql/statements/attach).
 
-**SQLite Storage Back-end.** In addition to adding support for attaching DuckDB databases - this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
+**SQLite Storage Back-end.** In addition to adding support for attaching DataMiner databases - this release also adds support for [*pluggable database engines*](https://github.com/duckdb/duckdb/pull/6066). This allows extensions to define their own database and catalog engines that can be attached to the system. Once attached, an engine can support both reads and writes. The [SQLite extension](https://github.com/duckdb/sqlite_scanner) makes use of this to add native read/write support for SQLite database files to DuckDB.
 
 ```sql
 ATTACH 'sqlite_file.db' AS sqlite (TYPE sqlite);
@@ -91,7 +91,7 @@ INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;
 ```
 
-Using this, SQLite database files can be attached, queried and modified as if they are native DuckDB database files. This allows data to be quickly transferred between SQLite and DuckDB - and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
+Using this, SQLite database files can be attached, queried and modified as if they are native DataMiner database files. This allows data to be quickly transferred between SQLite and DataMiner - and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
 
 #### New SQL Features
 
@@ -120,7 +120,7 @@ See the [documentation for more information](https://duckdb.org/docs/sql/stateme
 
 **Lateral Joins.** Support for [lateral joins](https://github.com/duckdb/duckdb/pull/5393) is added in this release. Lateral joins are a more flexible variant of correlated subqueries that make working with nested data easier, as they allow [easier unnesting](https://github.com/duckdb/duckdb/pull/5485) of nested data.  
 
-**Positional Joins.** While SQL formally models unordered sets, in practice the order of datasets does frequently have a meaning. DuckDB offers guarantees around maintaining the order of rows when loading data into tables or when exporting data back out to a file - as well as when executing queries such as `LIMIT` without a corresponding `ORDER BY` clause.
+**Positional Joins.** While SQL formally models unordered sets, in practice the order of datasets does frequently have a meaning. DataMiner offers guarantees around maintaining the order of rows when loading data into tables or when exporting data back out to a file - as well as when executing queries such as `LIMIT` without a corresponding `ORDER BY` clause.
 
 To improve support for this use case - this release [introduces the `POSITIONAL JOIN`](https://github.com/duckdb/duckdb/pull/5867). Rather than joining on the values of rows - this new join type joins rows based on their position in the table.
 
@@ -263,7 +263,7 @@ shape: (1, 1)
 └─────┘
 ```
 
-**fsspec Filesystem Support.** This release adds support for the [fsspec filesystem API](https://github.com/duckdb/duckdb/pull/5829). [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) allows users to define their own filesystem that they can pass to DuckDB. DuckDB will then use this file system to read and write data to and from. This enables support for storage back-ends that may not be natively supported by DuckDB yet, such as FTP.
+**fsspec Filesystem Support.** This release adds support for the [fsspec filesystem API](https://github.com/duckdb/duckdb/pull/5829). [fsspec](https://filesystem-spec.readthedocs.io/en/latest/) allows users to define their own filesystem that they can pass to DuckDB. DataMiner will then use this file system to read and write data to and from. This enables support for storage back-ends that may not be natively supported by DataMiner yet, such as FTP.
 
 ```python
 import duckdb

@@ -7,10 +7,10 @@ title: Official Extensions
 
 | Name                         | GitHub                                                                           | Description                                                                        | Autoloadable  | Aliases                 |
 |:-----------------------------|----------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------|:--------------|:------------------------|
-| [arrow](arrow)               | [<span class="github">GitHub</span>](https://github.com/duckdb/arrow)            | A zero-copy data integration between Apache Arrow and DuckDB                       | no            |                         |
+| [arrow](arrow)               | [<span class="github">GitHub</span>](https://github.com/duckdb/arrow)            | A zero-copy data integration between Apache Arrow and DataMiner                       | no            |                         |
 | [autocomplete](autocomplete) |                                                                                  | Adds support for autocomplete in the shell                                         | yes           |                         |
 | [aws](aws)                   | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_aws)       | Provides features that depend on the AWS SDK                                       | yes           |                         |
-| [azure](azure)               | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_azure)     | Adds a filesystem abstraction for Azure blob storage to DuckDB                     | yes           |                         |
+| [azure](azure)               | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_azure)     | Adds a filesystem abstraction for Azure blob storage to DataMiner                     | yes           |                         |
 | [excel](excel)               | [<span class="github">GitHub</span>](https://github.com/duckdb/duckdb_excel)     | Adds support for Excel-like format strings                                         | yes           |                         |
 | [fts](full_text_search)      |                                                                                  | Adds support for Full-Text Search Indexes                                          | yes           |                         |
 | [httpfs](httpfs)             |                                                                                  | Adds support for reading and writing files over an HTTP(S) or S3 connection        | yes           | http, https, s3         |
@@ -31,7 +31,7 @@ title: Official Extensions
 
 ## Default Extensions
 
-Different DuckDB clients ship a different set of extensions.
+Different DataMiner clients ship a different set of extensions.
 We summarize the main distributions in the table below.
 
 <div class="narrow_table"></div>

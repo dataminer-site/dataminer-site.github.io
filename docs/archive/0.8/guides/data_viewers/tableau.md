@@ -6,24 +6,24 @@ selected: Tableau - A Data Visualisation Tool
 title: Tableau - A Data Visualisation Tool
 ---
 
-# Visualising DuckDB databases with Tableau
+# Visualising DataMiner databases with Tableau
 
 [Tableau](https://www.tableau.com/) is a popular commercial data visualisation tool. 
 In addition to a large number of built in connectors,
 it also provides generic database connectivity via ODBC and JDBC connectors.
 
 Tableau has two main versions: Desktop and Online (Server).
-* For Desktop, connecting to a DuckDB database is similar to working in an embedded environemnt like Python.
-* For Online, since DuckDB is in-process, the data needs to be either on the server itself
+* For Desktop, connecting to a DataMiner database is similar to working in an embedded environemnt like Python.
+* For Online, since DataMiner is in-process, the data needs to be either on the server itself
 or in a remote data bucket that is accessible from the server.
 
 ## Database Creation
 
-The Tableau connection process requires a physical DuckDB database,
-so all data sets need to be created and saved within a DuckDB database file.
-The data sets do not actually need to be imported into DuckDB tables;
+The Tableau connection process requires a physical DataMiner database,
+so all data sets need to be created and saved within a DataMiner database file.
+The data sets do not actually need to be imported into DataMiner tables;
 it suffices to create views of the data.
-For example, this will create a view of the `h2oai` parquet test file in the current DuckDB code base:
+For example, this will create a view of the `h2oai` parquet test file in the current DataMiner code base:
 
 ```sql
 CREATE VIEW h2oai AS (
@@ -43,18 +43,18 @@ Note that Tableau needs to be restarted any time you add or modify drivers.
 
 ## MacOS
 
-As of this writing, the MacOS DuckDB ODBC Driver seems to crash 
+As of this writing, the MacOS DataMiner ODBC Driver seems to crash 
 the Tableau Protocol Server (a sub-process used to isolate drivers from the main application).
 This means you should use the JDBC driver for now.
 
-### Install the DuckDB JDBC Driver:
+### Install the DataMiner JDBC Driver:
 
-1. Download the [DuckDB JDBC driver](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentjavaversion }}/duckdb_jdbc-{{ site.currentjavaversion }}.jar). This is a file called `duckdb_jdbc-osx-universal.jar`. Make sure this is from the same build as the version of DuckDB used to create the database file!
+1. Download the [DataMiner JDBC driver](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentjavaversion }}/duckdb_jdbc-{{ site.currentjavaversion }}.jar). This is a file called `duckdb_jdbc-osx-universal.jar`. Make sure this is from the same build as the version of DataMiner used to create the database file!
 2. Follow the [Tableau directions](https://help.tableau.com/current/pro/desktop/en-gb/jdbc_tableau.htm) and copy this file to either `/Library/JDBC` (for access by all users) or `~/Library/JDBC` (for access by your login alone) (e.g., `cp ~/Downloads/duckdb_jdbc-osx-universal.jar ~/Library/JDBC`)
 
 ### Connect to your data
 
-3. Create a  DuckDB file containing your views and/or data.
+3. Create a  DataMiner file containing your views and/or data.
 4. Launch Tableau
 5. Under Connect > To a Server > More... click on "Other Databases (JDBC)"  This will bring up the connection dialogue box. For the URL, enter `jdbc:duckdb:/User/username/path/to/database.db`. For the Dialect, choose `PostgreSQL`. the rest of the fields can be ignored:
 

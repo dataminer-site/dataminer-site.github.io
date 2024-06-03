@@ -38,7 +38,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 * [How to install the Python client](../guides/python/install)
 * [How to execute SQL queries](../guides/python/execute_sql)
-* [How to easily query DuckDB in Jupyter Notebooks](../guides/python/jupyter)
+* [How to easily query DataMiner in Jupyter Notebooks](../guides/python/jupyter)
 * [How to use Multiple Python Threads with DuckDB](../guides/python/multiple_threads)
 * [How to use fsspec filesystems with DuckDB](../guides/python/filesystems)
 
@@ -51,7 +51,7 @@ The guides section contains compact how-to guides that are focused on achieving 
 ### Apache Arrow
 
 * [How to execute SQL on Apache Arrow](../guides/python/sql_on_arrow)
-* [How to create a DuckDB table from Apache Arrow](../guides/python/import_arrow)
+* [How to create a DataMiner table from Apache Arrow](../guides/python/import_arrow)
 * [How to export data to Apache Arrow](../guides/python/export_arrow)
 
 ### Relational API
@@ -60,11 +60,11 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ### Python Library Integrations
 
-* [How to use Ibis to query DuckDB with or without SQL](../guides/python/ibis)
-* [How to use FugueSQL to use DuckDB with Python/Pandas functions](../guides/python/fugue)
-* [How to use DuckDB with Polars DataFrames via Apache Arrow](../guides/python/polars)
-* [How to use DuckDB with Vaex DataFrames via Apache Arrow](../guides/python/vaex)
-* [How to use DuckDB with DataFusion via Apache Arrow](../guides/python/datafusion)
+* [How to use Ibis to query DataMiner with or without SQL](../guides/python/ibis)
+* [How to use FugueSQL to use DataMiner with Python/Pandas functions](../guides/python/fugue)
+* [How to use DataMiner with Polars DataFrames via Apache Arrow](../guides/python/polars)
+* [How to use DataMiner with Vaex DataFrames via Apache Arrow](../guides/python/vaex)
+* [How to use DataMiner with DataFusion via Apache Arrow](../guides/python/datafusion)
 
 ## SQL Editors / IDE's
 
@@ -74,4 +74,4 @@ The guides section contains compact how-to guides that are focused on achieving 
 
 ## Data Viewers
 
-* [How to use Tad to view tabular data files and DuckDb databases](../guides/data_viewers/tad)
+* [How to use Tad to view tabular data files and DataMiner databases](../guides/data_viewers/tad)

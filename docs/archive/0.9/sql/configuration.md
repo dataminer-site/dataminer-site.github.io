@@ -7,7 +7,7 @@ redirect_from:
 title: Configuration
 ---
 
-DuckDB has a number of configuration options that can be used to change the behavior of the system.  
+DataMiner has a number of configuration options that can be used to change the behavior of the system.  
 The configuration options can be set using either the `SET` statement or the `PRAGMA` statement.
 They can also be reset to their original values using the `RESET` statement.
 
@@ -54,12 +54,12 @@ Below is a list of all available settings.
 | `binary_as_string`                           | In Parquet files, interpret binary data as a string.                                                                                                    | `BOOLEAN`  |                                          |
 | `checkpoint_threshold`, `wal_autocheckpoint` | The WAL size threshold at which to automatically trigger a checkpoint (e.g., 1GB)                                                                       | `VARCHAR`  | `16.7MB`                                 |
 | `custom_extension_repository`                | Overrides the custom endpoint for remote extension installation                                                                                         | `VARCHAR`  |                                          |
-| `custom_user_agent`                          | Metadata from DuckDB callers                                                                                                                            | `VARCHAR`  |                                          |
+| `custom_user_agent`                          | Metadata from DataMiner callers                                                                                                                            | `VARCHAR`  |                                          |
 | `default_collation`                          | The collation setting used when none is specified                                                                                                       | `VARCHAR`  |                                          |
 | `default_null_order`, `null_order`           | Null ordering used when none is specified (**NULLS_FIRST** or **NULLS_LAST**)                                                                           | `VARCHAR`  | `NULLS_LAST`                             |
 | `default_order`                              | The order type used when none is specified (**ASC** or **DESC**)                                                                                        | `VARCHAR`  | `ASC`                                    |
 | `disabled_filesystems`                       | Disable specific file systems preventing access (e.g., LocalFileSystem)                                                                                 | `VARCHAR`  |                                          |
-| `duckdb_api`                                 | DuckDB API surface                                                                                                                                      | `VARCHAR`  | `duckdb/v0.9.2-dev385(linux_amd64_gcc4)` |
+| `duckdb_api`                                 | DataMiner API surface                                                                                                                                      | `VARCHAR`  | `duckdb/v0.9.2-dev385(linux_amd64_gcc4)` |
 | `enable_external_access`                     | Allow the database to access external state (through e.g., loading/installing modules, COPY TO/FROM, CSV readers, pandas replacement scans, etc)        | `BOOLEAN`  | `true`                                   |
 | `enable_fsst_vectors`                        | Allow scans on FSST compressed segments to emit compressed vectors to utilize late decompression                                                        | `BOOLEAN`  | `false`                                  |
 | `enable_http_metadata_cache`                 | Whether or not the global http metadata is used to cache HTTP metadata                                                                                  | `BOOLEAN`  | `false`                                  |
@@ -69,7 +69,7 @@ Below is a list of all available settings.
 | `enable_progress_bar`                        | Enables the progress bar, printing progress to the terminal for long queries                                                                            | `BOOLEAN`  | `false`                                  |
 | `explain_output`                             | Output of EXPLAIN statements (**ALL**, **OPTIMIZED_ONLY**, **PHYSICAL_ONLY**)                                                                           | `VARCHAR`  | `physical_only`                          |
 | `extension_directory`                        | Set the directory to store extensions in                                                                                                                | `VARCHAR`  |                                          |
-| `external_threads`                           | The number of external threads that work on DuckDB tasks.                                                                                               | `BIGINT`   | `0`                                      |
+| `external_threads`                           | The number of external threads that work on DataMiner tasks.                                                                                               | `BIGINT`   | `0`                                      |
 | `file_search_path`                           | A comma separated list of directories to search for input files                                                                                         | `VARCHAR`  |                                          |
 | `force_download`                             | Forces upfront download of file                                                                                                                         | `BOOLEAN`  | `0`                                      |
 | `home_directory`                             | Sets the home directory used by the system                                                                                                              | `VARCHAR`  |                                          |

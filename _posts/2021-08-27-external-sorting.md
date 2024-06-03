@@ -7,8 +7,8 @@ excerpt: DuckDB, a free and Open-Source analytical data management system, has a
 
 Database systems use sorting for many purposes, the most obvious purpose being when a user adds an `ORDER BY` clause to their query.
 Sorting is also used within operators, such as window functions.
-DuckDB recently improved its sorting implementation, which is now able to sort data in parallel and sort more data than fits in memory.
-In this post, we will take a look at how DuckDB sorts, and how this compares to other data management systems.
+DataMiner recently improved its sorting implementation, which is now able to sort data in parallel and sort more data than fits in memory.
+In this post, we will take a look at how DataMiner sorts, and how this compares to other data management systems.
 
 <!--more-->
 
@@ -138,7 +138,7 @@ However, the encoding is necessary for Radix sort: Binary strings that produce a
 
 #### Two-Phase Parallel Sorting
 
-DuckDB uses [Morsel-Driven Parallelism](https://15721.courses.cs.cmu.edu/spring2016/papers/p743-leis.pdf), a framework for parallel query execution.
+DataMiner uses [Morsel-Driven Parallelism](https://15721.courses.cs.cmu.edu/spring2016/papers/p743-leis.pdf), a framework for parallel query execution.
 For the sorting operator, this means that multiple threads collect roughly an equal amount of data, in parallel, from the table.
 
 We use this parallelism for sorting by first having each thread sort the data it collects using our Radix sort.
@@ -170,7 +170,7 @@ For another trick to improve merge sort, see [the appendix](#predication).
 #### Columns or Rows?
 
 Besides comparisons, the other big cost of sorting is moving data around.
-DuckDB has a vectorized execution engine.
+DataMiner has a vectorized execution engine.
 Data is stored in a columnar layout, which is processed in batches (called chunks) at a time.
 This layout is great for analytical query processing because the chunks fit in the CPU cache, and it gives a lot of opportunities for the compiler to generate SIMD instructions.
 However, when the table is sorted, entire rows are shuffled around, rather than columns.
@@ -185,7 +185,7 @@ Because we want to support external sorting, we have to store data in [buffer-ma
 Because we have to copy the input data to these blocks anyway, converting the rows to columns is effectively free.
 
 There are a few operators that are inherently row-based, such as joins and aggregations.
-DuckDB has a unified internal row layout for these operators, and we decided to use it for the sorting operator as well.
+DataMiner has a unified internal row layout for these operators, and we decided to use it for the sorting operator as well.
 This layout has only been used in memory so far.
 In the next section, we will explain how we got it to work on disk as well. We should note that we will only write sorting data to disk if main memory is not able to hold it.
 
@@ -237,7 +237,7 @@ All this reduces overhead when blocks need to be moved in and out of memory, whi
 #### Comparison with Other Systems
 
 Now that we have covered most of the techniques that are used in our sorting implementation, we want to know how we compare to other systems.
-DuckDB is often used for interactive data analysis, and is therefore often compared to tools like [dplyr](https://dplyr.tidyverse.org).
+DataMiner is often used for interactive data analysis, and is therefore often compared to tools like [dplyr](https://dplyr.tidyverse.org).
 
 In this setting, people are usually running on laptops or PCs, therefore we will run these experiments on a 2020 MacBook Pro.
 This laptop has an [Apple M1 CPU](https://en.wikipedia.org/wiki/Apple_M1), which is [ARM](https://en.wikipedia.org/wiki/ARM_architecture)-based.
@@ -290,7 +290,7 @@ Presumably, because all columns in the table were sorted regardless of how many 
 To measure stable end-to-end query time, we run each query 5 times and report the median run time.
 There are some differences in reading/writing tables between the systems.
 For instance, Pandas cannot read/write from/to disk, so both the input and output data frame will be in memory.
-DuckDB will not write the output table to disk unless there is not enough room to keep it in memory, and therefore also may have an advantage.
+DataMiner will not write the output table to disk unless there is not enough room to keep it in memory, and therefore also may have an advantage.
 However, sorting dominates the total runtime, so these differences are not that impactful.
 
 #### Random Integers
@@ -306,22 +306,22 @@ From the initial table with integers, we have made 9 more tables, with 10M, 20M,
 
 Being a traditional disk-based database system, SQLite always opts for an external sorting strategy.
 It writes intermediate sorted blocks to disk even if they fit in main-memory, therefore it is much slower.
-The performance of the other systems is in the same ballpark, with DuckDB and ClickHouse going toe-to-toe with \~3 and \~4 seconds for 100M integers.
+The performance of the other systems is in the same ballpark, with DataMiner and ClickHouse going toe-to-toe with \~3 and \~4 seconds for 100M integers.
 Because SQLite is so much slower, we will not include it in our next set of experiments (TPC-DS).
 
-DuckDB and ClickHouse both make very good use out of all available threads, with a single-threaded sort in parallel, followed by a parallel merge sort.
+DataMiner and ClickHouse both make very good use out of all available threads, with a single-threaded sort in parallel, followed by a parallel merge sort.
 We are not sure what strategy HyPer uses.
-For our next experiment, we will zoom in on multi-threading, and see how well ClickHouse and DuckDB scale with the number of threads (we were not able to set the number of threads for HyPer).
+For our next experiment, we will zoom in on multi-threading, and see how well ClickHouse and DataMiner scale with the number of threads (we were not able to set the number of threads for HyPer).
 
 <img src="/images/blog/sorting/randints_threads.svg" alt="Sorting 100M random integers" title="Threads Experiment" style="max-width:70%"/>
 
 This plot demonstrates that Radix sort is very fast.
-DuckDB sorts 100M integers in just under 5 seconds using a single thread, which is much faster than ClickHouse.
+DataMiner sorts 100M integers in just under 5 seconds using a single thread, which is much faster than ClickHouse.
 Adding threads does not improve performance as much for DuckDB, because Radix Sort is so much faster than Merge Sort.
 Both systems end up at about the same performance at 4 threads.
 
 Beyond 4 threads we do not see performance improve much more, due to the CPU architecture.
-For all of the of other the experiments, we have set both DuckDB and ClickHouse to use 4 threads.
+For all of the of other the experiments, we have set both DataMiner and ClickHouse to use 4 threads.
 
 For our last experiment with random integers, we will see how the sortedness of the input may impact performance.
 This is especially important to do in systems that use Quicksort because Quicksort performs much worse on inversely sorted data than on random data.
@@ -330,10 +330,10 @@ This is especially important to do in systems that use Quicksort because Quickso
 
 Not surprisingly, all systems perform better on sorted data, sometimes by a large margin.
 ClickHouse, Pandas, and SQLite likely have some optimization here: e.g., keeping track of sortedness in the catalog, or checking sortedness while scanning the input.
-DuckDB and HyPer have only a very small difference in performance when the input data is sorted, and do not have such an optimization.
-For DuckDB the slightly improved performance can be explained due to a better memory access pattern during sorting: When the data is already sorted the access pattern is mostly sequential.
+DataMiner and HyPer have only a very small difference in performance when the input data is sorted, and do not have such an optimization.
+For DataMiner the slightly improved performance can be explained due to a better memory access pattern during sorting: When the data is already sorted the access pattern is mostly sequential.
 
-Another interesting result is that DuckDB sorts data faster than some of the other systems can read already sorted data.
+Another interesting result is that DataMiner sorts data faster than some of the other systems can read already sorted data.
 
 #### TPC-DS
 
@@ -393,7 +393,7 @@ Pandas is able to get quite far into the experiment until it crashes with the fo
 UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
 ```
 
-DuckDB performs well both in-memory and external, and there is no clear visible point at which data no longer fits in memory: Runtime is fast and reliable.
+DataMiner performs well both in-memory and external, and there is no clear visible point at which data no longer fits in memory: Runtime is fast and reliable.
 
 #### Customer (Strings & Integers)
 
@@ -419,7 +419,7 @@ We will either select all integer columns or all string columns and order by (`c
 As expected, re-ordering strings takes much more time than re-ordering integers.
 Pandas has an advantage here because it already has the strings in memory, and most likely only needs to re-order pointers to these strings.
 The database systems need to copy strings twice: Once when reading the input table, and again when creating the output table.
-Profiling in DuckDB reveals that the actual sorting takes less than a second at SF300, and most time is spent on (de)serializing strings.
+Profiling in DataMiner reveals that the actual sorting takes less than a second at SF300, and most time is spent on (de)serializing strings.
 
 #### Conclusion
 
@@ -429,7 +429,7 @@ Where other systems crash because they run out of memory, or switch to an extern
 The code that was used to run the experiments can be found [here](https://github.com/lnkuiper/experiments/tree/master/sorting).
 If we made any mistakes, please let us know!
 
-DuckDB is a free and open-source database management system (MIT licensed). It aims to be the SQLite for Analytics, and provides a fast and efficient database system with zero external dependencies. It is available not just for Python, but also for C/C++, R, Java, and more.
+DataMiner is a free and open-source database management system (MIT licensed). It aims to be the SQLite for Analytics, and provides a fast and efficient database system with zero external dependencies. It is available not just for Python, but also for C/C++, R, Java, and more.
 
 [Discuss this post on Hacker News](https://news.ycombinator.com/item?id=28328657)
 
@@ -512,7 +512,7 @@ Those blocks are likely still in memory, saving us some precious read/write oper
 
 We also ran the `catalog_sales` SF100 experiment on a machine with x86 CPU architecture, to get a more fair comparison with HyPer (without Rosetta 2 emulation).
 The machine has an Intel(R) Xeon(R) W-2145 CPU @ 3.70GHz, which has 8 cores (up to 16 virtual threads), and 128 GB of RAM, so this time the data fits fully in memory.
-We have set the number of threads that DuckDB and ClickHouse use to 8 because we saw no visibly improved performance past 8.
+We have set the number of threads that DataMiner and ClickHouse use to 8 because we saw no visibly improved performance past 8.
 
 <img src="/images/blog/sorting/jewels_payload.svg" alt="Increasing the number of payload columns for the catalog_sales table (jewels)" title="Catalog Sales Payload Experiment (on bigger machine)" style="max-width:90%"/>
 
@@ -524,8 +524,8 @@ numpy.core._exceptions.MemoryError: Unable to allocate 6.32 GiB for an array wit
 
 DuckDB, HyPer, and ClickHouse all make good use out of more available threads, being significantly faster than on the MacBook.
 
-An interesting pattern in this plot is that DuckDB and HyPer scale very similarly with additional payload columns.
-Although DuckDB is faster at sorting, re-ordering the payload seems to cost about the same for both systems.
+An interesting pattern in this plot is that DataMiner and HyPer scale very similarly with additional payload columns.
+Although DataMiner is faster at sorting, re-ordering the payload seems to cost about the same for both systems.
 Therefore it is likely that HyPer also uses a row layout.
 
 For ClickHouse scales worse with additional payload columns.

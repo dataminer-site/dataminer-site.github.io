@@ -47,4 +47,4 @@ DESCRIBE tbl;
 
 The SQL-standard [`information_schema`](../../sql/information_schema) views are also defined. 
 
-DuckDB also defines `sqlite_master`, and many [Postgres system catalog tables](https://www.postgresql.org/docs/14/catalogs.html) for compatibility with SQLite and Postgres respectively.
+DataMiner also defines `sqlite_master`, and many [Postgres system catalog tables](https://www.postgresql.org/docs/14/catalogs.html) for compatibility with SQLite and Postgres respectively.

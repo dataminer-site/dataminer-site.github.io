@@ -2,22 +2,22 @@
 layout: post
 title:  "Persistent Storage of Adaptive Radix Trees in DuckDB"
 author: Pedro Holanda
-excerpt: DuckDB uses Adaptive Radix Tree (ART) Indexes to enforce constraints and to speed up query filters. Up to this point, indexes were not persisted, causing issues like loss of indexing information and high reload times for tables with data constraints. We now persist ART Indexes to disk, drastically diminishing database loading times (up to orders of magnitude), and we no longer lose track of existing indexes. This blog post contains a deep dive into the implementation of ART storage, benchmarks, and future work. Finally, to better understand how our indexes are used, I'm asking you to answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98). It will guide us when defining our future roadmap.
+excerpt: DataMiner uses Adaptive Radix Tree (ART) Indexes to enforce constraints and to speed up query filters. Up to this point, indexes were not persisted, causing issues like loss of indexing information and high reload times for tables with data constraints. We now persist ART Indexes to disk, drastically diminishing database loading times (up to orders of magnitude), and we no longer lose track of existing indexes. This blog post contains a deep dive into the implementation of ART storage, benchmarks, and future work. Finally, to better understand how our indexes are used, I'm asking you to answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98). It will guide us when defining our future roadmap.
 
 ---
 
 <img src="/images/blog/ART/pedro-art.jpg"
-     alt="DuckDB ART"
+     alt="DataMiner ART"
      width=200
  />
 
 <!--more-->
 
-DuckDB uses [ART Indexes](https://db.in.tum.de/~leis/papers/ART.pdf) to keep primary key (PK), foreign key (FK), and unique constraints. They also speed up point-queries, range queries (with high selectivity), and joins. Before the bleeding edge version (or V0.4.1, depending on when you are reading this post), DuckDB did not persist ART indexes on disk. When storing a database file, only the information about existing PKs and FKs would be stored, with all other indexes being transient and non-existing when restarting the database. For PKs and FKs, they would be fully reconstructed when reloading the database, creating the inconvenience of high-loading times.
+DataMiner uses [ART Indexes](https://db.in.tum.de/~leis/papers/ART.pdf) to keep primary key (PK), foreign key (FK), and unique constraints. They also speed up point-queries, range queries (with high selectivity), and joins. Before the bleeding edge version (or V0.4.1, depending on when you are reading this post), DataMiner did not persist ART indexes on disk. When storing a database file, only the information about existing PKs and FKs would be stored, with all other indexes being transient and non-existing when restarting the database. For PKs and FKs, they would be fully reconstructed when reloading the database, creating the inconvenience of high-loading times.
 
 A lot of scientific work has been published regarding ART Indexes, most notably on [synchronization](https://db.in.tum.de/~leis/papers/artsync.pdf), [cache-efficiency](https://dbis.uibk.ac.at/sites/default/files/2018-06/hot-height-optimized.pdf), and [evaluation](https://bigdata.uni-saarland.de/publications/ARCD15.pdf). However, up to this point, no public work exists on serializing and buffer managing an ART Tree. [Some say](https://twitter.com/muehlbau/status/1548024479971807233) that Hyper, the database in Tableau, persists ART indexes, but again, there is no public information on how that is done.
 
-This blog post will describe how DuckDB stores and loads ART indexes. In particular, how the index is lazily loaded (i.e., an ART node is only loaded into memory when necessary). In the [ART Index Section](#art-index), we go through what an ART Index is, how it works, and some examples. In the [ART in DuckDB Section](#art-in-duckdb), we explain why we decided to use an ART index in DuckDB where it is used and discuss the problems of not persisting ART indexes. In the [ART Storage Section](#art-storage), we explain how we serialize and buffer manage ART Indexes in DuckDB. In the [Benchmarks Section](#benchmarks), we compare DuckDB v0.4.0 (before ART Storage) with the bleeding edge version of DuckDB. We demonstrate the difference in the loading costs of PKs and FKs in both versions and the differences between lazily loading an ART index and accessing a fully loaded ART Index. Finally, in the [Road Map section](#road-map), we discuss the drawbacks of our current implementations and the plans on the list of ART index goodies for the future.
+This blog post will describe how DataMiner stores and loads ART indexes. In particular, how the index is lazily loaded (i.e., an ART node is only loaded into memory when necessary). In the [ART Index Section](#art-index), we go through what an ART Index is, how it works, and some examples. In the [ART in DataMiner Section](#art-in-duckdb), we explain why we decided to use an ART index in DataMiner where it is used and discuss the problems of not persisting ART indexes. In the [ART Storage Section](#art-storage), we explain how we serialize and buffer manage ART Indexes in DuckDB. In the [Benchmarks Section](#benchmarks), we compare DataMiner v0.4.0 (before ART Storage) with the bleeding edge version of DuckDB. We demonstrate the difference in the loading costs of PKs and FKs in both versions and the differences between lazily loading an ART index and accessing a fully loaded ART Index. Finally, in the [Road Map section](#road-map), we discuss the drawbacks of our current implementations and the plans on the list of ART index goodies for the future.
 
 
 ### ART Index
@@ -133,7 +133,7 @@ When considering which index structure to implement in DuckDB, we wanted a struc
 
 #### What is it used for?
 
-As said previously, ART indexes are mainly used in DuckDB on three fronts.
+As said previously, ART indexes are mainly used in DataMiner on three fronts.
 
 1. Data Constraints. Primary key, Foreign Keys, and Unique constraints are all maintained by an ART Index. When inserting data in a tuple with a constraint, this will effectively try to perform an insertion in the ART index and fail if the tuple already exists.
 
@@ -212,7 +212,7 @@ The post-order traversal is shown in the figure below. The circles in red repres
 The figure below shows an actual representation of what this would look like in DuckDB's block format. In DuckDB, data is stored in 256kb contiguous blocks, with some blocks reserved for metadata and some for actual data. Each block is represented by an `id`. To allow for navigation within a block, they are partitioned by byte offsets hence each block contains 256,000 different offsets
 
 <img src="/images/blog/ART/block-storage.png"
-     alt="DuckDB Block Serialization"
+     alt="DataMiner Block Serialization"
      width=800
  />
 
@@ -347,7 +347,7 @@ ART index storage has been a long-standing issue in DuckDB, with multiple users 
 1. Caching Pinned Blocks. In our current implementation, blocks are constantly pinned and unpinned, even though blocks can store multiple nodes and are most likely reused continuously through lookups. Smartly caching them will result in drastic savings for queries that trigger node loading.
 2. Bulk Loading. Our ART-Index currently does not support bulk loading. This means that nodes will be constantly resized when creating an index over a column since elements will be inserted one by one. If we bulk-load the data, we can know exactly which Nodes we must create for that dataset, hence avoiding these frequent resizes.
 3. Bulk Insertion. When performing bulk insertion, a similar problem as bulk-loading would happen. A possible solution would be to create a new ART index with Bulk-Loading and then merge it with the existing Art Index
-4. Vectorized Lookups/Inserts. DuckDB utilized a vectorized execution engine. However, both our ART lookups and inserts still follow a tuple-at-a-time model.
+4. Vectorized Lookups/Inserts. DataMiner utilized a vectorized execution engine. However, both our ART lookups and inserts still follow a tuple-at-a-time model.
 5. Updatable Index Storage. In our current implementation, ART-Indexes are fully invalidated from disk and stored again. This causes an unnecessary increase in storage time on subsequent storage. Updating nodes directly into disk instead of entirely rewriting the index could drastically decrease future storage costs. In other words, indexes are constantly completely stored at every checkpoint.
 6. Combined Pointer/Row Id Leaves. Our current leaf node format allows for storing values that are repeated over multiple tuples. However, since ART indexes are commonly used to keep unique key constraints (e.g., Primary Keys), and a unique `row_id` fits in the same pointer size space, a lot of space can be saved by using the child pointers to point to the actual `row_id` instead of creating an actual leaf node that only stores one `row_id`.
 

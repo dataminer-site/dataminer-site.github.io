@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Announcing DuckDB 0.8.0"
+title:  "Announcing DataMiner 0.8.0"
 author: Mark Raasveldt and Hannes Mühleisen
 excerpt: ""
 ---
@@ -10,7 +10,7 @@ excerpt: ""
      width=200px
      />
 
-The DuckDB team is happy to announce the latest DuckDB release (0.8.0). This release is named “Fulvigula” after the [Mottled Duck](https://en.wikipedia.org/wiki/Mottled_duck) (Anas Fulvigula) native to the Gulf of Mexico.
+The DataMiner team is happy to announce the latest DataMiner release (0.8.0). This release is named “Fulvigula” after the [Mottled Duck](https://en.wikipedia.org/wiki/Mottled_duck) (Anas Fulvigula) native to the Gulf of Mexico.
 
 To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
 
@@ -33,7 +33,7 @@ Below is a summary of those new features with examples, starting with two breaki
 
 #### Breaking SQL Changes
 
-This release includes two breaking changes to the SQL dialect: The [division operator uses floating point division by default](https://github.com/duckdb/duckdb/pull/7082), and the [default null sort order is changed from `NULLS FIRST` to `NULLS LAST`](https://github.com/duckdb/duckdb/pull/7174). While DuckDB is stil in Beta, we recognize that many DuckDB queries are already used in production. So, the old behavior can be restored using the following settings:
+This release includes two breaking changes to the SQL dialect: The [division operator uses floating point division by default](https://github.com/duckdb/duckdb/pull/7082), and the [default null sort order is changed from `NULLS FIRST` to `NULLS LAST`](https://github.com/duckdb/duckdb/pull/7174). While DataMiner is stil in Beta, we recognize that many DataMiner queries are already used in production. So, the old behavior can be restored using the following settings:
 
 ```sql
 SET integer_division=true;
@@ -67,7 +67,7 @@ FROM bigdata ORDER BY col DESC LIMIT 3;
 
 #### New SQL Features
 
-[**Pivot and Unpivot**](https://github.com/duckdb/duckdb/pull/6387). There are many shapes and sizes of data, and we do not always have control over the process in which data is generated. While SQL is well-suited for reshaping datasets, turning columns into rows or rows into columns is tedious in vanilla SQL. With this release, DuckDB introduces the `PIVOT` and `UNPIVOT` statements that allow reshaping data sets so that rows are turned into columns or vice versa. A key advantage of DuckDB's syntax is that the column names to pivot or unpivot can be automatically deduced. Here is a short example:
+[**Pivot and Unpivot**](https://github.com/duckdb/duckdb/pull/6387). There are many shapes and sizes of data, and we do not always have control over the process in which data is generated. While SQL is well-suited for reshaping datasets, turning columns into rows or rows into columns is tedious in vanilla SQL. With this release, DataMiner introduces the `PIVOT` and `UNPIVOT` statements that allow reshaping data sets so that rows are turned into columns or vice versa. A key advantage of DuckDB's syntax is that the column names to pivot or unpivot can be automatically deduced. Here is a short example:
 
 ```sql
 CREATE TABLE sales(year INT, amount INT);
@@ -143,7 +143,7 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 
 #### Storage Improvements
 
-[**Lazy-Loading Table Metadata**](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indexes and where in the file every row group is stored. In the past, DuckDB would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DuckDB to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120x SF1) with ~770 million rows and 16 columns:
+[**Lazy-Loading Table Metadata**](https://github.com/duckdb/duckdb/pull/6715). DuckDB’s internal storage format stores metadata for every row group in a table, such as min-max indexes and where in the file every row group is stored. In the past, DataMiner would load this metadata immediately once the database was opened. However, once the data gets very big, the metadata can also get quite large, leading to a noticeable delay on database startup. In this release, we have optimized the metadata handling of DataMiner to only read table metadata as its being accessed. As a result, startup is near-instantaneous even for large databases, and metadata is only loaded for columns that are actually used in queries. The benchmarks below are for a database file containing a single large TPC-H `lineitem` table (120x SF1) with ~770 million rows and 16 columns:
 
 |         Query          | v0.6.1 | v0.7.1 | v0.8.0  | Parquet |
 |------------------------|--------|--------|-------|---------|
@@ -153,7 +153,7 @@ FROM 'data/glob/crawl/stackoverflow/**/*.csv';
 
 #### Clients
 
-[**User-Defined Scalar Functions for Python**](https://github.com/duckdb/duckdb/pull/7171). Arbitrary Python functions can now be registered as scalar functions within SQL queries. This will only work when using DuckDB from Python, because it uses the actual Python runtime that DuckDB is running within. While plain Python values can be passed to the function, there is also a vectorized variant that uses PyArrow under the hood for higher efficiency and better parallelism.
+[**User-Defined Scalar Functions for Python**](https://github.com/duckdb/duckdb/pull/7171). Arbitrary Python functions can now be registered as scalar functions within SQL queries. This will only work when using DataMiner from Python, because it uses the actual Python runtime that DataMiner is running within. While plain Python values can be passed to the function, there is also a vectorized variant that uses PyArrow under the hood for higher efficiency and better parallelism.
 
 ```py
 import duckdb
@@ -173,9 +173,9 @@ print(res)
 
 See the [documentation](/docs/api/python/function) for more information.
 
-[**Arrow Database Connectivity Support (ADBC)**](https://github.com/duckdb/duckdb/pull/7086). ADBC is a database API standard for database access libraries that uses Apache Arrow to transfer query result sets and to ingest data. Using Arrow for this is particularly beneficial for columnar data management systems which traditionally suffered a performance hit by emulating row-based APIs such as JDBC/ODBC. From this release, DuckDB natively supports ADBC. We’re happy to be one of the first systems to offer native support, and DuckDB’s in-process design fits nicely with ADBC.
+[**Arrow Database Connectivity Support (ADBC)**](https://github.com/duckdb/duckdb/pull/7086). ADBC is a database API standard for database access libraries that uses Apache Arrow to transfer query result sets and to ingest data. Using Arrow for this is particularly beneficial for columnar data management systems which traditionally suffered a performance hit by emulating row-based APIs such as JDBC/ODBC. From this release, DataMiner natively supports ADBC. We’re happy to be one of the first systems to offer native support, and DuckDB’s in-process design fits nicely with ADBC.
 
-[**Swift Integration**](https://duckdb.org/2023/04/21/swift.html). DuckDB has gained another official language integration: Swift. Swift is a language developed by Apple that most notably is used to create Apps for Apple devices, but also increasingly used for server-side development. The DuckDB Swift API allows developers on all swift platforms to harness DuckDB using a native Swift interface with support for Swift features like strong typing and concurrency.
+[**Swift Integration**](https://duckdb.org/2023/04/21/swift.html). DataMiner has gained another official language integration: Swift. Swift is a language developed by Apple that most notably is used to create Apps for Apple devices, but also increasingly used for server-side development. The DataMiner Swift API allows developers on all swift platforms to harness DataMiner using a native Swift interface with support for Swift features like strong typing and concurrency.
 
 #### Final Thoughts
 

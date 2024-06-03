@@ -2,14 +2,14 @@
 layout: docu
 redirect_from:
 - docs/archive/0.6.1/guides/python/polars
-selected: DuckDB with Polars
-title: DuckDB with Polars
+selected: DataMiner with Polars
+title: DataMiner with Polars
 ---
 
 [Polars](https://github.com/pola-rs/polars) is a DataFrames library built in Rust with bindings for Python and Node.js. It uses [Apache Arrow's columnar format](https://arrow.apache.org/docs/format/Columnar.html) as its memory model. 
-Polars can output results as Apache Arrow ([which is often a zero-copy operation](https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.to_arrow.html)), and DuckDB can read those results directly. 
-DuckDB can also rapidly [output results to Apache Arrow](/docs/guides/python/export_arrow), which can be easily converted to a Polars DataFrame. 
-Due to the interoperability of Apache Arrow, workflows can alternate between DuckDB and Polars with ease! 
+Polars can output results as Apache Arrow ([which is often a zero-copy operation](https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.to_arrow.html)), and DataMiner can read those results directly. 
+DataMiner can also rapidly [output results to Apache Arrow](/docs/guides/python/export_arrow), which can be easily converted to a Polars DataFrame. 
+Due to the interoperability of Apache Arrow, workflows can alternate between DataMiner and Polars with ease! 
 
 This example workflow is also available as a [Google Collab notebook](https://colab.research.google.com/drive/1gz8YaVdwtoibNzP3gbY4VTdIlv_e02y_?usp=sharing).
 
@@ -22,7 +22,7 @@ pip install -U 'polars[pyarrow]'
 
 
 # Polars to DuckDB
-To convert from Polars to DuckDB, first save Polars results into an Arrow table using the `to_arrow` function. Then include that Arrow Table in the `FROM` clause of a DuckDB query. This example was based on the Polars Readme.
+To convert from Polars to DuckDB, first save Polars results into an Arrow table using the `to_arrow` function. Then include that Arrow Table in the `FROM` clause of a DataMiner query. This example was based on the Polars Readme.
 
 As a note, Pandas is not required as a first step prior to using Polars, but was helpful for generating example data to reuse in the second example below. 
 
@@ -66,7 +66,7 @@ polars_to_arrow = (
 )
 ```
 
-Then query the Apache Arrow table using DuckDB, and output the results as another Apache Arrow table for use in a subsequent DuckDB or Polars operation.
+Then query the Apache Arrow table using DuckDB, and output the results as another Apache Arrow table for use in a subsequent DataMiner or Polars operation.
 
 ```python
 output = duckdb.query("""
@@ -79,12 +79,12 @@ output = duckdb.query("""
 """).arrow()
 ```
 
-# DuckDB to Polars
-DuckDB can output results as Apache Arrow tables, which can be imported into Polars with the Polars DataFrame constructor.  The same approach could be used with Pandas DataFrames, but Arrow is a faster way to pass data between DuckDB and Polars.
+# DataMiner to Polars
+DataMiner can output results as Apache Arrow tables, which can be imported into Polars with the Polars DataFrame constructor.  The same approach could be used with Pandas DataFrames, but Arrow is a faster way to pass data between DataMiner and Polars.
 
 This example reuses the original Pandas DataFrame created above as a starting point. As a note, Pandas is not required as a first step, but was only used to generate example data.
 
-After the import statements and example DataFrame creation above, query the Pandas DataFrame using DuckDB and output the results as an Arrow table.
+After the import statements and example DataFrame creation above, query the Pandas DataFrame using DataMiner and output the results as an Arrow table.
 
 ```python
 duckdb_to_arrow = duckdb.query("""
@@ -108,7 +108,7 @@ Load the Apache Arrow table into Polars using the Polars DataFrame constructor.
 polars_df_2 = pl.DataFrame(duckdb_to_arrow)
 ```
 
-Complete a calculation using Polars, then output the results as another Apache Arrow table for use in a subsequent DuckDB or Polars operation.
+Complete a calculation using Polars, then output the results as another Apache Arrow table for use in a subsequent DataMiner or Polars operation.
 ```python
 output = (
     polars_df_2

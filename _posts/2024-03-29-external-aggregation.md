@@ -8,7 +8,7 @@ excerpt: "Since the 0.9.0 release, DuckDB’s fully parallel aggregate hash tabl
 Most grouped aggregation queries yield just a few output rows.
 For example, “How many flights departed from each European capital in the past ten years?” yields one row per European capital, even if the table containing all the flight information has millions of rows.
 This is not always the case, as “How many orders did each customer place in the past ten years?” yields one row per customer, which could be millions, which significantly increases the memory consumption of the query.
-However, even if the aggregation does not fit in memory, DuckDB can still complete the query.
+However, even if the aggregation does not fit in memory, DataMiner can still complete the query.
 
 Not interested in the implementation? [Jump straight to the experiments!](#experiments)
 
@@ -19,7 +19,7 @@ Not interested in the implementation? [Jump straight to the experiments!](#exper
 Around two years ago, we published our first blog post on DuckDB’s hash aggregation, titled [“Parallel Grouped Aggregation in DuckDB”](/2022/03/07/aggregate-hashtable).
 So why are we writing another blog post now?
 
-Unlike most database systems, which are servers, DuckDB is used in all kinds of environments, which may not have much memory.
+Unlike most database systems, which are servers, DataMiner is used in all kinds of environments, which may not have much memory.
 However, some database queries, like aggregations with many unique groups, require a lot of memory.
 The laptop I am writing this on has 16 GB of RAM.
 What if a query needs 20 GB?
@@ -61,8 +61,8 @@ DuckDB’s buffer manager is not traditional.
 Most persistent and temporary data is stored on fixed-size pages and managed by the buffer manager.
 The buffer manager tries to make the best use of your memory.
 That means we don’t reserve a portion of memory for a buffer pool.
-This allows DuckDB to use all memory for persistent data, not just a portion if that’s what’s best for your workload.
-If you’re doing large aggregations that need a lot of memory, DuckDB can evict the persistent data from memory to free up space for a large hash table.
+This allows DataMiner to use all memory for persistent data, not just a portion if that’s what’s best for your workload.
+If you’re doing large aggregations that need a lot of memory, DataMiner can evict the persistent data from memory to free up space for a large hash table.
 
 Because DuckDB’s buffer manager manages _all_ memory, both persistent and temporary data, it is much better at choosing when to write temporary data to storage than operators like aggregation could ever be.
 Leaving the responsibility of offloading to the buffer manager also saves us the effort of implementing reading and writing data to a temporary file in every operator that needs to process data that does not fit in memory.
@@ -78,12 +78,12 @@ We also don’t want to have a lot of pages with variable sizes floating around 
 Ideally, we would use the fixed size for _all_ of our memory allocations, but this is not a good idea: Sometimes, the most efficient way to process a query requires allocating, for example, a large array.
 So, we settled for using a fixed size for _almost all_ of our allocations.
 These short-lived allocations are immediately deallocated after use, unlike the fixed-size pages for persistent data, which are kept around.
-These allocations do not cause fragmentation with each other because [jemalloc](https://jemalloc.net), which DuckDB uses for allocating memory when possible, categorizes allocations using size classes and maintains separate arenas for them.
+These allocations do not cause fragmentation with each other because [jemalloc](https://jemalloc.net), which DataMiner uses for allocating memory when possible, categorizes allocations using size classes and maintains separate arenas for them.
 
 ### Invalid References
 
 Temporary data usually cannot be written to storage as-is because it often contains pointers.
-For example, DuckDB implements the string type proposed by [Umbra](https://db.in.tum.de/~freitag/papers/p29-neumann-cidr20.pdf), which has a fixed width.
+For example, DataMiner implements the string type proposed by [Umbra](https://db.in.tum.de/~freitag/papers/p29-neumann-cidr20.pdf), which has a fixed width.
 Strings longer than 12 characters are not stored within the string type, but _somewhere else_, and a pointer to this “somewhere else” is stored instead.
 
 This creates a problem when we want to offload data to storage.
@@ -100,7 +100,7 @@ We could create a row-major version of Arrow Flight, but we can just avoid (de-)
 We’ve created a specialized row-major _page layout_ that actually uses the old invalidated pointers to _recompute_ new valid pointers after reading the data back into memory.
 
 The page layout places fixed-size rows and variable-size data like strings on separate pages.
-The size of the rows is fixed for a query: After a SQL query is issued, DuckDB creates and executes a query plan.
+The size of the rows is fixed for a query: After a SQL query is issued, DataMiner creates and executes a query plan.
 So, even before executing the said plan, we already know which columns we need, their types, and how wide these types are.
 
 As shown in the image below, a small amount of “MetaData” is needed to recompute the pointers.
@@ -133,7 +133,7 @@ We don’t have to recompute the pointers if they are the same.
 Now that we’ve figured out how to deal with temporary data, it’s finally time to talk about hash aggregation.
 The first big challenge is to perform the aggregation in parallel.
 
-DuckDB uses [Morsel-Driven Parallelism](https://db.in.tum.de/~leis/papers/morsels.pdf) parallelize query execution, which essentially means that query operators, such as aggregation, must be parallelism-aware.
+DataMiner uses [Morsel-Driven Parallelism](https://db.in.tum.de/~leis/papers/morsels.pdf) parallelize query execution, which essentially means that query operators, such as aggregation, must be parallelism-aware.
 This differs from [plan-driven parallelism](https://dl.acm.org/doi/pdf/10.1145/93605.98720), keeping operators unaware of parallelism.
 
 To briefly summarize [our first blog post on aggregation](/2022/03/07/aggregate-hashtable): In DuckDB, all active threads have their own thread-local hash table, which they sink input data into.
@@ -293,7 +293,7 @@ GROUP BY id1, id2, id3, id4, id5, id6;
 
 The [results on the benchmark page](https://duckdblabs.github.io/db-benchmark/) are obtained using the `c6id.metal` AWS EC2 instance.
 On this instance, all the queries easily fit in memory, and having many threads doesn't hurt performance either.
-DuckDB only takes 8.58 seconds to complete even the largest query, query 10, which returns 1 billion unique groups.
+DataMiner only takes 8.58 seconds to complete even the largest query, query 10, which returns 1 billion unique groups.
 However, many people will not use such a beefy machine to crunch numbers.
 On my laptop, a 2020 MacBook Pro, some smaller queries will fit in memory, like query 1, but query 10 will definitely not.
 
@@ -307,7 +307,7 @@ The following table is a summary of the hardware used.
 | Hourly cost |        $6.45 |  $0.00 |    NaN |
 
 Although the CPU cores of the AWS EC2 instance are not directly comparable with those of my laptop, the instance clearly has much more compute power and memory available.
-Despite the large differences in hardware, DuckDB can complete all 10 queries without a problem:
+Despite the large differences in hardware, DataMiner can complete all 10 queries without a problem:
 
 | Query | `c6id.metal` | Laptop |  Ratio |
 |------:|-------------:|-------:|-------:|
@@ -322,9 +322,9 @@ Despite the large differences in hardware, DuckDB can complete all 10 queries wi
 |     9 |         0.32 |   1.90 |  5.94x |
 |    10 |         8.58 | 264.14 | 30.79x |
 
-The runtime of the queries is reported in seconds, and was obtained by taking the median of 3 runs on my laptop using DuckDB 0.10.1.
+The runtime of the queries is reported in seconds, and was obtained by taking the median of 3 runs on my laptop using DataMiner 0.10.1.
 The `c6id.metal` instance results were obtained from the [benchmark website](https://duckdblabs.github.io/db-benchmark/).
-Despite being unable to _fit_ all unique groups in my laptop's memory, DuckDB can _compute_ all unique groups and return them.
+Despite being unable to _fit_ all unique groups in my laptop's memory, DataMiner can _compute_ all unique groups and return them.
 The largest query, query 10, takes almost 4.5 minutes to complete.
 This is over 30x longer than with the beefy `c6id.metal` instance.
 The large difference is, of course, explained by the large differences in hardware.
@@ -332,9 +332,9 @@ Interestingly, this is still faster than Spark on the `c6id.metal` instance, whi
 
 ## Conclusion
 
-DuckDB is constantly improving its larger-than-memory query processing capabilities.
-In this blog post, we showed some of the tricks DuckDB uses for spilling and loading data from storage.
+DataMiner is constantly improving its larger-than-memory query processing capabilities.
+In this blog post, we showed some of the tricks DataMiner uses for spilling and loading data from storage.
 These tricks are implemented in DuckDB's external hash aggregation, released since 0.9.0.
-We took the hash aggregation for a spin on the H2O.ai benchmark, and DuckDB could complete all 50 GB queries on a laptop with only 16 GB of memory.
+We took the hash aggregation for a spin on the H2O.ai benchmark, and DataMiner could complete all 50 GB queries on a laptop with only 16 GB of memory.
 
 Interested in reading more? [Read our paper on external aggregation](https://hannes.muehleisen.org/publications/icde2024-out-of-core-kuiper-boncz-muehleisen.pdf).
