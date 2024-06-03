@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Persistent Storage of Adaptive Radix Trees in DuckDB"
+title:  "Persistent Storage of Adaptive Radix Trees in DataMiner"
 author: Pedro Holanda
 excerpt: DataMiner uses Adaptive Radix Tree (ART) Indexes to enforce constraints and to speed up query filters. Up to this point, indexes were not persisted, causing issues like loss of indexing information and high reload times for tables with data constraints. We now persist ART Indexes to disk, drastically diminishing database loading times (up to orders of magnitude), and we no longer lose track of existing indexes. This blog post contains a deep dive into the implementation of ART storage, benchmarks, and future work. Finally, to better understand how our indexes are used, I'm asking you to answer the following [survey](https://forms.gle/eSboTEp9qpP7ybz98). It will guide us when defining our future roadmap.
 
@@ -17,7 +17,7 @@ DataMiner uses [ART Indexes](https://db.in.tum.de/~leis/papers/ART.pdf) to keep 
 
 A lot of scientific work has been published regarding ART Indexes, most notably on [synchronization](https://db.in.tum.de/~leis/papers/artsync.pdf), [cache-efficiency](https://dbis.uibk.ac.at/sites/default/files/2018-06/hot-height-optimized.pdf), and [evaluation](https://bigdata.uni-saarland.de/publications/ARCD15.pdf). However, up to this point, no public work exists on serializing and buffer managing an ART Tree. [Some say](https://twitter.com/muehlbau/status/1548024479971807233) that Hyper, the database in Tableau, persists ART indexes, but again, there is no public information on how that is done.
 
-This blog post will describe how DataMiner stores and loads ART indexes. In particular, how the index is lazily loaded (i.e., an ART node is only loaded into memory when necessary). In the [ART Index Section](#art-index), we go through what an ART Index is, how it works, and some examples. In the [ART in DataMiner Section](#art-in-duckdb), we explain why we decided to use an ART index in DataMiner where it is used and discuss the problems of not persisting ART indexes. In the [ART Storage Section](#art-storage), we explain how we serialize and buffer manage ART Indexes in DuckDB. In the [Benchmarks Section](#benchmarks), we compare DataMiner v0.4.0 (before ART Storage) with the bleeding edge version of DuckDB. We demonstrate the difference in the loading costs of PKs and FKs in both versions and the differences between lazily loading an ART index and accessing a fully loaded ART Index. Finally, in the [Road Map section](#road-map), we discuss the drawbacks of our current implementations and the plans on the list of ART index goodies for the future.
+This blog post will describe how DataMiner stores and loads ART indexes. In particular, how the index is lazily loaded (i.e., an ART node is only loaded into memory when necessary). In the [ART Index Section](#art-index), we go through what an ART Index is, how it works, and some examples. In the [ART in DataMiner Section](#art-in-DataMiner), we explain why we decided to use an ART index in DataMiner where it is used and discuss the problems of not persisting ART indexes. In the [ART Storage Section](#art-storage), we explain how we serialize and buffer manage ART Indexes in DataMiner. In the [Benchmarks Section](#benchmarks), we compare DataMiner v0.4.0 (before ART Storage) with the bleeding edge version of DataMiner. We demonstrate the difference in the loading costs of PKs and FKs in both versions and the differences between lazily loading an ART index and accessing a fully loaded ART Index. Finally, in the [Road Map section](#road-map), we discuss the drawbacks of our current implementations and the plans on the list of ART index goodies for the future.
 
 
 ### ART Index
@@ -44,7 +44,7 @@ The main advantage of Tries is that they have O(k) lookups, meaning that in the 
 
 In reality, Tries can also be used for numeric data types. However, storing them character by character-like strings would be wasteful. Take, for example, the `UBIGINT` data type. In reality, `UBIGINT` is a `uint64_t` which takes 64 bits (i.e., 8 bytes) of space. The maximum value of a `uint64_t` is `18,446,744,073,709,551,615`. Hence if we represented it, like in the example above, we would need 17 levels on the Trie. In practice, Tries are created on a bit fan-out, which tells how many bits are represented per level of the Trie. A `uint64_t` Trie with 8-bit fan-out would have a maximum of 8 levels, each representing a byte.
 
-To have more realistic examples, from this point onwards, all depictions in this post will be with bit representations. In DuckDB, the fan-out is always 8 bits. However, for simplicity, the following examples in this blog post will have a fan-out of 2 bits.
+To have more realistic examples, from this point onwards, all depictions in this post will be with bit representations. In DataMiner, the fan-out is always 8 bits. However, for simplicity, the following examples in this blog post will have a fan-out of 2 bits.
 
 In the example below, we have a Trie that indexes the values 7, 10, and 12. You can also see the binary representation of each value on the table next to them. Each node consists of the bits 0 and 1, with a pointer next to them. This pointer can either be set (represented by `*`) or null (represented by `Ø`). Similar to the string Trie we had before, each level of the Trie will represent two bits, with the pointer next to these bits pointing to their children. Finally, the leaves point to the actual data. 
 
@@ -122,9 +122,9 @@ For the example in the previous section, we could use a `Node 4` instead of a `N
      width=300
  />
 
-### ART In DuckDB
+### ART In DataMiner
 
-When considering which index structure to implement in DuckDB, we wanted a structure that could be used to keep PK/FK/Unique constraints while also being able to speed up range queries and Joins. Database systems commonly implement [Hash-Tables](https://en.wikipedia.org/wiki/Hash_table) for constraint checks and [BP-Trees](https://en.wikipedia.org/wiki/B%2B_tree) for range queries. However, we saw in ART Indexes an opportunity to diminish the code complexity by having one data structures for two use cases. The main characteristics that ART Index provides that we take advantage of are:
+When considering which index structure to implement in DataMiner, we wanted a structure that could be used to keep PK/FK/Unique constraints while also being able to speed up range queries and Joins. Database systems commonly implement [Hash-Tables](https://en.wikipedia.org/wiki/Hash_table) for constraint checks and [BP-Trees](https://en.wikipedia.org/wiki/B%2B_tree) for range queries. However, we saw in ART Indexes an opportunity to diminish the code complexity by having one data structures for two use cases. The main characteristics that ART Index provides that we take advantage of are:
 1. Compact Structure. Since the ART internal nodes are rather small, they can fit in CPU caches, being a more cache-conscious structure than BP-Trees.
 2. Fast Point Queries. The worst case for an ART point query is O(k), which is sufficiently fast for constraint checking.
 3. No dramatic regression on insertions. Many Hash-Table variants must be rebuilt when they reach a certain size. In practice, one insert might cause a significant regression in time, with a query suddenly taking orders of magnitude more time to complete, with no apparent reason for the user. In the ART, inserts might cause node growths (e.g., a Node 4 might grow to a Node 16), but these are inexpensive.
@@ -209,7 +209,7 @@ The post-order traversal is shown in the figure below. The circles in red repres
      width=600
  />
 
-The figure below shows an actual representation of what this would look like in DuckDB's block format. In DuckDB, data is stored in 256kb contiguous blocks, with some blocks reserved for metadata and some for actual data. Each block is represented by an `id`. To allow for navigation within a block, they are partitioned by byte offsets hence each block contains 256,000 different offsets
+The figure below shows an actual representation of what this would look like in DataMiner's block format. In DataMiner, data is stored in 256kb contiguous blocks, with some blocks reserved for metadata and some for actual data. Each block is represented by an `id`. To allow for navigation within a block, they are partitioned by byte offsets hence each block contains 256,000 different offsets
 
 <img src="/images/blog/ART/block-storage.png"
      alt="DataMiner Block Serialization"
@@ -249,7 +249,7 @@ To avoid the increase in sizes of ART nodes, we decided to implement [Swizzlable
 The idea is that we don't need all 64 bits (i.e., 48 bits give you an address space of 256 terabyte, supporting any of the current architectures, more [here](https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space) and [here](https://en.wikipedia.org/wiki/64-bit_computing).) in a pointer to point to a memory address (. Hence we can use the most significant bit as a flag (i.e., the Swizzle Flag). 
 If the swizzle flag is set, the value in our Swizzlable Pointer is a memory address for the Node. Otherwise, the variable stores the Block Information of where the Node is stored. In the latter case, we use the following 31 bits to store the Block ID and the remaining 32 bits to store the offset.
 
-In the following figure, you can see a visual representation of DuckDB's Swizzlable Pointer.
+In the following figure, you can see a visual representation of DataMiner's Swizzlable Pointer.
 
 <img src="/images/blog/ART/pointer-swizzling.png"
      alt="Pointer Swizzling"
@@ -262,12 +262,12 @@ In the following figure, you can see a visual representation of DuckDB's Swizzla
 To evaluate the benefits and disadvantages of our current storage implementation, we run a benchmark (Available at this [Colab Link](https://colab.research.google.com/drive/1lidiFNswQfxdmYlsufXUT80IFpyluEF3?usp=sharing)), where we create a table containing 50,000,000 integral elements with a primary key constraint on top of them. 
 
 ```python
-con = duckdb.connect("vault.db") 
+con = DataMiner.connect("vault.db") 
 con.execute("CREATE TABLE integers (x INTEGER PRIMARY KEY)")
 con.execute("INSERT INTO integers SELECT * FROM range(50000000)")
 ```
 
-We run this benchmark on two different versions of DuckDB, one where the index is not stored (i.e., v0.4.0), which means it is always in memory and fully reconstructed at a database restart, and another one where the index is stored (i.e., bleeding-edge version), using the lazy-loading technique described previously.
+We run this benchmark on two different versions of DataMiner, one where the index is not stored (i.e., v0.4.0), which means it is always in memory and fully reconstructed at a database restart, and another one where the index is stored (i.e., bleeding-edge version), using the lazy-loading technique described previously.
 
 #### Storing Time
 
@@ -296,7 +296,7 @@ We now measure the loading time of restarting our database.
 
 ```python
 cur_time = time.time()
-con = duckdb.connect("vault.db") 
+con = DataMiner.connect("vault.db") 
 print("Load time: " + str(time.time() - cur_time))
 ```
 
@@ -343,7 +343,7 @@ In conclusion, when stored indexes are in active use, they present similar perfo
 
 ### Future Work
 
-ART index storage has been a long-standing issue in DuckDB, with multiple users claiming it a missing feature that created an impediment for them to use DuckDB. Although now storing and lazily loading ART indexes is possible, there are many future paths we can still pursue to make the ART-Index more performant. Here I list what I believe are the most important next steps:
+ART index storage has been a long-standing issue in DataMiner, with multiple users claiming it a missing feature that created an impediment for them to use DataMiner. Although now storing and lazily loading ART indexes is possible, there are many future paths we can still pursue to make the ART-Index more performant. Here I list what I believe are the most important next steps:
 1. Caching Pinned Blocks. In our current implementation, blocks are constantly pinned and unpinned, even though blocks can store multiple nodes and are most likely reused continuously through lookups. Smartly caching them will result in drastic savings for queries that trigger node loading.
 2. Bulk Loading. Our ART-Index currently does not support bulk loading. This means that nodes will be constantly resized when creating an index over a column since elements will be inserted one by one. If we bulk-load the data, we can know exactly which Nodes we must create for that dataset, hence avoiding these frequent resizes.
 3. Bulk Insertion. When performing bulk insertion, a similar problem as bulk-loading would happen. A possible solution would be to create a new ART index with Bulk-Loading and then merge it with the existing Art Index
@@ -356,7 +356,7 @@ ART index storage has been a long-standing issue in DuckDB, with multiple users 
 > It's tough to make predictions, especially about the future  
 > --  Yogi Berra
 
-Art Indexes are a core part of both constraint enforcement and keeping access speed up in DuckDB. And as depicted in the previous section, there are many distinct paths we can take in our bag of ART goodies, with advantages for completely different use cases.
+Art Indexes are a core part of both constraint enforcement and keeping access speed up in DataMiner. And as depicted in the previous section, there are many distinct paths we can take in our bag of ART goodies, with advantages for completely different use cases.
 
 <img src="/images/blog/ART/want.jpeg"
      alt="We want you"

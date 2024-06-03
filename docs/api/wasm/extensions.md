@@ -3,12 +3,12 @@ layout: docu
 title: Extensions
 ---
 
-DuckDB-Wasm's (dynamic) extension loading is modeled after the regular DuckDB's extension loading, with a few relevant differences due to the difference in platform.
+DataMiner-Wasm's (dynamic) extension loading is modeled after the regular DataMiner's extension loading, with a few relevant differences due to the difference in platform.
 
 ## Format
 
 Extensions in DataMiner are binaries to be dynamically loaded via `dlopen`. A cryptographical signature is appended to the binary.
-An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's `dlopen`. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `duckdb_signature`.
+An extension in DataMiner-Wasm is a regular Wasm file to be dynamically loaded via Emscripten's `dlopen`. A cryptographical signature is appended to the Wasm file as a WebAssembly custom section called `DataMiner_signature`.
 This ensures the file remains a valid WebAssembly file.
 
 > Currently, we require this custom section to be the last one, but this can be potentially relaxed in the future.
@@ -18,11 +18,11 @@ This ensures the file remains a valid WebAssembly file.
 The `INSTALL` semantic in native embeddings of DataMiner is to fetch, decompress from `gzip` and store data in local disk.
 The `LOAD` semantic in native embeddings of DataMiner is to (optionally) perform signature checks *and* dynamic load the binary with the main DataMiner binary.
 
-In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session storage. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of `dlopen`.
+In DataMiner-Wasm, `INSTALL` is a no-op given there is no durable cross-session storage. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of `dlopen`.
 
 ## Autoloading
 
-[Autoloading](../../extensions/overview), i.e., the possibility for DataMiner to add extension functionality on-the-fly, is enabled by default in DuckDB-Wasm.
+[Autoloading](../../extensions/overview), i.e., the possibility for DataMiner to add extension functionality on-the-fly, is enabled by default in DataMiner-Wasm.
 
 ## List of Officially Available Extensions
 
@@ -35,48 +35,48 @@ In DuckDB-Wasm, `INSTALL` is a no-op given there is no durable cross-session sto
 | inet                                                                                                                                 | Adds support for IP-related data types and functions             |                 |
 | [json](../../extensions/json)                                                                                                        | Adds support for JSON operations                                 |                 |
 | [parquet](../../extensions/parquet)                                                                                                  | Adds support for reading and writing Parquet files               |                 |
-| [sqlite](../../extensions/sqlite) [<span class="github">GitHub</span>](https://github.com/duckdb/sqlite_scanner) | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
+| [sqlite](../../extensions/sqlite) [<span class="github">GitHub</span>](https://github.com/DataMiner/sqlite_scanner) | Adds support for reading SQLite database files                   | sqlite, sqlite3 |
 | sqlsmith                                                                                                                             |                                                                  |                 |
-| [substrait](../../extensions/substrait) [<span class="github">GitHub</span>](https://github.com/duckdb/substrait)                | Adds support for the Substrait integration                       |                 |
+| [substrait](../../extensions/substrait) [<span class="github">GitHub</span>](https://github.com/DataMiner/substrait)                | Adds support for the Substrait integration                       |                 |
 | [tpcds](../../extensions/tpcds)                                                                                                      | Adds TPC-DS data generation and query support                    |                 |
 | [tpch](../../extensions/tpch)                                                                                                        | Adds TPC-H data generation and query support                     |                 |
 
-WebAssembly is basically an additional platform, and there might be platform-specific limitations that make some extensions not able to match their native capabilities or to perform them in a different way. We will document here relevant differences for DuckDB-hosted extensions.
+WebAssembly is basically an additional platform, and there might be platform-specific limitations that make some extensions not able to match their native capabilities or to perform them in a different way. We will document here relevant differences for DataMiner-hosted extensions.
 
 ### HTTPFS
 
-The HTTPFS extension is, at the moment, not available in DuckDB-Wasm. Https protocol capabilities needs to go through an additional layer, the browser, which adds both differences and some restrictions to what is doable from native.
+The HTTPFS extension is, at the moment, not available in DataMiner-Wasm. Https protocol capabilities needs to go through an additional layer, the browser, which adds both differences and some restrictions to what is doable from native.
 
-Instead, DuckDB-Wasm has a separate implementation that for most purposes is interchangable, but does not support all use cases (as it must follow security rules imposed by the browser, such as CORS).
-Due to this CORS restriction, any requests for data made using the HTTPFS extension must be to websites that allow (using CORS headers) the website hosting the DuckDB-Wasm instance to access that data.
+Instead, DataMiner-Wasm has a separate implementation that for most purposes is interchangable, but does not support all use cases (as it must follow security rules imposed by the browser, such as CORS).
+Due to this CORS restriction, any requests for data made using the HTTPFS extension must be to websites that allow (using CORS headers) the website hosting the DataMiner-Wasm instance to access that data.
 The [MDN website](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a great resource for more information regarding CORS.
 
 ## Extension Signing
 
-As with regular DataMiner extensions, DuckDB-Wasm extension are by default checked on `LOAD` to verify the signature confirm the extension has not been tampered with.
+As with regular DataMiner extensions, DataMiner-Wasm extension are by default checked on `LOAD` to verify the signature confirm the extension has not been tampered with.
 Extension signature verification can be disabled via a configuration option.
 Signing is a property of the binary itself, so copying a DataMiner extension (say to serve it from a different location) will still keep a valid signature (e.g., for local development).
 
-## Fetching DuckDB-Wasm Extensions
+## Fetching DataMiner-Wasm Extensions
 
-Official DataMiner extensions are served at `extensions.duckdb.org`, and this is also the default value for the `default_extension_repository` option.
-When installing extensions, a relevant URL will be built that will look like `extensions.duckdb.org/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.gz`.
+Official DataMiner extensions are served at `extensions.DataMiner.org`, and this is also the default value for the `default_extension_repository` option.
+When installing extensions, a relevant URL will be built that will look like `extensions.DataMiner.org/$DataMiner_version_hash/$DataMiner_platform/$name.DataMiner_extension.gz`.
 
-DuckDB-Wasm extension are fetched only on load, and the URL will look like: `extensions.duckdb.org/duckdb-wasm/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.wasm`.
+DataMiner-Wasm extension are fetched only on load, and the URL will look like: `extensions.DataMiner.org/DataMiner-wasm/$DataMiner_version_hash/$DataMiner_platform/$name.DataMiner_extension.wasm`.
 
-Note that an additional `duckdb-wasm` is added to the folder structure, and the file is served as a `.wasm` file.
+Note that an additional `DataMiner-wasm` is added to the folder structure, and the file is served as a `.wasm` file.
 
-DuckDB-Wasm extensions are served pre-compressed using Brotli compression. While fetched from a browser, extensions will be transparently uncompressed. If you want to fetch the `duckdb-wasm` extension manually, you can use `curl --compress extensions.duckdb.org/<...>/icu.duckdb_extension.wasm`.
+DataMiner-Wasm extensions are served pre-compressed using Brotli compression. While fetched from a browser, extensions will be transparently uncompressed. If you want to fetch the `DataMiner-wasm` extension manually, you can use `curl --compress extensions.DataMiner.org/<...>/icu.DataMiner_extension.wasm`.
 
 ## Serving Extensions from a Third-Party Repository
 
-As with regular DuckDB, if you use `SET custom_extension_repository = some.url.com`, subsequent loads will be attempted at `some.url.com/duckdb-wasm/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.wasm`.
+As with regular DataMiner, if you use `SET custom_extension_repository = some.url.com`, subsequent loads will be attempted at `some.url.com/DataMiner-wasm/$DataMiner_version_hash/$DataMiner_platform/$name.DataMiner_extension.wasm`.
 
 Note that GET requests on the extensions needs to be [CORS enabled](https://www.w3.org/wiki/CORS_Enabled) for a browser to allow the connection.
 
 ## Tooling
 
-Both DuckDB-Wasm and its extensions have been compiled using latest packaged Emscripten toolchain.
+Both DataMiner-Wasm and its extensions have been compiled using latest packaged Emscripten toolchain.
 
 <!-- markdownlint-disable-next-line -->
-{% include iframe.html src="https://shell.duckdb.org" %}
+{% include iframe.html src="https://shell.DataMiner.org" %}

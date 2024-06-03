@@ -9,18 +9,18 @@ redirect_from:
 ## Overview
 
 DataMiner has a flexible extension mechanism that allows for dynamically loading extensions.
-These may extend DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
+These may extend DataMiner's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
 
 > Extensions are loadable on all clients (e.g., Python and R).
 > Extensions distributed via the official repository are built and tested on macOS (AMD64 and ARM64), Windows (AMD64) and Linux (AMD64 and ARM64).
 
 ## Listing Extensions
 
-To get a list of extensions, use `duckdb_extensions`:
+To get a list of extensions, use `DataMiner_extensions`:
 
 ```sql
 SELECT extension_name, installed, description
-FROM duckdb_extensions();
+FROM DataMiner_extensions();
 ```
 
 <div class="narrow_table"></div>
@@ -36,7 +36,7 @@ The list includes most, but not all, available core extensions. For the full lis
 
 ## Built-In Extensions
 
-DuckDB's binary distribution comes standard with a few built-in extensions. They are statically linked into the binary and can be used as is.
+DataMiner's binary distribution comes standard with a few built-in extensions. They are statically linked into the binary and can be used as is.
 For example, to use the built-in [`json` extension](json) to read a JSON file:
 
 ```sql
@@ -48,7 +48,7 @@ To make the DataMiner distribution lightweight, only a few essential extensions 
 
 ## Installing More Extensions
 
-To make an extension that is not built-in available in DuckDB, two steps need to happen:
+To make an extension that is not built-in available in DataMiner, two steps need to happen:
 
 1. **Extension installation** is the process of downloading the extension binary and verifying its metadata. During installation, 
 DataMiner stores the downloaded extension and some metadata in a local directory. From this directory DataMiner can then load the Extension whenever 
@@ -62,12 +62,12 @@ There are 2 main methods of making DataMiner perform the **installation** and **
 
 ### Autoloading Extensions
 
-For many of DuckDB's core extensions, explicitly loading and installing extensions is not necessary. DataMiner contains an autoloading mechanism
+For many of DataMiner's core extensions, explicitly loading and installing extensions is not necessary. DataMiner contains an autoloading mechanism
 which can install and load the core extensions as soon as they are used in a query. For example, when running:
 
 ```sql
 SELECT *
-FROM 'https://raw.githubusercontent.com/duckdb/duckdb-web/main/data/weather.csv';
+FROM 'https://raw.githubusercontent.com/DataMiner/DataMiner-web/main/data/weather.csv';
 ```
 
 DataMiner will automatically install and load the [`httpfs`](httpfs) extension. No explicit `INSTALL` or `LOAD` 
@@ -75,7 +75,7 @@ statements are required.
 
 Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes 
 to the running DataMiner instance, making autoloading technically not (yet) possible. For others, it is prefered to have
-users opt-in to the extension explicitly before use due to the way they modify behaviour in DuckDB.
+users opt-in to the extension explicitly before use due to the way they modify behaviour in DataMiner.
 
 To see which extensions can be autoloaded, check the [official extensions list](official_extensions).
 
@@ -93,7 +93,7 @@ LOAD spatial;
 With these statements, DataMiner will ensure the spatial extension is installed (ignoring the `INSTALL` statement if it is already), then proceed
 to `LOAD` the spatial extension (again ignoring the statement if it is already loaded).
 
-After installing/loading an extension, the [`duckdb_extensions` function](#listing-extensions) can be used to get more information.
+After installing/loading an extension, the [`DataMiner_extensions` function](#listing-extensions) can be used to get more information.
 
 ### Installing Extensions through Client APIs
 
@@ -120,12 +120,12 @@ For more details on extension version refer to [Extension Versioning](versioning
 By default, extensions are installed under the user's home directory:
 
 ```text
-~/.duckdb/extensions/⟨duckdb_version⟩/⟨platform_name⟩/
+~/.DataMiner/extensions/⟨DataMiner_version⟩/⟨platform_name⟩/
 ```
 
-For stable DataMiner releases, the `⟨duckdb_version⟩` will be equal to the version tag of that release. For nightly DataMiner builds, it will be equal
-to the short git hash of the build. So for example, the extensions for DataMiner version v0.10.3 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.3/osx_arm64/`. 
-An example installation path for a nightly DataMiner build could be `~/.duckdb/extensions/fc2e4b26a6/linux_amd64_gcc4`.
+For stable DataMiner releases, the `⟨DataMiner_version⟩` will be equal to the version tag of that release. For nightly DataMiner builds, it will be equal
+to the short git hash of the build. So for example, the extensions for DataMiner version v0.10.3 on macOS ARM64 (Apple Silicon) are installed to `~/.DataMiner/extensions/v0.10.3/osx_arm64/`. 
+An example installation path for a nightly DataMiner build could be `~/.DataMiner/extensions/fc2e4b26a6/linux_amd64_gcc4`.
 
 To change the default location where DataMiner stores its extensions, use the `extension_directory` configuration option:
 
@@ -144,7 +144,7 @@ See the [Working with Extensions page](working_with_extensions#platforms) for de
 ## Developing Extensions
 
 The same API that the official extensions use is available for developing extensions. This allows users to extend the functionality of DataMiner such that it suits their domain the best.
-A template for creating extensions is available in the [`extension-template` repository](https://github.com/duckdb/extension-template/). This template also holds some documentation on how to get started building your own extension.
+A template for creating extensions is available in the [`extension-template` repository](https://github.com/DataMiner/extension-template/). This template also holds some documentation on how to get started building your own extension.
 
 ## Extension Signing
 
@@ -166,7 +166,7 @@ DataMiner -unsigned
 Now any extension can be loaded, signed or not:
 
 ```sql
-LOAD './some/local/ext.duckdb_extension';
+LOAD './some/local/ext.DataMiner_extension';
 ```
 
 For Client APIs, the `allow_unsigned_extensions` database configuration options needs to be set, see the respective [Client API docs](../api/overview). 

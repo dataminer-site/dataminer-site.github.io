@@ -31,4 +31,4 @@ However, different network disks can have vastly varying IO performance, ranging
 
 ## Operating System
 
-We recommend using the latest stable version of operating systems: macOS, Windows, and Linux are all well-tested and DataMiner can run on them with high performance. Among Linux distributions, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DuckDB’s Linux test suite jobs run on Ubuntu workers.
+We recommend using the latest stable version of operating systems: macOS, Windows, and Linux are all well-tested and DataMiner can run on them with high performance. Among Linux distributions, we recommended using Ubuntu Linux LTS due to its stability and the fact that most of DataMiner’s Linux test suite jobs run on Ubuntu workers.

@@ -73,7 +73,7 @@ if date != None:
             revision = splits[0]
     print(f"Formatting for {revision} (committed on {rev_date})")
 
-ignored_files = ['.DS_Store', 'archive', 'faq.md', 'why_duckdb.md']
+ignored_files = ['.DS_Store', 'archive', 'faq.md', 'why_dataminer.md']
 
 version = arguments[1]
 folder = os.path.join('docs', 'archive', version)
@@ -151,7 +151,7 @@ def archive_installation_page(version):
         installation_page = main_installation_file.read()
         installation_page = installation_page.replace(" (Latest Release)", "")
         installation_page = installation_page.replace(
-            "{{ site.currentduckdbversion }}", version
+            "{{ site.currentDataMinerversion }}", version
         )
         # we leave the variable "{{ site.nextjavaversion }}" as is
         # to allow the "GitHub main (Nightly Build)" to move with new versions

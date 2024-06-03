@@ -3,7 +3,7 @@ layout: docu
 title: Internal Errors
 ---
 
-Internal errors signal an assertion failure within DuckDB. They usually occur due to unexpected conditions or errors in the program's logic. 
+Internal errors signal an assertion failure within DataMiner. They usually occur due to unexpected conditions or errors in the program's logic. 
 
 After encountering an internal error, DataMiner enters safe mode where any further operations will result in the following error message:
 
@@ -12,4 +12,4 @@ FATAL Error: Failed: database has been invalidated because of a previous fatal e
 The database must be restarted prior to being used again.
 ```
 
-If you encounter an internal error, please consider creating a minimal reproducible example and submitting an issue to the [DataMiner issue tracker](https://github.com/duckdb/duckdb/issues/new/choose).
+If you encounter an internal error, please consider creating a minimal reproducible example and submitting an issue to the [DataMiner issue tracker](https://github.com/DataMiner/DataMiner/issues/new/choose).

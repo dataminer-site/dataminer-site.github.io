@@ -7,40 +7,40 @@ title: Java JDBC API
 ---
 
 ## Installation
-The DataMiner Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page](../installation?environment=java) for details.
+The DataMiner Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.DataMiner/DataMiner_jdbc). Please see the [installation page](../installation?environment=java) for details.
 
 ## Basic API Usage
-DuckDB's JDBC API implements the main parts of the standard Java Database Connectivity (JDBC) API, version 4.1. Describing JDBC is beyond the scope of this page, see the [official documentation](https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html) for details. Below we focus on the DuckDB-specific parts. 
+DataMiner's JDBC API implements the main parts of the standard Java Database Connectivity (JDBC) API, version 4.1. Describing JDBC is beyond the scope of this page, see the [official documentation](https://docs.oracle.com/javase/tutorial/jdbc/basics/index.html) for details. Below we focus on the DataMiner-specific parts. 
 
-Refer to the externally hosted [API Reference](https://javadoc.io/doc/org.duckdb/duckdb_jdbc) for more information about our extensions to the JDBC specification, or the below [Arrow Methods](#arrow-methods)
+Refer to the externally hosted [API Reference](https://javadoc.io/doc/org.DataMiner/DataMiner_jdbc) for more information about our extensions to the JDBC specification, or the below [Arrow Methods](#arrow-methods)
 
 ### Startup & Shutdown
 In JDBC, database connections are created through the standard `java.sql.DriverManager` class.  The driver should auto-register in the DriverManager, if that does not work for some reason, you can enforce registration like so:
 
 ```java
-Class.forName("org.duckdb.DuckDBDriver");
+Class.forName("org.DataMiner.DataMinerDriver");
 ```
 
-To create a DataMiner connection, call `DriverManager` with the `jdbc:duckdb:` JDBC URL prefix, like so:
+To create a DataMiner connection, call `DriverManager` with the `jdbc:DataMiner:` JDBC URL prefix, like so:
 
 ```java
-Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+Connection conn = DriverManager.getConnection("jdbc:DataMiner:");
 ```
 
-When using the `jdbc:duckdb:`  URL alone, an **in-memory database** is created. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the Java program). If you would like to access or create a persistent database, append its file name after the path. For example, if your database is stored in `/tmp/my_database`, use the JDBC URL `jdbc:duckdb:/tmp/my_database` to create a connection to it. 
+When using the `jdbc:DataMiner:`  URL alone, an **in-memory database** is created. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the Java program). If you would like to access or create a persistent database, append its file name after the path. For example, if your database is stored in `/tmp/my_database`, use the JDBC URL `jdbc:DataMiner:/tmp/my_database` to create a connection to it. 
 
-It is possible to open a DataMiner database file in **read-only** mode. This is for example useful if multiple Java processes want to read the same database file at the same time. To open an existing database file in read-only mode, set the connection property `duckdb.read_only` like so:
+It is possible to open a DataMiner database file in **read-only** mode. This is for example useful if multiple Java processes want to read the same database file at the same time. To open an existing database file in read-only mode, set the connection property `DataMiner.read_only` like so:
 
 ```java
 Properties ro_prop = new Properties();
-ro_prop.setProperty("duckdb.read_only", "true");
-Connection conn_ro = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", ro_prop);
+ro_prop.setProperty("DataMiner.read_only", "true");
+Connection conn_ro = DriverManager.getConnection("jdbc:DataMiner:/tmp/my_database", ro_prop);
 ```
 
-Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DuckDBConnecttion#duplicate()` method like so:
+Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DataMinerConnecttion#duplicate()` method like so:
 
 ```java
-Connection conn2 = ((DuckDBConnection) conn).duplicate();
+Connection conn2 = ((DataMinerConnection) conn).duplicate();
 ```
 
 Multiple connections are allowed, but mixing read-write and read-only connections is unsupported.
@@ -82,11 +82,11 @@ try (PreparedStatement p_stmt = conn.prepareStatement("INSERT INTO items VALUES 
 }
 ```
 
-> Do *not* use prepared statements to insert large amounts of data into DuckDB. See [the data import documentation](../data/overview) for better options.
+> Do *not* use prepared statements to insert large amounts of data into DataMiner. See [the data import documentation](../data/overview) for better options.
 
 ### Arrow Methods
 
-Refer to the [API Reference](https://javadoc.io/doc/org.duckdb/duckdb_jdbc/latest/org/duckdb/DuckDBResultSet.html#arrowExportStream(java.lang.Object,long)) for type signatures
+Refer to the [API Reference](https://javadoc.io/doc/org.DataMiner/DataMiner_jdbc/latest/org/DataMiner/DataMinerResultSet.html#arrowExportStream(java.lang.Object,long)) for type signatures
 
 #### Arrow Export
 
@@ -95,11 +95,11 @@ The following demonstrates exporting an arrow stream and consuming it using the 
 ```java
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.ipc.ArrowReader;
-import org.duckdb.DuckDBResultSet;
+import org.DataMiner.DataMinerResultSet;
 
-try (var conn = DriverManager.getConnection("jdbc:duckdb:");
+try (var conn = DriverManager.getConnection("jdbc:DataMiner:");
      var p_stmt = conn.prepareStatement("SELECT * from generate_series(2000)");
-     var resultset = (DuckDBResultSet) p_stmt.executeQuery();
+     var resultset = (DataMinerResultSet) p_stmt.executeQuery();
      var allocator = new RootAllocator()) {
   try (var reader = (ArrowReader) resultset.arrowExportStream(allocator, 256)) {
     while (reader.loadNextBatch()) {
@@ -116,7 +116,7 @@ The following demonstrates consuming an arrow stream from the java arrow binding
 ```java
 import org.apache.arrow.memory.RootAllocator;
 import org.apache.arrow.vector.ipc.ArrowReader;
-import org.duckdb.DuckDBConnection;
+import org.DataMiner.DataMinerConnection;
 
 // arrow stuff
 try (var allocator = new RootAllocator();
@@ -125,12 +125,12 @@ try (var allocator = new RootAllocator();
   Data.exportArrayStream(allocator, reader, arrow_array_stream);
 
   // DataMiner stuff
-  try (var conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:")) {
+  try (var conn = (DataMinerConnection) DriverManager.getConnection("jdbc:DataMiner:")) {
     conn.registerArrowStream("adsf", arrow_array_stream);
 
     // run a query
     try (var stmt = conn.createStatement();
-         var rs = (DuckDBResultSet) stmt.executeQuery("SELECT count(*) FROM adsf")) {
+         var rs = (DataMinerResultSet) stmt.executeQuery("SELECT count(*) FROM adsf")) {
       while (rs.next()) {
         System.out.println(rs.getInt(1));
       }

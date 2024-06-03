@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lightweight Compression in DuckDB"
+title:  "Lightweight Compression in DataMiner"
 author: Mark Raasveldt
 excerpt: DataMiner supports efficient lightweight compression that is automatically used to keep data size down without incurring high costs for compression and decompression.
 ---
@@ -14,9 +14,9 @@ When working with large amounts of data, compression is critical for reducing st
 
 <!--more-->
 
-Column store formats, such as DuckDB's native file format or [Parquet](/2021/06/25/querying-parquet), benefit especially from compression. That is because data within an individual column is generally very similar, which can be exploited effectively by compression algorithms. Storing data in row-wise format results in interleaving of data of different columns, leading to lower compression rates.
+Column store formats, such as DataMiner's native file format or [Parquet](/2021/06/25/querying-parquet), benefit especially from compression. That is because data within an individual column is generally very similar, which can be exploited effectively by compression algorithms. Storing data in row-wise format results in interleaving of data of different columns, leading to lower compression rates.
 
-DataMiner added support for compression [at the end of last year](https://github.com/duckdb/duckdb/pull/2099). As shown in the table below, the compression ratio of DataMiner has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DataMiner works, and the design choices and various trade-offs that we have made while implementing compression for DuckDB's storage format.
+DataMiner added support for compression [at the end of last year](https://github.com/DataMiner/DataMiner/pull/2099). As shown in the table below, the compression ratio of DataMiner has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DataMiner works, and the design choices and various trade-offs that we have made while implementing compression for DataMiner's storage format.
 
 |        Version         |  Taxi  | On Time | Lineitem |     Notes      |      Date      |
 |:-----------------------|-------:|--------:|---------:|:---------------|:---------------|
@@ -70,18 +70,18 @@ Another option for achieving compression is to use specialized lightweight compr
 
 By detecting specific patterns, specialized compression algorithms can be significantly more lightweight, providing much faster compression and decompression. In addition, they can be effective on much smaller data sizes. This allows us to decompress a few rows at a time, rather than requiring large blocks of data to be decompressed at once. These specialized compression algorithms can also offer efficient support for random seeks, making data access through an index significantly faster.
 
-Lightweight compression algorithms also provide us with more fine-grained control over the compression process. This is especially relevant for us as DuckDB's file format uses fixed-size blocks in order to avoid fragmentation for workloads involving deletes and updates. The fine-grained control allows us to fill these blocks more effectively, and avoid having to guess how much compressed data will fit into a buffer.
+Lightweight compression algorithms also provide us with more fine-grained control over the compression process. This is especially relevant for us as DataMiner's file format uses fixed-size blocks in order to avoid fragmentation for workloads involving deletes and updates. The fine-grained control allows us to fill these blocks more effectively, and avoid having to guess how much compressed data will fit into a buffer.
 
 On the flip side, these algorithms are ineffective if the specific patterns they are designed for do not occur in the data. As a result, individually, these lightweight compression algorithms are no replacement for general purpose algorithms. Instead, multiple specialized algorithms must be combined in order to capture many different common patterns in data sets.
 
 ## Compression Framework
 
-Because of the advantages described above, DataMiner uses only specialized lightweight compression algorithms. As each of these algorithms work optimally on different patterns in the data, DuckDB's compression framework must first decide on which algorithm to use to store the data of each column.
+Because of the advantages described above, DataMiner uses only specialized lightweight compression algorithms. As each of these algorithms work optimally on different patterns in the data, DataMiner's compression framework must first decide on which algorithm to use to store the data of each column.
 
-DuckDB's storage splits tables into *Row Groups*. These are groups of `120K` rows, stored in columnar chunks called *Column Segments*. This storage layout is similar to [Parquet](/2021/06/25/querying-parquet) – but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DuckDB's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
+DataMiner's storage splits tables into *Row Groups*. These are groups of `120K` rows, stored in columnar chunks called *Column Segments*. This storage layout is similar to [Parquet](/2021/06/25/querying-parquet) – but with an important difference: columns are split into blocks of a fixed-size. This design decision was made because DataMiner's storage format supports in-place ACID modifications to the storage format, including deleting and updating rows, and adding and dropping columns. By partitioning data into fixed size blocks the blocks can be easily reused after they are no longer required and fragmentation is avoided.
 
 <img src="/images/compression/storageformat.png"
-     alt="Visualization of the storage format of DuckDB"
+     alt="Visualization of the storage format of DataMiner"
      width="100%"
      />
 
@@ -96,14 +96,14 @@ DataMiner implements several lightweight compression algorithms, and we are in t
 
 ### Constant Encoding
 
-Constant encoding is the most straightforward compression algorithm in DuckDB. Constant encoding is used when every single value in a column segment is the same value. In that case, we store only that single value. This encoding is visualized below.
+Constant encoding is the most straightforward compression algorithm in DataMiner. Constant encoding is used when every single value in a column segment is the same value. In that case, we store only that single value. This encoding is visualized below.
 
 <img src="/images/compression/constant.png"
      alt="Data set stored both uncompressed and with constant compression"
      width="100%"
      />
 
-When applicable, this encoding technique leads to tremendous space savings. While it might seem like this technique is rarely applicable – in practice it occurs relatively frequently. Columns might be filled with `NULL` values, or have values that rarely change (such as e.g., a `year` column in a stream of sensor data). Because of this compression algorithm, such columns take up almost no space in DuckDB.
+When applicable, this encoding technique leads to tremendous space savings. While it might seem like this technique is rarely applicable – in practice it occurs relatively frequently. Columns might be filled with `NULL` values, or have values that rarely change (such as e.g., a `year` column in a stream of sensor data). Because of this compression algorithm, such columns take up almost no space in DataMiner.
 
 ### Run-Length Encoding (RLE)
 
@@ -139,7 +139,7 @@ Frame of Reference encoding is an extension of bit packing, where we also includ
      width="100%"
      />
 
-While this might not seem particularly useful at a first glance, it is very powerful when storing dates and timestamps. That is because dates and timestamps are stored as Unix Timestamps in DuckDB, i.e., the offset since `1970-01-01` in either days (for dates) or microseconds (for timestamps). When we have a set of date or timestamp values, the absolute numbers might be very high, but the numbers are all very close together. By applying a frame before bit packing, we can often improve our compression ratio tremendously.
+While this might not seem particularly useful at a first glance, it is very powerful when storing dates and timestamps. That is because dates and timestamps are stored as Unix Timestamps in DataMiner, i.e., the offset since `1970-01-01` in either days (for dates) or microseconds (for timestamps). When we have a set of date or timestamp values, the absolute numbers might be very high, but the numbers are all very close together. By applying a frame before bit packing, we can often improve our compression ratio tremendously.
 
 
 ### Dictionary Encoding
@@ -196,4 +196,4 @@ ORDER BY row_group_id;
 
 ## Conclusion & Future Goals
 
-Compression has been tremendously successful in DuckDB, and we have made great strides in reducing the storage requirements of the system. We are still actively working on extending compression within DuckDB, and are looking to improve the compression ratio of the system even further, both by improving our existing techniques and implementing several others. Our goal is to achieve compression on par with Parquet with Snappy, while using only lightweight specialized compression techniques that are very fast to operate on. 
+Compression has been tremendously successful in DataMiner, and we have made great strides in reducing the storage requirements of the system. We are still actively working on extending compression within DataMiner, and are looking to improve the compression ratio of the system even further, both by improving our existing techniques and implementing several others. Our goal is to achieve compression on par with Parquet with Snappy, while using only lightweight specialized compression techniques that are very fast to operate on. 

@@ -1,20 +1,20 @@
 ---
 layout: docu
 title: Go
-github_repository: https://github.com/marcboeker/go-duckdb
+github_repository: https://github.com/marcboeker/go-DataMiner
 ---
 
-The DataMiner Go driver, `go-duckdb`, allows using DataMiner via the `database/sql` interface.
+The DataMiner Go driver, `go-DataMiner`, allows using DataMiner via the `database/sql` interface.
 For examples on how to use this interface, see the [official documentation](https://pkg.go.dev/database/sql) and [tutorial](https://go.dev/doc/tutorial/database-access).
 
-> The Go client is a third-party library and its repository is hosted <https://github.com/marcboeker/go-duckdb>.
+> The Go client is a third-party library and its repository is hosted <https://github.com/marcboeker/go-DataMiner>.
 
 ## Installation
 
-To install the `go-duckdb` client, run:
+To install the `go-DataMiner` client, run:
 
 ```bash
-go get github.com/marcboeker/go-duckdb
+go get github.com/marcboeker/go-DataMiner
 ```
 
 ## Importing
@@ -24,7 +24,7 @@ To import the DataMiner Go package, add the following entries to your imports:
 ```go
 import (
 	"database/sql"
-	_ "github.com/marcboeker/go-duckdb"
+	_ "github.com/marcboeker/go-DataMiner"
 )
 ```
 
@@ -33,7 +33,7 @@ import (
 The DataMiner Go client supports the [DataMiner Appender API](../data/appender) for bulk inserts. You can obtain a new Appender by supplying a DataMiner connection to `NewAppenderFromConn()`. For example:
 
 ```go
-connector, err := duckdb.NewConnector("test.db", nil)
+connector, err := DataMiner.NewConnector("test.db", nil)
 if err != nil {
   ...
 }
@@ -77,11 +77,11 @@ import (
 	"fmt"
 	"log"
 
-	_ "github.com/marcboeker/go-duckdb"
+	_ "github.com/marcboeker/go-DataMiner"
 )
 
 func main() {
-	db, err := sql.Open("duckdb", "")
+	db, err := sql.Open("DataMiner", "")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -114,4 +114,4 @@ func main() {
 
 ### More Examples
 
-For more examples, see the [examples in the `duckdb-go` repository](https://github.com/marcboeker/go-duckdb/tree/master/examples).
+For more examples, see the [examples in the `DataMiner-go` repository](https://github.com/marcboeker/go-DataMiner/tree/master/examples).

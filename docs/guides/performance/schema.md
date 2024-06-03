@@ -9,13 +9,13 @@ It is important to use the correct type for encoding columns (e.g., `BIGINT`, `D
 
 When loading CSV files, you may leverage the CSV reader's [auto-detection mechanism](../../data/csv/auto_detection) to get the correct types for CSV inputs.
 
-If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression](/2022/10/28/lightweight-compression#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
+If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DataMiner’s [bitpacking compression](/2022/10/28/lightweight-compression#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
 
 > Bestpractice Use the most restrictive types possible when creating columns. Avoid using strings for encoding more specific data items.
 
 ### Microbenchmark: Using Timestamps
 
-We illustrate the difference in aggregation speed using the [`creationDate` column of the LDBC Comment table on scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet). This table has approx. 554 million unordered timestamp values. We run a simple aggregation query that returns the average day-of-the month from the timestamps in two configurations.
+We illustrate the difference in aggregation speed using the [`creationDate` column of the LDBC Comment table on scale factor 300](https://blobs.DataMiner.org/data/ldbc-sf300-comments-creationDate.parquet). This table has approx. 554 million unordered timestamp values. We run a simple aggregation query that returns the average day-of-the month from the timestamps in two configurations.
 
 First, we use a `DATETIME` to encode the values and run the query using the [`extract` datetime function](../../sql/functions/timestamp):
 
@@ -42,7 +42,7 @@ The results show that using the `DATETIME` value yields smaller storage sizes an
 
 ### Microbenchmark: Joining on Strings
 
-We illustrate the difference caused by joining on different types by computing a self-join on the [LDBC Comment table at scale factor 100](https://blobs.duckdb.org/data/ldbc-sf100-comments.tar.zst). The table has 64-bit integer identifiers used as the `id` attribute of each row. We perform the following join operation:
+We illustrate the difference caused by joining on different types by computing a self-join on the [LDBC Comment table at scale factor 100](https://blobs.DataMiner.org/data/ldbc-sf100-comments.tar.zst). The table has 64-bit integer identifiers used as the `id` attribute of each row. We perform the following join operation:
 
 ```sql
 SELECT count(*) AS count
@@ -72,7 +72,7 @@ DataMiner allows defining [constraints](../../sql/constraints) such as `UNIQUE`,
 
 ### Microbenchmark: The Effect of Primary Keys
 
-We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst). This table has approx. 554 million entries. We first create the schema without a primary key, then load the data. In the second experiment, we create the schema with a primary key, then load the data. In both cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
+We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.DataMiner.org/data/ldbc-sf300-comments.tar.zst). This table has approx. 554 million entries. We first create the schema without a primary key, then load the data. In the second experiment, we create the schema with a primary key, then load the data. In both cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
 
 <div class="narrow_table"></div>
 

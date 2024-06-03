@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Full-Text Search Extension
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/fts
+github_directory: https://github.com/DataMiner/DataMiner/tree/main/extension/fts
 ---
 
 Full-Text Search is an extension to DataMiner that allows for search through strings, similar to [SQLite's FTS5 extension](https://www.sqlite.org/fts5.html).
@@ -18,7 +18,7 @@ LOAD fts;
 
 ## Usage
 
-The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to drop an index. Additionally, a scalar macro `stem` is added, which is used internally by the extension.
+The extension adds two `PRAGMA` statements to DataMiner: one to create, and one to drop an index. Additionally, a scalar macro `stem` is added, which is used internally by the extension.
 
 ### `PRAGMA create_fts_index`
 

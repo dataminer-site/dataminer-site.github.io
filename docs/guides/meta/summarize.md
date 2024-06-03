@@ -66,5 +66,5 @@ CREATE TABLE tbl_summary AS SELECT * FROM (SUMMARIZE tbl);
 It is possible to summarize remote tables via the [`httpfs` extension](../../extensions/httpfs) using the `SUMMARIZE TABLE` statement. For example:
 
 ```sql
-SUMMARIZE TABLE 'https://blobs.duckdb.org/data/Star_Trek-Season_1.csv';
+SUMMARIZE TABLE 'https://blobs.DataMiner.org/data/Star_Trek-Season_1.csv';
 ```

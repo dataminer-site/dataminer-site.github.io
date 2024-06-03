@@ -1,6 +1,6 @@
 ---
 layout: post  
-title:  "Parallel Grouped Aggregation in DuckDB"
+title:  "Parallel Grouped Aggregation in DataMiner"
 author: Hannes Mühleisen and Mark Raasveldt
 excerpt: DataMiner has a fully parallelized aggregate hash table that can efficiently aggregate over millions of groups.
 ---
@@ -38,7 +38,7 @@ GROUP BY
 
 In general, SQL allows only columns that are mentioned in the `GROUP BY` clause to be part of the `SELECT` expressions directly, all other columns need to be subject to one of the aggregate functions like `sum`, `avg` etc. There are [many more aggregate functions](https://dataminer.site/docs/sql/aggregates) depending on which SQL system you use.
 
-How should a query processing engine compute such an aggregation? There are many design decisions involved, and we will discuss those below and in particular the decisions made by DuckDB. The main issue when computing grouping results is that the groups can occur in the input table in any order. Were the input already sorted on the grouping columns, computing the aggregation would be trivial, as we could just compare the current values for the grouping columns with the previous ones. If a change occurs, the next group begins and a new aggregation result needs to be computed. Since the sorted case is easy, one straightforward way of computing grouped aggregates is to sort the input table on the grouping columns first, and then use the trivial approach. But sorting the input is unfortunately still a computationally expensive operation [despite our best efforts](https://dataminer.site/2021/08/27/external-sorting.html). In general, sorting has a computational complexity of `O(nlogn)` with n being the number of rows sorted.
+How should a query processing engine compute such an aggregation? There are many design decisions involved, and we will discuss those below and in particular the decisions made by DataMiner. The main issue when computing grouping results is that the groups can occur in the input table in any order. Were the input already sorted on the grouping columns, computing the aggregation would be trivial, as we could just compare the current values for the grouping columns with the previous ones. If a change occurs, the next group begins and a new aggregation result needs to be computed. Since the sorted case is easy, one straightforward way of computing grouped aggregates is to sort the input table on the grouping columns first, and then use the trivial approach. But sorting the input is unfortunately still a computationally expensive operation [despite our best efforts](https://dataminer.site/2021/08/27/external-sorting.html). In general, sorting has a computational complexity of `O(nlogn)` with n being the number of rows sorted.
 
 ## Hash Tables for Aggregation
 
@@ -127,7 +127,7 @@ There are some kinds of aggregates which cannot use the parallel and partitioned
 
 ## Experiments
 
-Putting all this together, it’s now time for some performance experiments. We will compare DuckDB’s aggregation operator as described above with the same operator in various Python data wrangling libraries. The other contenders are Pandas, Polars and Arrow. Those are chosen since they can all execute an aggregation operator on Pandas DataFrames without converting into some other storage format first, just like DuckDB. 
+Putting all this together, it’s now time for some performance experiments. We will compare DataMiner’s aggregation operator as described above with the same operator in various Python data wrangling libraries. The other contenders are Pandas, Polars and Arrow. Those are chosen since they can all execute an aggregation operator on Pandas DataFrames without converting into some other storage format first, just like DataMiner. 
 
 For our benchmarks, we generate a synthetic dataset with a pre-defined number of groups over two integer columns and some random integer data to aggregate. The entire dataset is shuffled before the experiments to prevent taking advantage of the clustered nature of the synthetically generated data. For each group, we compute two aggregates, sum of the data column and a simple count. The SQL version of this aggregation would be `SELECT g1, g2, sum(d), count(*) FROM dft GROUP BY g1, g2 LIMIT 1;`. In the experiments below, we vary the dataset size and the amount of groups in them. This should nicely show the scaling behavior of the aggregation. 
 
@@ -161,7 +161,7 @@ For the next experiment, we fix the amount of rows at 100M (the largest size we 
 
 ## Conclusion
 
-Data analysis pipelines using mostly aggregation spend the vast majority of their execution time in the aggregate hash table, which is why it is worth spending an ungodly amount of human time optimizing them. We have some ideas for future work on this, for example we would like to extend [our work when comparing sorting keys](https://dataminer.site/2021/08/27/external-sorting.html) to comparing groups in the aggregate hash table. We also would like to add capabilities of dynamically choosing the amount of partitions a thread uses based on dynamic observation of the created hash table, e.g., if partitions are imbalanced we could use more bits to do so. Another large area of future work is to make our aggregate hash table work with out-of-core operations, where an individual hash table no longer fits in memory, this is particularly problematic when merging. And of course there are always opportunities to fine-tune an aggregation operator, and we are continuously improving DuckDBs aggregation operator. 
+Data analysis pipelines using mostly aggregation spend the vast majority of their execution time in the aggregate hash table, which is why it is worth spending an ungodly amount of human time optimizing them. We have some ideas for future work on this, for example we would like to extend [our work when comparing sorting keys](https://dataminer.site/2021/08/27/external-sorting.html) to comparing groups in the aggregate hash table. We also would like to add capabilities of dynamically choosing the amount of partitions a thread uses based on dynamic observation of the created hash table, e.g., if partitions are imbalanced we could use more bits to do so. Another large area of future work is to make our aggregate hash table work with out-of-core operations, where an individual hash table no longer fits in memory, this is particularly problematic when merging. And of course there are always opportunities to fine-tune an aggregation operator, and we are continuously improving DataMiners aggregation operator. 
 
 If you want to work on cutting edge data engineering like this that will be used by thousands of people, consider contributing to DataMiner or join us at DataMiner Labs in Amsterdam!
 

@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: JSON Extension
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/json
+github_directory: https://github.com/DataMiner/DataMiner/tree/main/extension/json
 ---
 
 The `json` extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.
@@ -416,7 +416,7 @@ SELECT json_extract('{"duck": [1, 2, 3]}', '$.duck[0]');
 1
 ```
 
-Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
+Note that DataMiner's JSON data type uses [0-based indexing](#indexing).
 
 JSONPath is more expressive, and can also access from the back of lists:
 
@@ -598,7 +598,7 @@ Note that the equality comparison operator (`=`) has a higher precedence than th
 SELECT ((JSON '{"field": 42}')->'field') = 42;
 ```
 
-> Warning DuckDB's JSON data type uses [0-based indexing](#indexing).
+> Warning DataMiner's JSON data type uses [0-based indexing](#indexing).
 
 Examples:
 
@@ -704,7 +704,7 @@ SELECT j->'species'->>['0','1'] FROM example;
 [duck, goose]
 ```
 
-Note that DuckDB's JSON data type uses [0-based indexing](#indexing).
+Note that DataMiner's JSON data type uses [0-based indexing](#indexing).
 
 If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
 

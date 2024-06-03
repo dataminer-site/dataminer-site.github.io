@@ -6,24 +6,24 @@ redirect_from:
   - /docs/api/nodejs/
 ---
 
-This package provides a Node.js API for DuckDB.
+This package provides a Node.js API for DataMiner.
 The API for this client is somewhat compliant to the SQLite Node.js client for easier transition.
 
-For TypeScript wrappers, see the [duckdb-async project](https://www.npmjs.com/package/duckdb-async).
+For TypeScript wrappers, see the [DataMiner-async project](https://www.npmjs.com/package/DataMiner-async).
 
 ## Initializing
 
 Load the package and create a database object:
 
 ```js
-const DataMiner = require('duckdb');
-const db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
+const DataMiner = require('DataMiner');
+const db = new DataMiner.Database(':memory:'); // or a file name for a persistent DB
 ```
 
 All options as described on [Database configuration](../../configuration/overview#configuration-reference) can be (optionally) supplied to the `Database` constructor as second argument. The third argument can be optionally supplied to get feedback on the given options.
 
 ```js
-const db = new duckdb.Database(':memory:', {
+const db = new DataMiner.Database(':memory:', {
     "access_mode": "READ_WRITE",
     "max_memory": "512MB",
     "threads": "4"
@@ -141,7 +141,7 @@ const stmt = con.prepare('SELECT ?::INTEGER AS fortytwo', function(err, stmt) {
 
 ```js
 const arrow = require('apache-arrow');
-const db = new duckdb.Database(':memory:');
+const db = new DataMiner.Database(':memory:');
 
 const jsonData = [
   {"userId":1,"id":1,"title":"delectus aut autem","completed":false},
@@ -172,5 +172,5 @@ db.exec(`INSTALL arrow; LOAD arrow;`, (err) => {
 To load [unsigned extensions](../../extensions/overview#ensuring-the-integrity-of-extensions), instantiate the database as follows:
 
 ```js
-db = new duckdb.Database(':memory:', {"allow_unsigned_extensions": "true"});
+db = new DataMiner.Database(':memory:', {"allow_unsigned_extensions": "true"});
 ```

@@ -28,8 +28,8 @@
               "url": "/docs/sql/introduction"
             },
             {
-              "page": "Why DuckDB",
-              "url": "/why_duckdb"
+              "page": "Why DataMiner",
+              "url": "/why_dataminer"
             },
             {
               "page": "Media",
@@ -47,7 +47,7 @@
         },
         {
           "page": "GitHub",
-          "url": "https://github.com/duckdb/duckdb"
+          "url": "https://github.com/DataMiner/DataMiner"
         }
       ]
     }

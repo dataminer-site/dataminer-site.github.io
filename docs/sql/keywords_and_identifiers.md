@@ -9,10 +9,10 @@ redirect_from:
 
 ## Identifiers
 
-Similarly to other SQL dialects and programming languages, identifiers in DuckDB's SQL are subject to several rules.
+Similarly to other SQL dialects and programming languages, identifiers in DataMiner's SQL are subject to several rules.
 
 * Unquoted identifiers need to conform to a number of rules:
-    * They must not be a reserved keyword (see [`duckdb_keywords()`](duckdb_table_functions#duckdb_keywords)), e.g., `SELECT 123 AS SELECT` will fail.
+    * They must not be a reserved keyword (see [`DataMiner_keywords()`](DataMiner_table_functions#DataMiner_keywords)), e.g., `SELECT 123 AS SELECT` will fail.
     * They must not start with a number or special character, e.g., `SELECT 123 AS 1col` is invalid.
     * They cannot contain whitespaces (including tabs and newline characters).
 * Identifiers can be quoted using double-quote characters (`"`). Quoted identifiers can use any keyword, whitespace or special character, e.g., `"SELECT"` and `" § 🦆 ¶ "` are valid identifiers.
@@ -41,9 +41,9 @@ FROM (SELECT UNNEST({'a': 42, 'b': {'a': 88, 'b': 99}}, recursive := true));
 
 Database names are subject to the rules for [identifiers](#identifiers).
 
-Additionally, it is best practice to avoid DuckDB's two internal [database schema names](duckdb_table_functions#duckdb_databases), `system` and `temp`.
+Additionally, it is best practice to avoid DataMiner's two internal [database schema names](DataMiner_table_functions#DataMiner_databases), `system` and `temp`.
 By default, persistent databases are named after their filename without the extension.
-Therefore, the filenames `system.db` and `temp.db` (as well as `system.duckdb` and `temp.duckdb`) result in the database names `system` and `temp`, respectively.
+Therefore, the filenames `system.db` and `temp.db` (as well as `system.DataMiner` and `temp.DataMiner`) result in the database names `system` and `temp`, respectively.
 If you need to attach to a database that has one of these names, use an alias, e.g.:
 
 ```sql
@@ -55,7 +55,7 @@ USE temp2;
 
 ### Keywords and Function Names
 
-SQL keywords and function names are case-insensitive in DuckDB.
+SQL keywords and function names are case-insensitive in DataMiner.
 
 For example, the following two queries are equivalent:
 

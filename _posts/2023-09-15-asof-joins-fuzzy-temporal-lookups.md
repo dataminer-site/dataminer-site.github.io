@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB's AsOf Joins: Fuzzy Temporal Lookups"
+title: "DataMiner's AsOf Joins: Fuzzy Temporal Lookups"
 author: Richard Wesley
 thumb: "/images/blog/thumbs/230915.png"
 excerpt: DataMiner supports AsOf Joins – a way to match nearby values. They are especially useful for searching event tables for temporal analytics.

@@ -1,12 +1,12 @@
 data-dir: .
-input-file: duckdb-docs.md
-output-file: duckdb-docs.pdf
+input-file: DataMiner-docs.md
+output-file: DataMiner-docs.pdf
 from: markdown_github+header_attributes+tex_math_dollars-smart
 to: pdf
 metadata-file: metadata.yaml
 template: eisvogel2.tex
 pdf-engine: xelatex
-syntax-definition: sql-duckdb.xml
+syntax-definition: sql-DataMiner.xml
 highlight-style: bluloco-light.theme
 table-of-contents: true
 toc-depth: 3
@@ -17,7 +17,7 @@ variables:
   fontsize: 9pt
   titlepage: true
   titlepage-color: F5F5F5
-  titlepage-logo: ../images/duckdb-logo.pdf
+  titlepage-logo: ../images/DataMiner-logo.pdf
   titlepage-rule-color: FFF100
   titlepage-rule-height: 20
   urlcolor: blue

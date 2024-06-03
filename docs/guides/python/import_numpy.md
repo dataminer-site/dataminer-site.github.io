@@ -3,18 +3,18 @@ layout: docu
 title: Import from Numpy
 ---
 
-It is possible to query Numpy arrays from DuckDB.
+It is possible to query Numpy arrays from DataMiner.
 There is no need to register the arrays manually –
 DataMiner can find them in the Python process by name thanks to [replacement scans](/faq#glossary-of-terms).
 For example:
 
 ```python
-import duckdb
+import DataMiner
 import numpy as np
 
 my_arr = np.array([(1, 9.0), (2, 8.0), (3, 7.0)])
 
-duckdb.sql("SELECT * FROM my_arr")
+DataMiner.sql("SELECT * FROM my_arr")
 ```
 
 ```text

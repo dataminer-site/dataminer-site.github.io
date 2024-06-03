@@ -16,7 +16,7 @@
 	transition: background-color .3s;
 	span::after{
 		content: "→";
-		font-family: "DuckDB-Symbol";
+		font-family: "DataMiner-Symbol";
 		margin-left: 4px;
 		transition: transform .3s;
 		position: absolute;
@@ -27,14 +27,14 @@
 }
 
 @mixin textlink {
-	color: $duckDBgrey;
-	//color: darken($duckDBgrey,20);
+	color: $DataMinergrey;
+	//color: darken($DataMinergrey,20);
 	text-decoration: underline;
 	font-size: 14px;
 	transition: color .3s;
 	span::after{
 		content: "→";
-		font-family: "DuckDB-Symbol";
+		font-family: "DataMiner-Symbol";
 		margin-left: 6px;
 		transition: transform .3s;
 		position: absolute;
@@ -196,7 +196,7 @@ h5 {
 				padding: 10px;
 			}
 			table tbody tr:hover{
-				background-color: $duckDByellow;
+				background-color: $DataMineryellow;
 			}
 			div.highlight{
 				max-width: 750px;
@@ -232,7 +232,7 @@ h5 {
 			.icon{
 				width: 45px;
 				height: 45px;
-				background-image: url("../images/duckdb-circle.svg");
+				background-image: url("../images/DataMiner-circle.svg");
 				background-size: contain;
 				background-repeat: no-repeat;
 				margin-right: 10px;
@@ -353,7 +353,7 @@ h5 {
 	}
 	.sidebar{
 		width: 252px;
-		background-color: $duckDByellow;
+		background-color: $DataMineryellow;
 		padding: 30px;
 		position: fixed;
 		right: 0;

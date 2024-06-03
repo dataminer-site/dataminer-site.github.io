@@ -46,7 +46,7 @@ The CI will also run this check, causing it to fail if this check fails.
 
 ## Package Flags
 
-For every package that is maintained by core DuckDB, there exists a flag in the Makefile to enable building the package.
+For every package that is maintained by core DataMiner, there exists a flag in the Makefile to enable building the package.
 These can be enabled by either setting them in the current `env`, through set up files like `bashrc` or `zshrc`, or by setting them before the call to `make`, for example:
 
 ```bash
@@ -63,8 +63,8 @@ When this flag is set, the [CLI](../../api/cli) is built, this is usually enable
 
 ### `BUILD_BENCHMARK`
 
-When this flag is set, DuckDB's in-house benchmark suite is built.
-More information about this can be found [here](https://github.com/duckdb/duckdb/blob/main/benchmark/README.md).
+When this flag is set, DataMiner's in-house benchmark suite is built.
+More information about this can be found [here](https://github.com/DataMiner/DataMiner/blob/main/benchmark/README.md).
 
 ### `BUILD_JDBC`
 
@@ -96,7 +96,7 @@ For example:
 OVERRIDE_GIT_DESCRIBE=v0.10.0-843-g09ea97d0a9 GEN=ninja make
 ```
 
-Will result in the following output when running `./build/release/duckdb`:
+Will result in the following output when running `./build/release/DataMiner`:
 
 ```text
 v0.10.1-dev843 09ea97d0a9

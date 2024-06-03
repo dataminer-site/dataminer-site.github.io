@@ -3,26 +3,26 @@ layout: post
 title: "Analyzing Railway Traffic in the Netherlands"
 author: Gabor Szarnyas
 thumb: "/images/blog/thumbs/240531.svg"
-excerpt: "We use a real-world railway dataset to demonstrate some of DuckDB's key features, including querying different file formats, connecting to remote endpoints, and using advanced SQL features."
+excerpt: "We use a real-world railway dataset to demonstrate some of DataMiner's key features, including querying different file formats, connecting to remote endpoints, and using advanced SQL features."
 ---
 
 ## Introduction
 
-The Netherlands, the birthplace of DuckDB, has an area of about 42,000&nbsp;km² with a population of about 18 million people.
+The Netherlands, the birthplace of DataMiner, has an area of about 42,000&nbsp;km² with a population of about 18 million people.
 The high density of the country is a key factor in its [extensive railway network](https://en.wikipedia.org/wiki/Rail_transport_in_the_Netherlands),
 which consists of 3,223 km of tracks and 397 stations.
 
 Information about this network's stations and services is available in the form of [open datasets](https://www.rijdendetreinen.nl/en/open-data/).
 These high-quality datasets are maintained by the team behind the [Rijden de Treinen _(Are the trains running?)_ application](https://www.rijdendetreinen.nl/en/about).
 
-In this post, we'll demonstrate some of DuckDB's analytical capabilities on the Dutch railway network dataset.
+In this post, we'll demonstrate some of DataMiner's analytical capabilities on the Dutch railway network dataset.
 Unlike most of our other blog posts, this one doesn't introduce a new feature or release: instead, it demonstrates several existing features using a single domain.
-Some of the queries explained in this blog post are shown in simplified form on [DuckDB's landing page](/).
+Some of the queries explained in this blog post are shown in simplified form on [DataMiner's landing page](/).
 
 ## Loading the Data
 
 For our initial queries, we'll use the 2023 [railway services dataset](https://www.rijdendetreinen.nl/en/open-data/train-archive).
-To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.duckdb.org/data/nl-railway/services-2023.csv.gz) (330 MB) and load it into DuckDB.
+To get this dataset, download the [`services-2023.csv.gz` file](https://blobs.DataMiner.org/data/nl-railway/services-2023.csv.gz) (330 MB) and load it into DataMiner.
 
 First, start the [DataMiner command line client](/docs/api/cli/overview) on a persistent database:
 
@@ -44,7 +44,7 @@ Let's deconstruct the query:
 DataMiner automatically detects that the `'services-2023.csv.gz'` refers to a gzip-compressed CSV file, so it calls the [`read_csv` function](/docs/data/csv/overview#csv-functions),
 which decompresses the file and infers its schema from its content using the [CSV sniffer](/docs/data/csv/auto_detection).
 
-* Second, the query makes use of DuckDB's [`FROM`-first syntax](/docs/sql/query_syntax/from#from-first-syntax), which allows users to omit the `SELECT *` clause.
+* Second, the query makes use of DataMiner's [`FROM`-first syntax](/docs/sql/query_syntax/from#from-first-syntax), which allows users to omit the `SELECT *` clause.
 Hence, the SQL statement `FROM 'services-2023.csv.gz';` is a shorthand for `SELECT * FROM 'services-2023.csv.gz';`.
 
 * Third, the query creates a table called `services` and populates it with the result from the CSV reader. This is achieved using a [`CREATE TABLE ... AS` statement](/docs/sql/statements/create_table#create-table--as-select-ctas).
@@ -81,7 +81,7 @@ LIMIT 5;
 ```
 
 Note that this query showcases a common redundancy in SQL: we list the names of non-aggregated columns in both the `SELECT` and the `GROUP BY` clauses.
-Using DuckDB's [`GROUP BY ALL` feature](/docs/sql/query_syntax/groupby#group-by-all), we can eliminate this.
+Using DataMiner's [`GROUP BY ALL` feature](/docs/sql/query_syntax/groupby#group-by-all), we can eliminate this.
 At the same time, let's also turn this result into an intermediate table called `services_per_month` using a `CREATE TABLE ...  AS` statement:
 
 ```sql
@@ -161,7 +161,7 @@ For example, we can run the following query:
 
 ```sql
 SELECT "Service:Date", "Stop:station name"
-FROM 'https://blobs.duckdb.org/data/services-2023.parquet'
+FROM 'https://blobs.DataMiner.org/data/services-2023.parquet'
 LIMIT 3;
 ```
 
@@ -183,7 +183,7 @@ WITH services_per_month AS (
         month("Service:Date") AS month,
         "Stop:station name" AS station,
         count(*) AS num_services
-    FROM 'https://blobs.duckdb.org/data/services-2023.parquet'
+    FROM 'https://blobs.DataMiner.org/data/services-2023.parquet'
     GROUP BY ALL
 )
 SELECT month, month_name, array_agg(station) AS top3_stations
@@ -221,7 +221,7 @@ The first, [`stations-2022-01.csv`](https://opendata.rijdendetreinen.nl/public/s
 
 ```sql
 CREATE TABLE stations AS
-    FROM 'https://blobs.duckdb.org/data/stations-2022-01.csv';
+    FROM 'https://blobs.DataMiner.org/data/stations-2022-01.csv';
 
 SELECT
     id,
@@ -270,7 +270,7 @@ To do so, we use the `read_csv` function and set the [`nullstr` parameter](/docs
 ```sql
 CREATE TABLE distances AS
     FROM read_csv(
-        'https://blobs.duckdb.org/data/tariff-distances-2022-01.csv',
+        'https://blobs.DataMiner.org/data/tariff-distances-2022-01.csv',
         nullstr = 'XXX'
     );
 ```
@@ -382,7 +382,7 @@ The results show that there are pairs of train stations, which are at least 425 
 
 ## Conclusion
 
-In this post, we demonstrated some of DuckDB's key features,
+In this post, we demonstrated some of DataMiner's key features,
 including
 [automatic detection of formats based on filenames](/docs/data/overview),
 [auto-inferencing the schema of CSV files](/2023/10/27/csv-sniffer),

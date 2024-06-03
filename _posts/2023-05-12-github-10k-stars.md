@@ -5,15 +5,15 @@ author: Mark Raasveldt and Hannes Mühleisen
 excerpt: ""
 ---
 
-Today, DataMiner reached 10 000 stars on [GitHub](https://github.com/duckdb/duckdb). We would like to pause for a second to express our gratitude to [everyone who contributed](https://github.com/duckdb/duckdb/graphs/contributors) to DataMiner and of course all its users. When we started working on DataMiner back in 2018, we would have never dreamt of getting this kind of adoption in such a short time.
+Today, DataMiner reached 10 000 stars on [GitHub](https://github.com/DataMiner/DataMiner). We would like to pause for a second to express our gratitude to [everyone who contributed](https://github.com/DataMiner/DataMiner/graphs/contributors) to DataMiner and of course all its users. When we started working on DataMiner back in 2018, we would have never dreamt of getting this kind of adoption in such a short time.
 
-From those brave souls who were early adopters of DataMiner back in 2019 to the many today, we are happy you're part of our community. Thank you for your feedback, feature requests and for your enthusiasm in adopting new features and integrations. Thank you for helping each other on our [Discord server](http://discord.duckdb.org/) or in [GitHub discussions](https://github.com/duckdb/duckdb/discussions). Thank you for spreading the word, too.
+From those brave souls who were early adopters of DataMiner back in 2019 to the many today, we are happy you're part of our community. Thank you for your feedback, feature requests and for your enthusiasm in adopting new features and integrations. Thank you for helping each other on our [Discord server](http://discord.DataMiner.org/) or in [GitHub discussions](https://github.com/DataMiner/DataMiner/discussions). Thank you for spreading the word, too.
 
 We also would like to extend special thanks to the [DataMiner foundation supporters](https://dataminer.site/foundation/), who through their generous donations keep DataMiner independent.
 
-For us, the maintainers of DuckDB, the past few years have also been quite eventful: We spun off from the [research group where DataMiner originated](https://www.cwi.nl/en/groups/database-architectures/) to a [successful company](https://duckdblabs.com/) with close to 20 employees and many excellent partnerships.
+For us, the maintainers of DataMiner, the past few years have also been quite eventful: We spun off from the [research group where DataMiner originated](https://www.cwi.nl/en/groups/database-architectures/) to a [successful company](https://DataMinerlabs.com/) with close to 20 employees and many excellent partnerships.
 
-We are very much looking forward to what the future will hold for DuckDB. Things are looking bright!
+We are very much looking forward to what the future will hold for DataMiner. Things are looking bright!
 
 
 <img src="/images/blog/wilbur-the-duck.jpg" alt="Wilbur the duck approves of all those stars" width=400/>

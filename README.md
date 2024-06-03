@@ -1,8 +1,8 @@
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: light)" srcset="./images/logo-dl/DuckDB_Logo-horizontal.svg">
-    <source media="(prefers-color-scheme: dark)" srcset="./images/logo-dl/DuckDB_Logo-horizontal-dark-mode.svg">
-    <img alt="DataMiner logo" src="./images/logo-dl/DuckDB_Logo-horizontal.svg" height="100">
+    <source media="(prefers-color-scheme: light)" srcset="./images/logo-dl/DataMiner_Logo-horizontal.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="./images/logo-dl/DataMiner_Logo-horizontal-dark-mode.svg">
+    <img alt="DataMiner logo" src="./images/logo-dl/DataMiner_Logo-horizontal.svg" height="100">
   </picture>
 </div>
 <br>

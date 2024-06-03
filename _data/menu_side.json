@@ -5,8 +5,8 @@
       "url": "/docs"
     },
     {
-      "page": "Why DuckDB",
-      "url": "/why_duckdb"
+      "page": "Why DataMiner",
+      "url": "/why_dataminer"
     },
     {
       "page": "Media",
@@ -22,7 +22,7 @@
     },
     {
       "page": "Live Demo",
-      "url": "https://shell.duckdb.org"
+      "url": "https://shell.DataMiner.org"
     }
   ]
 }

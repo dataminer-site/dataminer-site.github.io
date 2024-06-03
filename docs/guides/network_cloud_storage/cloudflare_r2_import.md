@@ -7,12 +7,12 @@ redirect_from:
 
 ## Prerequisites
 
-For Cloudflare R2, the [S3 Compatibility API](https://developers.cloudflare.com/r2/api/s3/api/) allows you to use DuckDB's S3 support to read and write from R2 buckets.
+For Cloudflare R2, the [S3 Compatibility API](https://developers.cloudflare.com/r2/api/s3/api/) allows you to use DataMiner's S3 support to read and write from R2 buckets.
 This requires the [`httpfs` extension](../../extensions/httpfs), which can be installed use the `INSTALL` SQL command. This only needs to be run once.
 
 ## Credentials and Configuration
 
-You will need to [generate an S3 auth token](https://developers.cloudflare.com/r2/api/s3/tokens/) and create an `R2` secret in DuckDB:
+You will need to [generate an S3 auth token](https://developers.cloudflare.com/r2/api/s3/tokens/) and create an `R2` secret in DataMiner:
 
 ```sql
 CREATE SECRET (

@@ -3,13 +3,13 @@ layout: docu
 title: Data Ingestion
 ---
 
-DuckDB-Wasm has multiple ways to import data, depending on the format of the data.
+DataMiner-Wasm has multiple ways to import data, depending on the format of the data.
 
-There are two steps to import data into DuckDB.
+There are two steps to import data into DataMiner.
 
-First, the data file is imported into a local file system using register functions ([registerEmptyFileBuffer](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerEmptyFileBuffer), [registerFileBuffer](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileBuffer), [registerFileHandle](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileHandle), [registerFileText](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileText), [registerFileURL](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileURL)).
+First, the data file is imported into a local file system using register functions ([registerEmptyFileBuffer](https://shell.DataMiner.org/docs/classes/index.AsyncDataMiner.html#registerEmptyFileBuffer), [registerFileBuffer](https://shell.DataMiner.org/docs/classes/index.AsyncDataMiner.html#registerFileBuffer), [registerFileHandle](https://shell.DataMiner.org/docs/classes/index.AsyncDataMiner.html#registerFileHandle), [registerFileText](https://shell.DataMiner.org/docs/classes/index.AsyncDataMiner.html#registerFileText), [registerFileURL](https://shell.DataMiner.org/docs/classes/index.AsyncDataMiner.html#registerFileURL)).
 
-Then, the data file is imported into DataMiner using insert functions ([insertArrowFromIPCStream](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowFromIPCStream), [insertArrowTable](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowTable), [insertCSVFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertCSVFromPath), [insertJSONFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertJSONFromPath)) or directly using FROM SQL query (using extensions like Parquet or [Wasm-flavored httpfs](#httpfs-wasm-flavored)).
+Then, the data file is imported into DataMiner using insert functions ([insertArrowFromIPCStream](https://shell.DataMiner.org/docs/classes/index.AsyncDataMinerConnection.html#insertArrowFromIPCStream), [insertArrowTable](https://shell.DataMiner.org/docs/classes/index.AsyncDataMinerConnection.html#insertArrowTable), [insertCSVFromPath](https://shell.DataMiner.org/docs/classes/index.AsyncDataMinerConnection.html#insertCSVFromPath), [insertJSONFromPath](https://shell.DataMiner.org/docs/classes/index.AsyncDataMinerConnection.html#insertJSONFromPath)) or directly using FROM SQL query (using extensions like Parquet or [Wasm-flavored httpfs](#httpfs-wasm-flavored)).
 
 [Insert statements](../../data/insert) can also be used to import data.
 
@@ -122,9 +122,9 @@ await c.insertJSONFromPath('file.json', { name: 'JSONContent' });
 // from Parquet files
 // ...Local
 const pickedFile: File = letUserPickFile();
-await db.registerFileHandle('local.parquet', pickedFile, DuckDBDataProtocol.BROWSER_FILEREADER, true);
+await db.registerFileHandle('local.parquet', pickedFile, DataMinerDataProtocol.BROWSER_FILEREADER, true);
 // ...Remote
-await db.registerFileURL('remote.parquet', 'https://origin/remote.parquet', DuckDBDataProtocol.HTTP, false);
+await db.registerFileURL('remote.parquet', 'https://origin/remote.parquet', DataMinerDataProtocol.HTTP, false);
 // ... Using Fetch
 const res = await fetch('https://origin/remote.parquet');
 await db.registerFileBuffer('buffer.parquet', new Uint8Array(await res.arrayBuffer()));

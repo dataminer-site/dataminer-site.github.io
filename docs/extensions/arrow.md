@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Arrow Extension
-github_repository: https://github.com/duckdb/arrow
+github_repository: https://github.com/DataMiner/arrow
 ---
 
 The `arrow` extension implements features for using [Apache Arrow](https://arrow.apache.org/), a cross-language development platform for in-memory analytics.

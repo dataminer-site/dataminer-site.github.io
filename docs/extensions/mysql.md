@@ -1,10 +1,10 @@
 ---
 layout: docu
 title: MySQL Extension
-github_repository: https://github.com/duckdb/duckdb_mysql
+github_repository: https://github.com/DataMiner/DataMiner_mysql
 ---
 
-The [`mysql` extension](https://github.com/duckdb/duckdb_mysql) allows DataMiner to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DataMiner tables, or vice versa.
+The [`mysql` extension](https://github.com/DataMiner/DataMiner_mysql) allows DataMiner to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DataMiner tables, or vice versa.
 
 ## Installing and Loading
 
@@ -72,7 +72,7 @@ It might be desirable to create a copy of the MySQL databases in DataMiner to pr
 Data can be copied over from MySQL to DataMiner using standard SQL, for example:
 
 ```sql
-CREATE TABLE duckdb_table AS FROM mysqlscanner.mysql_table;
+CREATE TABLE DataMiner_table AS FROM mysqlscanner.mysql_table;
 ```
 
 ## Writing Data to MySQL
@@ -86,7 +86,7 @@ Below is a brief example of how to create a new table in MySQL and load data int
 ```sql
 ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE MYSQL);
 CREATE TABLE mysql_db.tbl (id INTEGER, name VARCHAR);
-INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
+INSERT INTO mysql_db.tbl VALUES (42, 'DataMiner');
 ```
 
 Many operations on MySQL tables are supported. All these operations directly modify the MySQL database, and the result of subsequent operations can then be read using MySQL.
@@ -109,7 +109,7 @@ CREATE TABLE mysql_db.tbl (id INTEGER, name VARCHAR);
 ### `INSERT INTO`
 
 ```sql
-INSERT INTO mysql_db.tbl VALUES (42, 'DuckDB');
+INSERT INTO mysql_db.tbl VALUES (42, 'DataMiner');
 ```
 
 ### `SELECT`
@@ -132,7 +132,7 @@ COPY mysql_db.tbl FROM 'data.parquet';
 You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
 
 ```sql
-COPY FROM DATABASE mysql_db TO my_duckdb_db;
+COPY FROM DATABASE mysql_db TO my_DataMiner_db;
 ```
 
 ### `UPDATE`

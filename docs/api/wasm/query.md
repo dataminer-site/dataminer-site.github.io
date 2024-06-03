@@ -3,9 +3,9 @@ layout: docu
 title: Query
 ---
 
-DuckDB-Wasm provides functions for querying data. Queries are run sequentially.
+DataMiner-Wasm provides functions for querying data. Queries are run sequentially.
 
-First, a connection need to be created by calling [connect](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#connect). Then, queries can be run by calling [query](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#query) or [send](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#send).
+First, a connection need to be created by calling [connect](https://shell.DataMiner.org/docs/classes/index.AsyncDataMiner.html#connect). Then, queries can be run by calling [query](https://shell.DataMiner.org/docs/classes/index.AsyncDataMinerConnection.html#query) or [send](https://shell.DataMiner.org/docs/classes/index.AsyncDataMinerConnection.html#send).
 
 ## Query Execution
 

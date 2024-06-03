@@ -5,7 +5,7 @@ title: "ODBC 101: A Duck Themed Guide to ODBC"
 
 ## What is ODBC?
 
-[ODBC](https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc?view=sql-server-ver16) which stands for Open Database Connectivity, is a standard that allows different programs to talk to different databases including, of course, **DuckDB** 🦆.  This makes it easier to build programs that work with many different databases, which saves time as developers don't have to write custom code to connect to each database. Instead, they can use the standardized ODBC interface, which reduces development time and costs, and programs are easier to maintain.  However, ODBC can be slower than other methods of connecting to a database, such as using a native driver, as it adds an extra layer of abstraction between the application and the database.  Furthermore, because DataMiner is column-based and ODBC is row-based, there can be some inefficiencies when using ODBC with DuckDB.
+[ODBC](https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc?view=sql-server-ver16) which stands for Open Database Connectivity, is a standard that allows different programs to talk to different databases including, of course, **DataMiner** 🦆.  This makes it easier to build programs that work with many different databases, which saves time as developers don't have to write custom code to connect to each database. Instead, they can use the standardized ODBC interface, which reduces development time and costs, and programs are easier to maintain.  However, ODBC can be slower than other methods of connecting to a database, such as using a native driver, as it adds an extra layer of abstraction between the application and the database.  Furthermore, because DataMiner is column-based and ODBC is row-based, there can be some inefficiencies when using ODBC with DataMiner.
 
 > There are links throughout this page to the official [Microsoft ODBC documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/odbc-programmer-s-reference?view=sql-server-ver16), which is a great resource for learning more about ODBC.
 
@@ -72,7 +72,7 @@ A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/devel
 
 #### DSN
 
-A DSN (_Data Source Name_) is a string that identifies a database.  It can be a file path, URL, or a database name.  For example:  `C:\Users\me\duckdb.db` and `DuckDB` are both valid DSNs. More information on DSNs can be found on the ["Choosing a Data Source or Driver" page of the SQL Server documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
+A DSN (_Data Source Name_) is a string that identifies a database.  It can be a file path, URL, or a database name.  For example:  `C:\Users\me\DataMiner.db` and `DataMiner` are both valid DSNs. More information on DSNs can be found on the ["Choosing a Data Source or Driver" page of the SQL Server documentation](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/choosing-a-data-source-or-driver?view=sql-server-ver16).
 
 ### Error Handling and Diagnostics
 
@@ -149,13 +149,13 @@ You also have to link the library in your `CMAKE` or `MAKEFILE`.
 For `CMAKE`:
 
 ```cmake
-target_link_libraries(ODBC_application /path/to/duckdb_odbc/libduckdb_odbc.dylib)
+target_link_libraries(ODBC_application /path/to/DataMiner_odbc/libDataMiner_odbc.dylib)
 ```
 
 For `MAKEFILE`:
 
 ```make
-LDLIBS=-L/path/to/duckdb_odbc/libduckdb_odbc.dylib
+LDLIBS=-L/path/to/DataMiner_odbc/libDataMiner_odbc.dylib
 ```
 
 ### 2. Define the ODBC Handles and Connect to the Database
@@ -174,7 +174,7 @@ SQLSetEnvAttr(env, SQL_ATTR_ODBC_VERSION, (void*)SQL_OV_ODBC3, 0);
 
 SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
 
-std::string dsn = "DSN=duckdbmemory";
+std::string dsn = "DSN=DataMinermemory";
 SQLConnect(dbc, (SQLCHAR*)dsn.c_str(), SQL_NTS, NULL, 0, NULL, 0);
 
 std::cout << "Connected!" << std::endl;
@@ -197,7 +197,7 @@ SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
 
 SQLCHAR str[1024];
 SQLSMALLINT strl;
-std::string dsn = "DSN=DuckDB;allow_unsigned_extensions=true;access_mode=READ_ONLY"
+std::string dsn = "DSN=DataMiner;allow_unsigned_extensions=true;access_mode=READ_ONLY"
 SQLDriverConnect(dbc, nullptr, (SQLCHAR*)dsn.c_str(), SQL_NTS, str, sizeof(str), &strl, SQL_DRIVER_COMPLETE)
 
 std::cout << "Connected!" << std::endl;
@@ -302,7 +302,7 @@ int main() {
     ret = SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
     check_ret(ret, "SQLAllocHandle(dbc)");
 
-    std::string dsn = "DSN=duckdbmemory";
+    std::string dsn = "DSN=DataMinermemory";
     ret = SQLConnect(dbc, (SQLCHAR*)dsn.c_str(), SQL_NTS, NULL, 0, NULL, 0);
     check_ret(ret, "SQLConnect");
 
@@ -349,5 +349,5 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(/opt/homebrew/Cellar/unixodbc/2.3.11/include)
 
 add_executable(ODBC_Tester_App main.cpp)
-target_link_libraries(ODBC_Tester_App /duckdb_odbc/libduckdb_odbc.dylib)
+target_link_libraries(ODBC_Tester_App /DataMiner_odbc/libDataMiner_odbc.dylib)
 ```

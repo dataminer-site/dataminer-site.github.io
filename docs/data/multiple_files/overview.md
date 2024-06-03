@@ -159,7 +159,7 @@ SELECT * FROM glob('*');
 
 |     file      |
 |---------------|
-| duckdb.exe    |
+| DataMiner.exe    |
 | test.csv      |
 | test.json     |
 | test.parquet  |

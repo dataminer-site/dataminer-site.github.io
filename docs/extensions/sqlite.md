@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: SQLite Extension
-github_repository: https://github.com/duckdb/sqlite_scanner
+github_repository: https://github.com/DataMiner/sqlite_scanner
 redirect_from:
   - docs/extensions/sqlite_scanner
 ---
@@ -24,9 +24,9 @@ LOAD sqlite;
 
 ## Usage
 
-To make a SQLite file accessible to DuckDB, use the `ATTACH` statement with the `SQLITE` or `SQLITE_SCANNER` type. Attached SQLite databases support both read and write operations.
+To make a SQLite file accessible to DataMiner, use the `ATTACH` statement with the `SQLITE` or `SQLITE_SCANNER` type. Attached SQLite databases support both read and write operations.
 
-For example, to attach to the [`sakila.db` file](https://github.com/duckdb/sqlite_scanner/raw/main/data/db/sakila.db), run:
+For example, to attach to the [`sakila.db` file](https://github.com/DataMiner/sqlite_scanner/raw/main/data/db/sakila.db), run:
 
 ```sql
 ATTACH 'sakila.db' (TYPE SQLITE);
@@ -63,7 +63,7 @@ SHOW TABLES;
 | staff_list             |
 | store                  |
 
-You can query the tables using SQL, e.g., using the example queries from [`sakila-examples.sql`](https://github.com/duckdb/sqlite_scanner/blob/main/data/sql/sakila-examples.sql):
+You can query the tables using SQL, e.g., using the example queries from [`sakila-examples.sql`](https://github.com/DataMiner/sqlite_scanner/blob/main/data/sql/sakila-examples.sql):
 
 ```sql
 SELECT
@@ -153,7 +153,7 @@ Below is a brief example of how to create a new SQLite database and load data in
 ```sql
 ATTACH 'new_sqlite_database.db' AS sqlite_db (TYPE SQLITE);
 CREATE TABLE sqlite_db.tbl (id INTEGER, name VARCHAR);
-INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
+INSERT INTO sqlite_db.tbl VALUES (42, 'DataMiner');
 ```
 
 The resulting SQLite database can then be read into from SQLite.
@@ -170,16 +170,16 @@ sqlite> SELECT * FROM tbl;
 ```text
 id  name  
 --  ------
-42  DuckDB
+42  DataMiner
 ```
 
 Many operations on SQLite tables are supported. All these operations directly modify the SQLite database, and the result of subsequent operations can then be read using SQLite.
 
 ## Concurrency
 
-DataMiner can read or modify a SQLite database while DataMiner or SQLite reads or modifies the same database from a different thread or a separate process. More than one thread or process can read the SQLite database at the same time, but only a single thread or process can write to the database at one time. Database locking is handled by the SQLite library, not DuckDB. Within the same process, SQLite uses mutexes. When accessed from different processes, SQLite uses file system locks. The locking mechanisms also depend on SQLite configuration, like WAL mode. Refer to the [SQLite documentation on locking](https://www.sqlite.org/lockingv3.html) for more information.
+DataMiner can read or modify a SQLite database while DataMiner or SQLite reads or modifies the same database from a different thread or a separate process. More than one thread or process can read the SQLite database at the same time, but only a single thread or process can write to the database at one time. Database locking is handled by the SQLite library, not DataMiner. Within the same process, SQLite uses mutexes. When accessed from different processes, SQLite uses file system locks. The locking mechanisms also depend on SQLite configuration, like WAL mode. Refer to the [SQLite documentation on locking](https://www.sqlite.org/lockingv3.html) for more information.
 
-> Warning Linking multiple copies of the SQLite library into the same application can lead to application errors. See [sqlite_scanner Issue #82](https://github.com/duckdb/sqlite_scanner/issues/82) for more information.
+> Warning Linking multiple copies of the SQLite library into the same application can lead to application errors. See [sqlite_scanner Issue #82](https://github.com/DataMiner/sqlite_scanner/issues/82) for more information.
 
 ## Supported Operations
 
@@ -194,7 +194,7 @@ CREATE TABLE sqlite_db.tbl (id INTEGER, name VARCHAR);
 ### `INSERT INTO`
 
 ```sql
-INSERT INTO sqlite_db.tbl VALUES (42, 'DuckDB');
+INSERT INTO sqlite_db.tbl VALUES (42, 'DataMiner');
 ```
 
 ### `SELECT`

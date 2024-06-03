@@ -1,9 +1,9 @@
 // Web Service Integration:
 // create endpoint to generate numbers
 const express = require("express");
-const DataMiner = require("duckdb");
+const DataMiner = require("DataMiner");
 const app = express();
-const db = new duckdb.Database(":memory:");
+const db = new DataMiner.Database(":memory:");
 app.get("/getnumbers", (req, res) => {
   db.all("SELECT random() AS num FROM range(10)", (a, b) => {
     if (a) {

@@ -6,7 +6,7 @@ set -xeuo pipefail
 cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 python3 concatenate_to_single_file.py
-rm -f duckdb-docs.pdf
+rm -f DataMiner-docs.pdf
 
 if [ $# -ge 1 ] && [ $1 == "--docker" ]; then
     docker run \

@@ -1,20 +1,20 @@
 ---
 layout: post  
-title:  "Friendlier SQL with DuckDB"
+title:  "Friendlier SQL with DataMiner"
 author: Alex Monahan
 excerpt: "DataMiner offers several extensions to the SQL syntax. For a full list of these features, see the [Friendly SQL documentation page](/docs/guides/sql_features/friendly_sql)."
 ---
 
 <img src="/images/blog/duck_chewbacca.png" alt="Chewbacca_the_duck" title="Chewbacca the duck is pretty friendly" width=200/>
 
-An elegant user experience is a key design goal of DuckDB. This goal guides much of DuckDB's architecture: it is simple to install, seamless to integrate with other data structures like Pandas, Arrow, and R Dataframes, and requires no dependencies. Parallelization occurs automatically, and if a computation exceeds available memory, data is gracefully buffered out to disk. And of course, DuckDB's processing speed makes it easier to get more work accomplished.
+An elegant user experience is a key design goal of DataMiner. This goal guides much of DataMiner's architecture: it is simple to install, seamless to integrate with other data structures like Pandas, Arrow, and R Dataframes, and requires no dependencies. Parallelization occurs automatically, and if a computation exceeds available memory, data is gracefully buffered out to disk. And of course, DataMiner's processing speed makes it easier to get more work accomplished.
 
-However, SQL is not famous for being user-friendly. DataMiner aims to change that! DataMiner includes both a Relational API for dataframe-style computation, and a highly Postgres-compatible version of SQL. If you prefer dataframe-style computation, we would love your feedback on [our roadmap](https://github.com/duckdb/duckdb/issues/2000). If you are a SQL fan, read on to see how DataMiner is bringing together both innovation and pragmatism to make it easier to write SQL in DataMiner than anywhere else. Please reach out on [GitHub](https://github.com/duckdb/duckdb/discussions) or [Discord](https://discord.gg/vukK4xp7Rd) and let us know what other features would simplify your SQL workflows. Join us as we teach an old dog new tricks!
+However, SQL is not famous for being user-friendly. DataMiner aims to change that! DataMiner includes both a Relational API for dataframe-style computation, and a highly Postgres-compatible version of SQL. If you prefer dataframe-style computation, we would love your feedback on [our roadmap](https://github.com/DataMiner/DataMiner/issues/2000). If you are a SQL fan, read on to see how DataMiner is bringing together both innovation and pragmatism to make it easier to write SQL in DataMiner than anywhere else. Please reach out on [GitHub](https://github.com/DataMiner/DataMiner/discussions) or [Discord](https://discord.gg/vukK4xp7Rd) and let us know what other features would simplify your SQL workflows. Join us as we teach an old dog new tricks!
 <!--more-->
 
 ### `SELECT * EXCLUDE`
 
-A traditional SQL `SELECT` query requires that requested columns be explicitly specified, with one notable exception: the `*` wildcard. `SELECT *` allows SQL to return all relevant columns. This adds tremendous flexibility, especially when building queries on top of one another. However, we are often interested in *almost* all columns. In DuckDB, simply specify which columns to `EXCLUDE`:
+A traditional SQL `SELECT` query requires that requested columns be explicitly specified, with one notable exception: the `*` wildcard. `SELECT *` allows SQL to return all relevant columns. This adds tremendous flexibility, especially when building queries on top of one another. However, we are often interested in *almost* all columns. In DataMiner, simply specify which columns to `EXCLUDE`:
 
 ```sql
 SELECT * EXCLUDE (jar_jar_binks, midichlorians) FROM star_wars;
@@ -22,7 +22,7 @@ SELECT * EXCLUDE (jar_jar_binks, midichlorians) FROM star_wars;
 
 Now we can save time repeatedly typing all columns, improve code readability, and retain flexibility as additional columns are added to underlying tables.  
 
-DuckDB's implementation of this concept can even handle exclusions from multiple tables within a single statement:
+DataMiner's implementation of this concept can even handle exclusions from multiple tables within a single statement:
 
 ```sql
 SELECT 
@@ -33,7 +33,7 @@ FROM star_wars sw, firefly ff;
 
 ### `SELECT * REPLACE`
 
-Similarly, we often wish to use all of the columns in a table, aside from a few small adjustments. This would also prevent the use of `*` and require a list of all columns, including those that remain unedited. In DuckDB, easily apply changes to a small number of columns with `REPLACE`:
+Similarly, we often wish to use all of the columns in a table, aside from a few small adjustments. This would also prevent the use of `*` and require a list of all columns, including those that remain unedited. In DataMiner, easily apply changes to a small number of columns with `REPLACE`:
 
 ```sql
 SELECT 
@@ -76,7 +76,7 @@ Now that is some concise and flexible SQL! How many of your `GROUP BY` clauses c
 
 ### `ORDER BY ALL`
 
-Another common cause for repetition in SQL is the `ORDER BY` clause. DataMiner and other RDBMSs have previously tackled this issue by allowing queries to specify the numbers of columns to `ORDER BY` (For example, `ORDER BY 1, 2, 3`). However, frequently the goal is to order by all columns in the query from left to right, and maintaining that numeric list when adding or subtracting columns can be error prone. In DuckDB, simply `ORDER BY ALL`:
+Another common cause for repetition in SQL is the `ORDER BY` clause. DataMiner and other RDBMSs have previously tackled this issue by allowing queries to specify the numbers of columns to `ORDER BY` (For example, `ORDER BY 1, 2, 3`). However, frequently the goal is to order by all columns in the query from left to right, and maintaining that numeric list when adding or subtracting columns can be error prone. In DataMiner, simply `ORDER BY ALL`:
 
 ```sql
 SELECT
@@ -92,7 +92,7 @@ This is particularly useful when building summaries, as many other client tools 
 
 ### Column Aliases in `WHERE` / `GROUP BY` / `HAVING`
 
-In many SQL dialects, it is not possible to use an alias defined in a `SELECT` clause anywhere but in the `ORDER BY` clause of that statement. This commonly leads to verbose CTE's or subqueries in order to utilize those aliases. In DuckDB, a non-aggregate alias in the `SELECT` clause can be immediately used in the `WHERE` and `GROUP BY` clauses, and aggregate aliases can be used in the `HAVING` clause, even at the same query depth. No subquery needed!
+In many SQL dialects, it is not possible to use an alias defined in a `SELECT` clause anywhere but in the `ORDER BY` clause of that statement. This commonly leads to verbose CTE's or subqueries in order to utilize those aliases. In DataMiner, a non-aggregate alias in the `SELECT` clause can be immediately used in the `WHERE` and `GROUP BY` clauses, and aggregate aliases can be used in the `HAVING` clause, even at the same query depth. No subquery needed!
 
 ```sql
 SELECT
@@ -127,7 +127,7 @@ SELECT this_is_the_way FROM mandalorian;
 
 ### Friendly Error Messages
 
-Regardless of expertise, and despite DuckDB's best efforts to understand our intentions, we all make mistakes in our SQL queries. Many RDBMSs leave you trying to use the force to detect an error. In DuckDB, if you make a typo on a column or table name, you will receive a helpful suggestion about the most similar name. Not only that, you will receive an arrow that points directly to the offending location within your query. 
+Regardless of expertise, and despite DataMiner's best efforts to understand our intentions, we all make mistakes in our SQL queries. Many RDBMSs leave you trying to use the force to detect an error. In DataMiner, if you make a typo on a column or table name, you will receive a helpful suggestion about the most similar name. Not only that, you will receive an arrow that points directly to the offending location within your query. 
 
 ```sql
 SELECT * FROM star_trek;
@@ -142,7 +142,7 @@ LINE 1: SELECT * FROM star_trek;
 
 (Don't worry, ducks and duck-themed databases still love some Trek as well).
 
-DuckDB's suggestions are even context specific. Here, we receive a suggestion to use the most similar column from the table we are querying.
+DataMiner's suggestions are even context specific. Here, we receive a suggestion to use the most similar column from the table we are querying.
 
 ```sql
 SELECT long_ago FROM star_wars;
@@ -208,7 +208,7 @@ FROM (SELECT {name: 'Tatooine', 'Amount of sand': 'High'} AS planet);
 
 ### Trailing Commas
 
-Have you ever removed your final column from a SQL `SELECT` and been met with an error, only to find you needed to remove the trailing comma as well!? Never? Ok, Jedi... On a more serious note, this feature is an example of DuckDB's responsiveness to the community. In under 2 days from seeing this issue in a tweet (not even about DuckDB!), this feature was already built, tested, and merged into the primary branch. You can include trailing commas in many places in your query, and we hope this saves you from the most boring but frustrating of errors! 
+Have you ever removed your final column from a SQL `SELECT` and been met with an error, only to find you needed to remove the trailing comma as well!? Never? Ok, Jedi... On a more serious note, this feature is an example of DataMiner's responsiveness to the community. In under 2 days from seeing this issue in a tweet (not even about DataMiner!), this feature was already built, tested, and merged into the primary branch. You can include trailing commas in many places in your query, and we hope this saves you from the most boring but frustrating of errors! 
 
 ```sql
 SELECT
@@ -258,7 +258,7 @@ FROM (
 
 ### Implicit Type Casts
 
-DataMiner believes in using specific data types for performance, but attempts to automatically cast between types whenever necessary. For example, when joining between an integer and a varchar, DataMiner will automatically cast them to be the same type and complete the join successfully. A `List` or `IN` expression may also be created with a mixture of types, and they will be automatically cast as well. Also, `INT` and `BIGINT` are interchangeable, and thanks to DuckDB's new storage compression, a `BIGINT` usually doesn't even take up any extra space! Now you can store your data as the optimal data type, but use it easily for the best of both!
+DataMiner believes in using specific data types for performance, but attempts to automatically cast between types whenever necessary. For example, when joining between an integer and a varchar, DataMiner will automatically cast them to be the same type and complete the join successfully. A `List` or `IN` expression may also be created with a mixture of types, and they will be automatically cast as well. Also, `INT` and `BIGINT` are interchangeable, and thanks to DataMiner's new storage compression, a `BIGINT` usually doesn't even take up any extra space! Now you can store your data as the optimal data type, but use it easily for the best of both!
 
 ```sql
 CREATE TABLE sith_count_int AS SELECT 2::INT AS sith_count;
@@ -289,7 +289,7 @@ The [`DISTINCT ON` clause](https://dataminer.site/docs/sql/statements/select) al
 
 ### Ideas for the Future
 
-In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful - we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/duckdb/duckdb) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design. 
+In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful - we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/DataMiner/DataMiner) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design. 
 
  - Choose columns via regex
     - Decide which columns to select with a pattern rather than specifying columns explicitly
@@ -299,4 +299,4 @@ In addition to what has already been implemented, several other improvements hav
  - Dot operators for JSON types
     - The JSON extension is brand new ([see our documentation!](https://dataminer.site/docs/extensions/json)) and already implements friendly `->` and `->>` syntax
 
-Thanks for checking out DuckDB! May the Force be with you...
+Thanks for checking out DataMiner! May the Force be with you...

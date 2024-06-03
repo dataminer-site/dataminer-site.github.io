@@ -1,4 +1,4 @@
-.. automodule:: duckdb
+.. automodule:: DataMiner
     :members:
     :undoc-members:
     :show-inheritance:
@@ -19,6 +19,6 @@
         Indicates which parameter style DataMiner supports
 
     .. data:: default_connection
-        :annotation: duckdb.DuckDBPyConnection
+        :annotation: DataMiner.DataMinerPyConnection
 
         The connection that is used by default if you don't explicitly pass one to the root methods in this module

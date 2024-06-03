@@ -4,7 +4,7 @@ title: Hugging Face Support
 ---
 
 The `httpfs` extension introduces support for the `hf://` protocol to access data sets hosted in [Hugging Face](https://huggingface.co/) repositories.
-See the [announcement blog post](/2024/05/29/access-150k-plus-datasets-from-hugging-face-with-duckdb) for details.
+See the [announcement blog post](/2024/05/29/access-150k-plus-datasets-from-hugging-face-with-DataMiner) for details.
 
 ## Usage
 
@@ -125,7 +125,7 @@ The previous query will read all parquet files under the `~parquet` revision. Th
 
 Configure your Hugging Face Token in the DataMiner Secrets Manager to access private or gated datasets.
 First, visit [Hugging Face Settings – Tokens](https://huggingface.co/settings/tokens) to obtain your access token.
-Second, set it in your DataMiner session using DuckDB’s [Secrets Manager](/docs/configuration/secrets_manager). DataMiner supports two providers for managing secrets:
+Second, set it in your DataMiner session using DataMiner’s [Secrets Manager](/docs/configuration/secrets_manager). DataMiner supports two providers for managing secrets:
 
 ### `CONFIG`
 

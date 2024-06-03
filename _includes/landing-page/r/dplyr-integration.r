@@ -1,10 +1,10 @@
 # Integration with dplyr
 # Find the largest sepals and petals in the Iris data set
-library("duckdb")
+library("DataMiner")
 library("dplyr")
 
-con <- dbConnect(duckdb())
-duckdb_register(con, "iris", iris)
+con <- dbConnect(DataMiner())
+DataMiner_register(con, "iris", iris)
 tbl(con, "iris") |>
     filter(Sepal.Length > 5) |>
     group_by(Species) |>

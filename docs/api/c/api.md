@@ -9,403 +9,403 @@ title: Complete API
 
 ### Open/Connect
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_open"><span class="nf">duckdb_open</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>, <span class="kt">duckdb_database</span> *<span class="nv">out_database</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_open_ext"><span class="nf">duckdb_open_ext</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>, <span class="kt">duckdb_database</span> *<span class="nv">out_database</span>, <span class="kt">duckdb_config</span> <span class="nv">config</span>, <span class="kt">char</span> **<span class="nv">out_error</span>);
-<span class="kt">void</span> <a href="#duckdb_close"><span class="nf">duckdb_close</span></a>(<span class="kt">duckdb_database</span> *<span class="nv">database</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_connect"><span class="nf">duckdb_connect</span></a>(<span class="kt">duckdb_database</span> <span class="nv">database</span>, <span class="kt">duckdb_connection</span> *<span class="nv">out_connection</span>);
-<span class="kt">void</span> <a href="#duckdb_interrupt"><span class="nf">duckdb_interrupt</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
-<span class="kt">duckdb_query_progress_type</span> <a href="#duckdb_query_progress"><span class="nf">duckdb_query_progress</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>);
-<span class="kt">void</span> <a href="#duckdb_disconnect"><span class="nf">duckdb_disconnect</span></a>(<span class="kt">duckdb_connection</span> *<span class="nv">connection</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_library_version"><span class="nf">duckdb_library_version</span></a>();
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <a href="#DataMiner_open"><span class="nf">DataMiner_open</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>, <span class="kt">DataMiner_database</span> *<span class="nv">out_database</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_open_ext"><span class="nf">DataMiner_open_ext</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>, <span class="kt">DataMiner_database</span> *<span class="nv">out_database</span>, <span class="kt">DataMiner_config</span> <span class="nv">config</span>, <span class="kt">char</span> **<span class="nv">out_error</span>);
+<span class="kt">void</span> <a href="#DataMiner_close"><span class="nf">DataMiner_close</span></a>(<span class="kt">DataMiner_database</span> *<span class="nv">database</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_connect"><span class="nf">DataMiner_connect</span></a>(<span class="kt">DataMiner_database</span> <span class="nv">database</span>, <span class="kt">DataMiner_connection</span> *<span class="nv">out_connection</span>);
+<span class="kt">void</span> <a href="#DataMiner_interrupt"><span class="nf">DataMiner_interrupt</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>);
+<span class="kt">DataMiner_query_progress_type</span> <a href="#DataMiner_query_progress"><span class="nf">DataMiner_query_progress</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>);
+<span class="kt">void</span> <a href="#DataMiner_disconnect"><span class="nf">DataMiner_disconnect</span></a>(<span class="kt">DataMiner_connection</span> *<span class="nv">connection</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#DataMiner_library_version"><span class="nf">DataMiner_library_version</span></a>();
 </code></pre></div></div>
 
 ### Configuration
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_create_config"><span class="nf">duckdb_create_config</span></a>(<span class="kt">duckdb_config</span> *<span class="nv">out_config</span>);
-<span class="kt">size_t</span> <a href="#duckdb_config_count"><span class="nf">duckdb_config_count</span></a>();
-<span class="kt">duckdb_state</span> <a href="#duckdb_get_config_flag"><span class="nf">duckdb_get_config_flag</span></a>(<span class="kt">size_t</span> <span class="nv">index</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_name</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_description</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_set_config"><span class="nf">duckdb_set_config</span></a>(<span class="kt">duckdb_config</span> <span class="nv">config</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">option</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_config"><span class="nf">duckdb_destroy_config</span></a>(<span class="kt">duckdb_config</span> *<span class="nv">config</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <a href="#DataMiner_create_config"><span class="nf">DataMiner_create_config</span></a>(<span class="kt">DataMiner_config</span> *<span class="nv">out_config</span>);
+<span class="kt">size_t</span> <a href="#DataMiner_config_count"><span class="nf">DataMiner_config_count</span></a>();
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_get_config_flag"><span class="nf">DataMiner_get_config_flag</span></a>(<span class="kt">size_t</span> <span class="nv">index</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_name</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_description</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_set_config"><span class="nf">DataMiner_set_config</span></a>(<span class="kt">DataMiner_config</span> <span class="nv">config</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">option</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_config"><span class="nf">DataMiner_destroy_config</span></a>(<span class="kt">DataMiner_config</span> *<span class="nv">config</span>);
 </code></pre></div></div>
 
 ### Query Execution
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_query"><span class="nf">duckdb_query</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_result"><span class="nf">duckdb_destroy_result</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_column_name"><span class="nf">duckdb_column_name</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="kt">duckdb_type</span> <a href="#duckdb_column_type"><span class="nf">duckdb_column_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="kt">duckdb_statement_type</span> <a href="#duckdb_result_statement_type"><span class="nf">duckdb_result_statement_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_column_logical_type"><span class="nf">duckdb_column_logical_type</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_column_count"><span class="nf">duckdb_column_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_row_count"><span class="nf">duckdb_row_count</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_rows_changed"><span class="nf">duckdb_rows_changed</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
-<span class="kt">void</span> *<a href="#duckdb_column_data"><span class="nf">duckdb_column_data</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="kt">bool</span> *<a href="#duckdb_nullmask_data"><span class="nf">duckdb_nullmask_data</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_result_error"><span class="nf">duckdb_result_error</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <a href="#DataMiner_query"><span class="nf">DataMiner_query</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">DataMiner_result</span> *<span class="nv">out_result</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_result"><span class="nf">DataMiner_destroy_result</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#DataMiner_column_name"><span class="nf">DataMiner_column_name</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">DataMiner_type</span> <a href="#DataMiner_column_type"><span class="nf">DataMiner_column_type</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">DataMiner_statement_type</span> <a href="#DataMiner_result_statement_type"><span class="nf">DataMiner_result_statement_type</span></a>(<span class="kt">DataMiner_result</span> <span class="nv">result</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_column_logical_type"><span class="nf">DataMiner_column_logical_type</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_column_count"><span class="nf">DataMiner_column_count</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_row_count"><span class="nf">DataMiner_row_count</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_rows_changed"><span class="nf">DataMiner_rows_changed</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>);
+<span class="kt">void</span> *<a href="#DataMiner_column_data"><span class="nf">DataMiner_column_data</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">bool</span> *<a href="#DataMiner_nullmask_data"><span class="nf">DataMiner_nullmask_data</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#DataMiner_result_error"><span class="nf">DataMiner_result_error</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>);
 </code></pre></div></div>
 
 ### Result Functions
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <a href="#duckdb_result_get_chunk"><span class="nf">duckdb_result_get_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">chunk_index</span>);
-<span class="kt">bool</span> <a href="#duckdb_result_is_streaming"><span class="nf">duckdb_result_is_streaming</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_result_chunk_count"><span class="nf">duckdb_result_chunk_count</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
-<span class="kt">duckdb_result_type</span> <a href="#duckdb_result_return_type"><span class="nf">duckdb_result_return_type</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_data_chunk</span> <a href="#DataMiner_result_get_chunk"><span class="nf">DataMiner_result_get_chunk</span></a>(<span class="kt">DataMiner_result</span> <span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">chunk_index</span>);
+<span class="kt">bool</span> <a href="#DataMiner_result_is_streaming"><span class="nf">DataMiner_result_is_streaming</span></a>(<span class="kt">DataMiner_result</span> <span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_result_chunk_count"><span class="nf">DataMiner_result_chunk_count</span></a>(<span class="kt">DataMiner_result</span> <span class="nv">result</span>);
+<span class="kt">DataMiner_result_type</span> <a href="#DataMiner_result_return_type"><span class="nf">DataMiner_result_return_type</span></a>(<span class="kt">DataMiner_result</span> <span class="nv">result</span>);
 </code></pre></div></div>
 
 ### Safe fetch functions
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <a href="#duckdb_value_boolean"><span class="nf">duckdb_value_boolean</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">int8_t</span> <a href="#duckdb_value_int8"><span class="nf">duckdb_value_int8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">int16_t</span> <a href="#duckdb_value_int16"><span class="nf">duckdb_value_int16</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">int32_t</span> <a href="#duckdb_value_int32"><span class="nf">duckdb_value_int32</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">int64_t</span> <a href="#duckdb_value_int64"><span class="nf">duckdb_value_int64</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_hugeint</span> <a href="#duckdb_value_hugeint"><span class="nf">duckdb_value_hugeint</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_uhugeint</span> <a href="#duckdb_value_uhugeint"><span class="nf">duckdb_value_uhugeint</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_decimal</span> <a href="#duckdb_value_decimal"><span class="nf">duckdb_value_decimal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">uint8_t</span> <a href="#duckdb_value_uint8"><span class="nf">duckdb_value_uint8</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">uint16_t</span> <a href="#duckdb_value_uint16"><span class="nf">duckdb_value_uint16</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">uint32_t</span> <a href="#duckdb_value_uint32"><span class="nf">duckdb_value_uint32</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">uint64_t</span> <a href="#duckdb_value_uint64"><span class="nf">duckdb_value_uint64</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">float</span> <a href="#duckdb_value_float"><span class="nf">duckdb_value_float</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">double</span> <a href="#duckdb_value_double"><span class="nf">duckdb_value_double</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_date</span> <a href="#duckdb_value_date"><span class="nf">duckdb_value_date</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_time</span> <a href="#duckdb_value_time"><span class="nf">duckdb_value_time</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_timestamp</span> <a href="#duckdb_value_timestamp"><span class="nf">duckdb_value_timestamp</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_interval</span> <a href="#duckdb_value_interval"><span class="nf">duckdb_value_interval</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">char</span> *<a href="#duckdb_value_varchar"><span class="nf">duckdb_value_varchar</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_string</span> <a href="#duckdb_value_string"><span class="nf">duckdb_value_string</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">char</span> *<a href="#duckdb_value_varchar_internal"><span class="nf">duckdb_value_varchar_internal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_string</span> <a href="#duckdb_value_string_internal"><span class="nf">duckdb_value_string_internal</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">duckdb_blob</span> <a href="#duckdb_value_blob"><span class="nf">duckdb_value_blob</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">bool</span> <a href="#duckdb_value_is_null"><span class="nf">duckdb_value_is_null</span></a>(<span class="kt">duckdb_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <a href="#DataMiner_value_boolean"><span class="nf">DataMiner_value_boolean</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">int8_t</span> <a href="#DataMiner_value_int8"><span class="nf">DataMiner_value_int8</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">int16_t</span> <a href="#DataMiner_value_int16"><span class="nf">DataMiner_value_int16</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">int32_t</span> <a href="#DataMiner_value_int32"><span class="nf">DataMiner_value_int32</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">int64_t</span> <a href="#DataMiner_value_int64"><span class="nf">DataMiner_value_int64</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_hugeint</span> <a href="#DataMiner_value_hugeint"><span class="nf">DataMiner_value_hugeint</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_uhugeint</span> <a href="#DataMiner_value_uhugeint"><span class="nf">DataMiner_value_uhugeint</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_decimal</span> <a href="#DataMiner_value_decimal"><span class="nf">DataMiner_value_decimal</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">uint8_t</span> <a href="#DataMiner_value_uint8"><span class="nf">DataMiner_value_uint8</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">uint16_t</span> <a href="#DataMiner_value_uint16"><span class="nf">DataMiner_value_uint16</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">uint32_t</span> <a href="#DataMiner_value_uint32"><span class="nf">DataMiner_value_uint32</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">uint64_t</span> <a href="#DataMiner_value_uint64"><span class="nf">DataMiner_value_uint64</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">float</span> <a href="#DataMiner_value_float"><span class="nf">DataMiner_value_float</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">double</span> <a href="#DataMiner_value_double"><span class="nf">DataMiner_value_double</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_date</span> <a href="#DataMiner_value_date"><span class="nf">DataMiner_value_date</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_time</span> <a href="#DataMiner_value_time"><span class="nf">DataMiner_value_time</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_timestamp</span> <a href="#DataMiner_value_timestamp"><span class="nf">DataMiner_value_timestamp</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_interval</span> <a href="#DataMiner_value_interval"><span class="nf">DataMiner_value_interval</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">char</span> *<a href="#DataMiner_value_varchar"><span class="nf">DataMiner_value_varchar</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_string</span> <a href="#DataMiner_value_string"><span class="nf">DataMiner_value_string</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">char</span> *<a href="#DataMiner_value_varchar_internal"><span class="nf">DataMiner_value_varchar_internal</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_string</span> <a href="#DataMiner_value_string_internal"><span class="nf">DataMiner_value_string_internal</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">DataMiner_blob</span> <a href="#DataMiner_value_blob"><span class="nf">DataMiner_value_blob</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">bool</span> <a href="#DataMiner_value_is_null"><span class="nf">DataMiner_value_is_null</span></a>(<span class="kt">DataMiner_result</span> *<span class="nv">result</span>, <span class="kt">idx_t</span> <span class="nv">col</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 </code></pre></div></div>
 
 ### Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#duckdb_malloc"><span class="nf">duckdb_malloc</span></a>(<span class="kt">size_t</span> <span class="nv">size</span>);
-<span class="kt">void</span> <a href="#duckdb_free"><span class="nf">duckdb_free</span></a>(<span class="kt">void</span> *<span class="nv">ptr</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_vector_size"><span class="nf">duckdb_vector_size</span></a>();
-<span class="kt">bool</span> <a href="#duckdb_string_is_inlined"><span class="nf">duckdb_string_is_inlined</span></a>(<span class="nv">duckdb_string_t</span> <span class="nv">string</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#DataMiner_malloc"><span class="nf">DataMiner_malloc</span></a>(<span class="kt">size_t</span> <span class="nv">size</span>);
+<span class="kt">void</span> <a href="#DataMiner_free"><span class="nf">DataMiner_free</span></a>(<span class="kt">void</span> *<span class="nv">ptr</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_vector_size"><span class="nf">DataMiner_vector_size</span></a>();
+<span class="kt">bool</span> <a href="#DataMiner_string_is_inlined"><span class="nf">DataMiner_string_is_inlined</span></a>(<span class="nv">DataMiner_string_t</span> <span class="nv">string</span>);
 </code></pre></div></div>
 
 ### Date/Time/Timestamp Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <a href="#duckdb_from_date"><span class="nf">duckdb_from_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">date</span>);
-<span class="kt">duckdb_date</span> <a href="#duckdb_to_date"><span class="nf">duckdb_to_date</span></a>(<span class="kt">duckdb_date_struct</span> <span class="nv">date</span>);
-<span class="kt">bool</span> <a href="#duckdb_is_finite_date"><span class="nf">duckdb_is_finite_date</span></a>(<span class="kt">duckdb_date</span> <span class="nv">date</span>);
-<span class="kt">duckdb_time_struct</span> <a href="#duckdb_from_time"><span class="nf">duckdb_from_time</span></a>(<span class="kt">duckdb_time</span> <span class="nv">time</span>);
-<span class="kt">duckdb_time_tz</span> <a href="#duckdb_create_time_tz"><span class="nf">duckdb_create_time_tz</span></a>(<span class="kt">int64_t</span> <span class="nv">micros</span>, <span class="kt">int32_t</span> <span class="nv">offset</span>);
-<span class="kt">duckdb_time_tz_struct</span> <a href="#duckdb_from_time_tz"><span class="nf">duckdb_from_time_tz</span></a>(<span class="kt">duckdb_time_tz</span> <span class="nv">micros</span>);
-<span class="kt">duckdb_time</span> <a href="#duckdb_to_time"><span class="nf">duckdb_to_time</span></a>(<span class="kt">duckdb_time_struct</span> <span class="nv">time</span>);
-<span class="kt">duckdb_timestamp_struct</span> <a href="#duckdb_from_timestamp"><span class="nf">duckdb_from_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
-<span class="kt">duckdb_timestamp</span> <a href="#duckdb_to_timestamp"><span class="nf">duckdb_to_timestamp</span></a>(<span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts</span>);
-<span class="kt">bool</span> <a href="#duckdb_is_finite_timestamp"><span class="nf">duckdb_is_finite_timestamp</span></a>(<span class="kt">duckdb_timestamp</span> <span class="nv">ts</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_date_struct</span> <a href="#DataMiner_from_date"><span class="nf">DataMiner_from_date</span></a>(<span class="kt">DataMiner_date</span> <span class="nv">date</span>);
+<span class="kt">DataMiner_date</span> <a href="#DataMiner_to_date"><span class="nf">DataMiner_to_date</span></a>(<span class="kt">DataMiner_date_struct</span> <span class="nv">date</span>);
+<span class="kt">bool</span> <a href="#DataMiner_is_finite_date"><span class="nf">DataMiner_is_finite_date</span></a>(<span class="kt">DataMiner_date</span> <span class="nv">date</span>);
+<span class="kt">DataMiner_time_struct</span> <a href="#DataMiner_from_time"><span class="nf">DataMiner_from_time</span></a>(<span class="kt">DataMiner_time</span> <span class="nv">time</span>);
+<span class="kt">DataMiner_time_tz</span> <a href="#DataMiner_create_time_tz"><span class="nf">DataMiner_create_time_tz</span></a>(<span class="kt">int64_t</span> <span class="nv">micros</span>, <span class="kt">int32_t</span> <span class="nv">offset</span>);
+<span class="kt">DataMiner_time_tz_struct</span> <a href="#DataMiner_from_time_tz"><span class="nf">DataMiner_from_time_tz</span></a>(<span class="kt">DataMiner_time_tz</span> <span class="nv">micros</span>);
+<span class="kt">DataMiner_time</span> <a href="#DataMiner_to_time"><span class="nf">DataMiner_to_time</span></a>(<span class="kt">DataMiner_time_struct</span> <span class="nv">time</span>);
+<span class="kt">DataMiner_timestamp_struct</span> <a href="#DataMiner_from_timestamp"><span class="nf">DataMiner_from_timestamp</span></a>(<span class="kt">DataMiner_timestamp</span> <span class="nv">ts</span>);
+<span class="kt">DataMiner_timestamp</span> <a href="#DataMiner_to_timestamp"><span class="nf">DataMiner_to_timestamp</span></a>(<span class="kt">DataMiner_timestamp_struct</span> <span class="nv">ts</span>);
+<span class="kt">bool</span> <a href="#DataMiner_is_finite_timestamp"><span class="nf">DataMiner_is_finite_timestamp</span></a>(<span class="kt">DataMiner_timestamp</span> <span class="nv">ts</span>);
 </code></pre></div></div>
 
 ### Hugeint Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_hugeint_to_double"><span class="nf">duckdb_hugeint_to_double</span></a>(<span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
-<span class="kt">duckdb_hugeint</span> <a href="#duckdb_double_to_hugeint"><span class="nf">duckdb_double_to_hugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#DataMiner_hugeint_to_double"><span class="nf">DataMiner_hugeint_to_double</span></a>(<span class="kt">DataMiner_hugeint</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_hugeint</span> <a href="#DataMiner_double_to_hugeint"><span class="nf">DataMiner_double_to_hugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
 </code></pre></div></div>
 
 ### Unsigned Hugeint Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#duckdb_uhugeint_to_double"><span class="nf">duckdb_uhugeint_to_double</span></a>(<span class="kt">duckdb_uhugeint</span> <span class="nv">val</span>);
-<span class="kt">duckdb_uhugeint</span> <a href="#duckdb_double_to_uhugeint"><span class="nf">duckdb_double_to_uhugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <a href="#DataMiner_uhugeint_to_double"><span class="nf">DataMiner_uhugeint_to_double</span></a>(<span class="kt">DataMiner_uhugeint</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_uhugeint</span> <a href="#DataMiner_double_to_uhugeint"><span class="nf">DataMiner_double_to_uhugeint</span></a>(<span class="kt">double</span> <span class="nv">val</span>);
 </code></pre></div></div>
 
 ### Decimal Helpers
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_decimal</span> <a href="#duckdb_double_to_decimal"><span class="nf">duckdb_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
-<span class="kt">double</span> <a href="#duckdb_decimal_to_double"><span class="nf">duckdb_decimal_to_double</span></a>(<span class="kt">duckdb_decimal</span> <span class="nv">val</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_decimal</span> <a href="#DataMiner_double_to_decimal"><span class="nf">DataMiner_double_to_decimal</span></a>(<span class="kt">double</span> <span class="nv">val</span>, <span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
+<span class="kt">double</span> <a href="#DataMiner_decimal_to_double"><span class="nf">DataMiner_decimal_to_double</span></a>(<span class="kt">DataMiner_decimal</span> <span class="nv">val</span>);
 </code></pre></div></div>
 
 ### Prepared Statements
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_prepare"><span class="nf">duckdb_prepare</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_prepare"><span class="nf">duckdb_destroy_prepare</span></a>(<span class="kt">duckdb_prepared_statement</span> *<span class="nv">prepared_statement</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_prepare_error"><span class="nf">duckdb_prepare_error</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_nparams"><span class="nf">duckdb_nparams</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_parameter_name"><span class="nf">duckdb_parameter_name</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="kt">duckdb_type</span> <a href="#duckdb_param_type"><span class="nf">duckdb_param_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_clear_bindings"><span class="nf">duckdb_clear_bindings</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>);
-<span class="kt">duckdb_statement_type</span> <a href="#duckdb_prepared_statement_type"><span class="nf">duckdb_prepared_statement_type</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">statement</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <a href="#DataMiner_prepare"><span class="nf">DataMiner_prepare</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">DataMiner_prepared_statement</span> *<span class="nv">out_prepared_statement</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_prepare"><span class="nf">DataMiner_destroy_prepare</span></a>(<span class="kt">DataMiner_prepared_statement</span> *<span class="nv">prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#DataMiner_prepare_error"><span class="nf">DataMiner_prepare_error</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_nparams"><span class="nf">DataMiner_nparams</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#DataMiner_parameter_name"><span class="nf">DataMiner_parameter_name</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">DataMiner_type</span> <a href="#DataMiner_param_type"><span class="nf">DataMiner_param_type</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_clear_bindings"><span class="nf">DataMiner_clear_bindings</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>);
+<span class="kt">DataMiner_statement_type</span> <a href="#DataMiner_prepared_statement_type"><span class="nf">DataMiner_prepared_statement_type</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">statement</span>);
 </code></pre></div></div>
 
 ### Bind Values to Prepared Statements
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_bind_value"><span class="nf">duckdb_bind_value</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_value</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_parameter_index"><span class="nf">duckdb_bind_parameter_index</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_boolean"><span class="nf">duckdb_bind_boolean</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">bool</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int8"><span class="nf">duckdb_bind_int8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int8_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int16"><span class="nf">duckdb_bind_int16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int16_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int32"><span class="nf">duckdb_bind_int32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int32_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_int64"><span class="nf">duckdb_bind_int64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int64_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_hugeint"><span class="nf">duckdb_bind_hugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_hugeint</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uhugeint"><span class="nf">duckdb_bind_uhugeint</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_uhugeint</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_decimal"><span class="nf">duckdb_bind_decimal</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_decimal</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint8"><span class="nf">duckdb_bind_uint8</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint8_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint16"><span class="nf">duckdb_bind_uint16</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint16_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint32"><span class="nf">duckdb_bind_uint32</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint32_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_uint64"><span class="nf">duckdb_bind_uint64</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint64_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_float"><span class="nf">duckdb_bind_float</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">float</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_double"><span class="nf">duckdb_bind_double</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">double</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_date"><span class="nf">duckdb_bind_date</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_date</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_time"><span class="nf">duckdb_bind_time</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_time</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_timestamp"><span class="nf">duckdb_bind_timestamp</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_interval"><span class="nf">duckdb_bind_interval</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">duckdb_interval</span> <span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar"><span class="nf">duckdb_bind_varchar</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_varchar_length"><span class="nf">duckdb_bind_varchar_length</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_blob"><span class="nf">duckdb_bind_blob</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_bind_null"><span class="nf">duckdb_bind_null</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_value"><span class="nf">DataMiner_bind_value</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">DataMiner_value</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_parameter_index"><span class="nf">DataMiner_bind_parameter_index</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_boolean"><span class="nf">DataMiner_bind_boolean</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">bool</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_int8"><span class="nf">DataMiner_bind_int8</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int8_t</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_int16"><span class="nf">DataMiner_bind_int16</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int16_t</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_int32"><span class="nf">DataMiner_bind_int32</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int32_t</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_int64"><span class="nf">DataMiner_bind_int64</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">int64_t</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_hugeint"><span class="nf">DataMiner_bind_hugeint</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">DataMiner_hugeint</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_uhugeint"><span class="nf">DataMiner_bind_uhugeint</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">DataMiner_uhugeint</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_decimal"><span class="nf">DataMiner_bind_decimal</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">DataMiner_decimal</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_uint8"><span class="nf">DataMiner_bind_uint8</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint8_t</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_uint16"><span class="nf">DataMiner_bind_uint16</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint16_t</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_uint32"><span class="nf">DataMiner_bind_uint32</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint32_t</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_uint64"><span class="nf">DataMiner_bind_uint64</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">uint64_t</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_float"><span class="nf">DataMiner_bind_float</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">float</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_double"><span class="nf">DataMiner_bind_double</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">double</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_date"><span class="nf">DataMiner_bind_date</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">DataMiner_date</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_time"><span class="nf">DataMiner_bind_time</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">DataMiner_time</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_timestamp"><span class="nf">DataMiner_bind_timestamp</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">DataMiner_timestamp</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_interval"><span class="nf">DataMiner_bind_interval</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">DataMiner_interval</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_varchar"><span class="nf">DataMiner_bind_varchar</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_varchar_length"><span class="nf">DataMiner_bind_varchar_length</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_blob"><span class="nf">DataMiner_bind_blob</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_bind_null"><span class="nf">DataMiner_bind_null</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">idx_t</span> <span class="nv">param_idx</span>);
 </code></pre></div></div>
 
 ### Execute Prepared Statements
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared"><span class="nf">duckdb_execute_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_streaming"><span class="nf">duckdb_execute_prepared_streaming</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <a href="#DataMiner_execute_prepared"><span class="nf">DataMiner_execute_prepared</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">DataMiner_result</span> *<span class="nv">out_result</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_execute_prepared_streaming"><span class="nf">DataMiner_execute_prepared_streaming</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">DataMiner_result</span> *<span class="nv">out_result</span>);
 </code></pre></div></div>
 
 ### Extract Statements
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <a href="#duckdb_extract_statements"><span class="nf">duckdb_extract_statements</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="nv">duckdb_extracted_statements</span> *<span class="nv">out_extracted_statements</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_prepare_extracted_statement"><span class="nf">duckdb_prepare_extracted_statement</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="nv">duckdb_extracted_statements</span> <span class="nv">extracted_statements</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_extract_statements_error"><span class="nf">duckdb_extract_statements_error</span></a>(<span class="nv">duckdb_extracted_statements</span> <span class="nv">extracted_statements</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_extracted"><span class="nf">duckdb_destroy_extracted</span></a>(<span class="nv">duckdb_extracted_statements</span> *<span class="nv">extracted_statements</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <a href="#DataMiner_extract_statements"><span class="nf">DataMiner_extract_statements</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="nv">DataMiner_extracted_statements</span> *<span class="nv">out_extracted_statements</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_prepare_extracted_statement"><span class="nf">DataMiner_prepare_extracted_statement</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>, <span class="nv">DataMiner_extracted_statements</span> <span class="nv">extracted_statements</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">DataMiner_prepared_statement</span> *<span class="nv">out_prepared_statement</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#DataMiner_extract_statements_error"><span class="nf">DataMiner_extract_statements_error</span></a>(<span class="nv">DataMiner_extracted_statements</span> <span class="nv">extracted_statements</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_extracted"><span class="nf">DataMiner_destroy_extracted</span></a>(<span class="nv">DataMiner_extracted_statements</span> *<span class="nv">extracted_statements</span>);
 </code></pre></div></div>
 
 ### Pending Result Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_pending_prepared"><span class="nf">duckdb_pending_prepared</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="nv">duckdb_pending_result</span> *<span class="nv">out_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_pending_prepared_streaming"><span class="nf">duckdb_pending_prepared_streaming</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="nv">duckdb_pending_result</span> *<span class="nv">out_result</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_pending"><span class="nf">duckdb_destroy_pending</span></a>(<span class="nv">duckdb_pending_result</span> *<span class="nv">pending_result</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_pending_error"><span class="nf">duckdb_pending_error</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>);
-<span class="kt">duckdb_pending_state</span> <a href="#duckdb_pending_execute_task"><span class="nf">duckdb_pending_execute_task</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>);
-<span class="kt">duckdb_pending_state</span> <a href="#duckdb_pending_execute_check_state"><span class="nf">duckdb_pending_execute_check_state</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_execute_pending"><span class="nf">duckdb_execute_pending</span></a>(<span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>, <span class="kt">duckdb_result</span> *<span class="nv">out_result</span>);
-<span class="kt">bool</span> <a href="#duckdb_pending_execution_is_finished"><span class="nf">duckdb_pending_execution_is_finished</span></a>(<span class="kt">duckdb_pending_state</span> <span class="nv">pending_state</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <a href="#DataMiner_pending_prepared"><span class="nf">DataMiner_pending_prepared</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="nv">DataMiner_pending_result</span> *<span class="nv">out_result</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_pending_prepared_streaming"><span class="nf">DataMiner_pending_prepared_streaming</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="nv">DataMiner_pending_result</span> *<span class="nv">out_result</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_pending"><span class="nf">DataMiner_destroy_pending</span></a>(<span class="nv">DataMiner_pending_result</span> *<span class="nv">pending_result</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#DataMiner_pending_error"><span class="nf">DataMiner_pending_error</span></a>(<span class="nv">DataMiner_pending_result</span> <span class="nv">pending_result</span>);
+<span class="kt">DataMiner_pending_state</span> <a href="#DataMiner_pending_execute_task"><span class="nf">DataMiner_pending_execute_task</span></a>(<span class="nv">DataMiner_pending_result</span> <span class="nv">pending_result</span>);
+<span class="kt">DataMiner_pending_state</span> <a href="#DataMiner_pending_execute_check_state"><span class="nf">DataMiner_pending_execute_check_state</span></a>(<span class="nv">DataMiner_pending_result</span> <span class="nv">pending_result</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_execute_pending"><span class="nf">DataMiner_execute_pending</span></a>(<span class="nv">DataMiner_pending_result</span> <span class="nv">pending_result</span>, <span class="kt">DataMiner_result</span> *<span class="nv">out_result</span>);
+<span class="kt">bool</span> <a href="#DataMiner_pending_execution_is_finished"><span class="nf">DataMiner_pending_execution_is_finished</span></a>(<span class="kt">DataMiner_pending_state</span> <span class="nv">pending_state</span>);
 </code></pre></div></div>
 
 ### Value Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <a href="#duckdb_destroy_value"><span class="nf">duckdb_destroy_value</span></a>(<span class="kt">duckdb_value</span> *<span class="nv">value</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_varchar"><span class="nf">duckdb_create_varchar</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_varchar_length"><span class="nf">duckdb_create_varchar_length</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_int64"><span class="nf">duckdb_create_int64</span></a>(<span class="kt">int64_t</span> <span class="nv">val</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_struct_value"><span class="nf">duckdb_create_struct_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_list_value"><span class="nf">duckdb_create_list_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_create_array_value"><span class="nf">duckdb_create_array_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">duckdb_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
-<span class="kt">char</span> *<a href="#duckdb_get_varchar"><span class="nf">duckdb_get_varchar</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
-<span class="kt">int64_t</span> <a href="#duckdb_get_int64"><span class="nf">duckdb_get_int64</span></a>(<span class="kt">duckdb_value</span> <span class="nv">value</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <a href="#DataMiner_destroy_value"><span class="nf">DataMiner_destroy_value</span></a>(<span class="kt">DataMiner_value</span> *<span class="nv">value</span>);
+<span class="kt">DataMiner_value</span> <a href="#DataMiner_create_varchar"><span class="nf">DataMiner_create_varchar</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>);
+<span class="kt">DataMiner_value</span> <a href="#DataMiner_create_varchar_length"><span class="nf">DataMiner_create_varchar_length</span></a>(<span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">DataMiner_value</span> <a href="#DataMiner_create_int64"><span class="nf">DataMiner_create_int64</span></a>(<span class="kt">int64_t</span> <span class="nv">val</span>);
+<span class="kt">DataMiner_value</span> <a href="#DataMiner_create_struct_value"><span class="nf">DataMiner_create_struct_value</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>, <span class="kt">DataMiner_value</span> *<span class="nv">values</span>);
+<span class="kt">DataMiner_value</span> <a href="#DataMiner_create_list_value"><span class="nf">DataMiner_create_list_value</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>, <span class="kt">DataMiner_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
+<span class="kt">DataMiner_value</span> <a href="#DataMiner_create_array_value"><span class="nf">DataMiner_create_array_value</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>, <span class="kt">DataMiner_value</span> *<span class="nv">values</span>, <span class="kt">idx_t</span> <span class="nv">value_count</span>);
+<span class="kt">char</span> *<a href="#DataMiner_get_varchar"><span class="nf">DataMiner_get_varchar</span></a>(<span class="kt">DataMiner_value</span> <span class="nv">value</span>);
+<span class="kt">int64_t</span> <a href="#DataMiner_get_int64"><span class="nf">DataMiner_get_int64</span></a>(<span class="kt">DataMiner_value</span> <span class="nv">value</span>);
 </code></pre></div></div>
 
 ### Logical Type Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_logical_type"><span class="nf">duckdb_create_logical_type</span></a>(<span class="kt">duckdb_type</span> <span class="nv">type</span>);
-<span class="kt">char</span> *<a href="#duckdb_logical_type_get_alias"><span class="nf">duckdb_logical_type_get_alias</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_list_type"><span class="nf">duckdb_create_list_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_array_type"><span class="nf">duckdb_create_array_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">array_size</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_map_type"><span class="nf">duckdb_create_map_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">value_type</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_union_type"><span class="nf">duckdb_create_union_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_struct_type"><span class="nf">duckdb_create_struct_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_enum_type"><span class="nf">duckdb_create_enum_type</span></a>(<span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_create_decimal_type"><span class="nf">duckdb_create_decimal_type</span></a>(<span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
-<span class="kt">duckdb_type</span> <a href="#duckdb_get_type_id"><span class="nf">duckdb_get_type_id</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">uint8_t</span> <a href="#duckdb_decimal_width"><span class="nf">duckdb_decimal_width</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">uint8_t</span> <a href="#duckdb_decimal_scale"><span class="nf">duckdb_decimal_scale</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">duckdb_type</span> <a href="#duckdb_decimal_internal_type"><span class="nf">duckdb_decimal_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">duckdb_type</span> <a href="#duckdb_enum_internal_type"><span class="nf">duckdb_enum_internal_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">uint32_t</span> <a href="#duckdb_enum_dictionary_size"><span class="nf">duckdb_enum_dictionary_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">char</span> *<a href="#duckdb_enum_dictionary_value"><span class="nf">duckdb_enum_dictionary_value</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_list_type_child_type"><span class="nf">duckdb_list_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_array_type_child_type"><span class="nf">duckdb_array_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_array_type_array_size"><span class="nf">duckdb_array_type_array_size</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_key_type"><span class="nf">duckdb_map_type_key_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_map_type_value_type"><span class="nf">duckdb_map_type_value_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_struct_type_child_count"><span class="nf">duckdb_struct_type_child_count</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">char</span> *<a href="#duckdb_struct_type_child_name"><span class="nf">duckdb_struct_type_child_name</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_struct_type_child_type"><span class="nf">duckdb_struct_type_child_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_union_type_member_count"><span class="nf">duckdb_union_type_member_count</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">char</span> *<a href="#duckdb_union_type_member_name"><span class="nf">duckdb_union_type_member_name</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_union_type_member_type"><span class="nf">duckdb_union_type_member_type</span></a>(<span class="kt">duckdb_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_logical_type"><span class="nf">duckdb_destroy_logical_type</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">type</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_create_logical_type"><span class="nf">DataMiner_create_logical_type</span></a>(<span class="kt">DataMiner_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#DataMiner_logical_type_get_alias"><span class="nf">DataMiner_logical_type_get_alias</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_create_list_type"><span class="nf">DataMiner_create_list_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_create_array_type"><span class="nf">DataMiner_create_array_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">array_size</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_create_map_type"><span class="nf">DataMiner_create_map_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">key_type</span>, <span class="kt">DataMiner_logical_type</span> <span class="nv">value_type</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_create_union_type"><span class="nf">DataMiner_create_union_type</span></a>(<span class="kt">DataMiner_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_create_struct_type"><span class="nf">DataMiner_create_struct_type</span></a>(<span class="kt">DataMiner_logical_type</span> *<span class="nv">member_types</span>, <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_create_enum_type"><span class="nf">DataMiner_create_enum_type</span></a>(<span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>, <span class="kt">idx_t</span> <span class="nv">member_count</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_create_decimal_type"><span class="nf">DataMiner_create_decimal_type</span></a>(<span class="kt">uint8_t</span> <span class="nv">width</span>, <span class="kt">uint8_t</span> <span class="nv">scale</span>);
+<span class="kt">DataMiner_type</span> <a href="#DataMiner_get_type_id"><span class="nf">DataMiner_get_type_id</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">uint8_t</span> <a href="#DataMiner_decimal_width"><span class="nf">DataMiner_decimal_width</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">uint8_t</span> <a href="#DataMiner_decimal_scale"><span class="nf">DataMiner_decimal_scale</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">DataMiner_type</span> <a href="#DataMiner_decimal_internal_type"><span class="nf">DataMiner_decimal_internal_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">DataMiner_type</span> <a href="#DataMiner_enum_internal_type"><span class="nf">DataMiner_enum_internal_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">uint32_t</span> <a href="#DataMiner_enum_dictionary_size"><span class="nf">DataMiner_enum_dictionary_size</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#DataMiner_enum_dictionary_value"><span class="nf">DataMiner_enum_dictionary_value</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_list_type_child_type"><span class="nf">DataMiner_list_type_child_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_array_type_child_type"><span class="nf">DataMiner_array_type_child_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_array_type_array_size"><span class="nf">DataMiner_array_type_array_size</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_map_type_key_type"><span class="nf">DataMiner_map_type_key_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_map_type_value_type"><span class="nf">DataMiner_map_type_value_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_struct_type_child_count"><span class="nf">DataMiner_struct_type_child_count</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#DataMiner_struct_type_child_name"><span class="nf">DataMiner_struct_type_child_name</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_struct_type_child_type"><span class="nf">DataMiner_struct_type_child_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_union_type_member_count"><span class="nf">DataMiner_union_type_member_count</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">char</span> *<a href="#DataMiner_union_type_member_name"><span class="nf">DataMiner_union_type_member_name</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_union_type_member_type"><span class="nf">DataMiner_union_type_member_type</span></a>(<span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_logical_type"><span class="nf">DataMiner_destroy_logical_type</span></a>(<span class="kt">DataMiner_logical_type</span> *<span class="nv">type</span>);
 </code></pre></div></div>
 
 ### Data Chunk Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <a href="#duckdb_create_data_chunk"><span class="nf">duckdb_create_data_chunk</span></a>(<span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>, <span class="kt">idx_t</span> <span class="nv">column_count</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_data_chunk"><span class="nf">duckdb_destroy_data_chunk</span></a>(<span class="kt">duckdb_data_chunk</span> *<span class="nv">chunk</span>);
-<span class="kt">void</span> <a href="#duckdb_data_chunk_reset"><span class="nf">duckdb_data_chunk_reset</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_data_chunk_get_column_count"><span class="nf">duckdb_data_chunk_get_column_count</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
-<span class="kt">duckdb_vector</span> <a href="#duckdb_data_chunk_get_vector"><span class="nf">duckdb_data_chunk_get_vector</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_data_chunk_get_size"><span class="nf">duckdb_data_chunk_get_size</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
-<span class="kt">void</span> <a href="#duckdb_data_chunk_set_size"><span class="nf">duckdb_data_chunk_set_size</span></a>(<span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>, <span class="kt">idx_t</span> <span class="nv">size</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_data_chunk</span> <a href="#DataMiner_create_data_chunk"><span class="nf">DataMiner_create_data_chunk</span></a>(<span class="kt">DataMiner_logical_type</span> *<span class="nv">types</span>, <span class="kt">idx_t</span> <span class="nv">column_count</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_data_chunk"><span class="nf">DataMiner_destroy_data_chunk</span></a>(<span class="kt">DataMiner_data_chunk</span> *<span class="nv">chunk</span>);
+<span class="kt">void</span> <a href="#DataMiner_data_chunk_reset"><span class="nf">DataMiner_data_chunk_reset</span></a>(<span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_data_chunk_get_column_count"><span class="nf">DataMiner_data_chunk_get_column_count</span></a>(<span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>);
+<span class="kt">DataMiner_vector</span> <a href="#DataMiner_data_chunk_get_vector"><span class="nf">DataMiner_data_chunk_get_vector</span></a>(<span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_data_chunk_get_size"><span class="nf">DataMiner_data_chunk_get_size</span></a>(<span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>);
+<span class="kt">void</span> <a href="#DataMiner_data_chunk_set_size"><span class="nf">DataMiner_data_chunk_set_size</span></a>(<span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>, <span class="kt">idx_t</span> <span class="nv">size</span>);
 </code></pre></div></div>
 
 ### Vector Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <a href="#duckdb_vector_get_column_type"><span class="nf">duckdb_vector_get_column_type</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
-<span class="kt">void</span> *<a href="#duckdb_vector_get_data"><span class="nf">duckdb_vector_get_data</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
-<span class="kt">uint64_t</span> *<a href="#duckdb_vector_get_validity"><span class="nf">duckdb_vector_get_validity</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
-<span class="kt">void</span> <a href="#duckdb_vector_ensure_validity_writable"><span class="nf">duckdb_vector_ensure_validity_writable</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
-<span class="kt">void</span> <a href="#duckdb_vector_assign_string_element"><span class="nf">duckdb_vector_assign_string_element</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str</span>);
-<span class="kt">void</span> <a href="#duckdb_vector_assign_string_element_len"><span class="nf">duckdb_vector_assign_string_element_len</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str</span>, <span class="kt">idx_t</span> <span class="nv">str_len</span>);
-<span class="kt">duckdb_vector</span> <a href="#duckdb_list_vector_get_child"><span class="nf">duckdb_list_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_list_vector_get_size"><span class="nf">duckdb_list_vector_get_size</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_set_size"><span class="nf">duckdb_list_vector_set_size</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">size</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_list_vector_reserve"><span class="nf">duckdb_list_vector_reserve</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">required_capacity</span>);
-<span class="kt">duckdb_vector</span> <a href="#duckdb_struct_vector_get_child"><span class="nf">duckdb_struct_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="kt">duckdb_vector</span> <a href="#duckdb_array_vector_get_child"><span class="nf">duckdb_array_vector_get_child</span></a>(<span class="kt">duckdb_vector</span> <span class="nv">vector</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_vector_get_column_type"><span class="nf">DataMiner_vector_get_column_type</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>);
+<span class="kt">void</span> *<a href="#DataMiner_vector_get_data"><span class="nf">DataMiner_vector_get_data</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>);
+<span class="kt">uint64_t</span> *<a href="#DataMiner_vector_get_validity"><span class="nf">DataMiner_vector_get_validity</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>);
+<span class="kt">void</span> <a href="#DataMiner_vector_ensure_validity_writable"><span class="nf">DataMiner_vector_ensure_validity_writable</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>);
+<span class="kt">void</span> <a href="#DataMiner_vector_assign_string_element"><span class="nf">DataMiner_vector_assign_string_element</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str</span>);
+<span class="kt">void</span> <a href="#DataMiner_vector_assign_string_element_len"><span class="nf">DataMiner_vector_assign_string_element_len</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str</span>, <span class="kt">idx_t</span> <span class="nv">str_len</span>);
+<span class="kt">DataMiner_vector</span> <a href="#DataMiner_list_vector_get_child"><span class="nf">DataMiner_list_vector_get_child</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_list_vector_get_size"><span class="nf">DataMiner_list_vector_get_size</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_list_vector_set_size"><span class="nf">DataMiner_list_vector_set_size</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">size</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_list_vector_reserve"><span class="nf">DataMiner_list_vector_reserve</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">required_capacity</span>);
+<span class="kt">DataMiner_vector</span> <a href="#DataMiner_struct_vector_get_child"><span class="nf">DataMiner_struct_vector_get_child</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">DataMiner_vector</span> <a href="#DataMiner_array_vector_get_child"><span class="nf">DataMiner_array_vector_get_child</span></a>(<span class="kt">DataMiner_vector</span> <span class="nv">vector</span>);
 </code></pre></div></div>
 
 ### Validity Mask Functions
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <a href="#duckdb_validity_row_is_valid"><span class="nf">duckdb_validity_row_is_valid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">void</span> <a href="#duckdb_validity_set_row_validity"><span class="nf">duckdb_validity_set_row_validity</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>, <span class="kt">bool</span> <span class="nv">valid</span>);
-<span class="kt">void</span> <a href="#duckdb_validity_set_row_invalid"><span class="nf">duckdb_validity_set_row_invalid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
-<span class="kt">void</span> <a href="#duckdb_validity_set_row_valid"><span class="nf">duckdb_validity_set_row_valid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <a href="#DataMiner_validity_row_is_valid"><span class="nf">DataMiner_validity_row_is_valid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">void</span> <a href="#DataMiner_validity_set_row_validity"><span class="nf">DataMiner_validity_set_row_validity</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>, <span class="kt">bool</span> <span class="nv">valid</span>);
+<span class="kt">void</span> <a href="#DataMiner_validity_set_row_invalid"><span class="nf">DataMiner_validity_set_row_invalid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
+<span class="kt">void</span> <a href="#DataMiner_validity_set_row_valid"><span class="nf">DataMiner_validity_set_row_valid</span></a>(<span class="kt">uint64_t</span> *<span class="nv">validity</span>, <span class="kt">idx_t</span> <span class="nv">row</span>);
 </code></pre></div></div>
 
 ### Table Functions
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <a href="#duckdb_create_table_function"><span class="nf">duckdb_create_table_function</span></a>();
-<span class="kt">void</span> <a href="#duckdb_destroy_table_function"><span class="nf">duckdb_destroy_table_function</span></a>(<span class="kt">duckdb_table_function</span> *<span class="nv">table_function</span>);
-<span class="kt">void</span> <a href="#duckdb_table_function_set_name"><span class="nf">duckdb_table_function_set_name</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
-<span class="kt">void</span> <a href="#duckdb_table_function_add_parameter"><span class="nf">duckdb_table_function_add_parameter</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">void</span> <a href="#duckdb_table_function_add_named_parameter"><span class="nf">duckdb_table_function_add_named_parameter</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">void</span> <a href="#duckdb_table_function_set_extra_info"><span class="nf">duckdb_table_function_set_extra_info</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">void</span> *<span class="nv">extra_info</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy</span>);
-<span class="kt">void</span> <a href="#duckdb_table_function_set_bind"><span class="nf">duckdb_table_function_set_bind</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="nv">duckdb_table_function_bind_t</span> <span class="nv">bind</span>);
-<span class="kt">void</span> <a href="#duckdb_table_function_set_init"><span class="nf">duckdb_table_function_set_init</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init</span>);
-<span class="kt">void</span> <a href="#duckdb_table_function_set_local_init"><span class="nf">duckdb_table_function_set_local_init</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init</span>);
-<span class="kt">void</span> <a href="#duckdb_table_function_set_function"><span class="nf">duckdb_table_function_set_function</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="nv">duckdb_table_function_t</span> <span class="nv">function</span>);
-<span class="kt">void</span> <a href="#duckdb_table_function_supports_projection_pushdown"><span class="nf">duckdb_table_function_supports_projection_pushdown</span></a>(<span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>, <span class="kt">bool</span> <span class="nv">pushdown</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_register_table_function"><span class="nf">duckdb_register_table_function</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">con</span>, <span class="kt">duckdb_table_function</span> <span class="nv">function</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_table_function</span> <a href="#DataMiner_create_table_function"><span class="nf">DataMiner_create_table_function</span></a>();
+<span class="kt">void</span> <a href="#DataMiner_destroy_table_function"><span class="nf">DataMiner_destroy_table_function</span></a>(<span class="kt">DataMiner_table_function</span> *<span class="nv">table_function</span>);
+<span class="kt">void</span> <a href="#DataMiner_table_function_set_name"><span class="nf">DataMiner_table_function_set_name</span></a>(<span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
+<span class="kt">void</span> <a href="#DataMiner_table_function_add_parameter"><span class="nf">DataMiner_table_function_add_parameter</span></a>(<span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>, <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">void</span> <a href="#DataMiner_table_function_add_named_parameter"><span class="nf">DataMiner_table_function_add_named_parameter</span></a>(<span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">void</span> <a href="#DataMiner_table_function_set_extra_info"><span class="nf">DataMiner_table_function_set_extra_info</span></a>(<span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>, <span class="kt">void</span> *<span class="nv">extra_info</span>, <span class="nv">DataMiner_delete_callback_t</span> <span class="nv">destroy</span>);
+<span class="kt">void</span> <a href="#DataMiner_table_function_set_bind"><span class="nf">DataMiner_table_function_set_bind</span></a>(<span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>, <span class="nv">DataMiner_table_function_bind_t</span> <span class="nv">bind</span>);
+<span class="kt">void</span> <a href="#DataMiner_table_function_set_init"><span class="nf">DataMiner_table_function_set_init</span></a>(<span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>, <span class="nv">DataMiner_table_function_init_t</span> <span class="nv">init</span>);
+<span class="kt">void</span> <a href="#DataMiner_table_function_set_local_init"><span class="nf">DataMiner_table_function_set_local_init</span></a>(<span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>, <span class="nv">DataMiner_table_function_init_t</span> <span class="nv">init</span>);
+<span class="kt">void</span> <a href="#DataMiner_table_function_set_function"><span class="nf">DataMiner_table_function_set_function</span></a>(<span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>, <span class="nv">DataMiner_table_function_t</span> <span class="nv">function</span>);
+<span class="kt">void</span> <a href="#DataMiner_table_function_supports_projection_pushdown"><span class="nf">DataMiner_table_function_supports_projection_pushdown</span></a>(<span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>, <span class="kt">bool</span> <span class="nv">pushdown</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_register_table_function"><span class="nf">DataMiner_register_table_function</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">con</span>, <span class="kt">DataMiner_table_function</span> <span class="nv">function</span>);
 </code></pre></div></div>
 
 ### Table Function Bind
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#duckdb_bind_get_extra_info"><span class="nf">duckdb_bind_get_extra_info</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>);
-<span class="kt">void</span> <a href="#duckdb_bind_add_result_column"><span class="nf">duckdb_bind_add_result_column</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_bind_get_parameter_count"><span class="nf">duckdb_bind_get_parameter_count</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_bind_get_parameter"><span class="nf">duckdb_bind_get_parameter</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
-<span class="kt">duckdb_value</span> <a href="#duckdb_bind_get_named_parameter"><span class="nf">duckdb_bind_get_named_parameter</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
-<span class="kt">void</span> <a href="#duckdb_bind_set_bind_data"><span class="nf">duckdb_bind_set_bind_data</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">void</span> *<span class="nv">bind_data</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy</span>);
-<span class="kt">void</span> <a href="#duckdb_bind_set_cardinality"><span class="nf">duckdb_bind_set_cardinality</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">cardinality</span>, <span class="kt">bool</span> <span class="nv">is_exact</span>);
-<span class="kt">void</span> <a href="#duckdb_bind_set_error"><span class="nf">duckdb_bind_set_error</span></a>(<span class="kt">duckdb_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#DataMiner_bind_get_extra_info"><span class="nf">DataMiner_bind_get_extra_info</span></a>(<span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> <a href="#DataMiner_bind_add_result_column"><span class="nf">DataMiner_bind_add_result_column</span></a>(<span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>, <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_bind_get_parameter_count"><span class="nf">DataMiner_bind_get_parameter_count</span></a>(<span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>);
+<span class="kt">DataMiner_value</span> <a href="#DataMiner_bind_get_parameter"><span class="nf">DataMiner_bind_get_parameter</span></a>(<span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">index</span>);
+<span class="kt">DataMiner_value</span> <a href="#DataMiner_bind_get_named_parameter"><span class="nf">DataMiner_bind_get_named_parameter</span></a>(<span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>);
+<span class="kt">void</span> <a href="#DataMiner_bind_set_bind_data"><span class="nf">DataMiner_bind_set_bind_data</span></a>(<span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>, <span class="kt">void</span> *<span class="nv">bind_data</span>, <span class="nv">DataMiner_delete_callback_t</span> <span class="nv">destroy</span>);
+<span class="kt">void</span> <a href="#DataMiner_bind_set_cardinality"><span class="nf">DataMiner_bind_set_cardinality</span></a>(<span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">cardinality</span>, <span class="kt">bool</span> <span class="nv">is_exact</span>);
+<span class="kt">void</span> <a href="#DataMiner_bind_set_error"><span class="nf">DataMiner_bind_set_error</span></a>(<span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 </code></pre></div></div>
 
 ### Table Function Init
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#duckdb_init_get_extra_info"><span class="nf">duckdb_init_get_extra_info</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>);
-<span class="kt">void</span> *<a href="#duckdb_init_get_bind_data"><span class="nf">duckdb_init_get_bind_data</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>);
-<span class="kt">void</span> <a href="#duckdb_init_set_init_data"><span class="nf">duckdb_init_set_init_data</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">void</span> *<span class="nv">init_data</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_init_get_column_count"><span class="nf">duckdb_init_get_column_count</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_init_get_column_index"><span class="nf">duckdb_init_get_column_index</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">column_index</span>);
-<span class="kt">void</span> <a href="#duckdb_init_set_max_threads"><span class="nf">duckdb_init_set_max_threads</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">max_threads</span>);
-<span class="kt">void</span> <a href="#duckdb_init_set_error"><span class="nf">duckdb_init_set_error</span></a>(<span class="kt">duckdb_init_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#DataMiner_init_get_extra_info"><span class="nf">DataMiner_init_get_extra_info</span></a>(<span class="kt">DataMiner_init_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> *<a href="#DataMiner_init_get_bind_data"><span class="nf">DataMiner_init_get_bind_data</span></a>(<span class="kt">DataMiner_init_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> <a href="#DataMiner_init_set_init_data"><span class="nf">DataMiner_init_set_init_data</span></a>(<span class="kt">DataMiner_init_info</span> <span class="nv">info</span>, <span class="kt">void</span> *<span class="nv">init_data</span>, <span class="nv">DataMiner_delete_callback_t</span> <span class="nv">destroy</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_init_get_column_count"><span class="nf">DataMiner_init_get_column_count</span></a>(<span class="kt">DataMiner_init_info</span> <span class="nv">info</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_init_get_column_index"><span class="nf">DataMiner_init_get_column_index</span></a>(<span class="kt">DataMiner_init_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">column_index</span>);
+<span class="kt">void</span> <a href="#DataMiner_init_set_max_threads"><span class="nf">DataMiner_init_set_max_threads</span></a>(<span class="kt">DataMiner_init_info</span> <span class="nv">info</span>, <span class="kt">idx_t</span> <span class="nv">max_threads</span>);
+<span class="kt">void</span> <a href="#DataMiner_init_set_error"><span class="nf">DataMiner_init_set_error</span></a>(<span class="kt">DataMiner_init_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 </code></pre></div></div>
 
 ### Table Function
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#duckdb_function_get_extra_info"><span class="nf">duckdb_function_get_extra_info</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
-<span class="kt">void</span> *<a href="#duckdb_function_get_bind_data"><span class="nf">duckdb_function_get_bind_data</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
-<span class="kt">void</span> *<a href="#duckdb_function_get_init_data"><span class="nf">duckdb_function_get_init_data</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
-<span class="kt">void</span> *<a href="#duckdb_function_get_local_init_data"><span class="nf">duckdb_function_get_local_init_data</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>);
-<span class="kt">void</span> <a href="#duckdb_function_set_error"><span class="nf">duckdb_function_set_error</span></a>(<span class="kt">duckdb_function_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<a href="#DataMiner_function_get_extra_info"><span class="nf">DataMiner_function_get_extra_info</span></a>(<span class="kt">DataMiner_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> *<a href="#DataMiner_function_get_bind_data"><span class="nf">DataMiner_function_get_bind_data</span></a>(<span class="kt">DataMiner_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> *<a href="#DataMiner_function_get_init_data"><span class="nf">DataMiner_function_get_init_data</span></a>(<span class="kt">DataMiner_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> *<a href="#DataMiner_function_get_local_init_data"><span class="nf">DataMiner_function_get_local_init_data</span></a>(<span class="kt">DataMiner_function_info</span> <span class="nv">info</span>);
+<span class="kt">void</span> <a href="#DataMiner_function_set_error"><span class="nf">DataMiner_function_set_error</span></a>(<span class="kt">DataMiner_function_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 </code></pre></div></div>
 
 ### Replacement Scans
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <a href="#duckdb_add_replacement_scan"><span class="nf">duckdb_add_replacement_scan</span></a>(<span class="kt">duckdb_database</span> <span class="nv">db</span>, <span class="nv">duckdb_replacement_callback_t</span> <span class="nv">replacement</span>, <span class="kt">void</span> *<span class="nv">extra_data</span>, <span class="nv">duckdb_delete_callback_t</span> <span class="nv">delete_callback</span>);
-<span class="kt">void</span> <a href="#duckdb_replacement_scan_set_function_name"><span class="nf">duckdb_replacement_scan_set_function_name</span></a>(<span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">function_name</span>);
-<span class="kt">void</span> <a href="#duckdb_replacement_scan_add_parameter"><span class="nf">duckdb_replacement_scan_add_parameter</span></a>(<span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>, <span class="kt">duckdb_value</span> <span class="nv">parameter</span>);
-<span class="kt">void</span> <a href="#duckdb_replacement_scan_set_error"><span class="nf">duckdb_replacement_scan_set_error</span></a>(<span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <a href="#DataMiner_add_replacement_scan"><span class="nf">DataMiner_add_replacement_scan</span></a>(<span class="kt">DataMiner_database</span> <span class="nv">db</span>, <span class="nv">DataMiner_replacement_callback_t</span> <span class="nv">replacement</span>, <span class="kt">void</span> *<span class="nv">extra_data</span>, <span class="nv">DataMiner_delete_callback_t</span> <span class="nv">delete_callback</span>);
+<span class="kt">void</span> <a href="#DataMiner_replacement_scan_set_function_name"><span class="nf">DataMiner_replacement_scan_set_function_name</span></a>(<span class="kt">DataMiner_replacement_scan_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">function_name</span>);
+<span class="kt">void</span> <a href="#DataMiner_replacement_scan_add_parameter"><span class="nf">DataMiner_replacement_scan_add_parameter</span></a>(<span class="kt">DataMiner_replacement_scan_info</span> <span class="nv">info</span>, <span class="kt">DataMiner_value</span> <span class="nv">parameter</span>);
+<span class="kt">void</span> <a href="#DataMiner_replacement_scan_set_error"><span class="nf">DataMiner_replacement_scan_set_error</span></a>(<span class="kt">DataMiner_replacement_scan_info</span> <span class="nv">info</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error</span>);
 </code></pre></div></div>
 
 ### Appender
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_appender_create"><span class="nf">duckdb_appender_create</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">duckdb_appender</span> *<span class="nv">out_appender</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_appender_column_count"><span class="nf">duckdb_appender_column_count</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
-<span class="kt">duckdb_logical_type</span> <a href="#duckdb_appender_column_type"><span class="nf">duckdb_appender_column_type</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_appender_error"><span class="nf">duckdb_appender_error</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_appender_flush"><span class="nf">duckdb_appender_flush</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_appender_close"><span class="nf">duckdb_appender_close</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_appender_destroy"><span class="nf">duckdb_appender_destroy</span></a>(<span class="kt">duckdb_appender</span> *<span class="nv">appender</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_appender_begin_row"><span class="nf">duckdb_appender_begin_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_appender_end_row"><span class="nf">duckdb_appender_end_row</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_bool"><span class="nf">duckdb_append_bool</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">bool</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_int8"><span class="nf">duckdb_append_int8</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int8_t</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_int16"><span class="nf">duckdb_append_int16</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int16_t</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_int32"><span class="nf">duckdb_append_int32</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int32_t</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_int64"><span class="nf">duckdb_append_int64</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">int64_t</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_hugeint"><span class="nf">duckdb_append_hugeint</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_hugeint</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint8"><span class="nf">duckdb_append_uint8</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint8_t</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint16"><span class="nf">duckdb_append_uint16</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint16_t</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint32"><span class="nf">duckdb_append_uint32</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint32_t</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_uint64"><span class="nf">duckdb_append_uint64</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_uhugeint"><span class="nf">duckdb_append_uhugeint</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_uhugeint</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_float"><span class="nf">duckdb_append_float</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">float</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_double"><span class="nf">duckdb_append_double</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">double</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_date"><span class="nf">duckdb_append_date</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_date</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_time"><span class="nf">duckdb_append_time</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_time</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_timestamp"><span class="nf">duckdb_append_timestamp</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_timestamp</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_interval"><span class="nf">duckdb_append_interval</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_interval</span> <span class="nv">value</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_varchar"><span class="nf">duckdb_append_varchar</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_varchar_length"><span class="nf">duckdb_append_varchar_length</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_blob"><span class="nf">duckdb_append_blob</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_null"><span class="nf">duckdb_append_null</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_append_data_chunk"><span class="nf">duckdb_append_data_chunk</span></a>(<span class="kt">duckdb_appender</span> <span class="nv">appender</span>, <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <a href="#DataMiner_appender_create"><span class="nf">DataMiner_appender_create</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>, <span class="kt">DataMiner_appender</span> *<span class="nv">out_appender</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_appender_column_count"><span class="nf">DataMiner_appender_column_count</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>);
+<span class="kt">DataMiner_logical_type</span> <a href="#DataMiner_appender_column_type"><span class="nf">DataMiner_appender_column_type</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">idx_t</span> <span class="nv">col_idx</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#DataMiner_appender_error"><span class="nf">DataMiner_appender_error</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_appender_flush"><span class="nf">DataMiner_appender_flush</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_appender_close"><span class="nf">DataMiner_appender_close</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_appender_destroy"><span class="nf">DataMiner_appender_destroy</span></a>(<span class="kt">DataMiner_appender</span> *<span class="nv">appender</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_appender_begin_row"><span class="nf">DataMiner_appender_begin_row</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_appender_end_row"><span class="nf">DataMiner_appender_end_row</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_bool"><span class="nf">DataMiner_append_bool</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">bool</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_int8"><span class="nf">DataMiner_append_int8</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">int8_t</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_int16"><span class="nf">DataMiner_append_int16</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">int16_t</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_int32"><span class="nf">DataMiner_append_int32</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">int32_t</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_int64"><span class="nf">DataMiner_append_int64</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">int64_t</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_hugeint"><span class="nf">DataMiner_append_hugeint</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">DataMiner_hugeint</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_uint8"><span class="nf">DataMiner_append_uint8</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">uint8_t</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_uint16"><span class="nf">DataMiner_append_uint16</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">uint16_t</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_uint32"><span class="nf">DataMiner_append_uint32</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">uint32_t</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_uint64"><span class="nf">DataMiner_append_uint64</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">uint64_t</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_uhugeint"><span class="nf">DataMiner_append_uhugeint</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">DataMiner_uhugeint</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_float"><span class="nf">DataMiner_append_float</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">float</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_double"><span class="nf">DataMiner_append_double</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">double</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_date"><span class="nf">DataMiner_append_date</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">DataMiner_date</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_time"><span class="nf">DataMiner_append_time</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">DataMiner_time</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_timestamp"><span class="nf">DataMiner_append_timestamp</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">DataMiner_timestamp</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_interval"><span class="nf">DataMiner_append_interval</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">DataMiner_interval</span> <span class="nv">value</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_varchar"><span class="nf">DataMiner_append_varchar</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_varchar_length"><span class="nf">DataMiner_append_varchar_length</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_blob"><span class="nf">DataMiner_append_blob</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>, <span class="kt">idx_t</span> <span class="nv">length</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_null"><span class="nf">DataMiner_append_null</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_append_data_chunk"><span class="nf">DataMiner_append_data_chunk</span></a>(<span class="kt">DataMiner_appender</span> <span class="nv">appender</span>, <span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>);
 </code></pre></div></div>
 
 ### Arrow Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <a href="#duckdb_query_arrow"><span class="nf">duckdb_query_arrow</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">duckdb_arrow</span> *<span class="nv">out_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_query_arrow_schema"><span class="nf">duckdb_query_arrow_schema</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>, <span class="kt">duckdb_arrow_schema</span> *<span class="nv">out_schema</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_prepared_arrow_schema"><span class="nf">duckdb_prepared_arrow_schema</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared</span>, <span class="kt">duckdb_arrow_schema</span> *<span class="nv">out_schema</span>);
-<span class="kt">void</span> <a href="#duckdb_result_arrow_array"><span class="nf">duckdb_result_arrow_array</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>, <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>, <span class="kt">duckdb_arrow_array</span> *<span class="nv">out_array</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_query_arrow_array"><span class="nf">duckdb_query_arrow_array</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>, <span class="kt">duckdb_arrow_array</span> *<span class="nv">out_array</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_arrow_column_count"><span class="nf">duckdb_arrow_column_count</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_arrow_row_count"><span class="nf">duckdb_arrow_row_count</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_arrow_rows_changed"><span class="nf">duckdb_arrow_rows_changed</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<a href="#duckdb_query_arrow_error"><span class="nf">duckdb_query_arrow_error</span></a>(<span class="kt">duckdb_arrow</span> <span class="nv">result</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_arrow"><span class="nf">duckdb_destroy_arrow</span></a>(<span class="kt">duckdb_arrow</span> *<span class="nv">result</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_arrow_stream"><span class="nf">duckdb_destroy_arrow_stream</span></a>(<span class="nv">duckdb_arrow_stream</span> *<span class="nv">stream_p</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_execute_prepared_arrow"><span class="nf">duckdb_execute_prepared_arrow</span></a>(<span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">duckdb_arrow</span> *<span class="nv">out_result</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_scan"><span class="nf">duckdb_arrow_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow</span>);
-<span class="kt">duckdb_state</span> <a href="#duckdb_arrow_array_scan"><span class="nf">duckdb_arrow_array_scan</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>, <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>, <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <a href="#DataMiner_query_arrow"><span class="nf">DataMiner_query_arrow</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>, <span class="kt">DataMiner_arrow</span> *<span class="nv">out_result</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_query_arrow_schema"><span class="nf">DataMiner_query_arrow_schema</span></a>(<span class="kt">DataMiner_arrow</span> <span class="nv">result</span>, <span class="kt">DataMiner_arrow_schema</span> *<span class="nv">out_schema</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_prepared_arrow_schema"><span class="nf">DataMiner_prepared_arrow_schema</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared</span>, <span class="kt">DataMiner_arrow_schema</span> *<span class="nv">out_schema</span>);
+<span class="kt">void</span> <a href="#DataMiner_result_arrow_array"><span class="nf">DataMiner_result_arrow_array</span></a>(<span class="kt">DataMiner_result</span> <span class="nv">result</span>, <span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>, <span class="kt">DataMiner_arrow_array</span> *<span class="nv">out_array</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_query_arrow_array"><span class="nf">DataMiner_query_arrow_array</span></a>(<span class="kt">DataMiner_arrow</span> <span class="nv">result</span>, <span class="kt">DataMiner_arrow_array</span> *<span class="nv">out_array</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_arrow_column_count"><span class="nf">DataMiner_arrow_column_count</span></a>(<span class="kt">DataMiner_arrow</span> <span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_arrow_row_count"><span class="nf">DataMiner_arrow_row_count</span></a>(<span class="kt">DataMiner_arrow</span> <span class="nv">result</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_arrow_rows_changed"><span class="nf">DataMiner_arrow_rows_changed</span></a>(<span class="kt">DataMiner_arrow</span> <span class="nv">result</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<a href="#DataMiner_query_arrow_error"><span class="nf">DataMiner_query_arrow_error</span></a>(<span class="kt">DataMiner_arrow</span> <span class="nv">result</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_arrow"><span class="nf">DataMiner_destroy_arrow</span></a>(<span class="kt">DataMiner_arrow</span> *<span class="nv">result</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_arrow_stream"><span class="nf">DataMiner_destroy_arrow_stream</span></a>(<span class="nv">DataMiner_arrow_stream</span> *<span class="nv">stream_p</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_execute_prepared_arrow"><span class="nf">DataMiner_execute_prepared_arrow</span></a>(<span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>, <span class="kt">DataMiner_arrow</span> *<span class="nv">out_result</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_arrow_scan"><span class="nf">DataMiner_arrow_scan</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="nv">DataMiner_arrow_stream</span> <span class="nv">arrow</span>);
+<span class="kt">DataMiner_state</span> <a href="#DataMiner_arrow_array_scan"><span class="nf">DataMiner_arrow_array_scan</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">connection</span>, <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>, <span class="kt">DataMiner_arrow_schema</span> <span class="nv">arrow_schema</span>, <span class="kt">DataMiner_arrow_array</span> <span class="nv">arrow_array</span>, <span class="nv">DataMiner_arrow_stream</span> *<span class="nv">out_stream</span>);
 </code></pre></div></div>
 
 ### Threading Information
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <a href="#duckdb_execute_tasks"><span class="nf">duckdb_execute_tasks</span></a>(<span class="kt">duckdb_database</span> <span class="nv">database</span>, <span class="kt">idx_t</span> <span class="nv">max_tasks</span>);
-<span class="kt">duckdb_task_state</span> <a href="#duckdb_create_task_state"><span class="nf">duckdb_create_task_state</span></a>(<span class="kt">duckdb_database</span> <span class="nv">database</span>);
-<span class="kt">void</span> <a href="#duckdb_execute_tasks_state"><span class="nf">duckdb_execute_tasks_state</span></a>(<span class="kt">duckdb_task_state</span> <span class="nv">state</span>);
-<span class="kt">idx_t</span> <a href="#duckdb_execute_n_tasks_state"><span class="nf">duckdb_execute_n_tasks_state</span></a>(<span class="kt">duckdb_task_state</span> <span class="nv">state</span>, <span class="kt">idx_t</span> <span class="nv">max_tasks</span>);
-<span class="kt">void</span> <a href="#duckdb_finish_execution"><span class="nf">duckdb_finish_execution</span></a>(<span class="kt">duckdb_task_state</span> <span class="nv">state</span>);
-<span class="kt">bool</span> <a href="#duckdb_task_state_is_finished"><span class="nf">duckdb_task_state_is_finished</span></a>(<span class="kt">duckdb_task_state</span> <span class="nv">state</span>);
-<span class="kt">void</span> <a href="#duckdb_destroy_task_state"><span class="nf">duckdb_destroy_task_state</span></a>(<span class="kt">duckdb_task_state</span> <span class="nv">state</span>);
-<span class="kt">bool</span> <a href="#duckdb_execution_is_finished"><span class="nf">duckdb_execution_is_finished</span></a>(<span class="kt">duckdb_connection</span> <span class="nv">con</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <a href="#DataMiner_execute_tasks"><span class="nf">DataMiner_execute_tasks</span></a>(<span class="kt">DataMiner_database</span> <span class="nv">database</span>, <span class="kt">idx_t</span> <span class="nv">max_tasks</span>);
+<span class="kt">DataMiner_task_state</span> <a href="#DataMiner_create_task_state"><span class="nf">DataMiner_create_task_state</span></a>(<span class="kt">DataMiner_database</span> <span class="nv">database</span>);
+<span class="kt">void</span> <a href="#DataMiner_execute_tasks_state"><span class="nf">DataMiner_execute_tasks_state</span></a>(<span class="kt">DataMiner_task_state</span> <span class="nv">state</span>);
+<span class="kt">idx_t</span> <a href="#DataMiner_execute_n_tasks_state"><span class="nf">DataMiner_execute_n_tasks_state</span></a>(<span class="kt">DataMiner_task_state</span> <span class="nv">state</span>, <span class="kt">idx_t</span> <span class="nv">max_tasks</span>);
+<span class="kt">void</span> <a href="#DataMiner_finish_execution"><span class="nf">DataMiner_finish_execution</span></a>(<span class="kt">DataMiner_task_state</span> <span class="nv">state</span>);
+<span class="kt">bool</span> <a href="#DataMiner_task_state_is_finished"><span class="nf">DataMiner_task_state_is_finished</span></a>(<span class="kt">DataMiner_task_state</span> <span class="nv">state</span>);
+<span class="kt">void</span> <a href="#DataMiner_destroy_task_state"><span class="nf">DataMiner_destroy_task_state</span></a>(<span class="kt">DataMiner_task_state</span> <span class="nv">state</span>);
+<span class="kt">bool</span> <a href="#DataMiner_execution_is_finished"><span class="nf">DataMiner_execution_is_finished</span></a>(<span class="kt">DataMiner_connection</span> <span class="nv">con</span>);
 </code></pre></div></div>
 
 ### Streaming Result Interface
 
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <a href="#duckdb_stream_fetch_chunk"><span class="nf">duckdb_stream_fetch_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
-<span class="kt">duckdb_data_chunk</span> <a href="#duckdb_fetch_chunk"><span class="nf">duckdb_fetch_chunk</span></a>(<span class="kt">duckdb_result</span> <span class="nv">result</span>);
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_data_chunk</span> <a href="#DataMiner_stream_fetch_chunk"><span class="nf">DataMiner_stream_fetch_chunk</span></a>(<span class="kt">DataMiner_result</span> <span class="nv">result</span>);
+<span class="kt">DataMiner_data_chunk</span> <a href="#DataMiner_fetch_chunk"><span class="nf">DataMiner_fetch_chunk</span></a>(<span class="kt">DataMiner_result</span> <span class="nv">result</span>);
 </code></pre></div></div>
 
-### `duckdb_open`
+### `DataMiner_open`
 
 ---
 Creates a new database or opens an existing database file stored at the given path.
 If no path is given a new in-memory database is created instead.
-The instantiated database should be closed with 'duckdb_close'.
+The instantiated database should be closed with 'DataMiner_close'.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_open</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_open</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>,<span class="nv">
-</span>  <span class="kt">duckdb_database</span> *<span class="nv">out_database
+</span>  <span class="kt">DataMiner_database</span> *<span class="nv">out_database
 </span>);
 </code></pre></div></div>
 
@@ -420,23 +420,23 @@ Path to the database file on disk, or `nullptr` or `:memory:` to open an in-memo
 The result database object.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_open_ext`
+### `DataMiner_open_ext`
 
 ---
-Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
-The instantiated database should be closed with 'duckdb_close'.
+Extended version of DataMiner_open. Creates a new database or opens an existing database file stored at the given path.
+The instantiated database should be closed with 'DataMiner_close'.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_open_ext</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_open_ext</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">path</span>,<span class="nv">
-</span>  <span class="kt">duckdb_database</span> *<span class="nv">out_database</span>,<span class="nv">
-</span>  <span class="kt">duckdb_config</span> <span class="nv">config</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_database</span> *<span class="nv">out_database</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_config</span> <span class="nv">config</span>,<span class="nv">
 </span>  <span class="kt">char</span> **<span class="nv">out_error
 </span>);
 </code></pre></div></div>
@@ -455,27 +455,27 @@ The result database object.
 (Optional) configuration used to start up the database system.
 * `out_error`
 
-If set and the function returns DuckDBError, this will contain the reason why the start-up failed.
-Note that the error must be freed using `duckdb_free`.
+If set and the function returns DataMinerError, this will contain the reason why the start-up failed.
+Note that the error must be freed using `DataMiner_free`.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_close`
+### `DataMiner_close`
 
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
-This should be called after you are done with any database allocated through `duckdb_open` or `duckdb_open_ext`.
-Note that failing to call `duckdb_close` (in case of e.g., a program crash) will not cause data corruption.
+This should be called after you are done with any database allocated through `DataMiner_open` or `DataMiner_open_ext`.
+Note that failing to call `DataMiner_close` (in case of e.g., a program crash) will not cause data corruption.
 Still, it is recommended to always correctly close a database object after you are done with it.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_close</span>(<span class="nv">
-</span>  <span class="kt">duckdb_database</span> *<span class="nv">database
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_close</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_database</span> *<span class="nv">database
 </span>);
 </code></pre></div></div>
 
@@ -488,19 +488,19 @@ The database object to shut down.
 
 <br>
 
-### `duckdb_connect`
+### `DataMiner_connect`
 
 ---
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
-The instantiated connection should be closed using 'duckdb_disconnect'.
+The instantiated connection should be closed using 'DataMiner_disconnect'.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_connect</span>(<span class="nv">
-</span>  <span class="kt">duckdb_database</span> <span class="nv">database</span>,<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> *<span class="nv">out_connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_connect</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_database</span> <span class="nv">database</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> *<span class="nv">out_connection
 </span>);
 </code></pre></div></div>
 
@@ -515,11 +515,11 @@ The database file to connect to.
 The result connection object.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_interrupt`
+### `DataMiner_interrupt`
 
 ---
 Interrupt running query
@@ -527,8 +527,8 @@ Interrupt running query
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_interrupt</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_interrupt</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection
 </span>);
 </code></pre></div></div>
 
@@ -541,7 +541,7 @@ The connection to interrupt
 
 <br>
 
-### `duckdb_query_progress`
+### `DataMiner_query_progress`
 
 ---
 Get progress of the running query
@@ -549,8 +549,8 @@ Get progress of the running query
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_query_progress_type</span> <span class="nv">duckdb_query_progress</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_query_progress_type</span> <span class="nv">DataMiner_query_progress</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection
 </span>);
 </code></pre></div></div>
 
@@ -566,7 +566,7 @@ The working connection
 
 <br>
 
-### `duckdb_disconnect`
+### `DataMiner_disconnect`
 
 ---
 Closes the specified connection and de-allocates all memory allocated for that connection.
@@ -574,8 +574,8 @@ Closes the specified connection and de-allocates all memory allocated for that c
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_disconnect</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> *<span class="nv">connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_disconnect</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> *<span class="nv">connection
 </span>);
 </code></pre></div></div>
 
@@ -588,36 +588,36 @@ The connection to close.
 
 <br>
 
-### `duckdb_library_version`
+### `DataMiner_library_version`
 
 ---
-Returns the version of the linked DuckDB, with a version postfix for dev versions
+Returns the version of the linked DataMiner, with a version postfix for dev versions
 
 Usually used for developing C extensions that must return this for a compatibility check.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_library_version</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">DataMiner_library_version</span>(<span class="nv">
 </span>  <span class="nv">
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_create_config`
+### `DataMiner_create_config`
 
 ---
 Initializes an empty configuration object that can be used to provide start-up options for the DataMiner instance
-through `duckdb_open_ext`.
-The duckdb_config must be destroyed using 'duckdb_destroy_config'
+through `DataMiner_open_ext`.
+The DataMiner_config must be destroyed using 'DataMiner_destroy_config'
 
 This will always succeed unless there is a malloc failure.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_create_config</span>(<span class="nv">
-</span>  <span class="kt">duckdb_config</span> *<span class="nv">out_config
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_create_config</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_config</span> *<span class="nv">out_config
 </span>);
 </code></pre></div></div>
 
@@ -629,21 +629,21 @@ This will always succeed unless there is a malloc failure.
 The result configuration object.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_config_count`
+### `DataMiner_config_count`
 
 ---
-This returns the total amount of configuration options available for usage with `duckdb_get_config_flag`.
+This returns the total amount of configuration options available for usage with `DataMiner_get_config_flag`.
 
 This should not be called in a loop as it internally loops over all the options.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">size_t</span> <span class="nv">duckdb_config_count</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">size_t</span> <span class="nv">DataMiner_config_count</span>(<span class="nv">
 </span>  <span class="nv">
 </span>);
 </code></pre></div></div>
@@ -657,18 +657,18 @@ The amount of config options available.
 
 <br>
 
-### `duckdb_get_config_flag`
+### `DataMiner_get_config_flag`
 
 ---
 Obtains a human-readable name and description of a specific configuration option. This can be used to e.g.
-display configuration options. This will succeed unless `index` is out of range (i.e., `>= duckdb_config_count`).
+display configuration options. This will succeed unless `index` is out of range (i.e., `>= DataMiner_config_count`).
 
 The result name or description MUST NOT be freed.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_get_config_flag</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_get_config_flag</span>(<span class="nv">
 </span>  <span class="kt">size_t</span> <span class="nv">index</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_name</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">out_description
@@ -680,7 +680,7 @@ The result name or description MUST NOT be freed.
 ---
 * `index`
 
-The index of the configuration option (between 0 and `duckdb_config_count`)
+The index of the configuration option (between 0 and `DataMiner_config_count`)
 * `out_name`
 
 A name of the configuration flag.
@@ -689,15 +689,15 @@ A name of the configuration flag.
 A description of the configuration flag.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_set_config`
+### `DataMiner_set_config`
 
 ---
 Sets the specified option for the specified configuration. The configuration option is indicated by name.
-To obtain a list of config options, see `duckdb_get_config_flag`.
+To obtain a list of config options, see `DataMiner_get_config_flag`.
 
 In the source code, configuration options are defined in `config.cpp`.
 
@@ -706,8 +706,8 @@ This can fail if either the name is invalid, or if the value provided for the op
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_set_config</span>(<span class="nv">
-</span>  <span class="kt">duckdb_config</span> <span class="nv">config</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_set_config</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_config</span> <span class="nv">config</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">option
 </span>);
@@ -716,7 +716,7 @@ This can fail if either the name is invalid, or if the value provided for the op
 #### Parameters
 
 ---
-* `duckdb_config`
+* `DataMiner_config`
 
 The configuration object to set the option on.
 * `name`
@@ -727,11 +727,11 @@ The name of the configuration flag to set.
 The value to set the configuration flag to.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_destroy_config`
+### `DataMiner_destroy_config`
 
 ---
 Destroys the specified configuration object and de-allocates all memory allocated for the object.
@@ -739,8 +739,8 @@ Destroys the specified configuration object and de-allocates all memory allocate
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_config</span>(<span class="nv">
-</span>  <span class="kt">duckdb_config</span> *<span class="nv">config
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_config</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_config</span> *<span class="nv">config
 </span>);
 </code></pre></div></div>
 
@@ -753,23 +753,23 @@ The configuration object to destroy.
 
 <br>
 
-### `duckdb_query`
+### `DataMiner_query`
 
 ---
 Executes a SQL query within a connection and stores the full (materialized) result in the out_result pointer.
-If the query fails to execute, DuckDBError is returned and the error message can be retrieved by calling
-`duckdb_result_error`.
+If the query fails to execute, DataMinerError is returned and the error message can be retrieved by calling
+`DataMiner_result_error`.
 
-Note that after running `duckdb_query`, `duckdb_destroy_result` must be called on the result object even if the
+Note that after running `DataMiner_query`, `DataMiner_destroy_result` must be called on the result object even if the
 query fails, otherwise the error stored within the result will not be freed correctly.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_query</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -787,11 +787,11 @@ The SQL query to run.
 The query result.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_destroy_result`
+### `DataMiner_destroy_result`
 
 ---
 Closes the result and de-allocates all memory allocated for that connection.
@@ -799,8 +799,8 @@ Closes the result and de-allocates all memory allocated for that connection.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_result</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_result</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -813,7 +813,7 @@ The result to destroy.
 
 <br>
 
-### `duckdb_column_name`
+### `DataMiner_column_name`
 
 ---
 Returns the column name of the specified column. The result should not need to be freed; the column names will
@@ -824,8 +824,8 @@ Returns `NULL` if the column is out of range.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_column_name</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">DataMiner_column_name</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
@@ -845,18 +845,18 @@ The column name of the specified column.
 
 <br>
 
-### `duckdb_column_type`
+### `DataMiner_column_type`
 
 ---
 Returns the column type of the specified column.
 
-Returns `DUCKDB_TYPE_INVALID` if the column is out of range.
+Returns `DataMiner_TYPE_INVALID` if the column is out of range.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_column_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_type</span> <span class="nv">DataMiner_column_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
@@ -876,7 +876,7 @@ The column type of the specified column.
 
 <br>
 
-### `duckdb_result_statement_type`
+### `DataMiner_result_statement_type`
 
 ---
 Returns the statement type of the statement that was executed
@@ -884,8 +884,8 @@ Returns the statement type of the statement that was executed
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_result_statement_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_statement_type</span> <span class="nv">DataMiner_result_statement_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -897,24 +897,24 @@ Returns the statement type of the statement that was executed
 The result object to fetch the statement type from.
 * `returns`
 
-duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
+DataMiner_statement_type value or DataMiner_STATEMENT_TYPE_INVALID
 
 <br>
 
-### `duckdb_column_logical_type`
+### `DataMiner_column_logical_type`
 
 ---
 Returns the logical column type of the specified column.
 
-The return type of this call should be destroyed with `duckdb_destroy_logical_type`.
+The return type of this call should be destroyed with `DataMiner_destroy_logical_type`.
 
 Returns `NULL` if the column is out of range.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_column_logical_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_column_logical_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
@@ -934,7 +934,7 @@ The logical column type of the specified column.
 
 <br>
 
-### `duckdb_column_count`
+### `DataMiner_column_count`
 
 ---
 Returns the number of columns present in a the result object.
@@ -942,8 +942,8 @@ Returns the number of columns present in a the result object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_column_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_column_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -959,7 +959,7 @@ The number of columns present in the result object.
 
 <br>
 
-### `duckdb_row_count`
+### `DataMiner_row_count`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -969,8 +969,8 @@ Returns the number of rows present in the result object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_row_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_row_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -986,7 +986,7 @@ The number of rows present in the result object.
 
 <br>
 
-### `duckdb_rows_changed`
+### `DataMiner_rows_changed`
 
 ---
 Returns the number of rows changed by the query stored in the result. This is relevant only for INSERT/UPDATE/DELETE
@@ -995,8 +995,8 @@ queries. For other queries the rows_changed will be 0.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_rows_changed</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_rows_changed</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -1012,28 +1012,28 @@ The number of rows changed.
 
 <br>
 
-### `duckdb_column_data`
+### `DataMiner_column_data`
 
 ---
-**DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
+**DEPRECATED**: Prefer using `DataMiner_result_get_chunk` instead.
 
 Returns the data of a specific column of a result in columnar format.
 
 The function returns a dense array which contains the result data. The exact type stored in the array depends on the
-corresponding duckdb_type (as provided by `duckdb_column_type`). For the exact type by which the data should be
-accessed, see the comments in [the types section](types) or the `DUCKDB_TYPE` enum.
+corresponding DataMiner_type (as provided by `DataMiner_column_type`). For the exact type by which the data should be
+accessed, see the comments in [the types section](types) or the `DataMiner_TYPE` enum.
 
-For example, for a column of type `DUCKDB_TYPE_INTEGER`, rows can be accessed in the following manner:
+For example, for a column of type `DataMiner_TYPE_INTEGER`, rows can be accessed in the following manner:
 ```c
-int32_t *data = (int32_t *) duckdb_column_data(&result, 0);
+int32_t *data = (int32_t *) DataMiner_column_data(&result, 0);
 printf("Data for row %d: %d\n", row, data[row]);
 ```
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_column_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_column_data</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
@@ -1053,18 +1053,18 @@ The column data of the specified column.
 
 <br>
 
-### `duckdb_nullmask_data`
+### `DataMiner_nullmask_data`
 
 ---
-**DEPRECATED**: Prefer using `duckdb_result_get_chunk` instead.
+**DEPRECATED**: Prefer using `DataMiner_result_get_chunk` instead.
 
 Returns the nullmask of a specific column of a result in columnar format. The nullmask indicates for every row
 whether or not the corresponding row is `NULL`. If a row is `NULL`, the values present in the array provided
-by `duckdb_column_data` are undefined.
+by `DataMiner_column_data` are undefined.
 
 ```c
-int32_t *data = (int32_t *) duckdb_column_data(&result, 0);
-bool *nullmask = duckdb_nullmask_data(&result, 0);
+int32_t *data = (int32_t *) DataMiner_column_data(&result, 0);
+bool *nullmask = DataMiner_nullmask_data(&result, 0);
 if (nullmask[row]) {
 printf("Data for row %d: NULL\n", row);
 } else {
@@ -1075,8 +1075,8 @@ printf("Data for row %d: %d\n", row, data[row]);
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> *<span class="nv">duckdb_nullmask_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> *<span class="nv">DataMiner_nullmask_data</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col
 </span>);
 </code></pre></div></div>
@@ -1096,18 +1096,18 @@ The nullmask of the specified column.
 
 <br>
 
-### `duckdb_result_error`
+### `DataMiner_result_error`
 
 ---
-Returns the error message contained within the result. The error is only set if `duckdb_query` returns `DuckDBError`.
+Returns the error message contained within the result. The error is only set if `DataMiner_query` returns `DataMinerError`.
 
-The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_result` is called.
+The result of this function must not be freed. It will be cleaned up when `DataMiner_destroy_result` is called.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_result_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">DataMiner_result_error</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -1123,28 +1123,28 @@ The error of the result.
 
 <br>
 
-### `duckdb_result_get_chunk`
+### `DataMiner_result_get_chunk`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
-Fetches a data chunk from the duckdb_result. This function should be called repeatedly until the result is exhausted.
+Fetches a data chunk from the DataMiner_result. This function should be called repeatedly until the result is exhausted.
 
-The result must be destroyed with `duckdb_destroy_data_chunk`.
+The result must be destroyed with `DataMiner_destroy_data_chunk`.
 
-This function supersedes all `duckdb_value` functions, as well as the `duckdb_column_data` and `duckdb_nullmask_data`
+This function supersedes all `DataMiner_value` functions, as well as the `DataMiner_column_data` and `DataMiner_nullmask_data`
 functions. It results in significantly better performance, and should be preferred in newer code-bases.
 
 If this function is used, none of the other result functions can be used and vice versa (i.e., this function cannot be
 mixed with the legacy result functions).
 
-Use `duckdb_result_chunk_count` to figure out how many chunks there are in the result.
+Use `DataMiner_result_chunk_count` to figure out how many chunks there are in the result.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_result_get_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> <span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_data_chunk</span> <span class="nv">DataMiner_result_get_chunk</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> <span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">chunk_index
 </span>);
 </code></pre></div></div>
@@ -1164,7 +1164,7 @@ The resulting data chunk. Returns `NULL` if the chunk index is out of bounds.
 
 <br>
 
-### `duckdb_result_is_streaming`
+### `DataMiner_result_is_streaming`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1174,8 +1174,8 @@ Checks if the type of the internal result is StreamQueryResult.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_result_is_streaming</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_result_is_streaming</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -1191,7 +1191,7 @@ Whether or not the result object is of the type StreamQueryResult
 
 <br>
 
-### `duckdb_result_chunk_count`
+### `DataMiner_result_chunk_count`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1201,8 +1201,8 @@ Returns the number of data chunks present in the result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_result_chunk_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_result_chunk_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -1218,16 +1218,16 @@ Number of data chunks present in the result.
 
 <br>
 
-### `duckdb_result_return_type`
+### `DataMiner_result_return_type`
 
 ---
-Returns the return_type of the given result, or DUCKDB_RETURN_TYPE_INVALID on error
+Returns the return_type of the given result, or DataMiner_RETURN_TYPE_INVALID on error
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_result_type</span> <span class="nv">duckdb_result_return_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_result_type</span> <span class="nv">DataMiner_result_return_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -1243,7 +1243,7 @@ The return_type
 
 <br>
 
-### `duckdb_value_boolean`
+### `DataMiner_value_boolean`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1251,8 +1251,8 @@ The return_type
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_value_boolean</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_value_boolean</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1267,7 +1267,7 @@ The boolean value at the specified location, or false if the value cannot be con
 
 <br>
 
-### `duckdb_value_int8`
+### `DataMiner_value_int8`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1275,8 +1275,8 @@ The boolean value at the specified location, or false if the value cannot be con
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int8_t</span> <span class="nv">duckdb_value_int8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int8_t</span> <span class="nv">DataMiner_value_int8</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1291,7 +1291,7 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 
 <br>
 
-### `duckdb_value_int16`
+### `DataMiner_value_int16`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1299,8 +1299,8 @@ The int8_t value at the specified location, or 0 if the value cannot be converte
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int16_t</span> <span class="nv">duckdb_value_int16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int16_t</span> <span class="nv">DataMiner_value_int16</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1315,7 +1315,7 @@ The int16_t value at the specified location, or 0 if the value cannot be convert
 
 <br>
 
-### `duckdb_value_int32`
+### `DataMiner_value_int32`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1323,8 +1323,8 @@ The int16_t value at the specified location, or 0 if the value cannot be convert
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int32_t</span> <span class="nv">duckdb_value_int32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int32_t</span> <span class="nv">DataMiner_value_int32</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1339,7 +1339,7 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 
 <br>
 
-### `duckdb_value_int64`
+### `DataMiner_value_int64`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1347,8 +1347,8 @@ The int32_t value at the specified location, or 0 if the value cannot be convert
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="nv">duckdb_value_int64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="nv">DataMiner_value_int64</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1363,7 +1363,7 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 
 <br>
 
-### `duckdb_value_hugeint`
+### `DataMiner_value_hugeint`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1371,8 +1371,8 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="nv">duckdb_value_hugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_hugeint</span> <span class="nv">DataMiner_value_hugeint</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1383,11 +1383,11 @@ The int64_t value at the specified location, or 0 if the value cannot be convert
 ---
 * `returns`
 
-The duckdb_hugeint value at the specified location, or 0 if the value cannot be converted.
+The DataMiner_hugeint value at the specified location, or 0 if the value cannot be converted.
 
 <br>
 
-### `duckdb_value_uhugeint`
+### `DataMiner_value_uhugeint`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1395,8 +1395,8 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_uhugeint</span> <span class="nv">duckdb_value_uhugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_uhugeint</span> <span class="nv">DataMiner_value_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1407,11 +1407,11 @@ The duckdb_hugeint value at the specified location, or 0 if the value cannot be 
 ---
 * `returns`
 
-The duckdb_uhugeint value at the specified location, or 0 if the value cannot be converted.
+The DataMiner_uhugeint value at the specified location, or 0 if the value cannot be converted.
 
 <br>
 
-### `duckdb_value_decimal`
+### `DataMiner_value_decimal`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1419,8 +1419,8 @@ The duckdb_uhugeint value at the specified location, or 0 if the value cannot be
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_decimal</span> <span class="nv">duckdb_value_decimal</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_decimal</span> <span class="nv">DataMiner_value_decimal</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1431,11 +1431,11 @@ The duckdb_uhugeint value at the specified location, or 0 if the value cannot be
 ---
 * `returns`
 
-The duckdb_decimal value at the specified location, or 0 if the value cannot be converted.
+The DataMiner_decimal value at the specified location, or 0 if the value cannot be converted.
 
 <br>
 
-### `duckdb_value_uint8`
+### `DataMiner_value_uint8`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1443,8 +1443,8 @@ The duckdb_decimal value at the specified location, or 0 if the value cannot be 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_value_uint8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">DataMiner_value_uint8</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1459,7 +1459,7 @@ The uint8_t value at the specified location, or 0 if the value cannot be convert
 
 <br>
 
-### `duckdb_value_uint16`
+### `DataMiner_value_uint16`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1467,8 +1467,8 @@ The uint8_t value at the specified location, or 0 if the value cannot be convert
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint16_t</span> <span class="nv">duckdb_value_uint16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint16_t</span> <span class="nv">DataMiner_value_uint16</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1483,7 +1483,7 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 
 <br>
 
-### `duckdb_value_uint32`
+### `DataMiner_value_uint32`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1491,8 +1491,8 @@ The uint16_t value at the specified location, or 0 if the value cannot be conver
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nv">duckdb_value_uint32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nv">DataMiner_value_uint32</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1507,7 +1507,7 @@ The uint32_t value at the specified location, or 0 if the value cannot be conver
 
 <br>
 
-### `duckdb_value_uint64`
+### `DataMiner_value_uint64`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1515,8 +1515,8 @@ The uint32_t value at the specified location, or 0 if the value cannot be conver
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> <span class="nv">duckdb_value_uint64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> <span class="nv">DataMiner_value_uint64</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1531,7 +1531,7 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 
 <br>
 
-### `duckdb_value_float`
+### `DataMiner_value_float`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1539,8 +1539,8 @@ The uint64_t value at the specified location, or 0 if the value cannot be conver
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="nv">duckdb_value_float</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">float</span> <span class="nv">DataMiner_value_float</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1555,7 +1555,7 @@ The float value at the specified location, or 0 if the value cannot be converted
 
 <br>
 
-### `duckdb_value_double`
+### `DataMiner_value_double`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1563,8 +1563,8 @@ The float value at the specified location, or 0 if the value cannot be converted
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_value_double</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">DataMiner_value_double</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1579,7 +1579,7 @@ The double value at the specified location, or 0 if the value cannot be converte
 
 <br>
 
-### `duckdb_value_date`
+### `DataMiner_value_date`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1587,8 +1587,8 @@ The double value at the specified location, or 0 if the value cannot be converte
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="nv">duckdb_value_date</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_date</span> <span class="nv">DataMiner_value_date</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1599,11 +1599,11 @@ The double value at the specified location, or 0 if the value cannot be converte
 ---
 * `returns`
 
-The duckdb_date value at the specified location, or 0 if the value cannot be converted.
+The DataMiner_date value at the specified location, or 0 if the value cannot be converted.
 
 <br>
 
-### `duckdb_value_time`
+### `DataMiner_value_time`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1611,8 +1611,8 @@ The duckdb_date value at the specified location, or 0 if the value cannot be con
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="nv">duckdb_value_time</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_time</span> <span class="nv">DataMiner_value_time</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1623,11 +1623,11 @@ The duckdb_date value at the specified location, or 0 if the value cannot be con
 ---
 * `returns`
 
-The duckdb_time value at the specified location, or 0 if the value cannot be converted.
+The DataMiner_time value at the specified location, or 0 if the value cannot be converted.
 
 <br>
 
-### `duckdb_value_timestamp`
+### `DataMiner_value_timestamp`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1635,8 +1635,8 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="nv">duckdb_value_timestamp</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_timestamp</span> <span class="nv">DataMiner_value_timestamp</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1647,11 +1647,11 @@ The duckdb_time value at the specified location, or 0 if the value cannot be con
 ---
 * `returns`
 
-The duckdb_timestamp value at the specified location, or 0 if the value cannot be converted.
+The DataMiner_timestamp value at the specified location, or 0 if the value cannot be converted.
 
 <br>
 
-### `duckdb_value_interval`
+### `DataMiner_value_interval`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1659,8 +1659,8 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_interval</span> <span class="nv">duckdb_value_interval</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_interval</span> <span class="nv">DataMiner_value_interval</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1671,19 +1671,19 @@ The duckdb_timestamp value at the specified location, or 0 if the value cannot b
 ---
 * `returns`
 
-The duckdb_interval value at the specified location, or 0 if the value cannot be converted.
+The DataMiner_interval value at the specified location, or 0 if the value cannot be converted.
 
 <br>
 
-### `duckdb_value_varchar`
+### `DataMiner_value_varchar`
 
 ---
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_value_varchar</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">DataMiner_value_varchar</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1694,15 +1694,15 @@ The duckdb_interval value at the specified location, or 0 if the value cannot be
 ---
 * `DEPRECATED`
 
-use duckdb_value_string instead. This function does not work correctly if the string contains null bytes.
+use DataMiner_value_string instead. This function does not work correctly if the string contains null bytes.
 * `returns`
 
 The text value at the specified location as a null-terminated string, or nullptr if the value cannot be
-converted. The result must be freed with `duckdb_free`.
+converted. The result must be freed with `DataMiner_free`.
 
 <br>
 
-### `duckdb_value_string`
+### `DataMiner_value_string`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1710,8 +1710,8 @@ converted. The result must be freed with `duckdb_free`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_string</span> <span class="nv">duckdb_value_string</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_string</span> <span class="nv">DataMiner_value_string</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1724,19 +1724,19 @@ converted. The result must be freed with `duckdb_free`.
 
 The string value at the specified location. Attempts to cast the result value to string.
 * No support for nested types, and for other complex types.
-* The resulting field "string.data" must be freed with `duckdb_free.`
+* The resulting field "string.data" must be freed with `DataMiner_free.`
 
 <br>
 
-### `duckdb_value_varchar_internal`
+### `DataMiner_value_varchar_internal`
 
 ---
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_value_varchar_internal</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">DataMiner_value_varchar_internal</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1747,7 +1747,7 @@ The string value at the specified location. Attempts to cast the result value to
 ---
 * `DEPRECATED`
 
-use duckdb_value_string_internal instead. This function does not work correctly if the string contains
+use DataMiner_value_string_internal instead. This function does not work correctly if the string contains
 null bytes.
 * `returns`
 
@@ -1758,15 +1758,15 @@ The result must NOT be freed.
 
 <br>
 
-### `duckdb_value_string_internal`
+### `DataMiner_value_string_internal`
 
 ---
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_string</span> <span class="nv">duckdb_value_string_internal</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_string</span> <span class="nv">DataMiner_value_string_internal</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1777,7 +1777,7 @@ The result must NOT be freed.
 ---
 * `DEPRECATED`
 
-use duckdb_value_string_internal instead. This function does not work correctly if the string contains
+use DataMiner_value_string_internal instead. This function does not work correctly if the string contains
 null bytes.
 * `returns`
 
@@ -1788,7 +1788,7 @@ The result must NOT be freed.
 
 <br>
 
-### `duckdb_value_blob`
+### `DataMiner_value_blob`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1796,8 +1796,8 @@ The result must NOT be freed.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_blob</span> <span class="nv">duckdb_value_blob</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_blob</span> <span class="nv">DataMiner_value_blob</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1808,12 +1808,12 @@ The result must NOT be freed.
 ---
 * `returns`
 
-The duckdb_blob value at the specified location. Returns a blob with blob.data set to nullptr if the
-value cannot be converted. The resulting field "blob.data" must be freed with `duckdb_free.`
+The DataMiner_blob value at the specified location. Returns a blob with blob.data set to nullptr if the
+value cannot be converted. The resulting field "blob.data" must be freed with `DataMiner_free.`
 
 <br>
 
-### `duckdb_value_is_null`
+### `DataMiner_value_is_null`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -1821,8 +1821,8 @@ value cannot be converted. The resulting field "blob.data" must be freed with `d
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_value_is_null</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">result</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_value_is_null</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">result</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -1837,16 +1837,16 @@ Returns true if the value at the specified index is NULL, and false otherwise.
 
 <br>
 
-### `duckdb_malloc`
+### `DataMiner_malloc`
 
 ---
 Allocate `size` bytes of memory using the DataMiner internal malloc function. Any memory allocated in this manner
-should be freed using `duckdb_free`.
+should be freed using `DataMiner_free`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_malloc</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_malloc</span>(<span class="nv">
 </span>  <span class="kt">size_t</span> <span class="nv">size
 </span>);
 </code></pre></div></div>
@@ -1863,16 +1863,16 @@ A pointer to the allocated memory region.
 
 <br>
 
-### `duckdb_free`
+### `DataMiner_free`
 
 ---
-Free a value returned from `duckdb_malloc`, `duckdb_value_varchar`, `duckdb_value_blob`, or
-`duckdb_value_string`.
+Free a value returned from `DataMiner_malloc`, `DataMiner_value_varchar`, `DataMiner_value_blob`, or
+`DataMiner_value_string`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_free</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_free</span>(<span class="nv">
 </span>  <span class="kt">void</span> *<span class="nv">ptr
 </span>);
 </code></pre></div></div>
@@ -1886,16 +1886,16 @@ The memory region to de-allocate.
 
 <br>
 
-### `duckdb_vector_size`
+### `DataMiner_vector_size`
 
 ---
-The internal vector size used by DuckDB.
-This is the amount of tuples that will fit into a data chunk created by `duckdb_create_data_chunk`.
+The internal vector size used by DataMiner.
+This is the amount of tuples that will fit into a data chunk created by `DataMiner_create_data_chunk`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_vector_size</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_vector_size</span>(<span class="nv">
 </span>  <span class="nv">
 </span>);
 </code></pre></div></div>
@@ -1909,31 +1909,31 @@ The vector size.
 
 <br>
 
-### `duckdb_string_is_inlined`
+### `DataMiner_string_is_inlined`
 
 ---
-Whether or not the duckdb_string_t value is inlined.
+Whether or not the DataMiner_string_t value is inlined.
 This means that the data of the string does not have a separate allocation.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_string_is_inlined</span>(<span class="nv">
-</span>  <span class="nv">duckdb_string_t</span> <span class="nv">string
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_string_is_inlined</span>(<span class="nv">
+</span>  <span class="nv">DataMiner_string_t</span> <span class="nv">string
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_from_date`
+### `DataMiner_from_date`
 
 ---
-Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_date_struct`).
+Decompose a `DataMiner_date` object into year, month and date (stored as `DataMiner_date_struct`).
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date_struct</span> <span class="nv">duckdb_from_date</span>(<span class="nv">
-</span>  <span class="kt">duckdb_date</span> <span class="nv">date
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_date_struct</span> <span class="nv">DataMiner_from_date</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_date</span> <span class="nv">date
 </span>);
 </code></pre></div></div>
 
@@ -1942,23 +1942,23 @@ Decompose a `duckdb_date` object into year, month and date (stored as `duckdb_da
 ---
 * `date`
 
-The date object, as obtained from a `DUCKDB_TYPE_DATE` column.
+The date object, as obtained from a `DataMiner_TYPE_DATE` column.
 * `returns`
 
-The `duckdb_date_struct` with the decomposed elements.
+The `DataMiner_date_struct` with the decomposed elements.
 
 <br>
 
-### `duckdb_to_date`
+### `DataMiner_to_date`
 
 ---
-Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
+Re-compose a `DataMiner_date` from year, month and date (`DataMiner_date_struct`).
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_date</span> <span class="nv">duckdb_to_date</span>(<span class="nv">
-</span>  <span class="kt">duckdb_date_struct</span> <span class="nv">date
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_date</span> <span class="nv">DataMiner_to_date</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_date_struct</span> <span class="nv">date
 </span>);
 </code></pre></div></div>
 
@@ -1967,23 +1967,23 @@ Re-compose a `duckdb_date` from year, month and date (`duckdb_date_struct`).
 ---
 * `date`
 
-The year, month and date stored in a `duckdb_date_struct`.
+The year, month and date stored in a `DataMiner_date_struct`.
 * `returns`
 
-The `duckdb_date` element.
+The `DataMiner_date` element.
 
 <br>
 
-### `duckdb_is_finite_date`
+### `DataMiner_is_finite_date`
 
 ---
-Test a `duckdb_date` to see if it is a finite value.
+Test a `DataMiner_date` to see if it is a finite value.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_date</span>(<span class="nv">
-</span>  <span class="kt">duckdb_date</span> <span class="nv">date
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_is_finite_date</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_date</span> <span class="nv">date
 </span>);
 </code></pre></div></div>
 
@@ -1992,23 +1992,23 @@ Test a `duckdb_date` to see if it is a finite value.
 ---
 * `date`
 
-The date object, as obtained from a `DUCKDB_TYPE_DATE` column.
+The date object, as obtained from a `DataMiner_TYPE_DATE` column.
 * `returns`
 
 True if the date is finite, false if it is ±infinity.
 
 <br>
 
-### `duckdb_from_time`
+### `DataMiner_from_time`
 
 ---
-Decompose a `duckdb_time` object into hour, minute, second and microsecond (stored as `duckdb_time_struct`).
+Decompose a `DataMiner_time` object into hour, minute, second and microsecond (stored as `DataMiner_time_struct`).
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_struct</span> <span class="nv">duckdb_from_time</span>(<span class="nv">
-</span>  <span class="kt">duckdb_time</span> <span class="nv">time
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_time_struct</span> <span class="nv">DataMiner_from_time</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_time</span> <span class="nv">time
 </span>);
 </code></pre></div></div>
 
@@ -2017,22 +2017,22 @@ Decompose a `duckdb_time` object into hour, minute, second and microsecond (stor
 ---
 * `time`
 
-The time object, as obtained from a `DUCKDB_TYPE_TIME` column.
+The time object, as obtained from a `DataMiner_TYPE_TIME` column.
 * `returns`
 
-The `duckdb_time_struct` with the decomposed elements.
+The `DataMiner_time_struct` with the decomposed elements.
 
 <br>
 
-### `duckdb_create_time_tz`
+### `DataMiner_create_time_tz`
 
 ---
-Create a `duckdb_time_tz` object from micros and a timezone offset.
+Create a `DataMiner_time_tz` object from micros and a timezone offset.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_tz</span> <span class="nv">duckdb_create_time_tz</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_time_tz</span> <span class="nv">DataMiner_create_time_tz</span>(<span class="nv">
 </span>  <span class="kt">int64_t</span> <span class="nv">micros</span>,<span class="nv">
 </span>  <span class="kt">int32_t</span> <span class="nv">offset
 </span>);
@@ -2049,22 +2049,22 @@ The microsecond component of the time.
 The timezone offset component of the time.
 * `returns`
 
-The `duckdb_time_tz` element.
+The `DataMiner_time_tz` element.
 
 <br>
 
-### `duckdb_from_time_tz`
+### `DataMiner_from_time_tz`
 
 ---
 Decompose a TIME_TZ objects into micros and a timezone offset.
 
-Use `duckdb_from_time` to further decompose the micros into hour, minute, second and microsecond.
+Use `DataMiner_from_time` to further decompose the micros into hour, minute, second and microsecond.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time_tz_struct</span> <span class="nv">duckdb_from_time_tz</span>(<span class="nv">
-</span>  <span class="kt">duckdb_time_tz</span> <span class="nv">micros
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_time_tz_struct</span> <span class="nv">DataMiner_from_time_tz</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_time_tz</span> <span class="nv">micros
 </span>);
 </code></pre></div></div>
 
@@ -2073,7 +2073,7 @@ Use `duckdb_from_time` to further decompose the micros into hour, minute, second
 ---
 * `micros`
 
-The time object, as obtained from a `DUCKDB_TYPE_TIME_TZ` column.
+The time object, as obtained from a `DataMiner_TYPE_TIME_TZ` column.
 * `out_micros`
 
 The microsecond component of the time.
@@ -2083,16 +2083,16 @@ The timezone offset component of the time.
 
 <br>
 
-### `duckdb_to_time`
+### `DataMiner_to_time`
 
 ---
-Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_time_struct`).
+Re-compose a `DataMiner_time` from hour, minute, second and microsecond (`DataMiner_time_struct`).
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_time</span> <span class="nv">duckdb_to_time</span>(<span class="nv">
-</span>  <span class="kt">duckdb_time_struct</span> <span class="nv">time
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_time</span> <span class="nv">DataMiner_to_time</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_time_struct</span> <span class="nv">time
 </span>);
 </code></pre></div></div>
 
@@ -2101,23 +2101,23 @@ Re-compose a `duckdb_time` from hour, minute, second and microsecond (`duckdb_ti
 ---
 * `time`
 
-The hour, minute, second and microsecond in a `duckdb_time_struct`.
+The hour, minute, second and microsecond in a `DataMiner_time_struct`.
 * `returns`
 
-The `duckdb_time` element.
+The `DataMiner_time` element.
 
 <br>
 
-### `duckdb_from_timestamp`
+### `DataMiner_from_timestamp`
 
 ---
-Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
+Decompose a `DataMiner_timestamp` object into a `DataMiner_timestamp_struct`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp_struct</span> <span class="nv">duckdb_from_timestamp</span>(<span class="nv">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">ts
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_timestamp_struct</span> <span class="nv">DataMiner_from_timestamp</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_timestamp</span> <span class="nv">ts
 </span>);
 </code></pre></div></div>
 
@@ -2126,23 +2126,23 @@ Decompose a `duckdb_timestamp` object into a `duckdb_timestamp_struct`.
 ---
 * `ts`
 
-The ts object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
+The ts object, as obtained from a `DataMiner_TYPE_TIMESTAMP` column.
 * `returns`
 
-The `duckdb_timestamp_struct` with the decomposed elements.
+The `DataMiner_timestamp_struct` with the decomposed elements.
 
 <br>
 
-### `duckdb_to_timestamp`
+### `DataMiner_to_timestamp`
 
 ---
-Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
+Re-compose a `DataMiner_timestamp` from a DataMiner_timestamp_struct.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_timestamp</span> <span class="nv">duckdb_to_timestamp</span>(<span class="nv">
-</span>  <span class="kt">duckdb_timestamp_struct</span> <span class="nv">ts
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_timestamp</span> <span class="nv">DataMiner_to_timestamp</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_timestamp_struct</span> <span class="nv">ts
 </span>);
 </code></pre></div></div>
 
@@ -2151,23 +2151,23 @@ Re-compose a `duckdb_timestamp` from a duckdb_timestamp_struct.
 ---
 * `ts`
 
-The de-composed elements in a `duckdb_timestamp_struct`.
+The de-composed elements in a `DataMiner_timestamp_struct`.
 * `returns`
 
-The `duckdb_timestamp` element.
+The `DataMiner_timestamp` element.
 
 <br>
 
-### `duckdb_is_finite_timestamp`
+### `DataMiner_is_finite_timestamp`
 
 ---
-Test a `duckdb_timestamp` to see if it is a finite value.
+Test a `DataMiner_timestamp` to see if it is a finite value.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_is_finite_timestamp</span>(<span class="nv">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">ts
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_is_finite_timestamp</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_timestamp</span> <span class="nv">ts
 </span>);
 </code></pre></div></div>
 
@@ -2176,23 +2176,23 @@ Test a `duckdb_timestamp` to see if it is a finite value.
 ---
 * `ts`
 
-The timestamp object, as obtained from a `DUCKDB_TYPE_TIMESTAMP` column.
+The timestamp object, as obtained from a `DataMiner_TYPE_TIMESTAMP` column.
 * `returns`
 
 True if the timestamp is finite, false if it is ±infinity.
 
 <br>
 
-### `duckdb_hugeint_to_double`
+### `DataMiner_hugeint_to_double`
 
 ---
-Converts a duckdb_hugeint object (as obtained from a `DUCKDB_TYPE_HUGEINT` column) into a double.
+Converts a DataMiner_hugeint object (as obtained from a `DataMiner_TYPE_HUGEINT` column) into a double.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_hugeint_to_double</span>(<span class="nv">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">DataMiner_hugeint_to_double</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_hugeint</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
@@ -2208,17 +2208,17 @@ The converted `double` element.
 
 <br>
 
-### `duckdb_double_to_hugeint`
+### `DataMiner_double_to_hugeint`
 
 ---
-Converts a double value to a duckdb_hugeint object.
+Converts a double value to a DataMiner_hugeint object.
 
 If the conversion fails because the double value is too big the result will be 0.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_hugeint</span> <span class="nv">duckdb_double_to_hugeint</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_hugeint</span> <span class="nv">DataMiner_double_to_hugeint</span>(<span class="nv">
 </span>  <span class="kt">double</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
@@ -2231,20 +2231,20 @@ If the conversion fails because the double value is too big the result will be 0
 The double value.
 * `returns`
 
-The converted `duckdb_hugeint` element.
+The converted `DataMiner_hugeint` element.
 
 <br>
 
-### `duckdb_uhugeint_to_double`
+### `DataMiner_uhugeint_to_double`
 
 ---
-Converts a duckdb_uhugeint object (as obtained from a `DUCKDB_TYPE_UHUGEINT` column) into a double.
+Converts a DataMiner_uhugeint object (as obtained from a `DataMiner_TYPE_UHUGEINT` column) into a double.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_uhugeint_to_double</span>(<span class="nv">
-</span>  <span class="kt">duckdb_uhugeint</span> <span class="nv">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">DataMiner_uhugeint_to_double</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_uhugeint</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
@@ -2260,17 +2260,17 @@ The converted `double` element.
 
 <br>
 
-### `duckdb_double_to_uhugeint`
+### `DataMiner_double_to_uhugeint`
 
 ---
-Converts a double value to a duckdb_uhugeint object.
+Converts a double value to a DataMiner_uhugeint object.
 
 If the conversion fails because the double value is too big the result will be 0.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_uhugeint</span> <span class="nv">duckdb_double_to_uhugeint</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_uhugeint</span> <span class="nv">DataMiner_double_to_uhugeint</span>(<span class="nv">
 </span>  <span class="kt">double</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
@@ -2283,21 +2283,21 @@ If the conversion fails because the double value is too big the result will be 0
 The double value.
 * `returns`
 
-The converted `duckdb_uhugeint` element.
+The converted `DataMiner_uhugeint` element.
 
 <br>
 
-### `duckdb_double_to_decimal`
+### `DataMiner_double_to_decimal`
 
 ---
-Converts a double value to a duckdb_decimal object.
+Converts a double value to a DataMiner_decimal object.
 
 If the conversion fails because the double value is too big, or the width/scale are invalid the result will be 0.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_decimal</span> <span class="nv">duckdb_double_to_decimal</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_decimal</span> <span class="nv">DataMiner_double_to_decimal</span>(<span class="nv">
 </span>  <span class="kt">double</span> <span class="nv">val</span>,<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">scale
@@ -2312,20 +2312,20 @@ If the conversion fails because the double value is too big, or the width/scale 
 The double value.
 * `returns`
 
-The converted `duckdb_decimal` element.
+The converted `DataMiner_decimal` element.
 
 <br>
 
-### `duckdb_decimal_to_double`
+### `DataMiner_decimal_to_double`
 
 ---
-Converts a duckdb_decimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` column) into a double.
+Converts a DataMiner_decimal object (as obtained from a `DataMiner_TYPE_DECIMAL` column) into a double.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">duckdb_decimal_to_double</span>(<span class="nv">
-</span>  <span class="kt">duckdb_decimal</span> <span class="nv">val
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">double</span> <span class="nv">DataMiner_decimal_to_double</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_decimal</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 
@@ -2341,23 +2341,23 @@ The converted `double` element.
 
 <br>
 
-### `duckdb_prepare`
+### `DataMiner_prepare`
 
 ---
 Create a prepared statement object from a query.
 
-Note that after calling `duckdb_prepare`, the prepared statement should always be destroyed using
-`duckdb_destroy_prepare`, even if the prepare fails.
+Note that after calling `DataMiner_prepare`, the prepared statement should always be destroyed using
+`DataMiner_destroy_prepare`, even if the prepare fails.
 
-If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason why the prepare failed.
+If the prepare fails, `DataMiner_prepare_error` can be called to obtain the reason why the prepare failed.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_prepare</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_prepare</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement
+</span>  <span class="kt">DataMiner_prepared_statement</span> *<span class="nv">out_prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -2375,11 +2375,11 @@ The SQL query to prepare
 The resulting prepared statement object
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_destroy_prepare`
+### `DataMiner_destroy_prepare`
 
 ---
 Closes the prepared statement and de-allocates all memory allocated for the statement.
@@ -2387,8 +2387,8 @@ Closes the prepared statement and de-allocates all memory allocated for the stat
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_prepare</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="nv">prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_prepare</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> *<span class="nv">prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -2401,19 +2401,19 @@ The prepared statement to destroy.
 
 <br>
 
-### `duckdb_prepare_error`
+### `DataMiner_prepare_error`
 
 ---
 Returns the error message associated with the given prepared statement.
 If the prepared statement has no error message, this returns `nullptr` instead.
 
-The error message should not be freed. It will be de-allocated when `duckdb_destroy_prepare` is called.
+The error message should not be freed. It will be de-allocated when `DataMiner_destroy_prepare` is called.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_prepare_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">DataMiner_prepare_error</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -2429,7 +2429,7 @@ The error message, or `nullptr` if there is none.
 
 <br>
 
-### `duckdb_nparams`
+### `DataMiner_nparams`
 
 ---
 Returns the number of parameters that can be provided to the given prepared statement.
@@ -2439,8 +2439,8 @@ Returns 0 if the query was not successfully prepared.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_nparams</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_nparams</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -2453,19 +2453,19 @@ The prepared statement to obtain the number of parameters for.
 
 <br>
 
-### `duckdb_parameter_name`
+### `DataMiner_parameter_name`
 
 ---
 Returns the name used to identify the parameter
-The returned string should be freed using `duckdb_free`.
+The returned string should be freed using `DataMiner_free`.
 
 Returns NULL if the index is out of range for the provided prepared statement.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_parameter_name</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">DataMiner_parameter_name</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
@@ -2479,18 +2479,18 @@ The prepared statement for which to get the parameter name from.
 
 <br>
 
-### `duckdb_param_type`
+### `DataMiner_param_type`
 
 ---
 Returns the parameter type for the parameter at the given index.
 
-Returns `DUCKDB_TYPE_INVALID` if the parameter index is out of range or the statement was not successfully prepared.
+Returns `DataMiner_TYPE_INVALID` if the parameter index is out of range or the statement was not successfully prepared.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_param_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_type</span> <span class="nv">DataMiner_param_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx
 </span>);
 </code></pre></div></div>
@@ -2510,7 +2510,7 @@ The parameter type
 
 <br>
 
-### `duckdb_clear_bindings`
+### `DataMiner_clear_bindings`
 
 ---
 Clear the params bind to the prepared statement.
@@ -2518,13 +2518,13 @@ Clear the params bind to the prepared statement.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_clear_bindings</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_clear_bindings</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_prepared_statement_type`
+### `DataMiner_prepared_statement_type`
 
 ---
 Returns the statement type of the statement to be executed
@@ -2532,8 +2532,8 @@ Returns the statement type of the statement to be executed
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_statement_type</span> <span class="nv">duckdb_prepared_statement_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">statement
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_statement_type</span> <span class="nv">DataMiner_prepared_statement_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">statement
 </span>);
 </code></pre></div></div>
 
@@ -2545,11 +2545,11 @@ Returns the statement type of the statement to be executed
 The prepared statement.
 * `returns`
 
-duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
+DataMiner_statement_type value or DataMiner_STATEMENT_TYPE_INVALID
 
 <br>
 
-### `duckdb_bind_value`
+### `DataMiner_bind_value`
 
 ---
 Binds a value to the prepared statement at the specified index.
@@ -2557,15 +2557,15 @@ Binds a value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_value</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> <span class="nv">val
+</span>  <span class="kt">DataMiner_value</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_parameter_index`
+### `DataMiner_bind_parameter_index`
 
 ---
 Retrieve the index of the parameter for the prepared statement, identified by name
@@ -2573,15 +2573,15 @@ Retrieve the index of the parameter for the prepared statement, identified by na
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_parameter_index</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_parameter_index</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> *<span class="nv">param_idx_out</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_boolean`
+### `DataMiner_bind_boolean`
 
 ---
 Binds a bool value to the prepared statement at the specified index.
@@ -2589,15 +2589,15 @@ Binds a bool value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_boolean</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_boolean</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">bool</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_int8`
+### `DataMiner_bind_int8`
 
 ---
 Binds an int8_t value to the prepared statement at the specified index.
@@ -2605,15 +2605,15 @@ Binds an int8_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_int8</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">int8_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_int16`
+### `DataMiner_bind_int16`
 
 ---
 Binds an int16_t value to the prepared statement at the specified index.
@@ -2621,15 +2621,15 @@ Binds an int16_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_int16</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">int16_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_int32`
+### `DataMiner_bind_int32`
 
 ---
 Binds an int32_t value to the prepared statement at the specified index.
@@ -2637,15 +2637,15 @@ Binds an int32_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_int32</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">int32_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_int64`
+### `DataMiner_bind_int64`
 
 ---
 Binds an int64_t value to the prepared statement at the specified index.
@@ -2653,63 +2653,63 @@ Binds an int64_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_int64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_int64</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">int64_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_hugeint`
+### `DataMiner_bind_hugeint`
 
 ---
-Binds a duckdb_hugeint value to the prepared statement at the specified index.
+Binds a DataMiner_hugeint value to the prepared statement at the specified index.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_hugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_hugeint</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">val
+</span>  <span class="kt">DataMiner_hugeint</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_uhugeint`
+### `DataMiner_bind_uhugeint`
 
 ---
-Binds an duckdb_uhugeint value to the prepared statement at the specified index.
+Binds an DataMiner_uhugeint value to the prepared statement at the specified index.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uhugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_uhugeint</span> <span class="nv">val
+</span>  <span class="kt">DataMiner_uhugeint</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_decimal`
+### `DataMiner_bind_decimal`
 
 ---
-Binds a duckdb_decimal value to the prepared statement at the specified index.
+Binds a DataMiner_decimal value to the prepared statement at the specified index.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_decimal</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_decimal</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_decimal</span> <span class="nv">val
+</span>  <span class="kt">DataMiner_decimal</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_uint8`
+### `DataMiner_bind_uint8`
 
 ---
 Binds an uint8_t value to the prepared statement at the specified index.
@@ -2717,15 +2717,15 @@ Binds an uint8_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_uint8</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_uint16`
+### `DataMiner_bind_uint16`
 
 ---
 Binds an uint16_t value to the prepared statement at the specified index.
@@ -2733,15 +2733,15 @@ Binds an uint16_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_uint16</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">uint16_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_uint32`
+### `DataMiner_bind_uint32`
 
 ---
 Binds an uint32_t value to the prepared statement at the specified index.
@@ -2749,15 +2749,15 @@ Binds an uint32_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_uint32</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">uint32_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_uint64`
+### `DataMiner_bind_uint64`
 
 ---
 Binds an uint64_t value to the prepared statement at the specified index.
@@ -2765,15 +2765,15 @@ Binds an uint64_t value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_uint64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_uint64</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">uint64_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_float`
+### `DataMiner_bind_float`
 
 ---
 Binds a float value to the prepared statement at the specified index.
@@ -2781,15 +2781,15 @@ Binds a float value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_float</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_float</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">float</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_double`
+### `DataMiner_bind_double`
 
 ---
 Binds a double value to the prepared statement at the specified index.
@@ -2797,79 +2797,79 @@ Binds a double value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_double</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_double</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">double</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_date`
+### `DataMiner_bind_date`
 
 ---
-Binds a duckdb_date value to the prepared statement at the specified index.
+Binds a DataMiner_date value to the prepared statement at the specified index.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_date</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_date</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_date</span> <span class="nv">val
+</span>  <span class="kt">DataMiner_date</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_time`
+### `DataMiner_bind_time`
 
 ---
-Binds a duckdb_time value to the prepared statement at the specified index.
+Binds a DataMiner_time value to the prepared statement at the specified index.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_time</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_time</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_time</span> <span class="nv">val
+</span>  <span class="kt">DataMiner_time</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_timestamp`
+### `DataMiner_bind_timestamp`
 
 ---
-Binds a duckdb_timestamp value to the prepared statement at the specified index.
+Binds a DataMiner_timestamp value to the prepared statement at the specified index.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_timestamp</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_timestamp</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">val
+</span>  <span class="kt">DataMiner_timestamp</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_interval`
+### `DataMiner_bind_interval`
 
 ---
-Binds a duckdb_interval value to the prepared statement at the specified index.
+Binds a DataMiner_interval value to the prepared statement at the specified index.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_interval</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_interval</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
-</span>  <span class="kt">duckdb_interval</span> <span class="nv">val
+</span>  <span class="kt">DataMiner_interval</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_varchar`
+### `DataMiner_bind_varchar`
 
 ---
 Binds a null-terminated varchar value to the prepared statement at the specified index.
@@ -2877,15 +2877,15 @@ Binds a null-terminated varchar value to the prepared statement at the specified
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_varchar</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_varchar</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_varchar_length`
+### `DataMiner_bind_varchar_length`
 
 ---
 Binds a varchar value to the prepared statement at the specified index.
@@ -2893,8 +2893,8 @@ Binds a varchar value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_varchar_length</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_varchar_length</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">length
@@ -2902,7 +2902,7 @@ Binds a varchar value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_blob`
+### `DataMiner_bind_blob`
 
 ---
 Binds a blob value to the prepared statement at the specified index.
@@ -2910,8 +2910,8 @@ Binds a blob value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_blob</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_blob</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">length
@@ -2919,7 +2919,7 @@ Binds a blob value to the prepared statement at the specified index.
 </code></pre></div></div>
 <br>
 
-### `duckdb_bind_null`
+### `DataMiner_bind_null`
 
 ---
 Binds a NULL value to the prepared statement at the specified index.
@@ -2927,14 +2927,14 @@ Binds a NULL value to the prepared statement at the specified index.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_bind_null</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_bind_null</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">param_idx
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_execute_prepared`
+### `DataMiner_execute_prepared`
 
 ---
 Executes the prepared statement with the given bound parameters, and returns a materialized query result.
@@ -2942,14 +2942,14 @@ Executes the prepared statement with the given bound parameters, and returns a m
 This method can be called multiple times for each prepared statement, and the parameters can be modified
 between calls to this function.
 
-Note that the result must be freed with `duckdb_destroy_result`.
+Note that the result must be freed with `DataMiner_destroy_result`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_execute_prepared</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -2964,29 +2964,29 @@ The prepared statement to execute.
 The query result.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_execute_prepared_streaming`
+### `DataMiner_execute_prepared_streaming`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
 Executes the prepared statement with the given bound parameters, and returns an optionally-streaming query result.
-To determine if the resulting query was in fact streamed, use `duckdb_result_is_streaming`
+To determine if the resulting query was in fact streamed, use `DataMiner_result_is_streaming`
 
 This method can be called multiple times for each prepared statement, and the parameters can be modified
 between calls to this function.
 
-Note that the result must be freed with `duckdb_destroy_result`.
+Note that the result must be freed with `DataMiner_destroy_result`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared_streaming</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_execute_prepared_streaming</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -3001,26 +3001,26 @@ The prepared statement to execute.
 The query result.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_extract_statements`
+### `DataMiner_extract_statements`
 
 ---
 Extract all statements from a query.
-Note that after calling `duckdb_extract_statements`, the extracted statements should always be destroyed using
-`duckdb_destroy_extracted`, even if no statements were extracted.
+Note that after calling `DataMiner_extract_statements`, the extracted statements should always be destroyed using
+`DataMiner_destroy_extracted`, even if no statements were extracted.
 
-If the extract fails, `duckdb_extract_statements_error` can be called to obtain the reason why the extract failed.
+If the extract fails, `DataMiner_extract_statements_error` can be called to obtain the reason why the extract failed.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_extract_statements</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_extract_statements</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
-</span>  <span class="nv">duckdb_extracted_statements</span> *<span class="nv">out_extracted_statements
+</span>  <span class="nv">DataMiner_extracted_statements</span> *<span class="nv">out_extracted_statements
 </span>);
 </code></pre></div></div>
 
@@ -3042,23 +3042,23 @@ The number of extracted statements or 0 on failure.
 
 <br>
 
-### `duckdb_prepare_extracted_statement`
+### `DataMiner_prepare_extracted_statement`
 
 ---
 Prepare an extracted statement.
-Note that after calling `duckdb_prepare_extracted_statement`, the prepared statement should always be destroyed using
-`duckdb_destroy_prepare`, even if the prepare fails.
+Note that after calling `DataMiner_prepare_extracted_statement`, the prepared statement should always be destroyed using
+`DataMiner_destroy_prepare`, even if the prepare fails.
 
-If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason why the prepare failed.
+If the prepare fails, `DataMiner_prepare_error` can be called to obtain the reason why the prepare failed.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_prepare_extracted_statement</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
-</span>  <span class="nv">duckdb_extracted_statements</span> <span class="nv">extracted_statements</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_prepare_extracted_statement</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection</span>,<span class="nv">
+</span>  <span class="nv">DataMiner_extracted_statements</span> <span class="nv">extracted_statements</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index</span>,<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> *<span class="nv">out_prepared_statement
+</span>  <span class="kt">DataMiner_prepared_statement</span> *<span class="nv">out_prepared_statement
 </span>);
 </code></pre></div></div>
 
@@ -3079,21 +3079,21 @@ The index of the extracted statement to prepare
 The resulting prepared statement object
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_extract_statements_error`
+### `DataMiner_extract_statements_error`
 
 ---
 Returns the error message contained within the extracted statements.
-The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_extracted` is called.
+The result of this function must not be freed. It will be cleaned up when `DataMiner_destroy_extracted` is called.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_extract_statements_error</span>(<span class="nv">
-</span>  <span class="nv">duckdb_extracted_statements</span> <span class="nv">extracted_statements
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">DataMiner_extract_statements_error</span>(<span class="nv">
+</span>  <span class="nv">DataMiner_extracted_statements</span> <span class="nv">extracted_statements
 </span>);
 </code></pre></div></div>
 
@@ -3109,7 +3109,7 @@ The error of the extracted statements.
 
 <br>
 
-### `duckdb_destroy_extracted`
+### `DataMiner_destroy_extracted`
 
 ---
 De-allocates all memory allocated for the extracted statements.
@@ -3117,8 +3117,8 @@ De-allocates all memory allocated for the extracted statements.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_extracted</span>(<span class="nv">
-</span>  <span class="nv">duckdb_extracted_statements</span> *<span class="nv">extracted_statements
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_extracted</span>(<span class="nv">
+</span>  <span class="nv">DataMiner_extracted_statements</span> *<span class="nv">extracted_statements
 </span>);
 </code></pre></div></div>
 
@@ -3131,22 +3131,22 @@ The extracted statements to destroy.
 
 <br>
 
-### `duckdb_pending_prepared`
+### `DataMiner_pending_prepared`
 
 ---
 Executes the prepared statement with the given bound parameters, and returns a pending result.
 The pending result represents an intermediate structure for a query that is not yet fully executed.
 The pending result can be used to incrementally execute a query, returning control to the client between tasks.
 
-Note that after calling `duckdb_pending_prepared`, the pending result should always be destroyed using
-`duckdb_destroy_pending`, even if this function returns DuckDBError.
+Note that after calling `DataMiner_pending_prepared`, the pending result should always be destroyed using
+`DataMiner_destroy_pending`, even if this function returns DataMinerError.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_pending_prepared</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="nv">duckdb_pending_result</span> *<span class="nv">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_pending_prepared</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="nv">DataMiner_pending_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -3161,28 +3161,28 @@ The prepared statement to execute.
 The pending query result.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_pending_prepared_streaming`
+### `DataMiner_pending_prepared_streaming`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
 Executes the prepared statement with the given bound parameters, and returns a pending result.
-This pending result will create a streaming duckdb_result when executed.
+This pending result will create a streaming DataMiner_result when executed.
 The pending result represents an intermediate structure for a query that is not yet fully executed.
 
-Note that after calling `duckdb_pending_prepared_streaming`, the pending result should always be destroyed using
-`duckdb_destroy_pending`, even if this function returns DuckDBError.
+Note that after calling `DataMiner_pending_prepared_streaming`, the pending result should always be destroyed using
+`DataMiner_destroy_pending`, even if this function returns DataMinerError.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_pending_prepared_streaming</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="nv">duckdb_pending_result</span> *<span class="nv">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_pending_prepared_streaming</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="nv">DataMiner_pending_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -3197,11 +3197,11 @@ The prepared statement to execute.
 The pending query result.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_destroy_pending`
+### `DataMiner_destroy_pending`
 
 ---
 Closes the pending result and de-allocates all memory allocated for the result.
@@ -3209,8 +3209,8 @@ Closes the pending result and de-allocates all memory allocated for the result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_pending</span>(<span class="nv">
-</span>  <span class="nv">duckdb_pending_result</span> *<span class="nv">pending_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_pending</span>(<span class="nv">
+</span>  <span class="nv">DataMiner_pending_result</span> *<span class="nv">pending_result
 </span>);
 </code></pre></div></div>
 
@@ -3223,18 +3223,18 @@ The pending result to destroy.
 
 <br>
 
-### `duckdb_pending_error`
+### `DataMiner_pending_error`
 
 ---
 Returns the error message contained within the pending result.
 
-The result of this function must not be freed. It will be cleaned up when `duckdb_destroy_pending` is called.
+The result of this function must not be freed. It will be cleaned up when `DataMiner_destroy_pending` is called.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_pending_error</span>(<span class="nv">
-</span>  <span class="nv">duckdb_pending_result</span> <span class="nv">pending_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">DataMiner_pending_error</span>(<span class="nv">
+</span>  <span class="nv">DataMiner_pending_result</span> <span class="nv">pending_result
 </span>);
 </code></pre></div></div>
 
@@ -3250,22 +3250,22 @@ The error of the pending result.
 
 <br>
 
-### `duckdb_pending_execute_task`
+### `DataMiner_pending_execute_task`
 
 ---
 Executes a single task within the query, returning whether or not the query is ready.
 
-If this returns DUCKDB_PENDING_RESULT_READY, the duckdb_execute_pending function can be called to obtain the result.
-If this returns DUCKDB_PENDING_RESULT_NOT_READY, the duckdb_pending_execute_task function should be called again.
-If this returns DUCKDB_PENDING_ERROR, an error occurred during execution.
+If this returns DataMiner_PENDING_RESULT_READY, the DataMiner_execute_pending function can be called to obtain the result.
+If this returns DataMiner_PENDING_RESULT_NOT_READY, the DataMiner_pending_execute_task function should be called again.
+If this returns DataMiner_PENDING_ERROR, an error occurred during execution.
 
-The error message can be obtained by calling duckdb_pending_error on the pending_result.
+The error message can be obtained by calling DataMiner_pending_error on the pending_result.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_pending_state</span> <span class="nv">duckdb_pending_execute_task</span>(<span class="nv">
-</span>  <span class="nv">duckdb_pending_result</span> <span class="nv">pending_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_pending_state</span> <span class="nv">DataMiner_pending_execute_task</span>(<span class="nv">
+</span>  <span class="nv">DataMiner_pending_result</span> <span class="nv">pending_result
 </span>);
 </code></pre></div></div>
 
@@ -3281,20 +3281,20 @@ The state of the pending result after the execution.
 
 <br>
 
-### `duckdb_pending_execute_check_state`
+### `DataMiner_pending_execute_check_state`
 
 ---
-If this returns DUCKDB_PENDING_RESULT_READY, the duckdb_execute_pending function can be called to obtain the result.
-If this returns DUCKDB_PENDING_RESULT_NOT_READY, the duckdb_pending_execute_check_state function should be called again.
-If this returns DUCKDB_PENDING_ERROR, an error occurred during execution.
+If this returns DataMiner_PENDING_RESULT_READY, the DataMiner_execute_pending function can be called to obtain the result.
+If this returns DataMiner_PENDING_RESULT_NOT_READY, the DataMiner_pending_execute_check_state function should be called again.
+If this returns DataMiner_PENDING_ERROR, an error occurred during execution.
 
-The error message can be obtained by calling duckdb_pending_error on the pending_result.
+The error message can be obtained by calling DataMiner_pending_error on the pending_result.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_pending_state</span> <span class="nv">duckdb_pending_execute_check_state</span>(<span class="nv">
-</span>  <span class="nv">duckdb_pending_result</span> <span class="nv">pending_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_pending_state</span> <span class="nv">DataMiner_pending_execute_check_state</span>(<span class="nv">
+</span>  <span class="nv">DataMiner_pending_result</span> <span class="nv">pending_result
 </span>);
 </code></pre></div></div>
 
@@ -3310,22 +3310,22 @@ The state of the pending result.
 
 <br>
 
-### `duckdb_execute_pending`
+### `DataMiner_execute_pending`
 
 ---
 Fully execute a pending query result, returning the final query result.
 
-If duckdb_pending_execute_task has been called until DUCKDB_PENDING_RESULT_READY was returned, this will return fast.
+If DataMiner_pending_execute_task has been called until DataMiner_PENDING_RESULT_READY was returned, this will return fast.
 Otherwise, all remaining tasks must be executed first.
 
-Note that the result must be freed with `duckdb_destroy_result`.
+Note that the result must be freed with `DataMiner_destroy_result`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_pending</span>(<span class="nv">
-</span>  <span class="nv">duckdb_pending_result</span> <span class="nv">pending_result</span>,<span class="nv">
-</span>  <span class="kt">duckdb_result</span> *<span class="nv">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_execute_pending</span>(<span class="nv">
+</span>  <span class="nv">DataMiner_pending_result</span> <span class="nv">pending_result</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -3340,21 +3340,21 @@ The pending result to execute.
 The result object.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_pending_execution_is_finished`
+### `DataMiner_pending_execution_is_finished`
 
 ---
-Returns whether a duckdb_pending_state is finished executing. For example if `pending_state` is
-DUCKDB_PENDING_RESULT_READY, this function will return true.
+Returns whether a DataMiner_pending_state is finished executing. For example if `pending_state` is
+DataMiner_PENDING_RESULT_READY, this function will return true.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_pending_execution_is_finished</span>(<span class="nv">
-</span>  <span class="kt">duckdb_pending_state</span> <span class="nv">pending_state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_pending_execution_is_finished</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_pending_state</span> <span class="nv">pending_state
 </span>);
 </code></pre></div></div>
 
@@ -3370,7 +3370,7 @@ Boolean indicating pending execution should be considered finished.
 
 <br>
 
-### `duckdb_destroy_value`
+### `DataMiner_destroy_value`
 
 ---
 Destroys the value and de-allocates all memory allocated for that type.
@@ -3378,8 +3378,8 @@ Destroys the value and de-allocates all memory allocated for that type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_value</span> *<span class="nv">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_value</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_value</span> *<span class="nv">value
 </span>);
 </code></pre></div></div>
 
@@ -3392,7 +3392,7 @@ The value to destroy.
 
 <br>
 
-### `duckdb_create_varchar`
+### `DataMiner_create_varchar`
 
 ---
 Creates a value from a null-terminated string
@@ -3400,7 +3400,7 @@ Creates a value from a null-terminated string
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_varchar</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_value</span> <span class="nv">DataMiner_create_varchar</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text
 </span>);
 </code></pre></div></div>
@@ -3413,11 +3413,11 @@ Creates a value from a null-terminated string
 The null-terminated string
 * `returns`
 
-The value. This must be destroyed with `duckdb_destroy_value`.
+The value. This must be destroyed with `DataMiner_destroy_value`.
 
 <br>
 
-### `duckdb_create_varchar_length`
+### `DataMiner_create_varchar_length`
 
 ---
 Creates a value from a string
@@ -3425,7 +3425,7 @@ Creates a value from a string
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_varchar_length</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_value</span> <span class="nv">DataMiner_create_varchar_length</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">text</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
@@ -3442,11 +3442,11 @@ The text
 The length of the text
 * `returns`
 
-The value. This must be destroyed with `duckdb_destroy_value`.
+The value. This must be destroyed with `DataMiner_destroy_value`.
 
 <br>
 
-### `duckdb_create_int64`
+### `DataMiner_create_int64`
 
 ---
 Creates a value from an int64
@@ -3454,7 +3454,7 @@ Creates a value from an int64
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_int64</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_value</span> <span class="nv">DataMiner_create_int64</span>(<span class="nv">
 </span>  <span class="kt">int64_t</span> <span class="nv">val
 </span>);
 </code></pre></div></div>
@@ -3467,11 +3467,11 @@ Creates a value from an int64
 The bigint value
 * `returns`
 
-The value. This must be destroyed with `duckdb_destroy_value`.
+The value. This must be destroyed with `DataMiner_destroy_value`.
 
 <br>
 
-### `duckdb_create_struct_value`
+### `DataMiner_create_struct_value`
 
 ---
 Creates a struct value from a type and an array of values
@@ -3479,9 +3479,9 @@ Creates a struct value from a type and an array of values
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_struct_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> *<span class="nv">values
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_value</span> <span class="nv">DataMiner_create_struct_value</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_value</span> *<span class="nv">values
 </span>);
 </code></pre></div></div>
 
@@ -3496,11 +3496,11 @@ The type of the struct
 The values for the struct fields
 * `returns`
 
-The value. This must be destroyed with `duckdb_destroy_value`.
+The value. This must be destroyed with `DataMiner_destroy_value`.
 
 <br>
 
-### `duckdb_create_list_value`
+### `DataMiner_create_list_value`
 
 ---
 Creates a list value from a type and an array of values of length `value_count`
@@ -3508,9 +3508,9 @@ Creates a list value from a type and an array of values of length `value_count`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_list_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> *<span class="nv">values</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_value</span> <span class="nv">DataMiner_create_list_value</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_value</span> *<span class="nv">values</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">value_count
 </span>);
 </code></pre></div></div>
@@ -3529,11 +3529,11 @@ The values for the list
 The number of values in the list
 * `returns`
 
-The value. This must be destroyed with `duckdb_destroy_value`.
+The value. This must be destroyed with `DataMiner_destroy_value`.
 
 <br>
 
-### `duckdb_create_array_value`
+### `DataMiner_create_array_value`
 
 ---
 Creates a array value from a type and an array of values of length `value_count`
@@ -3541,9 +3541,9 @@ Creates a array value from a type and an array of values of length `value_count`
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_create_array_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> *<span class="nv">values</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_value</span> <span class="nv">DataMiner_create_array_value</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_value</span> *<span class="nv">values</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">value_count
 </span>);
 </code></pre></div></div>
@@ -3562,21 +3562,21 @@ The values for the array
 The number of values in the array
 * `returns`
 
-The value. This must be destroyed with `duckdb_destroy_value`.
+The value. This must be destroyed with `DataMiner_destroy_value`.
 
 <br>
 
-### `duckdb_get_varchar`
+### `DataMiner_get_varchar`
 
 ---
 Obtains a string representation of the given value.
-The result must be destroyed with `duckdb_free`.
+The result must be destroyed with `DataMiner_free`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_get_varchar</span>(<span class="nv">
-</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">DataMiner_get_varchar</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_value</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 
@@ -3588,11 +3588,11 @@ The result must be destroyed with `duckdb_free`.
 The value
 * `returns`
 
-The string value. This must be destroyed with `duckdb_free`.
+The string value. This must be destroyed with `DataMiner_free`.
 
 <br>
 
-### `duckdb_get_int64`
+### `DataMiner_get_int64`
 
 ---
 Obtains an int64 of the given value.
@@ -3600,8 +3600,8 @@ Obtains an int64 of the given value.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="nv">duckdb_get_int64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_value</span> <span class="nv">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int64_t</span> <span class="nv">DataMiner_get_int64</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_value</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 
@@ -3617,19 +3617,19 @@ The int64 value, or 0 if no conversion is possible
 
 <br>
 
-### `duckdb_create_logical_type`
+### `DataMiner_create_logical_type`
 
 ---
-Creates a `duckdb_logical_type` from a standard primitive type.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+Creates a `DataMiner_logical_type` from a standard primitive type.
+The resulting type should be destroyed with `DataMiner_destroy_logical_type`.
 
-This should not be used with `DUCKDB_TYPE_DECIMAL`.
+This should not be used with `DataMiner_TYPE_DECIMAL`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_logical_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_create_logical_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3645,17 +3645,17 @@ The logical type.
 
 <br>
 
-### `duckdb_logical_type_get_alias`
+### `DataMiner_logical_type_get_alias`
 
 ---
-Returns the alias of a duckdb_logical_type, if one is set, else `NULL`.
-The result must be destroyed with `duckdb_free`.
+Returns the alias of a DataMiner_logical_type, if one is set, else `NULL`.
+The result must be destroyed with `DataMiner_free`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_logical_type_get_alias</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">DataMiner_logical_type_get_alias</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3671,17 +3671,17 @@ The alias or `NULL`
 
 <br>
 
-### `duckdb_create_list_type`
+### `DataMiner_create_list_type`
 
 ---
 Creates a list type from its child type.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+The resulting type should be destroyed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_list_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_create_list_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3697,17 +3697,17 @@ The logical type.
 
 <br>
 
-### `duckdb_create_array_type`
+### `DataMiner_create_array_type`
 
 ---
 Creates a array type from its child type.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+The resulting type should be destroyed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_array_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_create_array_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">array_size
 </span>);
 </code></pre></div></div>
@@ -3727,18 +3727,18 @@ The logical type.
 
 <br>
 
-### `duckdb_create_map_type`
+### `DataMiner_create_map_type`
 
 ---
 Creates a map type from its key type and value type.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+The resulting type should be destroyed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_map_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">key_type</span>,<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">value_type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_create_map_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">key_type</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">value_type
 </span>);
 </code></pre></div></div>
 
@@ -3754,17 +3754,17 @@ The logical type.
 
 <br>
 
-### `duckdb_create_union_type`
+### `DataMiner_create_union_type`
 
 ---
 Creates a UNION type from the passed types array.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+The resulting type should be destroyed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_union_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_create_union_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">member_count
 </span>);
@@ -3785,17 +3785,17 @@ The logical type.
 
 <br>
 
-### `duckdb_create_struct_type`
+### `DataMiner_create_struct_type`
 
 ---
 Creates a STRUCT type from the passed member name and type arrays.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+The resulting type should be destroyed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_struct_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_create_struct_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> *<span class="nv">member_types</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">member_count
 </span>);
@@ -3819,16 +3819,16 @@ The logical type.
 
 <br>
 
-### `duckdb_create_enum_type`
+### `DataMiner_create_enum_type`
 
 ---
 Creates an ENUM type from the passed member name array.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+The resulting type should be destroyed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_enum_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_create_enum_type</span>(<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> **<span class="nv">member_names</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">member_count
 </span>);
@@ -3852,16 +3852,16 @@ The logical type.
 
 <br>
 
-### `duckdb_create_decimal_type`
+### `DataMiner_create_decimal_type`
 
 ---
-Creates a `duckdb_logical_type` of type decimal with the specified width and scale.
-The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+Creates a `DataMiner_logical_type` of type decimal with the specified width and scale.
+The resulting type should be destroyed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_create_decimal_type</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_create_decimal_type</span>(<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">width</span>,<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">scale
 </span>);
@@ -3882,16 +3882,16 @@ The logical type.
 
 <br>
 
-### `duckdb_get_type_id`
+### `DataMiner_get_type_id`
 
 ---
-Retrieves the enum type class of a `duckdb_logical_type`.
+Retrieves the enum type class of a `DataMiner_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_get_type_id</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_type</span> <span class="nv">DataMiner_get_type_id</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3907,7 +3907,7 @@ The type id
 
 <br>
 
-### `duckdb_decimal_width`
+### `DataMiner_decimal_width`
 
 ---
 Retrieves the width of a decimal type.
@@ -3915,8 +3915,8 @@ Retrieves the width of a decimal type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_decimal_width</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">DataMiner_decimal_width</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3932,7 +3932,7 @@ The width of the decimal type
 
 <br>
 
-### `duckdb_decimal_scale`
+### `DataMiner_decimal_scale`
 
 ---
 Retrieves the scale of a decimal type.
@@ -3940,8 +3940,8 @@ Retrieves the scale of a decimal type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">duckdb_decimal_scale</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint8_t</span> <span class="nv">DataMiner_decimal_scale</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3957,7 +3957,7 @@ The scale of the decimal type
 
 <br>
 
-### `duckdb_decimal_internal_type`
+### `DataMiner_decimal_internal_type`
 
 ---
 Retrieves the internal storage type of a decimal type.
@@ -3965,8 +3965,8 @@ Retrieves the internal storage type of a decimal type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_decimal_internal_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_type</span> <span class="nv">DataMiner_decimal_internal_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -3982,7 +3982,7 @@ The internal type of the decimal type
 
 <br>
 
-### `duckdb_enum_internal_type`
+### `DataMiner_enum_internal_type`
 
 ---
 Retrieves the internal storage type of an enum type.
@@ -3990,8 +3990,8 @@ Retrieves the internal storage type of an enum type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_type</span> <span class="nv">duckdb_enum_internal_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_type</span> <span class="nv">DataMiner_enum_internal_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4007,7 +4007,7 @@ The internal type of the enum type
 
 <br>
 
-### `duckdb_enum_dictionary_size`
+### `DataMiner_enum_dictionary_size`
 
 ---
 Retrieves the dictionary size of the enum type.
@@ -4015,8 +4015,8 @@ Retrieves the dictionary size of the enum type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nv">duckdb_enum_dictionary_size</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint32_t</span> <span class="nv">DataMiner_enum_dictionary_size</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4032,18 +4032,18 @@ The dictionary size of the enum type
 
 <br>
 
-### `duckdb_enum_dictionary_value`
+### `DataMiner_enum_dictionary_value`
 
 ---
 Retrieves the dictionary value at the specified position from the enum.
 
-The result must be freed with `duckdb_free`.
+The result must be freed with `DataMiner_free`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_enum_dictionary_value</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">DataMiner_enum_dictionary_value</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
@@ -4059,22 +4059,22 @@ The logical type object
 The index in the dictionary
 * `returns`
 
-The string value of the enum type. Must be freed with `duckdb_free`.
+The string value of the enum type. Must be freed with `DataMiner_free`.
 
 <br>
 
-### `duckdb_list_type_child_type`
+### `DataMiner_list_type_child_type`
 
 ---
 Retrieves the child type of the given list type.
 
-The result must be freed with `duckdb_destroy_logical_type`.
+The result must be freed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_list_type_child_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_list_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4086,22 +4086,22 @@ The result must be freed with `duckdb_destroy_logical_type`.
 The logical type object
 * `returns`
 
-The child type of the list type. Must be destroyed with `duckdb_destroy_logical_type`.
+The child type of the list type. Must be destroyed with `DataMiner_destroy_logical_type`.
 
 <br>
 
-### `duckdb_array_type_child_type`
+### `DataMiner_array_type_child_type`
 
 ---
 Retrieves the child type of the given array type.
 
-The result must be freed with `duckdb_destroy_logical_type`.
+The result must be freed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_array_type_child_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_array_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4113,11 +4113,11 @@ The result must be freed with `duckdb_destroy_logical_type`.
 The logical type object
 * `returns`
 
-The child type of the array type. Must be destroyed with `duckdb_destroy_logical_type`.
+The child type of the array type. Must be destroyed with `DataMiner_destroy_logical_type`.
 
 <br>
 
-### `duckdb_array_type_array_size`
+### `DataMiner_array_type_array_size`
 
 ---
 Retrieves the array size of the given array type.
@@ -4125,8 +4125,8 @@ Retrieves the array size of the given array type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_array_type_array_size</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_array_type_array_size</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4142,18 +4142,18 @@ The fixed number of elements the values of this array type can store.
 
 <br>
 
-### `duckdb_map_type_key_type`
+### `DataMiner_map_type_key_type`
 
 ---
 Retrieves the key type of the given map type.
 
-The result must be freed with `duckdb_destroy_logical_type`.
+The result must be freed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_map_type_key_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_map_type_key_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4165,22 +4165,22 @@ The result must be freed with `duckdb_destroy_logical_type`.
 The logical type object
 * `returns`
 
-The key type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
+The key type of the map type. Must be destroyed with `DataMiner_destroy_logical_type`.
 
 <br>
 
-### `duckdb_map_type_value_type`
+### `DataMiner_map_type_value_type`
 
 ---
 Retrieves the value type of the given map type.
 
-The result must be freed with `duckdb_destroy_logical_type`.
+The result must be freed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_map_type_value_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_map_type_value_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4192,11 +4192,11 @@ The result must be freed with `duckdb_destroy_logical_type`.
 The logical type object
 * `returns`
 
-The value type of the map type. Must be destroyed with `duckdb_destroy_logical_type`.
+The value type of the map type. Must be destroyed with `DataMiner_destroy_logical_type`.
 
 <br>
 
-### `duckdb_struct_type_child_count`
+### `DataMiner_struct_type_child_count`
 
 ---
 Returns the number of children of a struct type.
@@ -4204,8 +4204,8 @@ Returns the number of children of a struct type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_struct_type_child_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_struct_type_child_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4221,18 +4221,18 @@ The number of children of a struct type.
 
 <br>
 
-### `duckdb_struct_type_child_name`
+### `DataMiner_struct_type_child_name`
 
 ---
 Retrieves the name of the struct child.
 
-The result must be freed with `duckdb_free`.
+The result must be freed with `DataMiner_free`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_struct_type_child_name</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">DataMiner_struct_type_child_name</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
@@ -4248,22 +4248,22 @@ The logical type object
 The child index
 * `returns`
 
-The name of the struct type. Must be freed with `duckdb_free`.
+The name of the struct type. Must be freed with `DataMiner_free`.
 
 <br>
 
-### `duckdb_struct_type_child_type`
+### `DataMiner_struct_type_child_type`
 
 ---
 Retrieves the child type of the given struct type at the specified index.
 
-The result must be freed with `duckdb_destroy_logical_type`.
+The result must be freed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_struct_type_child_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_struct_type_child_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
@@ -4279,11 +4279,11 @@ The logical type object
 The child index
 * `returns`
 
-The child type of the struct type. Must be destroyed with `duckdb_destroy_logical_type`.
+The child type of the struct type. Must be destroyed with `DataMiner_destroy_logical_type`.
 
 <br>
 
-### `duckdb_union_type_member_count`
+### `DataMiner_union_type_member_count`
 
 ---
 Returns the number of members that the union type has.
@@ -4291,8 +4291,8 @@ Returns the number of members that the union type has.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_union_type_member_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_union_type_member_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4308,18 +4308,18 @@ The number of members of a union type.
 
 <br>
 
-### `duckdb_union_type_member_name`
+### `DataMiner_union_type_member_name`
 
 ---
 Retrieves the name of the union member.
 
-The result must be freed with `duckdb_free`.
+The result must be freed with `DataMiner_free`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">duckdb_union_type_member_name</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">char</span> *<span class="nv">DataMiner_union_type_member_name</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
@@ -4335,22 +4335,22 @@ The logical type object
 The child index
 * `returns`
 
-The name of the union member. Must be freed with `duckdb_free`.
+The name of the union member. Must be freed with `DataMiner_free`.
 
 <br>
 
-### `duckdb_union_type_member_type`
+### `DataMiner_union_type_member_type`
 
 ---
 Retrieves the child type of the given union member at the specified index.
 
-The result must be freed with `duckdb_destroy_logical_type`.
+The result must be freed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_union_type_member_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_union_type_member_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
@@ -4366,11 +4366,11 @@ The logical type object
 The child index
 * `returns`
 
-The child type of the union member. Must be destroyed with `duckdb_destroy_logical_type`.
+The child type of the union member. Must be destroyed with `DataMiner_destroy_logical_type`.
 
 <br>
 
-### `duckdb_destroy_logical_type`
+### `DataMiner_destroy_logical_type`
 
 ---
 Destroys the logical type and de-allocates all memory allocated for that type.
@@ -4378,8 +4378,8 @@ Destroys the logical type and de-allocates all memory allocated for that type.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_logical_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_logical_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> *<span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -4392,18 +4392,18 @@ The logical type to destroy.
 
 <br>
 
-### `duckdb_create_data_chunk`
+### `DataMiner_create_data_chunk`
 
 ---
 Creates an empty DataChunk with the specified set of types.
 
-Note that the result must be destroyed with `duckdb_destroy_data_chunk`.
+Note that the result must be destroyed with `DataMiner_destroy_data_chunk`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_create_data_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> *<span class="nv">types</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_data_chunk</span> <span class="nv">DataMiner_create_data_chunk</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> *<span class="nv">types</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">column_count
 </span>);
 </code></pre></div></div>
@@ -4423,7 +4423,7 @@ The data chunk.
 
 <br>
 
-### `duckdb_destroy_data_chunk`
+### `DataMiner_destroy_data_chunk`
 
 ---
 Destroys the data chunk and de-allocates all memory allocated for that chunk.
@@ -4431,8 +4431,8 @@ Destroys the data chunk and de-allocates all memory allocated for that chunk.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_data_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> *<span class="nv">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_data_chunk</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_data_chunk</span> *<span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -4445,7 +4445,7 @@ The data chunk to destroy.
 
 <br>
 
-### `duckdb_data_chunk_reset`
+### `DataMiner_data_chunk_reset`
 
 ---
 Resets a data chunk, clearing the validity masks and setting the cardinality of the data chunk to 0.
@@ -4453,8 +4453,8 @@ Resets a data chunk, clearing the validity masks and setting the cardinality of 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_data_chunk_reset</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_data_chunk_reset</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -4467,7 +4467,7 @@ The data chunk to reset.
 
 <br>
 
-### `duckdb_data_chunk_get_column_count`
+### `DataMiner_data_chunk_get_column_count`
 
 ---
 Retrieves the number of columns in a data chunk.
@@ -4475,8 +4475,8 @@ Retrieves the number of columns in a data chunk.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_data_chunk_get_column_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_data_chunk_get_column_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -4492,7 +4492,7 @@ The number of columns in the data chunk
 
 <br>
 
-### `duckdb_data_chunk_get_vector`
+### `DataMiner_data_chunk_get_vector`
 
 ---
 Retrieves the vector at the specified column index in the data chunk.
@@ -4503,8 +4503,8 @@ It does NOT need to be destroyed.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_data_chunk_get_vector</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_vector</span> <span class="nv">DataMiner_data_chunk_get_vector</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col_idx
 </span>);
 </code></pre></div></div>
@@ -4521,7 +4521,7 @@ The vector
 
 <br>
 
-### `duckdb_data_chunk_get_size`
+### `DataMiner_data_chunk_get_size`
 
 ---
 Retrieves the current number of tuples in a data chunk.
@@ -4529,8 +4529,8 @@ Retrieves the current number of tuples in a data chunk.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_data_chunk_get_size</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_data_chunk_get_size</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -4546,7 +4546,7 @@ The number of tuples in the data chunk
 
 <br>
 
-### `duckdb_data_chunk_set_size`
+### `DataMiner_data_chunk_set_size`
 
 ---
 Sets the current number of tuples in a data chunk.
@@ -4554,8 +4554,8 @@ Sets the current number of tuples in a data chunk.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_data_chunk_set_size</span>(<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_data_chunk_set_size</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">size
 </span>);
 </code></pre></div></div>
@@ -4572,18 +4572,18 @@ The number of tuples in the data chunk
 
 <br>
 
-### `duckdb_vector_get_column_type`
+### `DataMiner_vector_get_column_type`
 
 ---
 Retrieves the column type of the specified vector.
 
-The result must be destroyed with `duckdb_destroy_logical_type`.
+The result must be destroyed with `DataMiner_destroy_logical_type`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_vector_get_column_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_vector_get_column_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4599,7 +4599,7 @@ The type of the vector
 
 <br>
 
-### `duckdb_vector_get_data`
+### `DataMiner_vector_get_data`
 
 ---
 Retrieves the data pointer of the vector.
@@ -4610,8 +4610,8 @@ How to read or write values depends on the type of the vector.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_vector_get_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_vector_get_data</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4627,7 +4627,7 @@ The data pointer
 
 <br>
 
-### `duckdb_vector_get_validity`
+### `DataMiner_vector_get_validity`
 
 ---
 Retrieves the validity mask pointer of the specified vector.
@@ -4644,13 +4644,13 @@ idx_t entry_idx = row_idx / 64;
 idx_t idx_in_entry = row_idx % 64;
 bool is_valid = validity_mask[entry_idx] & (1 << idx_in_entry);
 
-Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
+Alternatively, the (slower) DataMiner_validity_row_is_valid function can be used.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> *<span class="nv">duckdb_vector_get_validity</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">uint64_t</span> *<span class="nv">DataMiner_vector_get_validity</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4666,19 +4666,19 @@ The pointer to the validity mask, or NULL if no validity mask is present
 
 <br>
 
-### `duckdb_vector_ensure_validity_writable`
+### `DataMiner_vector_ensure_validity_writable`
 
 ---
 Ensures the validity mask is writable by allocating it.
 
-After this function is called, `duckdb_vector_get_validity` will ALWAYS return non-NULL.
+After this function is called, `DataMiner_vector_get_validity` will ALWAYS return non-NULL.
 This allows null values to be written to the vector, regardless of whether a validity mask was present before.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_ensure_validity_writable</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_vector_ensure_validity_writable</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4691,7 +4691,7 @@ The vector to alter
 
 <br>
 
-### `duckdb_vector_assign_string_element`
+### `DataMiner_vector_assign_string_element`
 
 ---
 Assigns a string element in the vector at the specified location.
@@ -4699,8 +4699,8 @@ Assigns a string element in the vector at the specified location.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_assign_string_element</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_vector_assign_string_element</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str
 </span>);
@@ -4721,7 +4721,7 @@ The null-terminated string
 
 <br>
 
-### `duckdb_vector_assign_string_element_len`
+### `DataMiner_vector_assign_string_element_len`
 
 ---
 Assigns a string element in the vector at the specified location. You may also use this function to assign BLOBs.
@@ -4729,8 +4729,8 @@ Assigns a string element in the vector at the specified location. You may also u
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_vector_assign_string_element_len</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_vector_assign_string_element_len</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">str</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">str_len
@@ -4755,7 +4755,7 @@ The length of the string (in bytes)
 
 <br>
 
-### `duckdb_list_vector_get_child`
+### `DataMiner_list_vector_get_child`
 
 ---
 Retrieves the child vector of a list vector.
@@ -4765,8 +4765,8 @@ The resulting vector is valid as long as the parent vector is valid.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_list_vector_get_child</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_vector</span> <span class="nv">DataMiner_list_vector_get_child</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4782,7 +4782,7 @@ The child vector
 
 <br>
 
-### `duckdb_list_vector_get_size`
+### `DataMiner_list_vector_get_size`
 
 ---
 Returns the size of the child vector of the list.
@@ -4790,8 +4790,8 @@ Returns the size of the child vector of the list.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_list_vector_get_size</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_list_vector_get_size</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4807,7 +4807,7 @@ The size of the child list
 
 <br>
 
-### `duckdb_list_vector_set_size`
+### `DataMiner_list_vector_set_size`
 
 ---
 Sets the total size of the underlying child-vector of a list vector.
@@ -4815,8 +4815,8 @@ Sets the total size of the underlying child-vector of a list vector.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_list_vector_set_size</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_list_vector_set_size</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">size
 </span>);
 </code></pre></div></div>
@@ -4832,11 +4832,11 @@ The list vector.
 The size of the child list.
 * `returns`
 
-The DataMiner state. Returns DuckDBError if the vector is nullptr.
+The DataMiner state. Returns DataMinerError if the vector is nullptr.
 
 <br>
 
-### `duckdb_list_vector_reserve`
+### `DataMiner_list_vector_reserve`
 
 ---
 Sets the total capacity of the underlying child-vector of a list.
@@ -4844,8 +4844,8 @@ Sets the total capacity of the underlying child-vector of a list.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_list_vector_reserve</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_list_vector_reserve</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">required_capacity
 </span>);
 </code></pre></div></div>
@@ -4861,11 +4861,11 @@ The list vector.
 the total capacity to reserve.
 * `return`
 
-The DataMiner state. Returns DuckDBError if the vector is nullptr.
+The DataMiner state. Returns DataMinerError if the vector is nullptr.
 
 <br>
 
-### `duckdb_struct_vector_get_child`
+### `DataMiner_struct_vector_get_child`
 
 ---
 Retrieves the child vector of a struct vector.
@@ -4875,8 +4875,8 @@ The resulting vector is valid as long as the parent vector is valid.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_struct_vector_get_child</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_vector</span> <span class="nv">DataMiner_struct_vector_get_child</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
@@ -4896,7 +4896,7 @@ The child vector
 
 <br>
 
-### `duckdb_array_vector_get_child`
+### `DataMiner_array_vector_get_child`
 
 ---
 Retrieves the child vector of a array vector.
@@ -4907,8 +4907,8 @@ The resulting vector has the size of the parent vector multiplied by the array s
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_vector</span> <span class="nv">duckdb_array_vector_get_child</span>(<span class="nv">
-</span>  <span class="kt">duckdb_vector</span> <span class="nv">vector
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_vector</span> <span class="nv">DataMiner_array_vector_get_child</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_vector</span> <span class="nv">vector
 </span>);
 </code></pre></div></div>
 
@@ -4924,7 +4924,7 @@ The child vector
 
 <br>
 
-### `duckdb_validity_row_is_valid`
+### `DataMiner_validity_row_is_valid`
 
 ---
 Returns whether or not a row is valid (i.e., not NULL) in the given validity mask.
@@ -4932,7 +4932,7 @@ Returns whether or not a row is valid (i.e., not NULL) in the given validity mas
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_validity_row_is_valid</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_validity_row_is_valid</span>(<span class="nv">
 </span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -4943,7 +4943,7 @@ Returns whether or not a row is valid (i.e., not NULL) in the given validity mas
 ---
 * `validity`
 
-The validity mask, as obtained through `duckdb_vector_get_validity`
+The validity mask, as obtained through `DataMiner_vector_get_validity`
 * `row`
 
 The row index
@@ -4953,18 +4953,18 @@ true if the row is valid, false otherwise
 
 <br>
 
-### `duckdb_validity_set_row_validity`
+### `DataMiner_validity_set_row_validity`
 
 ---
 In a validity mask, sets a specific row to either valid or invalid.
 
-Note that `duckdb_vector_ensure_validity_writable` should be called before calling `duckdb_vector_get_validity`,
+Note that `DataMiner_vector_ensure_validity_writable` should be called before calling `DataMiner_vector_get_validity`,
 to ensure that there is a validity mask to write to.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_validity_set_row_validity</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_validity_set_row_validity</span>(<span class="nv">
 </span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row</span>,<span class="nv">
 </span>  <span class="kt">bool</span> <span class="nv">valid
@@ -4976,7 +4976,7 @@ to ensure that there is a validity mask to write to.
 ---
 * `validity`
 
-The validity mask, as obtained through `duckdb_vector_get_validity`.
+The validity mask, as obtained through `DataMiner_vector_get_validity`.
 * `row`
 
 The row index
@@ -4986,17 +4986,17 @@ Whether or not to set the row to valid, or invalid
 
 <br>
 
-### `duckdb_validity_set_row_invalid`
+### `DataMiner_validity_set_row_invalid`
 
 ---
 In a validity mask, sets a specific row to invalid.
 
-Equivalent to `duckdb_validity_set_row_validity` with valid set to false.
+Equivalent to `DataMiner_validity_set_row_validity` with valid set to false.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_validity_set_row_invalid</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_validity_set_row_invalid</span>(<span class="nv">
 </span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -5014,17 +5014,17 @@ The row index
 
 <br>
 
-### `duckdb_validity_set_row_valid`
+### `DataMiner_validity_set_row_valid`
 
 ---
 In a validity mask, sets a specific row to valid.
 
-Equivalent to `duckdb_validity_set_row_validity` with valid set to true.
+Equivalent to `DataMiner_validity_set_row_validity` with valid set to true.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_validity_set_row_valid</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_validity_set_row_valid</span>(<span class="nv">
 </span>  <span class="kt">uint64_t</span> *<span class="nv">validity</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">row
 </span>);
@@ -5042,17 +5042,17 @@ The row index
 
 <br>
 
-### `duckdb_create_table_function`
+### `DataMiner_create_table_function`
 
 ---
 Creates a new empty table function.
 
-The return value should be destroyed with `duckdb_destroy_table_function`.
+The return value should be destroyed with `DataMiner_destroy_table_function`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_table_function</span> <span class="nv">duckdb_create_table_function</span>(<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_table_function</span> <span class="nv">DataMiner_create_table_function</span>(<span class="nv">
 </span>  <span class="nv">
 </span>);
 </code></pre></div></div>
@@ -5066,7 +5066,7 @@ The table function object.
 
 <br>
 
-### `duckdb_destroy_table_function`
+### `DataMiner_destroy_table_function`
 
 ---
 Destroys the given table function object.
@@ -5074,8 +5074,8 @@ Destroys the given table function object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_table_function</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> *<span class="nv">table_function
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_table_function</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> *<span class="nv">table_function
 </span>);
 </code></pre></div></div>
 
@@ -5088,7 +5088,7 @@ The table function to destroy
 
 <br>
 
-### `duckdb_table_function_set_name`
+### `DataMiner_table_function_set_name`
 
 ---
 Sets the name of the given table function.
@@ -5096,8 +5096,8 @@ Sets the name of the given table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_name</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_table_function_set_name</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
 </span>);
 </code></pre></div></div>
@@ -5114,7 +5114,7 @@ The name of the table function
 
 <br>
 
-### `duckdb_table_function_add_parameter`
+### `DataMiner_table_function_add_parameter`
 
 ---
 Adds a parameter to the table function.
@@ -5122,9 +5122,9 @@ Adds a parameter to the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_add_parameter</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_table_function_add_parameter</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -5140,7 +5140,7 @@ The type of the parameter to add.
 
 <br>
 
-### `duckdb_table_function_add_named_parameter`
+### `DataMiner_table_function_add_named_parameter`
 
 ---
 Adds a named parameter to the table function.
@@ -5148,10 +5148,10 @@ Adds a named parameter to the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_add_named_parameter</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_table_function_add_named_parameter</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>,<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -5170,7 +5170,7 @@ The type of the parameter to add.
 
 <br>
 
-### `duckdb_table_function_set_extra_info`
+### `DataMiner_table_function_set_extra_info`
 
 ---
 Assigns extra information to the table function that can be fetched during binding, etc.
@@ -5178,10 +5178,10 @@ Assigns extra information to the table function that can be fetched during bindi
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_extra_info</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_table_function_set_extra_info</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="kt">void</span> *<span class="nv">extra_info</span>,<span class="nv">
-</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy
+</span>  <span class="nv">DataMiner_delete_callback_t</span> <span class="nv">destroy
 </span>);
 </code></pre></div></div>
 
@@ -5200,7 +5200,7 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
-### `duckdb_table_function_set_bind`
+### `DataMiner_table_function_set_bind`
 
 ---
 Sets the bind function of the table function.
@@ -5208,9 +5208,9 @@ Sets the bind function of the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_bind</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
-</span>  <span class="nv">duckdb_table_function_bind_t</span> <span class="nv">bind
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_table_function_set_bind</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="nv">DataMiner_table_function_bind_t</span> <span class="nv">bind
 </span>);
 </code></pre></div></div>
 
@@ -5226,7 +5226,7 @@ The bind function
 
 <br>
 
-### `duckdb_table_function_set_init`
+### `DataMiner_table_function_set_init`
 
 ---
 Sets the init function of the table function.
@@ -5234,9 +5234,9 @@ Sets the init function of the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_init</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
-</span>  <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_table_function_set_init</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="nv">DataMiner_table_function_init_t</span> <span class="nv">init
 </span>);
 </code></pre></div></div>
 
@@ -5252,7 +5252,7 @@ The init function
 
 <br>
 
-### `duckdb_table_function_set_local_init`
+### `DataMiner_table_function_set_local_init`
 
 ---
 Sets the thread-local init function of the table function.
@@ -5260,9 +5260,9 @@ Sets the thread-local init function of the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_local_init</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
-</span>  <span class="nv">duckdb_table_function_init_t</span> <span class="nv">init
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_table_function_set_local_init</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="nv">DataMiner_table_function_init_t</span> <span class="nv">init
 </span>);
 </code></pre></div></div>
 
@@ -5278,7 +5278,7 @@ The init function
 
 <br>
 
-### `duckdb_table_function_set_function`
+### `DataMiner_table_function_set_function`
 
 ---
 Sets the main function of the table function.
@@ -5286,9 +5286,9 @@ Sets the main function of the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_set_function</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
-</span>  <span class="nv">duckdb_table_function_t</span> <span class="nv">function
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_table_function_set_function</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+</span>  <span class="nv">DataMiner_table_function_t</span> <span class="nv">function
 </span>);
 </code></pre></div></div>
 
@@ -5304,20 +5304,20 @@ The function
 
 <br>
 
-### `duckdb_table_function_supports_projection_pushdown`
+### `DataMiner_table_function_supports_projection_pushdown`
 
 ---
 Sets whether or not the given table function supports projection pushdown.
 
 If this is set to true, the system will provide a list of all required columns in the `init` stage through
-the `duckdb_init_get_column_count` and `duckdb_init_get_column_index` functions.
+the `DataMiner_init_get_column_count` and `DataMiner_init_get_column_index` functions.
 If this is set to false (the default), the system will expect all columns to be projected.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_table_function_supports_projection_pushdown</span>(<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">table_function</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_table_function_supports_projection_pushdown</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">table_function</span>,<span class="nv">
 </span>  <span class="kt">bool</span> <span class="nv">pushdown
 </span>);
 </code></pre></div></div>
@@ -5334,21 +5334,21 @@ True if the table function supports projection pushdown, false otherwise.
 
 <br>
 
-### `duckdb_register_table_function`
+### `DataMiner_register_table_function`
 
 ---
 Register the table function object within the given connection.
 
 The function requires at least a name, a bind function, an init function and a main function.
 
-If the function is incomplete or a function with this name already exists DuckDBError is returned.
+If the function is incomplete or a function with this name already exists DataMinerError is returned.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_register_table_function</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">con</span>,<span class="nv">
-</span>  <span class="kt">duckdb_table_function</span> <span class="nv">function
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_register_table_function</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">con</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_table_function</span> <span class="nv">function
 </span>);
 </code></pre></div></div>
 
@@ -5367,16 +5367,16 @@ Whether or not the registration was successful.
 
 <br>
 
-### `duckdb_bind_get_extra_info`
+### `DataMiner_bind_get_extra_info`
 
 ---
-Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
+Retrieves the extra info of the function as set in `DataMiner_table_function_set_extra_info`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_bind_get_extra_info</span>(<span class="nv">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_bind_get_extra_info</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_bind_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5392,7 +5392,7 @@ The extra info
 
 <br>
 
-### `duckdb_bind_add_result_column`
+### `DataMiner_bind_add_result_column`
 
 ---
 Adds a result column to the output of the table function.
@@ -5400,10 +5400,10 @@ Adds a result column to the output of the table function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_add_result_column</span>(<span class="nv">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_bind_add_result_column</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name</span>,<span class="nv">
-</span>  <span class="kt">duckdb_logical_type</span> <span class="nv">type
+</span>  <span class="kt">DataMiner_logical_type</span> <span class="nv">type
 </span>);
 </code></pre></div></div>
 
@@ -5422,7 +5422,7 @@ The logical type of the column
 
 <br>
 
-### `duckdb_bind_get_parameter_count`
+### `DataMiner_bind_get_parameter_count`
 
 ---
 Retrieves the number of regular (non-named) parameters to the function.
@@ -5430,8 +5430,8 @@ Retrieves the number of regular (non-named) parameters to the function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_bind_get_parameter_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_bind_get_parameter_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_bind_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5447,18 +5447,18 @@ The number of parameters
 
 <br>
 
-### `duckdb_bind_get_parameter`
+### `DataMiner_bind_get_parameter`
 
 ---
 Retrieves the parameter at the given index.
 
-The result must be destroyed with `duckdb_destroy_value`.
+The result must be destroyed with `DataMiner_destroy_value`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_bind_get_parameter</span>(<span class="nv">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_value</span> <span class="nv">DataMiner_bind_get_parameter</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">index
 </span>);
 </code></pre></div></div>
@@ -5474,22 +5474,22 @@ The info object
 The index of the parameter to get
 * `returns`
 
-The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
+The value of the parameter. Must be destroyed with `DataMiner_destroy_value`.
 
 <br>
 
-### `duckdb_bind_get_named_parameter`
+### `DataMiner_bind_get_named_parameter`
 
 ---
 Retrieves a named parameter with the given name.
 
-The result must be destroyed with `duckdb_destroy_value`.
+The result must be destroyed with `DataMiner_destroy_value`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_value</span> <span class="nv">duckdb_bind_get_named_parameter</span>(<span class="nv">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_value</span> <span class="nv">DataMiner_bind_get_named_parameter</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">name
 </span>);
 </code></pre></div></div>
@@ -5505,11 +5505,11 @@ The info object
 The name of the parameter
 * `returns`
 
-The value of the parameter. Must be destroyed with `duckdb_destroy_value`.
+The value of the parameter. Must be destroyed with `DataMiner_destroy_value`.
 
 <br>
 
-### `duckdb_bind_set_bind_data`
+### `DataMiner_bind_set_bind_data`
 
 ---
 Sets the user-provided bind data in the bind object. This object can be retrieved again during execution.
@@ -5517,10 +5517,10 @@ Sets the user-provided bind data in the bind object. This object can be retrieve
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_set_bind_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_bind_set_bind_data</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">void</span> *<span class="nv">bind_data</span>,<span class="nv">
-</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy
+</span>  <span class="nv">DataMiner_delete_callback_t</span> <span class="nv">destroy
 </span>);
 </code></pre></div></div>
 
@@ -5539,7 +5539,7 @@ The callback that will be called to destroy the bind data (if any)
 
 <br>
 
-### `duckdb_bind_set_cardinality`
+### `DataMiner_bind_set_cardinality`
 
 ---
 Sets the cardinality estimate for the table function, used for optimization.
@@ -5547,8 +5547,8 @@ Sets the cardinality estimate for the table function, used for optimization.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_set_cardinality</span>(<span class="nv">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_bind_set_cardinality</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">cardinality</span>,<span class="nv">
 </span>  <span class="kt">bool</span> <span class="nv">is_exact
 </span>);
@@ -5566,7 +5566,7 @@ Whether or not the cardinality estimate is exact, or an approximation
 
 <br>
 
-### `duckdb_bind_set_error`
+### `DataMiner_bind_set_error`
 
 ---
 Report that an error has occurred while calling bind.
@@ -5574,8 +5574,8 @@ Report that an error has occurred while calling bind.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_bind_set_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_bind_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_bind_set_error</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_bind_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
 </span>);
 </code></pre></div></div>
@@ -5592,16 +5592,16 @@ The error message
 
 <br>
 
-### `duckdb_init_get_extra_info`
+### `DataMiner_init_get_extra_info`
 
 ---
-Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
+Retrieves the extra info of the function as set in `DataMiner_table_function_set_extra_info`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_init_get_extra_info</span>(<span class="nv">
-</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_init_get_extra_info</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_init_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5617,10 +5617,10 @@ The extra info
 
 <br>
 
-### `duckdb_init_get_bind_data`
+### `DataMiner_init_get_bind_data`
 
 ---
-Gets the bind data set by `duckdb_bind_set_bind_data` during the bind.
+Gets the bind data set by `DataMiner_bind_set_bind_data` during the bind.
 
 Note that the bind data should be considered as read-only.
 For tracking state, use the init data instead.
@@ -5628,8 +5628,8 @@ For tracking state, use the init data instead.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_init_get_bind_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_init_get_bind_data</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_init_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5645,7 +5645,7 @@ The bind data object
 
 <br>
 
-### `duckdb_init_set_init_data`
+### `DataMiner_init_set_init_data`
 
 ---
 Sets the user-provided init data in the init object. This object can be retrieved again during execution.
@@ -5653,10 +5653,10 @@ Sets the user-provided init data in the init object. This object can be retrieve
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_init_set_init_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_init_set_init_data</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_init_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">void</span> *<span class="nv">init_data</span>,<span class="nv">
-</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">destroy
+</span>  <span class="nv">DataMiner_delete_callback_t</span> <span class="nv">destroy
 </span>);
 </code></pre></div></div>
 
@@ -5675,7 +5675,7 @@ The callback that will be called to destroy the init data (if any)
 
 <br>
 
-### `duckdb_init_get_column_count`
+### `DataMiner_init_get_column_count`
 
 ---
 Returns the number of projected columns.
@@ -5685,8 +5685,8 @@ This function must be used if projection pushdown is enabled to figure out which
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_init_get_column_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_init_get_column_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_init_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5702,7 +5702,7 @@ The number of projected columns.
 
 <br>
 
-### `duckdb_init_get_column_index`
+### `DataMiner_init_get_column_index`
 
 ---
 Returns the column index of the projected column at the specified position.
@@ -5712,8 +5712,8 @@ This function must be used if projection pushdown is enabled to figure out which
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_init_get_column_index</span>(<span class="nv">
-</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_init_get_column_index</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_init_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">column_index
 </span>);
 </code></pre></div></div>
@@ -5726,14 +5726,14 @@ This function must be used if projection pushdown is enabled to figure out which
 The info object
 * `column_index`
 
-The index at which to get the projected column index, from 0..duckdb_init_get_column_count(info)
+The index at which to get the projected column index, from 0..DataMiner_init_get_column_count(info)
 * `returns`
 
 The column index of the projected column.
 
 <br>
 
-### `duckdb_init_set_max_threads`
+### `DataMiner_init_set_max_threads`
 
 ---
 Sets how many threads can process this table function in parallel (default: 1)
@@ -5741,8 +5741,8 @@ Sets how many threads can process this table function in parallel (default: 1)
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_init_set_max_threads</span>(<span class="nv">
-</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_init_set_max_threads</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_init_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">max_threads
 </span>);
 </code></pre></div></div>
@@ -5759,7 +5759,7 @@ The maximum amount of threads that can process this table function
 
 <br>
 
-### `duckdb_init_set_error`
+### `DataMiner_init_set_error`
 
 ---
 Report that an error has occurred while calling init.
@@ -5767,8 +5767,8 @@ Report that an error has occurred while calling init.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_init_set_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_init_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_init_set_error</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_init_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
 </span>);
 </code></pre></div></div>
@@ -5785,16 +5785,16 @@ The error message
 
 <br>
 
-### `duckdb_function_get_extra_info`
+### `DataMiner_function_get_extra_info`
 
 ---
-Retrieves the extra info of the function as set in `duckdb_table_function_set_extra_info`.
+Retrieves the extra info of the function as set in `DataMiner_table_function_set_extra_info`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_extra_info</span>(<span class="nv">
-</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_function_get_extra_info</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_function_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5810,10 +5810,10 @@ The extra info
 
 <br>
 
-### `duckdb_function_get_bind_data`
+### `DataMiner_function_get_bind_data`
 
 ---
-Gets the bind data set by `duckdb_bind_set_bind_data` during the bind.
+Gets the bind data set by `DataMiner_bind_set_bind_data` during the bind.
 
 Note that the bind data should be considered as read-only.
 For tracking state, use the init data instead.
@@ -5821,8 +5821,8 @@ For tracking state, use the init data instead.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_bind_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_function_get_bind_data</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_function_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5838,16 +5838,16 @@ The bind data object
 
 <br>
 
-### `duckdb_function_get_init_data`
+### `DataMiner_function_get_init_data`
 
 ---
-Gets the init data set by `duckdb_init_set_init_data` during the init.
+Gets the init data set by `DataMiner_init_set_init_data` during the init.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_init_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_function_get_init_data</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_function_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5863,16 +5863,16 @@ The init data object
 
 <br>
 
-### `duckdb_function_get_local_init_data`
+### `DataMiner_function_get_local_init_data`
 
 ---
-Gets the thread-local init data set by `duckdb_init_set_init_data` during the local_init.
+Gets the thread-local init data set by `DataMiner_init_set_init_data` during the local_init.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">duckdb_function_get_local_init_data</span>(<span class="nv">
-</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> *<span class="nv">DataMiner_function_get_local_init_data</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_function_info</span> <span class="nv">info
 </span>);
 </code></pre></div></div>
 
@@ -5888,7 +5888,7 @@ The init data object
 
 <br>
 
-### `duckdb_function_set_error`
+### `DataMiner_function_set_error`
 
 ---
 Report that an error has occurred while executing the function.
@@ -5896,8 +5896,8 @@ Report that an error has occurred while executing the function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_function_set_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_function_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_function_set_error</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_function_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
 </span>);
 </code></pre></div></div>
@@ -5914,7 +5914,7 @@ The error message
 
 <br>
 
-### `duckdb_add_replacement_scan`
+### `DataMiner_add_replacement_scan`
 
 ---
 Add a replacement scan definition to the specified database.
@@ -5922,11 +5922,11 @@ Add a replacement scan definition to the specified database.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_add_replacement_scan</span>(<span class="nv">
-</span>  <span class="kt">duckdb_database</span> <span class="nv">db</span>,<span class="nv">
-</span>  <span class="nv">duckdb_replacement_callback_t</span> <span class="nv">replacement</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_add_replacement_scan</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_database</span> <span class="nv">db</span>,<span class="nv">
+</span>  <span class="nv">DataMiner_replacement_callback_t</span> <span class="nv">replacement</span>,<span class="nv">
 </span>  <span class="kt">void</span> *<span class="nv">extra_data</span>,<span class="nv">
-</span>  <span class="nv">duckdb_delete_callback_t</span> <span class="nv">delete_callback
+</span>  <span class="nv">DataMiner_delete_callback_t</span> <span class="nv">delete_callback
 </span>);
 </code></pre></div></div>
 
@@ -5948,7 +5948,7 @@ The delete callback to call on the extra data, if any
 
 <br>
 
-### `duckdb_replacement_scan_set_function_name`
+### `DataMiner_replacement_scan_set_function_name`
 
 ---
 Sets the replacement function name. If this function is called in the replacement callback,
@@ -5957,8 +5957,8 @@ the replacement scan is performed. If it is not called, the replacement callback
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_set_function_name</span>(<span class="nv">
-</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_replacement_scan_set_function_name</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">function_name
 </span>);
 </code></pre></div></div>
@@ -5975,7 +5975,7 @@ The function name to substitute.
 
 <br>
 
-### `duckdb_replacement_scan_add_parameter`
+### `DataMiner_replacement_scan_add_parameter`
 
 ---
 Adds a parameter to the replacement scan function.
@@ -5983,9 +5983,9 @@ Adds a parameter to the replacement scan function.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_add_parameter</span>(<span class="nv">
-</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
-</span>  <span class="kt">duckdb_value</span> <span class="nv">parameter
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_replacement_scan_add_parameter</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_value</span> <span class="nv">parameter
 </span>);
 </code></pre></div></div>
 
@@ -6001,7 +6001,7 @@ The parameter to add.
 
 <br>
 
-### `duckdb_replacement_scan_set_error`
+### `DataMiner_replacement_scan_set_error`
 
 ---
 Report that an error has occurred while executing the replacement scan.
@@ -6009,8 +6009,8 @@ Report that an error has occurred while executing the replacement scan.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_replacement_scan_set_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_replacement_scan_set_error</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_replacement_scan_info</span> <span class="nv">info</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">error
 </span>);
 </code></pre></div></div>
@@ -6027,21 +6027,21 @@ The error message
 
 <br>
 
-### `duckdb_appender_create`
+### `DataMiner_appender_create`
 
 ---
 Creates an appender object.
 
-Note that the object must be destroyed with `duckdb_appender_destroy`.
+Note that the object must be destroyed with `DataMiner_appender_destroy`.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_create</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_appender_create</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">schema</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table</span>,<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> *<span class="nv">out_appender
+</span>  <span class="kt">DataMiner_appender</span> *<span class="nv">out_appender
 </span>);
 </code></pre></div></div>
 
@@ -6062,11 +6062,11 @@ The table name to append to.
 The resulting appender object.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_appender_column_count`
+### `DataMiner_appender_column_count`
 
 ---
 Returns the number of columns in the table that belongs to the appender.
@@ -6076,8 +6076,8 @@ Returns the number of columns in the table that belongs to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_appender_column_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_appender_column_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -6090,12 +6090,12 @@ The number of columns in the table.
 
 <br>
 
-### `duckdb_appender_column_type`
+### `DataMiner_appender_column_type`
 
 ---
 Returns the type of the column at the specified index.
 
-Note: The resulting type should be destroyed with `duckdb_destroy_logical_type`.
+Note: The resulting type should be destroyed with `DataMiner_destroy_logical_type`.
 
 * appender The appender to get the column type from.
 * col_idx The index of the column to get the type of.
@@ -6103,8 +6103,8 @@ Note: The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_logical_type</span> <span class="nv">duckdb_appender_column_type</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_logical_type</span> <span class="nv">DataMiner_appender_column_type</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">col_idx
 </span>);
 </code></pre></div></div>
@@ -6114,23 +6114,23 @@ Note: The resulting type should be destroyed with `duckdb_destroy_logical_type`.
 ---
 * `returns`
 
-The duckdb_logical_type of the column.
+The DataMiner_logical_type of the column.
 
 <br>
 
-### `duckdb_appender_error`
+### `DataMiner_appender_error`
 
 ---
 Returns the error message associated with the given appender.
 If the appender has no error message, this returns `nullptr` instead.
 
-The error message should not be freed. It will be de-allocated when `duckdb_appender_destroy` is called.
+The error message should not be freed. It will be de-allocated when `DataMiner_appender_destroy` is called.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_appender_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">DataMiner_appender_error</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -6146,19 +6146,19 @@ The error message, or `nullptr` if there is none.
 
 <br>
 
-### `duckdb_appender_flush`
+### `DataMiner_appender_flush`
 
 ---
 Flush the appender to the table, forcing the cache of the appender to be cleared. If flushing the data triggers a
-constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
-It is not possible to append more values. Call duckdb_appender_error to obtain the error message followed by
-duckdb_appender_destroy to destroy the invalidated appender.
+constraint violation or any other error, then all data is invalidated, and this function returns DataMinerError.
+It is not possible to append more values. Call DataMiner_appender_error to obtain the error message followed by
+DataMiner_appender_destroy to destroy the invalidated appender.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_flush</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_appender_flush</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -6170,23 +6170,23 @@ duckdb_appender_destroy to destroy the invalidated appender.
 The appender to flush.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_appender_close`
+### `DataMiner_appender_close`
 
 ---
 Closes the appender by flushing all intermediate states and closing it for further appends. If flushing the data
-triggers a constraint violation or any other error, then all data is invalidated, and this function returns DuckDBError.
-Call duckdb_appender_error to obtain the error message followed by duckdb_appender_destroy to destroy the invalidated
+triggers a constraint violation or any other error, then all data is invalidated, and this function returns DataMinerError.
+Call DataMiner_appender_error to obtain the error message followed by DataMiner_appender_destroy to destroy the invalidated
 appender.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_close</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_appender_close</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -6198,24 +6198,24 @@ appender.
 The appender to flush and close.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_appender_destroy`
+### `DataMiner_appender_destroy`
 
 ---
 Closes the appender by flushing all intermediate states to the table and destroying it. By destroying it, this function
 de-allocates all memory associated with the appender. If flushing the data triggers a constraint violation,
-then all data is invalidated, and this function returns DuckDBError. Due to the destruction of the appender, it is no
-longer possible to obtain the specific error message with duckdb_appender_error. Therefore, call duckdb_appender_close
+then all data is invalidated, and this function returns DataMinerError. Due to the destruction of the appender, it is no
+longer possible to obtain the specific error message with DataMiner_appender_error. Therefore, call DataMiner_appender_close
 before destroying the appender, if you need insights into the specific error.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_destroy</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> *<span class="nv">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_appender_destroy</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> *<span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -6227,25 +6227,25 @@ before destroying the appender, if you need insights into the specific error.
 The appender to flush, close and destroy.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_appender_begin_row`
+### `DataMiner_appender_begin_row`
 
 ---
-A nop function, provided for backwards compatibility reasons. Does nothing. Only `duckdb_appender_end_row` is required.
+A nop function, provided for backwards compatibility reasons. Does nothing. Only `DataMiner_appender_end_row` is required.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_begin_row</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_appender_begin_row</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_appender_end_row`
+### `DataMiner_appender_end_row`
 
 ---
 Finish the current row of appends. After end_row is called, the next row can be appended.
@@ -6253,8 +6253,8 @@ Finish the current row of appends. After end_row is called, the next row can be 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_appender_end_row</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_appender_end_row</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 
@@ -6266,11 +6266,11 @@ Finish the current row of appends. After end_row is called, the next row can be 
 The appender.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_append_bool`
+### `DataMiner_append_bool`
 
 ---
 Append a bool value to the appender.
@@ -6278,14 +6278,14 @@ Append a bool value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_bool</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_bool</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">bool</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_int8`
+### `DataMiner_append_int8`
 
 ---
 Append an int8_t value to the appender.
@@ -6293,14 +6293,14 @@ Append an int8_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_int8</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">int8_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_int16`
+### `DataMiner_append_int16`
 
 ---
 Append an int16_t value to the appender.
@@ -6308,14 +6308,14 @@ Append an int16_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_int16</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">int16_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_int32`
+### `DataMiner_append_int32`
 
 ---
 Append an int32_t value to the appender.
@@ -6323,14 +6323,14 @@ Append an int32_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_int32</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">int32_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_int64`
+### `DataMiner_append_int64`
 
 ---
 Append an int64_t value to the appender.
@@ -6338,29 +6338,29 @@ Append an int64_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_int64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_int64</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">int64_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_hugeint`
+### `DataMiner_append_hugeint`
 
 ---
-Append a duckdb_hugeint value to the appender.
+Append a DataMiner_hugeint value to the appender.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_hugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_hugeint</span> <span class="nv">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_hugeint</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_hugeint</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_uint8`
+### `DataMiner_append_uint8`
 
 ---
 Append a uint8_t value to the appender.
@@ -6368,14 +6368,14 @@ Append a uint8_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint8</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_uint8</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">uint8_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_uint16`
+### `DataMiner_append_uint16`
 
 ---
 Append a uint16_t value to the appender.
@@ -6383,14 +6383,14 @@ Append a uint16_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint16</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_uint16</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">uint16_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_uint32`
+### `DataMiner_append_uint32`
 
 ---
 Append a uint32_t value to the appender.
@@ -6398,14 +6398,14 @@ Append a uint32_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint32</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_uint32</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">uint32_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_uint64`
+### `DataMiner_append_uint64`
 
 ---
 Append a uint64_t value to the appender.
@@ -6413,29 +6413,29 @@ Append a uint64_t value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uint64</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_uint64</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">uint64_t</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_uhugeint`
+### `DataMiner_append_uhugeint`
 
 ---
-Append a duckdb_uhugeint value to the appender.
+Append a DataMiner_uhugeint value to the appender.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_uhugeint</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_uhugeint</span> <span class="nv">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_uhugeint</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_uhugeint</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_float`
+### `DataMiner_append_float`
 
 ---
 Append a float value to the appender.
@@ -6443,14 +6443,14 @@ Append a float value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_float</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_float</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">float</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_double`
+### `DataMiner_append_double`
 
 ---
 Append a double value to the appender.
@@ -6458,74 +6458,74 @@ Append a double value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_double</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_double</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">double</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_date`
+### `DataMiner_append_date`
 
 ---
-Append a duckdb_date value to the appender.
+Append a DataMiner_date value to the appender.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_date</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_date</span> <span class="nv">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_date</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_date</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_time`
+### `DataMiner_append_time`
 
 ---
-Append a duckdb_time value to the appender.
+Append a DataMiner_time value to the appender.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_time</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_time</span> <span class="nv">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_time</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_time</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_timestamp`
+### `DataMiner_append_timestamp`
 
 ---
-Append a duckdb_timestamp value to the appender.
+Append a DataMiner_timestamp value to the appender.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_timestamp</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_timestamp</span> <span class="nv">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_timestamp</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_timestamp</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_interval`
+### `DataMiner_append_interval`
 
 ---
-Append a duckdb_interval value to the appender.
+Append a DataMiner_interval value to the appender.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_interval</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_interval</span> <span class="nv">value
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_interval</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_interval</span> <span class="nv">value
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_varchar`
+### `DataMiner_append_varchar`
 
 ---
 Append a varchar value to the appender.
@@ -6533,14 +6533,14 @@ Append a varchar value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_varchar</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_varchar</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_varchar_length`
+### `DataMiner_append_varchar_length`
 
 ---
 Append a varchar value to the appender.
@@ -6548,15 +6548,15 @@ Append a varchar value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_varchar_length</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_varchar_length</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">val</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_blob`
+### `DataMiner_append_blob`
 
 ---
 Append a blob value to the appender.
@@ -6564,15 +6564,15 @@ Append a blob value to the appender.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_blob</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_blob</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">void</span> *<span class="nv">data</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">length
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_null`
+### `DataMiner_append_null`
 
 ---
 Append a NULL value to the appender (of any type).
@@ -6580,27 +6580,27 @@ Append a NULL value to the appender (of any type).
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_null</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_null</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender
 </span>);
 </code></pre></div></div>
 <br>
 
-### `duckdb_append_data_chunk`
+### `DataMiner_append_data_chunk`
 
 ---
 Appends a pre-filled data chunk to the specified appender.
 
 The types of the data chunk must exactly match the types of the table, no casting is performed.
-If the types do not match or the appender is in an invalid state, DuckDBError is returned.
-If the append is successful, DuckDBSuccess is returned.
+If the types do not match or the appender is in an invalid state, DataMinerError is returned.
+If the append is successful, DataMinerSuccess is returned.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_append_data_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_appender</span> <span class="nv">appender</span>,<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_append_data_chunk</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_appender</span> <span class="nv">appender</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk
 </span>);
 </code></pre></div></div>
 
@@ -6619,25 +6619,25 @@ The return state.
 
 <br>
 
-### `duckdb_query_arrow`
+### `DataMiner_query_arrow`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
 Executes a SQL query within a connection and stores the full (materialized) result in an arrow structure.
-If the query fails to execute, DuckDBError is returned and the error message can be retrieved by calling
-`duckdb_query_arrow_error`.
+If the query fails to execute, DataMinerError is returned and the error message can be retrieved by calling
+`DataMiner_query_arrow_error`.
 
-Note that after running `duckdb_query_arrow`, `duckdb_destroy_arrow` must be called on the result object even if the
+Note that after running `DataMiner_query_arrow`, `DataMiner_destroy_arrow` must be called on the result object even if the
 query fails, otherwise the error stored within the result will not be freed correctly.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query_arrow</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_query_arrow</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">query</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> *<span class="nv">out_result
+</span>  <span class="kt">DataMiner_arrow</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -6655,11 +6655,11 @@ The SQL query to run.
 The query result.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_query_arrow_schema`
+### `DataMiner_query_arrow_schema`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6670,9 +6670,9 @@ ArrowSchema object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query_arrow_schema</span>(<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_schema</span> *<span class="nv">out_schema
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_query_arrow_schema</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_arrow</span> <span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_arrow_schema</span> *<span class="nv">out_schema
 </span>);
 </code></pre></div></div>
 
@@ -6687,11 +6687,11 @@ The result to fetch the schema from.
 The output schema.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_prepared_arrow_schema`
+### `DataMiner_prepared_arrow_schema`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6702,9 +6702,9 @@ ArrowSchema object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_prepared_arrow_schema</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_schema</span> *<span class="nv">out_schema
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_prepared_arrow_schema</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_arrow_schema</span> *<span class="nv">out_schema
 </span>);
 </code></pre></div></div>
 
@@ -6719,11 +6719,11 @@ The prepared statement to fetch the schema from.
 The output schema.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_result_arrow_array`
+### `DataMiner_result_arrow_array`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6734,10 +6734,10 @@ ArrowArray object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_result_arrow_array</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> <span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">duckdb_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_array</span> *<span class="nv">out_array
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_result_arrow_array</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> <span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_data_chunk</span> <span class="nv">chunk</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_arrow_array</span> *<span class="nv">out_array
 </span>);
 </code></pre></div></div>
 
@@ -6756,7 +6756,7 @@ The output array.
 
 <br>
 
-### `duckdb_query_arrow_array`
+### `DataMiner_query_arrow_array`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6770,9 +6770,9 @@ So consume the out_array before calling this function again.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_query_arrow_array</span>(<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_array</span> *<span class="nv">out_array
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_query_arrow_array</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_arrow</span> <span class="nv">result</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_arrow_array</span> *<span class="nv">out_array
 </span>);
 </code></pre></div></div>
 
@@ -6787,11 +6787,11 @@ The result to fetch the array from.
 The output array.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_arrow_column_count`
+### `DataMiner_arrow_column_count`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6801,8 +6801,8 @@ Returns the number of columns present in the arrow result object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_arrow_column_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_arrow_column_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_arrow</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6818,7 +6818,7 @@ The number of columns present in the result object.
 
 <br>
 
-### `duckdb_arrow_row_count`
+### `DataMiner_arrow_row_count`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6828,8 +6828,8 @@ Returns the number of rows present in the arrow result object.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_arrow_row_count</span>(<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_arrow_row_count</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_arrow</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6845,7 +6845,7 @@ The number of rows present in the result object.
 
 <br>
 
-### `duckdb_arrow_rows_changed`
+### `DataMiner_arrow_rows_changed`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6856,8 +6856,8 @@ INSERT/UPDATE/DELETE queries. For other queries the rows_changed will be 0.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_arrow_rows_changed</span>(<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_arrow_rows_changed</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_arrow</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6873,21 +6873,21 @@ The number of rows changed.
 
 <br>
 
-### `duckdb_query_arrow_error`
+### `DataMiner_query_arrow_error`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
-Returns the error message contained within the result. The error is only set if `duckdb_query_arrow` returns
-`DuckDBError`.
+Returns the error message contained within the result. The error is only set if `DataMiner_query_arrow` returns
+`DataMinerError`.
 
-The error message should not be freed. It will be de-allocated when `duckdb_destroy_arrow` is called.
+The error message should not be freed. It will be de-allocated when `DataMiner_destroy_arrow` is called.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">duckdb_query_arrow_error</span>(<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="nv">DataMiner_query_arrow_error</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_arrow</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6903,7 +6903,7 @@ The error of the result.
 
 <br>
 
-### `duckdb_destroy_arrow`
+### `DataMiner_destroy_arrow`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6913,8 +6913,8 @@ Closes the result and de-allocates all memory allocated for the arrow result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_arrow</span>(<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> *<span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_arrow</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_arrow</span> *<span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -6927,7 +6927,7 @@ The result to destroy.
 
 <br>
 
-### `duckdb_destroy_arrow_stream`
+### `DataMiner_destroy_arrow_stream`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6937,8 +6937,8 @@ Releases the arrow array stream and de-allocates its memory.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_arrow_stream</span>(<span class="nv">
-</span>  <span class="nv">duckdb_arrow_stream</span> *<span class="nv">stream_p
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_arrow_stream</span>(<span class="nv">
+</span>  <span class="nv">DataMiner_arrow_stream</span> *<span class="nv">stream_p
 </span>);
 </code></pre></div></div>
 
@@ -6951,20 +6951,20 @@ The arrow array stream to destroy.
 
 <br>
 
-### `duckdb_execute_prepared_arrow`
+### `DataMiner_execute_prepared_arrow`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
 Executes the prepared statement with the given bound parameters, and returns an arrow query result.
-Note that after running `duckdb_execute_prepared_arrow`, `duckdb_destroy_arrow` must be called on the result object.
+Note that after running `DataMiner_execute_prepared_arrow`, `DataMiner_destroy_arrow` must be called on the result object.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_execute_prepared_arrow</span>(<span class="nv">
-</span>  <span class="kt">duckdb_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow</span> *<span class="nv">out_result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_execute_prepared_arrow</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_prepared_statement</span> <span class="nv">prepared_statement</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_arrow</span> *<span class="nv">out_result
 </span>);
 </code></pre></div></div>
 
@@ -6979,11 +6979,11 @@ The prepared statement to execute.
 The query result.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_arrow_scan`
+### `DataMiner_arrow_scan`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
@@ -6993,10 +6993,10 @@ Scans the Arrow stream and creates a view with the given name.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_scan</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_arrow_scan</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
-</span>  <span class="nv">duckdb_arrow_stream</span> <span class="nv">arrow
+</span>  <span class="nv">DataMiner_arrow_stream</span> <span class="nv">arrow
 </span>);
 </code></pre></div></div>
 
@@ -7014,27 +7014,27 @@ Name of the temporary view to create.
 Arrow stream wrapper.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_arrow_array_scan`
+### `DataMiner_arrow_array_scan`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
 Scans the Arrow array and creates a view with the given name.
-Note that after running `duckdb_arrow_array_scan`, `duckdb_destroy_arrow_stream` must be called on the out stream.
+Note that after running `DataMiner_arrow_array_scan`, `DataMiner_destroy_arrow_stream` must be called on the out stream.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nv">duckdb_arrow_array_scan</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">connection</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nv">DataMiner_arrow_array_scan</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">connection</span>,<span class="nv">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="nv">table_name</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_schema</span> <span class="nv">arrow_schema</span>,<span class="nv">
-</span>  <span class="kt">duckdb_arrow_array</span> <span class="nv">arrow_array</span>,<span class="nv">
-</span>  <span class="nv">duckdb_arrow_stream</span> *<span class="nv">out_stream
+</span>  <span class="kt">DataMiner_arrow_schema</span> <span class="nv">arrow_schema</span>,<span class="nv">
+</span>  <span class="kt">DataMiner_arrow_array</span> <span class="nv">arrow_array</span>,<span class="nv">
+</span>  <span class="nv">DataMiner_arrow_stream</span> *<span class="nv">out_stream
 </span>);
 </code></pre></div></div>
 
@@ -7058,11 +7058,11 @@ Arrow array wrapper.
 Output array stream that wraps around the passed schema, for releasing/deleting once done.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### `duckdb_execute_tasks`
+### `DataMiner_execute_tasks`
 
 ---
 Execute DataMiner tasks on this thread.
@@ -7072,8 +7072,8 @@ Will return after `max_tasks` have been executed, or if there are no more tasks 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_execute_tasks</span>(<span class="nv">
-</span>  <span class="kt">duckdb_database</span> <span class="nv">database</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_execute_tasks</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_database</span> <span class="nv">database</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">max_tasks
 </span>);
 </code></pre></div></div>
@@ -7090,19 +7090,19 @@ The maximum amount of tasks to execute
 
 <br>
 
-### `duckdb_create_task_state`
+### `DataMiner_create_task_state`
 
 ---
-Creates a task state that can be used with duckdb_execute_tasks_state to execute tasks until
-`duckdb_finish_execution` is called on the state.
+Creates a task state that can be used with DataMiner_execute_tasks_state to execute tasks until
+`DataMiner_finish_execution` is called on the state.
 
-`duckdb_destroy_state` must be called on the result.
+`DataMiner_destroy_state` must be called on the result.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_task_state</span> <span class="nv">duckdb_create_task_state</span>(<span class="nv">
-</span>  <span class="kt">duckdb_database</span> <span class="nv">database
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_task_state</span> <span class="nv">DataMiner_create_task_state</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_database</span> <span class="nv">database
 </span>);
 </code></pre></div></div>
 
@@ -7114,23 +7114,23 @@ Creates a task state that can be used with duckdb_execute_tasks_state to execute
 The database object to create the task state for
 * `returns`
 
-The task state that can be used with duckdb_execute_tasks_state.
+The task state that can be used with DataMiner_execute_tasks_state.
 
 <br>
 
-### `duckdb_execute_tasks_state`
+### `DataMiner_execute_tasks_state`
 
 ---
 Execute DataMiner tasks on this thread.
 
-The thread will keep on executing tasks forever, until duckdb_finish_execution is called on the state.
-Multiple threads can share the same duckdb_task_state.
+The thread will keep on executing tasks forever, until DataMiner_finish_execution is called on the state.
+Multiple threads can share the same DataMiner_task_state.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_execute_tasks_state</span>(<span class="nv">
-</span>  <span class="kt">duckdb_task_state</span> <span class="nv">state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_execute_tasks_state</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_task_state</span> <span class="nv">state
 </span>);
 </code></pre></div></div>
 
@@ -7143,21 +7143,21 @@ The task state of the executor
 
 <br>
 
-### `duckdb_execute_n_tasks_state`
+### `DataMiner_execute_n_tasks_state`
 
 ---
 Execute DataMiner tasks on this thread.
 
-The thread will keep on executing tasks until either duckdb_finish_execution is called on the state,
+The thread will keep on executing tasks until either DataMiner_finish_execution is called on the state,
 max_tasks tasks have been executed or there are no more tasks to be executed.
 
-Multiple threads can share the same duckdb_task_state.
+Multiple threads can share the same DataMiner_task_state.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">duckdb_execute_n_tasks_state</span>(<span class="nv">
-</span>  <span class="kt">duckdb_task_state</span> <span class="nv">state</span>,<span class="nv">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">idx_t</span> <span class="nv">DataMiner_execute_n_tasks_state</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_task_state</span> <span class="nv">state</span>,<span class="nv">
 </span>  <span class="kt">idx_t</span> <span class="nv">max_tasks
 </span>);
 </code></pre></div></div>
@@ -7177,7 +7177,7 @@ The amount of tasks that have actually been executed
 
 <br>
 
-### `duckdb_finish_execution`
+### `DataMiner_finish_execution`
 
 ---
 Finish execution on a specific task.
@@ -7185,8 +7185,8 @@ Finish execution on a specific task.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_finish_execution</span>(<span class="nv">
-</span>  <span class="kt">duckdb_task_state</span> <span class="nv">state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_finish_execution</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_task_state</span> <span class="nv">state
 </span>);
 </code></pre></div></div>
 
@@ -7199,16 +7199,16 @@ The task state to finish execution
 
 <br>
 
-### `duckdb_task_state_is_finished`
+### `DataMiner_task_state_is_finished`
 
 ---
-Check if the provided duckdb_task_state has finished execution
+Check if the provided DataMiner_task_state has finished execution
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_task_state_is_finished</span>(<span class="nv">
-</span>  <span class="kt">duckdb_task_state</span> <span class="nv">state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_task_state_is_finished</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_task_state</span> <span class="nv">state
 </span>);
 </code></pre></div></div>
 
@@ -7220,23 +7220,23 @@ Check if the provided duckdb_task_state has finished execution
 The task state to inspect
 * `returns`
 
-Whether or not duckdb_finish_execution has been called on the task state
+Whether or not DataMiner_finish_execution has been called on the task state
 
 <br>
 
-### `duckdb_destroy_task_state`
+### `DataMiner_destroy_task_state`
 
 ---
-Destroys the task state returned from duckdb_create_task_state.
+Destroys the task state returned from DataMiner_create_task_state.
 
-Note that this should not be called while there is an active duckdb_execute_tasks_state running
+Note that this should not be called while there is an active DataMiner_execute_tasks_state running
 on the task state.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">duckdb_destroy_task_state</span>(<span class="nv">
-</span>  <span class="kt">duckdb_task_state</span> <span class="nv">state
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nv">DataMiner_destroy_task_state</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_task_state</span> <span class="nv">state
 </span>);
 </code></pre></div></div>
 
@@ -7249,7 +7249,7 @@ The task state to clean up
 
 <br>
 
-### `duckdb_execution_is_finished`
+### `DataMiner_execution_is_finished`
 
 ---
 Returns true if the execution of the current query is finished.
@@ -7257,8 +7257,8 @@ Returns true if the execution of the current query is finished.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">duckdb_execution_is_finished</span>(<span class="nv">
-</span>  <span class="kt">duckdb_connection</span> <span class="nv">con
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">bool</span> <span class="nv">DataMiner_execution_is_finished</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_connection</span> <span class="nv">con
 </span>);
 </code></pre></div></div>
 
@@ -7271,17 +7271,17 @@ The connection on which to check
 
 <br>
 
-### `duckdb_stream_fetch_chunk`
+### `DataMiner_stream_fetch_chunk`
 
 ---
 **DEPRECATION NOTICE**: This method is scheduled for removal in a future release.
 
-Fetches a data chunk from the (streaming) duckdb_result. This function should be called repeatedly until the result is
+Fetches a data chunk from the (streaming) DataMiner_result. This function should be called repeatedly until the result is
 exhausted.
 
-The result must be destroyed with `duckdb_destroy_data_chunk`.
+The result must be destroyed with `DataMiner_destroy_data_chunk`.
 
-This function can only be used on duckdb_results created with 'duckdb_pending_prepared_streaming'
+This function can only be used on DataMiner_results created with 'DataMiner_pending_prepared_streaming'
 
 If this function is used, none of the other result functions can be used and vice versa (i.e., this function cannot be
 mixed with the legacy result functions or the materialized result functions).
@@ -7291,8 +7291,8 @@ It is not known beforehand how many chunks will be returned by this result.
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_stream_fetch_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_data_chunk</span> <span class="nv">DataMiner_stream_fetch_chunk</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 
@@ -7308,20 +7308,20 @@ The resulting data chunk. Returns `NULL` if the result has an error.
 
 <br>
 
-### `duckdb_fetch_chunk`
+### `DataMiner_fetch_chunk`
 
 ---
-Fetches a data chunk from a duckdb_result. This function should be called repeatedly until the result is exhausted.
+Fetches a data chunk from a DataMiner_result. This function should be called repeatedly until the result is exhausted.
 
-The result must be destroyed with `duckdb_destroy_data_chunk`.
+The result must be destroyed with `DataMiner_destroy_data_chunk`.
 
 It is not known beforehand how many chunks will be returned by this result.
 
 #### Syntax
 
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_data_chunk</span> <span class="nv">duckdb_fetch_chunk</span>(<span class="nv">
-</span>  <span class="kt">duckdb_result</span> <span class="nv">result
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_data_chunk</span> <span class="nv">DataMiner_fetch_chunk</span>(<span class="nv">
+</span>  <span class="kt">DataMiner_result</span> <span class="nv">result
 </span>);
 </code></pre></div></div>
 

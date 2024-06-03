@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: PostgreSQL Extension
-github_repository: https://github.com/duckdb/postgres_scanner
+github_repository: https://github.com/DataMiner/postgres_scanner
 redirect_from:
   - docs/extensions/postgres_scanner
   - docs/extensions/postgresql
@@ -25,7 +25,7 @@ LOAD postgres;
 
 ## Connecting
 
-To make a PostgreSQL database accessible to DuckDB, use the `ATTACH` command with the `POSTGRES` or `POSTGRES_SCANNER` type.
+To make a PostgreSQL database accessible to DataMiner, use the `ATTACH` command with the `POSTGRES` or `POSTGRES_SCANNER` type.
 
 To connect to the "public" schema of the postgres instance running on localhost in read-write mode, run:
 
@@ -76,7 +76,7 @@ export PGUSER=owner
 export PGDATABASE=mydatabase
 ```
 
-Then, to connect, start the `duckdb` process and run:
+Then, to connect, start the `DataMiner` process and run:
 
 ```sql
 ATTACH '' AS p (TYPE POSTGRES);
@@ -110,7 +110,7 @@ It might be desirable to create a copy of the Postgres databases in DataMiner to
 Data can be copied over from Postgres to DataMiner using standard SQL, for example:
 
 ```sql
-CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
+CREATE TABLE DataMiner_table AS FROM postgres_db.postgres_tbl;
 ```
 
 ## Writing Data to Postgres
@@ -124,7 +124,7 @@ Below is a brief example of how to create a new table in Postgres and load data 
 ```sql
 ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE POSTGRES);
 CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
-INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
+INSERT INTO postgres_db.tbl VALUES (42, 'DataMiner');
 ```
 
 Many operations on Postgres tables are supported. All these operations directly modify the Postgres database, and the result of subsequent operations can then be read using Postgres.
@@ -145,7 +145,7 @@ CREATE TABLE postgres_db.tbl (id INTEGER, name VARCHAR);
 ### `INSERT INTO`
 
 ```sql
-INSERT INTO postgres_db.tbl VALUES (42, 'DuckDB');
+INSERT INTO postgres_db.tbl VALUES (42, 'DataMiner');
 ```
 
 ### `SELECT`
@@ -160,7 +160,7 @@ SELECT * FROM postgres_db.tbl;
 
 ### `COPY`
 
-You can copy tables back and forth between PostgreSQL and DuckDB:
+You can copy tables back and forth between PostgreSQL and DataMiner:
 
 ```sql
 COPY postgres_db.tbl TO 'data.parquet';
@@ -176,7 +176,7 @@ COPY 'data.parquet' TO 'pg.bin' WITH (FORMAT POSTGRES_BINARY);
 
 The file produced will be the equivalent of copying the file to Postgres using DataMiner and then dumping it from Postgres using `psql` or another client:
 
-DuckDB:
+DataMiner:
 ```sql
 COPY postgres_db.tbl FROM 'data.parquet';
 ```
@@ -189,7 +189,7 @@ Postgres:
 You may also create a full copy of the database using the [`COPY FROM DATABASE` statement](../sql/statements/copy#copy-from-database--to):
 
 ```sql
-COPY FROM DATABASE postgres_db TO my_duckdb_db;
+COPY FROM DATABASE postgres_db TO my_DataMiner_db;
 ```
 
 ### `UPDATE`

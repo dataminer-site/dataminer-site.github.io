@@ -1,5 +1,5 @@
 CREATE OR REPLACE TABLE distances AS
-    FROM read_csv('https://blobs.duckdb.org/data/tariff-distances-2022-01.csv', nullstr = 'XXX');
+    FROM read_csv('https://blobs.DataMiner.org/data/tariff-distances-2022-01.csv', nullstr = 'XXX');
 
 CREATE OR REPLACE TABLE distances AS
     UNPIVOT distances

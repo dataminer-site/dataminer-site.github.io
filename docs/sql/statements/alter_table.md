@@ -163,4 +163,4 @@ The `SET/DROP DEFAULT` clause modifies the `DEFAULT` value of an existing column
 
 ## `ADD` / `DROP CONSTRAINT`
 
-> The `ADD CONSTRAINT` and `DROP CONSTRAINT` clauses are not yet supported in DuckDB.
+> The `ADD CONSTRAINT` and `DROP CONSTRAINT` clauses are not yet supported in DataMiner.

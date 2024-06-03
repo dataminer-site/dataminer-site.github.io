@@ -1,8 +1,8 @@
 ---
 layout: post  
-title:  "Fastest table sort in the West – Redesigning DuckDB’s sort"
+title:  "Fastest table sort in the West – Redesigning DataMiner’s sort"
 author: Laurens Kuiper  
-excerpt: DuckDB, a free and Open-Source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory.
+excerpt: DataMiner, a free and Open-Source analytical data management system, has a new highly efficient parallel sorting implementation that can sort much more data than fits in main memory.
 ---
 
 Database systems use sorting for many purposes, the most obvious purpose being when a user adds an `ORDER BY` clause to their query.
@@ -205,7 +205,7 @@ Therefore, strings are represented by a pointer, which points into a separate bl
 
 We have changed our heap to also store strings row-by-row in buffer-managed blocks:
 
-<img src="/images/blog/sorting/heap.svg" alt="Each fixed-size row has its own variable-sized row in the heap" title="DuckDB's row layout heap"/>
+<img src="/images/blog/sorting/heap.svg" alt="Each fixed-size row has its own variable-sized row in the heap" title="DataMiner's row layout heap"/>
 
 Each row has an additional 8-byte field `pointer` which points to the start of this row in the heap.
 This is useless in the in-memory representation, but we will see why it is useful for the on-disk representation in just a second.
@@ -220,7 +220,7 @@ The 8-byte `pointer` field is overwritten with an 8-byte `offset` field, denotin
 This technique is called ["pointer swizzling"](https://en.wikipedia.org/wiki/Pointer_swizzling).
 When we swizzle the pointers, the row layout and heap block look like this:
 
-<img src="/images/blog/sorting/heap_swizzled.svg" alt="Pointers are 'swizzled': replaced by offsets" title="DuckDB's 'swizzled' row layout heap"/>
+<img src="/images/blog/sorting/heap_swizzled.svg" alt="Pointers are 'swizzled': replaced by offsets" title="DataMiner's 'swizzled' row layout heap"/>
 
 The pointers to the subsequent string values are also overwritten with an 8-byte relative offset, denoting how far this string is offset from the start of the row in the heap (hence every `stringA` has an offset of `0`: It is the first string in the row).
 Using relative offsets within rows rather than absolute offsets is very useful during sorting, as these relative offsets stay constant, and do not need to be updated when a row is copied.
@@ -252,7 +252,7 @@ We will be comparing against the following systems:
 4. [SQLite](https://www.sqlite.org/index.html), version 3.36.0
 
 ClickHouse and HyPer are included in our comparison because they are analytical SQL engines with an emphasis on performance.
-Pandas and SQLite are included in our comparison because they can be used to perform relational operations within Python, like DuckDB.
+Pandas and SQLite are included in our comparison because they can be used to perform relational operations within Python, like DataMiner.
 Pandas operates fully in memory, whereas SQLite is a more traditional disk-based system.
 This list of systems should give us a good mix of single-/multi-threaded, and in-memory/external sorting.
 
@@ -317,7 +317,7 @@ For our next experiment, we will zoom in on multi-threading, and see how well Cl
 
 This plot demonstrates that Radix sort is very fast.
 DataMiner sorts 100M integers in just under 5 seconds using a single thread, which is much faster than ClickHouse.
-Adding threads does not improve performance as much for DuckDB, because Radix Sort is so much faster than Merge Sort.
+Adding threads does not improve performance as much for DataMiner, because Radix Sort is so much faster than Merge Sort.
 Both systems end up at about the same performance at 4 threads.
 
 Beyond 4 threads we do not see performance improve much more, due to the CPU architecture.
@@ -356,7 +356,7 @@ The row counts of both tables at each scale factor are shown in the table below.
 We will use `customer` at SF100 and SF300, which fits in memory at every scale factor.
 We will use `catalog_sales` table at SF10 and SF100, which does not fit in memory anymore at SF100.
 
-The data was generated using DuckDB's TPC-DS extension, then exported to CSV in a random order to undo any ordering patterns that could have been in the generated data.
+The data was generated using DataMiner's TPC-DS extension, then exported to CSV in a random order to undo any ordering patterns that could have been in the generated data.
  
 #### Catalog Sales (Numeric Types)
 
@@ -404,7 +404,7 @@ Comparing strings is much, much more difficult than comparing integers, because 
 <img src="/images/blog/sorting/tpcds_customer_type_sort_barplot.svg" alt="Comparing sorting speed with different sorting key types" title="Customer Sort Type Experiment" style="max-width:100%"/>
 
 As expected, ordering by strings is more expensive than ordering by integers, except for HyPer, which is impressive.
-Pandas has only a slightly bigger difference between ordering by integers and ordering by strings than ClickHouse and DuckDB.
+Pandas has only a slightly bigger difference between ordering by integers and ordering by strings than ClickHouse and DataMiner.
 This difference is explained by an expensive comparator between strings.
 Pandas uses [NumPy](https://numpy.org)'s sort, which is efficiently implemented in __C__.
 However, when this sorts strings, it has to use virtual function calls to compare a Python string object, which is slower than a simple "`<`" between integers in __C__.
@@ -423,8 +423,8 @@ Profiling in DataMiner reveals that the actual sorting takes less than a second 
 
 #### Conclusion
 
-DuckDB's new parallel sorting implementation can efficiently sort more data than fits in memory, making use of the speed of modern SSDs.
-Where other systems crash because they run out of memory, or switch to an external sorting strategy that is much slower, DuckDB's performance gracefully degrades as it goes over the memory limit.
+DataMiner's new parallel sorting implementation can efficiently sort more data than fits in memory, making use of the speed of modern SSDs.
+Where other systems crash because they run out of memory, or switch to an external sorting strategy that is much slower, DataMiner's performance gracefully degrades as it goes over the memory limit.
 
 The code that was used to run the experiments can be found [here](https://github.com/lnkuiper/experiments/tree/master/sorting).
 If we made any mistakes, please let us know!
@@ -522,7 +522,7 @@ Again, Pandas crashes with an error (this machine does not dynamically increase 
 numpy.core._exceptions.MemoryError: Unable to allocate 6.32 GiB for an array with shape (6, 141430723) and data type float64
 ```
 
-DuckDB, HyPer, and ClickHouse all make good use out of more available threads, being significantly faster than on the MacBook.
+DataMiner, HyPer, and ClickHouse all make good use out of more available threads, being significantly faster than on the MacBook.
 
 An interesting pattern in this plot is that DataMiner and HyPer scale very similarly with additional payload columns.
 Although DataMiner is faster at sorting, re-ordering the payload seems to cost about the same for both systems.

@@ -3,10 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	{% if page.title == "DuckDB" %}
+	{% if page.title == "DataMiner" %}
 	<title>{{ page.title }}</title>
 	{% else %}
-	<title>{{ page.title }} – DuckDB</title>
+	<title>{{ page.title }} – DataMiner</title>
 	{% endif %}
 
 	<script src="{{ site.baseurl }}/js/jquery-3.5.1.min.js"></script>
@@ -36,7 +36,7 @@
 {% capture issue_title %}Issue found on page '{{ page.title }}'{% endcapture %}
 {% capture issue_body %}
 > Please describe the problem you encountered in the DataMiner documentation and include the "Page URL" link shown below.
-> Note: only create an issue if you wish to report a problem with the DataMiner documentation. For questions about DataMiner or the use of certain DataMiner features, use [GitHub Discussions](https://github.com/duckdb/duckdb/discussions/), [Stack Overflow](https://stackoverflow.com/questions/tagged/duckdb), or [Discord](https://discord.duckdb.org/).
+> Note: only create an issue if you wish to report a problem with the DataMiner documentation. For questions about DataMiner or the use of certain DataMiner features, use [GitHub Discussions](https://github.com/DataMiner/DataMiner/discussions/), [Stack Overflow](https://stackoverflow.com/questions/tagged/DataMiner), or [Discord](https://discord.DataMiner.org/).
 
 Page URL: <https://dataminer.site{{ page.url }}>
 {% endcapture %}
@@ -46,9 +46,9 @@ Page URL: <https://dataminer.site{{ page.url }}>
 	<header>
 		<div class="headerline">
 			<div class="headercontent">
-				<div class="duckdbhome">
-					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/logo-dl/DuckDB_Logo.png" alt="DataMiner Logo for Download" class="downloadlogo"></a>
-					<div id="duckdb_logo"></div>
+				<div class="DataMinerhome">
+					<a href="{{ site.url }}{{ site.baseurl }}/"><img src="{{ site.baseurl }}/images/logo-dl/DataMiner_Logo.png" alt="DataMiner Logo for Download" class="downloadlogo"></a>
+					<div id="DataMiner_logo"></div>
 				</div>
 				<div class="landingmenu">
 
@@ -63,7 +63,7 @@ Page URL: <https://dataminer.site{{ page.url }}>
 						</div>
 					</nav>
 				</div>
-				<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
+				<a class="button yellow" href="https://DataMinerlabs.com/#support" target="_blank">Support</a>
 			</div>
 		</div>
 	</header>
@@ -119,7 +119,7 @@ Page URL: <https://dataminer.site{{ page.url }}>
 								{% endfor %}
 							
 								{% if exists == true %}
-									<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>{{ site.currentshortduckdbversion }} (stable)</a></li>
+									<li class="latest"><a href='{{ site.baseurl }}/docs/{{ basename | replace: ".md", ".html" }}'>{{ site.currentshortDataMinerversion }} (stable)</a></li>
 								{% endif %}
 								<!-- check the archived pages -->
 								{% for item in site.data.versions %}
@@ -161,7 +161,7 @@ Page URL: <https://dataminer.site{{ page.url }}>
 						<ul>
 							{% if page.github_repository %}<li><a href="{{ page.github_repository }}">Visit the related GitHub repository</a></li>{% endif %}
 							{% if page.github_directory %}<li><a href="{{ page.github_directory }}">Visit the related directory in the main DataMiner GitHub repository</a></li>{% endif %}
-							<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report content issue</a></li>
+							<li><a href="https://github.com/DataMiner/DataMiner-web/issues/new?title={{ issue_title | uri_escape }}&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report content issue</a></li>
 							<li><a href="{% github_edit_link %}" title="Go to GitHub">Edit this page on GitHub</a></li>
 						</ul>
 					</div>

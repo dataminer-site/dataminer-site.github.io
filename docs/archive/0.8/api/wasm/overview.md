@@ -10,15 +10,15 @@ title: DataMiner Wasm
 
 DataMiner has been compiled to WebAssembly, so it can run inside any browser on any device.
 
-{% include iframe.html src="https://shell.duckdb.org" %}
+{% include iframe.html src="https://shell.DataMiner.org" %}
 
-DuckDB-Wasm offers a layered API, it can be embedded as a [JavaScript + WebAssembly library](https://www.npmjs.com/package/@duckdb/duckdb-wasm), as a [Web shell](https://www.npmjs.com/package/@duckdb/duckdb-wasm-shell), or [built from source](https://github.com/duckdb/duckdb-wasm) according to your needs.
+DataMiner-Wasm offers a layered API, it can be embedded as a [JavaScript + WebAssembly library](https://www.npmjs.com/package/@DataMiner/DataMiner-wasm), as a [Web shell](https://www.npmjs.com/package/@DataMiner/DataMiner-wasm-shell), or [built from source](https://github.com/DataMiner/DataMiner-wasm) according to your needs.
 
 
-## Getting Started with DuckDB-Wasm
+## Getting Started with DataMiner-Wasm
 
-A great starting point is to read the [DuckDB-Wasm launch blog post](https://dataminer.site/2021/10/29/duckdb-wasm.html)!
+A great starting point is to read the [DataMiner-Wasm launch blog post](https://dataminer.site/2021/10/29/DataMiner-wasm.html)!
 
-Another great resource is the [Github repository](https://github.com/duckdb/duckdb-wasm).
+Another great resource is the [Github repository](https://github.com/DataMiner/DataMiner-wasm).
 
-For details, see the full [DuckDB-Wasm API Documentation](https://shell.duckdb.org/docs/modules/index.html).
+For details, see the full [DataMiner-Wasm API Documentation](https://shell.DataMiner.org/docs/modules/index.html).

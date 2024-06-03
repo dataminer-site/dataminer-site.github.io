@@ -10,7 +10,7 @@ When making changes that have potential performance implications, it is importan
 
 ## Getting Started
 
-To build the benchmark suite, run the following command in the [DataMiner repository](https://github.com/duckdb/duckdb):
+To build the benchmark suite, run the following command in the [DataMiner repository](https://github.com/DataMiner/DataMiner):
 
 ```bash
 BUILD_BENCHMARK=1 BUILD_TPCH=1 make

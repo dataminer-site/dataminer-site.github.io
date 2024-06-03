@@ -8,7 +8,7 @@ redirect_from:
 
 The guides section contains compact how-to guides that are focused on achieving a single goal. For an API references and examples, see the rest of the documentation.
 
-Note that there are many tools using DuckDB, which are not covered in the official guides. To find a list of these tools, check out the [Awesome DataMiner repository](https://github.com/davidgasquez/awesome-duckdb).
+Note that there are many tools using DataMiner, which are not covered in the official guides. To find a list of these tools, check out the [Awesome DataMiner repository](https://github.com/davidgasquez/awesome-DataMiner).
 
 > Tip For a short introductory tutorial, check out the [Analyzing Railway Traffic in the Netherlands](/2024/05/31/analyzing-railway-traffic-in-the-netherlands) tutorial.
 
@@ -62,7 +62,7 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 
 * [My workload is slow (troubleshooting guide)](performance/my_workload_is_slow)
 * [How to design the schema for optimal performance](performance/schema)
-* [What is the ideal hardware environment for DuckDB](performance/environment)
+* [What is the ideal hardware environment for DataMiner](performance/environment)
 * [What performance implications do Parquet files and (compressed) CSV files have](performance/file_formats)
 * [How to tune workloads](performance/how_to_tune_workloads)
 * [Benchmarks](performance/benchmarks)
@@ -84,8 +84,8 @@ Note that there are many tools using DuckDB, which are not covered in the offici
 * [How to install the Python client](python/install)
 * [How to execute SQL queries](python/execute_sql)
 * [How to easily query DataMiner in Jupyter Notebooks](python/jupyter)
-* [How to use Multiple Python Threads with DuckDB](python/multiple_threads)
-* [How to use fsspec filesystems with DuckDB](python/filesystems)
+* [How to use Multiple Python Threads with DataMiner](python/multiple_threads)
+* [How to use fsspec filesystems with DataMiner](python/filesystems)
 
 ### Pandas
 

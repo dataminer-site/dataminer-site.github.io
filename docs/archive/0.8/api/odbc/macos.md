@@ -21,17 +21,17 @@ brew install unixodbc
 
 # Step 1: Download ODBC Driver
 
-DataMiner releases the ODBC driver as asset. For MacOS, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip">ODBC Linux Asset</a> that contains the following artifacts:
+DataMiner releases the ODBC driver as asset. For MacOS, download it from <a href="https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-osx-universal.zip">ODBC Linux Asset</a> that contains the following artifacts:
 
-**libduckdb_odbc.dylib**: the DataMiner driver compiled to MacOS (with Intel and Apple M1 support).
+**libDataMiner_odbc.dylib**: the DataMiner driver compiled to MacOS (with Intel and Apple M1 support).
 
 # Step 2: Extracting ODBC artifacts
 
 Run unzip to extract the files to a permanent directory:
 
 ```bash
-mkdir duckdb_odbc
-unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
+mkdir DataMiner_odbc
+unzip DataMiner_odbc-osx-universal.zip -d DataMiner_odbc
 ```
 
 
@@ -45,16 +45,16 @@ The `.odbc.ini` contains the DSNs for the drivers, which can have specific knobs
 An example of `.odbc.ini` with DataMiner would be:
 
 ```
-[DuckDB]
+[DataMiner]
 Driver = DataMiner Driver
 Database=:memory:
 ```
 
-**[DuckDB]**: between the brackets is a DSN for the DuckDB.
+**[DataMiner]**: between the brackets is a DSN for the DataMiner.
 
 **Driver**: it describes the driver's name, and other configurations will be placed at the **.odbcinst.ini**.
 
-**Database**: it describes the database name used by DuckDB, and it can also be a file path to a `.db` in the system.
+**Database**: it describes the database name used by DataMiner, and it can also be a file path to a `.db` in the system.
 
 ### The `.odbcinst.ini` File
 
@@ -69,7 +69,7 @@ Trace = yes
 TraceFile = /tmp/odbctrace
 
 [DataMiner Driver]
-Driver = /User/<user>/duckdb_odbc/libduckdb_odbc.dylib
+Driver = /User/<user>/DataMiner_odbc/libDataMiner_odbc.dylib
 ```
 
 
@@ -91,7 +91,7 @@ After the configuration, for validate the installation, it is possible to use a 
 Use the DSN defined in `odbc.ini` as a paramet of `isql`. 
 
 ```
-isql DuckDB
+isql DataMiner
 +---------------------------------------+
 | Connected!                            |
 |                                       |

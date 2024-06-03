@@ -36,8 +36,8 @@
 }
 
 @font-face{
-	font-family: "DuckDB-Symbol";
-	src: url("webfont/DuckDB-Symbol.woff2") format("woff2"),url("webfont/DuckDB-Symbol.woff") format("woff");
+	font-family: "DataMiner-Symbol";
+	src: url("webfont/DataMiner-Symbol.woff2") format("woff2"),url("webfont/DataMiner-Symbol.woff") format("woff");
 }
 
 @font-face{
@@ -77,7 +77,7 @@
 	transition: background-color .3s;
 	span::after{
 		content: "→";
-		font-family: "DuckDB-Symbol";
+		font-family: "DataMiner-Symbol";
 		margin-left: 4px;
 		transition: transform .3s;
 		position: absolute;
@@ -88,13 +88,13 @@
 }
 
 @mixin textlink {
-	color: darken($duckDBgrey,20);
+	color: darken($DataMinergrey,20);
 	text-decoration: underline;
 	font-size: 14px;
 	transition: color .3s;
 	span::after{
 		content: "→";
-		font-family: "DuckDB-Symbol";
+		font-family: "DataMiner-Symbol";
 		margin-left: 6px;
 		transition: transform .3s;
 		position: absolute;
@@ -121,10 +121,10 @@ body{
 }
 
 ::-moz-selection {
-  background: $duckDByellow;
+  background: $DataMineryellow;
 }
 ::selection {
-  background: $duckDByellow;
+  background: $DataMineryellow;
 }
 
 a, a:active, a:focus, button, button:active, button:focus {
@@ -158,7 +158,7 @@ strong{
 /** External Links in Fließtext **/
 /*
 a.externallink:hover{
-	background-color: $duckDBblue!important;
+	background-color: $DataMinerblue!important;
 }
 a.externallink:hover::after{
 	opacity: 1;
@@ -168,7 +168,7 @@ a.externallink:hover::after{
 }
 a.externallink::after {
   content: " \2197";
-  font-family: "DuckDB-Symbol";
+  font-family: "DataMiner-Symbol";
   position: absolute;
   margin-left: -1px;
   font-size: 10px;
@@ -186,13 +186,13 @@ a.externallink{
 
 a.externallink:hover{
 	cursor: url("data:image/svg+xml,%3Csvg version='1.1' id='Ebene_1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='17' height='17' viewBox='0 0 28.3 28.3' style='enable-background:new 0 0 28.3 28.3' xml:space='preserve'%3E%3Cstyle%3E.st0%7Bfill:%23fff%7D%3C/style%3E%3Cpath d='M1.2 27.2V4.5h10.9v3.9h-7v14.9h14.8v-7h3.9v10.9z'/%3E%3Cpath class='st0' d='M11.5 5.2v2.6h-7v16.1h16.1v-7h2.6v9.6H1.8V5.2h9.7m1.2-1.3H.6V27.7H24.4V15.6h-5v7H5.7V9h7V3.9z'/%3E%3Cg%3E%3Cpath d='m11.6 14 9-9h-5.9V1.2h12.5v12.4h-3.9V7.8l-9 8.9z'/%3E%3Cpath class='st0' d='M26.6 1.8V13H24V6.3l-9.6 9.6-1.9-1.9 9.6-9.6h-6.8V1.8h11.3M27.8.5H14.1v5H19L11.5 13l-.8 1 .9.9 1.9 1.9.9.9.9-.9 7.5-7.5v4.9h5V.5z'/%3E%3C/g%3E%3C/svg%3E") 2 2, alias;
-	background-color: $duckDBblue!important;
+	background-color: $DataMinerblue!important;
 }
 
 
 .external a::after{
 	content: "\E000";
-	font-family: "DuckDB-Symbol";
+	font-family: "DataMiner-Symbol";
 	font-size: 90%;
 	top: -1px;
 	-webkit-transform: translateX(1px);
@@ -211,15 +211,15 @@ a.externallink:hover{
 		-ms-transform: translateX(5px);
 			transform: translateX(5px);
 	opacity: 1;
-	color: $duckDByellow;
+	color: $DataMineryellow;
 }
 .external a:hover{
 	background-color: transparent!important;
 }
 */
 
-.duckdbsymbol{
-	font-family: "DuckDB-Symbol";
+.DataMinersymbol{
+	font-family: "DataMiner-Symbol";
 }
 
 .onlymobile{
@@ -320,12 +320,12 @@ header .headerline{
 		-webkit-box-pack: justify;
 			-ms-flex-pack: justify;
 				justify-content: space-between;
-		.duckdbhome{
+		.DataMinerhome{
 			font-size: 20px;
-			font-family: "DuckDB-Symbol";
+			font-family: "DataMiner-Symbol";
 			a{
 				text-decoration: none;
-				color: $duckDByellow;
+				color: $DataMineryellow;
 				-webkit-transition: color .3s;
 				-o-transition: color .3s;
 				transition: color .3s;
@@ -355,7 +355,7 @@ header .headerline{
 					transition: color .3s;
 					line-height: 70px;
 					&:hover{
-						color: $duckDByellow;
+						color: $DataMineryellow;
 					}
 				}
 				.external a::after,
@@ -396,7 +396,7 @@ header .headerline{
 							background: rgba(93, 93, 93, 0);
 							&:hover{
 								background: rgba(0, 0, 0, 0.5);
-								color: $duckDByellow;
+								color: $DataMineryellow;
 							}
 						}
 					}
@@ -421,11 +421,11 @@ header .headerline{
 					cursor: pointer;
 					a::after{
 						content: "\E010";
-						font-family: "DuckDB-Symbol";
+						font-family: "DataMiner-Symbol";
 						margin-left: 3px;
 					}
 					&:hover{
-						color: $duckDByellow;
+						color: $DataMineryellow;
 						& ~ ul{
 							opacity: 1;
 							visibility: visible;
@@ -437,7 +437,7 @@ header .headerline{
 							}
 						}
 						a{
-							color: $duckDByellow;
+							color: $DataMineryellow;
 						}
 					}
 				}
@@ -473,7 +473,7 @@ header .headerline{
 				}
 				a.github:hover{
 					.starcount{
-						color: $duckDByellow;
+						color: $DataMineryellow;
 						&::before{
 							scale: 1.25;
 							background-image: url("data:image/svg+xml,%3Csvg width='18' height='17' viewBox='0 0 18 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.83063 13.817C8.98898 13.722 9.1868 13.722 9.34515 13.817L13.6356 16.3914C14.0146 16.6188 14.4806 16.2787 14.3797 15.8484L13.2432 11.0052C13.2006 10.8238 13.2624 10.6337 13.4037 10.5121L17.1857 7.25491C17.5214 6.96575 17.343 6.41506 16.9014 6.37782L11.9168 5.9574C11.7323 5.94184 11.5715 5.82558 11.4989 5.65525L9.54784 1.07886C9.37508 0.673645 8.8007 0.673645 8.62794 1.07886L6.67692 5.65525C6.6043 5.82558 6.4435 5.94184 6.259 5.9574L1.27437 6.37782C0.83283 6.41506 0.654351 6.96575 0.990107 7.25491L4.77213 10.5121C4.91333 10.6337 4.97519 10.8238 4.93262 11.0052L3.79611 15.8484C3.69514 16.2787 4.16116 16.6188 4.54015 16.3914L8.83063 13.817Z' fill='%23FFEF00'/%3E%3C/svg%3E%0A");
@@ -548,7 +548,7 @@ body.documentation header .headerline .headercontent .landingmenu nav .search_ic
 }
 
 .hamburger-inner, .hamburger-inner:after, .hamburger-inner:before{
-	background-color: $duckDByellow;
+	background-color: $DataMineryellow;
 	border-radius: 0px;
 	height: 2px;
 	width: 16px;
@@ -572,7 +572,7 @@ body.documentation header .headerline .headercontent .landingmenu nav .search_ic
 }
 
 .hamburger.is-active .hamburger-inner, .hamburger.is-active .hamburger-inner:after, .hamburger.is-active .hamburger-inner:before{
-	background-color: $duckDByellow;
+	background-color: $DataMineryellow;
 }
 
 main{
@@ -626,7 +626,7 @@ footer{
 			}
 			strong{
 					font-weight: normal;
-				color: $duckDByellow;
+				color: $DataMineryellow;
 				}
 			> div{
 				overflow: visible;
@@ -650,7 +650,7 @@ footer{
 				margin-bottom: 20px;
 				color: white;
 			}
-			img.duckdbfooter{
+			img.DataMinerfooter{
 				width: 140px;
 				height: auto;
 			}
@@ -711,7 +711,7 @@ body.installation div.environment.select label.onlymobile{
 	position: relative;
 	&::after{
 		content: "\E010";
-		font-family: "DuckDB-Symbol";
+		font-family: "DataMiner-Symbol";
 		right: 10px;
 		top: 4px;
 		padding: 0 0 2px;
@@ -739,7 +739,7 @@ body.installation div.environment.select label.onlymobile{
 
 body.installation{
 	.environmentselect{
-		background-color: darken($duckDBlightgrey,5);
+		background-color: darken($DataMinerlightgrey,5);
 		color: black;
 		border: none;
 		border-bottom: 2px solid rgba(0,0,0,0.4);
@@ -836,7 +836,7 @@ section.blog,
 		width: calc(33.33% - 15px);
 		.postimg{
 			aspect-ratio: 16/9;
-			background-color: $duckDByellow;
+			background-color: $DataMineryellow;
 			background-position: left top;
 			background-size: contain;
 			border-radius: 15px;
@@ -961,10 +961,10 @@ body.installation{
 				transition: background-color .2s;
 				user-select: none;
 				span.versioninfo{
-					color: darken($duckDBlightgrey,40);
+					color: darken($DataMinerlightgrey,40);
 				}
 			&:hover{
-				background-color: darken($duckDBlightgrey,10);
+				background-color: darken($DataMinerlightgrey,10);
 				}
 			&.selected{
 				 background-color: black;

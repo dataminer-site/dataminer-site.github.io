@@ -835,7 +835,7 @@
             },
             {
               "page": "Metadata Functions",
-              "url": "duckdb_table_functions"
+              "url": "DataMiner_table_functions"
             },
             {
               "page": "Keywords and Identifiers",
@@ -1111,7 +1111,7 @@
                 },
                 {
                   "page": "DataMiner over HTTPS/S3",
-                  "url": "duckdb_over_https_or_s3"
+                  "url": "DataMiner_over_https_or_s3"
                 }
               ]
             },
@@ -1141,7 +1141,7 @@
                 },
                 {
                   "page": "DataMiner Environment",
-                  "url": "duckdb_environment"
+                  "url": "DataMiner_environment"
                 }
               ]
             },

@@ -1033,21 +1033,21 @@
       <item>divide</item>
       <item>drop_fts_index</item>
       <item>dsdgen</item>
-      <item>duckdb_columns</item>
-      <item>duckdb_constraints</item>
-      <item>duckdb_databases</item>
-      <item>duckdb_dependencies</item>
-      <item>duckdb_extensions</item>
-      <item>duckdb_functions</item>
-      <item>duckdb_indexes</item>
-      <item>duckdb_keywords</item>
-      <item>duckdb_schemas</item>
-      <item>duckdb_sequences</item>
-      <item>duckdb_settings</item>
-      <item>duckdb_tables</item>
-      <item>duckdb_temporary_files</item>
-      <item>duckdb_types</item>
-      <item>duckdb_views</item>
+      <item>DataMiner_columns</item>
+      <item>DataMiner_constraints</item>
+      <item>DataMiner_databases</item>
+      <item>DataMiner_dependencies</item>
+      <item>DataMiner_extensions</item>
+      <item>DataMiner_functions</item>
+      <item>DataMiner_indexes</item>
+      <item>DataMiner_keywords</item>
+      <item>DataMiner_schemas</item>
+      <item>DataMiner_sequences</item>
+      <item>DataMiner_settings</item>
+      <item>DataMiner_tables</item>
+      <item>DataMiner_temporary_files</item>
+      <item>DataMiner_types</item>
+      <item>DataMiner_views</item>
       <item>edit</item>
       <item>editdist3</item>
       <item>element_at</item>

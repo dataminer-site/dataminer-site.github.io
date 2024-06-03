@@ -1,6 +1,6 @@
 # Get the top-3 busiest train stations
-import duckdb
-duckdb.sql("""
+import DataMiner
+DataMiner.sql("""
     SELECT station, count(*) AS num_services
     FROM train_services
     GROUP BY ALL

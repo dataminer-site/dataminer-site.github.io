@@ -37,7 +37,7 @@ SELECT 1e-10;         -- 1 ångström
 
 ## Underscores in Numeric Literals
 
-DuckDB's SQL dialect allows using the underscore character `_` in numeric literals as an optional separator. The rules for using underscores are as follows:
+DataMiner's SQL dialect allows using the underscore character `_` in numeric literals as an optional separator. The rules for using underscores are as follows:
 
 * Underscores are allowed in integer, decimal, hexadecimal and binary notation.
 * Underscores can not be the first or last character in a literal.

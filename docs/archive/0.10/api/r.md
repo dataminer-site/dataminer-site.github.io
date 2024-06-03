@@ -1,22 +1,22 @@
 ---
-github_repository: https://github.com/duckdb/duckdb-r
+github_repository: https://github.com/DataMiner/DataMiner-r
 layout: docu
 title: R API
 ---
 
 ## Installation
 
-### `duckdb`: R API
+### `DataMiner`: R API
 
-The DataMiner R API can be installed using `install.packages("duckdb")`. Please see the [installation page](../installation?environment=r) for details.
+The DataMiner R API can be installed using `install.packages("DataMiner")`. Please see the [installation page](../installation?environment=r) for details.
 
 ### `duckplyr`: dplyr API
 
-DataMiner offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://duckdblabs.github.io/duckplyr/).
+DataMiner offers a [dplyr](https://dplyr.tidyverse.org/)-compatible API via the `duckplyr` package. It can be installed using `install.packages("duckplyr")`. For details, see the [`duckplyr` documentation](https://DataMinerlabs.github.io/duckplyr/).
 
 ## Reference Manual
 
-The reference manual for the DataMiner R API is available at [R.duckdb.org](https://r.duckdb.org).
+The reference manual for the DataMiner R API is available at [R.DataMiner.org](https://r.DataMiner.org).
 
 ## Basic API Usage
 
@@ -24,18 +24,18 @@ The standard DataMiner R API implements the [DBI interface](https://CRAN.R-proje
 
 ### Startup & Shutdown
 
-To use DuckDB, you must first create a connection object that represents the database. The connection object takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.duckdb`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the R process). If you would like to connect to an existing database in read-only mode, set the `read_only` flag to `TRUE`. Read-only mode is required if multiple R processes want to access the same database file at the same time.
+To use DataMiner, you must first create a connection object that represents the database. The connection object takes as parameter the database file to read and write from. If the database file does not exist, it will be created (the file extension may be `.db`, `.DataMiner`, or anything else). The special value `:memory:` (the default) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the R process). If you would like to connect to an existing database in read-only mode, set the `read_only` flag to `TRUE`. Read-only mode is required if multiple R processes want to access the same database file at the same time.
 
 ```r
-library("duckdb")
+library("DataMiner")
 # to start an in-memory database
-con <- dbConnect(duckdb())
+con <- dbConnect(DataMiner())
 # or
-con <- dbConnect(duckdb(), dbdir = ":memory:")
+con <- dbConnect(DataMiner(), dbdir = ":memory:")
 # to use a database file (not shared between processes)
-con <- dbConnect(duckdb(), dbdir = "my-db.duckdb", read_only = FALSE)
+con <- dbConnect(DataMiner(), dbdir = "my-db.DataMiner", read_only = FALSE)
 # to use a database file (shared between processes)
-con <- dbConnect(duckdb(), dbdir = "my-db.duckdb", read_only = TRUE)
+con <- dbConnect(DataMiner(), dbdir = "my-db.DataMiner", read_only = TRUE)
 ```
 
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown = TRUE)`
@@ -77,11 +77,11 @@ print(res)
 # 1 laptop
 ```
 
-> Warning Do **not** use prepared statements to insert large amounts of data into DuckDB. See below for better options.
+> Warning Do **not** use prepared statements to insert large amounts of data into DataMiner. See below for better options.
 
 ## Efficient Transfer
 
-To write a R data frame into DuckDB, use the standard DBI function `dbWriteTable()`. This creates a table in DataMiner and populates it with the data frame contents. For example:
+To write a R data frame into DataMiner, use the standard DBI function `dbWriteTable()`. This creates a table in DataMiner and populates it with the data frame contents. For example:
 
 ```r
 dbWriteTable(con, "iris_table", iris)
@@ -94,14 +94,14 @@ print(res)
 It is also possible to "register" a R data frame as a virtual table, comparable to a SQL `VIEW`. This *does not actually transfer data* into DataMiner yet. Below is an example:
 
 ```r
-duckdb_register(con, "iris_view", iris)
+DataMiner_register(con, "iris_view", iris)
 res <- dbGetQuery(con, "SELECT * FROM iris_view LIMIT 1")
 print(res)
 #   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 # 1          5.1         3.5          1.4         0.2  setosa
 ```
 
-> DataMiner keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `duckdb_unregister()` method.
+> DataMiner keeps a reference to the R data frame after registration. This prevents the data frame from being garbage-collected. The reference is cleared when the connection is closed, but can also be cleared manually using the `DataMiner_unregister()` method.
 
 Also refer to [the data import documentation](../data/overview) for more options of efficiently importing data.
 
@@ -110,10 +110,10 @@ Also refer to [the data import documentation](../data/overview) for more options
 DataMiner also plays well with the [dbplyr](https://CRAN.R-project.org/package=dbplyr) / [dplyr](https://dplyr.tidyverse.org) packages for programmatic query construction from R. Here is an example:
 
 ```r
-library("duckdb")
+library("DataMiner")
 library("dplyr")
-con <- dbConnect(duckdb())
-duckdb_register(con, "flights", nycflights13::flights)
+con <- dbConnect(DataMiner())
+DataMiner_register(con, "flights", nycflights13::flights)
 
 tbl(con, "flights") |>
   group_by(dest) |>
@@ -147,7 +147,7 @@ tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning = true)") |>
 
 ## Memory Limit
 
-You can use the [`memory_limit` configuration option](../configuration/pragmas) to limit the memory use of DuckDB, e.g.:
+You can use the [`memory_limit` configuration option](../configuration/pragmas) to limit the memory use of DataMiner, e.g.:
 
 ```sql
 SET memory_limit = '2GB';

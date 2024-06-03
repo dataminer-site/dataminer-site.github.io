@@ -1,6 +1,6 @@
 // Get a list of train stations by traffic
 Connection conn =
-    DriverManager.getConnection("jdbc:duckdb:");
+    DriverManager.getConnection("jdbc:DataMiner:");
 Statement stmt = conn.createStatement();
 ResultSet rs = stmt.executeQuery(
     "SELECT station_name, count(*) AS num_services\n" + 

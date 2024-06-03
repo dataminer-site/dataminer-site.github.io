@@ -1,6 +1,6 @@
 # Reading and writing Pandas dataframes
 import pandas as pd
-import duckdb
+import DataMiner
 
 df_in = pd.DataFrame({
     'station': ['Delft', 'Delft', 'Gouda', 'Gouda'],
@@ -8,7 +8,7 @@ df_in = pd.DataFrame({
     'num_services' : [22, 20, 27, 25]})
 
 # Run query on a dataframe and return a dataframe
-df_out = duckdb.sql("""
+df_out = DataMiner.sql("""
     SELECT station, sum(num_services)
     FROM df_in
     GROUP BY station

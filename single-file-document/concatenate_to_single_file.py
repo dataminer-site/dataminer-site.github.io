@@ -304,7 +304,7 @@ with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") 
 docs_root = "../docs"
 
 # compile concatenated document
-with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"duckdb-docs.md", "w") as of:
+with open("../_data/menu_docs_dev.json") as menu_docs_file, open(f"DataMiner-docs.md", "w") as of:
     data = json.load(menu_docs_file)
 
     with open("cover-page.md") as cover_page_file:

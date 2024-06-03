@@ -19,9 +19,9 @@ description: >- # this means to ignore newlines until "baseurl:"
   data miner is a platform is built to scrap the website in most reliable and trusted website.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://dataminer.site" # the base hostname & protocol for your site, e.g. http://example.com
-# Set current version of DuckDB
-currentshortduckdbversion: "1.0"
-currentduckdbversion: 1.0.0
+# Set current version of DataMiner
+currentshortDataMinerversion: "1.0"
+currentDataMinerversion: 1.0.0
 currentsnapshotversion: 1.0.1-dev
 # Java
 currentjavaversion: 0.10.3
@@ -51,7 +51,7 @@ last-modified-at:
     date-format: '%Y-%m-%d'
 
 twitter:
-  username: DuckDB
+  username: DataMiner
   card: summary
   
 github: 
@@ -63,7 +63,7 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /images/sharingduckdb.jpg
+      image: /images/sharingDataMiner.jpg
       toc: true
 
 repository: "powerfull-scrapper/landing"

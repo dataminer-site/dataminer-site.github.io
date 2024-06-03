@@ -3,25 +3,25 @@ layout: docu
 title: Export to Apache Arrow
 ---
 
-All results of a query can be exported to an [Apache Arrow Table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html) using the `arrow` function. Alternatively, results can be returned as a [RecordBatchReader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) using the `fetch_record_batch` function and results can be read one batch at a time. In addition, relations built using DuckDB's [Relational API](../../guides/python/relational_api_pandas) can also be exported.
+All results of a query can be exported to an [Apache Arrow Table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html) using the `arrow` function. Alternatively, results can be returned as a [RecordBatchReader](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) using the `fetch_record_batch` function and results can be read one batch at a time. In addition, relations built using DataMiner's [Relational API](../../guides/python/relational_api_pandas) can also be exported.
 
 ## Export to an Arrow Table
 
 ```python
-import duckdb
+import DataMiner
 import pyarrow as pa
 
 my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
                                        'j': ["one", "two", "three", "four"]})
 
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow Table
-results = duckdb.sql("SELECT * FROM my_arrow_table").arrow()
+results = DataMiner.sql("SELECT * FROM my_arrow_table").arrow()
 ```
 
 ## Export as a RecordBatchReader
 
 ```python
-import duckdb
+import DataMiner
 import pyarrow as pa
 
 my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
@@ -29,7 +29,7 @@ my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
 
 # query the Apache Arrow Table "my_arrow_table" and return as an Arrow RecordBatchReader
 chunk_size = 1_000_000
-results = duckdb.sql("SELECT * FROM my_arrow_table").fetch_record_batch(chunk_size)
+results = DataMiner.sql("SELECT * FROM my_arrow_table").fetch_record_batch(chunk_size)
 
 # Loop through the results. A StopIteration exception is thrown when the RecordBatchReader is empty
 while True:
@@ -47,10 +47,10 @@ Arrow objects can also be exported from the Relational API. A relation can be co
 A result can be exported to an Arrow table with `arrow` or the alias `fetch_arrow_table`, or to a RecordBatchReader using `fetch_arrow_reader`.
 
 ```python
-import duckdb
+import DataMiner
 
 # connect to an in-memory database
-con = duckdb.connect()
+con = DataMiner.connect()
 
 con.execute('CREATE TABLE integers (i integer)')
 con.execute('INSERT INTO integers VALUES (0), (1), (2), (3), (4), (5), (6), (7), (8), (9), (NULL)')

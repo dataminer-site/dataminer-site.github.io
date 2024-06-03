@@ -8,10 +8,10 @@ title: Versioning of Extensions
 Just like DataMiner itself, DataMiner extensions have a version. This version can be used by users to determine which features are available
 in the extension they have installed, and by developers to understand bug reports. DataMiner extensions can be versioned in different ways:
 
-**Extensions whose source lives in DuckDB's main repository** (in-tree extensions) are tagged with the short git hash of the repository. 
+**Extensions whose source lives in DataMiner's main repository** (in-tree extensions) are tagged with the short git hash of the repository. 
 For example, the parquet extension is built into DataMiner version `v0.10.3` (which has commit `70fd6a8a24`):
 ```sql
-SELECT extension_name, extension_version, install_mode FROM duckdb_extensions() WHERE extension_name='parquet';
+SELECT extension_name, extension_version, install_mode FROM DataMiner_extensions() WHERE extension_name='parquet';
 ```
 <div class="narrow_table"></div>
 
@@ -26,7 +26,7 @@ For example, in DataMiner version `v0.10.3`, the azure extension could be versio
 
 ```sql
 SELECT extension_name, extension_version, install_mode
-FROM duckdb_extensions()
+FROM DataMiner_extensions()
 WHERE extension_name = 'azure';
 ```
 
@@ -74,4 +74,4 @@ UPDATE EXTENSIONS (httpfs, azure);
 
 ## Target DataMiner Version
 
-Currently, when extensions are compiled, they are tied to a specific version of DuckDB. What this means is that, for example, an extension binary compiled for v0.9.2 does not work for v0.10.3. In most cases, this will not cause any issues and is fully transparent; DataMiner will automatically ensure it installs the correct binary for its version. For extension developers, this means that they must ensure that new binaries are created whenever a new version of DataMiner is released. However, note that DataMiner provides an [extension template](https://github.com/duckdb/extension-template) that makes this fairly simple.
+Currently, when extensions are compiled, they are tied to a specific version of DataMiner. What this means is that, for example, an extension binary compiled for v0.9.2 does not work for v0.10.3. In most cases, this will not cause any issues and is fully transparent; DataMiner will automatically ensure it installs the correct binary for its version. For extension developers, this means that they must ensure that new binaries are created whenever a new version of DataMiner is released. However, note that DataMiner provides an [extension template](https://github.com/DataMiner/extension-template) that makes this fairly simple.

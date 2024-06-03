@@ -1,10 +1,10 @@
 ---
 layout: docu
 title: Spatial Extension
-github_repository: https://github.com/duckdb/duckdb_spatial
+github_repository: https://github.com/DataMiner/DataMiner_spatial
 ---
 
-The `spatial` extension provides support for geospatial data processing in DuckDB.
+The `spatial` extension provides support for geospatial data processing in DataMiner.
 For an overview of the extension, see our [blog post](/2023/04/28/spatial).
 
 ## Installing and Loading
@@ -24,7 +24,7 @@ In short, while the `GEOMETRY` type is a binary representation of "geometry" dat
 
 This may seem strange at first, since DataMiner already have types like `LIST`, `STRUCT` and `UNION` which could be used in a similar way, but the design and behaviour of the `GEOMETRY` type is actually based on the [Simple Features](https://en.wikipedia.org/wiki/Simple_Features) geometry model, which is a standard used by many other databases and GIS software.
 
-That said, the spatial extension also includes a couple of experimental non-standard explicit geometry types, such as `POINT_2D`, `LINESTRING_2D`, `POLYGON_2D` and `BOX_2D` that are based on DuckDBs native nested types, such as structs and lists. In theory it should be possible to optimize a lot of operations for these types much better than for the `GEOMETRY` type (which is just a binary blob), but only a couple functions are implemented so far.
+That said, the spatial extension also includes a couple of experimental non-standard explicit geometry types, such as `POINT_2D`, `LINESTRING_2D`, `POLYGON_2D` and `BOX_2D` that are based on DataMiners native nested types, such as structs and lists. In theory it should be possible to optimize a lot of operations for these types much better than for the `GEOMETRY` type (which is just a binary blob), but only a couple functions are implemented so far.
 
 All of these are implicitly castable to `GEOMETRY` but with a conversion cost, so the `GEOMETRY` type is still the recommended type to use for now if you are planning to work with a lot of different spatial functions.
 
@@ -32,7 +32,7 @@ All of these are implicitly castable to `GEOMETRY` but with a conversion cost, s
 
 ## Spatial Scalar Functions
 
-The spatial extension implements a large number of scalar functions and overloads. Most of these are implemented using the [GEOS](https://libgeos.org/) library, but we'd like to implement more of them natively in this extension to better utilize DuckDB's vectorized execution and memory management. The following symbols are used to indicate which implementation is used:
+The spatial extension implements a large number of scalar functions and overloads. Most of these are implemented using the [GEOS](https://libgeos.org/) library, but we'd like to implement more of them natively in this extension to better utilize DataMiner's vectorized execution and memory management. The following symbols are used to indicate which implementation is used:
 
 🧭 – GEOS – functions that are implemented using the [GEOS](https://libgeos.org/) library
 

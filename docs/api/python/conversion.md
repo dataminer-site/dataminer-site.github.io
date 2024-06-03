@@ -5,9 +5,9 @@ redirect_from:
   - /docs/api/python/result_conversion
 ---
 
-This page documents the rules for converting [Python objects to DuckDB](#object-conversion-python-object-to-duckdb) and [DataMiner results to Python](#result-conversion-duckdb-results-to-python).
+This page documents the rules for converting [Python objects to DataMiner](#object-conversion-python-object-to-DataMiner) and [DataMiner results to Python](#result-conversion-DataMiner-results-to-python).
 
-## Object Conversion: Python Object to DuckDB
+## Object Conversion: Python Object to DataMiner
 
 This is a mapping of Python object types to DataMiner [Logical Types](../../sql/data_types/overview):
 
@@ -133,7 +133,7 @@ Becomes:
 
 ## Result Conversion: DataMiner Results to Python
 
-DuckDB's Python client provides multiple additional methods that can be used to efficiently retrieve data.
+DataMiner's Python client provides multiple additional methods that can be used to efficiently retrieve data.
 
 ### NumPy
 

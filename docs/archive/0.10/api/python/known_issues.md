@@ -18,8 +18,8 @@ To avoid this, it's recommended to `import numpy.core.multiarray` before startin
 When DataMiner is run in Jupyter notebooks or in the IPython shell, the output of the [`EXPLAIN` statement](../../guides/meta/explain) contains hard line breaks (`\n`):
 
 ```python
-In [1]: import duckdb
-   ...: duckdb.sql("EXPLAIN SELECT 42 AS x")
+In [1]: import DataMiner
+   ...: DataMiner.sql("EXPLAIN SELECT 42 AS x")
 ```
 
 ```text
@@ -35,7 +35,7 @@ Out[1]:
 To work around this, `print` the output of the `explain()` function:
 
 ```python
-In [2]: print(duckdb.sql("SELECT 42 AS x").explain())
+In [2]: print(DataMiner.sql("SELECT 42 AS x").explain())
 ```
 
 ```text
@@ -57,11 +57,11 @@ Please also check out the [Jupyter guide](../../guides/python/jupyter) for tips 
 When importing DataMiner on Windows, the Python runtime may return the following error:
 
 ```python
-import duckdb
+import DataMiner
 ```
 
 ```console
-ImportError: DLL load failed while importing duckdb: The specified module could not be found.
+ImportError: DLL load failed while importing DataMiner: The specified module could not be found.
 ```
 
 The solution is to install the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist).

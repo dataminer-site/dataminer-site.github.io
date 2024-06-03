@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: ICU Extension
-github_directory: https://github.com/duckdb/duckdb/tree/main/extension/icu
+github_directory: https://github.com/DataMiner/DataMiner/tree/main/extension/icu
 ---
 
 The `icu` extension contains an easy-to-use version of the collation/timezone part of the [ICU library](https://github.com/unicode-org/icu).

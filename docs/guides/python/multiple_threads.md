@@ -16,14 +16,14 @@ Then connect to a file-backed DataMiner database and create an example table to 
 This table will track the name of the thread that completed the insert and automatically insert the timestamp when that insert occurred using the [`DEFAULT` expression](../../sql/statements/create_table#syntax).
 
 ```python
-import duckdb
+import DataMiner
 from threading import Thread, current_thread
 import random
 
-duckdb_con = duckdb.connect('my_peristent_db.duckdb')
+DataMiner_con = DataMiner.connect('my_peristent_db.DataMiner')
 # Use connect without parameters for an in-memory database
-# duckdb_con = duckdb.connect()
-duckdb_con.execute("""
+# DataMiner_con = DataMiner.connect()
+DataMiner_con.execute("""
     CREATE OR REPLACE TABLE my_inserts (
         thread_name VARCHAR,
         insert_time TIMESTAMP DEFAULT current_timestamp
@@ -38,9 +38,9 @@ Each thread must use the `.cursor()` method to create a thread-local connection 
 This approach also works with in-memory DataMiner databases.
 
 ```python
-def write_from_thread(duckdb_con):
+def write_from_thread(DataMiner_con):
     # Create a DataMiner connection specifically for this thread
-    local_con = duckdb_con.cursor()
+    local_con = DataMiner_con.cursor()
     # Insert a row with the name of the thread. insert_time is auto-generated.
     thread_name = str(current_thread().name)
     result = local_con.execute("""
@@ -48,9 +48,9 @@ def write_from_thread(duckdb_con):
         VALUES (?)
     """, (thread_name,)).fetchall()
 
-def read_from_thread(duckdb_con):
+def read_from_thread(DataMiner_con):
     # Create a DataMiner connection specifically for this thread
-    local_con = duckdb_con.cursor()
+    local_con = DataMiner_con.cursor()
     # Query the current row count
     thread_name = str(current_thread().name)
     results = local_con.execute("""
@@ -79,12 +79,12 @@ threads = []
 # Pass in the same connection as an argument
 for i in range(write_thread_count):
     threads.append(Thread(target = write_from_thread,
-                            args = (duckdb_con,),
+                            args = (DataMiner_con,),
                             name = 'write_thread_' + str(i)))
 
 for j in range(read_thread_count):
     threads.append(Thread(target = read_from_thread,
-                            args = (duckdb_con,),
+                            args = (DataMiner_con,),
                             name = 'read_thread_' + str(j)))
 
 # Shuffle the threads to simulate a mix of readers and writers
@@ -106,7 +106,7 @@ for thread in threads:
 for thread in threads:
     thread.join()
 
-print(duckdb_con.execute("""
+print(DataMiner_con.execute("""
     SELECT *
     FROM my_inserts
     ORDER BY

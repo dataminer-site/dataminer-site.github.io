@@ -4,7 +4,7 @@ Sitemap: https://dataminer.site/sitemap.xml
 
 User-agent: *
 {% for version in site.data.versions -%}
-{% if version.version != site.currentduckdbversion %}
+{% if version.version != site.currentDataMinerversion %}
 Disallow: /docs/archive/{{ version.version }}
 {%- endif %}
 {%- endfor %}

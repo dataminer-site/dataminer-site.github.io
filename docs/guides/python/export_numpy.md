@@ -6,10 +6,10 @@ title: Export to Numpy
 The result of a query can be converted to a Numpy array using the `fetchnumpy()` function. For example:
 
 ```python
-import duckdb
+import DataMiner
 import numpy as np
 
-my_arr = duckdb.sql("SELECT unnest([1, 2, 3]) AS x, 5.0 AS y").fetchnumpy()
+my_arr = DataMiner.sql("SELECT unnest([1, 2, 3]) AS x, 5.0 AS y").fetchnumpy()
 my_arr
 ```
 

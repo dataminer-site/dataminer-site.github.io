@@ -474,12 +474,12 @@ body.documentation{
 		line-height: 1;
 	}
 }
-.wrap.whyduckdb,
+.wrap.whyDataMiner,
 .wrap.media,
 .wrap.frequentlyaskedquestions,
 .wrap.codeofconduct,
 .wrap.documentation,
-.wrap.duckdbinstallation,
+.wrap.DataMinerinstallation,
 .wrap.guides{
 	.breadcrumbs{
 		display: none;
@@ -488,7 +488,7 @@ body.documentation{
 .sidenavigation{
 	position: fixed;
 	top: 70px;
-	background-color: $duckDByellow;
+	background-color: $DataMineryellow;
 	width: 275px;
 	height: calc(100vh - 70px);
 	padding: 15px;
@@ -988,7 +988,7 @@ div.flex{
 
 /** WHY DataMiner **/
 
-.wrap.whyduckdb{
+.wrap.whyDataMiner{
 	ul{
 		list-style-position: outside;
 		padding-left: 20px;

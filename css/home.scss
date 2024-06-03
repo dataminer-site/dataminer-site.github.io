@@ -249,7 +249,7 @@ body.landing{
 	  min-width: 15ch;
 	  max-width: 30ch;
 	
-	  border: 1px solid $duckDByellow;
+	  border: 1px solid $DataMineryellow;
 	  border-radius: 100px;
 	  padding: 10px 14px;
 	
@@ -258,12 +258,12 @@ body.landing{
 	  line-height: 1.1;
 	  color: black;
 	
-	  background-color: $duckDByellow;
+	  background-color: $DataMineryellow;
 	  -webkit-transition: background-color .3s;
 	  -o-transition: background-color .3s;
 	  transition: background-color .3s;
 	  &:hover{
-		  background-color: darken($duckDByellow, 5%);
+		  background-color: darken($DataMineryellow, 5%);
 	  }
 	  // Custom arrow
 	  &:not(.select--multiple)::after {
@@ -304,7 +304,7 @@ body.landing{
 	.select-styled {
 		position: relative;
 		display: inline-block;
-		background-color: $duckDByellow;
+		background-color: $DataMineryellow;
 		padding: 12px 45px 12px 20px;
 		-webkit-transition: all 0.2s ease-in;
 		-o-transition: all 0.2s ease-in;
@@ -349,7 +349,7 @@ body.landing{
 		z-index: 700;
 		margin: 0;
 		list-style: none;
-		background-color: $duckDByellow;
+		background-color: $DataMineryellow;
 		border-radius: 20px;
 		padding: 8px;
 		//padding-top: calc(#{$select-height} / 2);
@@ -389,7 +389,7 @@ body.landing{
 			-webkit-box-align: start;
 				-ms-flex-align: start;
 					align-items: flex-start;
-			.duckdb{
+			.DataMiner{
 				width: calc(40%);
 				text-align: left;
 				p{
@@ -407,7 +407,7 @@ body.landing{
 		}
 	}
 	/** FEATURES SECTION **/
-	section.whyduckdb{
+	section.whyDataMiner{
 		background-image: url("data:image/svg+xml,%3Csvg width='360' height='1440' viewBox='0 0 360 1440' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_2620_1994)'%3E%3Crect width='360' height='1440' fill='white'/%3E%3Cpath d='M360 160.288C315.006 160.288 292.514 148.968 270.021 137.647C247.524 126.324 225.025 115 180.009 115C134.994 115 112.488 126.324 89.9841 137.647C67.4851 148.967 44.9878 160.286 0 160.288V1440H360L360 160.288Z' fill='%23FBFAFF'/%3E%3Cpath d='M360 430C315.057 430.022 292.566 441.335 270.076 452.647C247.568 463.968 225.061 475.288 180.052 475.288C135.039 475.288 112.533 463.966 90.0264 452.644C67.5201 441.322 45.0127 430 0 430V1440H360V430Z' fill='%23F1EEFF'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M360 790.288C315.006 790.288 292.514 778.968 270.021 767.647C247.524 756.324 225.025 745 180.009 745C134.994 745 112.488 756.324 89.9841 767.647C67.4851 778.967 44.9878 790.286 0 790.288V1440H360L360 790.288Z' fill='%23E8E4FF'/%3E%3Cpath d='M360.132 1060C315.101 1060 292.588 1071.32 270.076 1082.65C247.568 1093.97 225.061 1105.29 180.052 1105.29C135.039 1105.29 112.533 1093.97 90.0264 1082.64L90.026 1082.64L90.0255 1082.64C67.5192 1071.32 45.0127 1060 0 1060V1439H360.132V1060Z' fill='%23DFD9FF'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_2620_1994'%3E%3Crect width='360' height='1440' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
 		background-size: contain;
 		h1{
@@ -552,7 +552,7 @@ body.landing{
 		h1{
 			max-width: 500px;
 		}
-		section.welcome .flexwrap .duckdb{
+		section.welcome .flexwrap .DataMiner{
 			width: 100%;
 		}
 		section.welcome .flexwrap .window,
@@ -580,7 +580,7 @@ body.landing{
 		section#quickinstall .wrap .intro {
 			width: 100%;
 		}
-		section.whyduckdb{
+		section.whyDataMiner{
 			background-size: cover;
 		}
 		section.blog .newstileswrap{

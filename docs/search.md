@@ -8,7 +8,7 @@ title: Search
 <div id="main_content_wrap">
 <form autocomplete="off">
 <div class="autocomplete" style="width:300px;">
-<input id="q" type="text" name="q" placeholder="DuckDB">
+<input id="q" type="text" name="q" placeholder="DataMiner">
 </div>
 </form>
 </div>

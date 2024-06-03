@@ -136,7 +136,7 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 
 ## Partial Reading
 
-DataMiner supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by DuckDB.
+DataMiner supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by DataMiner.
 
 DataMiner also supports filter pushdown into the Parquet reader. When you apply a filter to a column that is scanned from a Parquet file, the filter will be pushed down into the scan, and can even be used to skip parts of the file using the built-in zonemaps. Note that this will depend on whether or not your Parquet file contains zonemaps.
 
@@ -231,7 +231,7 @@ COPY
     (FORMAT PARQUET, COMPRESSION LZ4_RAW);
 ```
 
-DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../../sql/statements/export) for more details:
+DataMiner's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [Export statement documentation](../../sql/statements/export) for more details:
 
 Export the table contents of the entire database as Parquet:
 

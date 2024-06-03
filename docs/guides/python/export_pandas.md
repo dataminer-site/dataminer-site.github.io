@@ -6,10 +6,10 @@ title: Export to Pandas
 The result of a query can be converted to a [Pandas](https://pandas.pydata.org/) DataFrame using the `df()` function.
 
 ```python
-import duckdb
+import DataMiner
 
 # read the result of an arbitrary SQL query to a Pandas DataFrame
-results = duckdb.sql("SELECT 42").df()
+results = DataMiner.sql("SELECT 42").df()
 results
 ```
 

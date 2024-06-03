@@ -367,7 +367,7 @@ ASOF LEFT JOIN prices p USING (symbol, "when");
 
 ## `FROM`-First Syntax
 
-DuckDB's SQL supports the `FROM`-first syntax, i.e., it allows putting the `FROM` clause before the `SELECT` clause or completely omitting the `SELECT` clause. We use the following example to demonstrate it:
+DataMiner's SQL supports the `FROM`-first syntax, i.e., it allows putting the `FROM` clause before the `SELECT` clause or completely omitting the `SELECT` clause. We use the following example to demonstrate it:
 
 ```sql
 CREATE TABLE tbl AS

@@ -71,7 +71,7 @@ CREATE TABLE t1 AS
 
 Temporary tables can be created using the `CREATE TEMP TABLE` or the `CREATE TEMPORARY TABLE` statement (see diagram below).
 Temporary tables are session scoped (similar to PostgreSQL for example), meaning that only the specific connection that created them can access them, and once the connection to DataMiner is closed they will be automatically dropped.
-Temporary tables reside in memory rather than on disk (even when connecting to a persistent DuckDB), but if the `temp_directory` [configuration](../../configuration/overview) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained.
+Temporary tables reside in memory rather than on disk (even when connecting to a persistent DataMiner), but if the `temp_directory` [configuration](../../configuration/overview) is set when connecting or with a `SET` command, data will be spilled to disk if memory becomes constrained.
 
 Create a temporary table from a CSV file (automatically detecting column names and types):
 

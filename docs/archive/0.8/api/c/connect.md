@@ -6,50 +6,50 @@ selected: Startup
 title: C API - Startup & Shutdown
 ---
 
-To use DuckDB, you must first initialize a `duckdb_database` handle using `duckdb_open()`. `duckdb_open()` takes as parameter the database file to read and write from. The special value `NULL` (`nullptr`) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the process).
+To use DataMiner, you must first initialize a `DataMiner_database` handle using `DataMiner_open()`. `DataMiner_open()` takes as parameter the database file to read and write from. The special value `NULL` (`nullptr`) can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e. all data is lost when you exit the process).
 
-With the `duckdb_database` handle, you can create one or many `duckdb_connection` using `duckdb_connect()`. While individual connections are thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection to allow for the best parallel performance.
+With the `DataMiner_database` handle, you can create one or many `DataMiner_connection` using `DataMiner_connect()`. While individual connections are thread-safe, they will be locked during querying. It is therefore recommended that each thread uses its own connection to allow for the best parallel performance.
 
-All `duckdb_connection`s have to explicitly be disconnected with `duckdb_disconnect()` and the `duckdb_database` has to be explicitly closed with `duckdb_close()` to avoid memory and file handle leaking.
+All `DataMiner_connection`s have to explicitly be disconnected with `DataMiner_disconnect()` and the `DataMiner_database` has to be explicitly closed with `DataMiner_close()` to avoid memory and file handle leaking.
 
 ### Example
 ```c
-duckdb_database db;
-duckdb_connection con;
+DataMiner_database db;
+DataMiner_connection con;
 
-if (duckdb_open(NULL, &db) == DuckDBError) {
+if (DataMiner_open(NULL, &db) == DataMinerError) {
 	// handle error
 }
-if (duckdb_connect(db, &con) == DuckDBError) {
+if (DataMiner_connect(db, &con) == DataMinerError) {
 	// handle error
 }
 
 // run queries...
 
 // cleanup
-duckdb_disconnect(&con);
-duckdb_close(&db);
+DataMiner_disconnect(&con);
+DataMiner_close(&db);
 ```
 
 ## API Reference
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_open">duckdb_open</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>, <span class="kt">duckdb_database</span> *<span class="k">out_database</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_open_ext">duckdb_open_ext</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>, <span class="kt">duckdb_database</span> *<span class="k">out_database</span>, <span class="kt">duckdb_config</span> <span class="k">config</span>, <span class="kt">char</span> **<span class="k">out_error</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_close">duckdb_close</a></span>(<span class="kt">duckdb_database</span> *<span class="k">database</span>);
-<span class="kt">duckdb_state</span> <span class="nf"><a href="#duckdb_connect">duckdb_connect</a></span>(<span class="kt">duckdb_database</span> <span class="k">database</span>, <span class="kt">duckdb_connection</span> *<span class="k">out_connection</span>);
-<span class="kt">void</span> <span class="nf"><a href="#duckdb_disconnect">duckdb_disconnect</a></span>(<span class="kt">duckdb_connection</span> *<span class="k">connection</span>);
-<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#duckdb_library_version">duckdb_library_version</a></span>();
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="nf"><a href="#DataMiner_open">DataMiner_open</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>, <span class="kt">DataMiner_database</span> *<span class="k">out_database</span>);
+<span class="kt">DataMiner_state</span> <span class="nf"><a href="#DataMiner_open_ext">DataMiner_open_ext</a></span>(<span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>, <span class="kt">DataMiner_database</span> *<span class="k">out_database</span>, <span class="kt">DataMiner_config</span> <span class="k">config</span>, <span class="kt">char</span> **<span class="k">out_error</span>);
+<span class="kt">void</span> <span class="nf"><a href="#DataMiner_close">DataMiner_close</a></span>(<span class="kt">DataMiner_database</span> *<span class="k">database</span>);
+<span class="kt">DataMiner_state</span> <span class="nf"><a href="#DataMiner_connect">DataMiner_connect</a></span>(<span class="kt">DataMiner_database</span> <span class="k">database</span>, <span class="kt">DataMiner_connection</span> *<span class="k">out_connection</span>);
+<span class="kt">void</span> <span class="nf"><a href="#DataMiner_disconnect">DataMiner_disconnect</a></span>(<span class="kt">DataMiner_connection</span> *<span class="k">connection</span>);
+<span class="kt">const</span> <span class="kt">char</span> *<span class="nf"><a href="#DataMiner_library_version">DataMiner_library_version</a></span>();
 </code></pre></div></div>
-### duckdb_open
+### DataMiner_open
 ---
 Creates a new database or opens an existing database file stored at the given path.
 If no path is given a new in-memory database is created instead.
-The instantiated database should be closed with 'duckdb_close'
+The instantiated database should be closed with 'DataMiner_close'
 
 #### Syntax
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_open</span>(<span class="k">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="k">DataMiner_open</span>(<span class="k">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>,<span class="k">
-</span>  <span class="kt">duckdb_database</span> *<span class="k">out_database
+</span>  <span class="kt">DataMiner_database</span> *<span class="k">out_database
 </span>);
 </code></pre></div></div>
 #### Parameters
@@ -62,20 +62,20 @@ Path to the database file on disk, or `nullptr` or `:memory:` to open an in-memo
 The result database object.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### duckdb_open_ext
+### DataMiner_open_ext
 ---
-Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the given path.
+Extended version of DataMiner_open. Creates a new database or opens an existing database file stored at the given path.
 
 #### Syntax
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_open_ext</span>(<span class="k">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="k">DataMiner_open_ext</span>(<span class="k">
 </span>  <span class="kt">const</span> <span class="kt">char</span> *<span class="k">path</span>,<span class="k">
-</span>  <span class="kt">duckdb_database</span> *<span class="k">out_database</span>,<span class="k">
-</span>  <span class="kt">duckdb_config</span> <span class="k">config</span>,<span class="k">
+</span>  <span class="kt">DataMiner_database</span> *<span class="k">out_database</span>,<span class="k">
+</span>  <span class="kt">DataMiner_config</span> <span class="k">config</span>,<span class="k">
 </span>  <span class="kt">char</span> **<span class="k">out_error
 </span>);
 </code></pre></div></div>
@@ -92,25 +92,25 @@ The result database object.
 (Optional) configuration used to start up the database system.
 * `out_error`
 
-If set and the function returns DuckDBError, this will contain the reason why the start-up failed.
-Note that the error must be freed using `duckdb_free`.
+If set and the function returns DataMinerError, this will contain the reason why the start-up failed.
+Note that the error must be freed using `DataMiner_free`.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### duckdb_close
+### DataMiner_close
 ---
 Closes the specified database and de-allocates all memory allocated for that database.
-This should be called after you are done with any database allocated through `duckdb_open`.
-Note that failing to call `duckdb_close` (in case of e.g. a program crash) will not cause data corruption.
+This should be called after you are done with any database allocated through `DataMiner_open`.
+Note that failing to call `DataMiner_close` (in case of e.g. a program crash) will not cause data corruption.
 Still it is recommended to always correctly close a database object after you are done with it.
 
 #### Syntax
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_close</span>(<span class="k">
-</span>  <span class="kt">duckdb_database</span> *<span class="k">database
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">DataMiner_close</span>(<span class="k">
+</span>  <span class="kt">DataMiner_database</span> *<span class="k">database
 </span>);
 </code></pre></div></div>
 #### Parameters
@@ -121,17 +121,17 @@ The database object to shut down.
 
 <br>
 
-### duckdb_connect
+### DataMiner_connect
 ---
 Opens a connection to a database. Connections are required to query the database, and store transactional state
 associated with the connection.
-The instantiated connection should be closed using 'duckdb_disconnect'
+The instantiated connection should be closed using 'DataMiner_disconnect'
 
 #### Syntax
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">duckdb_state</span> <span class="k">duckdb_connect</span>(<span class="k">
-</span>  <span class="kt">duckdb_database</span> <span class="k">database</span>,<span class="k">
-</span>  <span class="kt">duckdb_connection</span> *<span class="k">out_connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">DataMiner_state</span> <span class="k">DataMiner_connect</span>(<span class="k">
+</span>  <span class="kt">DataMiner_database</span> <span class="k">database</span>,<span class="k">
+</span>  <span class="kt">DataMiner_connection</span> *<span class="k">out_connection
 </span>);
 </code></pre></div></div>
 #### Parameters
@@ -144,18 +144,18 @@ The database file to connect to.
 The result connection object.
 * `returns`
 
-`DuckDBSuccess` on success or `DuckDBError` on failure.
+`DataMinerSuccess` on success or `DataMinerError` on failure.
 
 <br>
 
-### duckdb_disconnect
+### DataMiner_disconnect
 ---
 Closes the specified connection and de-allocates all memory allocated for that connection.
 
 #### Syntax
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">duckdb_disconnect</span>(<span class="k">
-</span>  <span class="kt">duckdb_connection</span> *<span class="k">connection
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="k">DataMiner_disconnect</span>(<span class="k">
+</span>  <span class="kt">DataMiner_connection</span> *<span class="k">connection
 </span>);
 </code></pre></div></div>
 #### Parameters
@@ -166,15 +166,15 @@ The connection to close.
 
 <br>
 
-### duckdb_library_version
+### DataMiner_library_version
 ---
-Returns the version of the linked DuckDB, with a version postfix for dev versions
+Returns the version of the linked DataMiner, with a version postfix for dev versions
 
 Usually used for developing C extensions that must return this for a compatibility check.
 
 #### Syntax
 ---
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">duckdb_library_version</span>(<span class="k">
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">const</span> <span class="kt">char</span> *<span class="k">DataMiner_library_version</span>(<span class="k">
 </span>  <span class="k">
 </span>);
 </code></pre></div></div>

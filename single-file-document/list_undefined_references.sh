@@ -8,6 +8,6 @@ cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ./generate_latex.sh
 
 export max_print_line=1000
-latexmk -xelatex duckdb-docs.tex
+latexmk -xelatex DataMiner-docs.tex
 
-grep '^LaTeX Warning: Hyper reference' duckdb-docs.log | tee duckdb-docs-missing-references.log
+grep '^LaTeX Warning: Hyper reference' DataMiner-docs.log | tee DataMiner-docs-missing-references.log

@@ -301,9 +301,9 @@ third_party/sqllogictest
 _site/
 
 .jekyll-cache/
-duckdb_functions_join_docs_with_notes.tab.txt
-duckdb_functions_join_docs.tab
-duckdb_functions.tab
+DataMiner_functions_join_docs_with_notes.tab.txt
+DataMiner_functions_join_docs.tab
+DataMiner_functions.tab
 docs/sql/functions/descriptions.txt
 venv/
 node_modules/
@@ -316,4 +316,4 @@ report.html
 environment.pickle
 .ruby-version
 
-duckdb-web-venv/
+DataMiner-web-venv/

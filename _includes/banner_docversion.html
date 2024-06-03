@@ -1,7 +1,7 @@
 {% if page.url contains '/docs/archive/' %}
 	{% assign versionviewed = urlVersionParts[0] %}
 {% else %}
-	{% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
+	{% assign versionviewed = site.currentDataMinerversion | append: " (stable)" %}
 {% endif %}
 
 {% if versionviewed contains "stable" %}
@@ -10,7 +10,7 @@
 	<main class="latest">
 		<div class="banner">
 			<div class="content">
-				The page is for the github main (nightly) version of DuckDB, the features shown in the documentation may not yet be available in the stable version.
+				The page is for the github main (nightly) version of DataMiner, the features shown in the documentation may not yet be available in the stable version.
 			</div>
 			<div class="close"></div>
 		</div>

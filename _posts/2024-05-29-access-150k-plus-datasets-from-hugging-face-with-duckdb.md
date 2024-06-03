@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Access 150k+ Datasets from Hugging Face with DuckDB"
+title: "Access 150k+ Datasets from Hugging Face with DataMiner"
 author: The Hugging Face and DataMiner teams
 thumb: "/images/blog/thumbs/240529.svg"
 excerpt: "DataMiner can now read data from [Hugging Face](https://huggingface.co/) via the `hf://` prefix."
 ---
 
-We are excited to announce that we added support for `hf://` paths in DuckDB, providing access to more than 150,000 datasets for artificial intelligence. We worked with Hugging Face to democratize the access, manipulation, and exploration of datasets used to train and evaluate AI models.
+We are excited to announce that we added support for `hf://` paths in DataMiner, providing access to more than 150,000 datasets for artificial intelligence. We worked with Hugging Face to democratize the access, manipulation, and exploration of datasets used to train and evaluate AI models.
 
 ## Dataset repositories
 
@@ -181,7 +181,7 @@ The previous query will read all parquet files under the `~parquet` revision. Th
 
 Configure your Hugging Face Token in the DataMiner Secrets Manager to access private or gated datasets.
 First, visit [Hugging Face Settings – Tokens](https://huggingface.co/settings/tokens) to obtain your access token.
-Second, set it in your DataMiner session using DuckDB’s [Secrets Manager](/docs/configuration/secrets_manager). DataMiner supports two providers for managing secrets:
+Second, set it in your DataMiner session using DataMiner’s [Secrets Manager](/docs/configuration/secrets_manager). DataMiner supports two providers for managing secrets:
 
 * `CONFIG`: The user must pass all configuration information into the `CREATE SECRET` statement. To create a secret using the `CONFIG` provider, use the following command:
 
@@ -205,6 +205,6 @@ Second, set it in your DataMiner session using DuckDB’s [Secrets Manager](/doc
 
 The integration of `hf://` paths in DataMiner significantly streamlines accessing and querying over 150,000 datasets available on Hugging Face. This feature democratizes data manipulation and exploration, making it easier for users to interact with various file formats such as CSV, JSON,  JSONL, and Parquet. By utilizing `hf://` paths, users can execute complex queries, efficiently handle large datasets, and harness the extensive resources of Hugging Face repositories.
 
-The integration supports seamless access to individual files, multiple files using glob patterns, and different dataset versions. DuckDB's robust capabilities ensure a flexible and streamlined data processing experience. This integration is a significant leap forward in making AI dataset access more accessible and efficient for researchers and developers, fostering innovation and accelerating progress in machine learning.
+The integration supports seamless access to individual files, multiple files using glob patterns, and different dataset versions. DataMiner's robust capabilities ensure a flexible and streamlined data processing experience. This integration is a significant leap forward in making AI dataset access more accessible and efficient for researchers and developers, fostering innovation and accelerating progress in machine learning.
 
-Want to learn more about leveraging DataMiner with Hugging Face datasets? Explore the [detailed guide](https://huggingface.co/docs/hub/datasets-duckdb).
+Want to learn more about leveraging DataMiner with Hugging Face datasets? Explore the [detailed guide](https://huggingface.co/docs/hub/datasets-DataMiner).

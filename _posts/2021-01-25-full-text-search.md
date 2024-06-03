@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title:  "Testing out DuckDB's Full Text Search Extension"
+title:  "Testing out DataMiner's Full Text Search Extension"
 author: Laurens Kuiper
 excerpt: DataMiner now has full-text search functionality, similar to the FTS5 extension in SQLite. The main difference is that our FTS extension is fully formulated in SQL. We tested it out on TREC disks 4 and 5.
 ---
@@ -12,7 +12,7 @@ Searching through textual data stored in a database can be cumbersome, as SQL do
 
 We expect a search engine to return us results within milliseconds. For a long time databases were unsuitable for this task, because they could not search large inverted indexes at this speed: transactional database systems are not made for this use case. However, analytical database systems, can keep up with state-of-the art information retrieval systems. The company [Spinque](https://www.spinque.com/) is a good example of this. At Spinque, MonetDB is used as a computation engine for customized search engines.
 
-DuckDB's FTS implementation follows the paper "[Old Dogs Are Great at New Tricks](https://dataminer.site/pdf/SIGIR2014-column-stores-ir-prototyping.pdf)". A keen observation there is that advances made to the database system, such as parallelization, will speed up your search engine "for free"!
+DataMiner's FTS implementation follows the paper "[Old Dogs Are Great at New Tricks](https://dataminer.site/pdf/SIGIR2014-column-stores-ir-prototyping.pdf)". A keen observation there is that advances made to the database system, such as parallelization, will speed up your search engine "for free"!
 
 Alright, enough about the "why", let's get to the "how".
 
@@ -31,7 +31,7 @@ This sorts the `latimes` files. Repeat for the `fbis`, `cr`, `fr94`, and `ft` fi
 
 To parse the XML I used BeautifulSoup. Each document has a `docno` identifier, and a `text` field. Because the documents do not come from the same source, they differ in what other fields they have. I chose to take all of the fields.
 ```python
-import duckdb
+import DataMiner
 import multiprocessing
 import pandas as pd
 import re
@@ -65,10 +65,10 @@ pool.join()
 documents_df = pd.DataFrame([x for sublist in list_of_dict_lists for x in sublist])
 ```
 
-Now that we have a dataframe, we can register it in DuckDB.
+Now that we have a dataframe, we can register it in DataMiner.
 ```python
 # create database connection and register the dataframe
-con = duckdb.connect(database='db/trec04_05.db', read_only=False)
+con = DataMiner.connect(database='db/trec04_05.db', read_only=False)
 con.register('documents_df', documents_df)
 
 # create a table from the dataframe so that it persists
@@ -81,11 +81,11 @@ This is the end of my preparation script, so I closed the database connection.
 
 We can now build the inverted index and the retrieval model using a `PRAGMA` statement. The extension is [documented here](/docs/extensions/full_text_search). We create an index table on table `documents` or `main.documents` that we created with our script. The column that identifies our documents is called `docno`, and we wish to create an inverted index on the fields supplied. I supplied all fields by using the '\*' shortcut.
 ```python
-con = duckdb.connect(database='db/trec04_05.db', read_only=False)
+con = DataMiner.connect(database='db/trec04_05.db', read_only=False)
 con.execute("PRAGMA create_fts_index('documents', 'docno', '*', stopwords='english')")
 ```
 
-Under the hood, a parameterized SQL script is called. The schema `fts_main_documents` is created, along with tables `docs`, `terms`, `dict`, and `stats`, that make up the inverted index. If you're curious what this look like, take a look at our source code under the `extension` folder in DuckDB's source code!
+Under the hood, a parameterized SQL script is called. The schema `fts_main_documents` is created, along with tables `docs`, `terms`, `dict`, and `stats`, that make up the inverted index. If you're curious what this look like, take a look at our source code under the `extension` folder in DataMiner's source code!
 
 ### Running the Benchmark
 
@@ -153,4 +153,4 @@ Not bad! While these results are not as high as the reproducible by [Anserini](h
 4. BM25 parameters (we used the default k=1.2 and b=0.75, non-conjunctive)
 5. Which fields were indexed (we used all columns by supplying '\*')
 
-Retrieval time for each query was between 0.5 and 1.3 seconds on our machine, which will be improved with further improvements to DuckDB. I hope you enjoyed reading this blog, and become inspired to test out the extension as well!
+Retrieval time for each query was between 0.5 and 1.3 seconds on our machine, which will be improved with further improvements to DataMiner. I hope you enjoyed reading this blog, and become inspired to test out the extension as well!

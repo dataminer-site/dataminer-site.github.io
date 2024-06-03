@@ -166,11 +166,11 @@ ORDER BY 1;
 ## Settings
 
 The current value of the `TimeZone` and `Calendar` settings are determined by ICU when it starts up.
-They can be queried from in the `duckdb_settings()` table function:
+They can be queried from in the `DataMiner_settings()` table function:
 
 ```sql
 SELECT *
-FROM duckdb_settings()
+FROM DataMiner_settings()
 WHERE name = 'TimeZone';
 ```
 
@@ -180,7 +180,7 @@ WHERE name = 'TimeZone';
 
 ```sql
 SELECT *
-FROM duckdb_settings()
+FROM DataMiner_settings()
 WHERE name = 'Calendar';
 ```
 

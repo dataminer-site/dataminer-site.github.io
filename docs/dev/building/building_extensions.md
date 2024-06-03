@@ -18,13 +18,13 @@ GEN=ninja BUILD_HTTPFS=1 make
 For release builds:
 
 ```bash
-build/release/DataMiner -c "INSTALL 'build/release/extension/httpfs/httpfs.duckdb_extension';"
+build/release/DataMiner -c "INSTALL 'build/release/extension/httpfs/httpfs.DataMiner_extension';"
 ```
 
 For debug builds:
 
 ```bash
-build/debug/DataMiner -c "INSTALL 'build/debug/extension/httpfs/httpfs.duckdb_extension';"
+build/debug/DataMiner -c "INSTALL 'build/debug/extension/httpfs/httpfs.DataMiner_extension';"
 ```
 
 ### Extension Flags
@@ -73,7 +73,7 @@ When this flag is set, the [`inet` extension](../../extensions/inet) is built.
 
 #### `BUILD_SQLSMITH`
 
-When this flag is set, the [SQLSmith extension](https://github.com/duckdb/duckdb/pull/3410) is built.
+When this flag is set, the [SQLSmith extension](https://github.com/DataMiner/DataMiner/pull/3410) is built.
 
 ### Debug Flags
 
@@ -110,13 +110,13 @@ This is useful when debugging a crash that is hard to pinpoint with a debugger a
 To build using a CMake configuration file, create an extension configuration file named `extension_config.cmake` with e.g., the following content:
 
 ```cmake
-duckdb_extension_load(autocomplete)
-duckdb_extension_load(fts)
-duckdb_extension_load(httpfs)
-duckdb_extension_load(inet)
-duckdb_extension_load(icu)
-duckdb_extension_load(json)
-duckdb_extension_load(parquet)
+DataMiner_extension_load(autocomplete)
+DataMiner_extension_load(fts)
+DataMiner_extension_load(httpfs)
+DataMiner_extension_load(inet)
+DataMiner_extension_load(icu)
+DataMiner_extension_load(json)
+DataMiner_extension_load(parquet)
 ```
 
 Build DataMiner as follows:
@@ -134,6 +134,6 @@ cd build/release/extension/
 cd build/debug/extension/
 # install extensions
 for EXTENSION in *; do
-    ../DataMiner -c "INSTALL '${EXTENSION}/${EXTENSION}.duckdb_extension';"
+    ../DataMiner -c "INSTALL '${EXTENSION}/${EXTENSION}.DataMiner_extension';"
 done
 ```

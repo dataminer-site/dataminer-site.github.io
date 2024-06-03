@@ -26,7 +26,7 @@ All official extensions are distributed for the following platforms.
 Some extensions are distributed for the following platforms:
 
 * `windows_amd64_rtools`
-* `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions](../api/wasm/extensions))
+* `wasm_eh` and `wasm_mvp` (see [DataMiner-Wasm's extensions](../api/wasm/extensions))
 
 For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_gcc4`, `windows_amd64_mingw`).
 
@@ -38,10 +38,10 @@ The shared installation location allows extensions to be shared between the clie
 
 By default, DataMiner extensions are installed from a single repository containing extensions built and signed by the core
 DataMiner team. This ensures the stability and security of the core set of extensions. These extensions live in the default `core` repository
-which points to `http://extensions.duckdb.org`.
+which points to `http://extensions.DataMiner.org`.
 
 Besides the core repository, DataMiner also supports installing extensions from other repositories. For example, the `core_nightly` repository contains nightly builds for core extensions
-that are built for the latest stable release of DuckDB. This allows users to try out new features in extensions before they are officially published.
+that are built for the latest stable release of DataMiner. This allows users to try out new features in extensions before they are officially published.
 
 ### Installing Extensions from a Repository
 
@@ -60,7 +60,7 @@ INSTALL httpfs FROM core;
 Or:
 
 ```sql
-INSTALL httpfs FROM 'http://extensions.duckdb.org';
+INSTALL httpfs FROM 'http://extensions.DataMiner.org';
 ```
 
 To install an extension from the core nightly repository:
@@ -72,19 +72,19 @@ INSTALL spatial FROM core_nightly;
 Or:
 
 ```sql
-INSTALL spatial FROM 'http://nightly-extensions.duckdb.org';
+INSTALL spatial FROM 'http://nightly-extensions.DataMiner.org';
 ```
 
-To install an extensions from a custom repository unknown to DuckDB:
+To install an extensions from a custom repository unknown to DataMiner:
 
 ```sql
 INSTALL custom_extension FROM 'https://my-custom-extension-repository';
 ```
 
-Alternatively, the `custom_extension_repository` setting can be used to change the default repository used by DuckDB:
+Alternatively, the `custom_extension_repository` setting can be used to change the default repository used by DataMiner:
 
 ```sql
-SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
+SET custom_extension_repository = 'http://nightly-extensions.DataMiner.org';
 ```
 
 While any url or local path can be used as a repository, currently DataMiner contains the following predefined repositories:
@@ -93,8 +93,8 @@ While any url or local path can be used as a repository, currently DataMiner con
 
 | alias               | Url                                    | Description                                                                            |
 |:--------------------|:---------------------------------------|:---------------------------------------------------------------------------------------|
-| core                | `http://extensions.duckdb.org`         | DataMiner core extensions                                                                 |
-| core_nightly        | `http://nightly-extensions.duckdb.org` | Nightly builds for `core`                                                              |
+| core                | `http://extensions.DataMiner.org`         | DataMiner core extensions                                                                 |
+| core_nightly        | `http://nightly-extensions.DataMiner.org` | Nightly builds for `core`                                                              |
 | local_build_debug   | `./build/debug/repository`             | Repository created when building DataMiner from source in debug mode (for development)    |
 | local_build_release | `./build/release/repository`           | Repository created when building DataMiner from source in release mode (for development)  |
 
@@ -106,7 +106,7 @@ and version of the different extensions. For this reason, DataMiner keeps track 
 ```sql
 INSTALL httpfs FROM core;
 INSTALL aws FROM core_nightly;
-SELECT extensions_name, extensions_version, installed_from, install_mode FROM duckdb_extensions();
+SELECT extensions_name, extensions_version, installed_from, install_mode FROM DataMiner_extensions();
 ```
 Would output:
 
@@ -126,18 +126,18 @@ for local paths and remote servers, for example:
 base_repository_path_or_url
 └── v1.0.0
     └── osx_arm64
-        ├── autocomplete.duckdb_extension
-        ├── httpfs.duckdb_extension
-        ├── icu.duckdb_extension
-        ├── inet.duckdb_extension
-        ├── json.duckdb_extension
-        ├── parquet.duckdb_extension
-        ├── tpcds.duckdb_extension
-        ├── tpcds.duckdb_extension
-        └── tpch.duckdb_extension
+        ├── autocomplete.DataMiner_extension
+        ├── httpfs.DataMiner_extension
+        ├── icu.DataMiner_extension
+        ├── inet.DataMiner_extension
+        ├── json.DataMiner_extension
+        ├── parquet.DataMiner_extension
+        ├── tpcds.DataMiner_extension
+        ├── tpcds.DataMiner_extension
+        └── tpch.DataMiner_extension
 ```
 
-See the [`extension-template` repository](https://github.com/duckdb/extension-template/) for all necessary code and scripts
+See the [`extension-template` repository](https://github.com/DataMiner/extension-template/) for all necessary code and scripts
 to set up a repository.
 
 When installing an extension from a custom repository, DataMiner will search for both a gzipped and non-gzipped version. For example:
@@ -146,26 +146,26 @@ When installing an extension from a custom repository, DataMiner will search for
 INSTALL icu FROM '⟨custom repository⟩';
 ```
 
-The execution of this statement will first look `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
+The execution of this statement will first look `icu.DataMiner_extension.gz`, then `icu.DataMiner_extension` in the repository's directory structure.
 
 If the custom repository is served over HTTPS or S3, the [`httpfs` extension](httpfs/overview) is required. DataMiner will attempt to [autoload](overview#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.
 
 ## Downloading Extensions Directly from S3
 
-Downloading an extension directly can be helpful when building a [Lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DuckDB.
+Downloading an extension directly can be helpful when building a [Lambda service](https://aws.amazon.com/pm/lambda/) or container that uses DataMiner.
 DataMiner extensions are stored in public S3 buckets, but the directory structure of those buckets is not searchable.
 As a result, a direct URL to the file must be used.
 To download an extension file directly, use the following format:
 
 ```text
-http://extensions.duckdb.org/v⟨duckdb_version⟩/⟨platform_name⟩/⟨extension_name⟩.duckdb_extension.gz
+http://extensions.DataMiner.org/v⟨DataMiner_version⟩/⟨platform_name⟩/⟨extension_name⟩.DataMiner_extension.gz
 ```
 
 For example:
 
 ```text
-http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json.duckdb_extension.gz
+http://extensions.DataMiner.org/v{{ site.currentDataMinerversion }}/windows_amd64/json.DataMiner_extension.gz
 ```
 
 
@@ -173,13 +173,13 @@ http://extensions.duckdb.org/v{{ site.currentduckdbversion }}/windows_amd64/json
 
 ### Installing Extensions from an Explicit Path
 
-`INSTALL` can be used with the path to either a `.duckdb_extension` file.
-`.duckdb_extension.gz` files need to be decompressed before issuing `INSTALL name.duckdb_extension;`.
+`INSTALL` can be used with the path to either a `.DataMiner_extension` file.
+`.DataMiner_extension.gz` files need to be decompressed before issuing `INSTALL name.DataMiner_extension;`.
 
 For example, if the file was available into the same directory as where DataMiner is being executed, you can install it as follows:
 
 ```sql
-INSTALL 'path/to/httpfs.duckdb_extension';
+INSTALL 'path/to/httpfs.DataMiner_extension';
 ```
 
 It is also possible to specify remote paths.
@@ -209,11 +209,11 @@ FORCE INSTALL spatial FROM core_nightly;
 
 ## Loading Extension from a Path
 
-`LOAD` can be used with the path to a `.duckdb_extension`.
-For example, if the file was available at the (relative) path `path/to/httpfs.duckdb_extension`, you can load it as follows:
+`LOAD` can be used with the path to a `.DataMiner_extension`.
+For example, if the file was available at the (relative) path `path/to/httpfs.DataMiner_extension`, you can load it as follows:
 
 ```sql
-LOAD 'path/to/httpfs.duckdb_extension';
+LOAD 'path/to/httpfs.DataMiner_extension';
 ```
 
 This will skip any currently installed file in the specifed path.
@@ -226,4 +226,4 @@ For building and installing extensions from source, see the [building guide](/de
 
 ## Statically Linking Extensions
 
-To statically link extensions, follow the [developer documentation's "Using extension config files" section](https://github.com/duckdb/duckdb/blob/main/extension/README.md#using-extension-config-files).
+To statically link extensions, follow the [developer documentation's "Using extension config files" section](https://github.com/DataMiner/DataMiner/blob/main/extension/README.md#using-extension-config-files).

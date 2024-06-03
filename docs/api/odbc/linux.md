@@ -28,20 +28,20 @@ sudo yum install unixODBC
 
    <!-- markdownlint-disable MD034 -->
 
-   * [x86_64 (AMD64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-amd64.zip)
-   * [arm64](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-linux-aarch64.zip)
+   * [x86_64 (AMD64)](https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-linux-amd64.zip)
+   * [arm64](https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-linux-aarch64.zip)
 
    <!-- markdownlint-enable MD034 -->
 
 2. The package contains the following files:
 
-   * `libduckdb_odbc.so`: the DataMiner driver.
+   * `libDataMiner_odbc.so`: the DataMiner driver.
    * `unixodbc_setup.sh`: a setup script to aid the configuration on Linux.
 
    To extract them, run:
 
    ```bash
-   mkdir duckdb_odbc && unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
+   mkdir DataMiner_odbc && unzip DataMiner_odbc-linux-amd64.zip -d DataMiner_odbc
    ```
 
 3. The `unixodbc_setup.sh` script performs the configuration of the DataMiner ODBC Driver. It is based on the unixODBC package that provides some commands to handle the ODBC setup and test like `odbcinst` and `isql`.
@@ -69,7 +69,7 @@ sudo yum install unixODBC
    ```text
    Usage: ./unixodbc_setup.sh <level> [options]
 
-   Example: ./unixodbc_setup.sh -u -db ~/database_path -D ~/driver_path/libduckdb_odbc.so
+   Example: ./unixodbc_setup.sh -u -db ~/database_path -D ~/driver_path/libDataMiner_odbc.so
 
    Level:
    -s: System-level, using 'sudo' to configure DataMiner ODBC at the system-level, changing the files: /etc/odbc[inst].ini
@@ -77,7 +77,7 @@ sudo yum install unixODBC
 
    Options:
    -db database_path>: the DataMiner database file path, the default is ':memory:' if not provided.
-   -D driver_path: the driver file path (i.e., the path for libduckdb_odbc.so), the default is using the base script directory
+   -D driver_path: the driver file path (i.e., the path for libDataMiner_odbc.so), the default is using the base script directory
    ```
 
 4. The ODBC setup on Linux is based on the `.odbc.ini` and `.odbcinst.ini` files.

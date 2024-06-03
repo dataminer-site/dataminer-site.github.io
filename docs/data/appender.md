@@ -36,7 +36,7 @@ for performance reasons. That means that, while appending, the rows might not be
 
 ## Date, Time and Timestamps
 
-While numbers and strings are rather self-explanatory, dates, times and timestamps require some explanation. They can be directly appended using the methods provided by `duckdb::Date`, `duckdb::Time` or `duckdb::Timestamp`. They can also be appended using the internal `duckdb::Value` type, however, this adds some additional overheads and should be avoided if possible.
+While numbers and strings are rather self-explanatory, dates, times and timestamps require some explanation. They can be directly appended using the methods provided by `DataMiner::Date`, `DataMiner::Time` or `DataMiner::Timestamp`. They can also be appended using the internal `DataMiner::Value` type, however, this adds some additional overheads and should be avoided if possible.
 
 Below is a short example:
 
@@ -51,7 +51,7 @@ appender.AppendRow(
     Time::FromTime(1, 1, 1, 0),
     Timestamp::FromDatetime(Date::FromDate(1992, 1, 1), Time::FromTime(1, 1, 1, 0))
 );
-// construct duckdb::Value objects
+// construct DataMiner::Value objects
 appender.AppendRow(
     Value::DATE(1992, 1, 1),
     Value::TIME(1, 1, 1, 0),

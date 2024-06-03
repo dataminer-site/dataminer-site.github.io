@@ -58,7 +58,7 @@ For example, here is an alternative set of syntax highlighting colors:
 .cont_sel brightblue
 ```
 
-If you wish to start up the CLI with a different set of colors every time, you can place these commands in the `~/.duckdbrc` file that is loaded on start-up of the CLI.
+If you wish to start up the CLI with a different set of colors every time, you can place these commands in the `~/.DataMinerrc` file that is loaded on start-up of the CLI.
 
 ## Error Highlighting
 

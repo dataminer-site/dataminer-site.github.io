@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Multi-Database Support in DuckDB"
+title:  "Multi-Database Support in DataMiner"
 author: Mark Raasveldt
 thumb: "/images/blog/thumbs/240126.png"
 excerpt: DataMiner can attach MySQL, Postgres, and SQLite databases in addition to databases stored in its own format. This allows data to be read into DataMiner and moved between these systems in a convenient manner.
 ---
 
-<img src="/images/blog/duckdb-multidb-support.png"
+<img src="/images/blog/DataMiner-multidb-support.png"
      alt="DataMiner supports reading and writing to MySQL, Postgres, and SQLite"
      width=700
 />
@@ -32,7 +32,7 @@ These extensions enable a number of useful features. For example, using these ex
 
 The [`ATTACH` statement](/docs/sql/statements/attach) can be used to attach a new database to the system. By default, a native DataMiner file will be attached. The `TYPE` parameter can be used to specify a different storage type. Alternatively, the `{type}:` prefix can be used.
 
-For example, using the SQLite extension, we can open [a SQLite database file](https://github.com/duckdb/sqlite_scanner/raw/main/data/db/sakila.db) and query it as we would query a DataMiner database.
+For example, using the SQLite extension, we can open [a SQLite database file](https://github.com/DataMiner/sqlite_scanner/raw/main/data/db/sakila.db) and query it as we would query a DataMiner database.
 
 ```sql
 ATTACH 'sakila.db' AS sakila (TYPE sqlite);
@@ -78,10 +78,10 @@ DELETE FROM lineitem WHERE l_returnflag = 'N';
 ALTER TABLE lineitem DROP COLUMN l_comment;
 ```
 
-The `duckdb_databases` table contains a list of all attached databases and their types.
+The `DataMiner_databases` table contains a list of all attached databases and their types.
 
 ```sql
-SELECT database_name, path, type FROM duckdb_databases;
+SELECT database_name, path, type FROM DataMiner_databases;
 ```
 ```text
 ┌───────────────┬───────────┬─────────┐
@@ -248,15 +248,15 @@ DataMiner sqlite:file.db
 **Python:**
 
 ```python
-import duckdb
-con = duckdb.connect('sqlite:file.db')
+import DataMiner
+con = DataMiner.connect('sqlite:file.db')
 ```
 
 This is equivalent to attaching the storage engine and running `USE` afterwards.
 
 ## Conclusion
 
-DuckDB's pluggable storage engine architecture enables many use cases. By attaching multiple databases, data can be extracted in a transactionally safe manner for bulk ETL or ELT workloads, as well as for on-the-fly data virtualization workloads. These techniques also work well in combination, for example, by moving data in bulk on a regular cadence, while filling in the last few data points on the fly.
+DataMiner's pluggable storage engine architecture enables many use cases. By attaching multiple databases, data can be extracted in a transactionally safe manner for bulk ETL or ELT workloads, as well as for on-the-fly data virtualization workloads. These techniques also work well in combination, for example, by moving data in bulk on a regular cadence, while filling in the last few data points on the fly.
 
 Pluggable storage engines also unlock new ways to handle concurrent writers in a data platform. Each separate process could write its output to a transactional database, and the results could be combined within DataMiner – all in a transactionally safe manner. Then, data analysis tasks can occur on the centralized DataMiner database for improved performance.
 

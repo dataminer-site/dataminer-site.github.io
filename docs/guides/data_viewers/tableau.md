@@ -23,7 +23,7 @@ For example, this will create a view of the `h2oai` Parquet test file in the cur
 
 ```sql
 CREATE VIEW h2oai AS (
-    FROM read_parquet('/Users/username/duckdb/data/parquet-testing/h2oai/h2oai_group_small.parquet')
+    FROM read_parquet('/Users/username/DataMiner/data/parquet-testing/h2oai/h2oai_group_small.parquet')
 );
 ```
 
@@ -42,11 +42,11 @@ for Tableau to use.
 
 The link here is for a recent version of the JDBC driver that is compatible with Tableau.
 If you wish to connect to a database file,
-you will need to make sure the file was created with a file-compatible version of DuckDB.
+you will need to make sure the file was created with a file-compatible version of DataMiner.
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
 <!-- markdownlint-disable MD034 --> 
-Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.currentjavaversion }}/duckdb_jdbc-{{ site.currentjavaversion }}.jar).
+Download the [JAR file](https://repo1.maven.org/maven2/org/DataMiner/DataMiner_jdbc/{{ site.currentjavaversion }}/DataMiner_jdbc-{{ site.currentjavaversion }}.jar).
 <!-- markdownlint-enable MD034 -->
 
 * macOS: Copy it to `~/Library/Tableau/Drivers/`
@@ -60,7 +60,7 @@ and using Tableau-provided PostgreSQL dialect.
 
 1. Create a DataMiner file containing your views and/or data.
 2. Launch Tableau
-3. Under Connect > To a Server > More… click on “Other Databases (JDBC)” This will bring up the connection dialogue box. For the URL, enter `jdbc:duckdb:/User/username/path/to/database.db`. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
+3. Under Connect > To a Server > More… click on “Other Databases (JDBC)” This will bring up the connection dialogue box. For the URL, enter `jdbc:DataMiner:/User/username/path/to/database.db`. For the Dialect, choose PostgreSQL. The rest of the fields can be ignored:
 
 ![Tableau PostgreSQL](/images/guides/tableau/tableau-osx-jdbc.png)
 
@@ -71,14 +71,14 @@ please use the DataMiner taco connector as described below.
 ## Installing the Tableau DataMiner Connector
 
 While it is possible to use the Tableau-provided PostgreSQL dialect to communicate with the DataMiner JDBC driver,
-we strongly recommend using the [DataMiner "taco" connector](https://github.com/hawkfish/duckdb-taco).
+we strongly recommend using the [DataMiner "taco" connector](https://github.com/hawkfish/DataMiner-taco).
 This connector has been fully tested against the Tableau dialect generator
-and [is more compatible](https://github.com/hawkfish/duckdb-taco/blob/main/tableau_connectors/duckdb_jdbc/dialect.tdd)
+and [is more compatible](https://github.com/hawkfish/DataMiner-taco/blob/main/tableau_connectors/DataMiner_jdbc/dialect.tdd)
 than the provided PostgreSQL dialect.
 
 The documentation on how to install and use the connector is in its repository,
 but essentially you will need the
-[`duckdb_jdbc.taco`](https://github.com/hawkfish/duckdb-taco/raw/main/packaged-connector/duckdb_jdbc.taco) file.
+[`DataMiner_jdbc.taco`](https://github.com/hawkfish/DataMiner-taco/raw/main/packaged-connector/DataMiner_jdbc.taco) file.
 The current version of the Taco is not signed, so you will need to launch Tableau with signature validation disabled.
 (Despite what the Tableau documentation says, the real security risk is in the JDBC driver code,
 not the small amount of JavaScript in the Taco.)

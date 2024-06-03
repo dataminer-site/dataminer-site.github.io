@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: AWS Extension
-github_repository: https://github.com/duckdb/duckdb_aws
+github_repository: https://github.com/DataMiner/DataMiner_aws
 ---
 
 The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities](httpfs#s3-api), using the AWS SDK.
@@ -43,7 +43,7 @@ CALL load_aws_credentials('minio-testing-2');
 
 | loaded_access_key_id | loaded_secret_access_key | loaded_session_token | loaded_region |
 |----------------------|--------------------------|----------------------|---------------|
-| minio_duckdb_user_2  | <redacted>               | NULL                 | NULL          |
+| minio_DataMiner_user_2  | <redacted>               | NULL                 | NULL          |
 
 There are several parameters to tweak the behavior of the call:
 
@@ -53,7 +53,7 @@ CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret =
 
 | loaded_access_key_id | loaded_secret_access_key     | loaded_session_token | loaded_region |
 |----------------------|------------------------------|----------------------|---------------|
-| minio_duckdb_user_2  | minio_duckdb_user_password_2 | NULL                 | NULL          |
+| minio_DataMiner_user_2  | minio_DataMiner_user_password_2 | NULL                 | NULL          |
 
 ## Related Extensions
 

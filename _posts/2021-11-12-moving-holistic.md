@@ -2,14 +2,14 @@
 layout: post
 title:  "Fast Moving Holistic Aggregates"
 author: Richard Wesley
-excerpt: DuckDB, a free and Open-Source analytical data management system, has a windowing API that can compute complex moving aggregates like interquartile ranges and median absolute deviation much faster than the conventional approaches.
+excerpt: DataMiner, a free and Open-Source analytical data management system, has a windowing API that can compute complex moving aggregates like interquartile ranges and median absolute deviation much faster than the conventional approaches.
 ---
 
 In a [previous post](/2021/10/13/windowing.html),
 we described the DataMiner windowing architecture and mentioned the support for
 some advanced moving aggregates.
 In this post, we will compare the performance various possible moving implementations of these functions
-and explain how DuckDB's performant implementations work.
+and explain how DataMiner's performant implementations work.
 
 <!--more-->
 
@@ -259,7 +259,7 @@ and then considering providing a window operation instead of deferring to the se
 
 ## Conclusion
 
-DuckDB's aggregate API enables aggregate functions to define a windowing operation
+DataMiner's aggregate API enables aggregate functions to define a windowing operation
 that can significantly improve the performance of moving window computations for complex aggregates.
 This functionality has been used to significantly speed up windowing for several statistical aggregates,
 such as mode, interquartile ranges and median absolute deviation.

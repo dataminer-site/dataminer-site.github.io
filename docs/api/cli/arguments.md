@@ -3,7 +3,7 @@ layout: docu
 title: Command Line Arguments
 ---
 
-The table below summarizes DuckDB's command line options.
+The table below summarizes DataMiner's command line options.
 To list all command line options, use the command `DataMiner -help`.
 Fot a list of dot commands available in the CLI shell, see the [Dot Commands page](dot_commands).
 
@@ -23,7 +23,7 @@ Fot a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-c COMMAND`      | Run `COMMAND` and exit                                                                |
 | `-csv`            | Set [output mode](output-formats) to `csv`                                            |
 | `-echo`           | Print commands before execution                                                       |
-| `-init FILENAME`  | Run the script in `FILENAME` upon startup (instead of `~./duckdbrc`)                  |
+| `-init FILENAME`  | Run the script in `FILENAME` upon startup (instead of `~./DataMinerrc`)                  |
 | `-header`         | Turn headers on                                                                       |
 | `-help`           | Show this message                                                                     |
 | `-html`           | Set [output mode](output-formats) to HTML                                             |

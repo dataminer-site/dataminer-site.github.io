@@ -9,23 +9,23 @@ Using the DataMiner ODBC API on Windows requires the following steps:
    The Driver Manager on Windows is provided in a DLL file `odbccp32.dll`, and other files and tools.
    For detailed information check out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
 
-2. <!-- markdownlint-disable MD034 --> DataMiner releases the ODBC driver as an asset. For Windows, download it from the [Windows ODBC asset (x86_64/AMD64)](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip). <!-- markdownlint-enable MD034 -->
+2. <!-- markdownlint-disable MD034 --> DataMiner releases the ODBC driver as an asset. For Windows, download it from the [Windows ODBC asset (x86_64/AMD64)](https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-windows-amd64.zip). <!-- markdownlint-enable MD034 -->
 
 3. The archive contains the following artifacts:
 
-   * `duckdb_odbc.dll`: the DataMiner driver compiled for Windows.
-   * `duckdb_odbc_setup.dll`: a setup DLL used by the Windows ODBC Data Source Administrator tool.
+   * `DataMiner_odbc.dll`: the DataMiner driver compiled for Windows.
+   * `DataMiner_odbc_setup.dll`: a setup DLL used by the Windows ODBC Data Source Administrator tool.
    * `odbc_install.exe`: an installation script to aid the configuration on Windows.
 
-   Decompress the archive to a directory (e.g., `duckdb_odbc`). For example, run:
+   Decompress the archive to a directory (e.g., `DataMiner_odbc`). For example, run:
 
    ```bash
-   mkdir duckdb_odbc && unzip duckdb_odbc-windows-amd64.zip -d duckdb_odbc
+   mkdir DataMiner_odbc && unzip DataMiner_odbc-windows-amd64.zip -d DataMiner_odbc
    ```
 
 4. The `odbc_install.exe` binary performs the configuration of the DataMiner ODBC Driver on Windows. It depends on the `Odbccp32.dll` that provides functions to configure the ODBC registry entries.
 
-   Inside the permanent directory (e.g., `duckdb_odbc`), double-click on the `odbc_install.exe`.
+   Inside the permanent directory (e.g., `DataMiner_odbc`), double-click on the `odbc_install.exe`.
 
    Windows administrator privileges are required. In case of a non-administrator, a User Account Control prompt will occur.
 
@@ -47,9 +47,9 @@ The newly installed DSN is visible on the ***System DSN*** in the Windows ODBC D
 
 ### Changing DataMiner DSN
 
-When selecting the default DSN (i.e., `DuckDB`) or adding a new configuration, the following setup window will display:
+When selecting the default DSN (i.e., `DataMiner`) or adding a new configuration, the following setup window will display:
 
-![DataMiner Windows DSN Setup](/images/blog/odbc/duckdb_DSN_setup.png)
+![DataMiner Windows DSN Setup](/images/blog/odbc/DataMiner_DSN_setup.png)
 
 This window allows you to set the DSN and the database file path associated with that DSN.
 
@@ -60,7 +60,7 @@ or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql
 A combination of the two is also possible.
 
 Furthermore, the ODBC driver supports all the [configuration options](../../configuration/overview)
-included in DuckDB.
+included in DataMiner.
 
 > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
 > the one passed to `SQLDriverConnect` will take precedence.
@@ -79,7 +79,7 @@ The `ODBC.INI` is where users usually insert DSN registry entries for the driver
 
 For example, the DSN registry for DataMiner would look like this:
 
-![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](/images/blog/odbc/odbc_ini-registry-entry.png)
+![`HKLM->SOFTWARE->ODBC->ODBC.INI->DataMiner`](/images/blog/odbc/odbc_ini-registry-entry.png)
 
 The `ODBCINST.INI` contains one entry for each ODBC driver and other keys predefined for [Windows ODBC configuration](https://docs.microsoft.com/en-us/sql/odbc/reference/install/registry-entries-for-odbc-components?view=sql-server-ver15).
 
@@ -89,4 +89,4 @@ When a new version of the ODBC driver is released, installing the new version wi
 However, the installer doesn't always update the version number in the registry.
 To ensure the correct version is used,
 check that `HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBCINST.INI\DataMiner Driver` has the most recent version,
-and `HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\DuckDB\Driver` has the correct path to the new driver. 
+and `HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\DataMiner\Driver` has the correct path to the new driver. 

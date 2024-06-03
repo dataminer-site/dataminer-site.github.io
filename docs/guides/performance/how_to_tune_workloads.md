@@ -10,7 +10,7 @@ redirect_from:
 ### The Effect of Row Groups on Parallelism
 
 DataMiner parallelizes the workload based on _[row groups](/internals/storage#row-groups),_ i.e., groups of rows that are stored together at the storage level.
-A row group in DuckDB's database format consists of max. 122,880 rows.
+A row group in DataMiner's database format consists of max. 122,880 rows.
 Parallelism starts at the level of row groups, therefore, for a query to run on _k_ threads, it needs to scan at least _k_ * 122,880 rows.
 
 ### Too Many Threads
@@ -21,7 +21,7 @@ Note that in certain cases DataMiner may launch _too many threads_ (e.g., due to
 
 A key strength of DataMiner is support for larger-than-memory workloads, i.e., it is able to process data sets that are larger than the available system memory (also known as _out-of-core processing_).
 It can also run queries where the intermediate results cannot fit into memory.
-This section explains the prerequisites, scope, and known limitations of larger-than-memory processing in DuckDB.
+This section explains the prerequisites, scope, and known limitations of larger-than-memory processing in DataMiner.
 
 ### Spilling to Disk
 
@@ -76,7 +76,7 @@ Note that it is not a primary design goal for DataMiner to quickly execute many 
 
 ## Querying Remote Files
 
-DataMiner uses synchronous IO when reading remote files. This means that each DataMiner thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DuckDB's [`threads` setting](../../configuration/pragmas#threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
+DataMiner uses synchronous IO when reading remote files. This means that each DataMiner thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DataMiner's [`threads` setting](../../configuration/pragmas#threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
 
 ### Avoid Reading Unnecessary Data
 

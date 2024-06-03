@@ -3,12 +3,12 @@ layout: docu
 title: Types API
 ---
 
-The `DuckDBPyType` class represents a type instance of our [data types](../../sql/data_types/overview).
+The `DataMinerPyType` class represents a type instance of our [data types](../../sql/data_types/overview).
 
 ## Converting from Other Types
 
-To make the API as easy to use as possible, we have added implicit conversions from existing type objects to a DuckDBPyType instance.
-This means that wherever a DuckDBPyType object is expected, it is also possible to provide any of the options listed below.
+To make the API as easy to use as possible, we have added implicit conversions from existing type objects to a DataMinerPyType instance.
+This means that wherever a DataMinerPyType object is expected, it is also possible to provide any of the options listed below.
 
 ### Python Built-ins
 
@@ -53,10 +53,10 @@ The table below shows the mapping of Numpy DType to DataMiner type.
 Which can also be arbitrarily nested.
 
 ```python
-import duckdb
+import DataMiner
 from typing import Union
 
-duckdb.typing.DuckDBPyType(list[dict[Union[str, int], str])
+DataMiner.typing.DataMinerPyType(list[dict[Union[str, int], str])
 # MAP(UNION(u1 VARCHAR, u2 BIGINT), VARCHAR)[]
 ```
 
@@ -65,9 +65,9 @@ duckdb.typing.DuckDBPyType(list[dict[Union[str, int], str])
 `dict` type objects map to a `MAP` type of the key type and the value type.
 
 ```python
-import duckdb
+import DataMiner
 
-duckdb.typing.DuckDBPyType(dict[str, int])
+DataMiner.typing.DataMinerPyType(dict[str, int])
 # MAP(VARCHAR, BIGINT)
 ```
 
@@ -76,9 +76,9 @@ duckdb.typing.DuckDBPyType(dict[str, int])
 `dict` objects map to a `STRUCT` composed of the keys and values of the dict.
 
 ```python
-import duckdb
+import DataMiner
 
-duckdb.typing.DuckDBPyType({'a': str, 'b': int})
+DataMiner.typing.DataMinerPyType({'a': str, 'b': int})
 # STRUCT(a VARCHAR, b BIGINT)
 ```
 
@@ -87,16 +87,16 @@ duckdb.typing.DuckDBPyType({'a': str, 'b': int})
 `typing.Union` objects map to a `UNION` type of the provided types.
 
 ```python
-import duckdb
+import DataMiner
 from typing import Union
 
-duckdb.typing.DuckDBPyType(Union[int, str, bool, bytearray])
+DataMiner.typing.DataMinerPyType(Union[int, str, bool, bytearray])
 # UNION(u1 BIGINT, u2 VARCHAR, u3 BOOLEAN, u4 BLOB)
 ```
 
 ### Creation Functions
 
-For the built-in types, you can use the constants defined in `duckdb.typing`:
+For the built-in types, you can use the constants defined in `DataMiner.typing`:
 
 <div class="narrow_table"></div>
 
@@ -130,24 +130,24 @@ For the built-in types, you can use the constants defined in `duckdb.typing`:
 | `UUID`         |
 | `VARCHAR`      |
 
-For the complex types there are methods available on the `DuckDBPyConnection` object or the `duckdb` module.
-Anywhere a `DuckDBPyType` is accepted, we will also accept one of the type objects that can implicitly convert to a `DuckDBPyType`.
+For the complex types there are methods available on the `DataMinerPyConnection` object or the `DataMiner` module.
+Anywhere a `DataMinerPyType` is accepted, we will also accept one of the type objects that can implicitly convert to a `DataMinerPyType`.
 
 #### `list_type` | `array_type`
 
 Parameters:  
-- `child_type: DuckDBPyType`
+- `child_type: DataMinerPyType`
 
 #### `struct_type` | `row_type`
 
 Parameters:  
-- `fields: Union[list[DuckDBPyType], dict[str, DuckDBPyType]]`
+- `fields: Union[list[DataMinerPyType], dict[str, DataMinerPyType]]`
 
 #### `map_type`
 
 Parameters:  
-- `key_type: DuckDBPyType`
-- `value_type: DuckDBPyType`
+- `key_type: DataMinerPyType`
+- `value_type: DataMinerPyType`
 
 #### `decimal_type`
 
@@ -158,7 +158,7 @@ Parameters:
 #### `union_type`
 
 Parameters:  
-- `members: Union[list[DuckDBPyType], dict[str, DuckDBPyType]]`
+- `members: Union[list[DataMinerPyType], dict[str, DataMinerPyType]]`
 
 #### `string_type`
 

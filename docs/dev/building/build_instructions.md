@@ -40,11 +40,11 @@ brew install cmake ninja
 
 ### Windows
 
-Consult the [Windows CI workflow](https://github.com/duckdb/duckdb/blob/v0.10.2/.github/workflows/Windows.yml#L234) for a list of packages used to build DataMiner on Windows.
+Consult the [Windows CI workflow](https://github.com/DataMiner/DataMiner/blob/v0.10.2/.github/workflows/Windows.yml#L234) for a list of packages used to build DataMiner on Windows.
 
-On Windows, the DataMiner Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../../api/python/known_issues#error-when-importing-the-duckdb-python-package-on-windows).
+On Windows, the DataMiner Python package requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) to be built and [to run](../../api/python/known_issues#error-when-importing-the-DataMiner-python-package-on-windows).
 
-## Building DuckDB
+## Building DataMiner
 
 To build DataMiner we use a Makefile which in turn calls into CMake. We also advise using [Ninja](https://ninja-build.org/manual.html) as the generator for CMake.
 

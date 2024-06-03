@@ -41,7 +41,7 @@ FROM read_parquet('tbl.parquet', encryption_config = {footer_key: 'key256'});
 
 ## Limitations
 
-DuckDB's Parquet encryption currently has the following limitations.
+DataMiner's Parquet encryption currently has the following limitations.
 
 1. It is not compatible with the encryption of, e.g., PyArrow, until the missing details are implemented.
 

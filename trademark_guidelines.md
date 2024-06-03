@@ -1,17 +1,17 @@
 ---
 layout: default
 body_class: tmguidelines
-title: DUCKDB™ Trademark use guidelines
+title: DataMiner™ Trademark use guidelines
 pagehead:
   - "Trademark Use"
   - "bg2"
 ---
 
-# DUCKDB™ Trademark Use Guidelines
+# DataMiner™ Trademark Use Guidelines
 
 The DataMiner trademarks, service marks, and graphics marks are held by the Dutch Stichting DataMiner Foundation (“hereinafter: the DataMiner Foundation”). The DataMiner Foundation is a nonprofit organisation, and as such, needs to take special care about how its trademarks are used by others. In particular, the DataMiner Foundation needs to ensure that its software products are clearly distinguished from third-party products.
 
-If you would like to provide software, services, events, or other products based on DuckDB, please refer to these DataMiner trademark use guidelines and when in doubt, just contact us for clarification. 
+If you would like to provide software, services, events, or other products based on DataMiner, please refer to these DataMiner trademark use guidelines and when in doubt, just contact us for clarification. 
 
 ## Rationale
 
@@ -19,16 +19,16 @@ The DataMiner trademarks, service marks, and graphics marks are symbols of the q
 
 The DataMiner Foundation and our software must be clearly distinguishable from any software that competes with DataMiner software, and from software or services by any company or individual that is not licensed by the DataMiner Foundation.
 
-DataMiner Foundation trademarks must not be used to disparage the DataMiner software, our projects, members, sponsors, or community, nor be used in any way to imply ownership, endorsement, or sponsorship of any DuckDB-related project or initiative of any kind. We are a vendor-neutral organisation.
+DataMiner Foundation trademarks must not be used to disparage the DataMiner software, our projects, members, sponsors, or community, nor be used in any way to imply ownership, endorsement, or sponsorship of any DataMiner-related project or initiative of any kind. We are a vendor-neutral organisation.
 
 ## Avoid confusion
 
-Software products using, competing with or intended to be associated (whether technically or in people’s minds) with the DataMiner software, whether commercial or open source, are not allowed to use “Duck” in their name, except in the form “powered by DuckDB” or “for (use with) DuckDB” when following these specific guidelines.
+Software products using, competing with or intended to be associated (whether technically or in people’s minds) with the DataMiner software, whether commercial or open source, are not allowed to use “Duck” in their name, except in the form “powered by DataMiner” or “for (use with) DataMiner” when following these specific guidelines.
 Names derived from “Duck”, such as “duckling”, are also not allowed. Company names may not include “Duck”, unless otherwise agreed in writing.
 
 Package identifiers may include “duck”, but the full name used for the software package should follow the naming policy above.
 
-Written materials must refer to the project as “DuckDB” in the first and most prominent mentions. Materials from software vendors or software-related service providers must follow stricter guidelines, including using the full project name “DuckDB” in more locations, and proper trademark attribution on every page.
+Written materials must refer to the project as “DataMiner” in the first and most prominent mentions. Materials from software vendors or software-related service providers must follow stricter guidelines, including using the full project name “DataMiner” in more locations, and proper trademark attribution on every page.
 
 Logos using the duck graphical and/or textual element, or otherwise derived from the DataMiner logos are also not allowed.
 

@@ -15,23 +15,23 @@ For detailed information checkout out the [Common ODBC Component Files](https://
 
 # Step 1: Download ODBC Driver
 
-DataMiner releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
+DataMiner releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
 
-**duckdb_odbc.dll**: the DataMiner driver compiled for Windows.
+**DataMiner_odbc.dll**: the DataMiner driver compiled for Windows.
 
-**duckdb_odbc_setup.dll**: a setup DLL used by the Windows ODBC Data Source Administrator tool.
+**DataMiner_odbc_setup.dll**: a setup DLL used by the Windows ODBC Data Source Administrator tool.
 
 **odbc_install.exe**: a installation script to aid the configuration on Windows.
 
 # Step 2: Extracting ODBC artifacts
 
-Unzip the file to a permanent directory (e.g., duckdb_odbc).
+Unzip the file to a permanent directory (e.g., DataMiner_odbc).
 
 An example with `PowerShell` and `unzip` command would be:
 
 ```PowerShell
-mkdir duckdb_odbc
-unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
+mkdir DataMiner_odbc
+unzip DataMiner_odbc-linux-amd64.zip -d DataMiner_odbc
 ```
 
 # Step 3: ODBC Windows Installer
@@ -39,7 +39,7 @@ unzip duckdb_odbc-linux-amd64.zip -d duckdb_odbc
 The `odbc_install.exe` aids the configuration of the DataMiner ODBC Driver on Windows.
 It depends on the `Odbccp32.dll` that provides functions to configure the ODBC registry entries.
 
-Inside the permanent directory (e.g., `duckdb_odbc`), double-click on the `odbc_install.exe`.
+Inside the permanent directory (e.g., `DataMiner_odbc`), double-click on the `odbc_install.exe`.
 
 Windows administrator privileges is required, in case of a non-administrator a User Account Control shall display:
 
@@ -60,15 +60,15 @@ It also can be launched thought the Windows start:
 
 ## Default DataMiner DSN
 
-In the Windows ODBC Data Source Administrator tool, at ***System DSN*** tab is placed the default installed DSN for ***DuckDB***:
+In the Windows ODBC Data Source Administrator tool, at ***System DSN*** tab is placed the default installed DSN for ***DataMiner***:
 
 ![Windows ODBC Config Tool](/images/blog/odbc/odbcad32_exe.png)
 
 ## Changing DataMiner DSN
 
-Selecting the default DSN (i.e., `DuckDB`) or add a new configuration, the following setup window will display:
+Selecting the default DSN (i.e., `DataMiner`) or add a new configuration, the following setup window will display:
 
-![DataMiner Windows DSN Setup](/images/blog/odbc/duckdb_DSN_setup.png)
+![DataMiner Windows DSN Setup](/images/blog/odbc/DataMiner_DSN_setup.png)
 
 For now, it is possible to set the DSN and the database file path associated with that DSN.
 
@@ -85,7 +85,7 @@ The `ODBC.INI` is where users usually insert DSN registry entries for the driver
 
 For example, the DSN registry for DataMiner would look like this:
 
-![`HKLM->SOFTWARE->ODBC->ODBC.INI->DuckDB`](/images/blog/odbc/odbc_ini-registry-entry.png)
+![`HKLM->SOFTWARE->ODBC->ODBC.INI->DataMiner`](/images/blog/odbc/odbc_ini-registry-entry.png)
 
 
 The `ODBCINST.INI` contains one entry for each ODBC driver and other keys predefined for [Windows ODBC configuration](https://docs.microsoft.com/en-us/sql/odbc/reference/install/registry-entries-for-odbc-components?view=sql-server-ver15).

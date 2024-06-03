@@ -325,13 +325,13 @@ $(document).ready(function(){
 	
 	// Header Animation
 	if( $('.hamburger').is(':visible') ){
-		var animationpath = "/js/duckdbanimation_search.json"
+		var animationpath = "/js/DataMineranimation_search.json"
 	} else {
-		var animationpath = "/js/duckdbanimation.json"
+		var animationpath = "/js/DataMineranimation.json"
 	}
-	let duckDBicon = document.getElementById('duckdbanimation');	
-    let animationduckDBicon = lottie.loadAnimation({
-            container: duckDBicon,
+	let DataMinericon = document.getElementById('DataMineranimation');	
+    let animationDataMinericon = lottie.loadAnimation({
+            container: DataMinericon,
             renderer: 'svg',
             loop: false,
             autoplay: false,
@@ -339,13 +339,13 @@ $(document).ready(function(){
     });
     
 	if( !$('.hamburger').is(':visible') ){
-		$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseenter(function() {
-			animationduckDBicon.play();
-			animationduckDBicon.setDirection(1)
+		$('#DataMineranimation, .DataMinerhome img.downloadlogo').mouseenter(function() {
+			animationDataMinericon.play();
+			animationDataMinericon.setDirection(1)
 		})
-		$('#duckdbanimation, .duckdbhome img.downloadlogo').mouseleave(function() {
-			animationduckDBicon.play();
-			animationduckDBicon.setDirection(-1)
+		$('#DataMineranimation, .DataMinerhome img.downloadlogo').mouseleave(function() {
+			animationDataMinericon.play();
+			animationDataMinericon.setDirection(-1)
 		})
 	}
 	
@@ -355,28 +355,28 @@ $(document).ready(function(){
 		  renderer: 'svg',
 		  loop: true,
 		  autoplay: true,
-		  path: "/js/duckdbanimationloop.json"
+		  path: "/js/DataMineranimationloop.json"
 		});
 	}
 	
 	
 	// Landingpage Animation
 	if( $("body.landing").length != 0 ){
-		let duckDBcircled = document.getElementById('duckdbdanimationcircled');	
-	    let animationduckDBcircled = lottie.loadAnimation({
-	            container: duckDBcircled,
+		let DataMinercircled = document.getElementById('DataMinerdanimationcircled');	
+	    let animationDataMinercircled = lottie.loadAnimation({
+	            container: DataMinercircled,
 	            renderer: 'svg',
 	            loop: false,
 	            autoplay: false,
-	            path: "/js/duckdbanimation-circle.json"
+	            path: "/js/DataMineranimation-circle.json"
 	    });
-		$('#duckdbdanimationcircled').mouseenter(function() {
-			animationduckDBcircled.play();
-			animationduckDBcircled.setDirection(1)
+		$('#DataMinerdanimationcircled').mouseenter(function() {
+			animationDataMinercircled.play();
+			animationDataMinercircled.setDirection(1)
 		})
-		$('#duckdbdanimationcircled').mouseleave(function() {
-			animationduckDBcircled.play();
-			animationduckDBcircled.setDirection(-1)
+		$('#DataMinerdanimationcircled').mouseleave(function() {
+			animationDataMinercircled.play();
+			animationDataMinercircled.setDirection(-1)
 		})
 	}
 	

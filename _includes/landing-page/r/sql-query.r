@@ -1,8 +1,8 @@
 # Find the largest sepals & petals in the Iris data set
-library(duckdb)
+library(DataMiner)
 
-con <- dbConnect(duckdb())
-duckdb_register(con, "iris", iris)
+con <- dbConnect(DataMiner())
+DataMiner_register(con, "iris", iris)
 
 query <- r'(
 SELECT count(*) AS num_observations,

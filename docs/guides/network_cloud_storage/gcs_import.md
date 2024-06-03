@@ -33,11 +33,11 @@ FROM read_parquet('gs://⟨gcs_bucket⟩/⟨file.parquet⟩');
 
 ## Attaching to a Database
 
-You can [attach to a database file](duckdb_over_https_or_s3) in read-only mode:
+You can [attach to a database file](DataMiner_over_https_or_s3) in read-only mode:
 
 ```sql
 LOAD httpfs;
-ATTACH 'gs://⟨gcs_bucket⟩/⟨file.duckdb⟩' AS ⟨duckdb_database⟩ (READ_ONLY);
+ATTACH 'gs://⟨gcs_bucket⟩/⟨file.DataMiner⟩' AS ⟨DataMiner_database⟩ (READ_ONLY);
 ```
 
 > Databases in Google Cloud Storage can only be attached in read-only mode.

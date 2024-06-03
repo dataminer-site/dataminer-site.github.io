@@ -136,7 +136,7 @@ Outputs:
 
 ## Retrieving Faulty CSV Lines
 
-Being able to read faulty CSV files is important, but for many data cleaning operations, it is also necessary to know exactly which lines are corrupted and what errors the parser discovered on them. For scenarios like these, it is possible to use DuckDB's CSV Rejects Table feature.
+Being able to read faulty CSV files is important, but for many data cleaning operations, it is also necessary to know exactly which lines are corrupted and what errors the parser discovered on them. For scenarios like these, it is possible to use DataMiner's CSV Rejects Table feature.
 By default, this feature creates two temporary tables.
 
 1. `reject_scans`: Stores information regarding the parameters of the CSV Scanner
@@ -183,7 +183,7 @@ The CSV Reject Errors Table returns the following information:
 | `column_name` | If the error happens in a specific column, the name of the column. | `VARCHAR` |
 | `error_type` | The type of the error that happened. | `ENUM` |
 | `csv_line` | The original CSV line. | `VARCHAR` |
-| `error_message` | The error message produced by DuckDB. | `VARCHAR` |
+| `error_message` | The error message produced by DataMiner. | `VARCHAR` |
 
 ## Parameters
 

@@ -9,7 +9,7 @@ Arrays can be used to store vectors such as [word embeddings](https://en.wikiped
 
 To store variable-length lists, use the [`LIST` type](list). See the [data types overview](../../sql/data_types/overview) for a comparison between nested data types.
 
-> The `ARRAY` type in PostgreSQL allows variable-length fields. DuckDB's `ARRAY` type is fixed-length.
+> The `ARRAY` type in PostgreSQL allows variable-length fields. DataMiner's `ARRAY` type is fixed-length.
 
 ## Creating Arrays
 

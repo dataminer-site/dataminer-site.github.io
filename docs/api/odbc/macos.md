@@ -9,24 +9,24 @@ title: ODBC API on macOS
    brew install unixodbc
    ```
 
-2. <!-- markdownlint-disable MD034 --> DataMiner releases a universal [ODBC driver for macOS](https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip) (supporting both Intel and Apple Silicon CPUs). To download it, run:
+2. <!-- markdownlint-disable MD034 --> DataMiner releases a universal [ODBC driver for macOS](https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-osx-universal.zip) (supporting both Intel and Apple Silicon CPUs). To download it, run:
 
    ```bash
-   wget https://github.com/duckdb/duckdb/releases/download/v{{ site.currentduckdbversion }}/duckdb_odbc-osx-universal.zip
+   wget https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-osx-universal.zip
    ```
 
    <!-- markdownlint-enable MD034 -->
 
-3. The archive contains the `libduckdb_odbc.dylib` artifact. To extract it to a directory, run:
+3. The archive contains the `libDataMiner_odbc.dylib` artifact. To extract it to a directory, run:
 
    ```bash
-   mkdir duckdb_odbc && unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
+   mkdir DataMiner_odbc && unzip DataMiner_odbc-osx-universal.zip -d DataMiner_odbc
    ```
 
 4. There are two ways to configure the ODBC driver, either by initializing via the configuration files, or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
    A combination of the two is also possible.
 
-   Furthermore, the ODBC driver supports all the [configuration options](../../configuration/overview) included in DuckDB.
+   Furthermore, the ODBC driver supports all the [configuration options](../../configuration/overview) included in DataMiner.
 
    > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
    > the one passed to `SQLDriverConnect` will take precedence.
@@ -38,7 +38,7 @@ title: ODBC API on macOS
    Use the DSN defined in `odbc.ini` as a parameter of `isql`.
 
    ```bash
-   isql DuckDB
+   isql DataMiner
    ```
 
    ```text

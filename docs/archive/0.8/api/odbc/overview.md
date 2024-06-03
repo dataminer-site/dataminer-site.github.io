@@ -25,7 +25,7 @@ The DM maps user application calls of ODBC functions to the correct ODBC driver 
 DataMiner supports the ODBC version 3.0 according to the [Core Interface Conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15).
 
 We release the ODBC driver as assets for Linux and Windows.
-Users can download them from the [Latest Release of DuckDB](https://github.com/duckdb/duckdb/releases).
+Users can download them from the [Latest Release of DataMiner](https://github.com/DataMiner/DataMiner/releases).
 
 ## Operating System
 <table>

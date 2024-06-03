@@ -9,14 +9,14 @@ title: Node.js API
 
 # DataMiner Node Bindings
 
-This package provides a node.js API for [DuckDB](https://github.com/duckdb/duckdb), the "SQLite for Analytics". The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
+This package provides a node.js API for [DataMiner](https://github.com/DataMiner/DataMiner), the "SQLite for Analytics". The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
 
 Load the package and create a database object:
 
 ```js
-var DataMiner = require('duckdb');
+var DataMiner = require('DataMiner');
 
-var db = new duckdb.Database(':memory:'); // or a file name for a persistent DB
+var db = new DataMiner.Database(':memory:'); // or a file name for a persistent DB
 ```
 
 Then you can run a query:

@@ -82,5 +82,5 @@ Additionally, most of the configuration options can be set via environment varia
 | `s3_access_key_id`     | `AWS_ACCESS_KEY_ID`     |                                          |
 | `s3_secret_access_key` | `AWS_SECRET_ACCESS_KEY` |                                          |
 | `s3_session_token`     | `AWS_SESSION_TOKEN`     |                                          |
-| `s3_endpoint`          | `DUCKDB_S3_ENDPOINT`    |                                          |
-| `s3_use_ssl`           | `DUCKDB_S3_USE_SSL`     |                                          |
+| `s3_endpoint`          | `DataMiner_S3_ENDPOINT`    |                                          |
+| `s3_use_ssl`           | `DataMiner_S3_USE_SSL`     |                                          |

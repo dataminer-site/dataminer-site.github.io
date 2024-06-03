@@ -1,14 +1,14 @@
-import duckdb
+import DataMiner
 import time
 import os
 
 sf = os.environ['SF']
 
 print("Benchmark to join on BIGINT field")
-print(f"DataMiner version: {duckdb.__version__}")
+print(f"DataMiner version: {DataMiner.__version__}")
 print(f"Scale factor: SF{sf}")
 
-con = duckdb.connect(database = "ldbc.duckdb")
+con = DataMiner.connect(database = "ldbc.DataMiner")
 con.sql("""
         CREATE TABLE Comment (
             creationDate TIMESTAMP WITH TIME ZONE NOT NULL,

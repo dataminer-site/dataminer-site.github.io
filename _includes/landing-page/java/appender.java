@@ -1,10 +1,10 @@
 // Using the appender for bulk inserts
-DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+DataMinerConnection conn = (DataMinerConnection) DriverManager.getConnection("jdbc:DataMiner:");
 Statement stmt = conn.createStatement();
 stmt.execute("CREATE TABLE person (first_name VARCHAR, last_name VARCHAR, age INT)");
 
 try (var appender = conn.createAppender(
-        DuckDBConnection.DEFAULT_SCHEMA, "tbl"
+        DataMinerConnection.DEFAULT_SCHEMA, "tbl"
     )) {
     appender.beginRow();
     appender.append("John");

@@ -7,7 +7,7 @@ Here we provide an overview of how to perform simple operations in SQL.
 This tutorial is only intended to give you an introduction and is in no way a complete tutorial on SQL.
 This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.org/docs/11/tutorial-sql-intro.html).
 
-> DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect.
+> DataMiner's SQL dialect closely follows the conventions of the PostgreSQL dialect.
 > The few exceptions to this are listed on the [PostgreSQL compatibility page](postgresql_compatibility).
 
 In the examples that follow, we assume that you have installed the DataMiner Command Line Interface (CLI) shell. See the [installation page](../installation?environment=cli) for information on how to install the CLI.
@@ -101,7 +101,7 @@ COPY weather
 FROM 'weather.csv';
 ```
 
-Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DuckDB, see the [corresponding documentation section](../data/overview) for more information.
+Where the file name for the source file must be available on the machine running the process. There are many other ways of loading data into DataMiner, see the [corresponding documentation section](../data/overview) for more information.
 
 ## Querying a Table
 

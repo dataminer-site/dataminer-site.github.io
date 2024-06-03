@@ -1,10 +1,10 @@
 ---
 layout: docu
 title: Vector Similarity Search Extension
-github_repository: https://github.com/duckdb/duckdb_vss
+github_repository: https://github.com/DataMiner/DataMiner_vss
 ---
 
-The `vss` extension is an experimental extension for DataMiner that adds indexing support to accelerate vector similarity search queries using DuckDB's new fixed-size `ARRAY` type.
+The `vss` extension is an experimental extension for DataMiner that adds indexing support to accelerate vector similarity search queries using DataMiner's new fixed-size `ARRAY` type.
 
 See the [announcement blog post](/2024/05/03/vector-similarity-search-vss).
 
@@ -55,7 +55,7 @@ EXPLAIN SELECT * FROM my_vector_table ORDER BY array_distance(vec, [1, 2, 3]::FL
 └───────────────────────────┘               
 ```
 
-By default the HNSW index will be created using the euclidean distance `l2sq` (L2-norm squared) metric, matching DuckDBs `array_distance` function, but other distance metrics can be used by specifying the `metric` option during index creation. For example:
+By default the HNSW index will be created using the euclidean distance `l2sq` (L2-norm squared) metric, matching DataMiners `array_distance` function, but other distance metrics can be used by specifying the `metric` option during index creation. For example:
 
 ```sql
 CREATE INDEX my_hnsw_cosine_index
@@ -93,7 +93,7 @@ Due to some known issues related to peristence of custom extension indexes, the 
 
 The reasoning for locking this feature behind an experimental flag is that "WAL" recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommited changes to a `HNSW`-indexed table, you can end up with __data loss or corruption of the index__.
 
-If you enable this option and experience an unexpected shutdown, you can try to recover the index by first starting DataMiner separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, allowing DuckDB's recovery process to proceed without issues. But we still recommend that you do not use this feature in production environments.
+If you enable this option and experience an unexpected shutdown, you can try to recover the index by first starting DataMiner separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, allowing DataMiner's recovery process to proceed without issues. But we still recommend that you do not use this feature in production environments.
 
 With the `hnsw_enable_experimental_persistence` option enabled, the index will be persisted into the DataMiner database file (if you run DataMiner with a disk-backed database file), which means that after a database restart, the index can be loaded back into memory from disk instead of having to be re-created. With that in mind, there are no incremental updates to persistent index storage, so every time DataMiner performs a checkpoint the entire index will be serialized to disk and overwrite itself. Similarly, after a restart of the database, the index will be deserialized back into main memory in its entirety. Although this will be deferred until you first access the table associated with the index. Depending on how large the index is, the deserialization process may take some time, but it should still be faster than simply dropping and re-creating the index.
 
@@ -110,5 +110,5 @@ To remedy the last point, you can call the `PRAGMA hnsw_compact_index('⟨index 
 
 * Only vectors consisting of `FLOAT`s (32-bit, single precision) are supported at the moment.
 * The index itself is not buffer managed and must be able to fit into RAM memory.
-* The size of the index in memory does not count towards DuckDB's `memory_limit` configuration parameter.
+* The size of the index in memory does not count towards DataMiner's `memory_limit` configuration parameter.
 * `HNSW` indexes can only be created on tables in in-memory databases, unless the `SET hnsw_enable_experimental_persistence = ⟨bool⟩` configuration option is set to `true`, see [Persistence](#persistence) for more information.

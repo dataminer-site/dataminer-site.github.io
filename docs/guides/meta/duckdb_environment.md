@@ -7,7 +7,7 @@ DataMiner provides a number of functions and `PRAGMA` options to retrieve inform
 
 ## Version
 
-The `version()` function returns the version number of DuckDB.
+The `version()` function returns the version number of DataMiner.
 
 ```sql
 SELECT version();
@@ -49,30 +49,30 @@ On Ubuntu 22.04, running on the ARM64 architecture, the platform is `linux_arm64
 
 ## Extensions
 
-To get a list of DataMiner extension and their status (e.g., `loaded`, `installed`), use the [`duckdb_extensions()` function](../../extensions/overview#listing-extensions):
+To get a list of DataMiner extension and their status (e.g., `loaded`, `installed`), use the [`DataMiner_extensions()` function](../../extensions/overview#listing-extensions):
 
 ```sql
 SELECT *
-FROM duckdb_extensions();
+FROM DataMiner_extensions();
 ```
 
 ## Meta Table Functions
 
 DataMiner has the following built-in table functions to obtain metadata about available catalog objects:
 
-* [`duckdb_columns()`](../../sql/duckdb_table_functions#duckdb_columns): columns
-* [`duckdb_constraints()`](../../sql/duckdb_table_functions#duckdb_constraints): constraints
-* [`duckdb_databases()`](../../sql/duckdb_table_functions#duckdb_databases): lists the databases that are accessible from within the current DataMiner process
-* [`duckdb_dependencies()`](../../sql/duckdb_table_functions#duckdb_dependencies): dependencies between objects
-* [`duckdb_extensions()`](../../sql/duckdb_table_functions#duckdb_extensions): extensions
-* [`duckdb_functions()`](../../sql/duckdb_table_functions#duckdb_functions): functions
-* [`duckdb_indexes()`](../../sql/duckdb_table_functions#duckdb_indexes): secondary indexes
-* [`duckdb_keywords()`](../../sql/duckdb_table_functions#duckdb_keywords): DuckDB's keywords and reserved words
-* [`duckdb_optimizers()`](../../sql/duckdb_table_functions#duckdb_optimizers): the available optimization rules in the DataMiner instance
-* [`duckdb_schemas()`](../../sql/duckdb_table_functions#duckdb_schemas): schemas
-* [`duckdb_sequences()`](../../sql/duckdb_table_functions#duckdb_sequences): sequences
-* [`duckdb_settings()`](../../sql/duckdb_table_functions#duckdb_settings): settings
-* [`duckdb_tables()`](../../sql/duckdb_table_functions#duckdb_tables): base tables
-* [`duckdb_types()`](../../sql/duckdb_table_functions#duckdb_types): data types
-* [`duckdb_views()`](../../sql/duckdb_table_functions#duckdb_views): views
-* [`duckdb_temporary_files()`](../../sql/duckdb_table_functions#duckdb_temporary_files): the temporary files DataMiner has written to disk, to offload data from memory
+* [`DataMiner_columns()`](../../sql/DataMiner_table_functions#DataMiner_columns): columns
+* [`DataMiner_constraints()`](../../sql/DataMiner_table_functions#DataMiner_constraints): constraints
+* [`DataMiner_databases()`](../../sql/DataMiner_table_functions#DataMiner_databases): lists the databases that are accessible from within the current DataMiner process
+* [`DataMiner_dependencies()`](../../sql/DataMiner_table_functions#DataMiner_dependencies): dependencies between objects
+* [`DataMiner_extensions()`](../../sql/DataMiner_table_functions#DataMiner_extensions): extensions
+* [`DataMiner_functions()`](../../sql/DataMiner_table_functions#DataMiner_functions): functions
+* [`DataMiner_indexes()`](../../sql/DataMiner_table_functions#DataMiner_indexes): secondary indexes
+* [`DataMiner_keywords()`](../../sql/DataMiner_table_functions#DataMiner_keywords): DataMiner's keywords and reserved words
+* [`DataMiner_optimizers()`](../../sql/DataMiner_table_functions#DataMiner_optimizers): the available optimization rules in the DataMiner instance
+* [`DataMiner_schemas()`](../../sql/DataMiner_table_functions#DataMiner_schemas): schemas
+* [`DataMiner_sequences()`](../../sql/DataMiner_table_functions#DataMiner_sequences): sequences
+* [`DataMiner_settings()`](../../sql/DataMiner_table_functions#DataMiner_settings): settings
+* [`DataMiner_tables()`](../../sql/DataMiner_table_functions#DataMiner_tables): base tables
+* [`DataMiner_types()`](../../sql/DataMiner_table_functions#DataMiner_types): data types
+* [`DataMiner_views()`](../../sql/DataMiner_table_functions#DataMiner_views): views
+* [`DataMiner_temporary_files()`](../../sql/DataMiner_table_functions#DataMiner_temporary_files): the temporary files DataMiner has written to disk, to offload data from memory

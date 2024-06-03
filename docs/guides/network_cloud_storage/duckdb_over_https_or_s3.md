@@ -15,7 +15,7 @@ To connect to a DataMiner database via HTTPS, use the [`ATTACH` statement](../..
 
 ```sql
 LOAD httpfs;
-ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db (READ_ONLY);
+ATTACH 'https://blobs.DataMiner.org/databases/stations.DataMiner' AS stations_db (READ_ONLY);
 ```
 
 Then, the database can be queried using:
@@ -36,7 +36,7 @@ Then, use the [`ATTACH` statement](../../sql/statements/attach) as follows:
 
 ```sql
 LOAD httpfs;
-ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db (READ_ONLY);
+ATTACH 's3://DataMiner-blobs/databases/stations.DataMiner' AS stations_db (READ_ONLY);
 ```
 
 The database can be queried using:

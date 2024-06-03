@@ -11,7 +11,7 @@
 	{% elsif page.url contains '/docs/latest/' %}
 		<!-- todo -->
 	{% else %}
-		{% assign versionviewed = site.currentduckdbversion | append: " (stable)" %}
+		{% assign versionviewed = site.currentDataMinerversion | append: " (stable)" %}
 		{% assign startingUrl = "docs/" %}
 		{% assign urlParts = page.url | replace: ".html", "" | split: "/" %}
 	{% endif %}

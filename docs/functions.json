@@ -1328,7 +1328,7 @@
       "str2"
     ],
     "description": "The Jaro similarity between two strings. Different case is considered different. Returns a number between 0 and 1",
-    "example": "jaro_similarity('duck','duckdb')",
+    "example": "jaro_similarity('duck','DataMiner')",
     "type": "scalar_function",
     "category": "string",
     "result": 0.8888888888888888
@@ -1340,7 +1340,7 @@
       "str2"
     ],
     "description": "The Jaro-Winkler similarity between two strings. Different case is considered different. Returns a number between 0 and 1",
-    "example": "jaro_winkler_similarity('duck','duckdb')",
+    "example": "jaro_winkler_similarity('duck','DataMiner')",
     "type": "scalar_function",
     "category": "string",
     "result": 0.9333333333333333
@@ -2263,7 +2263,7 @@
     "struct": "RegexpEscapeFun",
     "type": "scalar_function",
     "category": "string",
-    "result": "https\\:\\/\\/duckdb\\.org"
+    "result": "https\\:\\/\\/DataMiner\\.org"
   },
   {
     "name": "regr_avgx",

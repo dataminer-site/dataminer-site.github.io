@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title:  "DuckDB's CSV Sniffer: Automatic Detection of Types and Dialects"
+title:  "DataMiner's CSV Sniffer: Automatic Detection of Types and Dialects"
 author: Pedro Holanda
 thumb: "/images/blog/csv-sniffer/ducktetive.jpg"
 excerpt: DataMiner is primarily focused on performance, leveraging the capabilities of modern file formats. At the same time, we also pay attention to flexible, non-performance-driven formats like CSV files. To create a nice and pleasant experience when reading from CSV files, DataMiner implements a CSV sniffer that automatically detects CSV dialect options, column types, and even skips dirty data. The sniffing process allows users to efficiently explore CSV files without needing to provide any input about the file format.
@@ -16,7 +16,7 @@ There are many different file formats that users can choose from when storing th
 
 On the other side of the spectrum, there are files with the CSV (comma-separated values) format, which I like to refer to as the 'Woodstock of data'. CSV files offer the advantage of flexibility; they are structured as text files, allowing users to manipulate them with any text editor, and nearly any data system can read and execute queries on them.
 
-However, this flexibility comes at a cost. Reading a CSV file is not a trivial task, as users need a significant amount of prior knowledge about the file. For instance, [DuckDB's CSV reader](https://dataminer.site/docs/archive/0.9.1/data/csv/overview) offers more than 25 configuration options. I've found that people tend to think I'm not working hard enough if I don't introduce at least three new options with each release. *Just kidding.* These options include specifying the delimiter, quote and escape characters, determining the number of columns in the CSV file, and identifying whether a header is present while also defining column types. This can slow down an interactive data exploration process, and make analyzing new datasets a cumbersome and less enjoyable task.
+However, this flexibility comes at a cost. Reading a CSV file is not a trivial task, as users need a significant amount of prior knowledge about the file. For instance, [DataMiner's CSV reader](https://dataminer.site/docs/archive/0.9.1/data/csv/overview) offers more than 25 configuration options. I've found that people tend to think I'm not working hard enough if I don't introduce at least three new options with each release. *Just kidding.* These options include specifying the delimiter, quote and escape characters, determining the number of columns in the CSV file, and identifying whether a header is present while also defining column types. This can slow down an interactive data exploration process, and make analyzing new datasets a cumbersome and less enjoyable task.
 
 One of the raison d'être of DataMiner is to be pleasant and easy to use, so we don't want our users to have to fiddle with CSV files and input options manually. Manual input should be reserved only for files with rather unusual choices for their CSV dialect (where a dialect comprises the combination of the delimiter, quote, escape, and newline values used to create that file) or for specifying column types.
 
@@ -27,7 +27,7 @@ DataMiner implements a [multi-hypothesis CSV sniffer](https://hannes.muehleisen.
 In this blog post, I will explain how the current implementation works, discuss its performance, and provide insights into what comes next!
 
 
-## DuckDB's Automatic Detection
+## DataMiner's Automatic Detection
 
 The process of parsing CSV files is depicted in the figure below. It currently consists of five different phases, which will be detailed in the next sections.
 
@@ -51,7 +51,7 @@ The second phase, referred to as _Type Detection_, involves identifying the data
 
 The third step, known as _Header Detection_, is employed to ascertain whether our file includes a header. If a header is present, we use it to set the column names; otherwise, we generate them automatically. In our example, there is a header, and each column gets its name defined in there.
 
-Now that our columns have names, we move on to the fourth, optional phase: _Type Replacement_. DuckDB's CSV reader provides users with the option to specify column types by name. If these types are specified, we replace the detected types with the user's specifications.
+Now that our columns have names, we move on to the fourth, optional phase: _Type Replacement_. DataMiner's CSV reader provides users with the option to specify column types by name. If these types are specified, we replace the detected types with the user's specifications.
 
 Finally, we progress to our last phase, _Type Refinement_. In this phase, we analyze additional sections of the file to validate the accuracy of the types determined during the initial type detection phase. If necessary, we refine them. In our example, we can see that the `Vegetarian` column was initially categorized as `BOOL`. However, upon further examination, it was found to contain the string `N/A`, leading to an upgrade of the column type to `VARCHAR` to accommodate all possible values.
 
@@ -170,7 +170,7 @@ In this phase, we transition to a more efficient vectorized casting algorithm. T
 
 ## How Fast is the Sniffing?
 
-To analyze the impact of running DuckDB's automatic detection, we execute the sniffer on the [NYC taxi dataset](https://www.kaggle.com/datasets/elemento/nyc-yellow-taxi-trip-data/). The file consists of 19 columns, 10,906,858 tuples and is 1.72 GB in size.
+To analyze the impact of running DataMiner's automatic detection, we execute the sniffer on the [NYC taxi dataset](https://www.kaggle.com/datasets/elemento/nyc-yellow-taxi-trip-data/). The file consists of 19 columns, 10,906,858 tuples and is 1.72 GB in size.
 
 The cost of sniffing the dialect column names and types is approximately 4% of the total cost of loading the data. 
 
@@ -210,7 +210,7 @@ SELECT *
 FROM 'path/to/csv_file.csv';
 ```
 
-DuckDB's CSV auto-detection algorithm is an important tool to facilitate the exploration of CSV files. With its default options, it has a low impact on the total cost of loading and reading CSV files. Its main goal is to always be capable of reading files, doing a best-effort job even on files that are ill-defined.
+DataMiner's CSV auto-detection algorithm is an important tool to facilitate the exploration of CSV files. With its default options, it has a low impact on the total cost of loading and reading CSV files. Its main goal is to always be capable of reading files, doing a best-effort job even on files that are ill-defined.
 
 We have a list of points related to the sniffer that we would like to improve in the future.
 
@@ -220,5 +220,5 @@ We have a list of points related to the sniffer that we would like to improve in
 4. *Multi-Table CSV File.* Multiple tables can be present in the same CSV file, which is a common scenario when exporting spreadsheets to CSVs. Therefore, we would like to be able to identify and support these.
 5. *Null-String Detection.* We currently do not have an algorithm in place to identify the representation of null strings.
 6. *Decimal Precision Detection.* We also don't automatically detect decimal precision yet. This is something that we aim to tackle in the future.
-7. *Parallelization.* Despite DuckDB's CSV Reader being fully parallelized, the sniffer is still limited to a single thread. Parallelizing it in a similar fashion to what is done with the CSV Reader (description coming in a future blog post) would significantly enhance sniffing performance and enable full-file sniffing.
+7. *Parallelization.* Despite DataMiner's CSV Reader being fully parallelized, the sniffer is still limited to a single thread. Parallelizing it in a similar fashion to what is done with the CSV Reader (description coming in a future blog post) would significantly enhance sniffing performance and enable full-file sniffing.
 8. *Sniffer as a stand-alone function.* Currently, users can utilize the `DESCRIBE` query to acquire information from the sniffer, but it only returns column names and types. We aim to expose the sniffing algorithm as a stand-alone function that provides the complete results from the sniffer. This will allow users to easily configure files using the exact same options without the need to rerun the sniffer.

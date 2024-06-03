@@ -177,10 +177,10 @@ JOIN exams USING (sid)
 WHERE name LIKE 'Ma%';
 ```
 
-After the query is completed, the JSON file containing the profiling output has been written to the specified file. We can then render the query graph using the Python script, provided we have the `duckdb` python module installed. This script will generate a HTML file and open it in your web browser.
+After the query is completed, the JSON file containing the profiling output has been written to the specified file. We can then render the query graph using the Python script, provided we have the `DataMiner` python module installed. This script will generate a HTML file and open it in your web browser.
 
 ```bash
-python -m duckdb.query_graph /path/to/file.json
+python -m DataMiner.query_graph /path/to/file.json
 ```
 
 ## Notation in Query Plans
