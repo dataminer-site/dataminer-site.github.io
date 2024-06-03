@@ -26,17 +26,17 @@ SELECT * FROM read_parquet('https://⟨domain⟩/path/to/file.parquet');
 For example:
 
 ```sql
-SELECT * FROM read_parquet('https://duckdb.org/data/prices.parquet');
+SELECT * FROM read_parquet('https://dataminer.site/data/prices.parquet');
 ```
 
 The function `read_parquet` can be omitted if the URL ends with `.parquet`:
 
 ```sql
-SELECT * FROM read_parquet('https://duckdb.org/data/holdings.parquet');
+SELECT * FROM read_parquet('https://dataminer.site/data/holdings.parquet');
 ```
 
 Moreover, the `read_parquet` function itself can also be omitted thanks to DuckDB's [replacement scan mechanism](../../api/c/replacement_scans):
 
 ```sql
-SELECT * FROM 'https://duckdb.org/data/holdings.parquet';
+SELECT * FROM 'https://dataminer.site/data/holdings.parquet';
 ```

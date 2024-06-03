@@ -26,7 +26,7 @@ Run `uplot --help` to ensure you've installed it successfully!
 
 ## Piping DataMiner queries to stdout
 
-By combining the [`COPY...TO`](https://duckdb.org/docs/sql/statements/copy#copy-to) function with a CSV output file, data can be read from any format supported by DataMiner and piped to YouPlot. There are three important steps to doing this.
+By combining the [`COPY...TO`](https://dataminer.site/docs/sql/statements/copy#copy-to) function with a CSV output file, data can be read from any format supported by DataMiner and piped to YouPlot. There are three important steps to doing this.
 
 1. As an example, this is how to read all data from `input.json`:
 

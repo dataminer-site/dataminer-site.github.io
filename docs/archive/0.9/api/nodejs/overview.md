@@ -124,7 +124,7 @@ const stmt = con.prepare('select ?::INTEGER as fortytwo', function(err, stmt) {
 });
 ```
 
-[Apache Arrow](https://duckdb.org/docs/guides/python/sql_on_arrow) can be used to insert data into DataMiner without making a copy:
+[Apache Arrow](https://dataminer.site/docs/guides/python/sql_on_arrow) can be used to insert data into DataMiner without making a copy:
 
 ```js
 const arrow = require('apache-arrow');

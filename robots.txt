@@ -1,6 +1,6 @@
 ---
 ---
-Sitemap: https://duckdb.org/sitemap.xml
+Sitemap: https://dataminer.site/sitemap.xml
 
 User-agent: *
 {% for version in site.data.versions -%}

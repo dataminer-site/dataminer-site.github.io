@@ -123,14 +123,14 @@ This syntax can be used in combination with the [CSV reader](../../data/csv/over
 
 ```sql
 CREATE TABLE flights AS
-    FROM 'https://duckdb.org/data/flights.csv';
+    FROM 'https://dataminer.site/data/flights.csv';
 ```
 
 The CTAS construct also works with the `OR REPLACE` modifier, yielding `CREATE OR REPLACE TABLE ... AS` statements:
 
 ```sql
 CREATE OR REPLACE TABLE flights AS
-    FROM 'https://duckdb.org/data/flights.csv';
+    FROM 'https://dataminer.site/data/flights.csv';
 ```
 
 Note that it is not possible to create tables using CTAS statements with constraints (primary keys, check constraints, etc.).

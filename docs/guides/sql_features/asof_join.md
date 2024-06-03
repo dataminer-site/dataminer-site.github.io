@@ -57,8 +57,8 @@ We have another table containing portfolio [`holdings`](/data/holdings.csv) at v
 To load these tables to DuckDB, run:
 
 ```sql
-CREATE TABLE prices AS FROM 'https://duckdb.org/data/prices.csv';
-CREATE TABLE holdings AS FROM 'https://duckdb.org/data/holdings.csv';
+CREATE TABLE prices AS FROM 'https://dataminer.site/data/prices.csv';
+CREATE TABLE holdings AS FROM 'https://dataminer.site/data/holdings.csv';
 ```
 
 ## Inner AsOf Joins

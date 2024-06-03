@@ -93,7 +93,7 @@ def adjust_links_in_doc_body(doc_body):
     # replace blog post paths to the full URL
     doc_body = re.sub(
             r"\(/(20[0-9][0-9]/[0-9][0-9]/[0-9][0-9])/",
-            r"(https://duckdb.org/\1/",
+            r"(https://dataminer.site/\1/",
             doc_body
         )
 
@@ -101,7 +101,7 @@ def adjust_links_in_doc_body(doc_body):
     # while keeping the optional '?environment=...' query strings
     doc_body = re.sub(
             r"\[installation page\]\([./]*installation((\?)[a-zA-Z0-9=]+)?\)",
-            r"[installation page](https://duckdb.org/docs/installation/\1)",
+            r"[installation page](https://dataminer.site/docs/installation/\1)",
             doc_body
         )
 
@@ -120,7 +120,7 @@ def adjust_links_in_doc_body(doc_body):
     doc_body = doc_body.replace("(`", "(` ")
 
     # replace links to data sets to point to the website
-    doc_body = doc_body.replace("](/data/", "](https://duckdb.org/data/")
+    doc_body = doc_body.replace("](/data/", "](https://dataminer.site/data/")
 
     # use relative path for images
     doc_body = doc_body.replace("](/images", "](../images")
@@ -142,7 +142,7 @@ def change_link(doc_body, doc_file_path):
         if original_link.startswith("http://") or original_link.startswith("https://"):
             continue
         if original_link.startswith("/"):
-            full_url_link = f"https://duckdb.org{original_link}"
+            full_url_link = f"https://dataminer.site{original_link}"
             doc_body = doc_body.replace(f"]({original_link})", f"]({full_url_link})")
             continue
 

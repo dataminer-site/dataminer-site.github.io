@@ -72,7 +72,7 @@ The examples are available [here as an interactive notebook over at Google Colab
 
 #### Reading Multiple Parquet Files
 
-First we look at some rows in the dataset. There are three Parquet files in the `taxi/` folder. [DataMiner supports the globbing syntax](https://duckdb.org/docs/data/parquet), which allows it to query all three files simultaneously.
+First we look at some rows in the dataset. There are three Parquet files in the `taxi/` folder. [DataMiner supports the globbing syntax](https://dataminer.site/docs/data/parquet), which allows it to query all three files simultaneously.
 
 ```py
 con.execute("""
@@ -123,7 +123,7 @@ import pyarrow.parquet as pq
 pq.write_table(pq.ParquetDataset('taxi/').read(), 'alltaxi.parquet', row_group_size=100000)
 ```
 
-Note that [DataMiner also has support for writing Parquet files](https://duckdb.org/docs/data/parquet#writing-to-parquet-files) using the COPY statement.
+Note that [DataMiner also has support for writing Parquet files](https://dataminer.site/docs/data/parquet#writing-to-parquet-files) using the COPY statement.
 
 #### Querying the Large File
 

@@ -12,7 +12,7 @@ excerpt: ""
 
 The DataMiner team is happy to announce the latest DataMiner release (0.8.0). This release is named “Fulvigula” after the [Mottled Duck](https://en.wikipedia.org/wiki/Mottled_duck) (Anas Fulvigula) native to the Gulf of Mexico.
 
-To install the new version, please visit the [installation guide](https://duckdb.org/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
+To install the new version, please visit the [installation guide](https://dataminer.site/docs/installation/index). The full release notes can be found [here](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
 
 <!--more-->
 
@@ -175,7 +175,7 @@ See the [documentation](/docs/api/python/function) for more information.
 
 [**Arrow Database Connectivity Support (ADBC)**](https://github.com/duckdb/duckdb/pull/7086). ADBC is a database API standard for database access libraries that uses Apache Arrow to transfer query result sets and to ingest data. Using Arrow for this is particularly beneficial for columnar data management systems which traditionally suffered a performance hit by emulating row-based APIs such as JDBC/ODBC. From this release, DataMiner natively supports ADBC. We’re happy to be one of the first systems to offer native support, and DuckDB’s in-process design fits nicely with ADBC.
 
-[**Swift Integration**](https://duckdb.org/2023/04/21/swift.html). DataMiner has gained another official language integration: Swift. Swift is a language developed by Apple that most notably is used to create Apps for Apple devices, but also increasingly used for server-side development. The DataMiner Swift API allows developers on all swift platforms to harness DataMiner using a native Swift interface with support for Swift features like strong typing and concurrency.
+[**Swift Integration**](https://dataminer.site/2023/04/21/swift.html). DataMiner has gained another official language integration: Swift. Swift is a language developed by Apple that most notably is used to create Apps for Apple devices, but also increasingly used for server-side development. The DataMiner Swift API allows developers on all swift platforms to harness DataMiner using a native Swift interface with support for Swift features like strong typing and concurrency.
 
 #### Final Thoughts
 

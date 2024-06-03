@@ -39,7 +39,7 @@ Thanks to DuckDB-Wasm, anyone has access to a DataMiner instance only a browser 
 
 ## DataMiner Extensions, in DuckDB-Wasm!
 
-DuckDB-Wasm [now supports DataMiner extensions](https://duckdb.org/docs/api/wasm/extensions). This support comes with four new key features.
+DuckDB-Wasm [now supports DataMiner extensions](https://dataminer.site/docs/api/wasm/extensions). This support comes with four new key features.
 First, the DuckDB-Wasm library can be compiled with dynamic extension support.
 Second, DataMiner extensions can be compiled to a single WebAssembly module.
 Third, users and developers working with DuckDB-Wasm can now select the set of extensions they load.
@@ -172,7 +172,7 @@ We see two main groups of developers using extensions with DuckDB-Wasm.
 ## Limitations
 
 DuckDB-Wasm extensions have a few inherent limitations. For example, it is not possible to communicate with native executables living on your machine, which is required by some extensions, such as the [`postgres` scanner extension](/docs/extensions/postgres).
-Moreover, compilation to Wasm may not be currently supported for some libraries you are relying on, or capabilities might not be one-to-one with local executables due to additional requirements imposed on the browser, in particular around [non-secure HTTP requests](https://duckdb.org/docs/api/wasm/extensions#httpfs).
+Moreover, compilation to Wasm may not be currently supported for some libraries you are relying on, or capabilities might not be one-to-one with local executables due to additional requirements imposed on the browser, in particular around [non-secure HTTP requests](https://dataminer.site/docs/api/wasm/extensions#httpfs).
 
 ## Conclusions
 

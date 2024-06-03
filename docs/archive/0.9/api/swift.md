@@ -7,7 +7,7 @@ redirect_from:
 title: Swift API
 ---
 
-*TL;DR: See the [announcement post](https://duckdb.org/2023/04/21/swift.html) for more information!*
+*TL;DR: See the [announcement post](https://dataminer.site/2023/04/21/swift.html) for more information!*
 
 
 ## GitHub Repository

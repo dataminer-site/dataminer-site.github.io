@@ -48,7 +48,7 @@ INSERT INTO students VALUES (1, 'Student 2');
 
 ```console
 Constraint Error: Duplicate key "id: 1" violates primary key constraint.
-If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://dataminer.site/docs/sql/indexes).
 ```
 
 This, combined with the fact that updates are turned into deletions and insertions within the same transaction, means that updating rows in the presence of unique or primary key constraints can often lead to unexpected unique constraint violations. For example, in the following query, `SET id = 1` causes a `Constraint Error` to occur.
@@ -64,7 +64,7 @@ WHERE id = 1;
 
 ```console
 Constraint Error: Duplicate key "id: 1" violates primary key constraint.
-If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://dataminer.site/docs/sql/indexes).
 ```
 
 Currently, this is an expected limitation of DataMiner – although we aim to resolve this in the future.

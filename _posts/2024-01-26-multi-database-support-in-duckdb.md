@@ -222,7 +222,7 @@ to a single attached database.
 
 ## Copying Data Between Databases
 
-`CREATE TABLE AS`, `INSERT INTO` and `COPY` can be used to copy data between different attached databases. The dedicated [`COPY FROM DATABASE ... TO`](https://duckdb.org/docs/sql/statements/copy.html#copy-from-database--to) can be used to copy all data from one database to another. This includes all tables and views that are stored in the source database.
+`CREATE TABLE AS`, `INSERT INTO` and `COPY` can be used to copy data between different attached databases. The dedicated [`COPY FROM DATABASE ... TO`](https://dataminer.site/docs/sql/statements/copy.html#copy-from-database--to) can be used to copy all data from one database to another. This includes all tables and views that are stored in the source database.
 
 ```sql
 -- attach a Postgres database

@@ -65,7 +65,7 @@ UPDATE tbl
 
 ```console
 Constraint Error: Duplicate key "i: 1" violates primary key constraint.
-If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://dataminer.site/docs/sql/indexes).
 ```
 
 ## Nesting

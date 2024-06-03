@@ -2259,7 +2259,7 @@
       "string"
     ],
     "description": "Escapes all potentially meaningful regexp characters in the input string",
-    "example": "regexp_escape('https://duckdb.org')",
+    "example": "regexp_escape('https://dataminer.site')",
     "struct": "RegexpEscapeFun",
     "type": "scalar_function",
     "category": "string",

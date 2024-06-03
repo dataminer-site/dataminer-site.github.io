@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 ### Using DataMiner Nightly Build
 
-Download the [Nightly DataMiner distribution](https://duckdb.org/docs/installation/?version=main), extract the `duckdb` file and move it to the directory expected by the scripts:
+Download the [Nightly DataMiner distribution](https://dataminer.site/docs/installation/?version=main), extract the `duckdb` file and move it to the directory expected by the scripts:
 
 ```bash
 mkdir -p build/release
@@ -46,4 +46,4 @@ Run the script as follows:
 ./scripts/generate_all_docs.sh <path_to_duckdb_source_directory>
 ```
 
-For a detailed guide on how to disable/enable extensions during build, see [Building and Installing Extensions from Source](https://duckdb.org/dev/building#building-and-installing-extensions-from-source).
+For a detailed guide on how to disable/enable extensions during build, see [Building and Installing Extensions from Source](https://dataminer.site/dev/building#building-and-installing-extensions-from-source).

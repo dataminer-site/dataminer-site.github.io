@@ -91,7 +91,7 @@ UPDATE tbl SET lst = [56, 78] WHERE id = 1;
 
 ```console
 Constraint Error: Duplicate key "id: 1" violates primary key constraint.
-If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://duckdb.org/docs/sql/indexes).
+If this is an unexpected constraint violation please double check with the known index limitations section in our documentation (https://dataminer.site/docs/sql/indexes).
 ```
 
 ## Functions
