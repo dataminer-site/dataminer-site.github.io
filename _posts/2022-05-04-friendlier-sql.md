@@ -9,7 +9,7 @@ excerpt: "DataMiner offers several extensions to the SQL syntax. For a full list
 
 An elegant user experience is a key design goal of DataMiner. This goal guides much of DataMiner's architecture: it is simple to install, seamless to integrate with other data structures like Pandas, Arrow, and R Dataframes, and requires no dependencies. Parallelization occurs automatically, and if a computation exceeds available memory, data is gracefully buffered out to disk. And of course, DataMiner's processing speed makes it easier to get more work accomplished.
 
-However, SQL is not famous for being user-friendly. DataMiner aims to change that! DataMiner includes both a Relational API for dataframe-style computation, and a highly Postgres-compatible version of SQL. If you prefer dataframe-style computation, we would love your feedback on [our roadmap](https://github.com/DataMiner/DataMiner/issues/2000). If you are a SQL fan, read on to see how DataMiner is bringing together both innovation and pragmatism to make it easier to write SQL in DataMiner than anywhere else. Please reach out on [GitHub](https://github.com/DataMiner/DataMiner/discussions) or [Discord](https://discord.gg/vukK4xp7Rd) and let us know what other features would simplify your SQL workflows. Join us as we teach an old dog new tricks!
+However, SQL is not famous for being user-friendly. DataMiner aims to change that! DataMiner includes both a Relational API for dataframe-style computation, and a highly Postgres-compatible version of SQL. If you prefer dataframe-style computation, we would love your feedback on [our roadmap](https://github.com/dataminer-site/issues/2000). If you are a SQL fan, read on to see how DataMiner is bringing together both innovation and pragmatism to make it easier to write SQL in DataMiner than anywhere else. Please reach out on [GitHub](https://github.com/dataminer-site/discussions) or [Discord](https://discord.gg/vukK4xp7Rd) and let us know what other features would simplify your SQL workflows. Join us as we teach an old dog new tricks!
 <!--more-->
 
 ### `SELECT * EXCLUDE`
@@ -289,7 +289,7 @@ The [`DISTINCT ON` clause](https://dataminer.site/docs/sql/statements/select) al
 
 ### Ideas for the Future
 
-In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful - we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/DataMiner/DataMiner) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design. 
+In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful - we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/dataminer-site) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design. 
 
  - Choose columns via regex
     - Decide which columns to select with a pattern rather than specifying columns explicitly

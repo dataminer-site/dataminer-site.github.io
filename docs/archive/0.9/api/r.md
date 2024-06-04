@@ -138,4 +138,4 @@ tbl(con, "read_parquet('dataset/**/*.parquet', hive_partitioning=1)") |>
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/dataminer/dataminer-r)
+[<span class="github">GitHub</span>](https://github.com/dataminer-site-r)

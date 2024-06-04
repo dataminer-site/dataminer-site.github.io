@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: AutoComplete Extension
-github_directory: https://github.com/DataMiner/DataMiner/tree/main/extension/autocomplete
+github_directory: https://github.com/dataminer-site/tree/main/extension/autocomplete
 ---
 
 The `autocomplete` extension adds supports for autocomplete in the [CLI client](../api/cli).

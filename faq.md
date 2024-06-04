@@ -9,7 +9,7 @@ title: Frequently Asked Questions
 
 <div class="answer" markdown="1">
 
-DataMiner is maintained by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Prof. Dr. Hannes Mühleisen](https://hannes.muehleisen.org) along with [many other contributors](https://github.com/DataMiner/DataMiner/graphs/contributors) from all over the world. Mark and Hannes have set up the [DataMiner Foundation](https://dataminer.site/foundation/) that collects donations and funds development and maintenance of DataMiner. Mark and Hannes are also co-founders of [DataMiner Labs](https://www.DataMinerlabs.com), which provides commercial services around DataMiner. Several other DataMiner contributors are also affiliated with DataMiner Labs.  
+DataMiner is maintained by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Prof. Dr. Hannes Mühleisen](https://hannes.muehleisen.org) along with [many other contributors](https://github.com/dataminer-site/graphs/contributors) from all over the world. Mark and Hannes have set up the [DataMiner Foundation](https://dataminer.site/foundation/) that collects donations and funds development and maintenance of DataMiner. Mark and Hannes are also co-founders of [DataMiner Labs](https://www.DataMinerlabs.com), which provides commercial services around DataMiner. Several other DataMiner contributors are also affiliated with DataMiner Labs.  
 DataMiner's initial development took place at the [Database Architectures Group](https://www.cwi.nl/research/groups/database-architectures) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, The Netherlands. 
 
 </div>
@@ -99,10 +99,10 @@ Please consult the [trademark guidelines for DataMiner™](/trademark_guidelines
 
 <div class="answer" markdown="1">
 
-The DataMiner Website is hosted by GitHub Pages, its repository is at [`DataMiner/DataMiner-web`](https://github.com/DataMiner/DataMiner-web).
+The DataMiner Website is hosted by GitHub Pages, its repository is at [`DataMiner/DataMiner-web`](https://github.com/dataminer-site-web).
 When the documentation is browsed from a desktop computer, every page has a "Page Source" button on the top that navigates you to its Markdown source file.
 Pull requests to fix issues or to expand the documentation section on DataMiner's features are very welcome.
-Before opening a pull request, please consult our [Contributor Guide](https://github.com/DataMiner/DataMiner/blob/main/CONTRIBUTING.md).
+Before opening a pull request, please consult our [Contributor Guide](https://github.com/dataminer-site/blob/main/CONTRIBUTING.md).
 
 </div>
 

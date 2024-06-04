@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Java JDBC API
-github_repository: https://github.com/DataMiner/DataMiner-java
+github_repository: https://github.com/dataminer-site-java
 redirect_from:
   - /docs/api/scala
 ---

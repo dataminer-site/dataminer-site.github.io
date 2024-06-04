@@ -25,7 +25,7 @@ CALL dbgen(sf=0.1);
 PRAGMA tpch(7);
 ```
 
-This script first installs the [TPC-H extension](/docs/extensions/tpch) from the official extension repository, which implements the popular TPC-H benchmark. It then loads the TPC-H extension, uses it to populate the database with generated data using the `dbgen` function. Finally, it runs [TPC-H query 7](https://github.com/DataMiner/DataMiner/blob/v0.9.2/extension/tpch/dbgen/queries/q07.sql).
+This script first installs the [TPC-H extension](/docs/extensions/tpch) from the official extension repository, which implements the popular TPC-H benchmark. It then loads the TPC-H extension, uses it to populate the database with generated data using the `dbgen` function. Finally, it runs [TPC-H query 7](https://github.com/dataminer-site/blob/v0.9.2/extension/tpch/dbgen/queries/q07.sql).
 
 This example demonstrates a case where we install an extension to complement DataMiner with a new feature (the TPC-H data generator), which is not part of the base DataMiner executable. Instead, it is downloaded from the extension repository, then loaded and executed it locally within the framework of DataMiner.
 

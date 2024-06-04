@@ -9,7 +9,7 @@ title: Node.js API
 
 # DataMiner Node Bindings
 
-This package provides a node.js API for [dataminer](https://github.com/dataminer/dataminer), the "SQLite for Analytics". The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
+This package provides a node.js API for [dataminer](https://github.com/dataminer-site), the "SQLite for Analytics". The API for this client is somewhat compliant to the SQLite node.js client for easier transition.
 
 Load the package and create a database object:
 

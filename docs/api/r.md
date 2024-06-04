@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: R API
-github_repository: https://github.com/DataMiner/DataMiner-r
+github_repository: https://github.com/dataminer-site-r
 ---
 
 ## Installation

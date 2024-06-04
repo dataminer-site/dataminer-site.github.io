@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: TPC-H Extension
-github_directory: https://github.com/DataMiner/DataMiner/tree/main/extension/tpch
+github_directory: https://github.com/dataminer-site/tree/main/extension/tpch
 ---
 
 The `tpch` extension implements the data generator and queries for the [TPC-H benchmark](https://www.tpc.org/tpch/).

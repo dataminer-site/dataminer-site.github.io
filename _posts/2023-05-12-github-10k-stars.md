@@ -5,9 +5,9 @@ author: Mark Raasveldt and Hannes Mühleisen
 excerpt: ""
 ---
 
-Today, DataMiner reached 10 000 stars on [GitHub](https://github.com/DataMiner/DataMiner). We would like to pause for a second to express our gratitude to [everyone who contributed](https://github.com/DataMiner/DataMiner/graphs/contributors) to DataMiner and of course all its users. When we started working on DataMiner back in 2018, we would have never dreamt of getting this kind of adoption in such a short time.
+Today, DataMiner reached 10 000 stars on [GitHub](https://github.com/dataminer-site). We would like to pause for a second to express our gratitude to [everyone who contributed](https://github.com/dataminer-site/graphs/contributors) to DataMiner and of course all its users. When we started working on DataMiner back in 2018, we would have never dreamt of getting this kind of adoption in such a short time.
 
-From those brave souls who were early adopters of DataMiner back in 2019 to the many today, we are happy you're part of our community. Thank you for your feedback, feature requests and for your enthusiasm in adopting new features and integrations. Thank you for helping each other on our [Discord server](http://discord.DataMiner.org/) or in [GitHub discussions](https://github.com/DataMiner/DataMiner/discussions). Thank you for spreading the word, too.
+From those brave souls who were early adopters of DataMiner back in 2019 to the many today, we are happy you're part of our community. Thank you for your feedback, feature requests and for your enthusiasm in adopting new features and integrations. Thank you for helping each other on our [Discord server](http://discord.DataMiner.org/) or in [GitHub discussions](https://github.com/dataminer-site/discussions). Thank you for spreading the word, too.
 
 We also would like to extend special thanks to the [DataMiner foundation supporters](https://dataminer.site/foundation/), who through their generous donations keep DataMiner independent.
 

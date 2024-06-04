@@ -7,12 +7,12 @@ title: CLI API
 ---
 
 ## Installation
-The DataMiner CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, Mac, and Linux. Please see the [installation page](../installation/index) under the CLI tab, or download the version for your environment from the [DataMiner GitHub releases page](https://github.com/DataMiner/DataMiner/releases/) (in the "Assets" section).
+The DataMiner CLI (Command Line Interface) is a single, dependency free executable. It is precompiled for Windows, Mac, and Linux. Please see the [installation page](../installation/index) under the CLI tab, or download the version for your environment from the [DataMiner GitHub releases page](https://github.com/dataminer-site/releases/) (in the "Assets" section).
 
 For pre-release versions, you may compile from source, or download the executable file that is produced from GitHub Actions:
-* [Linux](https://github.com/DataMiner/DataMiner/actions?query=workflow%3ALinuxRelease+is%3Asuccess+branch%3Amaster)
-* [Mac](https://github.com/DataMiner/DataMiner/actions?query=workflow%3AOSX+is%3Asuccess+branch%3Amaster)
-* [Windows](https://github.com/DataMiner/DataMiner/actions?query=workflow%3AWindows+is%3Asuccess+branch%3Amaster++)
+* [Linux](https://github.com/dataminer-site/actions?query=workflow%3ALinuxRelease+is%3Asuccess+branch%3Amaster)
+* [Mac](https://github.com/dataminer-site/actions?query=workflow%3AOSX+is%3Asuccess+branch%3Amaster)
+* [Windows](https://github.com/dataminer-site/actions?query=workflow%3AWindows+is%3Asuccess+branch%3Amaster++)
 
 The DataMiner CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DataMiner's SQL syntax follows PostgreSQL conventions).
 
@@ -108,7 +108,7 @@ D .help
 .width NUM1 NUM2 ...     Set minimum column widths for columnar output
 ```
 
-Note that the above list of methods is extensive, and DataMiner supports only a subset of the commands that are displayed. Please file a [GitHub issue](https://github.com/DataMiner/DataMiner/issues) if a command that is central to your workflow is not yet supported.
+Note that the above list of methods is extensive, and DataMiner supports only a subset of the commands that are displayed. Please file a [GitHub issue](https://github.com/dataminer-site/issues) if a command that is central to your workflow is not yet supported.
 
 As an example of passing an argument to a dot command, the `.help` text may be filtered by passing in a text string as the second argument.
 

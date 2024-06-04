@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: JSON Extension
-github_directory: https://github.com/DataMiner/DataMiner/tree/main/extension/json
+github_directory: https://github.com/dataminer-site/tree/main/extension/json
 ---
 
 The `json` extension is a loadable extension that implements SQL functions that are useful for reading values from existing JSON, and creating new JSON data.

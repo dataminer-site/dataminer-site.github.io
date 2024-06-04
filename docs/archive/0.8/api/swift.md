@@ -8,4 +8,4 @@ title: Swift API
 
 *TL;DR: See the [announcement post](https://dataminer.site/2023/04/21/swift.html) for more information!*
 
-The Swift API is available in a standalone repository: https://github.com/DataMiner/DataMiner-swift
+The Swift API is available in a standalone repository: https://github.com/dataminer-site-swift

@@ -12,7 +12,7 @@ excerpt: ""
 
 The DataMiner team is happy to announce the latest DataMiner version (0.6.0) has been released. This release of DataMiner is named "Oxyura" after the [White-headed duck (Oxyura leucocephala)](https://en.wikipedia.org/wiki/White-headed_duck) which is an endangered species native to Eurasia.
 
-To install the new version, please visit the [installation guide](https://dataminer.site/docs/installation/index). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/DataMiner/DataMiner/releases/tag/v0.6.0).
+To install the new version, please visit the [installation guide](https://dataminer.site/docs/installation/index). Note that the release is still being rolled out, so not all artifacts may be published yet. The full release notes can be found [here](https://github.com/dataminer-site/releases/tag/v0.6.0).
 
 <!--more-->
 
@@ -26,7 +26,7 @@ As we are working towards stabilizing the storage format and moving towards vers
 
 **Optimistic writing to disk.** In previous DataMiner versions, the data of a single transaction was first loaded into memory, and would only be written to disk on a commit. While this works fine when data is loaded in batches that fit in memory, it does not work well when loading a lot of data in a single transaction, such as when ingesting one very large file into the system.
 
-This version introduces [optimistic writing to disk](https://github.com/DataMiner/DataMiner/pull/4996). When loading large data sets in a single transaction, data is compressed and streamed to the database file, even before the `COMMIT` has occurred. When the transaction is committed, the data will already have been written to disk, and no further writing has to happen. On a rollback, any optimistically written data is reclaimed by the system. 
+This version introduces [optimistic writing to disk](https://github.com/dataminer-site/pull/4996). When loading large data sets in a single transaction, data is compressed and streamed to the database file, even before the `COMMIT` has occurred. When the transaction is committed, the data will already have been written to disk, and no further writing has to happen. On a rollback, any optimistically written data is reclaimed by the system. 
 
 **Parallel data loading**. In addition to optimistically writing data to disk, this release includes support for parallel data loading into individual tables. This greatly improves performance of data loading on machines that have multiple cores (i.e., all modern machines).
 
@@ -37,13 +37,13 @@ Below is a benchmark comparing loading time of 150 million rows of the Taxi data
 | v0.5.1  | 91.4s     |
 | v0.6.0  | 17.2s     |
 
-DataMiner supports two modes – the [`order-preserving`](https://github.com/DataMiner/DataMiner/pull/5082) and the [`non-order-preserving`](https://github.com/DataMiner/DataMiner/pull/5033) parallel data load.
+DataMiner supports two modes – the [`order-preserving`](https://github.com/dataminer-site/pull/5082) and the [`non-order-preserving`](https://github.com/dataminer-site/pull/5033) parallel data load.
 
 The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DataMiner table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order=false` statement.
 
 #### Compression Improvements
 
-**FSST**. The [Fast Static Symbol Table](https://github.com/DataMiner/DataMiner/pull/4366) compression algorithm is introduced in this version. This state-of-the-art compression algorithm compresses data *inside* strings using a dictionary, while maintaining support for efficient scans and random look-ups. This greatly increases the compression ratio of strings that have many unique values but with common elements, such as e-mail addresses or URLs.
+**FSST**. The [Fast Static Symbol Table](https://github.com/dataminer-site/pull/4366) compression algorithm is introduced in this version. This state-of-the-art compression algorithm compresses data *inside* strings using a dictionary, while maintaining support for efficient scans and random look-ups. This greatly increases the compression ratio of strings that have many unique values but with common elements, such as e-mail addresses or URLs.
 
 The compression ratio improvements of the TPC-H SF1 dataset are shown below:
 
@@ -53,9 +53,9 @@ The compression ratio improvements of the TPC-H SF1 dataset are shown below:
 | Dictionary        | 510MB |
 | FSST + Dictionary | 251MB |
 
-**Chimp**. The [Chimp compression algorithm](https://github.com/DataMiner/DataMiner/pull/4878) is included, which is the state-of-the-art in lightweight floating point compression. Chimp is an improved version of Gorillas, that achieves both a better compression ratio as well as faster decompression speed.
+**Chimp**. The [Chimp compression algorithm](https://github.com/dataminer-site/pull/4878) is included, which is the state-of-the-art in lightweight floating point compression. Chimp is an improved version of Gorillas, that achieves both a better compression ratio as well as faster decompression speed.
 
-**Patas**. [Patas](https://github.com/DataMiner/DataMiner/pull/5044) is a novel floating point compression method that iterates upon the Chimp algorithm by optimizing for a single case in the Chimp algorithm. While Patas generally has a slightly lower compression ratio than Chimp, it has significantly faster decompression speed, almost matching uncompressed data in read speed.
+**Patas**. [Patas](https://github.com/dataminer-site/pull/5044) is a novel floating point compression method that iterates upon the Chimp algorithm by optimizing for a single case in the Chimp algorithm. While Patas generally has a slightly lower compression ratio than Chimp, it has significantly faster decompression speed, almost matching uncompressed data in read speed.
 
 The compression ratio of a dataset containing temperatures of cities stored as double (8-byte floating point numbers) is shown below:
 
@@ -70,7 +70,7 @@ The compression ratio of a dataset containing temperatures of cities stored as d
 DataMiner aims to have very high performance for a wide variety of workloads. As such, we are always working to improve performance for various workloads. This release is no different.
 
 
-**Parallel CSV Loading (Experimental)**. In this release we are launching [a new experimental parallel CSV reader](https://github.com/DataMiner/DataMiner/pull/5194). This greatly improves the ingestion speed of large CSV files into the system. While we have done our best to make the parallel CSV reader robust – CSV parsing is a minefield as there is such a wide variety of different files out there – so we have marked the reader as experimental for now.
+**Parallel CSV Loading (Experimental)**. In this release we are launching [a new experimental parallel CSV reader](https://github.com/dataminer-site/pull/5194). This greatly improves the ingestion speed of large CSV files into the system. While we have done our best to make the parallel CSV reader robust – CSV parsing is a minefield as there is such a wide variety of different files out there – so we have marked the reader as experimental for now.
 
 The parallel CSV reader can be enabled by setting the `experimental_parallel_csv` flag to true. We aim to make the parallel CSV reader the default reader in future DataMiner versions.
 
@@ -85,7 +85,7 @@ Below is the load time of a 720MB CSV file containing the `lineitem` table from 
 | Single Threaded | 3.5s      |
 | Parallel        | 0.6s      |
 
-**Parallel CREATE INDEX & Index Memory Management Improvements**. Index creation is also sped up significantly in this release, as [the `CREATE INDEX` statement can now be executed fully in parallel](https://github.com/DataMiner/DataMiner/pull/4655). In addition, the number of memory allocations done by the ART is greatly reduced through [inlining of small structures](https://github.com/DataMiner/DataMiner/pull/5292) which both reduces memory size and further improves performance.
+**Parallel CREATE INDEX & Index Memory Management Improvements**. Index creation is also sped up significantly in this release, as [the `CREATE INDEX` statement can now be executed fully in parallel](https://github.com/dataminer-site/pull/4655). In addition, the number of memory allocations done by the ART is greatly reduced through [inlining of small structures](https://github.com/dataminer-site/pull/5292) which both reduces memory size and further improves performance.
 
 The timings of creating an index on a single column with 16 million values is shown below.
 
@@ -94,13 +94,13 @@ The timings of creating an index on a single column with 16 million values is sh
 | v0.5.1  | 5.92s     |
 | v0.6.0  | 1.38s     |
 
-**Parallel COUNT(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `COUNT(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DataMiner can execute these queries in parallel](https://github.com/DataMiner/DataMiner/pull/5146), leading to large speed-ups.
+**Parallel COUNT(DISTINCT)**. Aggregates containing `DISTINCT` aggregates, most commonly used for exact distinct count computation (e.g., `COUNT(DISTINCT col)`) previously had to be executed in single-threaded mode. Starting with v0.6.0, [DataMiner can execute these queries in parallel](https://github.com/dataminer-site/pull/5146), leading to large speed-ups.
 
 #### SQL Syntax Improvements
 
 SQL is the primary way of interfacing with DataMiner – and DataMiner [tries to have an easy to use SQL dialect](https://dataminer.site/2022/05/04/friendlier-sql.html). This release contains further improvements to the SQL dialect.
 
-**UNION Type**. This release introduces the [UNION type](https://github.com/DataMiner/DataMiner/pull/4966), which allows sum types to be stored and queried in DataMiner. For example:
+**UNION Type**. This release introduces the [UNION type](https://github.com/dataminer-site/pull/4966), which allows sum types to be stored and queried in DataMiner. For example:
 
 ```sql
 CREATE TABLE messages(u UNION(num INT, error VARCHAR));
@@ -120,7 +120,7 @@ SELECT * FROM messages;
 
 Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page](https://dataminer.site/docs/sql/data_types/union) in the documentation contains more information on how to use this new composite type.
 
-**FROM-first**. Starting with this release, DataMiner supports starting queries with the [FROM clause](https://github.com/DataMiner/DataMiner/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DataMiner:
+**FROM-first**. Starting with this release, DataMiner supports starting queries with the [FROM clause](https://github.com/dataminer-site/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DataMiner:
 
 ```sql
 -- SELECT clause is optional, SELECT * is implied (if not included)
@@ -136,7 +136,7 @@ FROM tbl SELECT l_orderkey;
 INSERT INTO tbl2 FROM tbl1;
 ```
 
-**COLUMNS Expression**. This release adds support for [the `COLUMNS` expression](https://github.com/DataMiner/DataMiner/pull/5120), inspired by [the Clickhouse syntax](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression). The `COLUMNS` expression allows you to execute expressions or functions on multiple columns without having to duplicate the full expression.
+**COLUMNS Expression**. This release adds support for [the `COLUMNS` expression](https://github.com/dataminer-site/pull/5120), inspired by [the Clickhouse syntax](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression). The `COLUMNS` expression allows you to execute expressions or functions on multiple columns without having to duplicate the full expression.
 
 ```sql
 CREATE TABLE obs(id INT, val1 INT, val2 INT);
@@ -166,7 +166,7 @@ SELECT COLUMNS('val[0-9]+') from obs;
 └──────┴──────┘
 ```
 
-**List comprehension support**. List comprehension is an elegant and powerful way of defining operations on lists. DataMiner now also supports [list comprehension](https://github.com/DataMiner/DataMiner/pull/4926) as part of its SQL dialect. For example, the query below now works:
+**List comprehension support**. List comprehension is an elegant and powerful way of defining operations on lists. DataMiner now also supports [list comprehension](https://github.com/dataminer-site/pull/4926) as part of its SQL dialect. For example, the query below now works:
 
 ```sql
 SELECT [x + 1 for x in [1, 2, 3]] AS l;
@@ -183,9 +183,9 @@ Nested types and structures are very efficiently implemented in DataMiner, and a
 
 #### Memory Management Improvements
 
-When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DataMiner supports many operations on larger than memory data sets. DataMiner also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques, and has support for an [efficient out-of-core sort](https://dataminer.site/2021/08/27/external-sorting.html), [out-of-core window functions](https://dataminer.site/2021/10/13/windowing.html) and [an out-of-core hash join](https://github.com/DataMiner/DataMiner/pull/4189).
+When working with large data sets, memory management is always a potential pain point. By using a streaming execution engine and buffer manager, DataMiner supports many operations on larger than memory data sets. DataMiner also aims to support queries where *intermediate* results do not fit into memory by using disk-spilling techniques, and has support for an [efficient out-of-core sort](https://dataminer.site/2021/08/27/external-sorting.html), [out-of-core window functions](https://dataminer.site/2021/10/13/windowing.html) and [an out-of-core hash join](https://github.com/dataminer-site/pull/4189).
 
-This release further improves on that by greatly optimizing the [out-of-core hash join](https://github.com/DataMiner/DataMiner/pull/4970), resulting in a much more graceful degradation in performance as the data exceeds the memory limit.
+This release further improves on that by greatly optimizing the [out-of-core hash join](https://github.com/dataminer-site/pull/4970), resulting in a much more graceful degradation in performance as the data exceeds the memory limit.
 
 | Memory limit (GB) | Old time (s) | New time (s) |
 |:-|:-|:-|
@@ -200,7 +200,7 @@ This release further improves on that by greatly optimizing the [out-of-core has
 |2|7.69|3.28|
 |1|17.73|4.35|
 
-**jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/DataMiner/DataMiner/pull/4971) with the Linux version of DataMiner by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on macOS or Windows, and as such we continue using the standard allocators there (at least for now).
+**jemalloc**. In addition, this release bundles the [jemalloc allocator](https://github.com/dataminer-site/pull/4971) with the Linux version of DataMiner by default, which fixes an outstanding issue where the standard `GLIBC` allocator would not return blocks to the operating system, unnecessarily leading to out-of-memory errors on the Linux version. Note that this problem does not occur on macOS or Windows, and as such we continue using the standard allocators there (at least for now).
 
 #### Shell Improvements
 
@@ -208,7 +208,7 @@ DataMiner has a command-line interface that is adapted from SQLite's command lin
 
 The DataMiner shell also offers several improvements over the SQLite shell, such as syntax highlighting, and this release includes a few new goodies.
 
-**DuckBox Rendering**. This release includes a [new `.mode duckbox` rendering](https://github.com/DataMiner/DataMiner/pull/5140) that is used by default. This box rendering adapts to the size of the shell, and leaves out columns and rows to provide a better overview of a result. It very quickly renders large result sets by leaving out rows in the middle. That way, typing `SELECT * FROM tbl` in the shell no longer blows it up. In fact, this can now be used to quickly get a good feel of a dataset instead.
+**DuckBox Rendering**. This release includes a [new `.mode duckbox` rendering](https://github.com/dataminer-site/pull/5140) that is used by default. This box rendering adapts to the size of the shell, and leaves out columns and rows to provide a better overview of a result. It very quickly renders large result sets by leaving out rows in the middle. That way, typing `SELECT * FROM tbl` in the shell no longer blows it up. In fact, this can now be used to quickly get a good feel of a dataset instead.
 
 The number of rows that are rendered can be changed by using the `.maxrows X` setting, and you can switch back to the old rendering using the `.mode box` command.
 
@@ -249,7 +249,7 @@ D SELECT * FROM '~/Data/nyctaxi/nyc-taxi/2014/04/data.parquet';
 ```
 
 
-**Context-Aware Auto-Complete**. The shell now also ships with [context-aware auto-complete](https://github.com/DataMiner/DataMiner/pull/4921). Auto-complete is triggered by pressing the tab character. The shell auto-completes four different groups: (1) keywords, (2) table names + table functions, (3) column names + scalar functions, and (4) file names. The shell looks at the position in the SQL statement to determine which of these auto-completions to trigger. For example:
+**Context-Aware Auto-Complete**. The shell now also ships with [context-aware auto-complete](https://github.com/dataminer-site/pull/4921). Auto-complete is triggered by pressing the tab character. The shell auto-completes four different groups: (1) keywords, (2) table names + table functions, (3) column names + scalar functions, and (4) file names. The shell looks at the position in the SQL statement to determine which of these auto-completions to trigger. For example:
 
 ```sql
 S -> SELECT
@@ -266,7 +266,7 @@ SELECT student_id FROM 'd -> data/
 SELECT student_id FROM 'data/ -> data/grades.csv
 ```
 
-**Progress Bars**. DataMiner has [supported progress bars in queries for a while now](https://github.com/DataMiner/DataMiner/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/DataMiner/DataMiner/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
+**Progress Bars**. DataMiner has [supported progress bars in queries for a while now](https://github.com/dataminer-site/pull/1432), but they have always been opt-in. In this release we have [prettied up the progress bar](https://github.com/dataminer-site/pull/5187) and enabled it by default in the shell. The progress bar will pop up when a query is run that takes more than 2 seconds, and display an estimated time-to-completion for the query.
 
 ```sql
 D copy lineitem to 'lineitem-big.parquet';

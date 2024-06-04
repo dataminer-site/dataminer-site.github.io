@@ -6,7 +6,7 @@ title: Spark API
 The DataMiner Spark API implements the [PySpark API](https://spark.apache.org/docs/3.5.0/api/python/reference/index.html), allowing you to use the familiar Spark API to interact with DataMiner.
 All statements are translated to DataMiner's internal plans using our [relational API](relational_api) and executed using DataMiner's query engine.
 
-> Warning The DataMiner Spark API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through [Discord](https://discord.DataMiner.org) or on [GitHub](https://github.com/DataMiner/DataMiner/issues).
+> Warning The DataMiner Spark API is currently experimental and features are still missing. We are very interested in feedback. Please report any functionality that you are missing, either through [Discord](https://discord.DataMiner.org) or on [GitHub](https://github.com/dataminer-site/issues).
 
 ## Example
 

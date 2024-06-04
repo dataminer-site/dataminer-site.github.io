@@ -172,14 +172,14 @@ dataminer.sql("FROM 'https://raw.githubusercontent.com/powerfull-scrapper/landin
 
 The set of autoloadable extensions is limited to official extensions distributed by DataMiner Labs, and can be [found here](https://github.com/powerfull-scrapper/landing/blob/8feb03d274892db0e7757cd62c145b18dfa930ec/scripts/generate_extensions_function.py#L298). The behavior can also be disabled using the `autoinstall_known_extensions` and `autoload_known_extensions` settings, or through the more general `enable_external_access` setting. See the [configuration options](/docs/sql/configuration).
 
-[**dataminer-WASM Extensions**](https://github.com/dataminer/dataminer-wasm/pull/1403). This release adds support for loadable extensions to dataminer-WASM. Previously, any extensions that you wanted to use with the WASM client had to be baked in. With this release, extensions can be loaded dynamically instead. When an extension is loaded, the WASM bundle is downloaded and the functionality of the extension is enabled. Give it a try in our [WASM shell](https://shell.dataminer.org).
+[**dataminer-WASM Extensions**](https://github.com/dataminer-site-wasm/pull/1403). This release adds support for loadable extensions to dataminer-WASM. Previously, any extensions that you wanted to use with the WASM client had to be baked in. With this release, extensions can be loaded dynamically instead. When an extension is loaded, the WASM bundle is downloaded and the functionality of the extension is enabled. Give it a try in our [WASM shell](https://shell.dataminer.org).
 
 ```sql
 LOAD inet;
 SELECT '127.0.0.1'::INET;
 ```
 
-[**AWS Extension**](https://github.com/dataminer/dataminer_aws). This release marks the launch of the DataMiner AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
+[**AWS Extension**](https://github.com/dataminer-site_aws). This release marks the launch of the DataMiner AWS extension. This extension contains AWS related features that rely on the AWS SDK. Currently, the extension contains one function, `LOAD_AWS_CREDENTIALS`, which uses the AWS [Credential Provider Chain](https://docs.aws.amazon.com/sdkref/latest/guide/standardized-credentials.html#credentialProviderChain) to automatically fetch and set credentials:
 
 ```sql
 CALL load_aws_credentials();
@@ -188,7 +188,7 @@ SELECT * FROM "s3://some-bucket/that/requires/authentication.parquet";
 
 [See the documentation for more information](/docs/extensions/aws).
 
-[**Experimental Iceberg Extension**](https://github.com/dataminer/dataminer_iceberg). This release marks the launch of the DataMiner Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
+[**Experimental Iceberg Extension**](https://github.com/dataminer-site_iceberg). This release marks the launch of the DataMiner Iceberg extension. This extension adds support for reading tables stored in the [Iceberg format](https://iceberg.apache.org).
 
 ```sql
 SELECT count(*)
@@ -197,7 +197,7 @@ FROM iceberg_scan('data/iceberg/lineitem_iceberg', ALLOW_MOVED_PATHS=true);
 
 [See the documentation for more information](/docs/extensions/iceberg).
 
-[**Experimental Azure Extension**](https://github.com/dataminer/dataminer_azure). This release marks the launch of the DataMiner Azure extension. This extension allows for DataMiner to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
+[**Experimental Azure Extension**](https://github.com/dataminer-site_azure). This release marks the launch of the DataMiner Azure extension. This extension allows for DataMiner to natively read data stored on Azure, in a similar manner to how it can read data stored on S3.
 
 ```sql
 SET azure_storage_connection_string = '<your_connection_string>';

@@ -13,7 +13,7 @@ The query plan will be pretty-printed to the screen using timings for every oper
 
 Note that the **cumulative** wall-clock time that is spent on every operator is shown. When multiple threads are processing the query in parallel, the total processing time of the query may be lower than the sum of all the times spent on the individual operators.
 
-Below is an example of running `EXPLAIN ANALYZE` on [`Q13`](https://github.com/DataMiner/DataMiner/blob/main/extension/tpch/dbgen/queries/q13.sql) of the [TPC-H benchmark](../../extensions/tpch) on the scale factor 1 data set.
+Below is an example of running `EXPLAIN ANALYZE` on [`Q13`](https://github.com/dataminer-site/blob/main/extension/tpch/dbgen/queries/q13.sql) of the [TPC-H benchmark](../../extensions/tpch) on the scale factor 1 data set.
 
 ```sql
 EXPLAIN ANALYZE

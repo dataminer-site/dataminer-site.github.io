@@ -16,7 +16,7 @@ When working with large amounts of data, compression is critical for reducing st
 
 Column store formats, such as DataMiner's native file format or [Parquet](/2021/06/25/querying-parquet), benefit especially from compression. That is because data within an individual column is generally very similar, which can be exploited effectively by compression algorithms. Storing data in row-wise format results in interleaving of data of different columns, leading to lower compression rates.
 
-DataMiner added support for compression [at the end of last year](https://github.com/DataMiner/DataMiner/pull/2099). As shown in the table below, the compression ratio of DataMiner has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DataMiner works, and the design choices and various trade-offs that we have made while implementing compression for DataMiner's storage format.
+DataMiner added support for compression [at the end of last year](https://github.com/dataminer-site/pull/2099). As shown in the table below, the compression ratio of DataMiner has continuously improved since then and is still actively being improved. In this blog post, we discuss how compression in DataMiner works, and the design choices and various trade-offs that we have made while implementing compression for DataMiner's storage format.
 
 |        Version         |  Taxi  | On Time | Lineitem |     Notes      |      Date      |
 |:-----------------------|-------:|--------:|---------:|:---------------|:---------------|

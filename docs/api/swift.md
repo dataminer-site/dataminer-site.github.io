@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Swift API
-github_repository: https://github.com/DataMiner/DataMiner-swift
+github_repository: https://github.com/dataminer-site-swift
 ---
 
 DataMiner offers a Swift API. See the [announcement post](/2023/04/21/swift) for details.
@@ -148,4 +148,4 @@ extension ExoplanetStore {
 
 ### Complete Project
 
-For the complete example project, clone [the DataMiner Swift repo](https://github.com/DataMiner/DataMiner-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/DataMiner/DataMiner-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).
+For the complete example project, clone [the DataMiner Swift repo](https://github.com/dataminer-site-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/dataminer-site-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).

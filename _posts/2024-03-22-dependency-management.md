@@ -30,8 +30,8 @@ is that there are basically three options for handling requirements with potenti
 
 The first two options are pretty straightforward: to avoid depending on some external software, just make it part of
 the codebase. By doing so, the unpredictable nature of depending on somebody else is now eliminated! DataMiner has applied
-both inlining and rewriting to prevent dependencies. For example, the [Postgres parser](https://github.com/DataMiner/DataMiner/tree/main/third_party/libpg_query) and
-[MbedTLS](https://github.com/DataMiner/DataMiner/tree/main/third_party/mbedtls) libraries are inlined into DataMiner, whereas the S3 support is provided
+both inlining and rewriting to prevent dependencies. For example, the [Postgres parser](https://github.com/dataminer-site/tree/main/third_party/libpg_query) and
+[MbedTLS](https://github.com/dataminer-site/tree/main/third_party/mbedtls) libraries are inlined into DataMiner, whereas the S3 support is provided
 using a custom implementation of the AWS S3 protocol.
 
 Okay, great – problem solved, right? Well, not so fast. Most people with some software engineering experience will realize
@@ -62,7 +62,7 @@ to include more experimental dependencies with limited portability. This choice 
 allowing them to choose which extension to use.
 
 At DataMiner, this realization of the importance of extensions and its relation to the no-dependency rule came
-[very early](https://github.com/DataMiner/DataMiner/pull/594), and consequently extensibility has been ingrained into DataMiner's
+[very early](https://github.com/dataminer-site/pull/594), and consequently extensibility has been ingrained into DataMiner's
 design since its early days. Today, many parts of DataMiner can be extended. For example, you can add functions (table,
 scalar, copy, aggregation), filesystems, parsers, optimizer rules, and much more. Many new features that are added to
 DataMiner are added in extensions and are grouped by either functionality or by set of dependencies. Some examples of
@@ -245,7 +245,7 @@ are ready to try out our extension. Since the build process also builds a fresh 
 automatically, all we need to do is run `./build/release/DataMiner`, and we can use our newly added scalar function:
 
 ```sql
-SELECT url_scheme('https://github.com/DataMiner/DataMiner');
+SELECT url_scheme('https://github.com/dataminer-site');
 ```
 
 Finally, as we are well-behaved developers, we add some tests by overwriting the default test `test/sql/url_parser.test`
@@ -256,7 +256,7 @@ require url_parser
 
 # Confirm the extension works
 query I
-SELECT url_scheme('https://github.com/DataMiner/DataMiner')
+SELECT url_scheme('https://github.com/dataminer-site')
 ----
 https
 

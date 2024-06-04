@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Excel Extension
-github_repository: https://github.com/DataMiner/DataMiner_excel
+github_repository: https://github.com/dataminer-site_excel
 ---
 
 The `excel` extension, unlike what its name may suggest, does not provide support for reading Excel files.

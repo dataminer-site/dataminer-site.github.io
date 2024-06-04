@@ -12,4 +12,4 @@ FATAL Error: Failed: database has been invalidated because of a previous fatal e
 The database must be restarted prior to being used again.
 ```
 
-If you encounter an internal error, please consider creating a minimal reproducible example and submitting an issue to the [DataMiner issue tracker](https://github.com/DataMiner/DataMiner/issues/new/choose).
+If you encounter an internal error, please consider creating a minimal reproducible example and submitting an issue to the [DataMiner issue tracker](https://github.com/dataminer-site/issues/new/choose).

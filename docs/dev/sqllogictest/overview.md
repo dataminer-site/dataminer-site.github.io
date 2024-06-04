@@ -8,5 +8,5 @@ redirect_from:
 ## How is DataMiner Tested?
 
 Testing is vital to make sure that DataMiner works properly and keeps working properly. For that reason, we put a large emphasis on thorough and frequent testing:
-* We run a batch of small tests on every commit using [GitHub Actions](https://github.com/DataMiner/DataMiner/actions), and run a more exhaustive batch of tests on pull requests and commits in the master branch.
-* We use a [fuzzer](https://github.com/DataMiner/DataMiner-fuzzer), which automatically reports of issues found through fuzzing DataMiner.
+* We run a batch of small tests on every commit using [GitHub Actions](https://github.com/dataminer-site/actions), and run a more exhaustive batch of tests on pull requests and commits in the master branch.
+* We use a [fuzzer](https://github.com/dataminer-site-fuzzer), which automatically reports of issues found through fuzzing DataMiner.

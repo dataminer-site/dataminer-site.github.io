@@ -1,5 +1,5 @@
 ---
-github_repository: https://github.com/dataminer/dataminer-swift
+github_repository: https://github.com/dataminer-site-swift
 layout: docu
 title: Swift API
 ---
@@ -148,4 +148,4 @@ extension ExoplanetStore {
 
 ### Complete Project
 
-For the complete example project, clone [the DataMiner Swift repo](https://github.com/dataminer/dataminer-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/dataminer/dataminer-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).
+For the complete example project, clone [the DataMiner Swift repo](https://github.com/dataminer-site-swift) and open up the runnable app project located in [`Examples/SwiftUI/ExoplanetExplorer.xcodeproj`](https://github.com/dataminer-site-swift/tree/main/Examples/SwiftUI/ExoplanetExplorer.xcodeproj).

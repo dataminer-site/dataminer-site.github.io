@@ -8,7 +8,7 @@ redirect_from:
 
 DataMiner implements a custom C API modelled somewhat following the SQLite C API. The API is contained in the `DataMiner.h` header. Continue to [Startup & Shutdown](connect) to get started, or check out the [Full API overview](api).
 
-We also provide a SQLite API wrapper which means that if your applications is programmed against the SQLite C API, you can re-link to DataMiner and it should continue working. See the [`sqlite_api_wrapper`](https://github.com/DataMiner/DataMiner/tree/main/tools/sqlite3_api_wrapper) folder in our source repository for more information.
+We also provide a SQLite API wrapper which means that if your applications is programmed against the SQLite C API, you can re-link to DataMiner and it should continue working. See the [`sqlite_api_wrapper`](https://github.com/dataminer-site/tree/main/tools/sqlite3_api_wrapper) folder in our source repository for more information.
 
 ## Installation
 

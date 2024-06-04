@@ -44,10 +44,6 @@
         {
           "page": "Blog",
           "url": "/news/"
-        },
-        {
-          "page": "GitHub",
-          "url": "https://github.com/DataMiner/DataMiner"
         }
       ]
     }

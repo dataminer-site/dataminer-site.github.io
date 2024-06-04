@@ -28,8 +28,8 @@ sudo yum install unixODBC
 
    <!-- markdownlint-disable MD034 -->
 
-   * [x86_64 (AMD64)](https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-linux-amd64.zip)
-   * [arm64](https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-linux-aarch64.zip)
+   * [x86_64 (AMD64)](https://github.com/dataminer-site/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-linux-amd64.zip)
+   * [arm64](https://github.com/dataminer-site/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-linux-aarch64.zip)
 
    <!-- markdownlint-enable MD034 -->
 

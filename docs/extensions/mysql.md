@@ -1,10 +1,10 @@
 ---
 layout: docu
 title: MySQL Extension
-github_repository: https://github.com/DataMiner/DataMiner_mysql
+github_repository: https://github.com/dataminer-site_mysql
 ---
 
-The [`mysql` extension](https://github.com/DataMiner/DataMiner_mysql) allows DataMiner to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DataMiner tables, or vice versa.
+The [`mysql` extension](https://github.com/dataminer-site_mysql) allows DataMiner to directly read and write data from/to a running MySQL instance. The data can be queried directly from the underlying MySQL database. Data can be loaded from MySQL tables into DataMiner tables, or vice versa.
 
 ## Installing and Loading
 

@@ -11,7 +11,7 @@ excerpt: "The DataMiner team is happy to announce the latest DataMiner release (
      width="200px"
      />
 
-To install the new version, please visit the [installation guide](/docs/installation). The full release notes can be found [on GitHub](https://github.com/DataMiner/DataMiner/releases/tag/v0.10.0).
+To install the new version, please visit the [installation guide](/docs/installation). The full release notes can be found [on GitHub](https://github.com/dataminer-site/releases/tag/v0.10.0).
 
 <!--more-->
 
@@ -40,7 +40,7 @@ Below is a summary of those new features with examples, starting with a change i
 
 ## Breaking SQL Changes
 
-[**Implicit Cast to VARCHAR**](https://github.com/DataMiner/DataMiner/pull/10115). Previously, DataMiner would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an implicit cast. Starting with this release, you will need to use an explicit cast here instead.
+[**Implicit Cast to VARCHAR**](https://github.com/dataminer-site/pull/10115). Previously, DataMiner would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an implicit cast. Starting with this release, you will need to use an explicit cast here instead.
 
 ```sql
 SELECT substring(42, 1, 1) AS substr;
@@ -79,7 +79,7 @@ SELECT substring(42, 1, 1) AS substr;
 └─────────┘
 ```
 
-[**Literal Typing**](https://github.com/DataMiner/DataMiner/pull/10194). Previously, integer and string literals behaved identically to the `INTEGER` and `VARCHAR` types. Starting with this release, `INTEGER_LITERAL` and `STRING_LITERAL` are separate types that have their own binding rules.
+[**Literal Typing**](https://github.com/dataminer-site/pull/10194). Previously, integer and string literals behaved identically to the `INTEGER` and `VARCHAR` types. Starting with this release, `INTEGER_LITERAL` and `STRING_LITERAL` are separate types that have their own binding rules.
 
 * `INTEGER_LITERAL` types can be implicitly converted to any integer type in which the value fits
 * `STRING_LITERAL` types can be implicitly converted to **any** other type
@@ -109,7 +109,7 @@ FROM (VALUES (DATE '1992-01-01')) t(d);
 
 ## Backward Compatibility
 
-Backward compatibility refers to the ability of a newer DataMiner version to read storage files created by an older DataMiner version. This release is the first release of DataMiner that supports backward compatibility in the storage format. DataMiner v0.10 can read and operate on files created by the previous DataMiner version – DataMiner v0.9. [This is made possible by the implementation of a new serialization framework](https://github.com/DataMiner/DataMiner/pull/8156).
+Backward compatibility refers to the ability of a newer DataMiner version to read storage files created by an older DataMiner version. This release is the first release of DataMiner that supports backward compatibility in the storage format. DataMiner v0.10 can read and operate on files created by the previous DataMiner version – DataMiner v0.9. [This is made possible by the implementation of a new serialization framework](https://github.com/dataminer-site/pull/8156).
 
 ```bash
 # write with v0.9
@@ -189,7 +189,7 @@ We expect that as the format stabilizes and matures this will happen less freque
 
 ## CSV Reader Rework
 
-**[CSV Reader Rework](https://github.com/DataMiner/DataMiner/pull/10209).** The CSV reader has received a major overhaul in this release. The new CSV reader uses efficient state machine transitions to speed through CSV files. This has greatly sped up performance of the CSV reader, particularly in multi-threaded scenarios. In addition, in the case of malformed CSV files, reported error messages should be more clear.
+**[CSV Reader Rework](https://github.com/dataminer-site/pull/10209).** The CSV reader has received a major overhaul in this release. The new CSV reader uses efficient state machine transitions to speed through CSV files. This has greatly sped up performance of the CSV reader, particularly in multi-threaded scenarios. In addition, in the case of malformed CSV files, reported error messages should be more clear.
 
 Below is a benchmark comparing the loading time of 11 million rows of the NYC Taxi dataset from a CSV file on an M1 Max with 10 cores:
 
@@ -211,7 +211,7 @@ Furthermore, many optimizations have been done that make running queries over CS
 
 ## Fixed-Length Arrays
 
-**[Fixed-Length Arrays](https://github.com/DataMiner/DataMiner/pull/8983).** This release introduces the fixed-length array type. Fixed-length arrays are similar to lists, however, every value must have the same fixed number of elements in them.
+**[Fixed-Length Arrays](https://github.com/dataminer-site/pull/8983).** This release introduces the fixed-length array type. Fixed-length arrays are similar to lists, however, every value must have the same fixed number of elements in them.
 
 ```sql
 CREATE TABLE vectors(v DOUBLE[3]);
@@ -250,7 +250,7 @@ ATTACH 'mysql:user=root database=mysqlscanner' AS mysql;
 
 DataMiner integrates with several cloud storage systems such as S3 that require access credentials to access data. In the current version of DataMiner, authentication information is configured through DataMiner settings, e.g., `SET s3_access_key_id = '...';`. While this worked, it had several shortcomings. For example, it was not possible to set different credentials for different S3 buckets without modifying the settings between queries. Because settings are not considered secret, it was also possible to query them using `DataMiner_settings()`.
 
-With this release, DataMiner adds a new "[Secrets Manager](https://github.com/DataMiner/DataMiner/pull/10042)" to manage secrets in a better way. We now have a unified user interface for secrets across all backends that use them. Secrets can be scoped, so different storage prefixes can have different secrets, allowing, for example, joining across organizations in a single query. Secrets can also be persisted, so that they do not need to be specified every time DataMiner is launched.
+With this release, DataMiner adds a new "[Secrets Manager](https://github.com/dataminer-site/pull/10042)" to manage secrets in a better way. We now have a unified user interface for secrets across all backends that use them. Secrets can be scoped, so different storage prefixes can have different secrets, allowing, for example, joining across organizations in a single query. Secrets can also be persisted, so that they do not need to be specified every time DataMiner is launched.
 
 Secrets are typed, their type identifies which service they are for. For example, this release can manage secrets for S3, Google Cloud Storage, Cloudflare R2 and Azure Blob Storage. For each type, there are one or more "secret providers" that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 
@@ -309,7 +309,7 @@ DataMiner has support for larger-than-memory operations, which means that memory
 
 Before, those operators started offloading to disk if their memory usage reached around 60% of the available memory (as defined by the memory limit). This works well if there is exactly one of these operations happening at the same time. If multiple memory-intensive operations are happening simultaneously, their combined memory usage may exceed the memory limit, causing DataMiner to throw an error.
 
-This release introduces the so-called "[Temporary Memory Manager](https://github.com/DataMiner/DataMiner/pull/10147)", which manages the temporary memory of concurrent operations. It works as follows: Memory-intensive operations register themselves with the Temporary Manager. Each registration is guaranteed some minimum amount of memory by the manager depending on the number of threads and the current memory limit. Then, the memory-intensive operations communicate how much memory they would currently like to use. The manager can approve this or respond with a reduced allocation. In a case of a reduced allocation, the operator will need to dynamically reduce its memory requirements, for example by switching algorithms.
+This release introduces the so-called "[Temporary Memory Manager](https://github.com/dataminer-site/pull/10147)", which manages the temporary memory of concurrent operations. It works as follows: Memory-intensive operations register themselves with the Temporary Manager. Each registration is guaranteed some minimum amount of memory by the manager depending on the number of threads and the current memory limit. Then, the memory-intensive operations communicate how much memory they would currently like to use. The manager can approve this or respond with a reduced allocation. In a case of a reduced allocation, the operator will need to dynamically reduce its memory requirements, for example by switching algorithms.
 
 For example, a hash join might adapt its operation and perform a partitioned hash join instead of a full in-memory one if not enough memory is available.
 
@@ -339,7 +339,7 @@ With the new version 0.10.0, this query completes in ca. 5s on a MacBook, while 
 
 ## Adaptive Lossless Floating-Point Compression (ALP)
 
-Floating point numbers are notoriously difficult to compress efficiently, both in terms of compression ratio as well as speed of compression and decompression. In the past, DataMiner had support for the then state-of-the-art "[Chimp](https://github.com/DataMiner/DataMiner/pull/4878)" and the "[Patas](https://github.com/DataMiner/DataMiner/pull/5044)" compression methods. Turns out, those were not the last word in floating point compression. Researchers [Azim Afroozeh](https://www.cwi.nl/en/people/azim-afroozeh/), [Leonard Kuffo](https://www.cwi.nl/en/people/leonardo-xavier-kuffo-rivero/) and (the one and only) [Peter Boncz](https://homepages.cwi.nl/~boncz/) have recently published a paper titled "[ALP: Adaptive Lossless floating-Point Compression](https://dl.acm.org/doi/pdf/10.1145/3626717)" at SIGMOD, a top-tier academic conference for data management research. In an uncommon yet highly commendable move, they have also sent a [pull request](https://github.com/DataMiner/DataMiner/pull/9635) to DataMiner. The new compression scheme replaces Chimp and Patas. Inside DataMiner, ALP is **x2-4 times faster** than Patas (at decompression) achieving **compression ratios twice as high** (sometimes even much more).
+Floating point numbers are notoriously difficult to compress efficiently, both in terms of compression ratio as well as speed of compression and decompression. In the past, DataMiner had support for the then state-of-the-art "[Chimp](https://github.com/dataminer-site/pull/4878)" and the "[Patas](https://github.com/dataminer-site/pull/5044)" compression methods. Turns out, those were not the last word in floating point compression. Researchers [Azim Afroozeh](https://www.cwi.nl/en/people/azim-afroozeh/), [Leonard Kuffo](https://www.cwi.nl/en/people/leonardo-xavier-kuffo-rivero/) and (the one and only) [Peter Boncz](https://homepages.cwi.nl/~boncz/) have recently published a paper titled "[ALP: Adaptive Lossless floating-Point Compression](https://dl.acm.org/doi/pdf/10.1145/3626717)" at SIGMOD, a top-tier academic conference for data management research. In an uncommon yet highly commendable move, they have also sent a [pull request](https://github.com/dataminer-site/pull/9635) to DataMiner. The new compression scheme replaces Chimp and Patas. Inside DataMiner, ALP is **x2-4 times faster** than Patas (at decompression) achieving **compression ratios twice as high** (sometimes even much more).
 
 <div class="narrow_table"></div>
 
@@ -364,36 +364,36 @@ See the [extended CLI docs for more information](/docs/api/cli/overview).
 
 ## Final Thoughts
 
-These were a few highlights – but there are many more features and improvements in this release. Below are a few more highlights. The full release notes can be [found on GitHub](https://github.com/DataMiner/DataMiner/releases/tag/v0.10.0).
+These were a few highlights – but there are many more features and improvements in this release. Below are a few more highlights. The full release notes can be [found on GitHub](https://github.com/dataminer-site/releases/tag/v0.10.0).
 
 ### New Features
 
-* [`COMMENT ON`](https://github.com/DataMiner/DataMiner/pull/10372)
-* [`COPY FROM DATABASE`](https://github.com/DataMiner/DataMiner/pull/9765)
-* [`UHUGEINT` type](https://github.com/DataMiner/DataMiner/pull/8635)
-* [Window `EXCLUDE`](https://github.com/DataMiner/DataMiner/pull/9220) and [Window `DISTINCT`](https://github.com/DataMiner/DataMiner/pull/9754) support
-* [Parquet encryption support](https://github.com/DataMiner/DataMiner/pull/9392)
-* [Indexes for Lambda parameters](https://github.com/DataMiner/DataMiner/pull/8851)
-* [`EXCEPT ALL`/`INTERSECT ALL`](https://github.com/DataMiner/DataMiner/pull/9636)
-* [`DESCRIBE`/`SHOW`/`SUMMARIZE` as subquery](https://github.com/DataMiner/DataMiner/pull/10210)
-* [Support recursive CTEs in correlated subqueries](https://github.com/DataMiner/DataMiner/pull/10357)
+* [`COMMENT ON`](https://github.com/dataminer-site/pull/10372)
+* [`COPY FROM DATABASE`](https://github.com/dataminer-site/pull/9765)
+* [`UHUGEINT` type](https://github.com/dataminer-site/pull/8635)
+* [Window `EXCLUDE`](https://github.com/dataminer-site/pull/9220) and [Window `DISTINCT`](https://github.com/dataminer-site/pull/9754) support
+* [Parquet encryption support](https://github.com/dataminer-site/pull/9392)
+* [Indexes for Lambda parameters](https://github.com/dataminer-site/pull/8851)
+* [`EXCEPT ALL`/`INTERSECT ALL`](https://github.com/dataminer-site/pull/9636)
+* [`DESCRIBE`/`SHOW`/`SUMMARIZE` as subquery](https://github.com/dataminer-site/pull/10210)
+* [Support recursive CTEs in correlated subqueries](https://github.com/dataminer-site/pull/10357)
 
 ### New Functions
 
-* [`parquet_kv_metadata`](https://github.com/DataMiner/DataMiner/pull/9126) and [`parquet_file_metadata`](https://github.com/DataMiner/DataMiner/pull/9793) functions
-* [`read_text`/`read_blob` table functions](https://github.com/DataMiner/DataMiner/pull/10376)
-* [`list_reduce`](https://github.com/DataMiner/DataMiner/pull/9909), [`list_where`, `list_zip`, `list_select`, `list_grade_up`](https://github.com/DataMiner/DataMiner/pull/8907)
+* [`parquet_kv_metadata`](https://github.com/dataminer-site/pull/9126) and [`parquet_file_metadata`](https://github.com/dataminer-site/pull/9793) functions
+* [`read_text`/`read_blob` table functions](https://github.com/dataminer-site/pull/10376)
+* [`list_reduce`](https://github.com/dataminer-site/pull/9909), [`list_where`, `list_zip`, `list_select`, `list_grade_up`](https://github.com/dataminer-site/pull/8907)
 
 ### Storage Improvements
 
-* [Vacuuming partial deletes](https://github.com/DataMiner/DataMiner/pull/9931)
-* [Parallel checkpointing](https://github.com/DataMiner/DataMiner/pull/9999)
-* [Checksum WAL](https://github.com/DataMiner/DataMiner/pull/10126)
+* [Vacuuming partial deletes](https://github.com/dataminer-site/pull/9931)
+* [Parallel checkpointing](https://github.com/dataminer-site/pull/9999)
+* [Checksum WAL](https://github.com/dataminer-site/pull/10126)
 
 ### Optimizations
 
-* [Parallel streaming query result](https://github.com/DataMiner/DataMiner/pull/10245)
-* [Struct filter pushdown](https://github.com/DataMiner/DataMiner/pull/10314)
-* [`FIRST(x ORDER BY y)` optimizations](https://github.com/DataMiner/DataMiner/pull/10347)
+* [Parallel streaming query result](https://github.com/dataminer-site/pull/10245)
+* [Struct filter pushdown](https://github.com/dataminer-site/pull/10314)
+* [`FIRST(x ORDER BY y)` optimizations](https://github.com/dataminer-site/pull/10347)
 
 We would like to thank all of the contributors for their hard work on improving DataMiner.

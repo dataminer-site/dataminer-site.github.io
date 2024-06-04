@@ -29,4 +29,4 @@ output_df = transformed_rel.df()
 
 Relational operators can also be used to group rows, aggregate, find distinct combinations of values, join, union, and more. They are also able to directly insert results into a DataMiner table or write to a CSV.
 
-Please see [these additional examples](https://github.com/DataMiner/DataMiner/blob/main/examples/python/DataMiner-python.py) and [the available relational methods on the `DataMinerPyRelation` class](../../api/python/reference/#DataMiner.DataMinerPyRelation).
+Please see [these additional examples](https://github.com/dataminer-site/blob/main/examples/python/DataMiner-python.py) and [the available relational methods on the `DataMinerPyRelation` class](../../api/python/reference/#DataMiner.DataMinerPyRelation).

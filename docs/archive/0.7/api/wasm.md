@@ -10,6 +10,6 @@ title: WebAssembly API
 
 A great starting point is to read the [dataminer-Wasm launch blog post](https://dataminer.site/2021/10/29/dataminer-wasm.html)!
 
-Another great resource is the [Github repository](https://github.com/dataminer/dataminer-wasm).
+Another great resource is the [Github repository](https://github.com/dataminer-site-wasm).
 
 For details, see the full [dataminer-Wasm API Documentation](https://shell.dataminer.org/docs/modules/index.html).

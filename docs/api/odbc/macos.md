@@ -9,10 +9,10 @@ title: ODBC API on macOS
    brew install unixodbc
    ```
 
-2. <!-- markdownlint-disable MD034 --> DataMiner releases a universal [ODBC driver for macOS](https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-osx-universal.zip) (supporting both Intel and Apple Silicon CPUs). To download it, run:
+2. <!-- markdownlint-disable MD034 --> DataMiner releases a universal [ODBC driver for macOS](https://github.com/dataminer-site/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-osx-universal.zip) (supporting both Intel and Apple Silicon CPUs). To download it, run:
 
    ```bash
-   wget https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-osx-universal.zip
+   wget https://github.com/dataminer-site/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-osx-universal.zip
    ```
 
    <!-- markdownlint-enable MD034 -->

@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: AWS Extension
-github_repository: https://github.com/DataMiner/DataMiner_aws
+github_repository: https://github.com/dataminer-site_aws
 ---
 
 The `aws` extension adds functionality (e.g., authentication) on top of the `httpfs` extension's [S3 capabilities](httpfs#s3-api), using the AWS SDK.

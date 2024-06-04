@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Spatial Extension
-github_repository: https://github.com/DataMiner/DataMiner_spatial
+github_repository: https://github.com/dataminer-site_spatial
 ---
 
 The `spatial` extension provides support for geospatial data processing in DataMiner.

@@ -21,7 +21,7 @@ brew install unixodbc
 
 # Step 1: Download ODBC Driver
 
-DataMiner releases the ODBC driver as asset. For MacOS, download it from <a href="https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-osx-universal.zip">ODBC Linux Asset</a> that contains the following artifacts:
+DataMiner releases the ODBC driver as asset. For MacOS, download it from <a href="https://github.com/dataminer-site/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-osx-universal.zip">ODBC Linux Asset</a> that contains the following artifacts:
 
 **libDataMiner_odbc.dylib**: the DataMiner driver compiled to MacOS (with Intel and Apple M1 support).
 

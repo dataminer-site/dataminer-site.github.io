@@ -66,7 +66,7 @@ def generate_index(page, filtered)
 end
 
 module Jekyll
-  class dataminerFunctionsTag < Liquid::Tag
+  class DataminerFunctionsTag < Liquid::Tag
     @tag_name = ''
     @filter_expression = ''
 
@@ -157,4 +157,4 @@ module Jekyll
   end
 end
 
-Liquid::Template.register_tag('dataminer_functions', Jekyll::dataminerFunctionsTag)
+Liquid::Template.register_tag('dataminer_functions', Jekyll::DataminerFunctionsTag)

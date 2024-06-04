@@ -137,7 +137,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 ## Achive and Generated Pages
 
 * The archive pages (e.g., <https://dataminer.site/docs/archive/0.8.1/>) contain documentation for old versions of dataminer. In general, we do not accept contributions to these pages – please target the latest version of the page when submitting your contributions.
-* Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Do not edit the generated content, instead, edit the source files (often found in the [`dataminer` repository](https://github.com/dataminer/dataminer)).
+* Many of the documentation's pages are auto-generated. Before editing, please check the [`scripts/generate_all_docs.sh`](scripts/generate_all_docs.sh) script. Do not edit the generated content, instead, edit the source files (often found in the [`dataminer` repository](https://github.com/dataminer-site)).
 
 ## Notice
 

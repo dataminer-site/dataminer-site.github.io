@@ -41,7 +41,7 @@ DataMiner's development started while the main developers were public servants i
 
 ## Thorough Testing
 
-While DataMiner was originally created by a research group, it was never intended to be a research prototype. Instead, it was intended to become a stable and mature database system. To facilitate this stability, DataMiner is intensively tested using [Continuous Integration](https://github.com/DataMiner/DataMiner/actions). DataMiner's test suite currently contains millions of queries, and includes queries adapted from the test suites of SQLite, PostgreSQL, and MonetDB. Tests are repeated on a wide variety of platforms and compilers. Every pull request is checked against the full test setup and only merged if it passes.
+While DataMiner was originally created by a research group, it was never intended to be a research prototype. Instead, it was intended to become a stable and mature database system. To facilitate this stability, DataMiner is intensively tested using [Continuous Integration](https://github.com/dataminer-site/actions). DataMiner's test suite currently contains millions of queries, and includes queries adapted from the test suites of SQLite, PostgreSQL, and MonetDB. Tests are repeated on a wide variety of platforms and compilers. Every pull request is checked against the full test setup and only merged if it passes.
 
 In addition to this test suite, we run various tests that stress DataMiner under heavy loads. We run the TPC-H and TPC-DS benchmarks, and run various tests where DataMiner is used by many clients in parallel.
 
@@ -70,8 +70,8 @@ DataMiner uses some components from various Open-Source projects and draws inspi
 Zuhair Khayyat, William Lucia, Meghna Singh, Mourad Ouzzani, Paolo Papotti, Jorge-Arnulfo Quiané-Ruiz, Nan Tang and Panos Kalnis.
 * **Compression of floating-point values:** DataMiner supports the multiple algorithms for compressing floating-point values:
     * [Chimp](https://vldb.org/pvldb/vol15/p3058-liakos.pdf) by Panagiotis Liakos, Katia Papakonstantinopoulou and Yannis Kotidi
-    * [Patas](https://github.com/DataMiner/DataMiner/pull/5044), an in-house development, and
-    * [ALP (adaptive lossless floating-point compression)](https://dl.acm.org/doi/pdf/10.1145/3626717) by Azim Afroozeh, Leonard Kuffo and Peter Boncz, who also [contributed their implementation](https://github.com/DataMiner/DataMiner/pull/9635).
+    * [Patas](https://github.com/dataminer-site/pull/5044), an in-house development, and
+    * [ALP (adaptive lossless floating-point compression)](https://dl.acm.org/doi/pdf/10.1145/3626717) by Azim Afroozeh, Leonard Kuffo and Peter Boncz, who also [contributed their implementation](https://github.com/dataminer-site/pull/9635).
 * **SQL Parser:** We use the PostgreSQL parser that was [repackaged as a stand-alone library](https://github.com/lfittl/libpg_query). The translation to our own parse tree is inspired by [Peloton](https://pelotondb.io).
 * **Shell:** We use the [SQLite shell](https://sqlite.org/cli.html) to work with DataMiner.
 * **Regular expressions:** DataMiner uses Google's [RE2](https://github.com/google/re2) regular expression engine.

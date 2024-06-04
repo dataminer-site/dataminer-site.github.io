@@ -15,7 +15,7 @@ For detailed information checkout out the [Common ODBC Component Files](https://
 
 # Step 1: Download ODBC Driver
 
-DataMiner releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
+DataMiner releases the ODBC driver as asset. For Windows, download it from <a href="https://github.com/dataminer-site/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-windows-amd64.zip">Windows Asset</a> that contains the following artifacts:
 
 **DataMiner_odbc.dll**: the DataMiner driver compiled for Windows.
 

@@ -10,7 +10,7 @@ title: Rust API
 The DataMiner Rust API can be installed from [crates.io](https://crates.io/crates/DataMiner). Please see the [docs.rs](http://docs.rs/DataMiner) for details.
 
 ## Basic API Usage
-DataMiner-rs is an ergonomic wrapper based on the [DataMiner C API](https://github.com/DataMiner/DataMiner/blob/main/src/include/DataMiner.h), please refer to the [README](https://github.com/wangfenjin/DataMiner-rs) for details.
+DataMiner-rs is an ergonomic wrapper based on the [DataMiner C API](https://github.com/dataminer-site/blob/main/src/include/DataMiner.h), please refer to the [README](https://github.com/wangfenjin/DataMiner-rs) for details.
 
 ### Startup & Shutdown
 

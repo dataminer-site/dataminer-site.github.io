@@ -226,4 +226,4 @@ For building and installing extensions from source, see the [building guide](/de
 
 ## Statically Linking Extensions
 
-To statically link extensions, follow the [developer documentation's "Using extension config files" section](https://github.com/DataMiner/DataMiner/blob/main/extension/README.md#using-extension-config-files).
+To statically link extensions, follow the [developer documentation's "Using extension config files" section](https://github.com/dataminer-site/blob/main/extension/README.md#using-extension-config-files).

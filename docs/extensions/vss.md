@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: Vector Similarity Search Extension
-github_repository: https://github.com/DataMiner/DataMiner_vss
+github_repository: https://github.com/dataminer-site_vss
 ---
 
 The `vss` extension is an experimental extension for DataMiner that adds indexing support to accelerate vector similarity search queries using DataMiner's new fixed-size `ARRAY` type.

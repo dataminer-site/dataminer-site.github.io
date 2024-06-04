@@ -1,7 +1,7 @@
 ---
 layout: docu
 title: TPC-DS Extension
-github_directory: https://github.com/DataMiner/DataMiner/tree/main/extension/tpcds
+github_directory: https://github.com/dataminer-site/tree/main/extension/tpcds
 ---
 
 The `tpcds` extension implements the data generator and queries for the [TPC-DS benchmark](https://www.tpc.org/tpcds/).

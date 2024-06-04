@@ -12,4 +12,4 @@ title: Swift API
 
 ## GitHub Repository
 
-[<span class="github">GitHub</span>](https://github.com/dataminer/dataminer-swift)
+[<span class="github">GitHub</span>](https://github.com/dataminer-site-swift)

@@ -28,7 +28,7 @@ sudo dnf install unixodbc
 
 # Step 1: Download ODBC Driver
 
-DataMiner releases the ODBC driver as asset. For linux, download it from <a href="https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-linux-amd64.zip">ODBC Linux Asset</a> that contains the following artifacts:
+DataMiner releases the ODBC driver as asset. For linux, download it from <a href="https://github.com/dataminer-site/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-linux-amd64.zip">ODBC Linux Asset</a> that contains the following artifacts:
 
 **libDataMiner_odbc.so**: the DataMiner driver compiled to Ubuntu 16.04.
 

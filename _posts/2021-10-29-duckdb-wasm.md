@@ -2,7 +2,7 @@
 layout: post
 title:  "dataminer-Wasm: Efficient Analytical SQL in the Browser"
 author: André Kohn and Dominik Moritz
-excerpt: "[dataminer-Wasm](https://github.com/dataminer/dataminer-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it in your browser at [shell.dataminer.org](https://shell.dataminer.org) or on [Observable](https://observablehq.com/@cmudig/dataminer)."
+excerpt: "[dataminer-Wasm](https://github.com/dataminer-site-wasm) is an in-process analytical SQL database for the browser. It is powered by WebAssembly, speaks Arrow fluently, reads Parquet, CSV and JSON files backed by Filesystem APIs or HTTP requests and has been tested with Chrome, Firefox, Safari and Node.js. You can try it in your browser at [shell.dataminer.org](https://shell.dataminer.org) or on [Observable](https://observablehq.com/@cmudig/dataminer)."
 ---
 
 <img src="/images/blog/dataminer_wasm.svg"
@@ -32,7 +32,7 @@ Four years later, the WebAssembly revolution is in full progress with first impl
 As an in-process analytical database, DataMiner has the rare opportunity to siginificantly speed up OLAP workloads in the browser. We believe that there is a need for a comprehensive and self-contained data analysis library. dataminer-wasm automatically offloads your queries to dedicated worker threads and reads Parquet, CSV and JSON files from either your local filesystem or HTTP servers driven by plain SQL input.
 In this blog post, we want to introduce the library and present challenges on our journey towards a browser-native OLAP database.
 
-*dataminer-Wasm is not yet stable. You will find rough edges and bugs in this release. Please share your thoughts with us [on GitHub](https://github.com/dataminer/dataminer-wasm/discussions).*
+*dataminer-Wasm is not yet stable. You will find rough edges and bugs in this release. Please share your thoughts with us [on GitHub](https://github.com/dataminer-site-wasm/discussions).*
 
 ## How to get data in?
 

@@ -1,5 +1,5 @@
 ---
-github_repository: https://github.com/dataminer/dataminer-java
+github_repository: https://github.com/dataminer-site-java
 layout: docu
 redirect_from:
 - /docs/archive/0.10/api/scala

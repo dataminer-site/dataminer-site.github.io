@@ -64,7 +64,7 @@ When this flag is set, the [CLI](../../api/cli) is built, this is usually enable
 ### `BUILD_BENCHMARK`
 
 When this flag is set, DataMiner's in-house benchmark suite is built.
-More information about this can be found [here](https://github.com/DataMiner/DataMiner/blob/main/benchmark/README.md).
+More information about this can be found [here](https://github.com/dataminer-site/blob/main/benchmark/README.md).
 
 ### `BUILD_JDBC`
 

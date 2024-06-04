@@ -9,7 +9,7 @@ Using the DataMiner ODBC API on Windows requires the following steps:
    The Driver Manager on Windows is provided in a DLL file `odbccp32.dll`, and other files and tools.
    For detailed information check out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
 
-2. <!-- markdownlint-disable MD034 --> DataMiner releases the ODBC driver as an asset. For Windows, download it from the [Windows ODBC asset (x86_64/AMD64)](https://github.com/DataMiner/DataMiner/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-windows-amd64.zip). <!-- markdownlint-enable MD034 -->
+2. <!-- markdownlint-disable MD034 --> DataMiner releases the ODBC driver as an asset. For Windows, download it from the [Windows ODBC asset (x86_64/AMD64)](https://github.com/dataminer-site/releases/download/v{{ site.currentDataMinerversion }}/DataMiner_odbc-windows-amd64.zip). <!-- markdownlint-enable MD034 -->
 
 3. The archive contains the following artifacts:
 
