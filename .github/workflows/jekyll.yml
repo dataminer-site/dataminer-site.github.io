@@ -76,7 +76,7 @@ jobs:
       - name: Move artifact
         run: |
           mkdir -p ../_pdf
-          mv duckdb-docs.pdf ../_pdf
+          mv DataMiner-docs.pdf ../_pdf
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
