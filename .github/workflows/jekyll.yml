@@ -32,14 +32,6 @@ jobs:
           ruby-version: '3.0' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
-      - name: Get star count
-        env:
-          GH_TOKEN: ${{ secrets.GH_STAR_COUNT_TOKEN }}
-        run: |
-          STAR_COUNT=$(gh api repos/duckdb/DataMiner | jq ".stargazers_count")
-          STAR_COUNT_FORMATTED=$(ruby -e 'printf("%.01fk", ARGV[0].to_i / 1000.0)' ${STAR_COUNT})
-          echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
-          echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
       - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Fetch release calendar
@@ -47,65 +39,17 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-        if: github.repository == 'powerfull-scrapper/landing'
+        if: github.repository == 'dataminer-site/dataminer-site.github.io'
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
       - name: Upload HTML artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: html_artifact
           path: _site
-
-  build_pdf:
-    runs-on: ubuntu-latest
-    container:
-      image: docker://pandoc/extra:3.1.1.0
-      options: --entrypoint=sh
-    defaults:
-      run:
-        working-directory: single-file-document
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Python
-        run: |
-          PYTHONUNBUFFERED=1
-          apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-          python3 -m ensurepip
-      - name: Install dependencies
-        run: pip3 install -r requirements.txt
-      - name: Concatenate files
-        run: python3 concatenate_to_single_file.py
-      - name: Convert with pandoc
-        run: pandoc --defaults pandoc-configuration.yaml
-      - name: Move artifact
-        run: |
-          mkdir -p ../_pdf
-          mv duckdb-docs.pdf ../_pdf
-      - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: pdf_artifact
-          path: _pdf
-
-  package_into_a_single_artifact:
-    runs-on: ubuntu-latest
-    needs: [build_html, build_pdf]
-    steps:
-      # download both the html and the pdf artifacts into the _site directory
-      - uses: actions/download-artifact@v4
-        with:
-          name: html_artifact
-          path: _site
-      - uses: actions/download-artifact@v4
-        with:
-          name: pdf_artifact
-          path: _site
-      - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
 
   # Deployment job
   deploy:
@@ -140,7 +84,7 @@ jobs:
 
       - name: Link Checker on stable
         run: |
-          linkchecker https://dataminer.site/ --ignore-url 'https?://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
+          linkchecker https://dataminer.site/ --ignore-url 'https?://dataminer\.site/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
           echo $?
 
       - run: cat report.html >> ${GITHUB_STEP_SUMMARY}
