@@ -47,7 +47,7 @@ Finally, the DataMiner-Wasm shell's features are now much closer to the native [
 
 ### Using the TPC-H Extension in DataMiner-Wasm
 
-To demonstrate this, we will again use the [TPC-H data generation example](#running-DataMiner-extensions-locally).
+To demonstrate this, we will again use the [TPC-H data generation example](#running-dataminer-extensions-locally).
 To run this script in your browser, [start an online DataMiner shell that runs these commands](https://shell.DataMiner.org/#queries=v0,INSTALL-tpch~,LOAD-tpch~,CALL-dbgen(sf%3D0.1)~,PRAGMA-tpch(7)~). The script will generate the TPC-H data set at scale factor 0.1, which corresponds to 100MB in uncompressed CSV format.
 
 Once the script is finished, you can keep executing queries, or you could even download the `customer.parquet` file (1MB) using the following commands:
