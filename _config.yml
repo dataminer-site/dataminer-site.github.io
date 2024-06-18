@@ -18,7 +18,7 @@ email: contact@dataminer.site
 description: >- # this means to ignore newlines until "baseurl:"
   data miner is a platform is built to scrap the website in most reliable and trusted website.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://dataminer.site" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://www.dataminer.site" # the base hostname & protocol for your site, e.g. http://example.com
 # Set current version of DataMiner
 currentshortDataMinerversion: "1.0"
 currentDataMinerversion: 1.0.0
@@ -51,22 +51,22 @@ last-modified-at:
     date-format: '%Y-%m-%d'
 
 twitter:
-  username: DataMiner
+  username: dharmendrasoni
   card: summary
   
 github: 
   source:
     branch: main
-  repository_url: "https://github.com/powerfull-scrapper/landing"
+  repository_url: "https://github.com/dataminer-site/dataminer-site.github.io"
 
 defaults:
   - scope:
       path: ""
     values:
-      image: /images/sharingDataMiner.jpg
+      image: /images/sharingDataMiner.png
       toc: true
 
-repository: "powerfull-scrapper/landing"
+repository: "dataminer-site/dataminer-site.github.io"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
