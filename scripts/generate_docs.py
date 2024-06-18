@@ -158,7 +158,9 @@ dataminer_vector
 '''
 
 keywords = [x.strip() for x in keyword_list.split('\n') if len(x.strip()) > 0]
-dataminer_types = [x.strip() for x in dataminer_type_list.split('\n') if len(x.strip()) > 0]
+dataminer_types = [
+    x.strip() for x in dataminer_type_list.split('\n') if len(x.strip()) > 0
+]
 
 
 def quick_docs_start():

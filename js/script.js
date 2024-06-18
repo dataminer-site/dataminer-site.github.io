@@ -394,8 +394,8 @@ $(document).ready(function(){
 	
 	// Appending Content-List of Documentation
 	if ( $('.wrap.documentation') != 0 ) {
-	    contentlist = $('ul.sidenav').clone()
-	    $('#docusitemaphere').append(contentlist).find("ul").removeAttr("style")
+	    contentlist = $('ul.sidenav').clone().children()
+	    $('#docusitemaphere').append(contentlist[2]).find("ul").removeAttr("style")
 	}
 	
 	// Add class-name to external Links

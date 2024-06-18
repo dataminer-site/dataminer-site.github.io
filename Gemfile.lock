@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 897af23071674ca9d0f8550c5ed8dea8660115c0
+  revision: 9bf79b378ba7ecdca650d29f7071bf7ae7596040
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -13,7 +13,7 @@ GEM
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.11.1)
+    coffee-script-source (1.12.2)
     colorator (1.1.0)
     commonmarker (0.23.10)
     concurrent-ruby (1.3.1)
@@ -61,9 +61,9 @@ GEM
       safe_yaml (~> 1.0)
     jekyll-avatar (0.8.0)
       jekyll (>= 3.0, < 5.0)
-    jekyll-coffeescript (1.1.1)
+    jekyll-coffeescript (2.0.0)
       coffee-script (~> 2.2)
-      coffee-script-source (~> 1.11.1)
+      coffee-script-source (~> 1.12)
     jekyll-commonmark (1.4.0)
       commonmarker (~> 0.22)
     jekyll-commonmark-ghpages (0.4.0)
@@ -223,7 +223,7 @@ DEPENDENCIES
   github-pages-health-check (= 1.18.2)
   jekyll (= 3.9.5)
   jekyll-avatar (= 0.8.0)
-  jekyll-coffeescript (= 1.1.1)
+  jekyll-coffeescript (= 2.0.0)
   jekyll-commonmark-ghpages (= 0.4.0)
   jekyll-default-layout (= 0.1.5)
   jekyll-feed (= 0.17.0)

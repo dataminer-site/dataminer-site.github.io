@@ -5,11 +5,11 @@ title: Frequently Asked Questions
 
 <div class="qa-wrap" markdown="1">
 
-### Who makes DataMiner?
+### Who develops DataMiner?
 
 <div class="answer" markdown="1">
 
-DataMiner is maintained by [Dharmendra Soni](https://github.com/dharmendrasha) & [Excellent enginners of scaletech](https://scaletech.xyz) along with [many other contributors](https://github.com/dataminer-site) from all over the world. 
+DataMiner is developed & maintained by [Dharmendra Soni](https://github.com/dharmendrasha) & [Excellent enginners of scaletech](https://scaletech.xyz) along with [many other contributors](https://github.com/dataminer-site) from all over the world. 
 
 </div>
 
@@ -19,7 +19,7 @@ DataMiner is maintained by [Dharmendra Soni](https://github.com/dharmendrasha) &
 
 <div class="qa-wrap" markdown="1">
 
-### Why call it DataMiner?
+### What makes DataMiner unique?
 
 <div class="answer" markdown="1">
 
@@ -33,11 +33,27 @@ The name "DataMiner" effectively captures the essence of our system's capabiliti
 
 <div class="qa-wrap" markdown="1">
 
+### How can I get started with DataMiner?
+
+<div class="answer" markdown="1">
+
+To begin using DataMiner, choose a stable release or nightly build based on your needs and follow the installation instructions provided on our [website](https://www.dataminer.site/docs/installation/index). You can also explore our comprehensive documentation for guidance.
+ <br/>
+
+
+</div>
+
+</div>
+
+<!-- Q&A entry -->
+
+<div class="qa-wrap" markdown="1">
+
 ### How Dataminer website is created?
 
 <div class="answer" markdown="1">
 
-Dataminer website is DuckDb opensource project of landing page: <br/>
+Dataminer website is DuckDb opensource project of landing page <br/>
 
 
 </div>
@@ -53,10 +69,9 @@ Dataminer website is DuckDb opensource project of landing page: <br/>
 
 <div class="answer" markdown="1">
 
-The DataMiner Website is hosted by GitHub Pages, its repository is at [`dataminer-site/dataminer-site.github.io`](https://github.com/dataminer-site/dataminer-site.github.io).
-When the documentation is browsed from a desktop computer, every page has a "Page Source" button on the top that navigates you to its Markdown source file.
-Pull requests to fix issues or to expand the documentation section on DataMiner's features are very welcome.
-Before opening a pull request, please consult our [Contributor Guide](https://github.com/dataminer-site/blob/main/CONTRIBUTING.md).
+The DataMiner Website is hosted on GitHub Pages, with its repository located at [`dataminer-site/dataminer-site.github.io`](https://github.com/dataminer-site/dataminer-site.github.io).
+Each page of the documentation includes a "Page Source" button at the top, allowing you to navigate directly to its markdown source file when browsing from a desktop computer.
+We welcome and encourage pull requests for fixing issues or expanding the documentation, particularly on DataMiner's features. Before submitting a pull request, please review our [`Contributor Guide`](https://github.com/dataminer-site/blob/main/CONTRIBUTING.md) for guidelines and best practices. Your contributions help improve the accessibility and usefulness of DataMiner for all users.
 
 </div>
 
@@ -66,7 +81,7 @@ Before opening a pull request, please consult our [Contributor Guide](https://gi
 
 <div class="qa-wrap" markdown="1">
 
-### There are already other products in the market why should i use Dataminer?
+### Why should I use DataMiner over other products in the market?
 
 <div class="answer" markdown="1">
 
@@ -95,7 +110,7 @@ Absolutely! DataMiner is designed with flexibility in mind, and we understand th
 
 <div class="qa-wrap" markdown="1">
 
-### How much reliable is DataMiner?
+### How reliable is DataMiner?
 
 <div class="answer" markdown="1">
 DataMiner is built with reliability at its core. It undergoes rigorous testing and quality assurance to ensure consistent performance and accuracy. Our robust architecture minimizes downtime and maximizes data integrity, giving you confidence in your data management and analysis processes. Additionally, we provide continuous support and updates to keep DataMiner operating smoothly and efficiently, making it a trusted solution for all your data needs.
