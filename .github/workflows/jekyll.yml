@@ -32,14 +32,6 @@ jobs:
           ruby-version: '3.0' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
-      - name: Get star count
-        env:
-          GH_TOKEN: ${{ secrets.GH_STAR_COUNT_TOKEN }}
-        run: |
-          STAR_COUNT=$(gh api repos/duckdb/DataMiner | jq ".stargazers_count")
-          STAR_COUNT_FORMATTED=$(ruby -e 'printf("%.01fk", ARGV[0].to_i / 1000.0)' ${STAR_COUNT})
-          echo "star_count: ${STAR_COUNT} (${STAR_COUNT_FORMATTED})"
-          echo "star_count: \"${STAR_COUNT_FORMATTED}\"" >> _config.yml
       - name: Install Python requirements
         run: pip install -r requirements.txt
       - name: Fetch release calendar
@@ -47,14 +39,14 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-        if: github.repository == 'powerfull-scrapper/landing'
+        if: github.repository == 'dataminer-site/dataminer-site.github.io'
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
       - name: Upload HTML artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: html_artifact
           path: _site
@@ -84,12 +76,27 @@ jobs:
       - name: Move artifact
         run: |
           mkdir -p ../_pdf
-          mv duckdb-docs.pdf ../_pdf
+          mv DataMiner-docs.pdf ../_pdf
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: pdf_artifact
           path: _pdf
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    if: github.ref == 'refs/heads/main' && github.repository == 'dataminer-site/dataminer-site.github.io'
+    runs-on: ubuntu-latest
+    needs: package_into_a_single_artifact
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          timeout: 3600000
 
   package_into_a_single_artifact:
     runs-on: ubuntu-latest
@@ -106,21 +113,6 @@ jobs:
           path: _site
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v3
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    if: github.ref == 'refs/heads/main' && github.repository == 'powerfull-scrapper/landing'
-    runs-on: ubuntu-latest
-    needs: package_into_a_single_artifact
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          timeout: 3600000
 
   LinkChecker:
     name: Link Checker
@@ -140,7 +132,7 @@ jobs:
 
       - name: Link Checker on stable
         run: |
-          linkchecker https://dataminer.site/ --ignore-url 'https?://duckdb\.org/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
+          linkchecker https://dataminer.site/ --ignore-url 'https?://dataminer\.site/docs/archive/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
           echo $?
 
       - run: cat report.html >> ${GITHUB_STEP_SUMMARY}
