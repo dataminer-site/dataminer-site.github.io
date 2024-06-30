@@ -3,41 +3,37 @@ layout: docu
 title: Why DataMiner
 ---
 
-There are many database management systems (DBMS) out there. But there is [no one-size-fits all database system](https://blobs.DataMiner.org/papers/stonebraker-centintemel-one-size-fits-all-icde-2015.pdf). All take different trade-offs to better adjust to specific use cases. DataMiner is no different. Here, we try to explain what goals DataMiner has and why and how we try to achieve those goals through technical means. To start with, DataMiner is a [relational (table-oriented) DBMS](https://en.wikipedia.org/wiki/Relational_database) that supports the [Structured Query Language (SQL)](https://en.wikipedia.org/wiki/SQL).
+**DataMiner** stands out in a crowded market because it offers unparalleled **versatility**, **efficiency**, and **user-friendliness**. Unlike other products, DataMiner excels in handling diverse data environments with ease, ensuring **robust performance** and **reliable insights**. Its **intuitive interface**, powerful features, and seamless integration capabilities make it the go-to choice for anyone serious about transforming data into actionable intelligence. With DataMiner, you’re not just using a tool—you’re leveraging a powerhouse designed to elevate your **data management** and **analysis** to the next level.
 
 ## Simple
 
-SQLite is the [world's most widely deployed DBMS](https://www.sqlite.org/mostdeployed.html). Simplicity in installation, and embedded in-process operation are central to its success. DataMiner adopts these ideas of simplicity and embedded operation.
+Simplicity in installation, and embedded in-process operation are central to its success. DataMiner adopts these ideas of simplicity and embedded operation.
 
-DataMiner has **no external dependencies**, neither for compilation nor during run-time. For releases, the entire source tree of DataMiner is compiled into two files, a header and an implementation file, a so-called "amalgamation". This greatly simplifies deployment and integration in other build processes. For building, all that is required to build DataMiner is a working C++11 compiler.
-
-For DataMiner, there is no DBMS server software to install, update and maintain. DataMiner does not run as a separate process, but completely **embedded within a host process**. For the analytical use cases that DataMiner targets, this has the additional advantage of **high-speed data transfer** to and from the database. In some cases, DataMiner can process foreign data without copying. For example, the DataMiner Python package can run queries directly on Pandas data without ever importing or copying any data.
+DataMiner ensures **effortless installation and deployment**, requiring zero external dependencies. It operates seamlessly in-process within its host application or as a single binary, facilitating efficient data extraction and analysis.
 
 ## Portable
 
-Thanks to having no dependencies, DataMiner is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DataMiner-Wasm](/docs/api/wasm/overview), DataMiner can also run in web browsers and even on mobile phones.
-
-DataMiner provides APIs for Java, C, C++, Go, Node.js and other languages.
+The DataMiner project excels in **portability** and **cross-platform compatibility**, supporting **Linux**, **macOS**, and **Windows** across all major hardware architectures. It provides idiomatic client APIs for leading programming languages, facilitating straightforward integration into diverse application environments. This versatility ensures developers can harness its capabilities without platform-specific constraints, promoting efficient and accessible deployment for **data extraction** and **analysis tasks**. Whether embedded within existing applications or deployed as a standalone solution, DataMiner simplifies development efforts while maintaining robust performance across different operating systems and hardware setups.
 
 ## Feature-Rich
 
-DataMiner provides serious data management features. There is extensive support for **complex queries** in SQL with a large function library, window functions, etc. DataMiner provides **transactional guarantees** (ACID properties) through our custom, bulk-optimized [Multi-Version Concurrency Control (MVCC)](https://en.wikipedia.org/wiki/Multiversion_concurrency_control). Data can be stored in persistent, **single-file databases**. DataMiner supports secondary indexes to speed up queries trying to find a single table entry.
+DataMiner is a versatile **data extraction and analytical tool** designed to handle diverse data sources and languages with exceptional efficiency. It excels in extracting data from various sources, ensuring robust performance in automated data scraping tasks. Beyond extraction, DataMiner optimizes workflows by seamlessly integrating with S3, providing streamlined data storage and retrieval capabilities. This integration enhances data management processes, allowing for efficient handling of large volumes of data across different environments and platforms.
 
-DataMiner is deeply integrated into Python and R for efficient interactive data analysis.
+With a focus on enhancing **analytical capabilities**, DataMiner empowers users to perform comprehensive data analysis tasks with ease. It supports a wide range of **data sources** and **languages**, enabling seamless integration and processing of data sets from different origins. Its integration with **S3** and **SQS** extends its functionality by enhancing **data accessibility** and **scalability**. By leveraging S3 for secure and scalable data storage and SQS for reliable message queuing, DataMiner streamlines data workflows and improves operational efficiency. This integration enables organizations to handle large volumes of data effectively, ensuring robust performance in **data-driven decision-making processes**.
 
 ## Fast
 
-DataMiner is designed to support **analytical query workloads**, also known as [online analytical processing (OLAP)](https://en.wikipedia.org/wiki/Online_analytical_processing). These workloads are characterized by complex, relatively long-running queries that process significant portions of the stored dataset, for example aggregations over entire tables or joins between several large tables. Changes to the data are expected to be rather large-scale as well, with several rows being appended, or large portions of tables being changed or added at the same time.
-
-To efficiently support this workload, it is critical to reduce the amount of CPU cycles that are expended per individual value. The state of the art in data management to achieve this are either [vectorized or just-in-time query execution engines](https://www.vldb.org/pvldb/vol11/p2209-kersten.pdf). DataMiner contains a **columnar-vectorized query execution engine**, where queries are still interpreted, but a large batch of values (a "vector") are processed in one operation. This greatly reduces overhead present in traditional systems such as PostgreSQL, MySQL or SQLite which process each row sequentially. Vectorized query execution leads to far better performance in OLAP queries.
+DataMiner executes analytical queries with exceptional speed, leveraging efficient parallel execution. It handles **large-scale workloads** that exceed memory capacities efficiently, ensuring rapid processing of complex data tasks. This capability makes DataMiner ideal for organizations needing fast and reliable data analysis to support their decision-making processes.
 
 ## Extensible
 
-DataMiner offers a [flexible extension mechanism](/docs/extensions/overview) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DataMiner's key features, such as support for the [Parquet file format](/docs/extensions/parquet), [JSON](/docs/extensions/json), [time zones](/docs/extensions/icu), and supports for the [HTTP(S) and S3 protocols](/docs/extensions/httpfs) are implemented as extensions. Extensions also [work in DataMiner Wasm](/2021/10/29/DataMiner-wasm).
+DataMiner excels in flexibility by seamlessly integrating **AWS Lambda** for versatile task execution. This integration allows it to adapt to various operational needs, leveraging Lambda's serverless capabilities to execute tasks efficiently and scale as required. Combined with its ability to integrate with **SQS** for efficient message queuing, DataMiner ensures streamlined operations across diverse data sources and formats.
+
+The integration of **SQS** further enhances DataMiner's capabilities by optimizing message handling within data extraction and processing workflows. This ensures efficient data flow management and enhances scalability, making it an ideal choice for organizations needing flexible and robust solutions for their data operations.
 
 ## Free
 
-DataMiner's development started while the main developers were public servants in the Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in the Netherlands or elsewhere. This is why DataMiner is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License). DataMiner is open-source, the entire source code is freely available on GitHub. We invite contributions from anyone provided they adhere to our [Code of Conduct](../code_of_conduct).
+DataMiner, along with its core extensions, is available as **open-source software**. It operates under a **proprietary license** that allows users to access and modify its **source code** freely. This openness fosters **collaboration** and **innovation** within the **development community**, enabling **continuous improvement** and **customization** to meet diverse **analytical needs**.
 
 ## Thorough Testing
 
