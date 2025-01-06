@@ -102,8 +102,8 @@ importers:
         specifier: ^0.1.5
         version: 0.1.5
       swiper:
-        specifier: ^11.1.14
-        version: 11.1.14
+        specifier: ^11.2.0
+        version: 11.2.0
       tailwindcss:
         specifier: ^3.4.15
         version: 3.4.15
@@ -3931,8 +3931,8 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  swiper@11.1.14:
-    resolution: {integrity: sha512-VbQLQXC04io6AoAjIUWuZwW4MSYozkcP9KjLdrsG/00Q/yiwvhz9RQyt0nHXV10hi9NVnDNy1/wv7Dzq1lkOCQ==}
+  swiper@11.2.0:
+    resolution: {integrity: sha512-rjjAKgDEs+grR2eQshVDCcE4KNPC7CI294nfcbV9gE8WCsLdvOYXDeZKUYevqAZZp8j5hE7kpT3dAGVKFBWlxQ==}
     engines: {node: '>= 4.7.0'}
 
   tailwindcss@3.4.15:
@@ -6066,7 +6066,7 @@ snapshots:
 
   '@types/swiper@6.0.0':
     dependencies:
-      swiper: 11.1.14
+      swiper: 11.2.0
 
   '@types/trusted-types@2.0.7': {}
 
@@ -9105,7 +9105,7 @@ snapshots:
       csso: 5.0.5
       picocolors: 1.1.0
 
-  swiper@11.1.14: {}
+  swiper@11.2.0: {}
 
   tailwindcss@3.4.15:
     dependencies:
